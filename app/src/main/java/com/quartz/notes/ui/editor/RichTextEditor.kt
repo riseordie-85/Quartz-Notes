@@ -223,19 +223,22 @@ private fun TaskBox(
     }
 }
 
-/** Renders a block's style spans. Offsets are shifted by one for the leading marker character. */
+/** Hides the leading marker character and renders the block's style spans. */
 private class BlockTransformation(
     private val spans: List<StyleSpan>,
     private val resolver: FontResolver,
 ) : VisualTransformation {
 
     override fun filter(text: AnnotatedString): TransformedText {
-        val length = text.length
-        val builder = AnnotatedString.Builder(text)
+        val rawLength = text.length
+        val visible = if (text.text.startsWith(MARK)) text.text.substring(MARK.length) else text.text
+        val hidden = rawLength - visible.length
+        val length = visible.length
+        val builder = AnnotatedString.Builder(visible)
 
         fun add(style: SpanStyle, start: Int, end: Int) {
-            val s = (start + 1).coerceIn(0, length)
-            val e = (end + 1).coerceIn(0, length)
+            val s = start.coerceIn(0, length)
+            val e = end.coerceIn(0, length)
             if (s < e) builder.addStyle(style, s, e)
         }
 
@@ -269,7 +272,12 @@ private class BlockTransformation(
                 if (a < b) add(SpanStyle(textDecoration = both), a, b)
             }
         }
-        return TransformedText(builder.toAnnotatedString(), OffsetMapping.Identity)
+        // The marker occupies original offset 0; everything after it shifts left by one.
+        val mapping = object : OffsetMapping {
+            override fun originalToTransformed(offset: Int): Int = (offset - hidden).coerceIn(0, length)
+            override fun transformedToOriginal(offset: Int): Int = (offset + hidden).coerceIn(0, rawLength)
+        }
+        return TransformedText(builder.toAnnotatedString(), mapping)
     }
 
     companion object {

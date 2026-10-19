@@ -20,11 +20,13 @@ import com.quartz.notes.data.rich.StyleSpan
 import com.quartz.notes.data.rich.newBlockId
 
 /**
- * Every block's text field starts with an invisible zero-width space. When the keyboard deletes it,
- * we know backspace was pressed at the very start of the block (which soft keyboards don't otherwise
- * report), so the block can merge into the one above.
+ * Every block's text field starts with a hidden line break (the visual transformation removes it from
+ * display). When the keyboard deletes it, we know backspace was pressed at the very start of the block,
+ * which soft keyboards don't otherwise report, so the block can merge into the one above. A line break,
+ * rather than an invisible character, also tells the keyboard that each block starts a new sentence, so
+ * auto-capitalization keeps working.
  */
-internal const val ZWSP = "​"
+internal const val MARK = "\n"
 
 private val ListTypes = setOf(BlockType.BULLET, BlockType.TASK)
 private val HeadingTypes = setOf(BlockType.HEADING, BlockType.SUBHEADING)
@@ -44,20 +46,20 @@ class BlockState internal constructor(
     var checked by mutableStateOf(checked)
     var indent by mutableIntStateOf(indent)
 
-    /** Raw field value, including the leading [ZWSP]. Never-equal so rejected edits still resync the field. */
-    var value by mutableStateOf(TextFieldValue(ZWSP + text, TextRange(ZWSP.length + text.length)), neverEqualPolicy())
+    /** Raw field value, including the leading [MARK]. Never-equal so rejected edits still resync the field. */
+    var value by mutableStateOf(TextFieldValue(MARK + text, TextRange(MARK.length + text.length)), neverEqualPolicy())
     var spans by mutableStateOf(spans)
 
     val focusRequester = FocusRequester()
 
-    val text: String get() = value.text.removePrefix(ZWSP)
+    val text: String get() = value.text.removePrefix(MARK)
     val selStart: Int get() = (value.selection.min - 1).coerceIn(0, text.length)
     val selEnd: Int get() = (value.selection.max - 1).coerceIn(0, text.length)
     val hasSelection: Boolean get() = selStart < selEnd
 
     internal fun setContent(newText: String, newSpans: List<StyleSpan>, cursor: Int) {
         val c = cursor.coerceIn(0, newText.length)
-        value = TextFieldValue(ZWSP + newText, TextRange(c + 1))
+        value = TextFieldValue(MARK + newText, TextRange(c + 1))
         spans = SpanOps.normalize(SpanOps.clip(newSpans, newText.length))
     }
 
@@ -151,17 +153,21 @@ class RichEditorState(doc: RichDoc) {
         val old = block.value
         var raw = incoming
 
-        if (!raw.text.startsWith(ZWSP)) {
-            val oldActual = old.text.removePrefix(ZWSP)
+        if (!raw.text.startsWith(MARK)) {
+            val oldActual = old.text.removePrefix(MARK)
             if (raw.text == oldActual) {
-                // The invisible marker was deleted: backspace at the start of the block.
+                // The hidden marker was deleted: backspace at the start of the block.
                 backspaceAtStart(block)
                 return
             }
-            val idx = raw.text.indexOf(ZWSP)
-            val cleaned = if (idx >= 0) raw.text.removeRange(idx, idx + 1) else raw.text
-            fun fix(o: Int) = if (idx >= 0 && o > idx) o else o + 1
-            raw = TextFieldValue(ZWSP + cleaned, TextRange(fix(raw.selection.start), fix(raw.selection.end)))
+            val shift = raw.text.length - old.text.length
+            raw = if (shift > 0 && raw.text.substring(shift) == old.text) {
+                // Text was inserted in front of the marker; move it after the marker.
+                val typed = raw.text.substring(0, shift)
+                TextFieldValue(MARK + typed + oldActual, TextRange(1 + shift))
+            } else {
+                TextFieldValue(MARK + raw.text, TextRange(raw.selection.start + 1, raw.selection.end + 1))
+            }
         }
 
         // Keep the cursor from landing before the marker.
