@@ -53,4 +53,6 @@ fun elementMediaPath(kind: String, raw: String): String? = when (kind) {
     ElementKind.IMAGE -> decodeImageData(raw)?.path
     ElementKind.VOICE -> decodeVoiceData(raw)?.path
     else -> null
-}
+} ?: LoosePath.find(raw)?.groupValues?.get(1) // e.g. written by a newer version with extra fields
+
+private val LoosePath = Regex("\"path\"\\s*:\\s*\"([^\"]+)\"")

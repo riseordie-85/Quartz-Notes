@@ -243,6 +243,15 @@ interface PageElementDao {
     @Update
     suspend fun update(element: PageElementEntity)
 
+    @Query("UPDATE page_elements SET x = :x, y = :y, width = :width, rotation = :rotation WHERE id = :id")
+    suspend fun updateGeometry(id: Long, x: Float, y: Float, width: Float, rotation: Float)
+
+    @Query("UPDATE page_elements SET data = :data WHERE id = :id")
+    suspend fun updateData(id: Long, data: String)
+
+    @Query("UPDATE page_elements SET z = :z WHERE id = :id")
+    suspend fun updateZ(id: Long, z: Int)
+
     @Query("DELETE FROM page_elements WHERE id = :id")
     suspend fun deleteById(id: Long)
 }

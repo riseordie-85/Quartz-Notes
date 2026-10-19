@@ -143,20 +143,36 @@ class BackupManager(
      * Skips the write when nothing changed since [lastFingerprint]. Returns the new fingerprint, or null if skipped.
      */
     suspend fun backupToFolder(treeUri: Uri, keep: Int, lastFingerprint: String?): String? = withContext(Dispatchers.IO) {
-        val fingerprint = repo.fingerprint()
+        val fingerprint = fingerprint()
         if (fingerprint == lastFingerprint) return@withContext null
         val folder = DocumentFile.fromTreeUri(appContext, treeUri) ?: error("Backup folder is no longer available")
         if (!folder.canWrite()) error("Quartz Notes can't write to the backup folder any more")
         val name = "$AUTO_PREFIX${SimpleDateFormat("yyyy-MM-dd-HHmm", Locale.US).format(Date())}.zip"
         folder.findFile(name)?.delete()
         val file = folder.createFile("application/zip", name) ?: error("Couldn't create a file in the backup folder")
-        appContext.contentResolver.openOutputStream(file.uri, "wt")?.use { export(it) } ?: error("Couldn't write the backup")
+        try {
+            appContext.contentResolver.openOutputStream(file.uri, "wt")?.use { export(it) } ?: error("Couldn't write the backup")
+        } catch (t: Throwable) {
+            // Never leave a half-written zip that would look like the newest backup.
+            file.delete()
+            throw t
+        }
         folder.listFiles()
             .filter { it.name?.startsWith(AUTO_PREFIX) == true && it.name?.endsWith(".zip") == true }
             .sortedByDescending { it.name }
             .drop(keep.coerceAtLeast(1))
             .forEach { it.delete() }
         fingerprint
+    }
+
+    /** Changes whenever anything that goes into a backup changes. */
+    private suspend fun fingerprint(): String {
+        val data = repo.snapshot().copy(exportedAt = 0)
+        val fontNames = fonts.fonts.value.mapNotNull { it.file?.name }.sorted().joinToString(",")
+        val digest = java.security.MessageDigest.getInstance("SHA-256")
+        digest.update(json.encodeToString(data).toByteArray())
+        digest.update(fontNames.toByteArray())
+        return digest.digest().joinToString("") { "%02x".format(it) }
     }
 
     /** The newest automatic backup in [treeUri], if any. */

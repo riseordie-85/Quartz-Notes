@@ -59,8 +59,8 @@ import kotlin.math.sqrt
 private val RecordRed = Color(0xFFE53935)
 
 /**
- * Records a voice note. Recording starts as soon as the sheet opens; "Save" keeps it,
- * dismissing or "Discard" deletes it. Call only after microphone permission is granted.
+ * Records a voice note. Recording starts as soon as the sheet opens. Stop/Save or swiping the
+ * sheet away keeps it; "Discard" deletes it. Call only after microphone permission is granted.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -124,7 +124,8 @@ fun VoiceRecorderSheet(onSaved: (path: String, durationMs: Long) -> Unit, onDism
     }
 
     ModalBottomSheet(
-        onDismissRequest = onDismiss,
+        // Swiping the sheet away keeps the recording; only "Discard" throws it out.
+        onDismissRequest = { if (recorder != null && elapsed >= 800) save() else onDismiss() },
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
         containerColor = MaterialTheme.colorScheme.surface,
     ) {

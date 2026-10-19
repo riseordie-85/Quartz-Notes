@@ -21,10 +21,16 @@ class BackupWorker(context: Context, params: WorkerParameters) : CoroutineWorker
         val container = (applicationContext as QuartzApp).container
         val settings = container.settings.settings.first()
         val folder = settings.backupFolder
-        if (folder == null || (!settings.autoBackup && !inputData.getBoolean(KEY_FORCE, false))) return Result.success()
+        val forced = inputData.getBoolean(KEY_FORCE, false)
+        if (folder == null || (!settings.autoBackup && !forced)) return Result.success()
         return try {
-            val fingerprint = container.backup.backupToFolder(Uri.parse(folder), settings.backupKeep, settings.lastBackupFingerprint)
-            container.settings.recordBackup(System.currentTimeMillis(), fingerprint)
+            // A forced backup always writes; a scheduled one is skipped when nothing changed.
+            val fingerprint = container.backup.backupToFolder(
+                Uri.parse(folder),
+                settings.backupKeep,
+                if (forced) null else settings.lastBackupFingerprint,
+            )
+            if (fingerprint != null) container.settings.recordBackup(System.currentTimeMillis(), fingerprint)
             Result.success()
         } catch (t: Throwable) {
             container.settings.recordBackupError(t.message ?: "Backup failed")

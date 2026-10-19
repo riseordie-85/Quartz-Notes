@@ -154,7 +154,10 @@ private fun NoteEditorContent(load: NoteLoad.Ready, vm: NoteViewModel, onClose: 
             .collect { vm.saveIfChanged() }
     }
     DisposableEffect(session) {
-        onDispose { vm.saveIfChanged() }
+        onDispose {
+            vm.saveIfChanged()
+            container.audio.stop()
+        }
     }
 
     // Leaving on purpose (back arrow / back gesture) saves, or discards the note if it's empty.
@@ -246,25 +249,28 @@ private fun NoteEditorContent(load: NoteLoad.Ready, vm: NoteViewModel, onClose: 
                     contentColor = ink,
                     placeholder = "Start writing…",
                 )
+                // Pictures and voice notes come after the text, at the bottom of the note.
+                NoteAttachments(
+                    attachments = attachments,
+                    ink = ink,
+                    onOpenImage = { viewing = it },
+                    onRemove = {
+                        container.audio.stop(it.path)
+                        vm.removeAttachment(it)
+                    },
+                    modifier = Modifier.padding(top = 18.dp),
+                )
                 // Tapping the empty space below the text puts the cursor at the end.
                 Box(
                     Modifier
                         .fillMaxWidth()
-                        .heightIn(min = 240.dp)
+                        .heightIn(min = if (attachments.isEmpty()) 240.dp else 120.dp)
                         .clickable(interactionSource = remember { MutableInteractionSource() }, indication = null) {
                             editor.focusEnd()
                             keyboard?.show()
                         },
                 )
             }
-            // Pictures and voice notes sit at the bottom of the note.
-            NoteAttachments(
-                attachments = attachments,
-                ink = ink,
-                onOpenImage = { viewing = it },
-                onRemove = vm::removeAttachment,
-                modifier = Modifier.padding(top = 8.dp, bottom = 14.dp),
-            )
         }
         Spacer(Modifier.height(12.dp))
         val s = settings
@@ -341,8 +347,9 @@ private fun NoteEditorContent(load: NoteLoad.Ready, vm: NoteViewModel, onClose: 
                 showShare = false
                 scope.launch {
                     val pictures = attachments.filter { it.kind == AttachmentKind.IMAGE.name }.map { container.media.file(it.path) }
-                    val file = renderNoteImage(context, session.title, editor.toDoc(), session.colorKey, pictures)
-                    shareFile(context, file, "image/png", "${context.packageName}.files")
+                    runCatching { renderNoteImage(context, session.title, editor.toDoc(), session.colorKey, pictures) }
+                        .onSuccess { shareFile(context, it, "image/png", "${context.packageName}.files") }
+                        .onFailure { Toast.makeText(context, "Couldn't make an image of this note", Toast.LENGTH_SHORT).show() }
                 }
             },
             onNotebook = {

@@ -98,11 +98,12 @@ class NoteViewModel(
     fun close() {
         val s = session ?: return
         if (finished) return
-        if (s.isBlank && attachments.value.isEmpty()) {
+        saveIfChanged()
+        if (s.isBlank) {
+            // Checked against the database after the save lands, so pictures or voice notes
+            // that haven't shown up here yet still keep the note.
             finished = true
-            repo.deleteNote(s.id)
-        } else {
-            saveIfChanged()
+            repo.discardIfBlank(s.id)
         }
     }
 

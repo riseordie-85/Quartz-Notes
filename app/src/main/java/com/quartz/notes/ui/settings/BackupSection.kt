@@ -111,6 +111,17 @@ fun BackupSection(settings: AppSettings, snackbar: SnackbarHostState) {
     }
     val folderLauncher = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocumentTree()) { uri ->
         if (uri != null) {
+            // Let go of the old folder so permissions don't pile up.
+            settings.backupFolder?.let { old ->
+                if (old != uri.toString()) {
+                    runCatching {
+                        context.contentResolver.releasePersistableUriPermission(
+                            Uri.parse(old),
+                            Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION,
+                        )
+                    }
+                }
+            }
             runCatching {
                 context.contentResolver.takePersistableUriPermission(
                     uri,

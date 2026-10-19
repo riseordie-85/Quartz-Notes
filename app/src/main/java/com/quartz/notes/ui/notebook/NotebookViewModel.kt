@@ -119,7 +119,8 @@ class NotebookViewModel(
         )
     }
 
-    fun updateElement(element: PageElementEntity) = repo.updateElement(element)
+    fun moveElement(element: PageElementEntity) = repo.moveElement(element)
+    fun updateElementData(element: PageElementEntity, data: String) = repo.updateElementData(element, data)
     fun bringToFront(element: PageElementEntity) = repo.bringToFront(element)
     fun deleteElement(element: PageElementEntity) = repo.deleteElement(element)
 

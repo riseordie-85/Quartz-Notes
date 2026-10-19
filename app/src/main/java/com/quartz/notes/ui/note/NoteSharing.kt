@@ -3,7 +3,6 @@ package com.quartz.notes.ui.note
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.RectF
@@ -136,13 +135,16 @@ suspend fun renderNoteImage(
     }
 
     // Pictures: decoded down to the card width, at most six.
+    // ImageDecoder applies camera (EXIF) rotation, unlike BitmapFactory.
     val images = pictures.take(6).mapNotNull { f ->
         runCatching {
-            val opts = BitmapFactory.Options().apply { inJustDecodeBounds = true }
-            BitmapFactory.decodeFile(f.absolutePath, opts)
-            var sample = 1
-            while (opts.outWidth / (sample * 2) >= contentWidth) sample *= 2
-            BitmapFactory.decodeFile(f.absolutePath, BitmapFactory.Options().apply { inSampleSize = sample })
+            android.graphics.ImageDecoder.decodeBitmap(android.graphics.ImageDecoder.createSource(f)) { decoder, info, _ ->
+                decoder.allocator = android.graphics.ImageDecoder.ALLOCATOR_SOFTWARE
+                val w = info.size.width
+                if (w > contentWidth) {
+                    decoder.setTargetSize(contentWidth, (info.size.height.toLong() * contentWidth / w).toInt().coerceAtLeast(1))
+                }
+            }
         }.getOrNull()
     }
     val imageHeights = images.map { bmp -> min(contentWidth * bmp.height / bmp.width, 1400) }

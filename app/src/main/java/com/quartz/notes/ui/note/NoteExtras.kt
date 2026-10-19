@@ -65,7 +65,7 @@ fun NoteAttachments(
     val voices = attachments.filter { it.kind == AttachmentKind.AUDIO.name }
     Column(modifier, verticalArrangement = Arrangement.spacedBy(10.dp)) {
         if (images.isNotEmpty()) {
-            LazyRow(horizontalArrangement = Arrangement.spacedBy(10.dp), contentPadding = PaddingValues(horizontal = 22.dp)) {
+            LazyRow(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                 items(images, key = { it.id }) { a ->
                     AsyncImage(
                         model = media.file(a.path),
@@ -83,7 +83,7 @@ fun NoteAttachments(
             VoicePlayer(
                 path = a.path,
                 durationMs = a.durationMs ?: 0,
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+                modifier = Modifier.fillMaxWidth(),
                 content = MaterialTheme.colorScheme.onSurface,
                 trailing = {
                     IconButton(onClick = { onRemove(a) }, modifier = Modifier.size(36.dp)) {

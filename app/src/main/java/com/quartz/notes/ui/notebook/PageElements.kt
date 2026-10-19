@@ -2,7 +2,13 @@ package com.quartz.notes.ui.notebook
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.gestures.detectTransformGestures
+import androidx.compose.foundation.gestures.awaitEachGesture
+import androidx.compose.foundation.gestures.awaitFirstDown
+import androidx.compose.foundation.gestures.calculatePan
+import androidx.compose.foundation.gestures.calculateRotation
+import androidx.compose.foundation.gestures.calculateZoom
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.input.pointer.positionChanged
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Row
@@ -15,6 +21,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.AutoAwesome
+import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.DeleteOutline
 import androidx.compose.material.icons.rounded.DragIndicator
 import androidx.compose.material.icons.rounded.FlipToFront
@@ -47,7 +54,6 @@ import com.quartz.notes.data.model.decodeVoiceData
 import com.quartz.notes.ui.media.DecoratedImage
 import com.quartz.notes.ui.media.VoicePlayer
 import com.quartz.notes.ui.media.heightFactor
-import kotlinx.coroutines.delay
 import kotlin.math.roundToInt
 
 /** Fixed height of a voice note player on a page. */
@@ -66,7 +72,8 @@ fun PageElementEntity.bottom(pageWidth: Dp): Dp = when (kind) {
 /** Callbacks from the element layer. */
 class ElementActions(
     val onSelect: (Long?) -> Unit,
-    val onCommit: (PageElementEntity) -> Unit,
+    /** Saves a new position, size or rotation (only those fields are written). */
+    val onMove: (PageElementEntity) -> Unit,
     val onView: (ImageData) -> Unit,
     val onDecorate: (PageElementEntity, ImageData) -> Unit,
     val onFront: (PageElementEntity) -> Unit,
@@ -98,23 +105,17 @@ fun BoxScope.PageElementLayer(
 
 @Composable
 private fun ElementItem(element: PageElementEntity, pageWidth: Dp, selected: Boolean, actions: ElementActions) {
-    // Live copy while gesturing; reset whenever the saved version changes.
-    var live by remember(element) { mutableStateOf(element) }
-    val latest by rememberUpdatedState(live)
+    // One live copy per element. It follows the saved row, except while a finger is down.
+    var live by remember(element.id) { mutableStateOf(element) }
+    var gesturing by remember(element.id) { mutableStateOf(false) }
+    LaunchedEffect(element) { if (!gesturing) live = element }
     val density = LocalDensity.current
     val widthPx = with(density) { pageWidth.toPx() }
-
-    // Save shortly after a gesture settles.
-    LaunchedEffect(live) {
-        if (live != element) {
-            delay(350)
-            actions.onCommit(live)
-        }
-    }
+    val latestSaved by rememberUpdatedState(element)
 
     val imageData = remember(element.data) { if (element.kind == ElementKind.IMAGE) decodeImageData(element.data) else null }
     val voiceData = remember(element.data) { if (element.kind == ElementKind.VOICE) decodeVoiceData(element.data) else null }
-    val heightFactor = imageData?.heightFactor()
+    val heightFactor by rememberUpdatedState(imageData?.heightFactor())
     val accent = MaterialTheme.colorScheme.primary
 
     Box(
@@ -129,19 +130,41 @@ private fun ElementItem(element: PageElementEntity, pageWidth: Dp, selected: Boo
             .then(
                 if (selected) {
                     Modifier.pointerInput(element.id, widthPx) {
-                        detectTransformGestures { _, pan, zoom, rotation ->
-                            val cur = latest
-                            val newWidth = (cur.width * zoom).coerceIn(0.12f, 1.4f)
-                            val hf = heightFactor
-                            // Keep the element's center fixed while it's resized.
-                            val dx = if (hf != null) (cur.width - newWidth) / 2 else 0f
-                            val dy = if (hf != null) (cur.width - newWidth) * hf / 2 else 0f
-                            live = cur.copy(
-                                x = (cur.x + dx + pan.x / widthPx).coerceIn(-newWidth * 0.8f, 1f - newWidth * 0.2f),
-                                y = (cur.y + dy + pan.y / widthPx).coerceAtLeast(0f),
-                                width = if (cur.kind == ElementKind.IMAGE) newWidth else cur.width,
-                                rotation = if (cur.kind == ElementKind.IMAGE) (cur.rotation + rotation) % 360f else 0f,
-                            )
+                        // Move / pinch / twist. Saves once, when the last finger lifts.
+                        awaitEachGesture {
+                            awaitFirstDown(requireUnconsumed = false)
+                            gesturing = true
+                            try {
+                                do {
+                                    val event = awaitPointerEvent()
+                                    val zoom = event.calculateZoom()
+                                    val rotation = event.calculateRotation()
+                                    val pan = event.calculatePan()
+                                    if (zoom != 1f || rotation != 0f || pan != Offset.Zero) {
+                                        val cur = live
+                                        val isImage = cur.kind == ElementKind.IMAGE
+                                        val newWidth = if (isImage) (cur.width * zoom).coerceIn(0.12f, 1f) else cur.width
+                                        val hf = heightFactor
+                                        // Keep the element's center fixed while it's resized.
+                                        val dx = if (hf != null) (cur.width - newWidth) / 2 else 0f
+                                        val dy = if (hf != null) (cur.width - newWidth) * hf / 2 else 0f
+                                        live = cur.copy(
+                                            x = (cur.x + dx + pan.x / widthPx).coerceIn(-newWidth * 0.8f, 1f - newWidth * 0.2f),
+                                            y = (cur.y + dy + pan.y / widthPx).coerceAtLeast(0f),
+                                            width = newWidth,
+                                            rotation = if (isImage) (cur.rotation + rotation) % 360f else 0f,
+                                        )
+                                        event.changes.forEach { if (it.positionChanged()) it.consume() }
+                                    }
+                                } while (event.changes.any { it.pressed })
+                            } finally {
+                                gesturing = false
+                                val moved = live
+                                val saved = latestSaved
+                                if (moved.x != saved.x || moved.y != saved.y || moved.width != saved.width || moved.rotation != saved.rotation) {
+                                    actions.onMove(moved)
+                                }
+                            }
                         }
                     }
                 } else {
@@ -205,6 +228,7 @@ private fun ElementToolbar(element: PageElementEntity, pageWidth: Dp, actions: E
                 IconButton(onClick = { actions.onDecorate(element, image) }) { Icon(Icons.Rounded.AutoAwesome, contentDescription = "Decorate") }
             }
             IconButton(onClick = { actions.onFront(element) }) { Icon(Icons.Rounded.FlipToFront, contentDescription = "Bring to front") }
+            IconButton(onClick = { actions.onSelect(null) }) { Icon(Icons.Rounded.Check, contentDescription = "Done", tint = MaterialTheme.colorScheme.primary) }
             IconButton(onClick = { actions.onDelete(element) }) {
                 Icon(Icons.Rounded.DeleteOutline, contentDescription = "Remove", tint = MaterialTheme.colorScheme.error)
             }

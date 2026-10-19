@@ -214,6 +214,7 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
             if (from !in list.indices || to !in list.indices) return@withTransaction
             list.add(to, list.removeAt(from))
             renumber(list)
+            pages.touch(list[to].id, now())
         }
     }
 
@@ -292,13 +293,27 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
         pages.touch(element.pageId, now())
     }
 
-    fun updateElement(element: PageElementEntity) = enqueue { elements.update(element) }
-
-    fun bringToFront(element: PageElementEntity) = enqueue {
-        elements.update(element.copy(z = elements.maxZ(element.pageId) + 1))
+    /** Saves only position, size and rotation, so it can't undo a decoration change. */
+    fun moveElement(element: PageElementEntity) = enqueue {
+        elements.updateGeometry(element.id, element.x, element.y, element.width, element.rotation)
+        pages.touch(element.pageId, now())
     }
 
-    fun deleteElement(element: PageElementEntity) = enqueue { elements.deleteById(element.id) }
+    /** Saves only the payload (frame, tape, caption...), so it can't undo a move. */
+    fun updateElementData(element: PageElementEntity, data: String) = enqueue {
+        elements.updateData(element.id, data)
+        pages.touch(element.pageId, now())
+    }
+
+    fun bringToFront(element: PageElementEntity) = enqueue {
+        elements.updateZ(element.id, elements.maxZ(element.pageId) + 1)
+        pages.touch(element.pageId, now())
+    }
+
+    fun deleteElement(element: PageElementEntity) = enqueue {
+        elements.deleteById(element.id)
+        pages.touch(element.pageId, now())
+    }
 
     // ---- Sharing ----
 
@@ -380,18 +395,6 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
                 attachments = attachments.getAll(),
             )
         }
-    }
-
-    /** Changes whenever notes, pages, notebooks or their media change. */
-    suspend fun fingerprint(): String = inOrder {
-        listOf(
-            shelves.getAll().joinToString(",") { "${it.id}${it.name}${it.position}" }.hashCode().toString(),
-            notebooks.fingerprint(),
-            pages.fingerprint(),
-            notes.fingerprint(),
-            attachments.fingerprint(),
-            elements.fingerprint(),
-        ).joinToString("|")
     }
 
     /**

@@ -69,6 +69,7 @@ import androidx.compose.material.icons.rounded.PhotoCamera
 import androidx.compose.material.icons.rounded.PhotoLibrary
 import com.quartz.notes.data.db.PageElementEntity
 import com.quartz.notes.data.model.ImageData
+import com.quartz.notes.data.model.elementMediaPath
 import com.quartz.notes.data.model.encode
 import com.quartz.notes.ui.media.DecorateSheet
 import com.quartz.notes.ui.media.ImageViewer
@@ -147,6 +148,7 @@ fun NotebookScreen(
     val settings by container.settings.settings.collectAsStateWithLifecycle(initialValue = null)
     val fonts by container.fonts.fonts.collectAsStateWithLifecycle()
     val scope = rememberCoroutineScope()
+    DisposableEffect(Unit) { onDispose { container.audio.stop() } }
 
     val editors = remember { mutableStateMapOf<Long, RichEditorState>() }
 
@@ -496,15 +498,21 @@ private fun PageView(
     var selectedElement by remember(page.id) { mutableStateOf<Long?>(null) }
     var viewing by remember { mutableStateOf<String?>(null) }
     var decorating by remember { mutableStateOf<Pair<PageElementEntity, ImageData>?>(null) }
+    val audio = LocalAppContainer.current.audio
+    // Typing or tapping into the text puts away the picture toolbar.
+    LaunchedEffect(editor) {
+        snapshotFlow { editor.version to editor.focusedId }.drop(1).collect { selectedElement = null }
+    }
     val elementActions = remember(page.id) {
         ElementActions(
             onSelect = { selectedElement = it },
-            onCommit = vm::updateElement,
+            onMove = vm::moveElement,
             onView = { viewing = it.path },
             onDecorate = { e, d -> decorating = e to d },
             onFront = vm::bringToFront,
             onDelete = {
                 selectedElement = null
+                elementMediaPath(it.kind, it.data)?.let(audio::stop)
                 vm.deleteElement(it)
             },
         )
@@ -610,9 +618,8 @@ private fun PageView(
         DecorateSheet(
             data = data,
             onChange = { updated ->
-                val e = element.copy(data = updated.encode(), height = element.width * updated.aspect)
-                decorating = e to updated
-                vm.updateElement(e)
+                decorating = element to updated
+                vm.updateElementData(element, updated.encode())
             },
             onDismiss = { decorating = null },
         )
