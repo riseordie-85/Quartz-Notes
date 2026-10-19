@@ -34,6 +34,9 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.SegmentedButton
+import androidx.compose.material3.SegmentedButtonDefaults
+import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
@@ -97,16 +100,16 @@ fun PageStyleSheet(
 
             Label("Layout")
             val scrapbook = page.layoutMode == "SCRAPBOOK"
-            androidx.compose.material3.SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
-                androidx.compose.material3.SegmentedButton(
+            SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
+                SegmentedButton(
                     selected = !scrapbook,
                     onClick = { if (scrapbook) onLayoutMode(false) },
-                    shape = androidx.compose.material3.SegmentedButtonDefaults.itemShape(0, 2),
+                    shape = SegmentedButtonDefaults.itemShape(0, 2),
                 ) { Text("Flowing text") }
-                androidx.compose.material3.SegmentedButton(
+                SegmentedButton(
                     selected = scrapbook,
                     onClick = { if (!scrapbook) onLayoutMode(true) },
-                    shape = androidx.compose.material3.SegmentedButtonDefaults.itemShape(1, 2),
+                    shape = SegmentedButtonDefaults.itemShape(1, 2),
                 ) { Text("Scrapbook") }
             }
             Text(

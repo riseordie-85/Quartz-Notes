@@ -133,11 +133,15 @@ fun decodeImageData(raw: String): ImageData? = decodePayload(raw)
 fun decodeVoiceData(raw: String): VoiceData? = decodePayload(raw)
 
 /** The media path referenced by an element's payload, whatever its kind. */
-fun elementMediaPath(kind: String, raw: String): String? = when (kind) {
-    ElementKind.IMAGE -> decodeImageData(raw)?.path
-    ElementKind.VOICE -> decodeVoiceData(raw)?.path
-    ElementKind.TEXT, ElementKind.SHAPE, ElementKind.ARROW, ElementKind.CONNECTOR, ElementKind.STROKE -> return null
-    else -> null
-} ?: LoosePath.find(raw)?.groupValues?.get(1) // e.g. written by a newer version with extra fields
+fun elementMediaPath(kind: String, raw: String): String? {
+    val parsed = when (kind) {
+        ElementKind.IMAGE -> decodeImageData(raw)?.path
+        ElementKind.VOICE -> decodeVoiceData(raw)?.path
+        ElementKind.TEXT, ElementKind.SHAPE, ElementKind.ARROW, ElementKind.CONNECTOR, ElementKind.STROKE -> return null
+        else -> null
+    }
+    // Fall back to a loose read, e.g. for payloads written by a newer version with extra fields.
+    return parsed ?: LoosePath.find(raw)?.groupValues?.get(1)
+}
 
 private val LoosePath = Regex("\"path\"\\s*:\\s*\"([^\"]+)\"")
