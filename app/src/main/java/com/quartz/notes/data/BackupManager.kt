@@ -72,7 +72,7 @@ class BackupManager(
         val data = repo.snapshot()
         val mediaPaths = (
             data.attachments.map { it.path } +
-                data.elements.mapNotNull { elementMediaPath(it.kind, it.data) } +
+                data.elements.flatMap { QuartzRepository.elementMediaPaths(it.kind, it.data) } +
                 data.pages.flatMap { com.quartz.notes.data.rich.RichDoc.decode(it.content).mediaPaths() }
             ).toSet()
         ZipOutputStream(out.buffered()).use { zip ->

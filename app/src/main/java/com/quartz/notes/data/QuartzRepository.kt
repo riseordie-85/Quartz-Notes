@@ -14,6 +14,7 @@ import com.quartz.notes.data.model.ElementKind
 import com.quartz.notes.data.model.ImageData
 import com.quartz.notes.data.model.OwnerType
 import com.quartz.notes.data.model.ConnectorData
+import com.quartz.notes.data.model.TextBoxData
 import com.quartz.notes.data.model.VoiceData
 import com.quartz.notes.data.model.decodePayload
 import com.quartz.notes.data.model.encodePayload
@@ -324,8 +325,8 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
         db.withTransaction {
             elements.deleteById(element.id)
             elements.getKind(element.pageId, ElementKind.CONNECTOR).forEach { c ->
-                val data = decodePayload<ConnectorData>(c.data)
-                if (data == null || data.from == element.id || data.to == element.id) elements.deleteById(c.id)
+                val data = decodePayload<ConnectorData>(c.data) ?: return@forEach
+                if (data.from == element.id || data.to == element.id) elements.deleteById(c.id)
             }
             pages.touch(element.pageId, now())
         }
@@ -399,7 +400,7 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
     suspend fun referencedMedia(): Set<String> = inOrder {
         attachments.deleteOrphans()
         val fromAttachments = attachments.getAll().map { it.path }
-        val fromElements = elements.getAll().mapNotNull { elementMediaPath(it.kind, it.data) }
+        val fromElements = elements.getAll().flatMap { elementMediaPaths(it.kind, it.data) }
         val inline = pages.getAll().flatMap { RichDoc.decode(it.content).mediaPaths() }
         (fromAttachments + fromElements + inline).toSet()
     }
@@ -483,6 +484,14 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
     }
 
     // ---- Search ----
+
+    companion object {
+        /** Media files an element uses: its picture or recording, or pictures in line inside a text box. */
+        fun elementMediaPaths(kind: String, data: String): List<String> = when (kind) {
+            ElementKind.TEXT -> RichDoc.decode(decodePayload<TextBoxData>(data)?.doc).mediaPaths()
+            else -> listOfNotNull(elementMediaPath(kind, data))
+        }
+    }
 
     suspend fun search(query: String, notebookId: Long? = null): SearchResults {
         val pattern = likePattern(query)

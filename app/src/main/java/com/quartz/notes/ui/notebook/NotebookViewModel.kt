@@ -46,6 +46,9 @@ class PageSession(page: PageEntity) {
     /** Editors for this page's text boxes, by element id. */
     val textBoxes = HashMap<Long, RichEditorState>()
 
+    /** Editor version last saved for each text box, so unsaved typing is never dropped. */
+    val textBoxSaved = HashMap<Long, Int>()
+
     /** The text box being typed in, if any; the toolbar formats it instead of the page text. */
     var activeEditor by mutableStateOf<RichEditorState?>(null)
 
@@ -172,14 +175,21 @@ class NotebookViewModel(
         )
 
     fun textEditor(element: PageElementEntity): RichEditorState {
+        knownTextBoxes[element.id] = element
         fun fresh() = RichEditorState(RichDoc.decode(decodePayload<TextBoxData>(element.data)?.doc))
         val map = sessions[element.pageId]?.textBoxes ?: return fresh()
-        return map.getOrPut(element.id) { fresh() }
+        return map.getOrPut(element.id) {
+            fresh().also { sessions[element.pageId]?.textBoxSaved?.set(element.id, it.version) }
+        }
     }
 
+    /** Saves a text box if it changed since its last save. */
     fun saveTextBox(element: PageElementEntity) {
-        val state = sessions[element.pageId]?.textBoxes?.get(element.id) ?: return
+        val session = sessions[element.pageId] ?: return
+        val state = session.textBoxes[element.id] ?: return
+        if (session.textBoxSaved[element.id] == state.version) return
         repo.updateElementData(element, TextBoxData(state.toDoc().encode()).encodePayload())
+        session.textBoxSaved[element.id] = state.version
     }
 
     private var shapeCount = 0
@@ -265,7 +275,11 @@ class NotebookViewModel(
         onDone()
     }
 
+    /** Text box element rows, so unsaved boxes can be written when the screen closes. */
+    val knownTextBoxes = HashMap<Long, PageElementEntity>()
+
     override fun onCleared() {
         sessions.keys.toList().forEach(::saveIfChanged)
+        knownTextBoxes.values.forEach(::saveTextBox)
     }
 }

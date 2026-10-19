@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -168,6 +169,7 @@ internal fun PageView(
             onSave()
             onEditorGone()
             sweepBlankTextBoxes()
+            session.activeEditor = null
         }
     }
     LaunchedEffect(session) {
@@ -181,8 +183,13 @@ internal fun PageView(
         }
     }
     // A finished brush stroke stays on screen until the database has it.
-    LaunchedEffect(elements) {
+    val strokeCount = elements.count { it.kind == ElementKind.STROKE }
+    LaunchedEffect(strokeCount) {
         if (!canvas.drawing) canvas.liveStroke.clear()
+    }
+    LaunchedEffect(elements) {
+        // A dragged arrow's live copy is dropped once its saved row has changed.
+        canvas.arrowDrag?.let { drag -> if (elements.none { it == drag.first }) canvas.arrowDrag = null }
         val ids = elements.map { it.id }.toSet()
         canvas.erased.keys.retainAll(ids)
         canvas.bounds.keys.retainAll(ids)
@@ -266,6 +273,8 @@ internal fun PageView(
             }
             editor.insertImage(index, data.copy(placement = ImagePlacement.FLOAT), (e.width * widthPx / textWidthPx), align)
             canvas.clearSelection()
+            // Save the text (now holding the picture) before removing the floating copy; the queue keeps the order.
+            vm.saveIfChanged(page.id)
             vm.deleteElement(e)
         }
 
@@ -280,6 +289,7 @@ internal fun PageView(
             }
             vm.addImageAt(page.id, data, x, top / widthPx, w)
             editor.removeBlock(block.id)
+            vm.saveIfChanged(page.id)
             canvas.clearSelection()
         }
 
@@ -382,11 +392,22 @@ internal fun PageView(
                             else end = max(end, widthPx - r.left + gapPx - padHPx)
                         }
                     }
-                    if (start <= 0f && end <= 0f) null else with(density) { start.coerceAtLeast(0f).toDp() to end.coerceAtLeast(0f).toDp() }
+                    // Never squeeze text narrower than this; a very wide picture just floats over it.
+                    val minText = with(density) { 110.dp.toPx() }
+                    if (start <= 0f && end <= 0f) {
+                        null
+                    } else if (textWidthPx - start.coerceAtLeast(0f) - end.coerceAtLeast(0f) < minText) {
+                        null
+                    } else {
+                        with(density) { start.coerceAtLeast(0f).toDp() to end.coerceAtLeast(0f).toDp() }
+                    }
                 }
             },
             root = { canvas.contentCoords },
-            onBlockBounds = { id, top, bottom -> canvas.blockBounds[id] = top to bottom },
+            onBlockBounds = { id, top, bottom ->
+                val v = top to bottom
+                if (canvas.blockBounds[id] != v) canvas.blockBounds[id] = v
+            },
             imageBlock = { block, textWidth ->
                 InlineImageSlot(
                     block = block,
@@ -446,36 +467,66 @@ internal fun PageView(
                             val down = awaitFirstDown(requireUnconsumed = false, pass = PointerEventPass.Initial)
                             if (latestTool != PageTool.NONE) return@awaitEachGesture
                             val p = down.position
-                            val onItem = canvas.bounds.values.any { it.inflate(4.dp.toPx()).contains(p) }
-                            val line = if (onItem) null else lineHit(p, latestElements, canvas.bounds, widthPx, 18.dp.toPx())
+                            val slop = viewConfiguration.touchSlop
+                            val onItem = canvas.bounds.values.any { it.inflate(4.dp.toPx()).contains(p) } ||
+                                canvas.toolbarRect?.contains(p) == true
+                            // The selected arrow's end handles get their own touches.
+                            val nearHandle = canvas.selectedId?.let { id ->
+                                val e = latestElements.firstOrNull { it.id == id && it.kind == ElementKind.ARROW } ?: return@let false
+                                val d = decodePayload<ArrowData>(e.data) ?: return@let false
+                                val (a, b) = arrowEnds(e, d, widthPx)
+                                (p - a).getDistance() < 22.dp.toPx() || (p - b).getDistance() < 22.dp.toPx()
+                            } ?: false
+                            val line = if (onItem || nearHandle) null else lineHit(p, latestElements, canvas.bounds, widthPx, 18.dp.toPx())
                             if (line != null) {
-                                down.consume()
+                                // Touching a line: a tap selects it; dragging a selected arrow moves it.
+                                // Anything else (a scroll or swipe) is left alone.
                                 val arrowData = if (line.kind == ElementKind.ARROW && canvas.selectedId == line.id) decodePayload<ArrowData>(line.data) else null
-                                var moved = false
+                                var dragging = false
                                 var last = p
-                                do {
+                                while (true) {
                                     val event = awaitPointerEvent(PointerEventPass.Initial)
-                                    val c = event.changes.firstOrNull { it.id == down.id }
-                                    if (c != null && c.pressed && arrowData != null) {
-                                        val delta = c.position - last
-                                        if (moved || delta.getDistance() > 2f) {
-                                            moved = true
-                                            last = c.position
-                                            val cur = canvas.arrowDrag?.takeIf { it.first == line } ?: Triple(line, line, arrowData)
-                                            canvas.arrowDrag = Triple(line, cur.second.copy(x = cur.second.x + delta.x / widthPx, y = (cur.second.y + delta.y / widthPx).coerceAtLeast(0f)), cur.third)
+                                    val c = event.changes.firstOrNull { it.id == down.id } ?: break
+                                    if (!c.pressed) {
+                                        if (dragging) {
+                                            canvas.arrowDrag?.takeIf { it.first == line }?.let { (_, el, d) -> accentActions.onArrowEdit(el, d) }
+                                        } else if (!c.isConsumed) {
+                                            c.consume()
+                                            accentActions.onSelect(line.id)
                                         }
+                                        break
                                     }
-                                    event.changes.forEach { it.consume() }
-                                } while (event.changes.any { it.pressed })
-                                if (moved) {
-                                    canvas.arrowDrag?.takeIf { it.first == line }?.let { (_, el, d) -> accentActions.onArrowEdit(el, d) }
-                                } else {
-                                    accentActions.onSelect(line.id)
+                                    if (!dragging && (c.position - p).getDistance() > slop) {
+                                        if (arrowData == null) break // a scroll or swipe: not ours
+                                        dragging = true
+                                        last = c.position
+                                    }
+                                    if (dragging && arrowData != null) {
+                                        val delta = c.position - last
+                                        last = c.position
+                                        val cur = canvas.arrowDrag?.takeIf { it.first == line } ?: Triple(line, line, arrowData)
+                                        canvas.arrowDrag = Triple(
+                                            line,
+                                            cur.second.copy(x = cur.second.x + delta.x / widthPx, y = (cur.second.y + delta.y / widthPx).coerceAtLeast(0f)),
+                                            cur.third,
+                                        )
+                                        event.changes.forEach { it.consume() }
+                                    }
                                 }
                             } else {
                                 // Not ours: let the items and text have it, then see if anyone used the tap.
-                                val up = waitForUpOrCancellation(PointerEventPass.Final)
-                                if (up != null && !up.isConsumed) tapHandler(up.position)
+                                var upAt: Offset? = null
+                                while (true) {
+                                    val event = awaitPointerEvent(PointerEventPass.Final)
+                                    val c = event.changes.firstOrNull { it.id == down.id } ?: break
+                                    if (c.isConsumed) break
+                                    if (!c.pressed) {
+                                        upAt = c.position
+                                        break
+                                    }
+                                    if ((c.position - p).getDistance() > slop) break
+                                }
+                                upAt?.let { tapHandler(it) }
                             }
                         }
                     },
@@ -526,7 +577,10 @@ internal fun PageView(
                                 styles = styles,
                                 contentColor = ink,
                                 layout = hooks,
-                                modifier = Modifier.fillMaxWidth().padding(start = padH, end = padH, top = 10.dp, bottom = 40.dp),
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(start = padH, end = padH, top = 10.dp, bottom = 40.dp)
+                                    .onFocusChanged { if (it.hasFocus) session.activeEditor = null },
                             )
                         } else if (elements.none { it.kind == ElementKind.TEXT }) {
                             Text(
@@ -752,14 +806,15 @@ private fun InlineImageSlot(
                 color = MaterialTheme.colorScheme.surface,
                 shadowElevation = 6.dp,
             ) {
-                Row(Modifier.padding(horizontal = 4.dp), verticalAlignment = Alignment.CenterVertically) {
-                    IconButton(onClick = onTap) { Icon(Icons.Rounded.OpenInFull, contentDescription = "View full size") }
-                    IconButton(onClick = onDecorate) { Icon(Icons.Rounded.AutoAwesome, contentDescription = "Decorate") }
-                    IconButton(onClick = onSize) { Icon(Icons.Rounded.PhotoSizeSelectLarge, contentDescription = "Size") }
-                    IconButton(onClick = onAlign) { Icon(Icons.AutoMirrored.Rounded.FormatAlignLeft, contentDescription = "Alignment") }
-                    IconButton(onClick = onFloat) { Icon(Icons.Rounded.PictureInPicture, contentDescription = "Float freely") }
-                    IconButton(onClick = onDone) { Icon(Icons.Rounded.Check, contentDescription = "Done", tint = accent) }
-                    IconButton(onClick = onDelete) { Icon(Icons.Rounded.DeleteOutline, contentDescription = "Remove", tint = MaterialTheme.colorScheme.error) }
+                // Compact buttons so the bar fits a phone's text width (tap the picture itself to view it).
+                val b = Modifier.size(40.dp)
+                Row(Modifier.padding(horizontal = 2.dp), verticalAlignment = Alignment.CenterVertically) {
+                    IconButton(onClick = onDecorate, modifier = b) { Icon(Icons.Rounded.AutoAwesome, contentDescription = "Decorate") }
+                    IconButton(onClick = onSize, modifier = b) { Icon(Icons.Rounded.PhotoSizeSelectLarge, contentDescription = "Size") }
+                    IconButton(onClick = onAlign, modifier = b) { Icon(Icons.AutoMirrored.Rounded.FormatAlignLeft, contentDescription = "Alignment") }
+                    IconButton(onClick = onFloat, modifier = b) { Icon(Icons.Rounded.PictureInPicture, contentDescription = "Float freely") }
+                    IconButton(onClick = onDone, modifier = b) { Icon(Icons.Rounded.Check, contentDescription = "Done", tint = accent) }
+                    IconButton(onClick = onDelete, modifier = b) { Icon(Icons.Rounded.DeleteOutline, contentDescription = "Remove", tint = MaterialTheme.colorScheme.error) }
                 }
             }
         }

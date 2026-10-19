@@ -166,7 +166,9 @@ fun NotebookScreen(
     val activePage = pages[activeIndex]
     val activeSession = vm.session(activePage)
     // A text box being typed in takes the formatting tools; otherwise the page's own text does.
-    val currentEditor = activeSession.activeEditor ?: editors[activePage.id]
+    // Scrapbook pages have no flowing text, so without an active text box there's nothing to format.
+    val currentEditor = activeSession.activeEditor
+        ?: if (activePage.layoutMode == "SCRAPBOOK") null else editors[activePage.id]
 
     // Drawing and connecting tools.
     var tool by remember { mutableStateOf(PageTool.NONE) }
@@ -176,6 +178,7 @@ fun NotebookScreen(
     var pendingTextFocus by remember { mutableStateOf<Pair<Long, Long>?>(null) }
 
     var showFormat by remember { mutableStateOf(false) }
+    var formatTarget by remember { mutableStateOf<RichEditorState?>(null) }
     var showStyle by remember { mutableStateOf(false) }
     var showPages by remember { mutableStateOf(false) }
     var showEdit by remember { mutableStateOf(false) }
@@ -315,7 +318,12 @@ fun NotebookScreen(
                     highlight = Color(s?.highlightArgb ?: 0xFFFFE14D.toInt()),
                     onInkChange = { c -> scope.launch { container.settings.setInk(c?.toArgb() ?: 0) } },
                     onHighlightChange = { c -> scope.launch { container.settings.setHighlight(c.toArgb()) } },
-                    onFormat = { if (currentEditor != null) showFormat = true },
+                    onFormat = {
+                        if (currentEditor != null) {
+                            formatTarget = currentEditor
+                            showFormat = true
+                        }
+                    },
                     modifier = Modifier.weight(1f),
                 ) {
                     Box {
@@ -427,8 +435,10 @@ fun NotebookScreen(
         }
     }
 
-    if (showFormat && currentEditor != null) {
-        FormatSheet(state = currentEditor, fonts = fonts, onDismiss = { showFormat = false })
+    // The sheet keeps formatting the editor it was opened for, even though opening it moves focus.
+    val sheetTarget = formatTarget
+    if (showFormat && sheetTarget != null) {
+        FormatSheet(state = sheetTarget, fonts = fonts, onDismiss = { showFormat = false })
     }
     if (showStyle) {
         PageStyleSheet(

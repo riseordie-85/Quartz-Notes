@@ -8,7 +8,6 @@ import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.gestures.calculatePan
 import androidx.compose.foundation.gestures.calculateRotation
 import androidx.compose.foundation.gestures.calculateZoom
-import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
@@ -145,7 +144,11 @@ class PageCanvasState {
     /** True while a brush stroke is being drawn (so the live stroke isn't cleared mid-draw). */
     var drawing = false
 
+    /** Where the selected item's toolbar is, so taps on it are never mistaken for taps on a line. */
+    var toolbarRect: Rect? = null
+
     fun clearSelection() {
+        toolbarRect = null
         selectedId = null
         editingShapeId = null
         selectedInlineBlock = null
@@ -300,6 +303,8 @@ private fun ElementItem(
     val voiceData = remember(element.data) { if (element.kind == ElementKind.VOICE) decodeVoiceData(element.data) else null }
     val shapeData = remember(element.data) { if (element.kind == ElementKind.SHAPE) decodePayload<ShapeData>(element.data) else null }
     val heightFactor by rememberUpdatedState(imageData?.heightFactor())
+    val latestSelected by rememberUpdatedState(selected)
+    val latestImage by rememberUpdatedState(imageData)
     val kind = element.kind
 
     fun commit() {
@@ -319,15 +324,16 @@ private fun ElementItem(
                 val root = canvas.contentCoords ?: return@onGloballyPositioned
                 if (!c.isAttached || !root.isAttached) return@onGloballyPositioned
                 val topLeft = root.localPositionOf(c, Offset.Zero)
-                canvas.bounds[element.id] = Rect(topLeft, androidx.compose.ui.geometry.Size(c.size.width.toFloat(), c.size.height.toFloat()))
+                val rect = Rect(topLeft, androidx.compose.ui.geometry.Size(c.size.width.toFloat(), c.size.height.toFloat()))
+                if (canvas.bounds[element.id] != rect) canvas.bounds[element.id] = rect
             }
-            .pointerInput(element.id, kind, selected) {
+            .pointerInput(element.id, kind) {
                 detectTapGestures(
                     onTap = {
                         when (kind) {
                             // Pictures open full size on tap; long-press to move or edit them.
-                            ElementKind.IMAGE -> imageData?.let(actions.onView)
-                            ElementKind.SHAPE -> if (selected) canvas.editingShapeId = element.id else actions.onSelect(element.id)
+                            ElementKind.IMAGE -> latestImage?.let(actions.onView)
+                            ElementKind.SHAPE -> if (latestSelected) canvas.editingShapeId = element.id else actions.onSelect(element.id)
                             else -> actions.onSelect(element.id)
                         }
                     },
@@ -401,6 +407,7 @@ private fun ElementItem(
                 ShapeItem(
                     element = element,
                     data = shapeData,
+                    widthUnits = live.width,
                     width = pageWidth * live.width,
                     height = pageWidth * live.height,
                     ink = ink,
@@ -410,8 +417,14 @@ private fun ElementItem(
                     onDoneEditing = { if (canvas.editingShapeId == element.id) canvas.editingShapeId = null },
                 )
                 if (selected) {
-                    ResizeHandle(Modifier.align(Alignment.BottomEnd)) { drag ->
-                        gesturing = true
+                    ResizeHandle(
+                        Modifier.align(Alignment.BottomEnd),
+                        onStart = { gesturing = true },
+                        onEnd = {
+                            gesturing = false
+                            commit()
+                        },
+                    ) { drag ->
                         live = live.copy(
                             width = (live.width + drag.x / widthPx).coerceIn(0.08f, 1f),
                             height = (live.height + drag.y / widthPx).coerceIn(0.06f, 2f),
@@ -442,26 +455,17 @@ private fun ElementItem(
                         gesturing = false
                         commit()
                     },
-                    onResize = { drag ->
-                        gesturing = true
-                        live = live.copy(width = (live.width + drag.x / widthPx).coerceIn(0.2f, 1f))
+                    onResizeStart = { gesturing = true },
+                    onResizeEnd = {
+                        gesturing = false
+                        commit()
                     },
+                    onResize = { drag -> live = live.copy(width = (live.width + drag.x / widthPx).coerceIn(0.2f, 1f)) },
                 )
             }
         }
     }
 
-    // A resize with the corner handle finished: save it.
-    if (kind == ElementKind.SHAPE || kind == ElementKind.TEXT) {
-        LaunchedEffect(element.id) {
-            snapshotFlow { live }.drop(1).debounce(400).collect {
-                if (gesturing) {
-                    gesturing = false
-                    commit()
-                }
-            }
-        }
-    }
 }
 
 /** Applies a move / pinch / twist to an element. Only pictures rotate. */
@@ -498,6 +502,7 @@ private fun transformed(
 private fun ShapeItem(
     element: PageElementEntity,
     data: ShapeData,
+    widthUnits: Float,
     width: Dp,
     height: Dp,
     ink: Color,
@@ -515,7 +520,7 @@ private fun ShapeItem(
     }
     Box(modifier.size(width, height), contentAlignment = Alignment.Center) {
         Canvas(Modifier.fillMaxSize()) {
-            val stroke = lineWidthPx(data.outlineLevel, size.width / max(0.01f, element.width))
+            val stroke = lineWidthPx(data.outlineLevel, size.width / max(0.01f, widthUnits))
             val inset = stroke / 2
             val path = shapePath(data.shape, androidx.compose.ui.geometry.Size(size.width - stroke, size.height - stroke))
             path.translate(Offset(inset, inset))
@@ -566,15 +571,23 @@ private fun TextBoxItem(
     actions: ElementActions,
     onGripDrag: (Offset) -> Unit,
     onGripEnd: () -> Unit,
+    onResizeStart: () -> Unit,
+    onResizeEnd: () -> Unit,
     onResize: (Offset) -> Unit,
 ) {
     var focused by remember { mutableStateOf(false) }
     val accent = MaterialTheme.colorScheme.primary
     val latestActions by rememberUpdatedState(actions)
+    val latestGripDrag by rememberUpdatedState(onGripDrag)
+    val latestGripEnd by rememberUpdatedState(onGripEnd)
 
     // Save typing shortly after it stops.
     LaunchedEffect(state) {
         snapshotFlow { state.version }.drop(1).debounce(500).collect { latestActions.onTextChanged(element) }
+    }
+    // Leaving the page (or swiping away) saves anything not yet written.
+    androidx.compose.runtime.DisposableEffect(state) {
+        onDispose { latestActions.onTextChanged(element) }
     }
     // A brand-new box gets the cursor right away.
     LaunchedEffect(canvas.pendingFocusTextBox) {
@@ -610,15 +623,28 @@ private fun TextBoxItem(
                     .height(TextGripHeight)
                     .background(accent.copy(alpha = 0.08f), RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp))
                     .pointerInput(element.id) {
-                        detectTapGestures(onTap = { latestActions.onSelect(element.id) })
-                    }
-                    .pointerInput(element.id) {
-                        detectDragGestures(
-                            onDragEnd = onGripEnd,
-                            onDragCancel = onGripEnd,
-                        ) { change, drag ->
-                            change.consume()
-                            onGripDrag(drag)
+                        // Tap selects the box (for its toolbar); drag moves it. Claims the touch right away
+                        // so the box's own move gesture doesn't compete.
+                        awaitEachGesture {
+                            val down = awaitFirstDown()
+                            down.consume()
+                            var dragging = false
+                            var last = down.position
+                            while (true) {
+                                val event = awaitPointerEvent()
+                                val c = event.changes.firstOrNull { it.id == down.id } ?: break
+                                if (!c.pressed) break
+                                if (!dragging && (c.position - down.position).getDistance() > viewConfiguration.touchSlop) {
+                                    dragging = true
+                                    last = c.position
+                                }
+                                if (dragging) {
+                                    latestGripDrag(c.position - last)
+                                    last = c.position
+                                }
+                                c.consume()
+                            }
+                            if (dragging) latestGripEnd() else latestActions.onSelect(element.id)
                         }
                     },
                 contentAlignment = Alignment.Center,
@@ -635,26 +661,47 @@ private fun TextBoxItem(
                 modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp, vertical = 4.dp),
             )
             if (selected) {
-                ResizeHandle(Modifier.align(Alignment.BottomEnd), onDrag = onResize)
+                ResizeHandle(Modifier.align(Alignment.BottomEnd), onStart = onResizeStart, onEnd = onResizeEnd, onDrag = onResize)
             }
         }
     }
 }
 
-/** Small round handle for resizing; reports drag deltas in px. */
+/**
+ * Small round handle for resizing; reports drag deltas in px. It claims the touch as soon as it
+ * lands, so the item's own move gesture never starts.
+ */
 @Composable
-private fun ResizeHandle(modifier: Modifier, onDrag: (Offset) -> Unit) {
+private fun ResizeHandle(modifier: Modifier, onStart: () -> Unit, onEnd: () -> Unit, onDrag: (Offset) -> Unit) {
     val accent = MaterialTheme.colorScheme.primary
+    val start by rememberUpdatedState(onStart)
+    val end by rememberUpdatedState(onEnd)
+    val drag by rememberUpdatedState(onDrag)
     Box(
         modifier
-            .size(28.dp)
+            .size(30.dp)
             .padding(3.dp)
             .background(Color.White, CircleShape)
             .border(2.5.dp, accent, CircleShape)
             .pointerInput(Unit) {
-                detectDragGestures { change, drag ->
-                    change.consume()
-                    onDrag(drag)
+                awaitEachGesture {
+                    val down = awaitFirstDown()
+                    down.consume()
+                    start()
+                    var last = down.position
+                    try {
+                        while (true) {
+                            val event = awaitPointerEvent()
+                            val c = event.changes.firstOrNull { it.id == down.id } ?: break
+                            if (!c.pressed) break
+                            val delta = c.position - last
+                            last = c.position
+                            c.consume()
+                            if (delta != Offset.Zero) drag(delta)
+                        }
+                    } finally {
+                        end()
+                    }
                 }
             },
     )
@@ -667,7 +714,7 @@ private fun ArrowHandles(element: PageElementEntity, widthPx: Float, canvas: Pag
     val live = drag?.second ?: element
     val data = drag?.third ?: base
     val (s, t) = arrowEnds(live, data, widthPx)
-    val latest by rememberUpdatedState(canvas.arrowDrag)
+    val latestActions by rememberUpdatedState(actions)
 
     @Composable
     fun Handle(at: Offset, isStart: Boolean) {
@@ -680,22 +727,29 @@ private fun ArrowHandles(element: PageElementEntity, widthPx: Float, canvas: Pag
                 .padding(4.dp)
                 .background(Color.White, CircleShape)
                 .border(2.5.dp, accent, CircleShape)
-                .pointerInput(element.id, isStart) {
-                    detectDragGestures(
-                        onDragEnd = {
-                            latest?.takeIf { it.first == element }?.let { (_, moved, d) -> actions.onArrowEdit(moved, d) }
-                        },
-                    ) { change, delta ->
-                        change.consume()
-                        val cur = canvas.arrowDrag?.takeIf { it.first == element } ?: Triple(element, element, base)
-                        val (_, el, d) = cur
-                        val ddx = delta.x / widthPx
-                        val ddy = delta.y / widthPx
-                        canvas.arrowDrag = if (isStart) {
-                            Triple(element, el.copy(x = el.x + ddx, y = (el.y + ddy).coerceAtLeast(0f)), d.copy(dx = d.dx - ddx, dy = d.dy - ddy))
-                        } else {
-                            Triple(element, el, d.copy(dx = d.dx + ddx, dy = d.dy + ddy))
+                .pointerInput(element, isStart) {
+                    awaitEachGesture {
+                        val down = awaitFirstDown()
+                        down.consume()
+                        var last = down.position
+                        while (true) {
+                            val event = awaitPointerEvent()
+                            val c = event.changes.firstOrNull { it.id == down.id } ?: break
+                            if (!c.pressed) break
+                            val delta = c.position - last
+                            last = c.position
+                            c.consume()
+                            // Start from any drag already in progress for this arrow (e.g. a body move).
+                            val (_, el, d) = canvas.arrowDrag?.takeIf { it.first == element } ?: Triple(element, element, base)
+                            val ddx = delta.x / widthPx
+                            val ddy = delta.y / widthPx
+                            canvas.arrowDrag = if (isStart) {
+                                Triple(element, el.copy(x = el.x + ddx, y = (el.y + ddy).coerceAtLeast(0f)), d.copy(dx = d.dx - ddx, dy = d.dy - ddy))
+                            } else {
+                                Triple(element, el, d.copy(dx = d.dx + ddx, dy = d.dy + ddy))
+                            }
                         }
+                        canvas.arrowDrag?.takeIf { it.first == element }?.let { (_, moved, d) -> latestActions.onArrowEdit(moved, d) }
                     }
                 },
         )
@@ -737,7 +791,14 @@ private fun ElementToolbar(
     var layoutMenu by remember { mutableStateOf(false) }
 
     Surface(
-        modifier = Modifier.offset { IntOffset(x.roundToInt(), y.roundToInt()) },
+        modifier = Modifier
+            .offset { IntOffset(x.roundToInt(), y.roundToInt()) }
+            .onGloballyPositioned { c ->
+                val root = canvas.contentCoords
+                if (root != null && root.isAttached && c.isAttached) {
+                    canvas.toolbarRect = Rect(root.localPositionOf(c, Offset.Zero), androidx.compose.ui.geometry.Size(c.size.width.toFloat(), c.size.height.toFloat()))
+                }
+            },
         shape = CircleShape,
         color = MaterialTheme.colorScheme.surface,
         shadowElevation = 6.dp,
