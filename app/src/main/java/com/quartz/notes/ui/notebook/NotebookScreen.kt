@@ -222,14 +222,18 @@ fun NotebookScreen(
                                 PageView(
                                     page = page,
                                     session = vm.session(page),
-                                    compact = perSpread == 2,
+                                    side = when {
+                                        perSpread == 1 -> PageSide.SINGLE
+                                        slot == 0 -> PageSide.LEFT
+                                        else -> PageSide.RIGHT
+                                    },
                                     onActivate = { activePageId = page.id },
                                     onEditorReady = { editors[page.id] = it },
                                     onEditorGone = { editors.remove(page.id) },
                                     onSave = { vm.saveIfChanged(page.id) },
                                 )
                             } else {
-                                BlankPageSlot(onClick = {
+                                BlankPageSlot(side = PageSide.RIGHT, onClick = {
                                     vm.addPage(pages.lastIndex) { newId -> scrollTarget = newId }
                                 })
                             }
@@ -410,7 +414,7 @@ private fun NotebookTopBar(
 private fun PageView(
     page: PageEntity,
     session: PageSession,
-    compact: Boolean,
+    side: PageSide,
     onActivate: () -> Unit,
     onEditorReady: (RichEditorState) -> Unit,
     onEditorGone: () -> Unit,
@@ -440,18 +444,22 @@ private fun PageView(
     val density = LocalDensity.current
     val unitPx = with(density) { styles.lineUnit.toPx() }
     val keyboard = LocalSoftwareKeyboardController.current
-    val shape = RoundedCornerShape(24.dp)
-    val padH = if (compact) 24.dp else 22.dp
+    val shape = side.shape
+    val padH = if (side == PageSide.SINGLE) 22.dp else 24.dp
+    val seamShade = if (quartz.isDark) 0.45f else 0.13f
 
     BoxWithConstraints(
         Modifier
             .fillMaxSize()
-            .padding(horizontal = if (compact) 6.dp else 16.dp, vertical = 6.dp)
+            .padding(start = side.outerStart, end = side.outerEnd, top = 6.dp, bottom = 6.dp)
             .onFocusChanged { if (it.hasFocus) onActivate() }
             .shadow(2.dp, shape)
             .clip(shape)
             .background(bg)
-            .drawBehind { texture?.let { drawRect(it) } },
+            .drawBehind {
+                texture?.let { drawRect(it) }
+                if (side != PageSide.SINGLE) drawSeam(atRightEdge = side == PageSide.LEFT, strength = seamShade)
+            },
     ) {
         val viewport = maxHeight
         Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState())) {
@@ -502,17 +510,21 @@ private fun PageView(
 
 /** Right-hand page of the last spread when the notebook has an odd number of pages. */
 @Composable
-private fun BlankPageSlot(onClick: () -> Unit) {
+private fun BlankPageSlot(side: PageSide, onClick: () -> Unit) {
     val outline = LocalQuartzColors.current.textSecondary.copy(alpha = 0.45f)
+    val shape = side.shape
     Box(
         Modifier
             .fillMaxSize()
-            .padding(horizontal = 6.dp, vertical = 6.dp)
-            .clip(RoundedCornerShape(24.dp))
+            .padding(start = side.outerStart, end = side.outerEnd, top = 6.dp, bottom = 6.dp)
+            .clip(shape)
             .drawBehind {
-                drawRoundRect(
+                val outlinePath = androidx.compose.ui.graphics.Path().apply {
+                    addOutline(shape.createOutline(size, layoutDirection, this@drawBehind))
+                }
+                drawPath(
+                    outlinePath,
                     color = outline,
-                    cornerRadius = androidx.compose.ui.geometry.CornerRadius(24.dp.toPx()),
                     style = androidx.compose.ui.graphics.drawscope.Stroke(
                         width = 2.dp.toPx(),
                         pathEffect = androidx.compose.ui.graphics.PathEffect.dashPathEffect(floatArrayOf(16f, 12f)),
@@ -527,4 +539,43 @@ private fun BlankPageSlot(onClick: () -> Unit) {
             Text("New page", color = outline, fontSize = 15.sp)
         }
     }
+}
+
+/** Where a page sits: alone, or as the left/right half of an open spread. */
+private enum class PageSide(
+    val shape: RoundedCornerShape,
+    val outerStart: androidx.compose.ui.unit.Dp,
+    val outerEnd: androidx.compose.ui.unit.Dp,
+) {
+    SINGLE(RoundedCornerShape(24.dp), 16.dp, 16.dp),
+    // Spread halves meet at the seam with square inner corners.
+    LEFT(RoundedCornerShape(topStart = 24.dp, bottomStart = 24.dp, topEnd = 0.dp, bottomEnd = 0.dp), 6.dp, 0.dp),
+    RIGHT(RoundedCornerShape(topStart = 0.dp, bottomStart = 0.dp, topEnd = 24.dp, bottomEnd = 24.dp), 0.dp, 6.dp),
+}
+
+/** Soft gutter shadow plus a fine crease line along the edge where two pages meet. */
+private fun androidx.compose.ui.graphics.drawscope.DrawScope.drawSeam(atRightEdge: Boolean, strength: Float) {
+    val width = 34.dp.toPx().coerceAtMost(size.width / 4)
+    val dark = Color.Black
+    val edgeX = if (atRightEdge) size.width else 0f
+    val brush = androidx.compose.ui.graphics.Brush.horizontalGradient(
+        colors = if (atRightEdge) {
+            listOf(dark.copy(alpha = 0f), dark.copy(alpha = strength * 0.45f), dark.copy(alpha = strength))
+        } else {
+            listOf(dark.copy(alpha = strength), dark.copy(alpha = strength * 0.45f), dark.copy(alpha = 0f))
+        },
+        startX = if (atRightEdge) size.width - width else 0f,
+        endX = if (atRightEdge) size.width else width,
+    )
+    drawRect(
+        brush = brush,
+        topLeft = androidx.compose.ui.geometry.Offset(if (atRightEdge) size.width - width else 0f, 0f),
+        size = androidx.compose.ui.geometry.Size(width, size.height),
+    )
+    drawLine(
+        color = dark.copy(alpha = (strength * 1.4f).coerceAtMost(0.6f)),
+        start = androidx.compose.ui.geometry.Offset(edgeX, 0f),
+        end = androidx.compose.ui.geometry.Offset(edgeX, size.height),
+        strokeWidth = 1.dp.toPx(),
+    )
 }
