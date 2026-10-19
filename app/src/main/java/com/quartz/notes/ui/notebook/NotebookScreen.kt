@@ -67,6 +67,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.graphics.drawOutline
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
@@ -519,11 +520,8 @@ private fun BlankPageSlot(side: PageSide, onClick: () -> Unit) {
             .padding(start = side.outerStart, end = side.outerEnd, top = 6.dp, bottom = 6.dp)
             .clip(shape)
             .drawBehind {
-                val outlinePath = androidx.compose.ui.graphics.Path().apply {
-                    addOutline(shape.createOutline(size, layoutDirection, this@drawBehind))
-                }
-                drawPath(
-                    outlinePath,
+                drawOutline(
+                    outline = shape.createOutline(size, layoutDirection, this),
                     color = outline,
                     style = androidx.compose.ui.graphics.drawscope.Stroke(
                         width = 2.dp.toPx(),
