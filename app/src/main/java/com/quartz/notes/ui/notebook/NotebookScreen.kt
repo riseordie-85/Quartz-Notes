@@ -56,9 +56,13 @@ import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.runtime.mutableLongStateOf
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -131,22 +135,14 @@ fun NotebookScreen(
     val fonts by container.fonts.fonts.collectAsStateWithLifecycle()
     val scope = rememberCoroutineScope()
 
-    val pagerState = rememberPagerState { pages.size }
-    var scrollTarget by rememberSaveable { mutableStateOf(initialPageId ?: -1L) }
-    LaunchedEffect(scrollTarget, pages) {
-        if (scrollTarget >= 0) {
-            val index = pages.indexOfFirst { it.id == scrollTarget }
-            if (index >= 0) {
-                pagerState.scrollToPage(index)
-                scrollTarget = -1L
-            }
-        }
-    }
-
     val editors = remember { mutableStateMapOf<Long, RichEditorState>() }
-    val currentIndex = pagerState.currentPage.coerceIn(0, pages.lastIndex)
-    val currentPage = pages[currentIndex]
-    val currentEditor = editors[currentPage.id]
+
+    // The page the toolbar, page style and "+" act on: the one being written in, or the first one showing.
+    var activePageId by rememberSaveable { mutableLongStateOf(initialPageId ?: pages.first().id) }
+    // Falls back to the first page if the active one was deleted.
+    val activeIndex = pages.indexOfFirst { it.id == activePageId }.coerceAtLeast(0)
+    val activePage = pages[activeIndex]
+    val currentEditor = editors[activePage.id]
 
     var showFormat by remember { mutableStateOf(false) }
     var showStyle by remember { mutableStateOf(false) }
@@ -162,11 +158,49 @@ fun NotebookScreen(
             .imePadding(),
     ) {
         val wide = maxWidth >= TwoPaneMinWidth
+        // Unfolded / tablet: two pages side by side, like an open notebook.
+        val perSpread = if (wide) 2 else 1
+        val spreadCount = (pages.size + perSpread - 1) / perSpread
+        val pagerState = rememberPagerState(initialPage = activeIndex / perSpread) { spreadCount }
+
+        // Jump to a requested page (new page, search result, pages list).
+        var scrollTarget by rememberSaveable { mutableLongStateOf(-1L) }
+        LaunchedEffect(scrollTarget, pages, perSpread) {
+            if (scrollTarget >= 0) {
+                val index = pages.indexOfFirst { it.id == scrollTarget }
+                if (index >= 0) {
+                    activePageId = scrollTarget
+                    pagerState.animateScrollToPage(index / perSpread)
+                    scrollTarget = -1L
+                }
+            }
+        }
+        // Folding or unfolding keeps the active page in view.
+        LaunchedEffect(perSpread) {
+            pagerState.scrollToPage((pages.indexOfFirst { it.id == activePageId }.coerceAtLeast(0)) / perSpread)
+        }
+        // Swiping to another spread makes its first page active, unless the active page is still showing.
+        val latestPages by rememberUpdatedState(pages)
+        LaunchedEffect(pagerState, perSpread) {
+            snapshotFlow { pagerState.settledPage }.collect { spread ->
+                val pages = latestPages
+                val first = spread * perSpread
+                val visible = pages.subList(first.coerceAtMost(pages.size), (first + perSpread).coerceAtMost(pages.size))
+                if (visible.isNotEmpty() && visible.none { it.id == activePageId }) activePageId = visible.first().id
+            }
+        }
+
+        val spreadStart = pagerState.currentPage * perSpread
+        val pageLabel = when {
+            perSpread == 2 && spreadStart + 1 < pages.size -> "${spreadStart + 1}–${spreadStart + 2}/${pages.size}"
+            else -> "${(spreadStart + 1).coerceAtMost(pages.size)}/${pages.size}"
+        }
+
         Column(Modifier.fillMaxSize()) {
             NotebookTopBar(
                 notebook = nb,
                 wide = wide,
-                pageLabel = "Page ${currentIndex + 1} of ${pages.size}",
+                pageLabel = pageLabel,
                 onBack = onBack,
                 onSearch = onSearch,
                 onPages = { showPages = true },
@@ -175,21 +209,32 @@ fun NotebookScreen(
 
             HorizontalPager(
                 state = pagerState,
-                key = { index -> pages.getOrNull(index)?.id ?: index },
+                key = { spread -> pages.getOrNull(spread * perSpread)?.id ?: -spread.toLong() },
                 userScrollEnabled = !WindowInsets.isImeVisible,
                 beyondViewportPageCount = 0,
                 modifier = Modifier.weight(1f).fillMaxWidth(),
-            ) { index ->
-                val page = pages.getOrNull(index)
-                if (page != null) {
-                    PageView(
-                        page = page,
-                        session = vm.session(page),
-                        wide = wide,
-                        onEditorReady = { editors[page.id] = it },
-                        onEditorGone = { editors.remove(page.id) },
-                        onSave = { vm.saveIfChanged(page.id) },
-                    )
+            ) { spread ->
+                Row(Modifier.fillMaxSize().padding(horizontal = if (perSpread == 2) 10.dp else 0.dp)) {
+                    for (slot in 0 until perSpread) {
+                        val page = pages.getOrNull(spread * perSpread + slot)
+                        Box(Modifier.weight(1f).fillMaxHeight()) {
+                            if (page != null) {
+                                PageView(
+                                    page = page,
+                                    session = vm.session(page),
+                                    compact = perSpread == 2,
+                                    onActivate = { activePageId = page.id },
+                                    onEditorReady = { editors[page.id] = it },
+                                    onEditorGone = { editors.remove(page.id) },
+                                    onSave = { vm.saveIfChanged(page.id) },
+                                )
+                            } else {
+                                BlankPageSlot(onClick = {
+                                    vm.addPage(pages.lastIndex) { newId -> scrollTarget = newId }
+                                })
+                            }
+                        }
+                    }
                 }
             }
 
@@ -198,7 +243,7 @@ fun NotebookScreen(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 val s = settings
-                val pageBg = currentPage.backgroundArgb?.let { Color(it) } ?: LocalQuartzColors.current.card
+                val pageBg = activePage.backgroundArgb?.let { Color(it) } ?: LocalQuartzColors.current.card
                 EditorToolbar(
                     state = currentEditor,
                     ink = s?.inkArgb?.takeIf { it != 0 }?.let { Color(it) },
@@ -216,13 +261,30 @@ fun NotebookScreen(
                 Spacer(Modifier.width(12.dp))
                 RoundActionButton(
                     onClick = {
-                        vm.addPage(currentIndex) { newId -> scrollTarget = newId }
+                        vm.addPage(activeIndex) { newId -> scrollTarget = newId }
                     },
                     size = 58.dp,
                 ) {
                     Icon(Icons.Rounded.Add, contentDescription = "Add page", modifier = Modifier.size(32.dp), tint = MaterialTheme.colorScheme.onSurface)
                 }
             }
+        }
+
+        if (showPages) {
+            PagesSheet(
+                pages = pages,
+                currentIndex = activeIndex,
+                onSelect = { index ->
+                    showPages = false
+                    scrollTarget = pages[index].id
+                },
+                onMove = { from, to ->
+                    if (from == activeIndex) scrollTarget = pages[from].id
+                    vm.movePage(from, to)
+                },
+                onDelete = { page -> vm.deletePage(page, isOnlyPage = pages.size <= 1) },
+                onDismiss = { showPages = false },
+            )
         }
     }
 
@@ -231,29 +293,13 @@ fun NotebookScreen(
     }
     if (showStyle) {
         PageStyleSheet(
-            page = currentPage,
+            page = activePage,
             onChange = vm::updateStyle,
             onApplyToAll = {
                 vm.applyStyleToAll(it)
                 showStyle = false
             },
             onDismiss = { showStyle = false },
-        )
-    }
-    if (showPages) {
-        PagesSheet(
-            pages = pages,
-            currentIndex = currentIndex,
-            onSelect = { index ->
-                showPages = false
-                scope.launch { pagerState.animateScrollToPage(index) }
-            },
-            onMove = { from, to ->
-                if (from == currentIndex) scrollTarget = pages[from].id
-                vm.movePage(from, to)
-            },
-            onDelete = { page -> vm.deletePage(page, isOnlyPage = pages.size <= 1) },
-            onDismiss = { showPages = false },
         )
     }
     if (showEdit) {
@@ -313,22 +359,21 @@ private fun NotebookTopBar(
             shadowElevation = 3.dp,
         ) {
             Row(Modifier.padding(start = 22.dp, end = 6.dp), verticalAlignment = Alignment.CenterVertically) {
-                Column(Modifier.weight(1f)) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(
-                            notebook.title,
-                            fontSize = 21.sp,
-                            color = onColor,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
-                            modifier = Modifier.weight(1f, fill = false),
-                        )
-                        NotebookIcons.of(notebook.icon)?.let {
-                            Spacer(Modifier.width(10.dp))
-                            Icon(it, contentDescription = null, tint = onColor, modifier = Modifier.size(22.dp))
-                        }
+                Row(Modifier.weight(1f), verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        notebook.title,
+                        fontSize = 21.sp,
+                        color = onColor,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier.weight(1f, fill = false),
+                    )
+                    NotebookIcons.of(notebook.icon)?.let {
+                        Spacer(Modifier.width(10.dp))
+                        Icon(it, contentDescription = null, tint = onColor, modifier = Modifier.size(22.dp))
                     }
-                    Text(pageLabel, fontSize = 12.sp, color = onColor.copy(alpha = 0.8f))
+                    Spacer(Modifier.width(10.dp))
+                    Text(pageLabel, fontSize = 13.sp, color = onColor.copy(alpha = 0.75f), maxLines = 1)
                 }
                 if (!wide) {
                     IconButton(onClick = onSearch) { Icon(Icons.Rounded.Search, contentDescription = "Search notebook", tint = onColor) }
@@ -365,7 +410,8 @@ private fun NotebookTopBar(
 private fun PageView(
     page: PageEntity,
     session: PageSession,
-    wide: Boolean,
+    compact: Boolean,
+    onActivate: () -> Unit,
     onEditorReady: (RichEditorState) -> Unit,
     onEditorGone: () -> Unit,
     onSave: () -> Unit,
@@ -395,12 +441,13 @@ private fun PageView(
     val unitPx = with(density) { styles.lineUnit.toPx() }
     val keyboard = LocalSoftwareKeyboardController.current
     val shape = RoundedCornerShape(24.dp)
-    val padH = if (wide) 40.dp else 22.dp
+    val padH = if (compact) 24.dp else 22.dp
 
     BoxWithConstraints(
         Modifier
             .fillMaxSize()
-            .padding(horizontal = 16.dp, vertical = 6.dp)
+            .padding(horizontal = if (compact) 6.dp else 16.dp, vertical = 6.dp)
+            .onFocusChanged { if (it.hasFocus) onActivate() }
             .shadow(2.dp, shape)
             .clip(shape)
             .background(bg)
@@ -449,6 +496,35 @@ private fun PageView(
                     modifier = Modifier.fillMaxWidth().padding(start = padH, end = padH, top = 10.dp, bottom = 40.dp),
                 )
             }
+        }
+    }
+}
+
+/** Right-hand page of the last spread when the notebook has an odd number of pages. */
+@Composable
+private fun BlankPageSlot(onClick: () -> Unit) {
+    val outline = LocalQuartzColors.current.textSecondary.copy(alpha = 0.45f)
+    Box(
+        Modifier
+            .fillMaxSize()
+            .padding(horizontal = 6.dp, vertical = 6.dp)
+            .clip(RoundedCornerShape(24.dp))
+            .drawBehind {
+                drawRoundRect(
+                    color = outline,
+                    cornerRadius = androidx.compose.ui.geometry.CornerRadius(24.dp.toPx()),
+                    style = androidx.compose.ui.graphics.drawscope.Stroke(
+                        width = 2.dp.toPx(),
+                        pathEffect = androidx.compose.ui.graphics.PathEffect.dashPathEffect(floatArrayOf(16f, 12f)),
+                    ),
+                )
+            }
+            .clickable(onClick = onClick),
+        contentAlignment = Alignment.Center,
+    ) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Icon(Icons.Rounded.Add, contentDescription = null, tint = outline, modifier = Modifier.size(40.dp))
+            Text("New page", color = outline, fontSize = 15.sp)
         }
     }
 }

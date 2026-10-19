@@ -55,6 +55,8 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -402,37 +404,70 @@ private fun buildTitle(): androidx.compose.ui.text.AnnotatedString =
 @Composable
 private fun ShelfSelector(state: HomeState, onSelectShelf: (Long) -> Unit, onNewShelf: () -> Unit) {
     var open by remember { mutableStateOf(false) }
+    var anchorWidthPx by remember { mutableStateOf(0) }
+    val density = androidx.compose.ui.platform.LocalDensity.current
+    val anchorWidth = with(density) { anchorWidthPx.toDp() }
+    val menuWidth = maxOf(anchorWidth, 240.dp)
+
     Box(Modifier.fillMaxWidth().padding(top = 10.dp, bottom = 4.dp), contentAlignment = Alignment.Center) {
-        Row(
-            Modifier
-                .clickable { open = true }
-                .padding(horizontal = 12.dp, vertical = 6.dp),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Text("Shelf: ", fontSize = 24.sp, fontWeight = FontWeight.Medium, color = MaterialTheme.colorScheme.onBackground)
-            Text(state.selectedShelf?.name ?: "", fontSize = 24.sp, color = MaterialTheme.colorScheme.onBackground)
-            Icon(Icons.Rounded.ArrowDropDown, contentDescription = "Choose shelf", tint = MaterialTheme.colorScheme.onBackground, modifier = Modifier.size(32.dp))
-        }
-        DropdownMenu(expanded = open, onDismissRequest = { open = false }) {
-            state.shelves.forEach { shelf ->
+        // The menu is anchored to the title itself and drops straight down from its center.
+        Box {
+            Row(
+                Modifier
+                    .onSizeChanged { anchorWidthPx = it.width }
+                    .clip(RoundedCornerShape(16.dp))
+                    .clickable { open = true }
+                    .padding(horizontal = 12.dp, vertical = 6.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Text("Shelf: ", fontSize = 24.sp, fontWeight = FontWeight.Medium, color = MaterialTheme.colorScheme.onBackground)
+                Text(state.selectedShelf?.name ?: "", fontSize = 24.sp, color = MaterialTheme.colorScheme.onBackground)
+                Icon(Icons.Rounded.ArrowDropDown, contentDescription = "Choose shelf", tint = MaterialTheme.colorScheme.onBackground, modifier = Modifier.size(32.dp))
+            }
+            DropdownMenu(
+                expanded = open,
+                onDismissRequest = { open = false },
+                offset = androidx.compose.ui.unit.DpOffset(x = (anchorWidth - menuWidth) / 2, y = 6.dp),
+                shape = RoundedCornerShape(20.dp),
+                containerColor = MaterialTheme.colorScheme.surface,
+                modifier = Modifier.width(menuWidth),
+            ) {
+                state.shelves.forEach { shelf ->
+                    val selected = shelf.id == state.selectedShelf?.id
+                    DropdownMenuItem(
+                        text = {
+                            Text(
+                                shelf.name,
+                                fontSize = 18.sp,
+                                fontWeight = if (selected) FontWeight.SemiBold else FontWeight.Normal,
+                                color = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
+                                textAlign = androidx.compose.ui.text.style.TextAlign.Center,
+                                modifier = Modifier.fillMaxWidth(),
+                            )
+                        },
+                        onClick = {
+                            open = false
+                            onSelectShelf(shelf.id)
+                        },
+                    )
+                }
+                HorizontalDivider(Modifier.padding(vertical = 4.dp))
                 DropdownMenuItem(
                     text = {
                         Text(
-                            shelf.name,
-                            fontWeight = if (shelf.id == state.selectedShelf?.id) FontWeight.SemiBold else FontWeight.Normal,
+                            "New shelf…",
+                            fontSize = 16.sp,
+                            color = LocalQuartzColors.current.textSecondary,
+                            textAlign = androidx.compose.ui.text.style.TextAlign.Center,
+                            modifier = Modifier.fillMaxWidth(),
                         )
                     },
                     onClick = {
                         open = false
-                        onSelectShelf(shelf.id)
+                        onNewShelf()
                     },
                 )
             }
-            HorizontalDivider()
-            DropdownMenuItem(text = { Text("New shelf…") }, onClick = {
-                open = false
-                onNewShelf()
-            })
         }
     }
 }
