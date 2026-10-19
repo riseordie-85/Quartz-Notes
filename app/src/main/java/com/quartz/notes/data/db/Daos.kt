@@ -133,6 +133,14 @@ interface QuickNoteDao {
 
     @Query(
         """
+        DELETE FROM quick_notes
+        WHERE id != :except AND TRIM(title) = '' AND TRIM(plainText, ' ' || char(9) || char(10) || char(13)) = ''
+        """,
+    )
+    suspend fun deleteBlank(except: Long)
+
+    @Query(
+        """
         SELECT * FROM quick_notes
         WHERE title LIKE :pattern ESCAPE '\' OR plainText LIKE :pattern ESCAPE '\'
         ORDER BY createdAt DESC

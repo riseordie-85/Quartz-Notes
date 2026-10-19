@@ -155,7 +155,8 @@ private fun InkButton(state: RichEditorState?, ink: Color?, autoInk: Color, onIn
 
     fun choose(c: Color?) {
         onInkChange(c)
-        if (state?.hasSelection == true) state.applyValue(InlineStyle.COLOR, c?.toHex())
+        // Colors the selection, or what's typed next when nothing is selected.
+        state?.applyValue(InlineStyle.COLOR, c?.toHex())
         menu = false
     }
 

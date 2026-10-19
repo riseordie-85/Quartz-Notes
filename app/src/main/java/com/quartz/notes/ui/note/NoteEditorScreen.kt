@@ -1,5 +1,6 @@
 package com.quartz.notes.ui.note
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -94,7 +95,7 @@ fun NoteEditorRoute(noteId: Long, onBack: () -> Unit) {
 /** The note card plus its toolbar. Used full screen on phones and as the right pane on tablets. */
 @Composable
 fun NoteEditorPane(noteId: Long, onClose: () -> Unit, showBack: Boolean) {
-    val vm = quartzViewModel(key = "note-$noteId") { NoteViewModel(noteId, it.repository, it.appScope) }
+    val vm = quartzViewModel(key = "note-$noteId") { NoteViewModel(noteId, it.repository) }
     val load by vm.load.collectAsStateWithLifecycle()
     when (val l = load) {
         NoteLoad.Loading -> Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { CircularProgressIndicator() }
@@ -108,32 +109,37 @@ fun NoteEditorPane(noteId: Long, onClose: () -> Unit, showBack: Boolean) {
 @OptIn(FlowPreview::class, ExperimentalLayoutApi::class)
 @Composable
 private fun NoteEditorContent(load: NoteLoad.Ready, vm: NoteViewModel, onClose: () -> Unit, showBack: Boolean) {
-    val note = load.note
+    val session = load.session
     val container = LocalAppContainer.current
     val settings by container.settings.settings.collectAsStateWithLifecycle(initialValue = null)
     val fonts by container.fonts.fonts.collectAsStateWithLifecycle()
     val scope = rememberCoroutineScope()
 
-    val editor = remember(note.id) { RichEditorState(RichDoc.decode(note.content)) }
-    var title by remember(note.id) { mutableStateOf(note.title) }
-    var colorKey by remember(note.id) { mutableStateOf(note.colorKey) }
+    val editor = session.editor
+    val title = session.title
+    val colorKey = session.colorKey
     var showFormat by remember { mutableStateOf(false) }
     var showColors by remember { mutableStateOf(false) }
     var menu by remember { mutableStateOf(false) }
     var confirmDelete by remember { mutableStateOf(false) }
 
-    // Autosave shortly after typing stops, and once more when the editor closes.
-    LaunchedEffect(editor) {
-        snapshotFlow { Triple(editor.version, title, colorKey) }
+    // Autosave shortly after typing stops, and whenever this pane goes away.
+    LaunchedEffect(session) {
+        snapshotFlow { Triple(editor.version, session.title, session.colorKey) }
             .drop(1)
             .debounce(600)
-            .collect { (_, t, c) -> vm.save(t, editor.toDoc(), c) }
+            .collect { vm.saveIfChanged() }
     }
-    val latestTitle by rememberUpdatedState(title)
-    val latestColor by rememberUpdatedState(colorKey)
-    DisposableEffect(editor) {
-        onDispose { vm.saveOnClose(latestTitle, editor.toDoc(), latestColor) }
+    DisposableEffect(session) {
+        onDispose { vm.saveIfChanged() }
     }
+
+    // Leaving on purpose (back arrow / back gesture) saves, or discards the note if it's empty.
+    val closeNote = {
+        vm.close()
+        onClose()
+    }
+    BackHandler(enabled = showBack, onBack = closeNote)
 
     val dark = LocalQuartzColors.current.isDark
     val noteColor = NoteColor.of(colorKey)
@@ -146,7 +152,7 @@ private fun NoteEditorContent(load: NoteLoad.Ready, vm: NoteViewModel, onClose: 
         QuartzCard(Modifier.weight(1f).fillMaxWidth(), color = cardColor) {
             Row(Modifier.fillMaxWidth().padding(start = 6.dp, end = 6.dp, top = 6.dp), verticalAlignment = Alignment.CenterVertically) {
                 if (showBack) {
-                    IconButton(onClick = onClose) { Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = "Back", tint = ink) }
+                    IconButton(onClick = closeNote) { Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = "Back", tint = ink) }
                 }
                 Spacer(Modifier.weight(1f))
                 IconButton(onClick = { showColors = !showColors }) {
@@ -177,7 +183,7 @@ private fun NoteEditorContent(load: NoteLoad.Ready, vm: NoteViewModel, onClose: 
                             color = if (c == NoteColor.DEFAULT) MaterialTheme.colorScheme.surface else c.background(dark),
                             selected = c == noteColor,
                             size = 34.dp,
-                            onClick = { colorKey = c.key },
+                            onClick = { session.colorKey = c.key },
                         )
                     }
                 }
@@ -192,7 +198,7 @@ private fun NoteEditorContent(load: NoteLoad.Ready, vm: NoteViewModel, onClose: 
             ) {
                 BasicTextField(
                     value = title,
-                    onValueChange = { title = it.replace("\n", "") },
+                    onValueChange = { session.title = it.replace("\n", "") },
                     textStyle = TextStyle(fontSize = 22.sp, fontWeight = FontWeight.Bold, color = ink),
                     cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
                     singleLine = false,
@@ -250,7 +256,8 @@ private fun NoteEditorContent(load: NoteLoad.Ready, vm: NoteViewModel, onClose: 
             onDismiss = { confirmDelete = false },
             onConfirm = {
                 confirmDelete = false
-                vm.delete(onClose)
+                vm.delete()
+                onClose()
             },
         )
     }

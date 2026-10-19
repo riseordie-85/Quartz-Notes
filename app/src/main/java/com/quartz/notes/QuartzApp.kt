@@ -26,7 +26,7 @@ class AppContainer(context: Context) {
     /** Outlives screens, so saves started when a screen closes still finish. */
     val appScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
     val database = QuartzDatabase.build(context)
-    val repository = QuartzRepository(database)
+    val repository = QuartzRepository(database, appScope)
     val settings = SettingsRepository(context)
     val fonts = FontRepository(context)
 }

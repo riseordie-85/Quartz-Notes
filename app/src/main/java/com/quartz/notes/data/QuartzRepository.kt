@@ -8,9 +8,11 @@ import com.quartz.notes.data.db.QuartzDatabase
 import com.quartz.notes.data.db.QuickNoteEntity
 import com.quartz.notes.data.db.ShelfEntity
 import com.quartz.notes.data.rich.RichDoc
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.sync.Mutex
-import kotlinx.coroutines.sync.withLock
+import kotlinx.coroutines.launch
 
 data class SearchResults(
     val notes: List<QuickNoteEntity>,
@@ -19,14 +21,41 @@ data class SearchResults(
     val isEmpty: Boolean get() = notes.isEmpty() && pages.isEmpty()
 }
 
-class QuartzRepository(private val db: QuartzDatabase) {
+class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
     private val shelves = db.shelfDao()
     private val notebooks = db.notebookDao()
     private val pages = db.pageDao()
     private val notes = db.quickNoteDao()
 
-    /** Serializes content saves so a late debounced save can't overwrite a newer one. */
-    private val writeLock = Mutex()
+    /**
+     * Page and note content goes through one queue, run strictly in the order it was submitted.
+     * A save queued before another can never land after it, and a read queued after a save sees it.
+     */
+    private val queue = Channel<suspend () -> Unit>(Channel.UNLIMITED)
+
+    init {
+        scope.launch {
+            for (task in queue) runCatching { task() }
+        }
+    }
+
+    /** Queues [block] behind every earlier queued operation. Returns immediately. */
+    private fun enqueue(block: suspend () -> Unit) {
+        queue.trySend(block)
+    }
+
+    /** Queues [block] and waits for its result. */
+    private suspend fun <T> inOrder(block: suspend () -> T): T {
+        val result = CompletableDeferred<T>()
+        queue.trySend {
+            try {
+                result.complete(block())
+            } catch (t: Throwable) {
+                result.completeExceptionally(t)
+            }
+        }
+        return result.await()
+    }
 
     private fun now() = System.currentTimeMillis()
 
@@ -99,7 +128,9 @@ class QuartzRepository(private val db: QuartzDatabase) {
     fun observeRecentPages(limit: Int = 60): Flow<List<PageHit>> = pages.observeRecent(limit)
 
     /** Inserts a page after [afterIndex], copying the style of the page it follows. Returns the new id. */
-    suspend fun insertPage(notebookId: Long, afterIndex: Int): Long = db.withTransaction {
+    suspend fun insertPage(notebookId: Long, afterIndex: Int): Long = inOrder { insertPageNow(notebookId, afterIndex) }
+
+    private suspend fun insertPageNow(notebookId: Long, afterIndex: Int): Long = db.withTransaction {
         val list = pages.getByNotebook(notebookId).toMutableList()
         val template = list.getOrNull(afterIndex) ?: list.lastOrNull()
         val insertAt = (afterIndex + 1).coerceIn(0, list.size)
@@ -117,17 +148,19 @@ class QuartzRepository(private val db: QuartzDatabase) {
         id
     }
 
-    suspend fun savePageContent(pageId: Long, doc: RichDoc) = writeLock.withLock {
+    suspend fun getPage(id: Long): PageEntity? = inOrder { pages.get(id) }
+
+    fun savePageContent(pageId: Long, doc: RichDoc) = enqueue {
         pages.updateContent(pageId, doc.encode(), doc.plainText(), now())
     }
 
-    suspend fun savePageTitle(pageId: Long, title: String) = writeLock.withLock {
+    fun savePageTitle(pageId: Long, title: String) = enqueue {
         pages.updateTitle(pageId, title, now())
     }
 
     /** Updates a page's style fields (type, colors, texture, layout). */
-    suspend fun updatePageStyle(page: PageEntity) = writeLock.withLock {
-        val current = pages.get(page.id) ?: return@withLock
+    fun updatePageStyle(page: PageEntity) = enqueue {
+        val current = pages.get(page.id) ?: return@enqueue
         pages.update(
             current.copy(
                 pageType = page.pageType,
@@ -139,7 +172,7 @@ class QuartzRepository(private val db: QuartzDatabase) {
         )
     }
 
-    suspend fun applyStyleToAllPages(source: PageEntity) = writeLock.withLock {
+    fun applyStyleToAllPages(source: PageEntity) = enqueue {
         db.withTransaction {
             val list = pages.getByNotebook(source.notebookId)
             pages.updateAll(
@@ -154,22 +187,23 @@ class QuartzRepository(private val db: QuartzDatabase) {
         }
     }
 
-    /** Deletes a page; a notebook always keeps at least one page. */
-    suspend fun deletePage(page: PageEntity) = db.withTransaction {
-        val list = pages.getByNotebook(page.notebookId)
-        if (list.size <= 1) {
-            pages.update(page.copy(title = "", content = "", plainText = "", updatedAt = now()))
-            return@withTransaction
+    /** Deletes a page. A notebook always keeps at least one page, so the last one is left alone. */
+    fun deletePage(page: PageEntity) = enqueue {
+        db.withTransaction {
+            val list = pages.getByNotebook(page.notebookId)
+            if (list.size <= 1) return@withTransaction
+            pages.delete(page)
+            renumber(list.filter { it.id != page.id }.toMutableList())
         }
-        pages.delete(page)
-        renumber(list.filter { it.id != page.id }.toMutableList())
     }
 
-    suspend fun movePage(notebookId: Long, from: Int, to: Int) = db.withTransaction {
-        val list = pages.getByNotebook(notebookId).toMutableList()
-        if (from !in list.indices || to !in list.indices) return@withTransaction
-        list.add(to, list.removeAt(from))
-        renumber(list)
+    fun movePage(notebookId: Long, from: Int, to: Int) = enqueue {
+        db.withTransaction {
+            val list = pages.getByNotebook(notebookId).toMutableList()
+            if (from !in list.indices || to !in list.indices) return@withTransaction
+            list.add(to, list.removeAt(from))
+            renumber(list)
+        }
     }
 
     private suspend fun renumber(list: MutableList<PageEntity>) {
@@ -181,15 +215,26 @@ class QuartzRepository(private val db: QuartzDatabase) {
 
     fun observeNotes(): Flow<List<QuickNoteEntity>> = notes.observeAll()
 
-    suspend fun getNote(id: Long): QuickNoteEntity? = notes.get(id)
+    suspend fun getNote(id: Long): QuickNoteEntity? = inOrder { notes.get(id) }
 
-    suspend fun createNote(): Long = notes.insert(QuickNoteEntity(content = RichDoc().encode()))
+    suspend fun createNote(): Long = inOrder { notes.insert(QuickNoteEntity(content = RichDoc().encode())) }
 
-    suspend fun saveNote(id: Long, title: String, doc: RichDoc, colorKey: String) = writeLock.withLock {
+    fun saveNote(id: Long, title: String, doc: RichDoc, colorKey: String) = enqueue {
         notes.updateContent(id, title, doc.encode(), doc.plainText(), colorKey, now())
     }
 
-    suspend fun deleteNote(id: Long) = writeLock.withLock { notes.deleteById(id) }
+    fun deleteNote(id: Long) = enqueue { notes.deleteById(id) }
+
+    /** Deletes the note if it has no title and no text (checked after all earlier saves land). */
+    fun discardIfBlank(id: Long) = enqueue {
+        val note = notes.get(id) ?: return@enqueue
+        if (note.title.isBlank() && note.plainText.isBlank()) notes.deleteById(id)
+    }
+
+    /** Removes blank notes left behind (e.g. the app was closed with an empty note open). */
+    fun sweepBlankNotes(except: Long?) = enqueue {
+        notes.deleteBlank(except ?: -1L)
+    }
 
     // ---- Search ----
 

@@ -1,6 +1,7 @@
 package com.quartz.notes.ui
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -42,7 +43,7 @@ fun QuartzNavHost() {
         }
         composable(Routes.NOTE, arguments = listOf(navArgument("id") { type = NavType.LongType })) { entry ->
             val id = entry.arguments?.getLong("id") ?: return@composable
-            NoteEditorRoute(noteId = id, onBack = { nav.popBackStack() })
+            NoteEditorRoute(noteId = id, onBack = { nav.back() })
         }
         composable(
             Routes.NOTEBOOK,
@@ -59,7 +60,7 @@ fun QuartzNavHost() {
             NotebookScreen(
                 notebookId = id,
                 initialPageId = page,
-                onBack = { nav.popBackStack() },
+                onBack = { nav.back() },
                 onSearch = { nav.navigate(Routes.search(id)) },
             )
         }
@@ -75,7 +76,7 @@ fun QuartzNavHost() {
             val notebookId = entry.arguments?.getLong("notebook")?.takeIf { it >= 0 }
             SearchScreen(
                 notebookId = notebookId,
-                onBack = { nav.popBackStack() },
+                onBack = { nav.back() },
                 onOpenNote = { nav.navigate(Routes.note(it)) },
                 onOpenPage = { nbId, pageId ->
                     if (notebookId != null) {
@@ -92,12 +93,17 @@ fun QuartzNavHost() {
         }
         composable(Routes.RECENT) {
             RecentScreen(
-                onBack = { nav.popBackStack() },
+                onBack = { nav.back() },
                 onOpenPage = { nbId, pageId -> nav.navigate(Routes.notebook(nbId, pageId)) },
             )
         }
         composable(Routes.SETTINGS) {
-            SettingsScreen(onBack = { nav.popBackStack() })
+            SettingsScreen(onBack = { nav.back() })
         }
     }
+}
+
+/** Pops one screen, ignoring extra taps while a screen is already animating out (which would pop Home). */
+private fun NavController.back() {
+    if (previousBackStackEntry != null) popBackStack()
 }

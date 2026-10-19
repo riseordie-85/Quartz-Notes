@@ -94,18 +94,23 @@ object SpanOps {
 
     /**
      * Re-maps spans after an edit that replaced old text [p, removedEnd) with [insertedLength] new characters.
-     * Text typed at the end of a span joins it; text typed at the start of a span does not.
+     * Typing at the end of a span joins it, as does typing at the very start of a block that begins with
+     * the span (matching [activeAt]). Otherwise typing just before a span doesn't join it, and a
+     * replacement that starts right where a span ends (autocorrect) doesn't extend the span.
      */
     fun remap(spans: List<StyleSpan>, p: Int, removedEnd: Int, insertedLength: Int): List<StyleSpan> {
         val delta = insertedLength - (removedEnd - p)
+        val pureInsert = removedEnd == p
         return spans.mapNotNull { sp ->
             val ns = when {
                 sp.start < p -> sp.start
+                pureInsert && p == 0 && sp.start == 0 -> 0
                 sp.start >= removedEnd -> sp.start + delta
                 else -> p
             }
             val ne = when {
                 sp.end < p -> sp.end
+                sp.end == p && !pureInsert -> sp.end
                 sp.end > removedEnd -> sp.end + delta
                 else -> p + insertedLength
             }

@@ -107,6 +107,9 @@ class RichEditorState(doc: RichDoc) {
     private var pendingOff by mutableStateOf<Set<InlineStyle>>(emptySet())
     private var nonce = 0L
 
+    /** Keeps pending styles when focus moves to a block created by Enter. */
+    private var carryPending = false
+
     init {
         blocks.addAll(doc.blocks.ifEmpty { listOf(Block()) }.map(BlockState::from))
     }
@@ -116,8 +119,8 @@ class RichEditorState(doc: RichDoc) {
     /** Block that toolbar actions apply to: the focused one, or the last block. */
     private val target: BlockState get() = focusedBlock ?: blocks.last()
 
-    val currentType: BlockType get() = (focusedBlock ?: blocks.first()).type
-    val currentAlign: Align get() = (focusedBlock ?: blocks.first()).align
+    val currentType: BlockType get() = target.type
+    val currentAlign: Align get() = target.align
     val hasSelection: Boolean get() = focusedBlock?.hasSelection == true
 
     fun toDoc(): RichDoc = RichDoc(blocks.map { it.toBlock() })
@@ -135,8 +138,17 @@ class RichEditorState(doc: RichDoc) {
     internal fun onFocused(block: BlockState) {
         if (focusedId != block.id) {
             focusedId = block.id
-            clearPending()
+            if (carryPending) carryPending = false else clearPending()
         }
+    }
+
+    /** Replaces the whole document (e.g. when a page is cleared). */
+    fun reset(doc: RichDoc = RichDoc()) {
+        blocks.clear()
+        blocks.addAll(doc.blocks.ifEmpty { listOf(Block()) }.map(BlockState::from))
+        focusedId = null
+        clearPending()
+        changed()
     }
 
     /** Places the cursor at the end of the document. */
@@ -170,6 +182,13 @@ class RichEditorState(doc: RichDoc) {
             }
         }
 
+        // Normalize Windows/old-Mac line breaks from pasted text.
+        if ('\r' in raw.text) {
+            val beforeCursor = raw.text.substring(0, raw.selection.end.coerceIn(0, raw.text.length))
+                .replace("\r\n", "\n").replace('\r', '\n')
+            raw = TextFieldValue(raw.text.replace("\r\n", "\n").replace('\r', '\n'), TextRange(beforeCursor.length))
+        }
+
         // Keep the cursor from landing before the marker.
         val clamped = TextRange(raw.selection.start.coerceAtLeast(1), raw.selection.end.coerceAtLeast(1))
         if (clamped != raw.selection) raw = raw.copy(selection = clamped)
@@ -199,15 +218,18 @@ class RichEditorState(doc: RichDoc) {
         val insertedEnd = newText.length - s
         val insertedLength = insertedEnd - p
 
+        val inserted = newText.substring(p, insertedEnd)
+        val onlyNewlines = inserted.isNotEmpty() && inserted.all { it == '\n' }
         var spans = SpanOps.remap(block.spans, p, removedEnd, insertedLength)
-        if (insertedLength > 0 && (pendingOn.isNotEmpty() || pendingOff.isNotEmpty())) {
+        if (insertedLength > 0 && !onlyNewlines && (pendingOn.isNotEmpty() || pendingOff.isNotEmpty())) {
             spans = applyPending(spans, p, p + insertedLength)
             clearPending()
         }
         block.spans = spans
         block.value = raw
 
-        if (newText.indexOf('\n', p).let { it in p until insertedEnd }) {
+        if ('\n' in inserted) {
+            if (onlyNewlines && (pendingOn.isNotEmpty() || pendingOff.isNotEmpty())) carryPending = true
             splitAtNewlines(block)
         }
         changed()

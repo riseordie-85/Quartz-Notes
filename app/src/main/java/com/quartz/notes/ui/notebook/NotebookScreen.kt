@@ -184,11 +184,11 @@ fun NotebookScreen(
                 if (page != null) {
                     PageView(
                         page = page,
+                        session = vm.session(page),
                         wide = wide,
                         onEditorReady = { editors[page.id] = it },
                         onEditorGone = { editors.remove(page.id) },
-                        onSave = { doc -> vm.savePage(page.id, doc) },
-                        onTitleChange = { vm.saveTitle(page.id, it) },
+                        onSave = { vm.saveIfChanged(page.id) },
                     )
                 }
             }
@@ -252,7 +252,7 @@ fun NotebookScreen(
                 if (from == currentIndex) scrollTarget = pages[from].id
                 vm.movePage(from, to)
             },
-            onDelete = vm::deletePage,
+            onDelete = { page -> vm.deletePage(page, isOnlyPage = pages.size <= 1) },
             onDismiss = { showPages = false },
         )
     }
@@ -364,27 +364,24 @@ private fun NotebookTopBar(
 @Composable
 private fun PageView(
     page: PageEntity,
+    session: PageSession,
     wide: Boolean,
     onEditorReady: (RichEditorState) -> Unit,
     onEditorGone: () -> Unit,
-    onSave: (RichDoc) -> Unit,
-    onTitleChange: (String) -> Unit,
+    onSave: () -> Unit,
 ) {
-    val editor = remember(page.id) { RichEditorState(RichDoc.decode(page.content)) }
-    var title by remember(page.id) { mutableStateOf(page.title) }
+    val editor = session.editor
+    val title = session.title
 
-    DisposableEffect(editor) {
+    DisposableEffect(session) {
         onEditorReady(editor)
         onDispose {
-            onSave(editor.toDoc())
+            onSave()
             onEditorGone()
         }
     }
-    LaunchedEffect(editor) {
-        snapshotFlow { editor.version }.drop(1).debounce(600).collect { onSave(editor.toDoc()) }
-    }
-    LaunchedEffect(page.id) {
-        snapshotFlow { title }.drop(1).distinctUntilChanged().debounce(500).collect { onTitleChange(it) }
+    LaunchedEffect(session) {
+        snapshotFlow { editor.version to session.title }.drop(1).debounce(600).collect { onSave() }
     }
 
     val quartz = LocalQuartzColors.current
@@ -413,7 +410,7 @@ private fun PageView(
         Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState())) {
             BasicTextField(
                 value = title,
-                onValueChange = { title = it.replace("\n", "") },
+                onValueChange = { session.title = it.replace("\n", "") },
                 textStyle = TextStyle(fontSize = 21.sp, fontWeight = FontWeight.Bold, color = ink),
                 cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
                 keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Words),

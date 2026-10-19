@@ -101,6 +101,10 @@ fun HomeRoute(
     var selectedNote by rememberSaveable { mutableStateOf<Long?>(null) }
     var notebookSheet by remember { mutableStateOf<NotebookSheet?>(null) }
     var newShelfDialog by remember { mutableStateOf(false) }
+    val previousNote = remember { mutableStateOf<Long?>(null) }
+
+    // Clean up empty notes left over from earlier sessions (never the one that's open).
+    LaunchedEffect(Unit) { vm.sweepBlankNotes(except = selectedNote) }
 
     BoxWithConstraints(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
         val twoPane = maxWidth >= TwoPaneMinWidth
@@ -109,9 +113,17 @@ fun HomeRoute(
         LaunchedEffect(twoPane) {
             val open = selectedNote
             if (!twoPane && open != null) {
+                previousNote.value = null // handing it over, not closing it
                 selectedNote = null
                 onOpenNote(open)
             }
+        }
+        // When the side pane switches away from a note, drop it if it was left empty. This runs after the
+        // old pane's final save has been queued, so the check sees its latest content.
+        LaunchedEffect(selectedNote) {
+            val prev = previousNote.value
+            if (prev != null && prev != selectedNote) vm.discardIfBlank(prev)
+            previousNote.value = selectedNote
         }
         BackHandler(enabled = twoPane && selectedNote != null) { selectedNote = null }
 

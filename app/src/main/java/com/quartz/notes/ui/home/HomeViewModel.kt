@@ -89,6 +89,10 @@ class HomeViewModel(
         onCreated(repo.createNote())
     }
 
+    fun discardIfBlank(noteId: Long) = repo.discardIfBlank(noteId)
+
+    fun sweepBlankNotes(except: Long?) = repo.sweepBlankNotes(except)
+
     private fun groupNotes(notes: List<QuickNoteEntity>): List<NoteGroup> {
         if (notes.isEmpty()) return emptyList()
         return notes
