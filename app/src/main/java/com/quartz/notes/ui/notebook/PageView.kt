@@ -183,7 +183,9 @@ internal fun PageView(
     // A finished brush stroke stays on screen until the database has it.
     LaunchedEffect(elements) {
         if (!canvas.drawing) canvas.liveStroke.clear()
-        canvas.erased.keys.retainAll(elements.map { it.id }.toSet())
+        val ids = elements.map { it.id }.toSet()
+        canvas.erased.keys.retainAll(ids)
+        canvas.bounds.keys.retainAll(ids)
     }
     // A text box added from the toolbar gets the cursor.
     LaunchedEffect(focusTextBox) {
@@ -439,112 +441,41 @@ internal fun PageView(
                     .heightIn(min = maxOf(elementsBottom + 48.dp, viewport))
                     .onPlaced { canvas.contentCoords = it }
                     .pointerInput(widthPx) {
+                        // Lines (arrows/connectors) and taps on empty space. Tools use the overlay below instead.
                         awaitEachGesture {
                             val down = awaitFirstDown(requireUnconsumed = false, pass = PointerEventPass.Initial)
-                            when (latestTool) {
-                                PageTool.BRUSH -> {
-                                    down.consume()
-                                    canvas.drawing = true
-                                    canvas.liveColor = inkOr(latestInk, inkColor)
-                                    canvas.liveWidth = brushWidthPx(latestBrush, widthPx)
-                                    canvas.liveStroke.clear()
-                                    canvas.liveStroke.add(down.position)
-                                    var twoFinger = false
-                                    do {
-                                        val event = awaitPointerEvent(PointerEventPass.Initial)
-                                        val pressed = event.changes.count { it.pressed }
-                                        if (pressed > 1) {
-                                            // Two fingers scroll the page instead of drawing.
-                                            twoFinger = true
-                                            canvas.liveStroke.clear()
-                                            scroll.dispatchRawDelta(-event.calculatePan().y)
-                                        } else if (!twoFinger) {
-                                            event.changes.firstOrNull { it.id == down.id && it.pressed }?.let { canvas.liveStroke.add(it.position) }
-                                        }
-                                        event.changes.forEach { it.consume() }
-                                    } while (event.changes.any { it.pressed })
-                                    canvas.drawing = false
-                                    if (!twoFinger && canvas.liveStroke.isNotEmpty()) {
-                                        val pts = canvas.liveStroke.flatMap { listOf(it.x / widthPx, it.y / widthPx) }
-                                        vm.addStroke(page.id, if (pts.size == 2) pts + pts else pts, latestInk, latestBrush)
-                                    } else {
-                                        canvas.liveStroke.clear()
-                                    }
-                                }
-                                PageTool.ERASER -> {
-                                    down.consume()
-                                    val radius = brushWidthPx(5, widthPx) / 2 + 10.dp.toPx()
-                                    fun eraseAt(p: Offset) {
-                                        latestElements.filter { it.kind == ElementKind.STROKE && !canvas.erased.containsKey(it.id) }.forEach { e ->
-                                            val d = decodePayload<StrokeData>(e.data) ?: return@forEach
-                                            if (distanceToPolyline(p, strokePoints(d, widthPx)) <= radius + brushWidthPx(d.level, widthPx) / 2) {
-                                                canvas.erased[e.id] = true
-                                                vm.deleteElement(e)
-                                            }
+                            if (latestTool != PageTool.NONE) return@awaitEachGesture
+                            val p = down.position
+                            val onItem = canvas.bounds.values.any { it.inflate(4.dp.toPx()).contains(p) }
+                            val line = if (onItem) null else lineHit(p, latestElements, canvas.bounds, widthPx, 18.dp.toPx())
+                            if (line != null) {
+                                down.consume()
+                                val arrowData = if (line.kind == ElementKind.ARROW && canvas.selectedId == line.id) decodePayload<ArrowData>(line.data) else null
+                                var moved = false
+                                var last = p
+                                do {
+                                    val event = awaitPointerEvent(PointerEventPass.Initial)
+                                    val c = event.changes.firstOrNull { it.id == down.id }
+                                    if (c != null && c.pressed && arrowData != null) {
+                                        val delta = c.position - last
+                                        if (moved || delta.getDistance() > 2f) {
+                                            moved = true
+                                            last = c.position
+                                            val cur = canvas.arrowDrag?.takeIf { it.first == line } ?: Triple(line, line, arrowData)
+                                            canvas.arrowDrag = Triple(line, cur.second.copy(x = cur.second.x + delta.x / widthPx, y = (cur.second.y + delta.y / widthPx).coerceAtLeast(0f)), cur.third)
                                         }
                                     }
-                                    eraseAt(down.position)
-                                    do {
-                                        val event = awaitPointerEvent(PointerEventPass.Initial)
-                                        event.changes.forEach { c ->
-                                            if (c.pressed) eraseAt(c.position)
-                                            c.consume()
-                                        }
-                                    } while (event.changes.any { it.pressed })
+                                    event.changes.forEach { it.consume() }
+                                } while (event.changes.any { it.pressed })
+                                if (moved) {
+                                    canvas.arrowDrag?.takeIf { it.first == line }?.let { (_, el, d) -> accentActions.onArrowEdit(el, d) }
+                                } else {
+                                    accentActions.onSelect(line.id)
                                 }
-                                PageTool.CONNECT -> {
-                                    down.consume()
-                                    val up = waitForUpOrCancellation(PointerEventPass.Initial)
-                                    up?.consume()
-                                    val p = up?.position ?: return@awaitEachGesture
-                                    val hit = latestElements
-                                        .filter { it.kind in ConnectableKinds }
-                                        .sortedByDescending { it.z }
-                                        .firstOrNull { canvas.bounds[it.id]?.contains(p) == true }
-                                        ?: return@awaitEachGesture
-                                    val first = canvas.connectFrom
-                                    if (first == null) {
-                                        canvas.connectFrom = hit.id
-                                    } else if (first != hit.id) {
-                                        vm.addConnector(page.id, first, hit.id)
-                                        canvas.connectFrom = null
-                                        latestToolDone()
-                                    }
-                                }
-                                PageTool.NONE -> {
-                                    val p = down.position
-                                    val onItem = canvas.bounds.values.any { it.inflate(4.dp.toPx()).contains(p) }
-                                    val line = if (onItem) null else lineHit(p, latestElements, canvas.bounds, widthPx, 18.dp.toPx())
-                                    if (line != null) {
-                                        down.consume()
-                                        val arrowData = if (line.kind == ElementKind.ARROW && canvas.selectedId == line.id) decodePayload<ArrowData>(line.data) else null
-                                        var moved = false
-                                        var last = p
-                                        do {
-                                            val event = awaitPointerEvent(PointerEventPass.Initial)
-                                            val c = event.changes.firstOrNull { it.id == down.id }
-                                            if (c != null && c.pressed && arrowData != null) {
-                                                val delta = c.position - last
-                                                if (moved || delta.getDistance() > 2f) {
-                                                    moved = true
-                                                    last = c.position
-                                                    val cur = canvas.arrowDrag?.takeIf { it.first == line } ?: Triple(line, line, arrowData)
-                                                    canvas.arrowDrag = Triple(line, cur.second.copy(x = cur.second.x + delta.x / widthPx, y = (cur.second.y + delta.y / widthPx).coerceAtLeast(0f)), cur.third)
-                                                }
-                                            }
-                                            event.changes.forEach { it.consume() }
-                                        } while (event.changes.any { it.pressed })
-                                        if (moved) {
-                                            canvas.arrowDrag?.takeIf { it.first == line }?.let { (_, el, d) -> accentActions.onArrowEdit(el, d) }
-                                        } else {
-                                            accentActions.onSelect(line.id)
-                                        }
-                                    } else {
-                                        // Not ours: let the items and text have it, then see if anyone used the tap.
-                                        val up = waitForUpOrCancellation(PointerEventPass.Final)
-                                        if (up != null && !up.isConsumed) tapHandler(up.position)
-                                    }
-                                }
+                            } else {
+                                // Not ours: let the items and text have it, then see if anyone used the tap.
+                                val up = waitForUpOrCancellation(PointerEventPass.Final)
+                                if (up != null && !up.isConsumed) tapHandler(up.position)
                             }
                         }
                     },
@@ -618,6 +549,90 @@ internal fun PageView(
                     textEditor = vm::textEditor,
                     actions = actions,
                 )
+                if (tool != PageTool.NONE) {
+                    // While a tool is on, this layer takes every touch so text and items underneath stay put.
+                    Box(
+                        Modifier
+                            .matchParentSize()
+                            .pointerInput(widthPx, tool) {
+                                awaitEachGesture {
+                                    val down = awaitFirstDown(requireUnconsumed = false)
+                                    when (latestTool) {
+                                PageTool.BRUSH -> {
+                                    down.consume()
+                                    canvas.drawing = true
+                                    canvas.liveColor = inkOr(latestInk, inkColor)
+                                    canvas.liveWidth = brushWidthPx(latestBrush, widthPx)
+                                    canvas.liveStroke.clear()
+                                    canvas.liveStroke.add(down.position)
+                                    var twoFinger = false
+                                    do {
+                                        val event = awaitPointerEvent()
+                                        val pressed = event.changes.count { it.pressed }
+                                        if (pressed > 1) {
+                                            // Two fingers scroll the page instead of drawing.
+                                            twoFinger = true
+                                            canvas.liveStroke.clear()
+                                            scroll.dispatchRawDelta(-event.calculatePan().y)
+                                        } else if (!twoFinger) {
+                                            event.changes.firstOrNull { it.id == down.id && it.pressed }?.let { canvas.liveStroke.add(it.position) }
+                                        }
+                                        event.changes.forEach { it.consume() }
+                                    } while (event.changes.any { it.pressed })
+                                    canvas.drawing = false
+                                    if (!twoFinger && canvas.liveStroke.isNotEmpty()) {
+                                        val pts = canvas.liveStroke.flatMap { listOf(it.x / widthPx, it.y / widthPx) }
+                                        vm.addStroke(page.id, if (pts.size == 2) pts + pts else pts, latestInk, latestBrush)
+                                    } else {
+                                        canvas.liveStroke.clear()
+                                    }
+                                }
+                                PageTool.ERASER -> {
+                                    down.consume()
+                                    val radius = brushWidthPx(5, widthPx) / 2 + 10.dp.toPx()
+                                    fun eraseAt(p: Offset) {
+                                        latestElements.filter { it.kind == ElementKind.STROKE && !canvas.erased.containsKey(it.id) }.forEach { e ->
+                                            val d = decodePayload<StrokeData>(e.data) ?: return@forEach
+                                            if (distanceToPolyline(p, strokePoints(d, widthPx)) <= radius + brushWidthPx(d.level, widthPx) / 2) {
+                                                canvas.erased[e.id] = true
+                                                vm.deleteElement(e)
+                                            }
+                                        }
+                                    }
+                                    eraseAt(down.position)
+                                    do {
+                                        val event = awaitPointerEvent()
+                                        event.changes.forEach { c ->
+                                            if (c.pressed) eraseAt(c.position)
+                                            c.consume()
+                                        }
+                                    } while (event.changes.any { it.pressed })
+                                }
+                                PageTool.CONNECT -> {
+                                    down.consume()
+                                    val up = waitForUpOrCancellation()
+                                    up?.consume()
+                                    val p = up?.position ?: return@awaitEachGesture
+                                    val hit = latestElements
+                                        .filter { it.kind in ConnectableKinds }
+                                        .sortedByDescending { it.z }
+                                        .firstOrNull { canvas.bounds[it.id]?.contains(p) == true }
+                                        ?: return@awaitEachGesture
+                                    val first = canvas.connectFrom
+                                    if (first == null) {
+                                        canvas.connectFrom = hit.id
+                                    } else if (first != hit.id) {
+                                        vm.addConnector(page.id, first, hit.id)
+                                        canvas.connectFrom = null
+                                        latestToolDone()
+                                    }
+                                }
+                                        PageTool.NONE -> Unit
+                                    }
+                                }
+                            },
+                    )
+                }
             }
         }
 
