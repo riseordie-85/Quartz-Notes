@@ -317,7 +317,7 @@ fun SettingsScreen(onBack: () -> Unit) {
 
                 item {
                     Text(
-                        "Quartz Notes · version 0.2.0",
+                        "Quartz Notes · version 0.3.0",
                         fontSize = 13.sp,
                         color = LocalQuartzColors.current.textSecondary,
                         modifier = Modifier.fillMaxWidth().padding(top = 28.dp),

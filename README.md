@@ -34,5 +34,5 @@ app/src/main/java/com/quartz/notes/
 ## Roadmap
 
 - **Phase 1 (done):** shelves, notebooks (colors, textures, titles, icons), page types (plain / lines / dotted / grid) with colors and textures, rich text (heading, subheading, regular, bold, italic, underline, strikeout, bullets, checkable tasks, alignment, fonts + font import, highlight with long-press color, text color), Quick Notes (list/grid, grouped by date, colors), global + notebook search, settings (theme, colors, shelves, fonts), phone + tablet/fold layouts.
-- **Phase 2:** images (tape, borders, shadows, polaroid captions, full-size view, compression), voice notes, share a note as text / image / send to a notebook, backup & export (manual + automatic to a folder you choose).
-- **Phase 3:** scrapbook mode — place anything anywhere, shapes with text, arrows, node connectors, brush with 5 thicknesses.
+- **Phase 2 (done):** images (tape, borders, shadows, polaroid captions, full-size view, compression), voice notes, share a note as text / image / send to a notebook, backup & export (manual + automatic to a folder you choose).
+- **Phase 3 (done):** scrapbook mode, text boxes, shapes with text, arrows, node connectors, brush with 5 thicknesses + eraser, pictures that float, wrap text, or sit in line.
