@@ -7,7 +7,14 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.quartz.notes.data.QuartzRepository
+import com.quartz.notes.data.StoredImage
 import com.quartz.notes.data.db.NotebookEntity
+import com.quartz.notes.data.db.PageElementEntity
+import com.quartz.notes.data.model.ElementKind
+import com.quartz.notes.data.model.ImageData
+import com.quartz.notes.data.model.VoiceData
+import com.quartz.notes.data.model.encode
+import kotlinx.coroutines.flow.Flow
 import com.quartz.notes.data.db.PageEntity
 import com.quartz.notes.data.db.ShelfEntity
 import com.quartz.notes.data.rich.RichDoc
@@ -24,6 +31,9 @@ class PageSession(page: PageEntity) {
     val id: Long = page.id
     val editor = RichEditorState(RichDoc.decode(page.content))
     var title by mutableStateOf(page.title)
+
+    /** How far the page is scrolled, in page widths; new pictures land in view. */
+    var scrollUnits = 0f
 
     private var savedVersion = editor.version
     private var savedTitle = page.title
@@ -73,6 +83,45 @@ class NotebookViewModel(
             s.markTitleSaved()
         }
     }
+
+    // ---- Pictures and voice notes on pages ----
+
+    private val elementFlows = HashMap<Long, Flow<List<PageElementEntity>>>()
+
+    fun elements(pageId: Long): Flow<List<PageElementEntity>> = elementFlows.getOrPut(pageId) { repo.observeElements(pageId) }
+
+    private var stagger = 0
+
+    private fun placementY(pageId: Long): Float {
+        val y = (sessions[pageId]?.scrollUnits ?: 0f) + 0.18f + (stagger % 5) * 0.06f
+        stagger++
+        return y
+    }
+
+    fun addImage(pageId: Long, image: StoredImage) {
+        val width = 0.6f
+        val x = (1f - width) / 2 + ((stagger % 5) - 2) * 0.03f
+        repo.addElement(
+            PageElementEntity(
+                pageId = pageId, kind = ElementKind.IMAGE, x = x, y = placementY(pageId), width = width,
+                height = width * image.aspect, rotation = listOf(-3f, 2f, -1.5f, 3f, 0f)[stagger % 5],
+                data = ImageData(path = image.path, aspect = image.aspect).encode(),
+            ),
+        )
+    }
+
+    fun addVoice(pageId: Long, path: String, durationMs: Long) {
+        repo.addElement(
+            PageElementEntity(
+                pageId = pageId, kind = ElementKind.VOICE, x = 0.1f, y = placementY(pageId), width = 0.7f,
+                data = VoiceData(path = path, durationMs = durationMs).encode(),
+            ),
+        )
+    }
+
+    fun updateElement(element: PageElementEntity) = repo.updateElement(element)
+    fun bringToFront(element: PageElementEntity) = repo.bringToFront(element)
+    fun deleteElement(element: PageElementEntity) = repo.deleteElement(element)
 
     fun updateStyle(page: PageEntity) = repo.updatePageStyle(page)
 

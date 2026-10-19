@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -36,6 +37,8 @@ import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.ArrowDropDown
 import androidx.compose.material.icons.rounded.GridView
 import androidx.compose.material.icons.rounded.History
+import androidx.compose.material.icons.rounded.Image
+import androidx.compose.material.icons.rounded.Mic
 import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material.icons.rounded.ViewAgenda
 import androidx.compose.material3.DropdownMenu
@@ -522,6 +525,14 @@ private fun NoteRow(note: NoteUi, selected: Boolean, onClick: () -> Unit) {
                 )
             }
         }
+        if (note.imageCount > 0) {
+            Spacer(Modifier.width(10.dp))
+            Icon(Icons.Rounded.Image, contentDescription = "Has pictures", tint = LocalQuartzColors.current.textSecondary, modifier = Modifier.size(20.dp))
+        }
+        if (note.voiceCount > 0) {
+            Spacer(Modifier.width(6.dp))
+            Icon(Icons.Rounded.Mic, contentDescription = "Has voice notes", tint = LocalQuartzColors.current.textSecondary, modifier = Modifier.size(20.dp))
+        }
         if (color != NoteColor.DEFAULT) {
             Spacer(Modifier.width(12.dp))
             ColorDot(color.dot)
@@ -550,7 +561,33 @@ private fun NoteGridCard(note: NoteUi, selected: Boolean, onClick: () -> Unit) {
                 if (note.title.isNotBlank()) Spacer(Modifier.height(6.dp))
                 Text(note.preview, fontSize = 15.sp, color = fg.copy(alpha = 0.85f), maxLines = 9, overflow = TextOverflow.Ellipsis, lineHeight = 21.sp)
             }
-            if (note.title.isBlank() && note.preview.isBlank()) {
+            if (note.images.isNotEmpty()) {
+                Spacer(Modifier.height(10.dp))
+                val media = com.quartz.notes.LocalAppContainer.current.media
+                Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                    note.images.forEach { path ->
+                        coil.compose.AsyncImage(
+                            model = media.file(path),
+                            contentDescription = null,
+                            contentScale = androidx.compose.ui.layout.ContentScale.Crop,
+                            modifier = Modifier.weight(1f).aspectRatio(1f).clip(RoundedCornerShape(10.dp)),
+                        )
+                    }
+                    repeat(3 - note.images.size) { Spacer(Modifier.weight(1f)) }
+                }
+            }
+            if (note.voiceCount > 0) {
+                Spacer(Modifier.height(8.dp))
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(Icons.Rounded.Mic, contentDescription = null, tint = fg.copy(alpha = 0.7f), modifier = Modifier.size(18.dp))
+                    Text(
+                        if (note.voiceCount == 1) "Voice note" else "${note.voiceCount} voice notes",
+                        fontSize = 13.sp,
+                        color = fg.copy(alpha = 0.7f),
+                    )
+                }
+            }
+            if (note.title.isBlank() && note.preview.isBlank() && note.images.isEmpty() && note.voiceCount == 0) {
                 Text("Empty note", fontSize = 15.sp, color = fg.copy(alpha = 0.5f))
             }
         }

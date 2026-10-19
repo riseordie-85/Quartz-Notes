@@ -4,8 +4,10 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import kotlinx.serialization.Serializable
 
 @Entity(tableName = "shelves")
+@Serializable
 data class ShelfEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val name: String,
@@ -25,6 +27,7 @@ data class ShelfEntity(
     ],
     indices = [Index("shelfId")],
 )
+@Serializable
 data class NotebookEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val shelfId: Long,
@@ -51,6 +54,7 @@ data class NotebookEntity(
     ],
     indices = [Index("notebookId")],
 )
+@Serializable
 data class PageEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val notebookId: Long,
@@ -88,6 +92,7 @@ data class PageEntity(
     ],
     indices = [Index("pageId")],
 )
+@Serializable
 data class PageElementEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val pageId: Long,
@@ -104,6 +109,7 @@ data class PageElementEntity(
 )
 
 @Entity(tableName = "quick_notes")
+@Serializable
 data class QuickNoteEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val title: String = "",
@@ -118,6 +124,7 @@ data class QuickNoteEntity(
 )
 
 @Entity(tableName = "attachments", indices = [Index("ownerType", "ownerId")])
+@Serializable
 data class AttachmentEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     /** [com.quartz.notes.data.model.OwnerType] name. */

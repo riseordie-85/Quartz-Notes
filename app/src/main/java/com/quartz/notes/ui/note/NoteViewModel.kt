@@ -7,10 +7,14 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.quartz.notes.data.QuartzRepository
+import com.quartz.notes.data.StoredImage
+import com.quartz.notes.data.db.AttachmentEntity
 import com.quartz.notes.data.db.QuickNoteEntity
 import com.quartz.notes.data.rich.RichDoc
 import com.quartz.notes.ui.editor.RichEditorState
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -58,6 +62,21 @@ class NoteViewModel(
 
     private var finished = false
 
+    val attachments: StateFlow<List<AttachmentEntity>> =
+        repo.observeNoteAttachments(noteId).stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
+
+    fun addImage(image: StoredImage) = repo.addNoteImage(noteId, image.path, image.width, image.height)
+
+    fun addVoice(path: String, durationMs: Long) = repo.addNoteVoice(noteId, path, durationMs)
+
+    fun removeAttachment(attachment: AttachmentEntity) = repo.deleteAttachment(attachment)
+
+    /** Saves any pending edits, then copies the note into a notebook. Returns the new page id. */
+    suspend fun sendToNotebook(notebookId: Long): Long {
+        saveIfChanged()
+        return repo.copyNoteToNotebook(noteId, notebookId)
+    }
+
     init {
         viewModelScope.launch {
             // Queued behind any pending saves, so this always reads the newest content.
@@ -79,7 +98,7 @@ class NoteViewModel(
     fun close() {
         val s = session ?: return
         if (finished) return
-        if (s.isBlank) {
+        if (s.isBlank && attachments.value.isEmpty()) {
             finished = true
             repo.deleteNote(s.id)
         } else {

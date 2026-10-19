@@ -63,6 +63,18 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.material.icons.rounded.Image
+import androidx.compose.material.icons.rounded.Mic
+import androidx.compose.material.icons.rounded.PhotoCamera
+import androidx.compose.material.icons.rounded.PhotoLibrary
+import com.quartz.notes.data.db.PageElementEntity
+import com.quartz.notes.data.model.ImageData
+import com.quartz.notes.data.model.encode
+import com.quartz.notes.ui.media.DecorateSheet
+import com.quartz.notes.ui.media.ImageViewer
+import com.quartz.notes.ui.media.VoiceRecorderSheet
+import com.quartz.notes.ui.media.rememberImageAdder
+import com.quartz.notes.ui.media.rememberMicPermission
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -149,6 +161,12 @@ fun NotebookScreen(
     var showStyle by remember { mutableStateOf(false) }
     var showPages by remember { mutableStateOf(false) }
     var showEdit by remember { mutableStateOf(false) }
+    var imageMenu by remember { mutableStateOf(false) }
+    var recording by remember { mutableStateOf(false) }
+    // Pictures and recordings go onto the active page; remember which one in case it changes meanwhile.
+    val targetPage by rememberUpdatedState(activePage.id)
+    val imageAdder = rememberImageAdder { image -> vm.addImage(targetPage, image) }
+    val askMic = rememberMicPermission { recording = true }
 
     BoxWithConstraints(
         Modifier
@@ -223,6 +241,7 @@ fun NotebookScreen(
                                 PageView(
                                     page = page,
                                     session = vm.session(page),
+                                    vm = vm,
                                     side = when {
                                         perSpread == 1 -> PageSide.SINGLE
                                         slot == 0 -> PageSide.LEFT
@@ -259,6 +278,32 @@ fun NotebookScreen(
                     onFormat = { if (currentEditor != null) showFormat = true },
                     modifier = Modifier.weight(1f),
                 ) {
+                    Box {
+                        ToolButton(onClick = { imageMenu = true }, description = "Add picture") {
+                            Icon(Icons.Rounded.Image, null)
+                        }
+                        DropdownMenu(expanded = imageMenu, onDismissRequest = { imageMenu = false }) {
+                            DropdownMenuItem(
+                                text = { Text("Photo library") },
+                                leadingIcon = { Icon(Icons.Rounded.PhotoLibrary, null) },
+                                onClick = {
+                                    imageMenu = false
+                                    imageAdder.pickFromGallery()
+                                },
+                            )
+                            DropdownMenuItem(
+                                text = { Text("Take photo") },
+                                leadingIcon = { Icon(Icons.Rounded.PhotoCamera, null) },
+                                onClick = {
+                                    imageMenu = false
+                                    imageAdder.takePhoto()
+                                },
+                            )
+                        }
+                    }
+                    ToolButton(onClick = askMic, description = "Record voice note") {
+                        Icon(Icons.Rounded.Mic, null)
+                    }
                     ToolButton(onClick = { showStyle = true }, description = "Page style") {
                         Icon(Icons.Rounded.Texture, null)
                     }
@@ -305,6 +350,16 @@ fun NotebookScreen(
                 showStyle = false
             },
             onDismiss = { showStyle = false },
+        )
+    }
+    if (recording) {
+        val pageForRecording = remember { activePage.id }
+        VoiceRecorderSheet(
+            onSaved = { path, duration ->
+                recording = false
+                vm.addVoice(pageForRecording, path, duration)
+            },
+            onDismiss = { recording = false },
         )
     }
     if (showEdit) {
@@ -415,6 +470,7 @@ private fun NotebookTopBar(
 private fun PageView(
     page: PageEntity,
     session: PageSession,
+    vm: NotebookViewModel,
     side: PageSide,
     onActivate: () -> Unit,
     onEditorReady: (RichEditorState) -> Unit,
@@ -433,6 +489,25 @@ private fun PageView(
     }
     LaunchedEffect(session) {
         snapshotFlow { editor.version to session.title }.drop(1).debounce(600).collect { onSave() }
+    }
+
+    val elementsFlow = remember(page.id) { vm.elements(page.id) }
+    val elements by elementsFlow.collectAsStateWithLifecycle(initialValue = emptyList())
+    var selectedElement by remember(page.id) { mutableStateOf<Long?>(null) }
+    var viewing by remember { mutableStateOf<String?>(null) }
+    var decorating by remember { mutableStateOf<Pair<PageElementEntity, ImageData>?>(null) }
+    val elementActions = remember(page.id) {
+        ElementActions(
+            onSelect = { selectedElement = it },
+            onCommit = vm::updateElement,
+            onView = { viewing = it.path },
+            onDecorate = { e, d -> decorating = e to d },
+            onFront = vm::bringToFront,
+            onDelete = {
+                selectedElement = null
+                vm.deleteElement(it)
+            },
+        )
     }
 
     val quartz = LocalQuartzColors.current
@@ -463,7 +538,16 @@ private fun PageView(
             },
     ) {
         val viewport = maxHeight
-        Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState())) {
+        val pageWidth = maxWidth
+        val pageWidthPx = with(density) { pageWidth.toPx() }
+        val scroll = rememberScrollState()
+        LaunchedEffect(scroll, pageWidthPx) {
+            snapshotFlow { scroll.value }.collect { session.scrollUnits = if (pageWidthPx > 0) it / pageWidthPx else 0f }
+        }
+        val elementsBottom = elements.maxOfOrNull { it.bottom(pageWidth) } ?: 0.dp
+        Column(Modifier.fillMaxSize().verticalScroll(scroll)) {
+          Box(Modifier.fillMaxWidth().heightIn(min = elementsBottom + 48.dp)) {
+          Column(Modifier.fillMaxWidth()) {
             BasicTextField(
                 value = title,
                 onValueChange = { session.title = it.replace("\n", "") },
@@ -493,9 +577,14 @@ private fun PageView(
                         spacingPx = unitPx,
                         topOffsetPx = with(density) { 10.dp.toPx() },
                     )
+                    .onFocusChanged { if (it.hasFocus) selectedElement = null }
                     .clickable(interactionSource = remember { MutableInteractionSource() }, indication = null) {
-                        editor.focusEnd()
-                        keyboard?.show()
+                        if (selectedElement != null) {
+                            selectedElement = null
+                        } else {
+                            editor.focusEnd()
+                            keyboard?.show()
+                        }
                     },
             ) {
                 RichTextEditor(
@@ -505,7 +594,28 @@ private fun PageView(
                     modifier = Modifier.fillMaxWidth().padding(start = padH, end = padH, top = 10.dp, bottom = 40.dp),
                 )
             }
+          }
+            PageElementLayer(
+                elements = elements,
+                pageWidth = pageWidth,
+                selectedId = selectedElement,
+                actions = elementActions,
+            )
+          }
         }
+    }
+
+    viewing?.let { path -> ImageViewer(path = path, onDismiss = { viewing = null }) }
+    decorating?.let { (element, data) ->
+        DecorateSheet(
+            data = data,
+            onChange = { updated ->
+                val e = element.copy(data = updated.encode(), height = element.width * updated.aspect)
+                decorating = e to updated
+                vm.updateElement(e)
+            },
+            onDismiss = { decorating = null },
+        )
     }
 }
 

@@ -311,9 +311,13 @@ fun SettingsScreen(onBack: () -> Unit) {
                     }
                 }
 
+                // ---- Backup ----
+                item { SettingsSectionTitle("Backup & restore") }
+                item { BackupSection(settings = s, snackbar = snackbar) }
+
                 item {
                     Text(
-                        "Quartz Notes · version 0.1.0",
+                        "Quartz Notes · version 0.2.0",
                         fontSize = 13.sp,
                         color = LocalQuartzColors.current.textSecondary,
                         modifier = Modifier.fillMaxWidth().padding(top = 28.dp),

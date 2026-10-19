@@ -46,6 +46,20 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
+import android.widget.Toast
+import androidx.compose.material.icons.rounded.AttachFile
+import androidx.compose.material.icons.rounded.Mic
+import androidx.compose.material.icons.rounded.PhotoCamera
+import androidx.compose.material.icons.rounded.PhotoLibrary
+import androidx.compose.material.icons.rounded.Share
+import androidx.compose.ui.platform.LocalContext
+import com.quartz.notes.data.db.AttachmentEntity
+import com.quartz.notes.data.model.AttachmentKind
+import com.quartz.notes.ui.editor.ToolButton
+import com.quartz.notes.ui.media.ImageViewer
+import com.quartz.notes.ui.media.VoiceRecorderSheet
+import com.quartz.notes.ui.media.rememberImageAdder
+import com.quartz.notes.ui.media.rememberMicPermission
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -122,6 +136,15 @@ private fun NoteEditorContent(load: NoteLoad.Ready, vm: NoteViewModel, onClose: 
     var showColors by remember { mutableStateOf(false) }
     var menu by remember { mutableStateOf(false) }
     var confirmDelete by remember { mutableStateOf(false) }
+    var attachMenu by remember { mutableStateOf(false) }
+    var recording by remember { mutableStateOf(false) }
+    var showShare by remember { mutableStateOf(false) }
+    var pickNotebook by remember { mutableStateOf(false) }
+    var viewing by remember { mutableStateOf<AttachmentEntity?>(null) }
+    val attachments by vm.attachments.collectAsStateWithLifecycle()
+    val context = LocalContext.current
+    val imageAdder = rememberImageAdder { vm.addImage(it) }
+    val askMic = rememberMicPermission { recording = true }
 
     // Autosave shortly after typing stops, and whenever this pane goes away.
     LaunchedEffect(session) {
@@ -155,6 +178,9 @@ private fun NoteEditorContent(load: NoteLoad.Ready, vm: NoteViewModel, onClose: 
                     IconButton(onClick = closeNote) { Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = "Back", tint = ink) }
                 }
                 Spacer(Modifier.weight(1f))
+                IconButton(onClick = { showShare = true }) {
+                    Icon(Icons.Rounded.Share, contentDescription = "Share", tint = ink)
+                }
                 IconButton(onClick = { showColors = !showColors }) {
                     Icon(Icons.Rounded.Palette, contentDescription = "Note color", tint = ink)
                 }
@@ -192,7 +218,8 @@ private fun NoteEditorContent(load: NoteLoad.Ready, vm: NoteViewModel, onClose: 
             val scroll = rememberScrollState()
             Column(
                 Modifier
-                    .fillMaxSize()
+                    .weight(1f)
+                    .fillMaxWidth()
                     .verticalScroll(scroll)
                     .padding(horizontal = 22.dp),
             ) {
@@ -230,6 +257,14 @@ private fun NoteEditorContent(load: NoteLoad.Ready, vm: NoteViewModel, onClose: 
                         },
                 )
             }
+            // Pictures and voice notes sit at the bottom of the note.
+            NoteAttachments(
+                attachments = attachments,
+                ink = ink,
+                onOpenImage = { viewing = it },
+                onRemove = vm::removeAttachment,
+                modifier = Modifier.padding(top = 8.dp, bottom = 14.dp),
+            )
         }
         Spacer(Modifier.height(12.dp))
         val s = settings
@@ -242,6 +277,92 @@ private fun NoteEditorContent(load: NoteLoad.Ready, vm: NoteViewModel, onClose: 
             onHighlightChange = { c -> scope.launch { container.settings.setHighlight(c.toArgb()) } },
             onFormat = { showFormat = true },
             modifier = Modifier.fillMaxWidth(),
+        ) {
+            Box {
+                ToolButton(onClick = { attachMenu = true }, description = "Attach") {
+                    Icon(Icons.Rounded.AttachFile, null)
+                }
+                DropdownMenu(expanded = attachMenu, onDismissRequest = { attachMenu = false }) {
+                    DropdownMenuItem(
+                        text = { Text("Photo library") },
+                        leadingIcon = { Icon(Icons.Rounded.PhotoLibrary, null) },
+                        onClick = {
+                            attachMenu = false
+                            imageAdder.pickFromGallery()
+                        },
+                    )
+                    DropdownMenuItem(
+                        text = { Text("Take photo") },
+                        leadingIcon = { Icon(Icons.Rounded.PhotoCamera, null) },
+                        onClick = {
+                            attachMenu = false
+                            imageAdder.takePhoto()
+                        },
+                    )
+                    DropdownMenuItem(
+                        text = { Text("Voice note") },
+                        leadingIcon = { Icon(Icons.Rounded.Mic, null) },
+                        onClick = {
+                            attachMenu = false
+                            askMic()
+                        },
+                    )
+                }
+            }
+        }
+    }
+
+    if (recording) {
+        VoiceRecorderSheet(
+            onSaved = { path, duration ->
+                recording = false
+                vm.addVoice(path, duration)
+            },
+            onDismiss = { recording = false },
+        )
+    }
+    viewing?.let { a ->
+        ImageViewer(
+            path = a.path,
+            onDismiss = { viewing = null },
+            onDelete = {
+                viewing = null
+                vm.removeAttachment(a)
+            },
+        )
+    }
+    if (showShare) {
+        ShareNoteSheet(
+            onText = {
+                showShare = false
+                shareText(context, session.title, noteAsText(session.title, editor.toDoc()))
+            },
+            onImage = {
+                showShare = false
+                scope.launch {
+                    val pictures = attachments.filter { it.kind == AttachmentKind.IMAGE.name }.map { container.media.file(it.path) }
+                    val file = renderNoteImage(context, session.title, editor.toDoc(), session.colorKey, pictures)
+                    shareFile(context, file, "image/png", "${context.packageName}.files")
+                }
+            },
+            onNotebook = {
+                showShare = false
+                pickNotebook = true
+            },
+            onDismiss = { showShare = false },
+        )
+    }
+    if (pickNotebook) {
+        NotebookPickerSheet(
+            onPick = { nb ->
+                pickNotebook = false
+                scope.launch {
+                    runCatching { vm.sendToNotebook(nb.id) }
+                        .onSuccess { Toast.makeText(context, "Added to ${nb.title}", Toast.LENGTH_SHORT).show() }
+                        .onFailure { Toast.makeText(context, "Couldn't send the note", Toast.LENGTH_SHORT).show() }
+                }
+            },
+            onDismiss = { pickNotebook = false },
         )
     }
 

@@ -85,6 +85,15 @@ class FontRepository(context: Context) {
         }
     }
 
+    /** Adds font files from a restored backup (existing names are kept). */
+    suspend fun installFrom(files: List<File>) = withContext(Dispatchers.IO) {
+        files.filter { it.extension.lowercase() in setOf("ttf", "otf") }.forEach { f ->
+            val target = File(dir, f.name)
+            if (!target.exists()) f.copyTo(target)
+        }
+        _fonts.value = load()
+    }
+
     suspend fun delete(font: FontInfo) = withContext(Dispatchers.IO) {
         font.file?.delete()
         _fonts.value = load()

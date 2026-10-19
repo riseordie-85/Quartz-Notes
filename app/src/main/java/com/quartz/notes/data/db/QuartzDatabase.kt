@@ -24,6 +24,7 @@ abstract class QuartzDatabase : RoomDatabase() {
     abstract fun pageDao(): PageDao
     abstract fun quickNoteDao(): QuickNoteDao
     abstract fun attachmentDao(): AttachmentDao
+    abstract fun pageElementDao(): PageElementDao
 
     companion object {
         fun build(context: Context): QuartzDatabase =

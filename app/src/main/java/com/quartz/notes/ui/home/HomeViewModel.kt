@@ -4,7 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.quartz.notes.data.QuartzRepository
 import com.quartz.notes.data.SettingsRepository
+import com.quartz.notes.data.db.AttachmentEntity
 import com.quartz.notes.data.db.NotebookEntity
+import com.quartz.notes.data.model.AttachmentKind
 import com.quartz.notes.data.db.QuickNoteEntity
 import com.quartz.notes.data.db.ShelfEntity
 import com.quartz.notes.data.rich.RichDoc
@@ -29,6 +31,10 @@ data class NoteUi(
     val preview: String,
     val colorKey: String,
     val createdAt: Long,
+    /** Up to three picture paths, for thumbnails. */
+    val images: List<String> = emptyList(),
+    val imageCount: Int = 0,
+    val voiceCount: Int = 0,
 )
 
 data class NoteGroup(val label: String, val notes: List<NoteUi>)
@@ -59,9 +65,9 @@ class HomeViewModel(
         .distinctUntilChanged()
         .flatMapLatest { id -> if (id == null) flowOf(emptyList()) else repo.observeNotebooks(id) }
 
-    private val groups = repo.observeNotes()
-        .map { notes -> groupNotes(notes) }
-        .flowOn(Dispatchers.Default)
+    private val groups = combine(repo.observeNotes(), repo.observeAllNoteAttachments()) { notes, attachments ->
+        groupNotes(notes, attachments.groupBy { it.ownerId })
+    }.flowOn(Dispatchers.Default)
 
     val state: StateFlow<HomeState> = combine(shelves, selectedShelf, notebooks, groups, settings.settings) { sh, sel, nb, gr, s ->
         HomeState(loaded = true, shelves = sh, selectedShelf = sel, notebooks = nb, groups = gr, grid = s.quickNotesGrid)
@@ -93,14 +99,14 @@ class HomeViewModel(
 
     fun sweepBlankNotes(except: Long?) = repo.sweepBlankNotes(except)
 
-    private fun groupNotes(notes: List<QuickNoteEntity>): List<NoteGroup> {
+    private fun groupNotes(notes: List<QuickNoteEntity>, attachments: Map<Long, List<AttachmentEntity>>): List<NoteGroup> {
         if (notes.isEmpty()) return emptyList()
         return notes
             .groupBy { it.createdAt.toLocalDate() }
-            .map { (date, list) -> NoteGroup(dateLabel(date), list.map(::toUi)) }
+            .map { (date, list) -> NoteGroup(dateLabel(date), list.map { toUi(it, attachments[it.id].orEmpty()) }) }
     }
 
-    private fun toUi(note: QuickNoteEntity): NoteUi {
+    private fun toUi(note: QuickNoteEntity, attachments: List<AttachmentEntity>): NoteUi {
         val lines = RichDoc.decode(note.content).previewLines()
         val title: String
         val preview: String
@@ -111,6 +117,16 @@ class HomeViewModel(
             title = lines.firstOrNull()?.removePrefix("• ")?.removePrefix("☐ ")?.removePrefix("☑ ") ?: ""
             preview = lines.drop(1).joinToString("\n")
         }
-        return NoteUi(note.id, title, preview.take(400), note.colorKey, note.createdAt)
+        val images = attachments.filter { it.kind == AttachmentKind.IMAGE.name }
+        return NoteUi(
+            id = note.id,
+            title = title,
+            preview = preview.take(400),
+            colorKey = note.colorKey,
+            createdAt = note.createdAt,
+            images = images.take(3).map { it.path },
+            imageCount = images.size,
+            voiceCount = attachments.count { it.kind == AttachmentKind.AUDIO.name },
+        )
     }
 }

@@ -1,12 +1,21 @@
 package com.quartz.notes.data
 
 import androidx.room.withTransaction
+import com.quartz.notes.data.db.AttachmentEntity
 import com.quartz.notes.data.db.NotebookEntity
+import com.quartz.notes.data.db.PageElementEntity
 import com.quartz.notes.data.db.PageEntity
 import com.quartz.notes.data.db.PageHit
 import com.quartz.notes.data.db.QuartzDatabase
 import com.quartz.notes.data.db.QuickNoteEntity
 import com.quartz.notes.data.db.ShelfEntity
+import com.quartz.notes.data.model.AttachmentKind
+import com.quartz.notes.data.model.ElementKind
+import com.quartz.notes.data.model.ImageData
+import com.quartz.notes.data.model.OwnerType
+import com.quartz.notes.data.model.VoiceData
+import com.quartz.notes.data.model.elementMediaPath
+import com.quartz.notes.data.model.encode
 import com.quartz.notes.data.rich.RichDoc
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
@@ -26,6 +35,8 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
     private val notebooks = db.notebookDao()
     private val pages = db.pageDao()
     private val notes = db.quickNoteDao()
+    private val attachments = db.attachmentDao()
+    private val elements = db.pageElementDao()
 
     /**
      * Page and note content goes through one queue, run strictly in the order it was submitted.
@@ -223,17 +234,212 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
         notes.updateContent(id, title, doc.encode(), doc.plainText(), colorKey, now())
     }
 
-    fun deleteNote(id: Long) = enqueue { notes.deleteById(id) }
+    fun deleteNote(id: Long) = enqueue {
+        db.withTransaction {
+            attachments.deleteFor(OwnerType.NOTE.name, id)
+            notes.deleteById(id)
+        }
+    }
 
     /** Deletes the note if it has no title and no text (checked after all earlier saves land). */
     fun discardIfBlank(id: Long) = enqueue {
         val note = notes.get(id) ?: return@enqueue
-        if (note.title.isBlank() && note.plainText.isBlank()) notes.deleteById(id)
+        val hasAttachments = attachments.getFor(OwnerType.NOTE.name, id).isNotEmpty()
+        if (note.title.isBlank() && note.plainText.isBlank() && !hasAttachments) notes.deleteById(id)
     }
 
     /** Removes blank notes left behind (e.g. the app was closed with an empty note open). */
     fun sweepBlankNotes(except: Long?) = enqueue {
         notes.deleteBlank(except ?: -1L)
+    }
+
+    // ---- Note attachments ----
+
+    fun observeNoteAttachments(noteId: Long): Flow<List<AttachmentEntity>> =
+        attachments.observeFor(OwnerType.NOTE.name, noteId)
+
+    fun observeAllNoteAttachments(): Flow<List<AttachmentEntity>> = attachments.observeAllOf(OwnerType.NOTE.name)
+
+    fun addNoteImage(noteId: Long, path: String, width: Int, height: Int) = enqueue {
+        attachments.insert(
+            AttachmentEntity(
+                ownerType = OwnerType.NOTE.name, ownerId = noteId, kind = AttachmentKind.IMAGE.name,
+                path = path, width = width, height = height,
+            ),
+        )
+        notes.touch(noteId, now())
+    }
+
+    fun addNoteVoice(noteId: Long, path: String, durationMs: Long) = enqueue {
+        attachments.insert(
+            AttachmentEntity(
+                ownerType = OwnerType.NOTE.name, ownerId = noteId, kind = AttachmentKind.AUDIO.name,
+                path = path, mimeType = "audio/mp4", durationMs = durationMs,
+            ),
+        )
+        notes.touch(noteId, now())
+    }
+
+    fun deleteAttachment(attachment: AttachmentEntity) = enqueue { attachments.delete(attachment) }
+
+    // ---- Page elements (pictures and voice notes placed on pages) ----
+
+    fun observeElements(pageId: Long): Flow<List<PageElementEntity>> = elements.observeFor(pageId)
+
+    /** Adds an element on top of everything else on the page. */
+    fun addElement(element: PageElementEntity) = enqueue {
+        elements.insert(element.copy(z = elements.maxZ(element.pageId) + 1))
+        pages.touch(element.pageId, now())
+    }
+
+    fun updateElement(element: PageElementEntity) = enqueue { elements.update(element) }
+
+    fun bringToFront(element: PageElementEntity) = enqueue {
+        elements.update(element.copy(z = elements.maxZ(element.pageId) + 1))
+    }
+
+    fun deleteElement(element: PageElementEntity) = enqueue { elements.deleteById(element.id) }
+
+    // ---- Sharing ----
+
+    /** Notebooks with their shelf, for the "send to notebook" picker. */
+    fun observeAllNotebooks(): Flow<List<NotebookEntity>> = notebooks.observeAll()
+
+    /**
+     * Copies a quick note onto a new last page of [notebookId]. Pictures and voice notes are placed
+     * below the text, where they can be moved around. Returns the new page id.
+     */
+    suspend fun copyNoteToNotebook(noteId: Long, notebookId: Long): Long = inOrder {
+        db.withTransaction {
+            val note = notes.get(noteId) ?: error("Note not found")
+            val list = pages.getByNotebook(notebookId)
+            val template = list.lastOrNull()
+            val pageId = pages.insert(
+                PageEntity(
+                    notebookId = notebookId,
+                    title = note.title,
+                    position = list.size,
+                    pageType = template?.pageType ?: "LINES",
+                    backgroundArgb = template?.backgroundArgb,
+                    texture = template?.texture ?: "NONE",
+                    content = note.content,
+                    plainText = note.plainText,
+                ),
+            )
+            // Element positions are in page-width units; start a little below the estimated end of the text.
+            val lineCount = RichDoc.decode(note.content).blocks.size
+            var y = 0.32f + lineCount * 0.075f
+            var z = 1
+            attachments.getFor(OwnerType.NOTE.name, noteId).forEach { a ->
+                if (a.kind == AttachmentKind.IMAGE.name) {
+                    val aspect = if ((a.width ?: 0) > 0) (a.height ?: 1).toFloat() / a.width!! else 0.75f
+                    val width = 0.56f
+                    elements.insert(
+                        PageElementEntity(
+                            pageId = pageId, kind = ElementKind.IMAGE, x = 0.08f, y = y, width = width,
+                            height = width * aspect, z = z++, data = ImageData(path = a.path, aspect = aspect).encode(),
+                        ),
+                    )
+                    y += width * aspect + 0.12f
+                } else {
+                    elements.insert(
+                        PageElementEntity(
+                            pageId = pageId, kind = ElementKind.VOICE, x = 0.08f, y = y, width = 0.62f,
+                            height = 0f, z = z++, data = VoiceData(path = a.path, durationMs = a.durationMs ?: 0).encode(),
+                        ),
+                    )
+                    y += 0.2f
+                }
+            }
+            pageId
+        }
+    }
+
+    // ---- Media bookkeeping ----
+
+    /** Every media path still referenced by a note attachment or page element. */
+    suspend fun referencedMedia(): Set<String> = inOrder {
+        attachments.deleteOrphans()
+        val fromAttachments = attachments.getAll().map { it.path }
+        val fromElements = elements.getAll().mapNotNull { elementMediaPath(it.kind, it.data) }
+        (fromAttachments + fromElements).toSet()
+    }
+
+    // ---- Backup ----
+
+    /** A consistent copy of everything, read after all queued saves have landed. */
+    suspend fun snapshot(): BackupData = inOrder {
+        db.withTransaction {
+            BackupData(
+                exportedAt = now(),
+                shelves = shelves.getAll(),
+                notebooks = notebooks.getAll(),
+                pages = pages.getAll(),
+                elements = elements.getAll(),
+                notes = notes.getAll(),
+                attachments = attachments.getAll(),
+            )
+        }
+    }
+
+    /** Changes whenever notes, pages, notebooks or their media change. */
+    suspend fun fingerprint(): String = inOrder {
+        listOf(
+            shelves.getAll().joinToString(",") { "${it.id}${it.name}${it.position}" }.hashCode().toString(),
+            notebooks.fingerprint(),
+            pages.fingerprint(),
+            notes.fingerprint(),
+            attachments.fingerprint(),
+            elements.fingerprint(),
+        ).joinToString("|")
+    }
+
+    /**
+     * Imports a backup. With [replace], everything currently in the app is removed first; otherwise the
+     * backup is added alongside (shelves with the same name are merged). Ids are re-assigned.
+     */
+    suspend fun importBackup(data: BackupData, replace: Boolean): ImportSummary = inOrder {
+        db.withTransaction {
+            if (replace) {
+                attachments.deleteAll()
+                notes.deleteAll()
+                shelves.deleteAll()
+            }
+            val existingShelves = shelves.getAll()
+            val shelfMap = HashMap<Long, Long>()
+            var nextShelfPos = shelves.maxPosition() + 1
+            data.shelves.sortedBy { it.position }.forEach { s ->
+                val match = if (replace) null else existingShelves.firstOrNull { it.name.equals(s.name, ignoreCase = true) }
+                shelfMap[s.id] = match?.id ?: shelves.insert(s.copy(id = 0, position = nextShelfPos++))
+            }
+            val fallbackShelf = shelves.getAll().firstOrNull()?.id
+                ?: shelves.insert(ShelfEntity(name = "Notebooks", position = 0))
+
+            val notebookMap = HashMap<Long, Long>()
+            data.notebooks.sortedBy { it.position }.forEach { n ->
+                val shelfId = shelfMap[n.shelfId] ?: fallbackShelf
+                notebookMap[n.id] = notebooks.insert(n.copy(id = 0, shelfId = shelfId, position = notebooks.maxPosition(shelfId) + 1))
+            }
+
+            val pageMap = HashMap<Long, Long>()
+            data.pages.forEach { p ->
+                val nb = notebookMap[p.notebookId] ?: return@forEach
+                pageMap[p.id] = pages.insert(p.copy(id = 0, notebookId = nb))
+            }
+            data.elements.forEach { e ->
+                val page = pageMap[e.pageId] ?: return@forEach
+                elements.insert(e.copy(id = 0, pageId = page))
+            }
+
+            val noteMap = HashMap<Long, Long>()
+            data.notes.forEach { n -> noteMap[n.id] = notes.insert(n.copy(id = 0)) }
+            data.attachments.forEach { a ->
+                if (a.ownerType != OwnerType.NOTE.name) return@forEach
+                val owner = noteMap[a.ownerId] ?: return@forEach
+                attachments.insert(a.copy(id = 0, ownerId = owner))
+            }
+            ImportSummary(notebooks = notebookMap.size, pages = pageMap.size, notes = noteMap.size)
+        }
     }
 
     // ---- Search ----

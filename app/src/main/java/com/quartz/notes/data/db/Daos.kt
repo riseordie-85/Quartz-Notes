@@ -26,6 +26,10 @@ interface ShelfDao {
 
     @Query("SELECT COALESCE(MAX(position), -1) FROM shelves")
     suspend fun maxPosition(): Int
+
+    /** Also removes every notebook, page and page element (foreign keys cascade). */
+    @Query("DELETE FROM shelves")
+    suspend fun deleteAll()
 }
 
 @Dao
@@ -48,6 +52,18 @@ interface NotebookDao {
     @Delete
     suspend fun delete(notebook: NotebookEntity)
 
+    @Query("SELECT * FROM notebooks ORDER BY shelfId, position, id")
+    fun observeAll(): Flow<List<NotebookEntity>>
+
+    @Query("SELECT * FROM notebooks")
+    suspend fun getAll(): List<NotebookEntity>
+
+    @Query("SELECT COUNT(*) || ':' || COALESCE(MAX(updatedAt), 0) FROM notebooks")
+    suspend fun fingerprint(): String
+
+    @Insert
+    suspend fun insertAll(notebooks: List<NotebookEntity>): List<Long>
+
     @Query("SELECT COALESCE(MAX(position), -1) FROM notebooks WHERE shelfId = :shelfId")
     suspend fun maxPosition(shelfId: Long): Int
 
@@ -66,6 +82,9 @@ interface PageDao {
     @Query("SELECT * FROM pages WHERE id = :id")
     suspend fun get(id: Long): PageEntity?
 
+    @Query("SELECT * FROM pages")
+    suspend fun getAll(): List<PageEntity>
+
     @Insert
     suspend fun insert(page: PageEntity): Long
 
@@ -83,6 +102,12 @@ interface PageDao {
 
     @Query("UPDATE pages SET title = :title, updatedAt = :updatedAt WHERE id = :id")
     suspend fun updateTitle(id: Long, title: String, updatedAt: Long)
+
+    @Query("UPDATE pages SET updatedAt = :updatedAt WHERE id = :id")
+    suspend fun touch(id: Long, updatedAt: Long)
+
+    @Query("SELECT COUNT(*) || ':' || COALESCE(MAX(updatedAt), 0) FROM pages")
+    suspend fun fingerprint(): String
 
     @Query(
         """
@@ -117,6 +142,9 @@ interface QuickNoteDao {
     @Query("SELECT * FROM quick_notes WHERE id = :id")
     suspend fun get(id: Long): QuickNoteEntity?
 
+    @Query("SELECT * FROM quick_notes")
+    suspend fun getAll(): List<QuickNoteEntity>
+
     @Insert
     suspend fun insert(note: QuickNoteEntity): Long
 
@@ -131,10 +159,21 @@ interface QuickNoteDao {
     @Query("DELETE FROM quick_notes WHERE id = :id")
     suspend fun deleteById(id: Long)
 
+    @Query("UPDATE quick_notes SET updatedAt = :updatedAt WHERE id = :id")
+    suspend fun touch(id: Long, updatedAt: Long)
+
+    @Query("DELETE FROM quick_notes")
+    suspend fun deleteAll()
+
+    /** Cheap change fingerprint: count and newest edit time. */
+    @Query("SELECT COUNT(*) || ':' || COALESCE(MAX(updatedAt), 0) FROM quick_notes")
+    suspend fun fingerprint(): String
+
     @Query(
         """
         DELETE FROM quick_notes
         WHERE id != :except AND TRIM(title) = '' AND TRIM(plainText, ' ' || char(9) || char(10) || char(13)) = ''
+          AND id NOT IN (SELECT ownerId FROM attachments WHERE ownerType = 'NOTE')
         """,
     )
     suspend fun deleteBlank(except: Long)
@@ -152,12 +191,58 @@ interface QuickNoteDao {
 
 @Dao
 interface AttachmentDao {
-    @Query("SELECT * FROM attachments WHERE ownerType = :ownerType AND ownerId = :ownerId ORDER BY createdAt")
+    @Query("SELECT * FROM attachments WHERE ownerType = :ownerType AND ownerId = :ownerId ORDER BY createdAt, id")
     fun observeFor(ownerType: String, ownerId: Long): Flow<List<AttachmentEntity>>
+
+    @Query("SELECT * FROM attachments WHERE ownerType = :ownerType AND ownerId = :ownerId ORDER BY createdAt, id")
+    suspend fun getFor(ownerType: String, ownerId: Long): List<AttachmentEntity>
+
+    @Query("SELECT * FROM attachments WHERE ownerType = :ownerType ORDER BY createdAt, id")
+    fun observeAllOf(ownerType: String): Flow<List<AttachmentEntity>>
+
+    @Query("SELECT * FROM attachments")
+    suspend fun getAll(): List<AttachmentEntity>
 
     @Insert
     suspend fun insert(attachment: AttachmentEntity): Long
 
     @Delete
     suspend fun delete(attachment: AttachmentEntity)
+
+    @Query("DELETE FROM attachments WHERE ownerType = :ownerType AND ownerId = :ownerId")
+    suspend fun deleteFor(ownerType: String, ownerId: Long)
+
+    @Query("DELETE FROM attachments")
+    suspend fun deleteAll()
+
+    @Query("SELECT COUNT(*) || ':' || COALESCE(MAX(id), 0) FROM attachments")
+    suspend fun fingerprint(): String
+
+    /** Removes note attachments whose note no longer exists. */
+    @Query("DELETE FROM attachments WHERE ownerType = 'NOTE' AND ownerId NOT IN (SELECT id FROM quick_notes)")
+    suspend fun deleteOrphans()
+}
+
+@Dao
+interface PageElementDao {
+    @Query("SELECT * FROM page_elements WHERE pageId = :pageId ORDER BY z, id")
+    fun observeFor(pageId: Long): Flow<List<PageElementEntity>>
+
+    @Query("SELECT * FROM page_elements")
+    suspend fun getAll(): List<PageElementEntity>
+
+    @Query("SELECT COUNT(*) || ':' || COALESCE(SUM(x + y + width + rotation), 0) || ':' || COALESCE(SUM(LENGTH(data)), 0) FROM page_elements")
+    suspend fun fingerprint(): String
+
+    @Query("SELECT COALESCE(MAX(z), 0) FROM page_elements WHERE pageId = :pageId")
+    suspend fun maxZ(pageId: Long): Int
+
+    @Insert
+    suspend fun insert(element: PageElementEntity): Long
+
+    @Update
+    suspend fun update(element: PageElementEntity)
+
+    @Query("DELETE FROM page_elements WHERE id = :id")
+    suspend fun deleteById(id: Long)
 }
