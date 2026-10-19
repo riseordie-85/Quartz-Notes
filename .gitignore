@@ -1,7 +1,20 @@
+*.iml
 *.hprof
 .gradle/
+.kotlin/
 build/
-*.iml
+/captures
 local.properties
-.idea/workspace.xml
-.idea/repositories.xml
+.externalNativeBuild
+.cxx
+.DS_Store
+
+# Android Studio project files (regenerated per machine)
+.idea/
+
+# Release outputs and signing
+/app/release/
+*.apk
+*.aab
+*.jks
+*.keystore

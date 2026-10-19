@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Placeholder icon: a faceted quartz notebook. Swap in your own design any time. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- notebook body -->
+    <path
+        android:fillColor="#FFD6004C"
+        android:pathData="M38,30 L70,30 Q76,30 76,36 L76,72 Q76,78 70,78 L38,78 Q34,78 34,74 L34,34 Q34,30 38,30 Z" />
+    <!-- spine -->
+    <path
+        android:fillColor="#33000000"
+        android:pathData="M38,30 L41,30 L41,78 L38,78 Q34,78 34,74 L34,34 Q34,30 38,30 Z" />
+    <!-- gloss -->
+    <path
+        android:fillColor="#40FFFFFF"
+        android:pathData="M41,30 L70,30 Q76,30 76,36 L76,46 L41,54 Z" />
+    <!-- crystal -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M58,40 L65,48 L58,66 L51,48 Z" />
+    <path
+        android:fillColor="#FFF3C6D8"
+        android:pathData="M58,40 L58,66 L51,48 Z" />
+    <path
+        android:fillColor="#FFFFE4EF"
+        android:pathData="M51,48 L65,48 L58,40 Z" />
+</vector>

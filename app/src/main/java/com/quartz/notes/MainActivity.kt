@@ -1,87 +1,63 @@
 package com.quartz.notes
 
+import android.graphics.Color as AndroidColor
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.runtime.*
+import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavType
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
-import com.quartz.notes.data.local.entity.NoteEntity
-import com.quartz.notes.ui.notes.NoteEditorScreen
-import com.quartz.notes.ui.notes.NotesListScreen
-import com.quartz.notes.ui.notes.NotesViewModel
-import com.quartz.notes.ui.settings.SettingsScreen
-import com.quartz.notes.ui.theme.QuartzNotesTheme
+import com.quartz.notes.data.ThemeMode
+import com.quartz.notes.ui.QuartzNavHost
+import com.quartz.notes.ui.editor.FontResolver
+import com.quartz.notes.ui.editor.LocalFontResolver
+import com.quartz.notes.ui.theme.QuartzTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        val container = (application as QuartzApp).container
+
         setContent {
-            val vm: NotesViewModel = viewModel()
-            val themeMode by vm.themeMode.collectAsStateWithLifecycle()
-            val globalGradient by vm.globalGradient.collectAsStateWithLifecycle()
-            val notes by vm.notes.collectAsStateWithLifecycle()
-            val searchQuery by vm.searchQuery.collectAsStateWithLifecycle()
-            val autoBackupEnabled by vm.autoBackupEnabled.collectAsStateWithLifecycle()
-            val autoBackupInterval by vm.autoBackupIntervalHours.collectAsStateWithLifecycle()
-            val autoBackupUri by vm.autoBackupUri.collectAsStateWithLifecycle()
+            val settings by container.settings.settings.collectAsStateWithLifecycle(initialValue = null)
+            val fonts by container.fonts.fonts.collectAsStateWithLifecycle()
+            val systemDark = isSystemInDarkTheme()
+            val current = settings
 
-            QuartzNotesTheme(themeMode = themeMode) {
-                val navController = rememberNavController()
-
-                NavHost(navController = navController, startDestination = "notes_list") {
-                    composable("notes_list") {
-                        NotesListScreen(
-                            notes = notes,
-                            globalGradient = globalGradient,
-                            searchQuery = searchQuery,
-                            onSearchChange = vm::updateSearch,
-                            onNoteClick = { noteId -> navController.navigate("editor/$noteId") },
-                            onCreateNote = { navController.navigate("editor/0") },
-                            onDeleteNote = vm::deleteNoteToTrash,
-                            onOpenSettings = { navController.navigate("settings") }
-                        )
-                    }
-
-                    composable(
-                        route = "editor/{noteId}",
-                        arguments = listOf(navArgument("noteId") { type = NavType.LongType })
-                    ) { backStackEntry ->
-                        val noteId = backStackEntry.arguments?.getLong("noteId") ?: 0L
-                        val existingNote = remember(noteId, notes) {
-                            notes.find { it.id == noteId } ?: NoteEntity()
-                        }
-
-                        NoteEditorScreen(
-                            initialNote = existingNote,
-                            globalGradient = globalGradient,
-                            onSaveNote = vm::saveNote,
-                            onNavigateBack = { navController.popBackStack() }
-                        )
-                    }
-
-                    composable("settings") {
-                        SettingsScreen(
-                            currentThemeMode = themeMode,
-                            currentGlobalGradient = globalGradient,
-                            autoBackupEnabled = autoBackupEnabled,
-                            autoBackupIntervalHours = autoBackupInterval,
-                            autoBackupUriString = autoBackupUri,
-                            onThemeModeChange = vm::setThemeMode,
-                            onGlobalGradientChange = vm::setGlobalGradient,
-                            onExportManualZip = vm::exportManualZip,
-                            onExportManualJson = vm::exportManualJson,
-                            onConfigureAutoBackupFolder = vm::setAutoBackupFolder,
-                            onToggleAutoBackup = vm::setAutoBackupSchedule,
-                            onNavigateBack = { navController.popBackStack() }
-                        )
+            if (current == null) {
+                // Settings load in a few milliseconds; avoid flashing the wrong theme meanwhile.
+                Box(Modifier.fillMaxSize().background(if (systemDark) Color(0xFF101013) else Color(0xFFEFEFF1)))
+            } else {
+                val dark = when (current.themeMode) {
+                    ThemeMode.SYSTEM -> systemDark
+                    ThemeMode.LIGHT -> false
+                    ThemeMode.DARK -> true
+                }
+                DisposableEffect(dark) {
+                    enableEdgeToEdge(
+                        statusBarStyle = SystemBarStyle.auto(AndroidColor.TRANSPARENT, AndroidColor.TRANSPARENT) { dark },
+                        navigationBarStyle = SystemBarStyle.auto(AndroidColor.TRANSPARENT, AndroidColor.TRANSPARENT) { dark },
+                    )
+                    onDispose {}
+                }
+                val resolver = remember(fonts) { FontResolver(fonts) }
+                CompositionLocalProvider(
+                    LocalAppContainer provides container,
+                    LocalFontResolver provides resolver,
+                ) {
+                    QuartzTheme(settings = current, dark = dark) {
+                        QuartzNavHost()
                     }
                 }
             }
