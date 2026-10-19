@@ -1,12 +1,13 @@
 package com.quartz.notes.data.rich
 
+import com.quartz.notes.data.model.ImageData
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.util.UUID
 
 @Serializable
-enum class BlockType { HEADING, SUBHEADING, BODY, BULLET, TASK }
+enum class BlockType { HEADING, SUBHEADING, BODY, BULLET, TASK, IMAGE }
 
 @Serializable
 enum class Align { START, CENTER, END, JUSTIFY }
@@ -42,6 +43,10 @@ data class Block(
     val align: Align = Align.START,
     val checked: Boolean = false,
     val indent: Int = 0,
+    /** The picture, for [BlockType.IMAGE] blocks (pictures placed in line with the text). */
+    val image: ImageData? = null,
+    /** Width of an in-line picture as a fraction of the text width. */
+    val imageWidth: Float = 0.7f,
 )
 
 /** A rich text document: an ordered list of blocks. Stored as JSON. */
@@ -53,7 +58,10 @@ data class RichDoc(val blocks: List<Block> = listOf(Block())) {
     /** Text used for search indexing. */
     fun plainText(): String = blocks.joinToString("\n") { it.text }
 
-    fun isBlank(): Boolean = blocks.all { it.text.isBlank() }
+    fun isBlank(): Boolean = blocks.all { it.text.isBlank() && it.image == null }
+
+    /** Media paths of in-line pictures. */
+    fun mediaPaths(): List<String> = blocks.mapNotNull { it.image?.path }
 
     /** Readable preview lines with list markers, skipping empty lines. */
     fun previewLines(): List<String> = blocks.mapNotNull { b ->

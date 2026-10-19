@@ -70,7 +70,11 @@ class BackupManager(
     /** Writes a complete backup zip to [out]. */
     suspend fun export(out: OutputStream) = withContext(Dispatchers.IO) {
         val data = repo.snapshot()
-        val mediaPaths = (data.attachments.map { it.path } + data.elements.mapNotNull { elementMediaPath(it.kind, it.data) }).toSet()
+        val mediaPaths = (
+            data.attachments.map { it.path } +
+                data.elements.mapNotNull { elementMediaPath(it.kind, it.data) } +
+                data.pages.flatMap { com.quartz.notes.data.rich.RichDoc.decode(it.content).mediaPaths() }
+            ).toSet()
         ZipOutputStream(out.buffered()).use { zip ->
             zip.putNextEntry(ZipEntry(DATA_ENTRY))
             zip.write(json.encodeToString(data).toByteArray())

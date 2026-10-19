@@ -76,6 +76,13 @@ import com.quartz.notes.ui.media.ImageViewer
 import com.quartz.notes.ui.media.VoiceRecorderSheet
 import com.quartz.notes.ui.media.rememberImageAdder
 import com.quartz.notes.ui.media.rememberMicPermission
+import androidx.compose.material.icons.rounded.AccountTree
+import androidx.compose.material.icons.automirrored.rounded.ArrowRightAlt
+import androidx.compose.material.icons.rounded.Brush
+import androidx.compose.material.icons.rounded.Category
+import androidx.compose.material.icons.rounded.TextFields
+import androidx.compose.runtime.mutableIntStateOf
+import com.quartz.notes.data.model.ShapeType
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -157,7 +164,16 @@ fun NotebookScreen(
     // Falls back to the first page if the active one was deleted.
     val activeIndex = pages.indexOfFirst { it.id == activePageId }.coerceAtLeast(0)
     val activePage = pages[activeIndex]
-    val currentEditor = editors[activePage.id]
+    val activeSession = vm.session(activePage)
+    // A text box being typed in takes the formatting tools; otherwise the page's own text does.
+    val currentEditor = activeSession.activeEditor ?: editors[activePage.id]
+
+    // Drawing and connecting tools.
+    var tool by remember { mutableStateOf(PageTool.NONE) }
+    var brushLevel by rememberSaveable { mutableIntStateOf(2) }
+    var shapeMenu by remember { mutableStateOf(false) }
+    // A text box added from the toolbar gets the cursor once it exists.
+    var pendingTextFocus by remember { mutableStateOf<Pair<Long, Long>?>(null) }
 
     var showFormat by remember { mutableStateOf(false) }
     var showStyle by remember { mutableStateOf(false) }
@@ -249,6 +265,12 @@ fun NotebookScreen(
                                         slot == 0 -> PageSide.LEFT
                                         else -> PageSide.RIGHT
                                     },
+                                    tool = tool,
+                                    brushLevel = brushLevel,
+                                    inkArgb = settings?.inkArgb ?: 0,
+                                    onToolDone = { tool = PageTool.NONE },
+                                    focusTextBox = pendingTextFocus?.takeIf { it.first == page.id }?.second,
+                                    onFocusTextBoxHandled = { pendingTextFocus = null },
                                     onActivate = { activePageId = page.id },
                                     onEditorReady = { editors[page.id] = it },
                                     onEditorGone = { editors.remove(page.id) },
@@ -262,6 +284,22 @@ fun NotebookScreen(
                         }
                     }
                 }
+            }
+
+            if (tool == PageTool.BRUSH || tool == PageTool.ERASER) {
+                BrushBar(
+                    level = brushLevel,
+                    eraser = tool == PageTool.ERASER,
+                    color = settings?.inkArgb?.takeIf { it != 0 }?.let { Color(it) }
+                        ?: contentColorFor(activePage.backgroundArgb?.let { Color(it) } ?: LocalQuartzColors.current.card),
+                    onLevel = {
+                        brushLevel = it
+                        tool = PageTool.BRUSH
+                    },
+                    onEraser = { tool = if (tool == PageTool.ERASER) PageTool.BRUSH else PageTool.ERASER },
+                    onDone = { tool = PageTool.NONE },
+                    modifier = Modifier.padding(horizontal = 16.dp).padding(top = 6.dp),
+                )
             }
 
             Row(
@@ -306,6 +344,55 @@ fun NotebookScreen(
                     ToolButton(onClick = askMic, description = "Record voice note") {
                         Icon(Icons.Rounded.Mic, null)
                     }
+                    ToolButton(
+                        onClick = {
+                            tool = PageTool.NONE
+                            scope.launch {
+                                val y = activeSession.scrollUnits + 0.3f
+                                val id = vm.addTextBox(activePage.id, 0.12f, y, 0.6f)
+                                pendingTextFocus = activePage.id to id
+                            }
+                        },
+                        description = "Add text box",
+                    ) { Icon(Icons.Rounded.TextFields, null) }
+                    ToolButton(
+                        selected = tool == PageTool.BRUSH || tool == PageTool.ERASER,
+                        onClick = { tool = if (tool == PageTool.BRUSH || tool == PageTool.ERASER) PageTool.NONE else PageTool.BRUSH },
+                        description = "Brush",
+                    ) { Icon(Icons.Rounded.Brush, null) }
+                    Box {
+                        ToolButton(onClick = { shapeMenu = true }, description = "Add shape") { Icon(Icons.Rounded.Category, null) }
+                        DropdownMenu(expanded = shapeMenu, onDismissRequest = { shapeMenu = false }) {
+                            ShapeType.entries.forEach { t ->
+                                DropdownMenuItem(
+                                    text = { Text(t.label) },
+                                    leadingIcon = {
+                                        val c = MaterialTheme.colorScheme.onSurface
+                                        androidx.compose.foundation.Canvas(Modifier.size(22.dp)) {
+                                            drawPath(shapePath(t, size), c, style = androidx.compose.ui.graphics.drawscope.Stroke(2.dp.toPx()))
+                                        }
+                                    },
+                                    onClick = {
+                                        shapeMenu = false
+                                        tool = PageTool.NONE
+                                        vm.addShape(activePage.id, t)
+                                    },
+                                )
+                            }
+                        }
+                    }
+                    ToolButton(
+                        onClick = {
+                            tool = PageTool.NONE
+                            vm.addArrow(activePage.id)
+                        },
+                        description = "Add arrow",
+                    ) { Icon(Icons.AutoMirrored.Rounded.ArrowRightAlt, null) }
+                    ToolButton(
+                        selected = tool == PageTool.CONNECT,
+                        onClick = { tool = if (tool == PageTool.CONNECT) PageTool.NONE else PageTool.CONNECT },
+                        description = "Connect two items",
+                    ) { Icon(Icons.Rounded.AccountTree, null) }
                     ToolButton(onClick = { showStyle = true }, description = "Page style") {
                         Icon(Icons.Rounded.Texture, null)
                     }
@@ -346,6 +433,7 @@ fun NotebookScreen(
     if (showStyle) {
         PageStyleSheet(
             page = activePage,
+            onLayoutMode = { scrapbook -> vm.setLayoutMode(activePage, scrapbook) },
             onChange = vm::updateStyle,
             onApplyToAll = {
                 vm.applyStyleToAll(it)
@@ -467,165 +555,6 @@ private fun NotebookTopBar(
     }
 }
 
-@OptIn(FlowPreview::class)
-@Composable
-private fun PageView(
-    page: PageEntity,
-    session: PageSession,
-    vm: NotebookViewModel,
-    side: PageSide,
-    onActivate: () -> Unit,
-    onEditorReady: (RichEditorState) -> Unit,
-    onEditorGone: () -> Unit,
-    onSave: () -> Unit,
-) {
-    val editor = session.editor
-    val title = session.title
-
-    DisposableEffect(session) {
-        onEditorReady(editor)
-        onDispose {
-            onSave()
-            onEditorGone()
-        }
-    }
-    LaunchedEffect(session) {
-        snapshotFlow { editor.version to session.title }.drop(1).debounce(600).collect { onSave() }
-    }
-
-    val elementsFlow = remember(page.id) { vm.elements(page.id) }
-    val elements by elementsFlow.collectAsStateWithLifecycle(initialValue = emptyList())
-    var selectedElement by remember(page.id) { mutableStateOf<Long?>(null) }
-    var viewing by remember { mutableStateOf<String?>(null) }
-    var decorating by remember { mutableStateOf<Pair<PageElementEntity, ImageData>?>(null) }
-    val audio = LocalAppContainer.current.audio
-    // Typing or tapping into the text puts away the picture toolbar.
-    LaunchedEffect(editor) {
-        snapshotFlow { editor.version to editor.focusedId }.drop(1).collect { selectedElement = null }
-    }
-    val elementActions = remember(page.id) {
-        ElementActions(
-            onSelect = { selectedElement = it },
-            onMove = vm::moveElement,
-            onView = { viewing = it.path },
-            onDecorate = { e, d -> decorating = e to d },
-            onFront = vm::bringToFront,
-            onDelete = {
-                selectedElement = null
-                elementMediaPath(it.kind, it.data)?.let(audio::stop)
-                vm.deleteElement(it)
-            },
-        )
-    }
-
-    val quartz = LocalQuartzColors.current
-    val bg = page.backgroundArgb?.let { Color(it) } ?: quartz.card
-    val ink = contentColorFor(bg)
-    val type = enumOrDefault(page.pageType, PageType.LINES)
-    val texture = rememberTextureBrush(enumOrDefault(page.texture, Texture.NONE), whiteInk = ink != Color(0xFF111114))
-    val lineColor = ink.copy(alpha = if (quartz.isDark && page.backgroundArgb == null) 0.22f else 0.28f)
-    val styles = remember { editorStyles() }
-    val density = LocalDensity.current
-    val unitPx = with(density) { styles.lineUnit.toPx() }
-    val keyboard = LocalSoftwareKeyboardController.current
-    val shape = side.shape
-    val padH = if (side == PageSide.SINGLE) 22.dp else 24.dp
-    val seamShade = if (quartz.isDark) 0.45f else 0.13f
-
-    BoxWithConstraints(
-        Modifier
-            .fillMaxSize()
-            .padding(start = side.outerStart, end = side.outerEnd, top = 6.dp, bottom = 6.dp)
-            .onFocusChanged { if (it.hasFocus) onActivate() }
-            .shadow(2.dp, shape)
-            .clip(shape)
-            .background(bg)
-            .drawBehind {
-                texture?.let { drawRect(it) }
-                if (side != PageSide.SINGLE) drawSeam(atRightEdge = side == PageSide.LEFT, strength = seamShade)
-            },
-    ) {
-        val viewport = maxHeight
-        val pageWidth = maxWidth
-        val pageWidthPx = with(density) { pageWidth.toPx() }
-        val scroll = rememberScrollState()
-        LaunchedEffect(scroll, pageWidthPx) {
-            snapshotFlow { scroll.value }.collect { session.scrollUnits = if (pageWidthPx > 0) it / pageWidthPx else 0f }
-        }
-        val elementsBottom = elements.maxOfOrNull { it.bottom(pageWidth) } ?: 0.dp
-        Column(Modifier.fillMaxSize().verticalScroll(scroll)) {
-          Box(Modifier.fillMaxWidth().heightIn(min = elementsBottom + 48.dp)) {
-          Column(Modifier.fillMaxWidth()) {
-            BasicTextField(
-                value = title,
-                onValueChange = { session.title = it.replace("\n", "") },
-                textStyle = TextStyle(fontSize = 21.sp, fontWeight = FontWeight.Bold, color = ink),
-                cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
-                keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Words),
-                modifier = Modifier.fillMaxWidth().padding(start = padH, end = padH, top = 24.dp, bottom = 14.dp),
-                decorationBox = { inner ->
-                    Box {
-                        if (title.isEmpty()) {
-                            Text("Page title", style = TextStyle(fontSize = 21.sp, fontWeight = FontWeight.Bold, color = ink.copy(alpha = 0.32f)))
-                        }
-                        inner()
-                    }
-                },
-            )
-            HorizontalDivider(Modifier.padding(horizontal = 18.dp), thickness = 2.dp, color = lineColor)
-            Box(
-                Modifier
-                    .fillMaxWidth()
-                    .heightIn(min = (viewport - 80.dp).coerceAtLeast(200.dp))
-                    .pageBackground(
-                        background = Color.Transparent,
-                        texture = null,
-                        type = type,
-                        lineColor = lineColor,
-                        spacingPx = unitPx,
-                        topOffsetPx = with(density) { 10.dp.toPx() },
-                    )
-                    .onFocusChanged { if (it.hasFocus) selectedElement = null }
-                    .clickable(interactionSource = remember { MutableInteractionSource() }, indication = null) {
-                        if (selectedElement != null) {
-                            selectedElement = null
-                        } else {
-                            editor.focusEnd()
-                            keyboard?.show()
-                        }
-                    },
-            ) {
-                RichTextEditor(
-                    state = editor,
-                    styles = styles,
-                    contentColor = ink,
-                    modifier = Modifier.fillMaxWidth().padding(start = padH, end = padH, top = 10.dp, bottom = 40.dp),
-                )
-            }
-          }
-            PageElementLayer(
-                elements = elements,
-                pageWidth = pageWidth,
-                selectedId = selectedElement,
-                actions = elementActions,
-            )
-          }
-        }
-    }
-
-    viewing?.let { path -> ImageViewer(path = path, onDismiss = { viewing = null }) }
-    decorating?.let { (element, data) ->
-        DecorateSheet(
-            data = data,
-            onChange = { updated ->
-                decorating = element to updated
-                vm.updateElementData(element, updated.encode())
-            },
-            onDismiss = { decorating = null },
-        )
-    }
-}
-
 /** Right-hand page of the last spread when the notebook has an odd number of pages. */
 @Composable
 private fun BlankPageSlot(side: PageSide, onClick: () -> Unit) {
@@ -657,7 +586,7 @@ private fun BlankPageSlot(side: PageSide, onClick: () -> Unit) {
 }
 
 /** Where a page sits: alone, or as the left/right half of an open spread. */
-private enum class PageSide(
+internal enum class PageSide(
     val shape: RoundedCornerShape,
     val outerStart: androidx.compose.ui.unit.Dp,
     val outerEnd: androidx.compose.ui.unit.Dp,
@@ -669,7 +598,7 @@ private enum class PageSide(
 }
 
 /** Soft gutter shadow plus a fine crease line along the edge where two pages meet. */
-private fun androidx.compose.ui.graphics.drawscope.DrawScope.drawSeam(atRightEdge: Boolean, strength: Float) {
+internal fun androidx.compose.ui.graphics.drawscope.DrawScope.drawSeam(atRightEdge: Boolean, strength: Float) {
     val width = 34.dp.toPx().coerceAtMost(size.width / 4)
     val dark = Color.Black
     val edgeX = if (atRightEdge) size.width else 0f

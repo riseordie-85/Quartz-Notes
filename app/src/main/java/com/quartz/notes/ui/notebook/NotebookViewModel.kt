@@ -13,7 +13,15 @@ import com.quartz.notes.data.db.PageElementEntity
 import com.quartz.notes.data.model.ElementKind
 import com.quartz.notes.data.model.ImageData
 import com.quartz.notes.data.model.VoiceData
+import com.quartz.notes.data.model.ArrowData
+import com.quartz.notes.data.model.ConnectorData
+import com.quartz.notes.data.model.ShapeData
+import com.quartz.notes.data.model.ShapeType
+import com.quartz.notes.data.model.StrokeData
+import com.quartz.notes.data.model.TextBoxData
+import com.quartz.notes.data.model.decodePayload
 import com.quartz.notes.data.model.encode
+import com.quartz.notes.data.model.encodePayload
 import kotlinx.coroutines.flow.Flow
 import com.quartz.notes.data.db.PageEntity
 import com.quartz.notes.data.db.ShelfEntity
@@ -34,6 +42,12 @@ class PageSession(page: PageEntity) {
 
     /** How far the page is scrolled, in page widths; new pictures land in view. */
     var scrollUnits = 0f
+
+    /** Editors for this page's text boxes, by element id. */
+    val textBoxes = HashMap<Long, RichEditorState>()
+
+    /** The text box being typed in, if any; the toolbar formats it instead of the page text. */
+    var activeEditor by mutableStateOf<RichEditorState?>(null)
 
     private var savedVersion = editor.version
     private var savedTitle = page.title
@@ -110,6 +124,33 @@ class NotebookViewModel(
         )
     }
 
+    /** Places an existing picture at a given spot (used when an in-line picture is set to float). */
+    fun addImageAt(pageId: Long, data: ImageData, x: Float, y: Float, width: Float) {
+        repo.addElement(
+            PageElementEntity(
+                pageId = pageId, kind = ElementKind.IMAGE, x = x, y = y, width = width,
+                height = width * data.aspect, data = data.encode(),
+            ),
+        )
+    }
+
+    /**
+     * Switches a page between flowing text and scrapbook. Going to scrapbook, the page's text moves
+     * into a text box so nothing is lost.
+     */
+    fun setLayoutMode(page: PageEntity, scrapbook: Boolean) {
+        val session = session(page)
+        viewModelScope.launch {
+            if (scrapbook && !session.editor.isBlank()) {
+                val doc = session.editor.toDoc()
+                addTextBox(page.id, 0.05f, 0.24f, 0.9f, doc)
+                session.editor.reset()
+                saveIfChanged(page.id)
+            }
+            repo.updatePageStyle(page.copy(layoutMode = if (scrapbook) "SCRAPBOOK" else "INLINE"))
+        }
+    }
+
     fun addVoice(pageId: Long, path: String, durationMs: Long) {
         repo.addElement(
             PageElementEntity(
@@ -118,6 +159,75 @@ class NotebookViewModel(
             ),
         )
     }
+
+    // ---- Text boxes, shapes, arrows, connectors, drawings ----
+
+    /** Adds a text box at (x, y) in page widths and returns its id. */
+    suspend fun addTextBox(pageId: Long, x: Float, y: Float, width: Float, doc: RichDoc = RichDoc()): Long =
+        repo.insertElement(
+            PageElementEntity(
+                pageId = pageId, kind = ElementKind.TEXT, x = x, y = y, width = width,
+                data = TextBoxData(doc.encode()).encodePayload(),
+            ),
+        )
+
+    fun textEditor(element: PageElementEntity): RichEditorState {
+        fun fresh() = RichEditorState(RichDoc.decode(decodePayload<TextBoxData>(element.data)?.doc))
+        val map = sessions[element.pageId]?.textBoxes ?: return fresh()
+        return map.getOrPut(element.id) { fresh() }
+    }
+
+    fun saveTextBox(element: PageElementEntity) {
+        val state = sessions[element.pageId]?.textBoxes?.get(element.id) ?: return
+        repo.updateElementData(element, TextBoxData(state.toDoc().encode()).encodePayload())
+    }
+
+    private var shapeCount = 0
+
+    fun addShape(pageId: Long, type: ShapeType) {
+        val fills = listOf(0xFF00A8D6.toInt(), 0xFFD6004C.toInt(), 0xFFFFD600.toInt(), 0xFF2E9E5B.toInt())
+        val w = if (type == ShapeType.RECTANGLE || type == ShapeType.ROUNDED) 0.36f else 0.3f
+        val h = if (type == ShapeType.RECTANGLE || type == ShapeType.ROUNDED) 0.24f else 0.3f
+        repo.addElement(
+            PageElementEntity(
+                pageId = pageId, kind = ElementKind.SHAPE, x = (1f - w) / 2 + ((shapeCount % 3) - 1) * 0.05f,
+                y = placementY(pageId), width = w, height = h,
+                data = ShapeData(shape = type, fill = fills[shapeCount % fills.size]).encodePayload(),
+            ),
+        )
+        shapeCount++
+    }
+
+    fun addArrow(pageId: Long) {
+        repo.addElement(
+            PageElementEntity(
+                pageId = pageId, kind = ElementKind.ARROW, x = 0.3f, y = placementY(pageId) + 0.1f, width = 0f,
+                data = ArrowData(dx = 0.4f, dy = 0f).encodePayload(),
+            ),
+        )
+    }
+
+    fun addStroke(pageId: Long, pointsUnits: List<Float>, color: Int, level: Int) {
+        if (pointsUnits.size < 2) return
+        val xs = pointsUnits.filterIndexed { i, _ -> i % 2 == 0 }
+        val ys = pointsUnits.filterIndexed { i, _ -> i % 2 == 1 }
+        repo.addElement(
+            PageElementEntity(
+                pageId = pageId, kind = ElementKind.STROKE, x = xs.min(), y = ys.min(),
+                width = xs.max() - xs.min(), height = ys.max() - ys.min(),
+                data = StrokeData(points = pointsUnits, color = color, level = level).encodePayload(),
+            ),
+        )
+    }
+
+    fun addConnector(pageId: Long, from: Long, to: Long) {
+        if (from == to) return
+        repo.addElement(
+            PageElementEntity(pageId = pageId, kind = ElementKind.CONNECTOR, data = ConnectorData(from = from, to = to).encodePayload()),
+        )
+    }
+
+    fun replaceElement(element: PageElementEntity) = repo.replaceElement(element)
 
     fun moveElement(element: PageElementEntity) = repo.moveElement(element)
     fun updateElementData(element: PageElementEntity, data: String) = repo.updateElementData(element, data)

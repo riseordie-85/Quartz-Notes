@@ -352,6 +352,17 @@ private fun NoteEditorContent(load: NoteLoad.Ready, vm: NoteViewModel, onClose: 
                         .onFailure { Toast.makeText(context, "Couldn't make an image of this note", Toast.LENGTH_SHORT).show() }
                 }
             },
+            onSaveImage = {
+                showShare = false
+                scope.launch {
+                    val pictures = attachments.filter { it.kind == AttachmentKind.IMAGE.name }.map { container.media.file(it.path) }
+                    val saved = runCatching {
+                        val file = renderNoteImage(context, session.title, editor.toDoc(), session.colorKey, pictures)
+                        saveImageToGallery(context, file, file.nameWithoutExtension + " " + System.currentTimeMillis() / 1000)
+                    }.getOrDefault(false)
+                    Toast.makeText(context, if (saved) "Saved to your gallery" else "Couldn't save the image", Toast.LENGTH_SHORT).show()
+                }
+            },
             onNotebook = {
                 showShare = false
                 pickNotebook = true

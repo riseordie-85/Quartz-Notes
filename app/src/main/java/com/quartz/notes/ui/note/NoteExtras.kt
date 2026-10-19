@@ -21,6 +21,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.LibraryBooks
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.Image
+import androidx.compose.material.icons.rounded.SaveAlt
 import androidx.compose.material.icons.rounded.TextFields
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -101,6 +102,7 @@ fun NoteAttachments(
 fun ShareNoteSheet(
     onText: () -> Unit,
     onImage: () -> Unit,
+    onSaveImage: () -> Unit,
     onNotebook: () -> Unit,
     onDismiss: () -> Unit,
 ) {
@@ -118,6 +120,12 @@ fun ShareNoteSheet(
                 subtitle = "A picture of the note, with its color and photos",
                 onClick = onImage,
                 leading = { Icon(Icons.Rounded.Image, null, tint = MaterialTheme.colorScheme.primary) },
+            )
+            ListRow(
+                title = "Save as image",
+                subtitle = "Save that picture to your gallery (Quartz Notes album)",
+                onClick = onSaveImage,
+                leading = { Icon(Icons.Rounded.SaveAlt, null, tint = MaterialTheme.colorScheme.primary) },
             )
             ListRow(
                 title = "Send to notebook",

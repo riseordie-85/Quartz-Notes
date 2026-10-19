@@ -30,6 +30,29 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import kotlin.math.min
 
+/** Copies a rendered note picture into the gallery (Pictures/Quartz Notes). No permission needed. */
+suspend fun saveImageToGallery(context: Context, file: File, displayName: String): Boolean = withContext(Dispatchers.IO) {
+    val resolver = context.contentResolver
+    val values = android.content.ContentValues().apply {
+        put(android.provider.MediaStore.Images.Media.DISPLAY_NAME, "$displayName.png")
+        put(android.provider.MediaStore.Images.Media.MIME_TYPE, "image/png")
+        put(android.provider.MediaStore.Images.Media.RELATIVE_PATH, "${android.os.Environment.DIRECTORY_PICTURES}/Quartz Notes")
+        put(android.provider.MediaStore.Images.Media.IS_PENDING, 1)
+    }
+    val collection = android.provider.MediaStore.Images.Media.getContentUri(android.provider.MediaStore.VOLUME_EXTERNAL_PRIMARY)
+    val uri = resolver.insert(collection, values) ?: return@withContext false
+    try {
+        resolver.openOutputStream(uri)?.use { out -> file.inputStream().use { it.copyTo(out) } } ?: error("No output")
+        values.clear()
+        values.put(android.provider.MediaStore.Images.Media.IS_PENDING, 0)
+        resolver.update(uri, values, null, null)
+        true
+    } catch (t: Throwable) {
+        resolver.delete(uri, null, null)
+        false
+    }
+}
+
 /** Plain-text version of a note, with bullets and checkboxes. */
 fun noteAsText(title: String, doc: RichDoc): String = buildString {
     if (title.isNotBlank()) {
@@ -104,7 +127,7 @@ suspend fun renderNoteImage(
             BlockType.SUBHEADING -> Triple(paint(19f, bold = true), 0f, null)
             BlockType.BULLET -> Triple(paint(16f), 56f, "•")
             BlockType.TASK -> Triple(paint(16f), 64f, if (b.checked) "☑" else "☐")
-            BlockType.BODY -> Triple(paint(16f), 0f, null)
+            BlockType.BODY, BlockType.IMAGE -> Triple(paint(16f), 0f, null)
         }
         val text = SpannableStringBuilder(b.text.ifEmpty { " " })
         b.spans.forEach { sp ->

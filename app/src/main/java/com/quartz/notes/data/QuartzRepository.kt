@@ -13,7 +13,10 @@ import com.quartz.notes.data.model.AttachmentKind
 import com.quartz.notes.data.model.ElementKind
 import com.quartz.notes.data.model.ImageData
 import com.quartz.notes.data.model.OwnerType
+import com.quartz.notes.data.model.ConnectorData
 import com.quartz.notes.data.model.VoiceData
+import com.quartz.notes.data.model.decodePayload
+import com.quartz.notes.data.model.encodePayload
 import com.quartz.notes.data.model.elementMediaPath
 import com.quartz.notes.data.model.encode
 import com.quartz.notes.data.rich.RichDoc
@@ -295,7 +298,7 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
 
     /** Saves only position, size and rotation, so it can't undo a decoration change. */
     fun moveElement(element: PageElementEntity) = enqueue {
-        elements.updateGeometry(element.id, element.x, element.y, element.width, element.rotation)
+        elements.updateGeometry(element.id, element.x, element.y, element.width, element.height, element.rotation)
         pages.touch(element.pageId, now())
     }
 
@@ -305,14 +308,34 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
         pages.touch(element.pageId, now())
     }
 
+    /** Writes the whole row (used for arrows, whose position and shape change together). */
+    fun replaceElement(element: PageElementEntity) = enqueue {
+        elements.update(element)
+        pages.touch(element.pageId, now())
+    }
+
     fun bringToFront(element: PageElementEntity) = enqueue {
         elements.updateZ(element.id, elements.maxZ(element.pageId) + 1)
         pages.touch(element.pageId, now())
     }
 
+    /** Removes an element, plus any connector lines attached to it. */
     fun deleteElement(element: PageElementEntity) = enqueue {
-        elements.deleteById(element.id)
+        db.withTransaction {
+            elements.deleteById(element.id)
+            elements.getKind(element.pageId, ElementKind.CONNECTOR).forEach { c ->
+                val data = decodePayload<ConnectorData>(c.data)
+                if (data == null || data.from == element.id || data.to == element.id) elements.deleteById(c.id)
+            }
+            pages.touch(element.pageId, now())
+        }
+    }
+
+    /** Adds an element on top and returns its id (used when the new item must get focus). */
+    suspend fun insertElement(element: PageElementEntity): Long = inOrder {
+        val id = elements.insert(element.copy(z = elements.maxZ(element.pageId) + 1))
         pages.touch(element.pageId, now())
+        id
     }
 
     // ---- Sharing ----
@@ -377,7 +400,8 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
         attachments.deleteOrphans()
         val fromAttachments = attachments.getAll().map { it.path }
         val fromElements = elements.getAll().mapNotNull { elementMediaPath(it.kind, it.data) }
-        (fromAttachments + fromElements).toSet()
+        val inline = pages.getAll().flatMap { RichDoc.decode(it.content).mediaPaths() }
+        (fromAttachments + fromElements + inline).toSet()
     }
 
     // ---- Backup ----
@@ -429,9 +453,22 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
                 val nb = notebookMap[p.notebookId] ?: return@forEach
                 pageMap[p.id] = pages.insert(p.copy(id = 0, notebookId = nb))
             }
+            val elementMap = HashMap<Long, Long>()
+            val connectors = ArrayList<PageElementEntity>()
             data.elements.forEach { e ->
                 val page = pageMap[e.pageId] ?: return@forEach
-                elements.insert(e.copy(id = 0, pageId = page))
+                if (e.kind == ElementKind.CONNECTOR) {
+                    connectors += e.copy(pageId = page)
+                } else {
+                    elementMap[e.id] = elements.insert(e.copy(id = 0, pageId = page))
+                }
+            }
+            // Connectors point at other elements by id, which have all been re-numbered.
+            connectors.forEach { c ->
+                val cd = decodePayload<ConnectorData>(c.data) ?: return@forEach
+                val from = elementMap[cd.from] ?: return@forEach
+                val to = elementMap[cd.to] ?: return@forEach
+                elements.insert(c.copy(id = 0, data = cd.copy(from = from, to = to).encodePayload()))
             }
 
             val noteMap = HashMap<Long, Long>()

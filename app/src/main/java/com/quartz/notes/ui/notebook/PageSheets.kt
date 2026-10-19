@@ -69,6 +69,7 @@ import com.quartz.notes.ui.theme.contentColorFor
 @Composable
 fun PageStyleSheet(
     page: PageEntity,
+    onLayoutMode: (scrapbook: Boolean) -> Unit,
     onChange: (PageEntity) -> Unit,
     onApplyToAll: (PageEntity) -> Unit,
     onDismiss: () -> Unit,
@@ -93,6 +94,28 @@ fun PageStyleSheet(
                 .navigationBarsPadding(),
         ) {
             Text("Page style", fontSize = 22.sp, fontWeight = FontWeight.Medium)
+
+            Label("Layout")
+            val scrapbook = page.layoutMode == "SCRAPBOOK"
+            androidx.compose.material3.SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
+                androidx.compose.material3.SegmentedButton(
+                    selected = !scrapbook,
+                    onClick = { if (scrapbook) onLayoutMode(false) },
+                    shape = androidx.compose.material3.SegmentedButtonDefaults.itemShape(0, 2),
+                ) { Text("Flowing text") }
+                androidx.compose.material3.SegmentedButton(
+                    selected = scrapbook,
+                    onClick = { if (!scrapbook) onLayoutMode(true) },
+                    shape = androidx.compose.material3.SegmentedButtonDefaults.itemShape(1, 2),
+                ) { Text("Scrapbook") }
+            }
+            Text(
+                if (scrapbook) "Tap anywhere on the page to add a text box. Everything can be moved around."
+                else "Text flows down the page. Pictures, shapes and drawings can still go anywhere.",
+                fontSize = 13.sp,
+                color = LocalQuartzColors.current.textSecondary,
+                modifier = Modifier.padding(top = 8.dp),
+            )
 
             Label("Paper")
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {

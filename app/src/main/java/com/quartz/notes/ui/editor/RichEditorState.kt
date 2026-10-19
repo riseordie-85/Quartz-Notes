@@ -2,6 +2,7 @@ package com.quartz.notes.ui.editor
 
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -10,6 +11,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
+import com.quartz.notes.data.model.ImageData
 import com.quartz.notes.data.rich.Align
 import com.quartz.notes.data.rich.Block
 import com.quartz.notes.data.rich.BlockType
@@ -40,8 +42,15 @@ class BlockState internal constructor(
     align: Align,
     checked: Boolean,
     indent: Int,
+    image: ImageData? = null,
+    imageWidth: Float = 0.7f,
 ) {
     var type by mutableStateOf(type)
+
+    /** The picture of an in-line image block. */
+    var image by mutableStateOf(image)
+    var imageWidth by mutableFloatStateOf(imageWidth)
+    val isImage: Boolean get() = type == BlockType.IMAGE
     var align by mutableStateOf(align)
     var checked by mutableStateOf(checked)
     var indent by mutableIntStateOf(indent)
@@ -76,10 +85,12 @@ class BlockState internal constructor(
         align = align,
         checked = checked,
         indent = indent,
+        image = if (type == BlockType.IMAGE) image else null,
+        imageWidth = imageWidth,
     )
 
     companion object {
-        fun from(b: Block) = BlockState(b.id, b.type, b.text, b.spans, b.align, b.checked, b.indent)
+        fun from(b: Block) = BlockState(b.id, b.type, b.text, b.spans, b.align, b.checked, b.indent, b.image, b.imageWidth)
         fun empty(type: BlockType = BlockType.BODY, align: Align = Align.START, indent: Int = 0) =
             BlockState(newBlockId(), type, "", emptyList(), align, false, indent)
     }
@@ -116,8 +127,8 @@ class RichEditorState(doc: RichDoc) {
 
     val focusedBlock: BlockState? get() = blocks.firstOrNull { it.id == focusedId }
 
-    /** Block that toolbar actions apply to: the focused one, or the last block. */
-    private val target: BlockState get() = focusedBlock ?: blocks.last()
+    /** Block that toolbar actions apply to: the focused one, or the last text block. */
+    private val target: BlockState get() = focusedBlock ?: blocks.lastOrNull { !it.isImage } ?: blocks.last()
 
     val currentType: BlockType get() = target.type
     val currentAlign: Align get() = target.align
@@ -125,7 +136,7 @@ class RichEditorState(doc: RichDoc) {
 
     fun toDoc(): RichDoc = RichDoc(blocks.map { it.toBlock() })
 
-    fun isBlank(): Boolean = blocks.all { it.text.isBlank() }
+    fun isBlank(): Boolean = blocks.all { it.text.isBlank() && !it.isImage }
 
     private fun changed() {
         version++
@@ -153,9 +164,56 @@ class RichEditorState(doc: RichDoc) {
 
     /** Places the cursor at the end of the document. */
     fun focusEnd() {
+        if (blocks.last().isImage) {
+            // There's nowhere to type after a picture, so add a line.
+            blocks.add(BlockState.empty())
+            changed()
+        }
         val last = blocks.last()
         last.setCursor(last.text.length)
         requestFocus(last)
+    }
+
+    // ---- In-line pictures ----
+
+    /** Inserts a picture block before [index] (or at the end), with an empty line after it if needed. */
+    fun insertImage(index: Int, data: ImageData, width: Float, align: Align = Align.CENTER): String {
+        val at = index.coerceIn(0, blocks.size)
+        val block = BlockState(newBlockId(), BlockType.IMAGE, "", emptyList(), align, false, 0, data, width.coerceIn(0.25f, 1f))
+        blocks.add(at, block)
+        if (at == blocks.lastIndex) blocks.add(BlockState.empty())
+        changed()
+        return block.id
+    }
+
+    /** Removes a block (used to turn an in-line picture back into a floating one). */
+    fun removeBlock(id: String) {
+        val index = blocks.indexOfFirst { it.id == id }
+        if (index < 0) return
+        blocks.removeAt(index)
+        if (blocks.isEmpty()) blocks.add(BlockState.empty())
+        changed()
+    }
+
+    fun updateImage(id: String, data: ImageData) {
+        blocks.firstOrNull { it.id == id }?.let {
+            it.image = data
+            changed()
+        }
+    }
+
+    fun setImageWidth(id: String, width: Float) {
+        blocks.firstOrNull { it.id == id }?.let {
+            it.imageWidth = width.coerceIn(0.25f, 1f)
+            changed()
+        }
+    }
+
+    fun setBlockAlign(id: String, align: Align) {
+        blocks.firstOrNull { it.id == id }?.let {
+            it.align = align
+            changed()
+        }
     }
 
     // ---- Text input ----
@@ -313,6 +371,23 @@ class RichEditorState(doc: RichDoc) {
             return
         }
         val prev = blocks[index - 1]
+        if (prev.isImage) {
+            // Never merge text into a picture. An empty line right after a picture is removed instead
+            // (unless it's the last line, which must stay so there's somewhere to type).
+            if (currentText.isEmpty() && index < blocks.lastIndex) {
+                blocks.removeAt(index)
+                val next = blocks[index]
+                if (!next.isImage) {
+                    next.setCursor(0)
+                    focusedId = next.id
+                    requestFocus(next)
+                }
+                changed()
+            } else {
+                block.setContent(currentText, currentSpans, 0)
+            }
+            return
+        }
         val prevLength = prev.text.length
         prev.setContent(prev.text + currentText, prev.spans + SpanOps.shift(currentSpans, prevLength), prevLength)
         blocks.removeAt(index)
@@ -325,6 +400,7 @@ class RichEditorState(doc: RichDoc) {
 
     fun toggleBlockType(type: BlockType) {
         val b = target
+        if (b.isImage || type == BlockType.IMAGE) return
         b.type = if (b.type == type && type != BlockType.BODY) BlockType.BODY else type
         if (b.type != BlockType.TASK) b.checked = false
         if (focusedBlock == null) requestFocus(b)
@@ -333,6 +409,7 @@ class RichEditorState(doc: RichDoc) {
 
     fun setBlockType(type: BlockType) {
         val b = target
+        if (b.isImage || type == BlockType.IMAGE) return
         b.type = type
         if (type != BlockType.TASK) b.checked = false
         changed()

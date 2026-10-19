@@ -5,6 +5,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -32,6 +33,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.layout.LayoutCoordinates
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.unit.Dp
+import com.quartz.notes.ui.media.DecoratedImage
+import com.quartz.notes.ui.media.heightFactor
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
@@ -111,13 +118,37 @@ fun RichTextEditor(
     modifier: Modifier = Modifier,
     readOnly: Boolean = false,
     placeholder: String? = null,
+    layout: EditorLayoutHooks? = null,
 ) {
     val accent = MaterialTheme.colorScheme.primary
-    Box(modifier) {
+    BoxWithConstraints(modifier) {
+        val textWidth = maxWidth
         Column(Modifier.fillMaxWidth()) {
             for (block in state.blocks) {
                 key(block.id) {
-                    BlockRow(state, block, styles, contentColor, accent, readOnly)
+                    val insets = layout?.insets?.invoke(block.id)
+                    val measured = Modifier
+                        .padding(start = insets?.first ?: 0.dp, end = insets?.second ?: 0.dp)
+                        .then(
+                            if (layout?.onBlockBounds != null) {
+                                Modifier.onGloballyPositioned { c ->
+                                    val root = layout.root() ?: return@onGloballyPositioned
+                                    if (!c.isAttached || !root.isAttached) return@onGloballyPositioned
+                                    val top = root.localPositionOf(c, Offset.Zero).y
+                                    layout.onBlockBounds.invoke(block.id, top, top + c.size.height)
+                                }
+                            } else {
+                                Modifier
+                            },
+                        )
+                    if (block.isImage) {
+                        Box(measured) {
+                            val img = layout?.imageBlock
+                            if (img != null) img(block, textWidth) else DefaultImageBlock(block, textWidth, styles)
+                        }
+                    } else {
+                        Box(measured) { BlockRow(state, block, styles, contentColor, accent, readOnly) }
+                    }
                 }
             }
         }
@@ -129,6 +160,44 @@ fun RichTextEditor(
                 style = styles.body.copy(color = contentColor.copy(alpha = 0.38f)),
             )
         }
+    }
+}
+
+/**
+ * Extra layout features used by notebook pages: per-paragraph insets (text wrapping around
+ * pictures), reporting where each paragraph sits, and custom drawing of in-line pictures.
+ */
+class EditorLayoutHooks(
+    /** Start/end inset for a block, or null. */
+    val insets: ((blockId: String) -> Pair<Dp, Dp>?)? = null,
+    /** The coordinates block positions are reported in. */
+    val root: () -> LayoutCoordinates? = { null },
+    /** Called with a block's top and bottom, in px relative to [root]. */
+    val onBlockBounds: ((blockId: String, top: Float, bottom: Float) -> Unit)? = null,
+    /** Draws an in-line picture block, given the text column's width. */
+    val imageBlock: (@Composable (BlockState, Dp) -> Unit)? = null,
+)
+
+/** Height an in-line picture occupies, rounded up to whole ruled lines so the text below stays on the lines. */
+@Composable
+fun inlineImageSlotHeight(block: BlockState, textWidth: Dp, styles: EditorStyles): Dp {
+    val data = block.image ?: return 0.dp
+    val unit = with(LocalDensity.current) { styles.lineUnit.toDp() }
+    val h = textWidth * block.imageWidth * data.heightFactor() + 16.dp
+    val lines = kotlin.math.ceil(h / unit).toInt().coerceAtLeast(1)
+    return unit * lines
+}
+
+@Composable
+private fun DefaultImageBlock(block: BlockState, textWidth: Dp, styles: EditorStyles) {
+    val data = block.image ?: return
+    val alignment = when (block.align) {
+        Align.CENTER, Align.JUSTIFY -> Alignment.Center
+        Align.END -> Alignment.CenterEnd
+        Align.START -> Alignment.CenterStart
+    }
+    Box(Modifier.fillMaxWidth().height(inlineImageSlotHeight(block, textWidth, styles)), contentAlignment = alignment) {
+        DecoratedImage(data, textWidth * block.imageWidth)
     }
 }
 
@@ -191,7 +260,7 @@ private fun BlockRow(
 @Composable
 private fun TaskBox(
     checked: Boolean,
-    height: androidx.compose.ui.unit.Dp,
+    height: Dp,
     accent: Color,
     contentColor: Color,
     onToggle: () -> Unit,

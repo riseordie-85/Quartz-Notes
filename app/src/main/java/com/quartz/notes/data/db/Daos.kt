@@ -243,8 +243,14 @@ interface PageElementDao {
     @Update
     suspend fun update(element: PageElementEntity)
 
-    @Query("UPDATE page_elements SET x = :x, y = :y, width = :width, rotation = :rotation WHERE id = :id")
-    suspend fun updateGeometry(id: Long, x: Float, y: Float, width: Float, rotation: Float)
+    @Query("UPDATE page_elements SET x = :x, y = :y, width = :width, height = :height, rotation = :rotation WHERE id = :id")
+    suspend fun updateGeometry(id: Long, x: Float, y: Float, width: Float, height: Float, rotation: Float)
+
+    @Query("SELECT * FROM page_elements WHERE pageId = :pageId AND kind = :kind")
+    suspend fun getKind(pageId: Long, kind: String): List<PageElementEntity>
+
+    @Query("SELECT * FROM page_elements WHERE id = :id")
+    suspend fun get(id: Long): PageElementEntity?
 
     @Query("UPDATE page_elements SET data = :data WHERE id = :id")
     suspend fun updateData(id: Long, data: String)
