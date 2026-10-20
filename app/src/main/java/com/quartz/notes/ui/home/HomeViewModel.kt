@@ -35,9 +35,14 @@ data class NoteUi(
     val images: List<String> = emptyList(),
     val imageCount: Int = 0,
     val voiceCount: Int = 0,
+    val pinned: Boolean = false,
 )
 
-data class NoteGroup(val label: String, val notes: List<NoteUi>)
+/** A run of notes under one header: the pinned notes, or the notes from one day. */
+data class NoteGroup(val label: String, val notes: List<NoteUi>, val pinned: Boolean = false) {
+    /** Stable key for lazy lists (date labels never read "Pinned", but keep the two apart anyway). */
+    val key: String get() = if (pinned) "pinned" else "date-$label"
+}
 
 data class HomeState(
     val loaded: Boolean = false,
@@ -107,34 +112,60 @@ class HomeViewModel(
 
     fun sweepBlankNotes(except: Long?) = repo.sweepBlankNotes(except)
 
+    fun setPinned(id: Long, pinned: Boolean) = repo.setNotePinned(id, pinned)
+
+    /** Puts the note away in Settings → Archive (which also unpins it). */
+    fun archive(id: Long) = repo.setNoteArchived(id, true)
+
+    /** Undoes [archive], putting the pin back if the note had one. */
+    fun unarchive(id: Long, wasPinned: Boolean) {
+        repo.setNoteArchived(id, false)
+        if (wasPinned) repo.setNotePinned(id, true)
+    }
+
+    fun delete(id: Long) = repo.deleteNote(id)
+
+    /** Pinned notes first under their own header, then the rest by day (the DAO already sorts them that way). */
     private fun groupNotes(notes: List<QuickNoteEntity>, attachments: Map<Long, List<AttachmentEntity>>): List<NoteGroup> {
         if (notes.isEmpty()) return emptyList()
-        return notes
+        val (pinned, rest) = notes.partition { it.pinned }
+        val groups = mutableListOf<NoteGroup>()
+        if (pinned.isNotEmpty()) {
+            groups += NoteGroup("Pinned", pinned.map { toUi(it, attachments[it.id].orEmpty()) }, pinned = true)
+        }
+        rest
             .groupBy { it.createdAt.toLocalDate() }
-            .map { (date, list) -> NoteGroup(dateLabel(date), list.map { toUi(it, attachments[it.id].orEmpty()) }) }
+            .mapTo(groups) { (date, list) -> NoteGroup(dateLabel(date), list.map { toUi(it, attachments[it.id].orEmpty()) }) }
+        return groups
     }
 
     private fun toUi(note: QuickNoteEntity, attachments: List<AttachmentEntity>): NoteUi {
-        val lines = RichDoc.decode(note.content).previewLines()
-        val title: String
-        val preview: String
-        if (note.title.isNotBlank()) {
-            title = note.title.trim()
-            preview = lines.joinToString("\n")
-        } else {
-            title = lines.firstOrNull()?.removePrefix("• ")?.removePrefix("☐ ")?.removePrefix("☑ ") ?: ""
-            preview = lines.drop(1).joinToString("\n")
-        }
+        val (title, preview) = notePreview(note)
         val images = attachments.filter { it.kind == AttachmentKind.IMAGE.name }
         return NoteUi(
             id = note.id,
             title = title,
-            preview = preview.take(400),
+            preview = preview,
             colorKey = note.colorKey,
             createdAt = note.createdAt,
             images = images.take(3).map { it.path },
             imageCount = images.size,
             voiceCount = attachments.count { it.kind == AttachmentKind.AUDIO.name },
+            pinned = note.pinned,
         )
+    }
+}
+
+/**
+ * The title and preview text shown for a quick note in lists. Untitled notes use their first line as
+ * the title (without any bullet or checkbox mark) and the remaining lines as the preview.
+ */
+fun notePreview(note: QuickNoteEntity): Pair<String, String> {
+    val lines = RichDoc.decode(note.content).previewLines()
+    return if (note.title.isNotBlank()) {
+        note.title.trim() to lines.joinToString("\n").take(400)
+    } else {
+        val title = lines.firstOrNull()?.removePrefix("• ")?.removePrefix("☐ ")?.removePrefix("☑ ") ?: ""
+        title to lines.drop(1).joinToString("\n").take(400)
     }
 }

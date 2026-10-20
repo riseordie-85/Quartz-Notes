@@ -27,18 +27,24 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridItemSpan
 import androidx.compose.foundation.lazy.staggeredgrid.items
+import androidx.compose.foundation.lazy.staggeredgrid.rememberLazyStaggeredGridState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.PushPin as PushPinOutline
 import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material.icons.rounded.Archive
 import androidx.compose.material.icons.rounded.ArrowDropDown
+import androidx.compose.material.icons.rounded.DeleteOutline
 import androidx.compose.material.icons.rounded.GridView
 import androidx.compose.material.icons.rounded.History
 import androidx.compose.material.icons.rounded.Image
 import androidx.compose.material.icons.rounded.Mic
+import androidx.compose.material.icons.rounded.PushPin
 import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material.icons.rounded.ViewAgenda
 import androidx.compose.material3.DropdownMenu
@@ -47,6 +53,10 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -54,7 +64,9 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -72,6 +84,7 @@ import com.quartz.notes.data.db.NotebookEntity
 import com.quartz.notes.data.model.enumOrDefault
 import com.quartz.notes.data.model.Texture
 import com.quartz.notes.ui.components.ColorDot
+import com.quartz.notes.ui.components.ConfirmDialog
 import com.quartz.notes.ui.components.EmptyHint
 import com.quartz.notes.ui.components.NewNotebookCover
 import com.quartz.notes.ui.components.NotebookCover
@@ -80,7 +93,11 @@ import com.quartz.notes.ui.components.QuartzCard
 import com.quartz.notes.ui.components.QuartzPill
 import com.quartz.notes.ui.components.RecentCover
 import com.quartz.notes.ui.components.RoundActionButton
+import com.quartz.notes.ui.components.SwipeAction
+import com.quartz.notes.ui.components.SwipeReveal
+import com.quartz.notes.ui.components.SwipeRevealGroup
 import com.quartz.notes.ui.components.TextInputDialog
+import com.quartz.notes.ui.components.rememberSwipeRevealGroup
 import com.quartz.notes.ui.note.NoteEditorPane
 import com.quartz.notes.ui.notebook.NotebookEditorSheet
 import com.quartz.notes.ui.notebook.applyDraft
@@ -89,6 +106,8 @@ import com.quartz.notes.ui.theme.LocalQuartzColors
 import com.quartz.notes.ui.theme.NoteColor
 import com.quartz.notes.ui.theme.SectionTitleStyle
 import com.quartz.notes.ui.theme.contentColorFor
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.launch
 
 /** Width at which the home screen shows notes side by side with the list (tablets, unfolded phones). */
 val TwoPaneMinWidth: Dp = 600.dp
@@ -107,6 +126,9 @@ fun HomeRoute(
     var notebookSheet by remember { mutableStateOf<NotebookSheet?>(null) }
     var newShelfDialog by remember { mutableStateOf(false) }
     val previousNote = remember { mutableStateOf<Long?>(null) }
+    var pendingDelete by remember { mutableStateOf<NoteUi?>(null) }
+    val snackbar = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
 
     // Clean up empty notes left over from earlier sessions (never the one that's open).
     LaunchedEffect(Unit) { vm.sweepBlankNotes(except = selectedNote) }
@@ -134,12 +156,29 @@ fun HomeRoute(
 
         val openNote: (Long) -> Unit = { id -> if (twoPane) selectedNote = id else onOpenNote(id) }
 
+        // What the buttons behind a swiped quick note do.
+        val noteActions = NoteActions(
+            onTogglePin = { note -> vm.setPinned(note.id, !note.pinned) },
+            onArchive = { note ->
+                if (selectedNote == note.id) selectedNote = null
+                vm.archive(note.id)
+                scope.launch {
+                    snackbar.currentSnackbarData?.dismiss()
+                    val result = snackbar.showSnackbar("Note archived", actionLabel = "Undo", duration = SnackbarDuration.Short)
+                    if (result == SnackbarResult.ActionPerformed) vm.unarchive(note.id, wasPinned = note.pinned)
+                }
+            },
+            onDelete = { note -> pendingDelete = note },
+        )
+
         val content: @Composable (Modifier) -> Unit = { modifier ->
             HomeContent(
                 state = state,
                 selectedNoteId = if (twoPane) selectedNote else null,
                 modifier = modifier,
                 onOpenNote = openNote,
+                noteActions = noteActions,
+                snackbar = snackbar,
                 onNewNote = { vm.createNote(openNote) },
                 onOpenNotebook = onOpenNotebook,
                 onEditNotebook = { notebookSheet = NotebookSheet(it) },
@@ -206,6 +245,19 @@ fun HomeRoute(
             onDelete = sheet.notebook?.let { nb -> { vm.deleteNotebook(nb); notebookSheet = null } },
         )
     }
+    pendingDelete?.let { note ->
+        ConfirmDialog(
+            title = "Delete note?",
+            message = if (note.title.isNotBlank()) "\"${note.title}\" will be permanently deleted." else "This note will be permanently deleted.",
+            confirmLabel = "Delete",
+            onDismiss = { pendingDelete = null },
+            onConfirm = {
+                pendingDelete = null
+                if (selectedNote == note.id) selectedNote = null
+                vm.delete(note.id)
+            },
+        )
+    }
     if (newShelfDialog) {
         TextInputDialog(
             title = "New shelf",
@@ -221,12 +273,21 @@ fun HomeRoute(
 
 private data class NotebookSheet(val notebook: NotebookEntity?)
 
+/** Handlers for the pin / archive / delete buttons uncovered by swiping a quick note. */
+private class NoteActions(
+    val onTogglePin: (NoteUi) -> Unit,
+    val onArchive: (NoteUi) -> Unit,
+    val onDelete: (NoteUi) -> Unit,
+)
+
 @Composable
 private fun HomeContent(
     state: HomeState,
     selectedNoteId: Long?,
     modifier: Modifier,
     onOpenNote: (Long) -> Unit,
+    noteActions: NoteActions,
+    snackbar: SnackbarHostState,
     onNewNote: () -> Unit,
     onOpenNotebook: (Long) -> Unit,
     onEditNotebook: (NotebookEntity) -> Unit,
@@ -238,6 +299,16 @@ private fun HomeContent(
     onSearch: () -> Unit,
     onSettings: () -> Unit,
 ) {
+    // At most one quick note is swiped open at a time; scrolling the list closes it.
+    val swipeGroup = rememberSwipeRevealGroup()
+    val listState = rememberLazyListState()
+    val gridState = rememberLazyStaggeredGridState()
+    LaunchedEffect(listState, gridState) {
+        snapshotFlow { listState.isScrollInProgress || gridState.isScrollInProgress }
+            .filter { it }
+            .collect { swipeGroup.closeAll() }
+    }
+
     val top = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
     val bottom = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
     val listPadding = PaddingValues(start = 16.dp, end = 16.dp, top = top + 12.dp, bottom = bottom + 110.dp)
@@ -262,6 +333,7 @@ private fun HomeContent(
 
         if (state.grid) {
             LazyVerticalStaggeredGrid(
+                state = gridState,
                 columns = StaggeredGridCells.Adaptive(150.dp),
                 contentPadding = listPadding,
                 verticalItemSpacing = 12.dp,
@@ -273,22 +345,24 @@ private fun HomeContent(
                     item(key = "empty", span = StaggeredGridItemSpan.FullLine) { EmptyHint("No quick notes yet. Tap + to jot one down.") }
                 }
                 state.groups.forEach { group ->
-                    item(key = "date-${group.label}", span = StaggeredGridItemSpan.FullLine) { DateHeader(group.label) }
+                    item(key = group.key, span = StaggeredGridItemSpan.FullLine) { DateHeader(group.label) }
                     items(group.notes, key = { it.id }) { note ->
-                        NoteGridCard(note, selected = note.id == selectedNoteId, onClick = { onOpenNote(note.id) })
+                        SwipeableNote(note, swipeGroup, noteActions, inline = false) {
+                            NoteGridCard(note, selected = note.id == selectedNoteId, onClick = { onOpenNote(note.id) })
+                        }
                     }
                 }
             }
         } else {
-            LazyColumn(contentPadding = listPadding, modifier = Modifier.fillMaxSize()) {
+            LazyColumn(state = listState, contentPadding = listPadding, modifier = Modifier.fillMaxSize()) {
                 item(key = "header") { header() }
                 if (state.loaded && state.groups.isEmpty()) {
                     item(key = "empty") { EmptyHint("No quick notes yet. Tap + to jot one down.") }
                 }
                 state.groups.forEach { group ->
-                    item(key = "date-${group.label}") { DateHeader(group.label) }
-                    item(key = "group-${group.label}") {
-                        NoteGroupCard(group, selectedNoteId, onOpenNote)
+                    item(key = group.key) { DateHeader(group.label) }
+                    item(key = "group-${group.key}") {
+                        NoteGroupCard(group, selectedNoteId, onOpenNote, swipeGroup, noteActions)
                     }
                 }
             }
@@ -327,6 +401,14 @@ private fun HomeContent(
                 Icon(Icons.Rounded.Add, contentDescription = "New quick note", modifier = Modifier.size(34.dp), tint = MaterialTheme.colorScheme.onSurface)
             }
         }
+        // Sits just above the search bar.
+        SnackbarHost(
+            snackbar,
+            Modifier
+                .align(Alignment.BottomCenter)
+                .navigationBarsPadding()
+                .padding(bottom = 84.dp),
+        )
     }
 }
 
@@ -485,12 +567,64 @@ private fun DateHeader(label: String) {
     )
 }
 
+/** Amber for pins, blue for the archive; delete uses the theme's error color. */
+private val PinActionColor = Color(0xFFFFC94D)
+private val OnPinActionColor = Color(0xFF3D2C00)
+private val ArchiveActionColor = Color(0xFF1E6FE8)
+
+/**
+ * A quick note that swipes right to pin / unpin it and left to archive or delete it.
+ * [inline] notes are rows inside a shared group card, so their buttons sit inset within that card.
+ */
 @Composable
-private fun NoteGroupCard(group: NoteGroup, selectedNoteId: Long?, onOpenNote: (Long) -> Unit) {
+private fun SwipeableNote(
+    note: NoteUi,
+    group: SwipeRevealGroup,
+    actions: NoteActions,
+    inline: Boolean,
+    content: @Composable () -> Unit,
+) {
+    val error = MaterialTheme.colorScheme.error
+    val onError = MaterialTheme.colorScheme.onError
+    val pin = SwipeAction(
+        label = if (note.pinned) "Unpin" else "Pin",
+        icon = if (note.pinned) Icons.Outlined.PushPinOutline else Icons.Rounded.PushPin,
+        color = PinActionColor,
+        contentColor = OnPinActionColor,
+        onClick = { actions.onTogglePin(note) },
+    )
+    val archive = SwipeAction("Archive", Icons.Rounded.Archive, ArchiveActionColor, Color.White) { actions.onArchive(note) }
+    val delete = SwipeAction("Delete", Icons.Rounded.DeleteOutline, error, onError) { actions.onDelete(note) }
+    SwipeReveal(
+        key = note.id,
+        group = group,
+        startActions = listOf(pin),
+        endActions = listOf(archive, delete),
+        // Rows nest inside the 22dp group card, so inset buttons get a matching smaller radius.
+        corner = if (inline) 16.dp else 18.dp,
+        inset = if (inline) 6.dp else 0.dp,
+        spacing = if (inline) 6.dp else 8.dp,
+        content = content,
+    )
+}
+
+@Composable
+private fun NoteGroupCard(
+    group: NoteGroup,
+    selectedNoteId: Long?,
+    onOpenNote: (Long) -> Unit,
+    swipeGroup: SwipeRevealGroup,
+    actions: NoteActions,
+) {
     QuartzCard(Modifier.fillMaxWidth()) {
         group.notes.forEachIndexed { index, note ->
             if (index > 0) HorizontalDivider(Modifier.padding(horizontal = 22.dp), color = LocalQuartzColors.current.divider)
-            NoteRow(note, selected = note.id == selectedNoteId, onClick = { onOpenNote(note.id) })
+            // Keyed so each row keeps its own swipe state when notes move between groups.
+            androidx.compose.runtime.key(note.id) {
+                SwipeableNote(note, swipeGroup, actions, inline = true) {
+                    NoteRow(note, selected = note.id == selectedNoteId, onClick = { onOpenNote(note.id) })
+                }
+            }
         }
     }
 }
@@ -501,6 +635,8 @@ private fun NoteRow(note: NoteUi, selected: Boolean, onClick: () -> Unit) {
     Row(
         Modifier
             .fillMaxWidth()
+            // Opaque, so the swipe buttons stay hidden until the row slides away from them.
+            .background(LocalQuartzColors.current.card)
             .background(if (selected) MaterialTheme.colorScheme.primary.copy(alpha = 0.08f) else Color.Transparent)
             .clickable(onClick = onClick)
             .padding(horizontal = 22.dp, vertical = 14.dp),
@@ -533,6 +669,10 @@ private fun NoteRow(note: NoteUi, selected: Boolean, onClick: () -> Unit) {
             Spacer(Modifier.width(6.dp))
             Icon(Icons.Rounded.Mic, contentDescription = "Has voice notes", tint = LocalQuartzColors.current.textSecondary, modifier = Modifier.size(20.dp))
         }
+        if (note.pinned) {
+            Spacer(Modifier.width(8.dp))
+            Icon(Icons.Rounded.PushPin, contentDescription = "Pinned", tint = LocalQuartzColors.current.textSecondary, modifier = Modifier.size(18.dp))
+        }
         if (color != NoteColor.DEFAULT) {
             Spacer(Modifier.width(12.dp))
             ColorDot(color.dot)
@@ -553,7 +693,18 @@ private fun NoteGridCard(note: NoteUi, selected: Boolean, onClick: () -> Unit) {
         border = if (selected) androidx.compose.foundation.BorderStroke(2.dp, MaterialTheme.colorScheme.primary) else null,
         modifier = Modifier.fillMaxWidth(),
     ) {
-        Column(Modifier.padding(16.dp)) {
+        if (note.pinned) {
+            Box(Modifier.fillMaxWidth()) {
+                Icon(
+                    Icons.Rounded.PushPin,
+                    contentDescription = "Pinned",
+                    tint = fg.copy(alpha = 0.55f),
+                    modifier = Modifier.align(Alignment.TopEnd).padding(top = 10.dp, end = 10.dp).size(16.dp),
+                )
+            }
+        }
+        // Leaves room on the right for the pin mark.
+        Column(Modifier.padding(start = 16.dp, top = 16.dp, bottom = 16.dp, end = if (note.pinned) 28.dp else 16.dp)) {
             if (note.title.isNotBlank()) {
                 Text(note.title, fontSize = 17.sp, fontWeight = FontWeight.Bold, color = fg, maxLines = 3, overflow = TextOverflow.Ellipsis)
             }

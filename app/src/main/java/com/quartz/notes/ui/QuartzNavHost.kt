@@ -98,7 +98,7 @@ fun QuartzNavHost() {
             )
         }
         composable(Routes.SETTINGS) {
-            SettingsScreen(onBack = { nav.back() })
+            SettingsScreen(onBack = { nav.back() }, onOpenNote = { nav.navigate(Routes.note(it)) })
         }
     }
 }
