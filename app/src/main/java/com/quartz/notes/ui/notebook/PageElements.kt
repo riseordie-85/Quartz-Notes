@@ -66,7 +66,19 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.input.pointer.positionChange
 import androidx.compose.ui.input.pointer.positionChanged
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.material.icons.rounded.GraphicEq
+import androidx.compose.material.icons.rounded.Refresh
+import kotlin.math.abs
+import kotlin.math.atan2
+import kotlin.math.cos
+import kotlin.math.sin
 import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
@@ -105,7 +117,6 @@ import kotlin.math.roundToInt
 /** Fixed height of a voice note player on a page. */
 val VoiceElementHeight: Dp = 56.dp
 private val GripWidth: Dp = 30.dp
-private val TextGripHeight: Dp = 24.dp
 
 /** Where to put a picture relative to the text. */
 enum class PictureLayout { FLOAT, WRAP, INLINE }
@@ -118,6 +129,8 @@ enum class PictureLayout { FLOAT, WRAP, INLINE }
 class PageCanvasState {
     var selectedId by mutableStateOf<Long?>(null)
     var editingShapeId by mutableStateOf<Long?>(null)
+    /** The text box being typed in. */
+    var editingTextId by mutableStateOf<Long?>(null)
     var selectedInlineBlock by mutableStateOf<String?>(null)
     var connectFrom by mutableStateOf<Long?>(null)
     var pendingFocusTextBox by mutableStateOf<Long?>(null)
@@ -151,6 +164,7 @@ class PageCanvasState {
         toolbarRect = null
         selectedId = null
         editingShapeId = null
+        editingTextId = null
         selectedInlineBlock = null
     }
 }
@@ -196,6 +210,8 @@ fun BoxScope.PageElementLayer(
     pageWidth: Dp,
     ink: Color,
     tool: PageTool,
+    /** Page is locked: items stay where they are. */
+    locked: Boolean,
     allowTextLayout: Boolean,
     canvas: PageCanvasState,
     styles: EditorStyles,
@@ -255,6 +271,7 @@ fun BoxScope.PageElementLayer(
                 pageWidth = pageWidth,
                 ink = ink,
                 tool = tool,
+                locked = locked,
                 canvas = canvas,
                 styles = styles,
                 textEditor = textEditor,
@@ -265,10 +282,10 @@ fun BoxScope.PageElementLayer(
 
     // Handles for the selected arrow's two ends.
     val selectedElement = elements.firstOrNull { it.id == canvas.selectedId }
-    if (selectedElement != null && selectedElement.kind == ElementKind.ARROW && tool == PageTool.NONE) {
+    if (selectedElement != null && selectedElement.kind == ElementKind.ARROW && tool == PageTool.NONE && !locked) {
         ArrowHandles(selectedElement, widthPx, canvas, actions)
     }
-    if (selectedElement != null && tool == PageTool.NONE) {
+    if (selectedElement != null && tool == PageTool.NONE && !locked) {
         ElementToolbar(selectedElement, pageWidth, canvas, allowTextLayout, actions)
     }
 }
@@ -283,6 +300,7 @@ private fun ElementItem(
     pageWidth: Dp,
     ink: Color,
     tool: PageTool,
+    locked: Boolean,
     canvas: PageCanvasState,
     styles: EditorStyles,
     textEditor: (PageElementEntity) -> RichEditorState,
@@ -298,6 +316,9 @@ private fun ElementItem(
     val selected = canvas.selectedId == element.id
     val connecting = tool == PageTool.CONNECT && canvas.connectFrom == element.id
     val accent = MaterialTheme.colorScheme.primary
+    // Laid-out size (before rotation), and the height a text box's text needs.
+    var sizePx by remember(element.id) { mutableStateOf(IntSize.Zero) }
+    var textHeightPx by remember(element.id) { mutableIntStateOf(0) }
 
     val imageData = remember(element.data) { if (element.kind == ElementKind.IMAGE) decodeImageData(element.data) else null }
     val voiceData = remember(element.data) { if (element.kind == ElementKind.VOICE) decodeVoiceData(element.data) else null }
@@ -305,7 +326,10 @@ private fun ElementItem(
     val heightFactor by rememberUpdatedState(imageData?.heightFactor())
     val latestSelected by rememberUpdatedState(selected)
     val latestImage by rememberUpdatedState(imageData)
+    val latestLocked by rememberUpdatedState(locked)
     val kind = element.kind
+    val rotates = kind == ElementKind.IMAGE || kind == ElementKind.TEXT
+    val stalkPx = with(density) { RotateStalk.toPx() }
 
     fun commit() {
         val moved = live
@@ -317,10 +341,16 @@ private fun ElementItem(
         }
     }
 
+    fun startTextEditing() {
+        canvas.selectedId = if (latestLocked) null else element.id
+        canvas.editingTextId = element.id
+    }
+
     Box(
         Modifier
             .offset { IntOffset((live.x * widthPx).roundToInt(), (live.y * widthPx).roundToInt()) }
             .onGloballyPositioned { c ->
+                if (c.size != sizePx) sizePx = c.size
                 val root = canvas.contentCoords ?: return@onGloballyPositioned
                 if (!c.isAttached || !root.isAttached) return@onGloballyPositioned
                 val topLeft = root.localPositionOf(c, Offset.Zero)
@@ -330,23 +360,33 @@ private fun ElementItem(
             .pointerInput(element.id, kind) {
                 detectTapGestures(
                     onTap = {
-                        when (kind) {
-                            // Pictures open full size on tap; long-press to move or edit them.
-                            ElementKind.IMAGE -> latestImage?.let(actions.onView)
-                            ElementKind.SHAPE -> if (latestSelected) canvas.editingShapeId = element.id else actions.onSelect(element.id)
-                            else -> actions.onSelect(element.id)
+                        if (latestLocked) {
+                            // Locked page: nothing moves, but pictures still open and text can still be typed.
+                            when (kind) {
+                                ElementKind.IMAGE -> latestImage?.let(actions.onView)
+                                ElementKind.TEXT -> startTextEditing()
+                            }
+                        } else if (kind == ElementKind.TEXT && latestSelected) {
+                            // Tapping a selected text box starts typing in it.
+                            startTextEditing()
+                        } else {
+                            actions.onSelect(element.id)
                         }
                     },
                     onDoubleTap = if (kind == ElementKind.SHAPE) {
-                        { actions.onSelect(element.id); canvas.editingShapeId = element.id }
+                        {
+                            if (!latestLocked) {
+                                actions.onSelect(element.id)
+                                canvas.editingShapeId = element.id
+                            }
+                        }
                     } else {
                         null
                     },
-                    onLongPress = { actions.onSelect(element.id) },
                 )
             }
             .then(
-                if (selected && tool == PageTool.NONE && canvas.editingShapeId != element.id) {
+                if (selected && !locked && tool == PageTool.NONE && canvas.editingShapeId != element.id) {
                     Modifier.pointerInput(element.id, widthPx) {
                         // Move / pinch / twist. Saves once, when the last finger lifts.
                         awaitEachGesture {
@@ -374,7 +414,18 @@ private fun ElementItem(
                     Modifier
                 },
             )
-            .graphicsLayer { rotationZ = if (kind == ElementKind.IMAGE) live.rotation else 0f },
+            .graphicsLayer { rotationZ = if (rotates) live.rotation else 0f }
+            .then(
+                if (kind == ElementKind.TEXT && selected && !locked && tool == PageTool.NONE) {
+                    // The stem joining the box to its rotate handle (turns with the box).
+                    Modifier.drawWithContent {
+                        drawContent()
+                        drawLine(accent, Offset(size.width / 2, 0f), Offset(size.width / 2, -stalkPx), strokeWidth = 1.5.dp.toPx())
+                    }
+                } else {
+                    Modifier
+                },
+            ),
     ) {
         val outline = when {
             connecting -> Modifier.border(3.dp, accent, RoundedCornerShape(6.dp))
@@ -398,7 +449,11 @@ private fun ElementItem(
                 ) {
                     // Grab handle: the player's own buttons take taps, so selecting starts here.
                     Box(Modifier.width(GripWidth).fillMaxHeight(), contentAlignment = Alignment.Center) {
-                        Icon(Icons.Rounded.DragIndicator, contentDescription = "Move voice note", tint = accent)
+                        Icon(
+                            if (locked) Icons.Rounded.GraphicEq else Icons.Rounded.DragIndicator,
+                            contentDescription = if (locked) null else "Move voice note",
+                            tint = accent,
+                        )
                     }
                     VoicePlayer(voiceData.path, voiceData.durationMs, modifier = Modifier.width(w))
                 }
@@ -416,7 +471,7 @@ private fun ElementItem(
                     onText = { actions.onShapeText(element, shapeData, it) },
                     onDoneEditing = { if (canvas.editingShapeId == element.id) canvas.editingShapeId = null },
                 )
-                if (selected) {
+                if (selected && !locked) {
                     ResizeHandle(
                         Modifier.align(Alignment.BottomEnd),
                         onStart = { gesturing = true },
@@ -438,37 +493,196 @@ private fun ElementItem(
                     element = element,
                     state = state,
                     width = pageWidth * live.width,
+                    minHeight = pageWidth * live.height,
                     ink = ink,
                     styles = styles,
-                    selected = selected,
+                    framed = (selected && !locked) || connecting,
+                    editing = canvas.editingTextId == element.id,
                     canvas = canvas,
-                    outline = outline,
                     actions = actions,
-                    onGripDrag = { drag ->
-                        gesturing = true
-                        live = live.copy(
-                            x = (live.x + drag.x / widthPx).coerceIn(-live.width * 0.8f, 1f - live.width * 0.2f),
-                            y = (live.y + drag.y / widthPx).coerceAtLeast(0f),
-                        )
-                    },
-                    onGripEnd = {
-                        gesturing = false
-                        commit()
-                    },
-                    onResizeStart = { gesturing = true },
-                    onResizeEnd = {
-                        gesturing = false
-                        commit()
-                    },
-                    onResize = { drag -> live = live.copy(width = (live.width + drag.x / widthPx).coerceIn(0.2f, 1f)) },
+                    onTextHeight = { textHeightPx = it },
                 )
             }
         }
     }
 
+    // A selected text box gets corner handles (resize) and a rotate handle above it.
+    if (kind == ElementKind.TEXT && selected && !locked && tool == PageTool.NONE && sizePx != IntSize.Zero) {
+        TextBoxHandles(
+            live = live,
+            boxHeightPx = sizePx.height.toFloat(),
+            textHeightPx = textHeightPx.toFloat(),
+            widthPx = widthPx,
+            stalkPx = stalkPx,
+            onStart = { gesturing = true },
+            onChange = { live = it },
+            onEnd = {
+                gesturing = false
+                commit()
+            },
+        )
+    }
 }
 
-/** Applies a move / pinch / twist to an element. Only pictures rotate. */
+/** Length of the stem between a text box and its rotate handle. */
+private val RotateStalk: Dp = 28.dp
+
+private fun rotateBy(v: Offset, degrees: Float): Offset {
+    val r = Math.toRadians(degrees.toDouble())
+    val c = cos(r).toFloat()
+    val s = sin(r).toFloat()
+    return Offset(v.x * c - v.y * s, v.x * s + v.y * c)
+}
+
+/**
+ * Square handles on a text box's four corners and a round rotate handle above its top edge.
+ * Positions are in the page's own space, worked out from the box's (possibly rotated) geometry.
+ */
+@Composable
+private fun TextBoxHandles(
+    live: PageElementEntity,
+    boxHeightPx: Float,
+    textHeightPx: Float,
+    widthPx: Float,
+    stalkPx: Float,
+    onStart: () -> Unit,
+    onChange: (PageElementEntity) -> Unit,
+    onEnd: () -> Unit,
+) {
+    val accent = MaterialTheme.colorScheme.primary
+    val density = LocalDensity.current
+    val minWidthPx = with(density) { 70.dp.toPx() }
+    val latestLive by rememberUpdatedState(live)
+    val latestBoxHeight by rememberUpdatedState(boxHeightPx)
+    val latestTextHeight by rememberUpdatedState(textHeightPx)
+    val start by rememberUpdatedState(onStart)
+    val change by rememberUpdatedState(onChange)
+    val end by rememberUpdatedState(onEnd)
+
+    val w = live.width * widthPx
+    val h = boxHeightPx
+    val center = Offset(live.x * widthPx + w / 2, live.y * widthPx + h / 2)
+
+    @Composable
+    fun Handle(at: Offset, target: Dp, gesture: suspend androidx.compose.ui.input.pointer.PointerInputScope.() -> Unit, content: @Composable BoxScope.() -> Unit) {
+        val half = with(density) { target.toPx() } / 2
+        Box(
+            Modifier
+                .offset { IntOffset((at.x - half).roundToInt(), (at.y - half).roundToInt()) }
+                .size(target)
+                .pointerInput(widthPx) { gesture() },
+            contentAlignment = Alignment.Center,
+            content = content,
+        )
+    }
+
+    // Corners: (sx, sy) says which side of the box each one is on.
+    for ((sx, sy) in listOf(-1f to -1f, 1f to -1f, -1f to 1f, 1f to 1f)) {
+        val at = center + rotateBy(Offset(sx * w / 2, sy * h / 2), live.rotation)
+        Handle(
+            at = at,
+            target = 36.dp,
+            gesture = {
+                awaitEachGesture {
+                    val down = awaitFirstDown()
+                    down.consume()
+                    start()
+                    var cur = latestLive
+                    var curH = latestBoxHeight
+                    try {
+                        while (true) {
+                            val event = awaitPointerEvent()
+                            val c = event.changes.firstOrNull { it.id == down.id } ?: break
+                            if (!c.pressed) break
+                            val delta = c.positionChange()
+                            c.consume()
+                            if (delta == Offset.Zero) continue
+                            // The drag in the box's own (unrotated) directions.
+                            val d = rotateBy(delta, -cur.rotation)
+                            val oldW = cur.width * widthPx
+                            val newW = (oldW + sx * d.x).coerceIn(minWidthPx, widthPx)
+                            val newH = (curH + sy * d.y).coerceAtLeast(latestTextHeight)
+                            // Keep the opposite corner where it is.
+                            val oldCenter = Offset(cur.x * widthPx + oldW / 2, cur.y * widthPx + curH / 2)
+                            val c2 = oldCenter + rotateBy(Offset(sx * (newW - oldW) / 2, sy * (newH - curH) / 2), cur.rotation)
+                            cur = cur.copy(
+                                x = (c2.x - newW / 2) / widthPx,
+                                y = ((c2.y - newH / 2) / widthPx).coerceAtLeast(0f),
+                                width = newW / widthPx,
+                                height = newH / widthPx,
+                            )
+                            curH = newH
+                            change(cur)
+                        }
+                    } finally {
+                        end()
+                    }
+                }
+            },
+        ) {
+            Box(
+                Modifier
+                    .size(12.dp)
+                    .background(Color.White, RoundedCornerShape(2.dp))
+                    .border(2.dp, accent, RoundedCornerShape(2.dp)),
+            )
+        }
+    }
+
+    // Rotate handle at the top center, at the end of the stem.
+    val rotateAt = center + rotateBy(Offset(0f, -(h / 2 + stalkPx)), live.rotation)
+    Handle(
+        at = rotateAt,
+        target = 40.dp,
+        gesture = {
+            awaitEachGesture {
+                val down = awaitFirstDown()
+                down.consume()
+                start()
+                val cur = latestLive
+                val curW = cur.width * widthPx
+                val curH = latestBoxHeight
+                val pivot = Offset(cur.x * widthPx + curW / 2, cur.y * widthPx + curH / 2)
+                val handleAt = pivot + rotateBy(Offset(0f, -(curH / 2 + stalkPx)), cur.rotation)
+                val half = 20.dp.toPx()
+                // Track the finger in page space by adding up its movement.
+                var finger = handleAt + (down.position - Offset(half, half))
+                val startAngle = atan2(finger.y - pivot.y, finger.x - pivot.x)
+                val startRotation = cur.rotation
+                try {
+                    while (true) {
+                        val event = awaitPointerEvent()
+                        val c = event.changes.firstOrNull { it.id == down.id } ?: break
+                        if (!c.pressed) break
+                        finger += c.positionChange()
+                        c.consume()
+                        val angle = atan2(finger.y - pivot.y, finger.x - pivot.x)
+                        var deg = startRotation + Math.toDegrees((angle - startAngle).toDouble()).toFloat()
+                        deg = ((deg % 360f) + 540f) % 360f - 180f
+                        // Snap to straight and right angles.
+                        val nearest = (deg / 90f).roundToInt() * 90f
+                        if (abs(deg - nearest) < 5f) deg = nearest
+                        change(cur.copy(rotation = deg))
+                    }
+                } finally {
+                    end()
+                }
+            }
+        },
+    ) {
+        Box(
+            Modifier
+                .size(28.dp)
+                .background(Color.White, CircleShape)
+                .border(2.dp, accent, CircleShape),
+            contentAlignment = Alignment.Center,
+        ) {
+            Icon(Icons.Rounded.Refresh, contentDescription = "Rotate", tint = accent, modifier = Modifier.size(17.dp))
+        }
+    }
+}
+
+/** Applies a move / pinch / twist to an element. Only pictures twist. */
 private fun transformed(
     cur: PageElementEntity,
     kind: String,
@@ -494,7 +708,12 @@ private fun transformed(
         y = (cur.y + dy + pan.y / widthPx).coerceAtLeast(0f),
         width = newWidth,
         height = newHeight,
-        rotation = if (kind == ElementKind.IMAGE) (cur.rotation + rotation) % 360f else 0f,
+        rotation = when (kind) {
+            ElementKind.IMAGE -> (cur.rotation + rotation) % 360f
+            // Text boxes turn with their rotate handle, not with two fingers.
+            ElementKind.TEXT -> cur.rotation
+            else -> 0f
+        },
     )
 }
 
@@ -563,23 +782,20 @@ private fun TextBoxItem(
     element: PageElementEntity,
     state: RichEditorState,
     width: Dp,
+    minHeight: Dp,
     ink: Color,
     styles: EditorStyles,
-    selected: Boolean,
+    /** Show the bounding box (selected, or picked for a connector). */
+    framed: Boolean,
+    /** Typing in it: the text takes taps and shows a cursor. */
+    editing: Boolean,
     canvas: PageCanvasState,
-    outline: Modifier,
     actions: ElementActions,
-    onGripDrag: (Offset) -> Unit,
-    onGripEnd: () -> Unit,
-    onResizeStart: () -> Unit,
-    onResizeEnd: () -> Unit,
-    onResize: (Offset) -> Unit,
+    onTextHeight: (Int) -> Unit,
 ) {
     var focused by remember { mutableStateOf(false) }
     val accent = MaterialTheme.colorScheme.primary
     val latestActions by rememberUpdatedState(actions)
-    val latestGripDrag by rememberUpdatedState(onGripDrag)
-    val latestGripEnd by rememberUpdatedState(onGripEnd)
 
     // Save typing shortly after it stops.
     LaunchedEffect(state) {
@@ -589,81 +805,50 @@ private fun TextBoxItem(
     androidx.compose.runtime.DisposableEffect(state) {
         onDispose { latestActions.onTextChanged(element) }
     }
-    // A brand-new box gets the cursor right away.
+    // A brand-new box is selected and ready for typing.
     LaunchedEffect(canvas.pendingFocusTextBox) {
         if (canvas.pendingFocusTextBox == element.id) {
             canvas.pendingFocusTextBox = null
-            state.focusEnd()
+            canvas.selectedId = element.id
+            canvas.editingTextId = element.id
         }
     }
+    // Starting to type puts the cursor at the end of the text.
+    LaunchedEffect(editing) {
+        if (editing && !focused) state.focusEnd()
+    }
 
-    val active = focused || selected
-    Column(
+    Box(
         Modifier
             .width(width)
+            .heightIn(min = minHeight)
             .then(
-                if (active) {
-                    Modifier.border(1.5.dp, accent.copy(alpha = if (selected) 1f else 0.5f), RoundedCornerShape(8.dp))
-                } else {
-                    outline
+                when {
+                    framed -> Modifier.border(1.5.dp, accent)
+                    editing -> Modifier.border(1.dp, accent.copy(alpha = 0.35f))
+                    else -> Modifier
                 },
             )
             .onFocusChanged {
                 if (it.hasFocus != focused) {
                     focused = it.hasFocus
                     latestActions.onTextFocus(element, state, it.hasFocus)
+                    // Typing ends when the cursor leaves the box.
+                    if (!it.hasFocus && canvas.editingTextId == element.id) canvas.editingTextId = null
                 }
             },
     ) {
-        if (active) {
-            // Grip strip: drag to move, tap to select (for the toolbar).
-            Box(
-                Modifier
-                    .fillMaxWidth()
-                    .height(TextGripHeight)
-                    .background(accent.copy(alpha = 0.08f), RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp))
-                    .pointerInput(element.id) {
-                        // Tap selects the box (for its toolbar); drag moves it. Claims the touch right away
-                        // so the box's own move gesture doesn't compete.
-                        awaitEachGesture {
-                            val down = awaitFirstDown()
-                            down.consume()
-                            var dragging = false
-                            var last = down.position
-                            while (true) {
-                                val event = awaitPointerEvent()
-                                val c = event.changes.firstOrNull { it.id == down.id } ?: break
-                                if (!c.pressed) break
-                                if (!dragging && (c.position - down.position).getDistance() > viewConfiguration.touchSlop) {
-                                    dragging = true
-                                    last = c.position
-                                }
-                                if (dragging) {
-                                    latestGripDrag(c.position - last)
-                                    last = c.position
-                                }
-                                c.consume()
-                            }
-                            if (dragging) latestGripEnd() else latestActions.onSelect(element.id)
-                        }
-                    },
-                contentAlignment = Alignment.Center,
-            ) {
-                Icon(Icons.Rounded.DragIndicator, contentDescription = "Move text box", tint = accent, modifier = Modifier.size(18.dp).graphicsLayer { rotationZ = 90f })
-            }
-        }
-        Box {
-            RichTextEditor(
-                state = state,
-                styles = styles,
-                contentColor = ink,
-                placeholder = "Type here",
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp, vertical = 4.dp),
-            )
-            if (selected) {
-                ResizeHandle(Modifier.align(Alignment.BottomEnd), onStart = onResizeStart, onEnd = onResizeEnd, onDrag = onResize)
-            }
-        }
+        RichTextEditor(
+            state = state,
+            styles = styles,
+            contentColor = ink,
+            placeholder = "Type here",
+            enabled = editing,
+            modifier = Modifier
+                .fillMaxWidth()
+                .onSizeChanged { onTextHeight(it.height) }
+                .padding(horizontal = 8.dp, vertical = 4.dp),
+        )
     }
 }
 
@@ -688,14 +873,13 @@ private fun ResizeHandle(modifier: Modifier, onStart: () -> Unit, onEnd: () -> U
                     val down = awaitFirstDown()
                     down.consume()
                     start()
-                    var last = down.position
                     try {
                         while (true) {
                             val event = awaitPointerEvent()
                             val c = event.changes.firstOrNull { it.id == down.id } ?: break
                             if (!c.pressed) break
-                            val delta = c.position - last
-                            last = c.position
+                            // Finger movement (the handle itself moves as the item grows).
+                            val delta = c.positionChange()
                             c.consume()
                             if (delta != Offset.Zero) drag(delta)
                         }
@@ -786,7 +970,12 @@ private fun ElementToolbar(
     }
     val barHeightPx = with(density) { 58.dp.toPx() }
     val barWidthPx = with(density) { 300.dp.toPx() }
-    val y = if (rect.top > barHeightPx) rect.top - barHeightPx else rect.bottom + with(density) { 8.dp.toPx() }
+    val y = when {
+        // A text box's rotate handle sits above it, so its toolbar goes underneath.
+        element.kind == ElementKind.TEXT -> rect.bottom + with(density) { 22.dp.toPx() }
+        rect.top > barHeightPx -> rect.top - barHeightPx
+        else -> rect.bottom + with(density) { 8.dp.toPx() }
+    }
     val x = rect.left.coerceIn(0f, (widthPx - barWidthPx).coerceAtLeast(0f))
     var layoutMenu by remember { mutableStateOf(false) }
 
@@ -838,6 +1027,9 @@ private fun ElementToolbar(
                             )
                         }
                     }
+                }
+                ElementKind.TEXT -> {
+                    IconButton(onClick = { canvas.editingTextId = element.id }) { Icon(Icons.Rounded.Edit, contentDescription = "Type") }
                 }
                 ElementKind.SHAPE -> {
                     IconButton(onClick = { canvas.editingShapeId = element.id }) { Icon(Icons.Rounded.Edit, contentDescription = "Edit text") }

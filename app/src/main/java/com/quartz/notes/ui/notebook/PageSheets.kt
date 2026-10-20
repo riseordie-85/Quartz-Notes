@@ -113,7 +113,7 @@ fun PageStyleSheet(
                 ) { Text("Scrapbook") }
             }
             Text(
-                if (scrapbook) "Tap anywhere on the page to add a text box. Everything can be moved around."
+                if (scrapbook) "Add text boxes with the T button. Everything can be moved, resized and turned."
                 else "Text flows down the page. Pictures, shapes and drawings can still go anywhere.",
                 fontSize = 13.sp,
                 color = LocalQuartzColors.current.textSecondary,

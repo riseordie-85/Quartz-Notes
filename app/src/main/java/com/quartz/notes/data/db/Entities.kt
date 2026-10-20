@@ -74,6 +74,10 @@ data class PageEntity(
     val plainText: String = "",
     val createdAt: Long = System.currentTimeMillis(),
     val updatedAt: Long = System.currentTimeMillis(),
+    /** Items on the page are frozen in place. */
+    val locked: Boolean = false,
+    /** Scrapbook page that spans both sides of an open spread. */
+    val spread: Boolean = false,
 )
 
 /**

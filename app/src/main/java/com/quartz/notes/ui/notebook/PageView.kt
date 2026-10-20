@@ -25,6 +25,9 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.FormatAlignLeft
 import androidx.compose.material.icons.rounded.AutoAwesome
+import androidx.compose.material.icons.rounded.AutoStories
+import androidx.compose.material.icons.rounded.Lock
+import androidx.compose.material.icons.rounded.LockOpen
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.DeleteOutline
 import androidx.compose.material.icons.rounded.OpenInFull
@@ -42,7 +45,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
@@ -106,7 +108,6 @@ import com.quartz.notes.ui.theme.contentColorFor
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.drop
-import kotlinx.coroutines.launch
 import kotlin.math.max
 
 /** Gap between a wrapped picture and the text beside it. */
@@ -123,6 +124,8 @@ internal fun PageView(
     session: PageSession,
     vm: NotebookViewModel,
     side: PageSide,
+    /** The screen is wide enough for a scrapbook page to spread across both sides. */
+    canSpread: Boolean,
     tool: PageTool,
     brushLevel: Int,
     inkArgb: Int,
@@ -136,7 +139,6 @@ internal fun PageView(
 ) {
     val editor = session.editor
     val title = session.title
-    val scope = rememberCoroutineScope()
     val audio = LocalAppContainer.current.audio
     val focusManager = LocalFocusManager.current
     val keyboard = LocalSoftwareKeyboardController.current
@@ -152,11 +154,13 @@ internal fun PageView(
     var shapeStyling by remember { mutableStateOf<Long?>(null) }
     var lineStyling by remember { mutableStateOf<Long?>(null) }
 
-    /** Removes text boxes nobody typed in (they're created on a tap, so empty ones are leftovers). */
+    /** Removes text boxes nobody typed in. */
     fun sweepBlankTextBoxes() {
         elements.filter { it.kind == ElementKind.TEXT }.forEach { e ->
             val state = session.textBoxes[e.id] ?: return@forEach
-            if (state.isBlank() && session.activeEditor !== state && canvas.pendingFocusTextBox != e.id) {
+            if (state.isBlank() && session.activeEditor !== state && canvas.pendingFocusTextBox != e.id &&
+                canvas.editingTextId != e.id
+            ) {
                 session.textBoxes.remove(e.id)
                 vm.deleteElement(e)
             }
@@ -201,6 +205,16 @@ internal fun PageView(
             onFocusTextBoxHandled()
         }
     }
+    // Locking the page puts away anything picked up for moving.
+    val locked = page.locked
+    LaunchedEffect(locked) {
+        if (locked) {
+            canvas.selectedId = null
+            canvas.editingShapeId = null
+            canvas.selectedInlineBlock = null
+            canvas.toolbarRect = null
+        }
+    }
     // Tools put away selections.
     LaunchedEffect(tool) {
         if (tool != PageTool.NONE) {
@@ -233,7 +247,11 @@ internal fun PageView(
             .background(bg)
             .drawBehind {
                 texture?.let { drawRect(it) }
-                if (side != PageSide.SINGLE) drawSeam(atRightEdge = side == PageSide.LEFT, strength = seamShade)
+                when (side) {
+                    PageSide.LEFT, PageSide.RIGHT -> drawSeam(atRightEdge = side == PageSide.LEFT, strength = seamShade)
+                    PageSide.SPREAD -> drawCenterSeam(seamShade)
+                    PageSide.SINGLE -> Unit
+                }
             },
     ) {
         val viewport = maxHeight
@@ -335,10 +353,17 @@ internal fun PageView(
                 onLineStyle = { lineStyling = it.id },
                 onShapeText = { e, d, text -> vm.updateElementData(e, d.copy(text = text).encodePayload()) },
                 onTextChanged = vm::saveTextBox,
-                onTextFocus = { _, state, focused ->
+                onTextFocus = { e, state, focused ->
                     if (focused) {
                         session.activeEditor = state
-                        canvas.clearSelection()
+                        // A box being typed in keeps its handles; anything else selected is put away.
+                        if (canvas.selectedId != e.id) {
+                            canvas.selectedId = null
+                            canvas.toolbarRect = null
+                        }
+                        canvas.editingShapeId = null
+                        canvas.selectedInlineBlock = null
+                        canvas.editingTextId = e.id
                     }
                 },
                 onArrowEdit = { moved, d -> vm.replaceElement(moved.copy(data = d.encodePayload())) },
@@ -346,23 +371,19 @@ internal fun PageView(
         }
 
         fun backgroundTap(p: Offset) {
-            if (canvas.selectedId != null || canvas.editingShapeId != null || canvas.selectedInlineBlock != null) {
+            // Tapping empty space finishes typing in a text box.
+            val typingInBox = canvas.editingTextId != null || session.activeEditor != null
+            if (canvas.selectedId != null || canvas.editingShapeId != null || canvas.selectedInlineBlock != null || typingInBox) {
                 canvas.clearSelection()
+                if (typingInBox) {
+                    focusManager.clearFocus()
+                    session.activeEditor = null
+                }
+                sweepBlankTextBoxes()
                 return
             }
             sweepBlankTextBoxes()
-            if (scrapbook) {
-                if (p.y > titleBottomPx) {
-                    // Scrapbook pages: tap anywhere to start a text box there.
-                    val w = 0.6f
-                    val x = (p.x / widthPx - 0.03f).coerceIn(0.03f, 0.97f - w)
-                    val y = (p.y / widthPx - 0.04f).coerceAtLeast(0f)
-                    scope.launch {
-                        val id = vm.addTextBox(page.id, x, y, w)
-                        canvas.pendingFocusTextBox = id
-                    }
-                }
-            } else if (p.y > titleBottomPx) {
+            if (!scrapbook && p.y > titleBottomPx) {
                 editor.focusEnd()
                 keyboard?.show()
             }
@@ -416,6 +437,7 @@ internal fun PageView(
                     selected = canvas.selectedInlineBlock == block.id,
                     onTap = { block.image?.let { viewing = it.path } },
                     onLongPress = {
+                        if (page.locked) return@InlineImageSlot
                         canvas.clearSelection()
                         focusManager.clearFocus()
                         canvas.selectedInlineBlock = block.id
@@ -454,6 +476,7 @@ internal fun PageView(
         val tapHandler by rememberUpdatedState(::backgroundTap)
         val latestToolDone by rememberUpdatedState(onToolDone)
         val accentActions by rememberUpdatedState(actions)
+        val latestLocked by rememberUpdatedState(locked)
 
         Column(Modifier.fillMaxSize().verticalScroll(scroll)) {
             Box(
@@ -466,6 +489,7 @@ internal fun PageView(
                         awaitEachGesture {
                             val down = awaitFirstDown(requireUnconsumed = false, pass = PointerEventPass.Initial)
                             if (latestTool != PageTool.NONE) return@awaitEachGesture
+                            val pageLocked = latestLocked
                             val p = down.position
                             val slop = viewConfiguration.touchSlop
                             val onItem = canvas.bounds.values.any { it.inflate(4.dp.toPx()).contains(p) } ||
@@ -477,7 +501,7 @@ internal fun PageView(
                                 val (a, b) = arrowEnds(e, d, widthPx)
                                 (p - a).getDistance() < 22.dp.toPx() || (p - b).getDistance() < 22.dp.toPx()
                             } ?: false
-                            val line = if (onItem || nearHandle) null else lineHit(p, latestElements, canvas.bounds, widthPx, 18.dp.toPx())
+                            val line = if (onItem || nearHandle || pageLocked) null else lineHit(p, latestElements, canvas.bounds, widthPx, 18.dp.toPx())
                             if (line != null) {
                                 // Touching a line: a tap selects it; dragging a selected arrow moves it.
                                 // Anything else (a scroll or swipe) is left alone.
@@ -532,22 +556,43 @@ internal fun PageView(
                     },
             ) {
                 Column(Modifier.fillMaxWidth()) {
-                    BasicTextField(
-                        value = title,
-                        onValueChange = { session.title = it.replace("\n", "") },
-                        textStyle = TextStyle(fontSize = 21.sp, fontWeight = FontWeight.Bold, color = ink),
-                        cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
-                        keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Words),
-                        modifier = Modifier.fillMaxWidth().padding(start = padH, end = padH, top = 24.dp, bottom = 14.dp),
-                        decorationBox = { inner ->
-                            Box {
-                                if (title.isEmpty()) {
-                                    Text("Page title", style = TextStyle(fontSize = 21.sp, fontWeight = FontWeight.Bold, color = ink.copy(alpha = 0.32f)))
+                    Row(
+                        Modifier.fillMaxWidth().padding(start = padH, end = padH - 10.dp, top = 14.dp, bottom = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        BasicTextField(
+                            value = title,
+                            onValueChange = { session.title = it.replace("\n", "") },
+                            textStyle = TextStyle(fontSize = 21.sp, fontWeight = FontWeight.Bold, color = ink),
+                            cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
+                            keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Words),
+                            modifier = Modifier.weight(1f).padding(top = 10.dp, bottom = 10.dp),
+                            decorationBox = { inner ->
+                                Box {
+                                    if (title.isEmpty()) {
+                                        Text("Page title", style = TextStyle(fontSize = 21.sp, fontWeight = FontWeight.Bold, color = ink.copy(alpha = 0.32f)))
+                                    }
+                                    inner()
                                 }
-                                inner()
-                            }
-                        },
-                    )
+                            },
+                        )
+                        if (scrapbook && canSpread) {
+                            PageToggle(
+                                on = page.spread,
+                                ink = ink,
+                                icon = Icons.Rounded.AutoStories,
+                                description = if (page.spread) "Use one page" else "Use both pages",
+                                onClick = { vm.setPageSpread(page, !page.spread) },
+                            )
+                        }
+                        PageToggle(
+                            on = locked,
+                            ink = ink,
+                            icon = if (locked) Icons.Rounded.Lock else Icons.Rounded.LockOpen,
+                            description = if (locked) "Unlock page" else "Lock page",
+                            onClick = { vm.setPageLocked(page, !locked) },
+                        )
+                    }
                     HorizontalDivider(
                         Modifier
                             .padding(horizontal = 18.dp)
@@ -584,7 +629,7 @@ internal fun PageView(
                             )
                         } else if (elements.none { it.kind == ElementKind.TEXT }) {
                             Text(
-                                "Scrapbook page: tap anywhere to add text",
+                                "Scrapbook page: add text with the T button below",
                                 color = ink.copy(alpha = 0.35f),
                                 fontSize = 15.sp,
                                 modifier = Modifier.padding(start = padH, top = 16.dp),
@@ -597,6 +642,7 @@ internal fun PageView(
                     pageWidth = pageWidth,
                     ink = ink,
                     tool = tool,
+                    locked = locked,
                     allowTextLayout = !scrapbook,
                     canvas = canvas,
                     styles = styles,
@@ -749,6 +795,28 @@ internal fun PageView(
                 onConnector = { vm.updateElementData(e, it.encodePayload()) },
                 onDismiss = { lineStyling = null },
             )
+        }
+    }
+}
+
+/** Small icon toggle on the page's title line (lock, use both pages). */
+@Composable
+private fun PageToggle(
+    on: Boolean,
+    ink: Color,
+    icon: androidx.compose.ui.graphics.vector.ImageVector,
+    description: String,
+    onClick: () -> Unit,
+) {
+    val accent = MaterialTheme.colorScheme.primary
+    IconButton(onClick = onClick, modifier = Modifier.size(40.dp)) {
+        Box(
+            Modifier
+                .size(34.dp)
+                .background(if (on) accent.copy(alpha = 0.14f) else Color.Transparent, CircleShape),
+            contentAlignment = Alignment.Center,
+        ) {
+            Icon(icon, contentDescription = description, tint = if (on) accent else ink.copy(alpha = 0.42f), modifier = Modifier.size(21.dp))
         }
     }
 }

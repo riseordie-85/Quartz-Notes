@@ -246,6 +246,10 @@ class NotebookViewModel(
 
     fun updateStyle(page: PageEntity) = repo.updatePageStyle(page)
 
+    fun setPageLocked(page: PageEntity, locked: Boolean) = repo.setPageLocked(page.id, locked)
+
+    fun setPageSpread(page: PageEntity, spread: Boolean) = repo.setPageSpread(page.id, spread)
+
     fun applyStyleToAll(page: PageEntity) = repo.applyStyleToAllPages(page)
 
     fun addPage(afterIndex: Int, onCreated: (Long) -> Unit) = viewModelScope.launch {

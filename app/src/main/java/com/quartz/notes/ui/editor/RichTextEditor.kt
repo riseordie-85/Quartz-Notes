@@ -1,6 +1,11 @@
 package com.quartz.notes.ui.editor
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.relocation.BringIntoViewRequester
+import androidx.compose.foundation.relocation.bringIntoViewRequester
+import androidx.compose.runtime.rememberCoroutineScope
+import kotlinx.coroutines.launch
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -119,6 +124,8 @@ fun RichTextEditor(
     readOnly: Boolean = false,
     placeholder: String? = null,
     layout: EditorLayoutHooks? = null,
+    /** When false the text can't be focused or tapped (taps go to whatever is underneath). */
+    enabled: Boolean = true,
 ) {
     val accent = MaterialTheme.colorScheme.primary
     BoxWithConstraints(modifier) {
@@ -147,7 +154,7 @@ fun RichTextEditor(
                             if (img != null) img(block, textWidth) else DefaultImageBlock(block, textWidth, styles)
                         }
                     } else {
-                        Box(measured) { BlockRow(state, block, styles, contentColor, accent, readOnly) }
+                        Box(measured) { BlockRow(state, block, styles, contentColor, accent, readOnly, enabled) }
                     }
                 }
             }
@@ -201,6 +208,7 @@ private fun DefaultImageBlock(block: BlockState, textWidth: Dp, styles: EditorSt
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun BlockRow(
     state: RichEditorState,
@@ -209,6 +217,7 @@ private fun BlockRow(
     contentColor: Color,
     accent: Color,
     readOnly: Boolean,
+    enabled: Boolean,
 ) {
     val resolver = LocalFontResolver.current
     val typeStyle = styles.forType(block.type)
@@ -227,6 +236,12 @@ private fun BlockRow(
         }
     }
 
+    // Typing keeps the cursor on screen, even after scrolling away from it with the keyboard open.
+    val reveal = remember { BringIntoViewRequester() }
+    val tracker = remember { CursorTracker() }
+    val scope = rememberCoroutineScope()
+    val revealMargin = with(LocalDensity.current) { 24.dp.toPx() }
+
     Row(Modifier.fillMaxWidth().padding(start = (block.indent * 24).dp)) {
         when (block.type) {
             BlockType.BULLET -> Box(Modifier.width(26.dp).height(lineHeight), contentAlignment = Alignment.Center) {
@@ -237,18 +252,40 @@ private fun BlockRow(
                 height = lineHeight,
                 accent = accent,
                 contentColor = contentColor,
-                onToggle = { if (!readOnly) state.toggleChecked(block) },
+                enabled = enabled && !readOnly,
+                onToggle = { state.toggleChecked(block) },
             )
             else -> Unit
         }
         BasicTextField(
             value = block.value,
-            onValueChange = { state.onValueChange(block, it) },
+            onValueChange = {
+                if (it.text != block.value.text) tracker.pending = true
+                state.onValueChange(block, it)
+            },
             modifier = Modifier
                 .weight(1f)
+                .bringIntoViewRequester(reveal)
                 .focusRequester(block.focusRequester)
-                .onFocusChanged { if (it.isFocused) state.onFocused(block) },
+                .onFocusChanged {
+                    tracker.focused = it.isFocused
+                    if (it.isFocused) state.onFocused(block)
+                },
+            enabled = enabled,
             readOnly = readOnly,
+            onTextLayout = { layout ->
+                if (tracker.pending && tracker.focused) {
+                    tracker.pending = false
+                    // The hidden marker shifts every offset by one.
+                    val offset = (block.value.selection.end - 1).coerceIn(0, layout.layoutInput.text.length)
+                    val cursor = layout.getCursorRect(offset)
+                    scope.launch {
+                        runCatching {
+                            reveal.bringIntoView(cursor.copy(top = cursor.top - revealMargin / 2, bottom = cursor.bottom + revealMargin))
+                        }
+                    }
+                }
+            },
             textStyle = textStyle,
             cursorBrush = SolidColor(accent),
             visualTransformation = transformation,
@@ -263,6 +300,7 @@ private fun TaskBox(
     height: Dp,
     accent: Color,
     contentColor: Color,
+    enabled: Boolean,
     onToggle: () -> Unit,
 ) {
     val shape = RoundedCornerShape(5.dp)
@@ -270,10 +308,16 @@ private fun TaskBox(
         Modifier
             .width(32.dp)
             .height(height)
-            .clickable(
-                interactionSource = remember { MutableInteractionSource() },
-                indication = null,
-                onClick = onToggle,
+            .then(
+                if (enabled) {
+                    Modifier.clickable(
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = null,
+                        onClick = onToggle,
+                    )
+                } else {
+                    Modifier
+                },
             ),
         contentAlignment = Alignment.CenterStart,
     ) {
@@ -290,6 +334,12 @@ private fun TaskBox(
             if (checked) Icon(Icons.Rounded.Check, contentDescription = "Done", tint = Color.White, modifier = Modifier.size(15.dp))
         }
     }
+}
+
+/** Remembers, without causing recomposition, whether typing should bring the cursor into view. */
+private class CursorTracker {
+    var pending = false
+    var focused = false
 }
 
 /** Hides the leading marker character and renders the block's style spans. */

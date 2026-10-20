@@ -80,7 +80,12 @@ import androidx.compose.material.icons.rounded.AccountTree
 import androidx.compose.material.icons.automirrored.rounded.ArrowRightAlt
 import androidx.compose.material.icons.rounded.Brush
 import androidx.compose.material.icons.rounded.Category
-import androidx.compose.material.icons.rounded.TextFields
+import android.widget.Toast
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.StrokeJoin
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.vector.path
 import androidx.compose.runtime.mutableIntStateOf
 import com.quartz.notes.data.model.ShapeType
 import androidx.compose.ui.Alignment
@@ -188,6 +193,15 @@ fun NotebookScreen(
     val targetPage by rememberUpdatedState(activePage.id)
     val imageAdder = rememberImageAdder { image -> vm.addImage(targetPage, image) }
     val askMic = rememberMicPermission { recording = true }
+    val context = LocalContext.current
+
+    /** New items need placing, so adding one to a locked page unlocks it. */
+    fun unlockForNewItem() {
+        if (activePage.locked) {
+            vm.setPageLocked(activePage, false)
+            Toast.makeText(context, "Page unlocked so the new item can be placed", Toast.LENGTH_SHORT).show()
+        }
+    }
 
     BoxWithConstraints(
         Modifier
@@ -198,43 +212,40 @@ fun NotebookScreen(
             .imePadding(),
     ) {
         val wide = maxWidth >= TwoPaneMinWidth
-        // Unfolded / tablet: two pages side by side, like an open notebook.
+        // Unfolded / tablet: two pages side by side, like an open notebook. A scrapbook page set to
+        // use both pages gets a whole spread to itself.
         val perSpread = if (wide) 2 else 1
-        val spreadCount = (pages.size + perSpread - 1) / perSpread
-        val pagerState = rememberPagerState(initialPage = activeIndex / perSpread) { spreadCount }
+        val spreads = remember(pages, wide) { buildSpreads(pages, wide) }
+        fun spreadOf(pageId: Long): Int = spreads.indexOfFirst { s -> s.any { it?.id == pageId } }.coerceAtLeast(0)
+        val pagerState = rememberPagerState(initialPage = spreadOf(activePageId)) { spreads.size }
 
         // Jump to a requested page (new page, search result, pages list).
         var scrollTarget by rememberSaveable { mutableLongStateOf(-1L) }
-        LaunchedEffect(scrollTarget, pages, perSpread) {
-            if (scrollTarget >= 0) {
-                val index = pages.indexOfFirst { it.id == scrollTarget }
-                if (index >= 0) {
-                    activePageId = scrollTarget
-                    pagerState.animateScrollToPage(index / perSpread)
-                    scrollTarget = -1L
-                }
+        LaunchedEffect(scrollTarget, spreads) {
+            if (scrollTarget >= 0 && pages.any { it.id == scrollTarget }) {
+                activePageId = scrollTarget
+                pagerState.animateScrollToPage(spreadOf(scrollTarget))
+                scrollTarget = -1L
             }
         }
-        // Folding or unfolding keeps the active page in view.
-        LaunchedEffect(perSpread) {
-            pagerState.scrollToPage((pages.indexOfFirst { it.id == activePageId }.coerceAtLeast(0)) / perSpread)
+        // Folding, unfolding or spreading a page across both sides keeps the active page in view.
+        val arrangement = spreads.map { s -> s.map { it?.id } }
+        LaunchedEffect(arrangement) {
+            val target = spreadOf(activePageId)
+            if (pagerState.currentPage != target) pagerState.scrollToPage(target)
         }
         // Swiping to another spread makes its first page active, unless the active page is still showing.
-        val latestPages by rememberUpdatedState(pages)
-        LaunchedEffect(pagerState, perSpread) {
-            snapshotFlow { pagerState.settledPage }.collect { spread ->
-                val pages = latestPages
-                val first = spread * perSpread
-                val visible = pages.subList(first.coerceAtMost(pages.size), (first + perSpread).coerceAtMost(pages.size))
+        val latestSpreads by rememberUpdatedState(spreads)
+        LaunchedEffect(pagerState) {
+            snapshotFlow { pagerState.settledPage }.collect { index ->
+                val visible = latestSpreads.getOrNull(index).orEmpty().filterNotNull()
                 if (visible.isNotEmpty() && visible.none { it.id == activePageId }) activePageId = visible.first().id
             }
         }
 
-        val spreadStart = pagerState.currentPage * perSpread
-        val pageLabel = when {
-            perSpread == 2 && spreadStart + 1 < pages.size -> "${spreadStart + 1}–${spreadStart + 2}/${pages.size}"
-            else -> "${(spreadStart + 1).coerceAtMost(pages.size)}/${pages.size}"
-        }
+        val shown = spreads.getOrNull(pagerState.currentPage).orEmpty().filterNotNull()
+        val firstShown = shown.firstOrNull()?.let { p -> pages.indexOfFirst { it.id == p.id } + 1 } ?: 1
+        val pageLabel = if (shown.size == 2) "$firstShown–${firstShown + 1}/${pages.size}" else "$firstShown/${pages.size}"
 
         Column(Modifier.fillMaxSize()) {
             NotebookTopBar(
@@ -249,25 +260,21 @@ fun NotebookScreen(
 
             HorizontalPager(
                 state = pagerState,
-                key = { spread -> pages.getOrNull(spread * perSpread)?.id ?: -spread.toLong() },
+                key = { index -> spreads.getOrNull(index)?.firstOrNull()?.id ?: -index.toLong() - 1 },
                 userScrollEnabled = !WindowInsets.isImeVisible,
                 beyondViewportPageCount = 0,
                 modifier = Modifier.weight(1f).fillMaxWidth(),
-            ) { spread ->
-                Row(Modifier.fillMaxSize().padding(horizontal = if (perSpread == 2) 10.dp else 0.dp)) {
-                    for (slot in 0 until perSpread) {
-                        val page = pages.getOrNull(spread * perSpread + slot)
-                        Box(Modifier.weight(1f).fillMaxHeight()) {
-                            if (page != null) {
+            ) { index ->
+                val spread = spreads.getOrNull(index).orEmpty()
+
+                @Composable
+                fun Page(page: PageEntity, side: PageSide) {
                                 PageView(
                                     page = page,
                                     session = vm.session(page),
                                     vm = vm,
-                                    side = when {
-                                        perSpread == 1 -> PageSide.SINGLE
-                                        slot == 0 -> PageSide.LEFT
-                                        else -> PageSide.RIGHT
-                                    },
+                                    side = side,
+                                    canSpread = wide,
                                     tool = tool,
                                     brushLevel = brushLevel,
                                     inkArgb = settings?.inkArgb ?: 0,
@@ -279,10 +286,27 @@ fun NotebookScreen(
                                     onEditorGone = { editors.remove(page.id) },
                                     onSave = { vm.saveIfChanged(page.id) },
                                 )
-                            } else {
-                                BlankPageSlot(side = PageSide.RIGHT, onClick = {
-                                    vm.addPage(pages.lastIndex) { newId -> scrollTarget = newId }
-                                })
+                }
+
+                Row(Modifier.fillMaxSize().padding(horizontal = if (perSpread == 2) 10.dp else 0.dp)) {
+                    if (spread.size == 1) {
+                        val page = spread[0]
+                        if (page != null) {
+                            Box(Modifier.weight(1f).fillMaxHeight()) {
+                                Page(page, if (perSpread == 2) PageSide.SPREAD else PageSide.SINGLE)
+                            }
+                        }
+                    } else {
+                        for ((slot, page) in spread.withIndex()) {
+                            Box(Modifier.weight(1f).fillMaxHeight()) {
+                                when {
+                                    page != null -> Page(page, if (slot == 0) PageSide.LEFT else PageSide.RIGHT)
+                                    index == spreads.lastIndex -> BlankPageSlot(side = PageSide.RIGHT, onClick = {
+                                        vm.addPage(pages.lastIndex) { newId -> scrollTarget = newId }
+                                    })
+                                    // The next page spreads across both sides, so this side is left blank.
+                                    else -> EmptyPageFace(side = PageSide.RIGHT)
+                                }
                             }
                         }
                     }
@@ -336,6 +360,7 @@ fun NotebookScreen(
                                 leadingIcon = { Icon(Icons.Rounded.PhotoLibrary, null) },
                                 onClick = {
                                     imageMenu = false
+                                    unlockForNewItem()
                                     imageAdder.pickFromGallery()
                                 },
                             )
@@ -344,17 +369,25 @@ fun NotebookScreen(
                                 leadingIcon = { Icon(Icons.Rounded.PhotoCamera, null) },
                                 onClick = {
                                     imageMenu = false
+                                    unlockForNewItem()
                                     imageAdder.takePhoto()
                                 },
                             )
                         }
                     }
-                    ToolButton(onClick = askMic, description = "Record voice note") {
+                    ToolButton(
+                        onClick = {
+                            unlockForNewItem()
+                            askMic()
+                        },
+                        description = "Record voice note",
+                    ) {
                         Icon(Icons.Rounded.Mic, null)
                     }
                     ToolButton(
                         onClick = {
                             tool = PageTool.NONE
+                            unlockForNewItem()
                             scope.launch {
                                 val y = activeSession.scrollUnits + 0.3f
                                 val id = vm.addTextBox(activePage.id, 0.12f, y, 0.6f)
@@ -362,7 +395,7 @@ fun NotebookScreen(
                             }
                         },
                         description = "Add text box",
-                    ) { Icon(Icons.Rounded.TextFields, null) }
+                    ) { Icon(TextBoxIcon, null) }
                     ToolButton(
                         selected = tool == PageTool.BRUSH || tool == PageTool.ERASER,
                         onClick = { tool = if (tool == PageTool.BRUSH || tool == PageTool.ERASER) PageTool.NONE else PageTool.BRUSH },
@@ -383,6 +416,7 @@ fun NotebookScreen(
                                     onClick = {
                                         shapeMenu = false
                                         tool = PageTool.NONE
+                                        unlockForNewItem()
                                         vm.addShape(activePage.id, t)
                                     },
                                 )
@@ -392,6 +426,7 @@ fun NotebookScreen(
                     ToolButton(
                         onClick = {
                             tool = PageTool.NONE
+                            unlockForNewItem()
                             vm.addArrow(activePage.id)
                         },
                         description = "Add arrow",
@@ -602,9 +637,110 @@ internal enum class PageSide(
     val outerEnd: androidx.compose.ui.unit.Dp,
 ) {
     SINGLE(RoundedCornerShape(24.dp), 16.dp, 16.dp),
+    // A scrapbook page using both sides of an open spread.
+    SPREAD(RoundedCornerShape(24.dp), 6.dp, 6.dp),
     // Spread halves meet at the seam with square inner corners.
     LEFT(RoundedCornerShape(topStart = 24.dp, bottomStart = 24.dp, topEnd = 0.dp, bottomEnd = 0.dp), 6.dp, 0.dp),
     RIGHT(RoundedCornerShape(topStart = 0.dp, bottomStart = 0.dp, topEnd = 24.dp, bottomEnd = 24.dp), 0.dp, 6.dp),
+}
+
+/** Is this a scrapbook page set to use both sides of an open spread? */
+internal val PageEntity.usesBothSides: Boolean get() = spread && layoutMode == "SCRAPBOOK"
+
+/**
+ * Groups pages into what's shown at once: pairs when [wide], one page otherwise. A page using both
+ * sides stands alone; a page that can't pair up gets an empty slot (null) beside it.
+ */
+internal fun buildSpreads(pages: List<PageEntity>, wide: Boolean): List<List<PageEntity?>> {
+    if (!wide) return pages.map { listOf(it) }
+    val out = ArrayList<List<PageEntity?>>()
+    var i = 0
+    while (i < pages.size) {
+        val page = pages[i]
+        val next = pages.getOrNull(i + 1)
+        when {
+            page.usesBothSides -> {
+                out += listOf(page)
+                i += 1
+            }
+            next != null && !next.usesBothSides -> {
+                out += listOf(page, next)
+                i += 2
+            }
+            else -> {
+                out += listOf(page, null)
+                i += 1
+            }
+        }
+    }
+    return out
+}
+
+/** A plain, empty right-hand page (the next page needs a whole spread of its own). */
+@Composable
+private fun EmptyPageFace(side: PageSide) {
+    val quartz = LocalQuartzColors.current
+    val shape = side.shape
+    Box(
+        Modifier
+            .fillMaxSize()
+            .padding(start = side.outerStart, end = side.outerEnd, top = 6.dp, bottom = 6.dp)
+            .shadow(2.dp, shape)
+            .clip(shape)
+            .background(quartz.card.copy(alpha = 0.6f))
+            .drawBehind { drawSeam(atRightEdge = false, strength = if (quartz.isDark) 0.45f else 0.13f) },
+    )
+}
+
+/** Shading down the middle of a page that spreads across both sides. */
+internal fun androidx.compose.ui.graphics.drawscope.DrawScope.drawCenterSeam(strength: Float) {
+    val half = 30.dp.toPx().coerceAtMost(size.width / 8)
+    val mid = size.width / 2
+    val dark = Color.Black
+    drawRect(
+        brush = androidx.compose.ui.graphics.Brush.horizontalGradient(
+            colors = listOf(dark.copy(alpha = 0f), dark.copy(alpha = strength * 0.7f), dark.copy(alpha = 0f)),
+            startX = mid - half,
+            endX = mid + half,
+        ),
+        topLeft = androidx.compose.ui.geometry.Offset(mid - half, 0f),
+        size = androidx.compose.ui.geometry.Size(half * 2, size.height),
+    )
+    drawLine(
+        color = dark.copy(alpha = (strength * 1.2f).coerceAtMost(0.5f)),
+        start = androidx.compose.ui.geometry.Offset(mid, 0f),
+        end = androidx.compose.ui.geometry.Offset(mid, size.height),
+        strokeWidth = 1.dp.toPx(),
+    )
+}
+
+/** "T in a box": the add-text-box button. */
+private val TextBoxIcon: ImageVector by lazy {
+    ImageVector.Builder(name = "TextBox", defaultWidth = 24.dp, defaultHeight = 24.dp, viewportWidth = 24f, viewportHeight = 24f)
+        .path(
+            stroke = SolidColor(Color.Black),
+            strokeLineWidth = 2f,
+            strokeLineCap = StrokeCap.Round,
+            strokeLineJoin = StrokeJoin.Round,
+        ) {
+            // Rounded box
+            moveTo(7f, 4f)
+            lineTo(17f, 4f)
+            quadTo(20f, 4f, 20f, 7f)
+            lineTo(20f, 17f)
+            quadTo(20f, 20f, 17f, 20f)
+            lineTo(7f, 20f)
+            quadTo(4f, 20f, 4f, 17f)
+            lineTo(4f, 7f)
+            quadTo(4f, 4f, 7f, 4f)
+            close()
+            // T
+            moveTo(8.5f, 8.5f)
+            lineTo(15.5f, 8.5f)
+            moveTo(12f, 8.5f)
+            lineTo(12f, 16f)
+        }
+        .build()
 }
 
 /** Soft gutter shadow plus a fine crease line along the edge where two pages meet. */

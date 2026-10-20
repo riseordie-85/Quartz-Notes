@@ -106,6 +106,12 @@ interface PageDao {
     @Query("UPDATE pages SET updatedAt = :updatedAt WHERE id = :id")
     suspend fun touch(id: Long, updatedAt: Long)
 
+    @Query("UPDATE pages SET locked = :locked WHERE id = :id")
+    suspend fun setLocked(id: Long, locked: Boolean)
+
+    @Query("UPDATE pages SET spread = :spread WHERE id = :id")
+    suspend fun setSpread(id: Long, spread: Boolean)
+
     @Query("SELECT COUNT(*) || ':' || COALESCE(MAX(updatedAt), 0) FROM pages")
     suspend fun fingerprint(): String
 

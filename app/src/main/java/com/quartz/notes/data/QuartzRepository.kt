@@ -169,6 +169,10 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
         pages.updateContent(pageId, doc.encode(), doc.plainText(), now())
     }
 
+    fun setPageLocked(pageId: Long, locked: Boolean) = enqueue { pages.setLocked(pageId, locked) }
+
+    fun setPageSpread(pageId: Long, spread: Boolean) = enqueue { pages.setSpread(pageId, spread) }
+
     fun savePageTitle(pageId: Long, title: String) = enqueue {
         pages.updateTitle(pageId, title, now())
     }
@@ -182,6 +186,8 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
                 backgroundArgb = page.backgroundArgb,
                 texture = page.texture,
                 layoutMode = page.layoutMode,
+                // Only scrapbook pages can span both sides.
+                spread = current.spread && page.layoutMode == "SCRAPBOOK",
                 updatedAt = now(),
             ),
         )
