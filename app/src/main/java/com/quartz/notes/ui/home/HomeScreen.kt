@@ -197,7 +197,7 @@ fun HomeRoute(
             onSave = { draft ->
                 val existing = sheet.notebook
                 if (existing == null) {
-                    vm.createNotebook(draft.shelfId, draft.title, draft.colorArgb, draft.texture.name, draft.icon)
+                    vm.createNotebook(draft.shelfId, draft.title, draft.colorArgb, draft.texture.name, draft.icon, draft.twoPage)
                 } else {
                     vm.updateNotebook(existing.applyDraft(draft))
                 }

@@ -15,7 +15,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
         QuickNoteEntity::class,
         AttachmentEntity::class,
     ],
-    version = 2,
+    version = 3,
     exportSchema = true,
 )
 abstract class QuartzDatabase : RoomDatabase() {
@@ -37,7 +37,7 @@ abstract class QuartzDatabase : RoomDatabase() {
                         )
                     }
                 })
-                .addMigrations(MIGRATION_1_2)
+                .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
                 .build()
 
         /** Adds page lock and two-page (spread) flags. */
@@ -45,6 +45,13 @@ abstract class QuartzDatabase : RoomDatabase() {
             override fun migrate(db: SupportSQLiteDatabase) {
                 db.execSQL("ALTER TABLE pages ADD COLUMN locked INTEGER NOT NULL DEFAULT 0")
                 db.execSQL("ALTER TABLE pages ADD COLUMN spread INTEGER NOT NULL DEFAULT 0")
+            }
+        }
+
+        /** Adds the per-notebook two-page view switch (on by default). */
+        private val MIGRATION_2_3 = object : androidx.room.migration.Migration(2, 3) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE notebooks ADD COLUMN twoPage INTEGER NOT NULL DEFAULT 1")
             }
         }
     }

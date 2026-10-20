@@ -81,6 +81,14 @@ import androidx.compose.material.icons.automirrored.rounded.ArrowRightAlt
 import androidx.compose.material.icons.rounded.Brush
 import androidx.compose.material.icons.rounded.Category
 import android.widget.Toast
+import androidx.compose.material.icons.rounded.Share
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.TextButton
+import com.quartz.notes.ui.note.NotebookPickerSheet
+import com.quartz.notes.ui.note.ShareNoteSheet
+import com.quartz.notes.ui.note.saveImageToGallery
+import com.quartz.notes.ui.note.shareFile
+import com.quartz.notes.ui.note.shareText
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.runtime.key
 import androidx.compose.ui.graphics.StrokeCap
@@ -189,6 +197,10 @@ fun NotebookScreen(
     var showPages by remember { mutableStateOf(false) }
     var showEdit by remember { mutableStateOf(false) }
     var imageMenu by remember { mutableStateOf(false) }
+    // Sharing: the pages to choose between (two showing), the page being shared, and one being copied.
+    var shareChoices by remember { mutableStateOf<List<PageEntity>>(emptyList()) }
+    var sharingId by remember { mutableStateOf<Long?>(null) }
+    var copyingId by remember { mutableStateOf<Long?>(null) }
     var recording by remember { mutableStateOf(false) }
     // Pictures and recordings go onto the active page; remember which one in case it changes meanwhile.
     val targetPage by rememberUpdatedState(activePage.id)
@@ -218,10 +230,11 @@ fun NotebookScreen(
             .imePadding(),
     ) {
         val wide = maxWidth >= TwoPaneMinWidth
-        // Unfolded / tablet: two pages side by side, like an open notebook. A scrapbook page set to
-        // use both pages gets a whole spread to itself.
-        val perSpread = if (wide) 2 else 1
-        val spreads = remember(pages, wide) { buildSpreads(pages, wide) }
+        // Unfolded / tablet: two pages side by side, like an open notebook (unless the notebook turns
+        // that off). A scrapbook page set to use both pages gets a whole spread to itself.
+        val twoUp = wide && nb.twoPage
+        val perSpread = if (twoUp) 2 else 1
+        val spreads = remember(pages, twoUp) { buildSpreads(pages, twoUp) }
         fun spreadOf(pageId: Long): Int = spreads.indexOfFirst { s -> s.any { it?.id == pageId } }.coerceAtLeast(0)
         val pagerState = rememberPagerState(initialPage = spreadOf(activePageId)) { spreads.size }
 
@@ -272,6 +285,10 @@ fun NotebookScreen(
                 onSearch = onSearch,
                 onPages = { showPages = true },
                 onEdit = { showEdit = true },
+                onShare = {
+                    // Two pages showing: ask which one.
+                    if (shown.size > 1) shareChoices = shown else sharingId = (shown.firstOrNull() ?: activePage).id
+                },
             )
 
             HorizontalPager(
@@ -290,7 +307,7 @@ fun NotebookScreen(
                                     session = vm.session(page),
                                     vm = vm,
                                     side = side,
-                                    canSpread = wide,
+                                    canSpread = twoUp,
                                     tool = tool,
                                     brushLevel = brushLevel,
                                     inkArgb = settings?.inkArgb ?: 0,
@@ -481,6 +498,104 @@ fun NotebookScreen(
         }
     }
 
+    if (shareChoices.isNotEmpty()) {
+        val choices = shareChoices
+        AlertDialog(
+            onDismissRequest = { shareChoices = emptyList() },
+            title = { Text("Share which page?") },
+            text = {
+                Column {
+                    choices.forEachIndexed { i, p ->
+                        val number = pages.indexOfFirst { it.id == p.id } + 1
+                        Row(
+                            Modifier
+                                .fillMaxWidth()
+                                .clip(RoundedCornerShape(12.dp))
+                                .clickable {
+                                    shareChoices = emptyList()
+                                    sharingId = p.id
+                                }
+                                .padding(horizontal = 8.dp, vertical = 12.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            Text(
+                                if (i == 0) "Left" else "Right",
+                                fontSize = 13.sp,
+                                color = LocalQuartzColors.current.textSecondary,
+                                modifier = Modifier.width(52.dp),
+                            )
+                            Text(
+                                p.title.ifBlank { "Page $number" },
+                                fontSize = 17.sp,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis,
+                                modifier = Modifier.weight(1f),
+                            )
+                            Text("$number", fontSize = 13.sp, color = LocalQuartzColors.current.textSecondary)
+                        }
+                    }
+                }
+            },
+            confirmButton = {},
+            dismissButton = { TextButton(onClick = { shareChoices = emptyList() }) { Text("Cancel") } },
+        )
+    }
+    sharingId?.let { id ->
+        val page = pages.firstOrNull { it.id == id }
+        if (page == null) {
+            sharingId = null
+        } else {
+            val session = vm.session(page)
+            fun withImage(action: suspend (java.io.File) -> Unit) {
+                sharingId = null
+                val exporter = session.exporter
+                if (exporter == null) {
+                    Toast.makeText(context, "Open the page to share it as a picture", Toast.LENGTH_SHORT).show()
+                    return
+                }
+                scope.launch {
+                    runCatching { exporter.image() }
+                        .onSuccess { action(it) }
+                        .onFailure { Toast.makeText(context, "Couldn't make the picture", Toast.LENGTH_SHORT).show() }
+                }
+            }
+            ShareNoteSheet(
+                noun = "page",
+                onText = {
+                    sharingId = null
+                    val text = session.exporter?.text()
+                        ?: listOf(session.title.trim(), page.plainText.trim()).filter { it.isNotEmpty() }.joinToString("\n\n")
+                    shareText(context, session.title, text)
+                },
+                onImage = { withImage { shareFile(context, it, "image/png", "${context.packageName}.files") } },
+                onSaveImage = {
+                    withImage { file ->
+                        val saved = saveImageToGallery(context, file, file.nameWithoutExtension + " " + System.currentTimeMillis() / 1000)
+                        Toast.makeText(context, if (saved) "Saved to your gallery" else "Couldn't save the picture", Toast.LENGTH_SHORT).show()
+                    }
+                },
+                onNotebook = {
+                    sharingId = null
+                    copyingId = page.id
+                },
+                onDismiss = { sharingId = null },
+            )
+        }
+    }
+    copyingId?.let { pageId ->
+        NotebookPickerSheet(
+            onPick = { target ->
+                copyingId = null
+                scope.launch {
+                    runCatching { vm.copyPageTo(pageId, target.id) }
+                        .onSuccess { Toast.makeText(context, "Copied to ${target.title}", Toast.LENGTH_SHORT).show() }
+                        .onFailure { Toast.makeText(context, "Couldn't copy the page", Toast.LENGTH_SHORT).show() }
+                }
+            },
+            onDismiss = { copyingId = null },
+        )
+    }
+
     // The sheet keeps formatting the editor it was opened for, even though opening it moves focus.
     val sheetTarget = formatTarget
     if (showFormat && sheetTarget != null) {
@@ -536,6 +651,7 @@ private fun NotebookTopBar(
     onSearch: () -> Unit,
     onPages: () -> Unit,
     onEdit: () -> Unit,
+    onShare: () -> Unit,
 ) {
     var menu by remember { mutableStateOf(false) }
     val color = Color(notebook.colorArgb)
@@ -585,6 +701,7 @@ private fun NotebookTopBar(
                 if (!wide) {
                     IconButton(onClick = onSearch) { Icon(Icons.Rounded.Search, contentDescription = "Search notebook", tint = onColor) }
                 }
+                IconButton(onClick = onShare) { Icon(Icons.Rounded.Share, contentDescription = "Share page", tint = onColor) }
                 IconButton(onClick = onPages) { Icon(Icons.Rounded.Layers, contentDescription = "Pages", tint = onColor) }
                 Box {
                     IconButton(onClick = { menu = true }) { Icon(Icons.Rounded.MoreVert, contentDescription = "More", tint = onColor) }

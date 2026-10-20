@@ -37,6 +37,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
@@ -74,6 +75,7 @@ data class NotebookDraft(
     val texture: Texture,
     val icon: String,
     val shelfId: Long,
+    val twoPage: Boolean = true,
 )
 
 /** Create or edit a notebook's title, color, cover texture, icon and shelf. */
@@ -95,6 +97,7 @@ fun NotebookEditorSheet(
     var customColor by remember { mutableStateOf(false) }
     var confirmDelete by remember { mutableStateOf(false) }
     var shelfMenu by remember { mutableStateOf(false) }
+    var twoPage by remember { mutableStateOf(existing?.twoPage ?: true) }
 
     ModalBottomSheet(
         onDismissRequest = onDismiss,
@@ -194,6 +197,27 @@ fun NotebookEditorSheet(
                 }
             }
 
+            SheetLabel("Pages")
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(12.dp))
+                    .clickable { twoPage = !twoPage }
+                    .padding(vertical = 4.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Column(Modifier.weight(1f)) {
+                    Text("Two-page view", fontSize = 16.sp)
+                    Text(
+                        "When unfolded or on a tablet, show two pages side by side like an open notebook",
+                        fontSize = 13.sp,
+                        color = LocalQuartzColors.current.textSecondary,
+                    )
+                }
+                Spacer(Modifier.width(12.dp))
+                Switch(checked = twoPage, onCheckedChange = { twoPage = it })
+            }
+
             Spacer(Modifier.height(24.dp))
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.CenterVertically) {
                 if (onDelete != null) {
@@ -205,7 +229,7 @@ fun NotebookEditorSheet(
                 Spacer(Modifier.weight(1f))
                 Button(
                     enabled = title.isNotBlank(),
-                    onClick = { onSave(NotebookDraft(title.trim(), color, texture, icon, shelfId)) },
+                    onClick = { onSave(NotebookDraft(title.trim(), color, texture, icon, shelfId, twoPage)) },
                 ) { Text(if (existing == null) "Create" else "Save") }
             }
         }
@@ -269,4 +293,5 @@ fun NotebookEntity.applyDraft(d: NotebookDraft) = copy(
     texture = d.texture.name,
     icon = d.icon,
     shelfId = d.shelfId,
+    twoPage = d.twoPage,
 )

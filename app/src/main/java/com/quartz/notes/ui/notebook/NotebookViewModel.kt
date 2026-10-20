@@ -52,6 +52,9 @@ class PageSession(page: PageEntity) {
     /** The text box being typed in, if any; the toolbar formats it instead of the page text. */
     var activeEditor by mutableStateOf<RichEditorState?>(null)
 
+    /** Set while the page is on screen: its words and a picture of it, for sharing. */
+    var exporter: PageExporter? = null
+
     private var savedVersion = editor.version
     private var savedTitle = page.title
 
@@ -66,6 +69,13 @@ class PageSession(page: PageEntity) {
         savedTitle = title
     }
 }
+
+/** Shares what's on a page that's currently showing. */
+class PageExporter(
+    val text: () -> String,
+    /** Draws the page (without selection handles) to a PNG and returns the file. */
+    val image: suspend () -> java.io.File,
+)
 
 class NotebookViewModel(
     val notebookId: Long,
@@ -245,6 +255,13 @@ class NotebookViewModel(
     fun deleteElement(element: PageElementEntity) = repo.deleteElement(element)
 
     fun updateStyle(page: PageEntity) = repo.updatePageStyle(page)
+
+    /** Copies a page (saving any unsaved typing first) to the end of a notebook. */
+    suspend fun copyPageTo(pageId: Long, notebookId: Long): Long {
+        saveIfChanged(pageId)
+        knownTextBoxes.values.filter { it.pageId == pageId }.forEach(::saveTextBox)
+        return repo.copyPageToNotebook(pageId, notebookId)
+    }
 
     fun setPageLocked(page: PageEntity, locked: Boolean) = repo.setPageLocked(page.id, locked)
 

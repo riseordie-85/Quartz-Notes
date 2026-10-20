@@ -82,9 +82,17 @@ class HomeViewModel(
         settings.setSelectedShelf(id)
     }
 
-    fun createNotebook(shelfId: Long, title: String, color: Int, texture: String, icon: String, onCreated: (Long) -> Unit = {}) =
+    fun createNotebook(
+        shelfId: Long,
+        title: String,
+        color: Int,
+        texture: String,
+        icon: String,
+        twoPage: Boolean = true,
+        onCreated: (Long) -> Unit = {},
+    ) =
         viewModelScope.launch {
-            onCreated(repo.createNotebook(shelfId, title, color, texture, icon))
+            onCreated(repo.createNotebook(shelfId, title, color, texture, icon, twoPage))
         }
 
     fun updateNotebook(notebook: NotebookEntity) = viewModelScope.launch { repo.updateNotebook(notebook) }

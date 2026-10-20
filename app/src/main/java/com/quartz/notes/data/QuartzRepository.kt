@@ -112,6 +112,7 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
         colorArgb: Int,
         texture: String,
         icon: String,
+        twoPage: Boolean = true,
     ): Long = db.withTransaction {
         val id = notebooks.insert(
             NotebookEntity(
@@ -120,6 +121,7 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
                 colorArgb = colorArgb,
                 texture = texture,
                 icon = icon,
+                twoPage = twoPage,
                 position = notebooks.maxPosition(shelfId) + 1,
             ),
         )
@@ -397,6 +399,36 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
                 }
             }
             pageId
+        }
+    }
+
+    /**
+     * Copies a notebook page, with everything placed on it, to the end of another notebook.
+     * Pictures and recordings are shared by path (media is only removed once nothing uses it).
+     * Returns the new page id.
+     */
+    suspend fun copyPageToNotebook(pageId: Long, notebookId: Long): Long = inOrder {
+        db.withTransaction {
+            val page = pages.get(pageId) ?: error("Page not found")
+            val position = pages.getByNotebook(notebookId).size
+            val stamp = now()
+            val newId = pages.insert(
+                page.copy(id = 0, notebookId = notebookId, position = position, locked = false, createdAt = stamp, updatedAt = stamp),
+            )
+            val idMap = HashMap<Long, Long>()
+            val connectors = ArrayList<PageElementEntity>()
+            elements.getForPage(pageId).forEach { e ->
+                if (e.kind == ElementKind.CONNECTOR) connectors += e else idMap[e.id] = elements.insert(e.copy(id = 0, pageId = newId))
+            }
+            // Connectors point at items by id, which are new on the copy.
+            connectors.forEach { c ->
+                val cd = decodePayload<ConnectorData>(c.data) ?: return@forEach
+                val from = idMap[cd.from] ?: return@forEach
+                val to = idMap[cd.to] ?: return@forEach
+                elements.insert(c.copy(id = 0, pageId = newId, data = cd.copy(from = from, to = to).encodePayload()))
+            }
+            notebooks.get(notebookId)?.let { notebooks.update(it.copy(updatedAt = stamp)) }
+            newId
         }
     }
 

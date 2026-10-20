@@ -40,6 +40,8 @@ data class NotebookEntity(
     val position: Int = 0,
     val createdAt: Long = System.currentTimeMillis(),
     val updatedAt: Long = System.currentTimeMillis(),
+    /** Show pages side by side when the screen is wide (unfolded / tablet). */
+    val twoPage: Boolean = true,
 )
 
 @Entity(

@@ -237,6 +237,9 @@ interface PageElementDao {
     @Query("SELECT * FROM page_elements")
     suspend fun getAll(): List<PageElementEntity>
 
+    @Query("SELECT * FROM page_elements WHERE pageId = :pageId ORDER BY z, id")
+    suspend fun getForPage(pageId: Long): List<PageElementEntity>
+
     @Query("SELECT COUNT(*) || ':' || COALESCE(SUM(x + y + width + rotation), 0) || ':' || COALESCE(SUM(LENGTH(data)), 0) FROM page_elements")
     suspend fun fingerprint(): String
 

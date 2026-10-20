@@ -105,10 +105,12 @@ fun ShareNoteSheet(
     onSaveImage: () -> Unit,
     onNotebook: () -> Unit,
     onDismiss: () -> Unit,
+    /** What's being shared, for the wording ("note" or "page"). */
+    noun: String = "note",
 ) {
     ModalBottomSheet(onDismissRequest = onDismiss, containerColor = MaterialTheme.colorScheme.surface) {
         Column(Modifier.navigationBarsPadding().padding(bottom = 16.dp)) {
-            Text("Share note", fontSize = 22.sp, fontWeight = FontWeight.Medium, modifier = Modifier.padding(horizontal = 20.dp, vertical = 4.dp))
+            Text("Share ${noun}", fontSize = 22.sp, fontWeight = FontWeight.Medium, modifier = Modifier.padding(horizontal = 20.dp, vertical = 4.dp))
             ListRow(
                 title = "Share as text",
                 subtitle = "Send the words to any app",
@@ -117,7 +119,7 @@ fun ShareNoteSheet(
             )
             ListRow(
                 title = "Share as image",
-                subtitle = "A picture of the note, with its color and photos",
+                subtitle = "A picture of the $noun, with its color and photos",
                 onClick = onImage,
                 leading = { Icon(Icons.Rounded.Image, null, tint = MaterialTheme.colorScheme.primary) },
             )

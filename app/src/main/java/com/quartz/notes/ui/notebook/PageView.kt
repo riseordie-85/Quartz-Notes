@@ -52,6 +52,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.graphics.asAndroidBitmap
+import androidx.compose.ui.graphics.layer.drawLayer
+import androidx.compose.ui.graphics.rememberGraphicsLayer
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.runtime.withFrameNanos
+import com.quartz.notes.data.model.TextBoxData
+import com.quartz.notes.data.rich.RichDoc
+import com.quartz.notes.ui.note.noteAsText
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import java.io.File
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.geometry.Offset
@@ -472,6 +485,42 @@ internal fun PageView(
         // ---- Touch handling for tools, lines and empty space ----
 
         val latestElements by rememberUpdatedState(elements)
+
+        // ---- Sharing ----
+        val captureLayer = rememberGraphicsLayer()
+        val context = LocalContext.current
+        val latestPage by rememberUpdatedState(page)
+        val pageColor by rememberUpdatedState(bg)
+        DisposableEffect(session, captureLayer) {
+            val exporter = PageExporter(
+                text = { pageAsText(session, latestPage, latestElements) },
+                image = {
+                    // Put away handles, toolbars and the cursor, and let the page redraw without them.
+                    canvas.clearSelection()
+                    focusManager.clearFocus()
+                    session.activeEditor = null
+                    withFrameNanos { }
+                    withFrameNanos { }
+                    val shot = captureLayer.toImageBitmap().asAndroidBitmap().copy(android.graphics.Bitmap.Config.ARGB_8888, false)
+                    withContext(Dispatchers.IO) {
+                        val out = android.graphics.Bitmap.createBitmap(shot.width, shot.height, android.graphics.Bitmap.Config.ARGB_8888)
+                        android.graphics.Canvas(out).apply {
+                            drawColor(pageColor.toArgb())
+                            drawBitmap(shot, 0f, 0f, null)
+                        }
+                        val dir = File(context.cacheDir, "shared").apply { mkdirs() }
+                        val name = session.title.replace(Regex("[^A-Za-z0-9 _-]"), "").take(40).trim().ifEmpty { "Page" }
+                        val file = File(dir, "$name.png")
+                        file.outputStream().use { out.compress(android.graphics.Bitmap.CompressFormat.PNG, 100, it) }
+                        shot.recycle()
+                        out.recycle()
+                        file
+                    }
+                },
+            )
+            session.exporter = exporter
+            onDispose { if (session.exporter === exporter) session.exporter = null }
+        }
         val latestTool by rememberUpdatedState(tool)
         val latestBrush by rememberUpdatedState(brushLevel)
         val latestInk by rememberUpdatedState(inkArgbResolved)
@@ -487,6 +536,11 @@ internal fun PageView(
                     .fillMaxWidth()
                     .heightIn(min = maxOf(elementsBottom + 48.dp, viewport))
                     .onPlaced { canvas.contentCoords = it }
+                    // Keeps a recording of the whole page (even the part scrolled off screen) for "share as image".
+                    .drawWithContent {
+                        captureLayer.record { this@drawWithContent.drawContent() }
+                        drawLayer(captureLayer)
+                    }
                     .pointerInput(widthPx) {
                         // Lines (arrows/connectors) and taps on empty space. Tools use the overlay below instead.
                         awaitEachGesture {
@@ -807,6 +861,26 @@ internal fun PageView(
             )
         }
     }
+}
+
+/** A page's words: title, flowing text, then text boxes and shape labels from top to bottom. */
+private fun pageAsText(session: PageSession, page: PageEntity, elements: List<PageElementEntity>): String {
+    val parts = ArrayList<String>()
+    if (page.layoutMode != LayoutMode.SCRAPBOOK.name) parts += noteAsText("", session.editor.toDoc())
+    elements
+        .filter { it.kind == ElementKind.TEXT || it.kind == ElementKind.SHAPE }
+        .sortedWith(compareBy({ it.y }, { it.x }))
+        .forEach { e ->
+            parts += if (e.kind == ElementKind.TEXT) {
+                val doc = session.textBoxes[e.id]?.toDoc() ?: RichDoc.decode(decodePayload<TextBoxData>(e.data)?.doc)
+                noteAsText("", doc)
+            } else {
+                decodePayload<ShapeData>(e.data)?.text.orEmpty()
+            }
+        }
+    val body = parts.map { it.trim() }.filter { it.isNotEmpty() }.joinToString("\n\n")
+    val title = session.title.trim()
+    return listOf(title, body).filter { it.isNotEmpty() }.joinToString("\n\n")
 }
 
 /** Small icon toggle on the page's title line (lock, use both pages). */
