@@ -349,12 +349,13 @@ private fun ElementItem(
     Box(
         Modifier
             .offset { IntOffset((live.x * widthPx).roundToInt(), (live.y * widthPx).roundToInt()) }
+            // Turned first, so touches and the reported bounds match what's on screen.
+            .graphicsLayer { rotationZ = if (rotates) live.rotation else 0f }
             .onGloballyPositioned { c ->
                 if (c.size != sizePx) sizePx = c.size
                 val root = canvas.contentCoords ?: return@onGloballyPositioned
                 if (!c.isAttached || !root.isAttached) return@onGloballyPositioned
-                val topLeft = root.localPositionOf(c, Offset.Zero)
-                val rect = Rect(topLeft, androidx.compose.ui.geometry.Size(c.size.width.toFloat(), c.size.height.toFloat()))
+                val rect = root.localBoundingBoxOf(c, clipBounds = false)
                 if (canvas.bounds[element.id] != rect) canvas.bounds[element.id] = rect
             }
             .pointerInput(element.id, kind) {
@@ -414,7 +415,6 @@ private fun ElementItem(
                     Modifier
                 },
             )
-            .graphicsLayer { rotationZ = if (rotates) live.rotation else 0f }
             .then(
                 if (kind == ElementKind.TEXT && selected && !locked && tool == PageTool.NONE) {
                     // The stem joining the box to its rotate handle (turns with the box).
@@ -693,7 +693,10 @@ private fun transformed(
     heightFactor: Float?,
 ): PageElementEntity {
     val scalable = kind == ElementKind.IMAGE || kind == ElementKind.SHAPE || kind == ElementKind.TEXT
-    val newWidth = if (scalable) (cur.width * zoom).coerceIn(0.08f, 1f) else cur.width
+    val minWidth = if (kind == ElementKind.TEXT) 0.2f else 0.08f
+    val newWidth = if (scalable) (cur.width * zoom).coerceIn(minWidth, 1f) else cur.width
+    // Touches arrive in the item's own (turned) directions; move it in the page's.
+    val pagePan = if (cur.rotation != 0f) rotateBy(pan, cur.rotation) else pan
     val newHeight = if (kind == ElementKind.SHAPE) (cur.height * zoom).coerceIn(0.06f, 2f) else cur.height
     val h = when (kind) {
         ElementKind.IMAGE -> heightFactor ?: 0f
@@ -704,8 +707,8 @@ private fun transformed(
     val dx = (cur.width - newWidth) / 2
     val dy = (cur.width - newWidth) * h / 2
     return cur.copy(
-        x = (cur.x + dx + pan.x / widthPx).coerceIn(-newWidth * 0.8f, 1f - newWidth * 0.2f),
-        y = (cur.y + dy + pan.y / widthPx).coerceAtLeast(0f),
+        x = (cur.x + dx + pagePan.x / widthPx).coerceIn(-newWidth * 0.8f, 1f - newWidth * 0.2f),
+        y = (cur.y + dy + pagePan.y / widthPx).coerceAtLeast(0f),
         width = newWidth,
         height = newHeight,
         rotation = when (kind) {

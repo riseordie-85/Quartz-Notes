@@ -364,6 +364,9 @@ internal fun PageView(
                         canvas.editingShapeId = null
                         canvas.selectedInlineBlock = null
                         canvas.editingTextId = e.id
+                    } else if (session.activeEditor === state) {
+                        // The formatting tools go back to the page (an open Format sheet keeps its own target).
+                        session.activeEditor = null
                     }
                 },
                 onArrowEdit = { moved, d -> vm.replaceElement(moved.copy(data = d.encodePayload())) },
@@ -492,7 +495,10 @@ internal fun PageView(
                             val pageLocked = latestLocked
                             val p = down.position
                             val slop = viewConfiguration.touchSlop
-                            val onItem = canvas.bounds.values.any { it.inflate(4.dp.toPx()).contains(p) } ||
+                            // A selected text box's handles reach outside it (the rotate handle sits above).
+                            val handles = canvas.selectedId?.takeIf { id -> latestElements.any { it.id == id && it.kind == ElementKind.TEXT } }
+                                ?.let { canvas.bounds[it] }?.inflate(60.dp.toPx())?.contains(p) == true
+                            val onItem = handles || canvas.bounds.values.any { it.inflate(4.dp.toPx()).contains(p) } ||
                                 canvas.toolbarRect?.contains(p) == true
                             // The selected arrow's end handles get their own touches.
                             val nearHandle = canvas.selectedId?.let { id ->
@@ -582,7 +588,11 @@ internal fun PageView(
                                 ink = ink,
                                 icon = Icons.Rounded.AutoStories,
                                 description = if (page.spread) "Use one page" else "Use both pages",
-                                onClick = { vm.setPageSpread(page, !page.spread) },
+                                onClick = {
+                                    // Keeps this page in view as the spreads rearrange.
+                                    onActivate()
+                                    vm.setPageSpread(page, !page.spread)
+                                },
                             )
                         }
                         PageToggle(

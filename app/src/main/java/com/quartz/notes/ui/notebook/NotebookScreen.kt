@@ -82,6 +82,7 @@ import androidx.compose.material.icons.rounded.Brush
 import androidx.compose.material.icons.rounded.Category
 import android.widget.Toast
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.runtime.key
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -191,17 +192,22 @@ fun NotebookScreen(
     var recording by remember { mutableStateOf(false) }
     // Pictures and recordings go onto the active page; remember which one in case it changes meanwhile.
     val targetPage by rememberUpdatedState(activePage.id)
-    val imageAdder = rememberImageAdder { image -> vm.addImage(targetPage, image) }
-    val askMic = rememberMicPermission { recording = true }
     val context = LocalContext.current
+    val latestPageList by rememberUpdatedState(pages)
 
     /** New items need placing, so adding one to a locked page unlocks it. */
-    fun unlockForNewItem() {
-        if (activePage.locked) {
-            vm.setPageLocked(activePage, false)
+    fun unlockForNewItem(pageId: Long = activePage.id) {
+        val page = latestPageList.firstOrNull { it.id == pageId } ?: return
+        if (page.locked) {
+            vm.setPageLocked(page, false)
             Toast.makeText(context, "Page unlocked so the new item can be placed", Toast.LENGTH_SHORT).show()
         }
     }
+    val imageAdder = rememberImageAdder { image ->
+        unlockForNewItem(targetPage)
+        vm.addImage(targetPage, image)
+    }
+    val askMic = rememberMicPermission { recording = true }
 
     BoxWithConstraints(
         Modifier
@@ -222,15 +228,25 @@ fun NotebookScreen(
         // Jump to a requested page (new page, search result, pages list).
         var scrollTarget by rememberSaveable { mutableLongStateOf(-1L) }
         LaunchedEffect(scrollTarget, spreads) {
-            if (scrollTarget >= 0 && pages.any { it.id == scrollTarget }) {
-                activePageId = scrollTarget
-                pagerState.animateScrollToPage(spreadOf(scrollTarget))
+            val target = scrollTarget
+            if (target >= 0 && pages.any { it.id == target }) {
+                // Cleared first, so an interrupted animation can't leave a stale jump behind.
                 scrollTarget = -1L
+                activePageId = target
+                pagerState.animateScrollToPage(spreadOf(target))
             }
         }
         // Folding, unfolding or spreading a page across both sides keeps the active page in view.
         val arrangement = spreads.map { s -> s.map { it?.id } }
         LaunchedEffect(arrangement) {
+            if (scrollTarget >= 0) return@LaunchedEffect // a jump is on its way
+            if (spreads.none { s -> s.any { it?.id == activePageId } }) {
+                // The active page was deleted: stay about where we were.
+                val index = pagerState.currentPage.coerceIn(0, spreads.lastIndex)
+                spreads[index].firstOrNull { it != null }?.let { activePageId = it.id }
+                if (pagerState.currentPage != index) pagerState.scrollToPage(index)
+                return@LaunchedEffect
+            }
             val target = spreadOf(activePageId)
             if (pagerState.currentPage != target) pagerState.scrollToPage(target)
         }
@@ -293,14 +309,14 @@ fun NotebookScreen(
                         val page = spread[0]
                         if (page != null) {
                             Box(Modifier.weight(1f).fillMaxHeight()) {
-                                Page(page, if (perSpread == 2) PageSide.SPREAD else PageSide.SINGLE)
+                                key(page.id) { Page(page, if (perSpread == 2) PageSide.SPREAD else PageSide.SINGLE) }
                             }
                         }
                     } else {
                         for ((slot, page) in spread.withIndex()) {
                             Box(Modifier.weight(1f).fillMaxHeight()) {
                                 when {
-                                    page != null -> Page(page, if (slot == 0) PageSide.LEFT else PageSide.RIGHT)
+                                    page != null -> key(page.id) { Page(page, if (slot == 0) PageSide.LEFT else PageSide.RIGHT) }
                                     index == spreads.lastIndex -> BlankPageSlot(side = PageSide.RIGHT, onClick = {
                                         vm.addPage(pages.lastIndex) { newId -> scrollTarget = newId }
                                     })
@@ -360,7 +376,6 @@ fun NotebookScreen(
                                 leadingIcon = { Icon(Icons.Rounded.PhotoLibrary, null) },
                                 onClick = {
                                     imageMenu = false
-                                    unlockForNewItem()
                                     imageAdder.pickFromGallery()
                                 },
                             )
@@ -369,17 +384,13 @@ fun NotebookScreen(
                                 leadingIcon = { Icon(Icons.Rounded.PhotoCamera, null) },
                                 onClick = {
                                     imageMenu = false
-                                    unlockForNewItem()
                                     imageAdder.takePhoto()
                                 },
                             )
                         }
                     }
                     ToolButton(
-                        onClick = {
-                            unlockForNewItem()
-                            askMic()
-                        },
+                        onClick = askMic,
                         description = "Record voice note",
                     ) {
                         Icon(Icons.Rounded.Mic, null)
@@ -492,6 +503,7 @@ fun NotebookScreen(
         VoiceRecorderSheet(
             onSaved = { path, duration ->
                 recording = false
+                unlockForNewItem(pageForRecording)
                 vm.addVoice(pageForRecording, path, duration)
             },
             onDismiss = { recording = false },
