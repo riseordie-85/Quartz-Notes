@@ -76,6 +76,9 @@ data class NotebookDraft(
     val icon: String,
     val shelfId: Long,
     val twoPage: Boolean = true,
+    val showIndex: Boolean = false,
+    val sectionTabs: Boolean = true,
+    val attachAtBottom: Boolean = false,
 )
 
 /** Create or edit a notebook's title, color, cover texture, icon and shelf. */
@@ -98,6 +101,9 @@ fun NotebookEditorSheet(
     var confirmDelete by remember { mutableStateOf(false) }
     var shelfMenu by remember { mutableStateOf(false) }
     var twoPage by remember { mutableStateOf(existing?.twoPage ?: true) }
+    var showIndex by remember { mutableStateOf(existing?.showIndex ?: false) }
+    var sectionTabs by remember { mutableStateOf(existing?.sectionTabs ?: true) }
+    var attachAtBottom by remember { mutableStateOf(existing?.attachAtBottom ?: false) }
 
     ModalBottomSheet(
         onDismissRequest = onDismiss,
@@ -112,7 +118,7 @@ fun NotebookEditorSheet(
                 .navigationBarsPadding(),
         ) {
             Text(
-                if (existing == null) "New notebook" else "Edit notebook",
+                if (existing == null) "New notebook" else "Notebook settings",
                 fontSize = 22.sp,
                 fontWeight = FontWeight.Medium,
             )
@@ -198,24 +204,31 @@ fun NotebookEditorSheet(
             }
 
             SheetLabel("Pages")
-            Row(
-                Modifier
-                    .fillMaxWidth()
-                    .clip(RoundedCornerShape(12.dp))
-                    .clickable { twoPage = !twoPage }
-                    .padding(vertical = 4.dp),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Column(Modifier.weight(1f)) {
-                    Text("Two-page view", fontSize = 16.sp)
-                    Text(
-                        "When unfolded or on a tablet, show two pages side by side like an open notebook",
-                        fontSize = 13.sp,
-                        color = LocalQuartzColors.current.textSecondary,
-                    )
-                }
-                Spacer(Modifier.width(12.dp))
-                Switch(checked = twoPage, onCheckedChange = { twoPage = it })
+            SwitchRow(
+                title = "Two-page view",
+                subtitle = "When unfolded or on a tablet, show two pages side by side like an open notebook",
+                checked = twoPage,
+                onChange = { twoPage = it },
+            )
+            if (existing != null) {
+                SwitchRow(
+                    title = "Index page",
+                    subtitle = "A page at the front listing every page, then every picture and recording",
+                    checked = showIndex,
+                    onChange = { showIndex = it },
+                )
+                SwitchRow(
+                    title = "Section tabs",
+                    subtitle = "Show sections as colored tabs along the page edges. Hold the + button to add a section",
+                    checked = sectionTabs,
+                    onChange = { sectionTabs = it },
+                )
+                SwitchRow(
+                    title = "Attachments at the bottom",
+                    subtitle = "New pictures and recordings go in a strip under the text instead of anywhere on the page",
+                    checked = attachAtBottom,
+                    onChange = { attachAtBottom = it },
+                )
             }
 
             Spacer(Modifier.height(24.dp))
@@ -229,7 +242,7 @@ fun NotebookEditorSheet(
                 Spacer(Modifier.weight(1f))
                 Button(
                     enabled = title.isNotBlank(),
-                    onClick = { onSave(NotebookDraft(title.trim(), color, texture, icon, shelfId, twoPage)) },
+                    onClick = { onSave(NotebookDraft(title.trim(), color, texture, icon, shelfId, twoPage, showIndex, sectionTabs, attachAtBottom)) },
                 ) { Text(if (existing == null) "Create" else "Save") }
             }
         }
@@ -294,4 +307,27 @@ fun NotebookEntity.applyDraft(d: NotebookDraft) = copy(
     icon = d.icon,
     shelfId = d.shelfId,
     twoPage = d.twoPage,
+    showIndex = d.showIndex,
+    sectionTabs = d.sectionTabs,
+    attachAtBottom = d.attachAtBottom,
 )
+
+/** A setting with a title, a short explanation and a switch; the whole row toggles it. */
+@Composable
+private fun SwitchRow(title: String, subtitle: String, checked: Boolean, onChange: (Boolean) -> Unit) {
+    Row(
+        Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(12.dp))
+            .clickable { onChange(!checked) }
+            .padding(vertical = 6.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Column(Modifier.weight(1f)) {
+            Text(title, fontSize = 16.sp)
+            Text(subtitle, fontSize = 13.sp, color = LocalQuartzColors.current.textSecondary)
+        }
+        Spacer(Modifier.width(12.dp))
+        Switch(checked = checked, onCheckedChange = onChange)
+    }
+}

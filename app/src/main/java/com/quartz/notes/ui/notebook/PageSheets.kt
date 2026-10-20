@@ -23,7 +23,11 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Bookmark
 import androidx.compose.material.icons.rounded.Colorize
+import androidx.compose.material.icons.rounded.MoreVert
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material.icons.rounded.DeleteOutline
 import androidx.compose.material.icons.rounded.KeyboardArrowDown
 import androidx.compose.material.icons.rounded.KeyboardArrowUp
@@ -196,6 +200,8 @@ fun PagesSheet(
     onSelect: (Int) -> Unit,
     onMove: (from: Int, to: Int) -> Unit,
     onDelete: (PageEntity) -> Unit,
+    /** Adds a new section page at this position (so the page here becomes the section's first page). */
+    onStartSection: (Int) -> Unit,
     onDismiss: () -> Unit,
 ) {
     var pendingDelete by remember { mutableStateOf<PageEntity?>(null) }
@@ -219,9 +225,12 @@ fun PagesSheet(
                         color = LocalQuartzColors.current.textSecondary,
                         modifier = Modifier.width(30.dp),
                     )
+                    if (page.isSection) {
+                        Box(Modifier.padding(end = 10.dp).size(width = 6.dp, height = 30.dp).background(page.sectionColor, RoundedCornerShape(3.dp)))
+                    }
                     Column(Modifier.weight(1f)) {
                         Text(
-                            page.title.ifBlank { "Untitled page" },
+                            page.title.ifBlank { if (page.isSection) "Untitled section" else "Untitled page" },
                             fontSize = 16.sp,
                             fontWeight = if (selected) FontWeight.SemiBold else FontWeight.Normal,
                             maxLines = 1,
@@ -238,8 +247,29 @@ fun PagesSheet(
                     IconButton(enabled = index < pages.lastIndex, onClick = { onMove(index, index + 1) }) {
                         Icon(Icons.Rounded.KeyboardArrowDown, contentDescription = "Move down")
                     }
-                    IconButton(onClick = { pendingDelete = page }) {
-                        Icon(Icons.Rounded.DeleteOutline, contentDescription = "Delete page")
+                    Box {
+                        var menu by remember { mutableStateOf(false) }
+                        IconButton(onClick = { menu = true }) { Icon(Icons.Rounded.MoreVert, contentDescription = "Page options") }
+                        DropdownMenu(expanded = menu, onDismissRequest = { menu = false }) {
+                            if (!page.isSection) {
+                                DropdownMenuItem(
+                                    text = { Text("Start a section here") },
+                                    leadingIcon = { Icon(Icons.Rounded.Bookmark, null) },
+                                    onClick = {
+                                        menu = false
+                                        onStartSection(index)
+                                    },
+                                )
+                            }
+                            DropdownMenuItem(
+                                text = { Text(if (page.isSection) "Delete section page" else "Delete page", color = MaterialTheme.colorScheme.error) },
+                                leadingIcon = { Icon(Icons.Rounded.DeleteOutline, null, tint = MaterialTheme.colorScheme.error) },
+                                onClick = {
+                                    menu = false
+                                    pendingDelete = page
+                                },
+                            )
+                        }
                     }
                 }
             }

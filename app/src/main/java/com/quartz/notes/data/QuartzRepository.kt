@@ -398,7 +398,7 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
         db.withTransaction {
             val note = notes.get(noteId) ?: error("Note not found")
             val list = pages.getByNotebook(notebookId)
-            val template = list.lastOrNull()
+            val template = list.lastOrNull { !it.isSection }
             val pageId = pages.insert(
                 PageEntity(
                     notebookId = notebookId,

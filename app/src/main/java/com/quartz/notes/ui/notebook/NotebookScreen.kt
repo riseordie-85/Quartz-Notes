@@ -35,7 +35,7 @@ import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Edit
 import androidx.compose.material.icons.rounded.Layers
-import androidx.compose.material.icons.rounded.MoreVert
+import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material.icons.rounded.Texture
 import androidx.compose.material.icons.rounded.ViewDay
@@ -81,6 +81,9 @@ import androidx.compose.material.icons.automirrored.rounded.ArrowRightAlt
 import androidx.compose.material.icons.rounded.Brush
 import androidx.compose.material.icons.rounded.Category
 import android.widget.Toast
+import androidx.compose.foundation.combinedClickable
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.material.icons.rounded.Share
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.TextButton
@@ -182,7 +185,10 @@ fun NotebookScreen(
     // A text box being typed in takes the formatting tools; otherwise the page's own text does.
     // Scrapbook pages have no flowing text, so without an active text box there's nothing to format.
     // A locked page can't be changed, so there's nothing to format.
-    val currentEditor = if (activePage.locked) {
+    // The index and section pages aren't ordinary pages: no formatting, items or drawing there.
+    val onIndex = activePageId == INDEX_PAGE_ID
+    val activeIsPlain = !onIndex && !activePage.isSection
+    val currentEditor = if (activePage.locked || !activeIsPlain) {
         null
     } else {
         activeSession.activeEditor ?: if (activePage.layoutMode == "SCRAPBOOK") null else editors[activePage.id]
@@ -200,6 +206,8 @@ fun NotebookScreen(
     var showStyle by remember { mutableStateOf(false) }
     var showPages by remember { mutableStateOf(false) }
     var showEdit by remember { mutableStateOf(false) }
+    // Section page whose color / icon / photo is being changed.
+    var sectionStyleId by remember { mutableStateOf<Long?>(null) }
     var imageMenu by remember { mutableStateOf(false) }
     // Sharing: the pages to choose between (two showing), the page being shared, and one being copied.
     var shareChoices by remember { mutableStateOf<List<PageEntity>>(emptyList()) }
@@ -238,7 +246,9 @@ fun NotebookScreen(
         // that off). A scrapbook page set to use both pages gets a whole spread to itself.
         val twoUp = wide && nb.twoPage
         val perSpread = if (twoUp) 2 else 1
-        val spreads = remember(pages, twoUp) { buildSpreads(pages, twoUp) }
+        // The index, when the notebook has one, comes first like any other page.
+        val displayPages = remember(pages, nb.showIndex) { if (nb.showIndex) listOf(indexPage(nb.id)) + pages else pages }
+        val spreads = remember(displayPages, twoUp) { buildSpreads(displayPages, twoUp) }
         fun spreadOf(pageId: Long): Int = spreads.indexOfFirst { s -> s.any { it?.id == pageId } }.coerceAtLeast(0)
         val pagerState = rememberPagerState(initialPage = spreadOf(activePageId)) { spreads.size }
 
@@ -276,9 +286,15 @@ fun NotebookScreen(
             }
         }
 
-        val shown = spreads.getOrNull(pagerState.currentPage).orEmpty().filterNotNull()
+        val shownAll = spreads.getOrNull(pagerState.currentPage).orEmpty().filterNotNull()
+        // Real pages showing (not the index).
+        val shown = shownAll.filter { it.id != INDEX_PAGE_ID }
         val firstShown = shown.firstOrNull()?.let { p -> pages.indexOfFirst { it.id == p.id } + 1 } ?: 1
-        val pageLabel = if (shown.size == 2) "$firstShown–${firstShown + 1}/${pages.size}" else "$firstShown/${pages.size}"
+        val pageLabel = when {
+            shown.isEmpty() -> "Index"
+            shown.size == 2 -> "$firstShown–${firstShown + 1}/${pages.size}"
+            else -> "$firstShown/${pages.size}"
+        }
 
         Column(Modifier.fillMaxSize()) {
             NotebookTopBar(
@@ -291,58 +307,94 @@ fun NotebookScreen(
                 onEdit = { showEdit = true },
                 onShare = {
                     // Two pages showing: ask which one.
-                    if (shown.size > 1) shareChoices = shown else sharingId = (shown.firstOrNull() ?: activePage).id
+                    when {
+                        shown.size > 1 -> shareChoices = shown
+                        shown.isNotEmpty() -> sharingId = shown.first().id
+                        else -> Toast.makeText(context, "Turn to a page to share it", Toast.LENGTH_SHORT).show()
+                    }
                 },
             )
 
-            HorizontalPager(
-                state = pagerState,
-                key = { index -> spreads.getOrNull(index)?.firstOrNull()?.id ?: -index.toLong() - 1 },
-                userScrollEnabled = !WindowInsets.isImeVisible,
-                beyondViewportPageCount = 0,
-                modifier = Modifier.weight(1f).fillMaxWidth(),
-            ) { index ->
-                val spread = spreads.getOrNull(index).orEmpty()
+            // Section tabs along the page edges (drawn first, so the pages sit on top of them).
+            val tabSections = if (nb.sectionTabs) pages.filter { it.isSection } else emptyList()
+            BoxWithConstraints(Modifier.weight(1f).fillMaxWidth()) {
+                SectionTabs(
+                    sections = tabSections,
+                    indexOf = { section -> pages.indexOfFirst { it.id == section.id } },
+                    firstShown = shown.firstOrNull()?.let { p -> pages.indexOfFirst { it.id == p.id } } ?: -1,
+                    twoUp = twoUp,
+                    height = maxHeight,
+                    onOpen = { scrollTarget = it },
+                )
+                HorizontalPager(
+                    state = pagerState,
+                    key = { index -> spreads.getOrNull(index)?.firstOrNull()?.id ?: (Long.MIN_VALUE + index) },
+                    userScrollEnabled = !WindowInsets.isImeVisible,
+                    beyondViewportPageCount = 0,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(start = if (tabSections.isNotEmpty() && twoUp) TabExtra else 0.dp, end = if (tabSections.isNotEmpty()) TabExtra else 0.dp),
+                ) { index ->
+                    val spread = spreads.getOrNull(index).orEmpty()
 
-                @Composable
-                fun Page(page: PageEntity, side: PageSide) {
-                                PageView(
-                                    page = page,
-                                    session = vm.session(page),
-                                    vm = vm,
-                                    side = side,
-                                    canSpread = twoUp,
-                                    tool = tool,
-                                    brushLevel = brushLevel,
-                                    inkArgb = settings?.inkArgb ?: 0,
-                                    onToolDone = { tool = PageTool.NONE },
-                                    focusTextBox = pendingTextFocus?.takeIf { it.first == page.id }?.second,
-                                    onFocusTextBoxHandled = { pendingTextFocus = null },
-                                    onActivate = { activePageId = page.id },
-                                    onEditorReady = { editors[page.id] = it },
-                                    onEditorGone = { editors.remove(page.id) },
-                                    onSave = { vm.saveIfChanged(page.id) },
-                                )
-                }
-
-                Row(Modifier.fillMaxSize().padding(horizontal = if (perSpread == 2) 10.dp else 0.dp)) {
-                    if (spread.size == 1) {
-                        val page = spread[0]
-                        if (page != null) {
-                            Box(Modifier.weight(1f).fillMaxHeight()) {
-                                key(page.id) { Page(page, if (perSpread == 2) PageSide.SPREAD else PageSide.SINGLE) }
-                            }
+                    @Composable
+                    fun Page(page: PageEntity, side: PageSide) {
+                        if (page.id == INDEX_PAGE_ID) {
+                            IndexPageView(pages = pages, vm = vm, side = side, onOpen = { scrollTarget = it })
+                            return
                         }
-                    } else {
-                        for ((slot, page) in spread.withIndex()) {
-                            Box(Modifier.weight(1f).fillMaxHeight()) {
-                                when {
-                                    page != null -> key(page.id) { Page(page, if (slot == 0) PageSide.LEFT else PageSide.RIGHT) }
-                                    index == spreads.lastIndex -> BlankPageSlot(side = PageSide.RIGHT, onClick = {
-                                        vm.addPage(pages.lastIndex) { newId -> scrollTarget = newId }
-                                    })
-                                    // The next page spreads across both sides, so this side is left blank.
-                                    else -> EmptyPageFace(side = PageSide.RIGHT)
+                        if (page.isSection) {
+                            SectionPageView(
+                                page = page,
+                                session = vm.session(page),
+                                vm = vm,
+                                side = side,
+                                onActivate = { activePageId = page.id },
+                                onStyle = {
+                                    activePageId = page.id
+                                    sectionStyleId = page.id
+                                },
+                            )
+                            return
+                        }
+                                    PageView(
+                                        page = page,
+                                        session = vm.session(page),
+                                        vm = vm,
+                                        side = side,
+                                        canSpread = twoUp,
+                                        tool = tool,
+                                        brushLevel = brushLevel,
+                                        inkArgb = settings?.inkArgb ?: 0,
+                                        onToolDone = { tool = PageTool.NONE },
+                                        focusTextBox = pendingTextFocus?.takeIf { it.first == page.id }?.second,
+                                        onFocusTextBoxHandled = { pendingTextFocus = null },
+                                        onActivate = { activePageId = page.id },
+                                        onEditorReady = { editors[page.id] = it },
+                                        onEditorGone = { editors.remove(page.id) },
+                                        onSave = { vm.saveIfChanged(page.id) },
+                                    )
+                    }
+
+                    Row(Modifier.fillMaxSize().padding(horizontal = if (perSpread == 2) 10.dp else 0.dp)) {
+                        if (spread.size == 1) {
+                            val page = spread[0]
+                            if (page != null) {
+                                Box(Modifier.weight(1f).fillMaxHeight()) {
+                                    key(page.id) { Page(page, if (perSpread == 2) PageSide.SPREAD else PageSide.SINGLE) }
+                                }
+                            }
+                        } else {
+                            for ((slot, page) in spread.withIndex()) {
+                                Box(Modifier.weight(1f).fillMaxHeight()) {
+                                    when {
+                                        page != null -> key(page.id) { Page(page, if (slot == 0) PageSide.LEFT else PageSide.RIGHT) }
+                                        index == spreads.lastIndex -> BlankPageSlot(side = PageSide.RIGHT, onClick = {
+                                            vm.addPage(pages.lastIndex) { newId -> scrollTarget = newId }
+                                        })
+                                        // The next page spreads across both sides, so this side is left blank.
+                                        else -> EmptyPageFace(side = PageSide.RIGHT)
+                                    }
                                 }
                             }
                         }
@@ -387,113 +439,136 @@ fun NotebookScreen(
                     },
                     modifier = Modifier.weight(1f),
                 ) {
-                    Box {
-                        ToolButton(onClick = { imageMenu = true }, description = "Add picture") {
-                            Icon(Icons.Rounded.Image, null)
-                        }
-                        DropdownMenu(expanded = imageMenu, onDismissRequest = { imageMenu = false }) {
-                            DropdownMenuItem(
-                                text = { Text("Photo library") },
-                                leadingIcon = { Icon(Icons.Rounded.PhotoLibrary, null) },
-                                onClick = {
-                                    imageMenu = false
-                                    imageAdder.pickFromGallery()
-                                },
-                            )
-                            DropdownMenuItem(
-                                text = { Text("Take photo") },
-                                leadingIcon = { Icon(Icons.Rounded.PhotoCamera, null) },
-                                onClick = {
-                                    imageMenu = false
-                                    imageAdder.takePhoto()
-                                },
-                            )
-                        }
-                    }
-                    ToolButton(
-                        onClick = askMic,
-                        description = "Record voice note",
-                    ) {
-                        Icon(Icons.Rounded.Mic, null)
-                    }
-                    ToolButton(
-                        onClick = {
-                            tool = PageTool.NONE
-                            unlockForNewItem()
-                            scope.launch {
-                                val y = activeSession.scrollUnits + 0.3f
-                                val id = vm.addTextBox(activePage.id, 0.12f, y, 0.6f)
-                                pendingTextFocus = activePage.id to id
+                    // Items, text boxes and drawing only make sense on ordinary pages.
+                    if (activeIsPlain) {
+                        Box {
+                            ToolButton(onClick = { imageMenu = true }, description = "Add picture") {
+                                Icon(Icons.Rounded.Image, null)
                             }
-                        },
-                        description = "Add text box",
-                    ) { Icon(TextBoxIcon, null) }
-                    ToolButton(
-                        selected = tool == PageTool.BRUSH || tool == PageTool.ERASER,
-                        onClick = {
-                            if (tool == PageTool.BRUSH || tool == PageTool.ERASER) {
-                                tool = PageTool.NONE
-                            } else {
-                                unlockForNewItem()
-                                tool = PageTool.BRUSH
-                            }
-                        },
-                        description = "Brush",
-                    ) { Icon(Icons.Rounded.Brush, null) }
-                    Box {
-                        ToolButton(onClick = { shapeMenu = true }, description = "Add shape") { Icon(Icons.Rounded.Category, null) }
-                        DropdownMenu(expanded = shapeMenu, onDismissRequest = { shapeMenu = false }) {
-                            ShapeType.entries.forEach { t ->
+                            DropdownMenu(expanded = imageMenu, onDismissRequest = { imageMenu = false }) {
                                 DropdownMenuItem(
-                                    text = { Text(t.label) },
-                                    leadingIcon = {
-                                        val c = MaterialTheme.colorScheme.onSurface
-                                        androidx.compose.foundation.Canvas(Modifier.size(22.dp)) {
-                                            drawPath(shapePath(t, size), c, style = androidx.compose.ui.graphics.drawscope.Stroke(2.dp.toPx()))
-                                        }
-                                    },
+                                    text = { Text("Photo library") },
+                                    leadingIcon = { Icon(Icons.Rounded.PhotoLibrary, null) },
                                     onClick = {
-                                        shapeMenu = false
-                                        tool = PageTool.NONE
-                                        unlockForNewItem()
-                                        vm.addShape(activePage.id, t)
+                                        imageMenu = false
+                                        imageAdder.pickFromGallery()
+                                    },
+                                )
+                                DropdownMenuItem(
+                                    text = { Text("Take photo") },
+                                    leadingIcon = { Icon(Icons.Rounded.PhotoCamera, null) },
+                                    onClick = {
+                                        imageMenu = false
+                                        imageAdder.takePhoto()
                                     },
                                 )
                             }
                         }
-                    }
-                    ToolButton(
-                        onClick = {
-                            tool = PageTool.NONE
-                            unlockForNewItem()
-                            vm.addArrow(activePage.id)
-                        },
-                        description = "Add arrow",
-                    ) { Icon(Icons.AutoMirrored.Rounded.ArrowRightAlt, null) }
-                    ToolButton(
-                        selected = tool == PageTool.CONNECT,
-                        onClick = {
-                            if (tool == PageTool.CONNECT) {
+                        ToolButton(
+                            onClick = askMic,
+                            description = "Record voice note",
+                        ) {
+                            Icon(Icons.Rounded.Mic, null)
+                        }
+                        ToolButton(
+                            onClick = {
                                 tool = PageTool.NONE
-                            } else {
                                 unlockForNewItem()
-                                tool = PageTool.CONNECT
+                                scope.launch {
+                                    val y = activeSession.scrollUnits + 0.3f
+                                    val id = vm.addTextBox(activePage.id, 0.12f, y, 0.6f)
+                                    pendingTextFocus = activePage.id to id
+                                }
+                            },
+                            description = "Add text box",
+                        ) { Icon(TextBoxIcon, null) }
+                        ToolButton(
+                            selected = tool == PageTool.BRUSH || tool == PageTool.ERASER,
+                            onClick = {
+                                if (tool == PageTool.BRUSH || tool == PageTool.ERASER) {
+                                    tool = PageTool.NONE
+                                } else {
+                                    unlockForNewItem()
+                                    tool = PageTool.BRUSH
+                                }
+                            },
+                            description = "Brush",
+                        ) { Icon(Icons.Rounded.Brush, null) }
+                        Box {
+                            ToolButton(onClick = { shapeMenu = true }, description = "Add shape") { Icon(Icons.Rounded.Category, null) }
+                            DropdownMenu(expanded = shapeMenu, onDismissRequest = { shapeMenu = false }) {
+                                ShapeType.entries.forEach { t ->
+                                    DropdownMenuItem(
+                                        text = { Text(t.label) },
+                                        leadingIcon = {
+                                            val c = MaterialTheme.colorScheme.onSurface
+                                            androidx.compose.foundation.Canvas(Modifier.size(22.dp)) {
+                                                drawPath(shapePath(t, size), c, style = androidx.compose.ui.graphics.drawscope.Stroke(2.dp.toPx()))
+                                            }
+                                        },
+                                        onClick = {
+                                            shapeMenu = false
+                                            tool = PageTool.NONE
+                                            unlockForNewItem()
+                                            vm.addShape(activePage.id, t)
+                                        },
+                                    )
+                                }
                             }
-                        },
-                        description = "Connect two items",
-                    ) { Icon(Icons.Rounded.AccountTree, null) }
-                    ToolButton(onClick = { showStyle = true }, description = "Page style") {
-                        Icon(Icons.Rounded.Texture, null)
+                        }
+                        ToolButton(
+                            onClick = {
+                                tool = PageTool.NONE
+                                unlockForNewItem()
+                                vm.addArrow(activePage.id)
+                            },
+                            description = "Add arrow",
+                        ) { Icon(Icons.AutoMirrored.Rounded.ArrowRightAlt, null) }
+                        ToolButton(
+                            selected = tool == PageTool.CONNECT,
+                            onClick = {
+                                if (tool == PageTool.CONNECT) {
+                                    tool = PageTool.NONE
+                                } else {
+                                    unlockForNewItem()
+                                    tool = PageTool.CONNECT
+                                }
+                            },
+                            description = "Connect two items",
+                        ) { Icon(Icons.Rounded.AccountTree, null) }
+                    }
+                    if (!onIndex) {
+                        ToolButton(
+                            onClick = { if (activePage.isSection) sectionStyleId = activePage.id else showStyle = true },
+                            description = if (activePage.isSection) "Section style" else "Page style",
+                        ) {
+                            Icon(Icons.Rounded.Texture, null)
+                        }
                     }
                 }
                 Spacer(Modifier.width(12.dp))
-                RoundActionButton(
-                    onClick = {
-                        vm.addPage(activeIndex) { newId -> scrollTarget = newId }
-                    },
-                    size = 58.dp,
+                // Tap: new page after this one. Long-press: new section.
+                val haptics = LocalHapticFeedback.current
+                val insertAfter = if (onIndex) -1 else activeIndex
+                Box(
+                    Modifier
+                        .size(58.dp)
+                        .shadow(3.dp, CircleShape)
+                        .clip(CircleShape)
+                        .background(LocalQuartzColors.current.pill)
+                        .combinedClickable(
+                            onClickLabel = "Add page",
+                            onLongClickLabel = "Add section",
+                            onClick = { vm.addPage(insertAfter) { newId -> scrollTarget = newId } },
+                            onLongClick = {
+                                haptics.performHapticFeedback(HapticFeedbackType.LongPress)
+                                vm.addSection(insertAfter + 1) { newId -> scrollTarget = newId }
+                                Toast.makeText(context, "New section added", Toast.LENGTH_SHORT).show()
+                            },
+                        ),
+                    contentAlignment = Alignment.Center,
                 ) {
-                    Icon(Icons.Rounded.Add, contentDescription = "Add page", modifier = Modifier.size(32.dp), tint = MaterialTheme.colorScheme.onSurface)
+                    Icon(Icons.Rounded.Add, contentDescription = "Add page (hold for a new section)", modifier = Modifier.size(32.dp), tint = MaterialTheme.colorScheme.onSurface)
                 }
             }
         }
@@ -511,6 +586,10 @@ fun NotebookScreen(
                     vm.movePage(from, to)
                 },
                 onDelete = { page -> vm.deletePage(page, isOnlyPage = pages.size <= 1) },
+                onStartSection = { index ->
+                    showPages = false
+                    vm.addSection(index) { newId -> scrollTarget = newId }
+                },
                 onDismiss = { showPages = false },
             )
         }
@@ -620,6 +699,19 @@ fun NotebookScreen(
         )
     }
 
+    sectionStyleId?.let { id ->
+        val page = pages.firstOrNull { it.id == id && it.isSection }
+        if (page == null) {
+            sectionStyleId = null
+        } else {
+            SectionStyleSheet(
+                page = page,
+                onChange = { color, icon, image -> vm.saveSection(page, color, icon, image) },
+                onDismiss = { sectionStyleId = null },
+            )
+        }
+    }
+
     // The sheet keeps formatting the editor it was opened for, even though opening it moves focus.
     val sheetTarget = formatTarget
     if (showFormat && sheetTarget != null) {
@@ -677,7 +769,6 @@ private fun NotebookTopBar(
     onEdit: () -> Unit,
     onShare: () -> Unit,
 ) {
-    var menu by remember { mutableStateOf(false) }
     val color = Color(notebook.colorArgb)
     val onColor = contentColorFor(color)
     Row(
@@ -727,27 +818,7 @@ private fun NotebookTopBar(
                 }
                 IconButton(onClick = onShare) { Icon(Icons.Rounded.Share, contentDescription = "Share page", tint = onColor) }
                 IconButton(onClick = onPages) { Icon(Icons.Rounded.Layers, contentDescription = "Pages", tint = onColor) }
-                Box {
-                    IconButton(onClick = { menu = true }) { Icon(Icons.Rounded.MoreVert, contentDescription = "More", tint = onColor) }
-                    DropdownMenu(expanded = menu, onDismissRequest = { menu = false }) {
-                        DropdownMenuItem(
-                            text = { Text("Edit notebook") },
-                            leadingIcon = { Icon(Icons.Rounded.Edit, null) },
-                            onClick = {
-                                menu = false
-                                onEdit()
-                            },
-                        )
-                        DropdownMenuItem(
-                            text = { Text("All pages") },
-                            leadingIcon = { Icon(Icons.Rounded.ViewDay, null) },
-                            onClick = {
-                                menu = false
-                                onPages()
-                            },
-                        )
-                    }
-                }
+                IconButton(onClick = onEdit) { Icon(Icons.Rounded.Settings, contentDescription = "Notebook settings", tint = onColor) }
             }
         }
     }

@@ -20,6 +20,9 @@ import com.quartz.notes.data.model.ShapeType
 import com.quartz.notes.data.model.StrokeData
 import com.quartz.notes.data.model.TextBoxData
 import com.quartz.notes.data.model.decodePayload
+import com.quartz.notes.data.model.ImagePlacement
+import com.quartz.notes.data.model.decodeImageData
+import com.quartz.notes.data.model.decodeVoiceData
 import com.quartz.notes.data.model.encode
 import com.quartz.notes.data.model.encodePayload
 import kotlinx.coroutines.flow.Flow
@@ -55,8 +58,19 @@ class PageSession(page: PageEntity) {
     /** Set while the page is on screen: its words and a picture of it, for sharing. */
     var exporter: PageExporter? = null
 
+    /** A section page's description (sections keep it as plain text). */
+    var description by mutableStateOf(if (page.isSection) page.plainText else "")
+
     private var savedVersion = editor.version
     private var savedTitle = page.title
+    private var savedDescription = description
+
+    val sectionDirty: Boolean get() = title != savedTitle || description != savedDescription
+
+    internal fun markSectionSaved() {
+        savedTitle = title
+        savedDescription = description
+    }
 
     val contentDirty: Boolean get() = editor.version != savedVersion
     val titleDirty: Boolean get() = title != savedTitle
@@ -111,7 +125,57 @@ class NotebookViewModel(
         }
     }
 
+    // ---- Sections ----
+
+    /** Saves a section page's title and description, with its color, icon and photo. */
+    fun saveSection(
+        page: PageEntity,
+        color: Int? = page.backgroundArgb,
+        icon: String? = page.sectionIcon,
+        image: String? = page.sectionImage,
+    ) {
+        val s = session(page)
+        repo.saveSection(page.id, s.title, s.description, color, icon, image)
+        s.markSectionSaved()
+    }
+
+    fun saveSectionIfChanged(page: PageEntity) {
+        val s = sessions[page.id] ?: return
+        if (s.sectionDirty) saveSection(page)
+    }
+
+    /** Adds a new section page at [position] (0-based) and reports its id. */
+    fun addSection(position: Int, onCreated: (Long) -> Unit) = viewModelScope.launch {
+        val count = pages.value.orEmpty().count { it.isSection }
+        onCreated(repo.insertSection(notebookId, position, nextSectionColor(count)))
+    }
+
+    /** Pictures, recordings and text boxes across the notebook, for the index page. */
+    val notebookMedia: StateFlow<List<PageElementEntity>> =
+        repo.observeNotebookMedia(notebookId).stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+
     // ---- Pictures and voice notes on pages ----
+
+    /** Whether new pictures and recordings go in the strip at the bottom of the page. */
+    private val attachAtBottom: Boolean get() = notebook.value?.attachAtBottom == true
+
+    /** Moves a picture or recording from the bottom strip onto the page itself. */
+    fun placeAttachment(e: PageElementEntity) {
+        val y = placementY(e.pageId)
+        when (e.kind) {
+            ElementKind.IMAGE -> {
+                val d = decodeImageData(e.data) ?: return
+                val w = 0.6f
+                repo.replaceElement(
+                    e.copy(x = (1f - w) / 2, y = y, width = w, height = w * d.aspect, data = d.copy(placement = ImagePlacement.FLOAT).encode()),
+                )
+            }
+            ElementKind.VOICE -> {
+                val d = decodeVoiceData(e.data) ?: return
+                repo.replaceElement(e.copy(x = 0.1f, y = y, width = 0.7f, data = d.copy(attached = false).encode()))
+            }
+        }
+    }
 
     private val elementFlows = HashMap<Long, Flow<List<PageElementEntity>>>()
 
@@ -131,8 +195,13 @@ class NotebookViewModel(
         repo.addElement(
             PageElementEntity(
                 pageId = pageId, kind = ElementKind.IMAGE, x = x, y = placementY(pageId), width = width,
-                height = width * image.aspect, rotation = listOf(-3f, 2f, -1.5f, 3f, 0f)[stagger % 5],
-                data = ImageData(path = image.path, aspect = image.aspect).encode(),
+                height = width * image.aspect,
+                rotation = if (attachAtBottom) 0f else listOf(-3f, 2f, -1.5f, 3f, 0f)[stagger % 5],
+                data = ImageData(
+                    path = image.path,
+                    aspect = image.aspect,
+                    placement = if (attachAtBottom) ImagePlacement.ATTACHED else ImagePlacement.FLOAT,
+                ).encode(),
             ),
         )
     }
@@ -168,7 +237,7 @@ class NotebookViewModel(
         repo.addElement(
             PageElementEntity(
                 pageId = pageId, kind = ElementKind.VOICE, x = 0.1f, y = placementY(pageId), width = 0.7f,
-                data = VoiceData(path = path, durationMs = durationMs).encode(),
+                data = VoiceData(path = path, durationMs = durationMs, attached = attachAtBottom).encode(),
             ),
         )
     }
