@@ -2,23 +2,18 @@ package com.quartz.notes.ui.editor
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.relocation.BringIntoViewRequester
-import androidx.compose.foundation.relocation.bringIntoViewRequester
-import androidx.compose.runtime.rememberCoroutineScope
-import kotlinx.coroutines.launch
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.relocation.BringIntoViewRequester
+import androidx.compose.foundation.relocation.bringIntoViewRequester
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
@@ -31,25 +26,29 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.layout.LayoutCoordinates
-import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.unit.Dp
-import com.quartz.notes.ui.media.DecoratedImage
-import com.quartz.notes.ui.media.heightFactor
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.layout.LayoutCoordinates
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
@@ -61,6 +60,10 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.style.TextIndent
+import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -70,7 +73,11 @@ import com.quartz.notes.data.rich.Align
 import com.quartz.notes.data.rich.BlockType
 import com.quartz.notes.data.rich.InlineStyle
 import com.quartz.notes.data.rich.StyleSpan
+import com.quartz.notes.ui.media.DecoratedImage
+import com.quartz.notes.ui.media.heightFactor
 import com.quartz.notes.ui.theme.parseHexColor
+import kotlinx.coroutines.launch
+import kotlin.math.roundToInt
 
 /** Looks up font families by id for inline FONT spans. */
 @Stable
@@ -114,7 +121,20 @@ fun Align.toTextAlign(): TextAlign = when (this) {
     Align.JUSTIFY -> TextAlign.Justify
 }
 
-/** A block-based rich text editor. Place it inside a vertically scrolling container. */
+/** Width of the bullet / checkbox column in front of list items. */
+private val BulletColumn: Dp = 26.dp
+private val TaskColumn: Dp = 32.dp
+
+/** Extra start indent per indent level. */
+private val IndentStep: Dp = 24.dp
+
+/**
+ * A rich text editor for a whole document in one text field, so selecting, select all, copy and
+ * paste work across paragraphs. Paragraph looks (headings, lists, tasks, alignment) come from
+ * paragraph styles; bullets, checkboxes and in-line pictures are drawn at their lines. Place it
+ * inside a vertically scrolling container.
+ */
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun RichTextEditor(
     state: RichEditorState,
@@ -128,68 +148,174 @@ fun RichTextEditor(
     enabled: Boolean = true,
 ) {
     val accent = MaterialTheme.colorScheme.primary
+    val density = LocalDensity.current
+    val resolver = LocalFontResolver.current
     BoxWithConstraints(modifier) {
         val textWidth = maxWidth
-        Column(Modifier.fillMaxWidth()) {
-            for (block in state.blocks) {
-                key(block.id) {
-                    val insets = layout?.insets?.invoke(block.id)
-                    val measured = Modifier
-                        .padding(start = insets?.first ?: 0.dp, end = insets?.second ?: 0.dp)
-                        .then(
-                            if (layout?.onBlockBounds != null) {
-                                Modifier.onGloballyPositioned { c ->
-                                    val root = layout.root() ?: return@onGloballyPositioned
-                                    if (!c.isAttached || !root.isAttached) return@onGloballyPositioned
-                                    val top = root.localPositionOf(c, Offset.Zero).y
-                                    layout.onBlockBounds.invoke(block.id, top, top + c.size.height)
-                                }
-                            } else {
-                                Modifier
-                            },
-                        )
-                    if (block.isImage) {
-                        Box(measured) {
-                            val img = layout?.imageBlock
-                            if (img != null) img(block, textWidth) else DefaultImageBlock(block, textWidth, styles)
+        val version = state.version
+        val transformation = remember(version, styles, contentColor, resolver, textWidth, density) {
+            DocTransformation(
+                metas = state.blocks.map { ParagraphLook(it.type, it.align, it.checked, it.indent, it.isImage && it.image != null) },
+                slotHeights = state.blocks.map { b -> if (b.isImage && b.image != null) slotHeight(b, textWidth, styles, density) else 0.dp },
+                spans = state.spans,
+                styles = styles,
+                contentColor = contentColor,
+                resolver = resolver,
+                density = density,
+            )
+        }
+        var textLayout by remember { mutableStateOf<TextLayoutResult?>(null) }
+        val holder = remember { LayoutHolder() }
+        val reveal = remember { BringIntoViewRequester() }
+        val scope = rememberCoroutineScope()
+        val revealMargin = with(density) { 24.dp.toPx() }
+
+        LaunchedEffect(state.focusRequest) {
+            if (state.focusRequest > 0) runCatching { state.focusRequester.requestFocus() }
+        }
+
+        fun reportBounds() {
+            val hooks = layout ?: return
+            val report = hooks.onBlockBounds ?: return
+            val coords = holder.coords ?: return
+            val root = hooks.root() ?: return
+            val l = holder.layout ?: return
+            if (!coords.isAttached || !root.isAttached) return
+            val origin = root.localPositionOf(coords, Offset.Zero).y
+            val t = state.text
+            val starts = state.paragraphStarts(t)
+            val len = l.layoutInput.text.length
+            state.blocks.forEachIndexed { i, b ->
+                val start = starts.getOrNull(i) ?: return@forEachIndexed
+                val end = starts.getOrNull(i + 1)?.minus(1) ?: t.length
+                val first = l.getLineForOffset(start.coerceIn(0, len))
+                val last = l.getLineForOffset(end.coerceIn(0, len))
+                report(b.id, origin + l.getLineTop(first), origin + l.getLineBottom(last))
+            }
+        }
+
+        BasicTextField(
+            value = state.value,
+            onValueChange = {
+                if (it.text != state.value.text) holder.revealPending = true
+                state.onValueChange(it)
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .bringIntoViewRequester(reveal)
+                .focusRequester(state.focusRequester)
+                .onFocusChanged { state.onFocusChanged(it.isFocused) }
+                .onGloballyPositioned {
+                    holder.coords = it
+                    reportBounds()
+                }
+                .drawBehind {
+                    // Bullets in front of list items.
+                    val l = textLayout ?: return@drawBehind
+                    val starts = state.paragraphStarts(state.text)
+                    val len = l.layoutInput.text.length
+                    state.blocks.forEachIndexed { i, b ->
+                        if (b.type != BlockType.BULLET) return@forEachIndexed
+                        val start = starts.getOrNull(i) ?: return@forEachIndexed
+                        val line = l.getLineForOffset(start.coerceIn(0, len))
+                        val cy = (l.getLineTop(line) + l.getLineBottom(line)) / 2
+                        val cx = (IndentStep * b.indent + BulletColumn / 2).toPx()
+                        drawCircle(contentColor, radius = 3.dp.toPx(), center = Offset(cx, cy))
+                    }
+                },
+            enabled = enabled,
+            readOnly = readOnly,
+            textStyle = styles.body.copy(color = contentColor),
+            cursorBrush = SolidColor(accent),
+            visualTransformation = transformation,
+            keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
+            onTextLayout = { result ->
+                textLayout = result
+                holder.layout = result
+                reportBounds()
+                if (holder.revealPending && state.focused) {
+                    holder.revealPending = false
+                    // Keep the cursor on screen while typing, even after scrolling away from it.
+                    val offset = state.selEnd.coerceIn(0, result.layoutInput.text.length)
+                    val cursor = result.getCursorRect(offset)
+                    scope.launch {
+                        runCatching {
+                            reveal.bringIntoView(cursor.copy(top = cursor.top - revealMargin / 2, bottom = cursor.bottom + revealMargin))
                         }
-                    } else {
-                        Box(measured) { BlockRow(state, block, styles, contentColor, accent, readOnly, enabled) }
+                    }
+                }
+            },
+        )
+
+        // Checkboxes and in-line pictures, placed on their lines.
+        val l = textLayout
+        if (l != null) {
+            val starts = state.paragraphStarts(state.text)
+            val len = l.layoutInput.text.length
+            state.blocks.forEachIndexed { i, b ->
+                val start = starts.getOrNull(i) ?: return@forEachIndexed
+                val line = l.getLineForOffset(start.coerceIn(0, len))
+                val top = l.getLineTop(line)
+                val lineHeight = with(density) { (l.getLineBottom(line) - top).toDp() }
+                key(b.id) {
+                    when {
+                        b.type == BlockType.TASK -> TaskBox(
+                            checked = b.checked,
+                            height = lineHeight,
+                            accent = accent,
+                            contentColor = contentColor,
+                            enabled = enabled && !readOnly,
+                            onToggle = { state.toggleChecked(b) },
+                            modifier = Modifier.offset { IntOffset((IndentStep * b.indent).roundToPx(), top.roundToInt()) },
+                        )
+                        b.isImage && b.image != null -> Box(
+                            Modifier
+                                .offset { IntOffset(0, top.roundToInt()) }
+                                .width(textWidth)
+                                .height(lineHeight),
+                        ) {
+                            val img = layout?.imageBlock
+                            if (img != null) img(b, textWidth) else DefaultImageBlock(b, textWidth, styles)
+                        }
                     }
                 }
             }
         }
-        if (placeholder != null && state.blocks.size == 1 && state.blocks[0].text.isEmpty() &&
-            state.blocks[0].type == BlockType.BODY
-        ) {
-            Text(
-                text = placeholder,
-                style = styles.body.copy(color = contentColor.copy(alpha = 0.38f)),
-            )
+
+        if (placeholder != null && state.blocks.size == 1 && state.text.isEmpty() && state.blocks[0].type == BlockType.BODY) {
+            Text(text = placeholder, style = styles.body.copy(color = contentColor.copy(alpha = 0.38f)))
         }
     }
 }
 
+/** Last text layout and field position, without triggering recomposition. */
+private class LayoutHolder {
+    var layout: TextLayoutResult? = null
+    var coords: LayoutCoordinates? = null
+    var revealPending = false
+}
+
 /**
- * Extra layout features used by notebook pages: per-paragraph insets (text wrapping around
- * pictures), reporting where each paragraph sits, and custom drawing of in-line pictures.
+ * Extra layout features used by notebook pages: reporting where each paragraph sits, and custom
+ * drawing of in-line pictures.
  */
 class EditorLayoutHooks(
-    /** Start/end inset for a block, or null. */
-    val insets: ((blockId: String) -> Pair<Dp, Dp>?)? = null,
-    /** The coordinates block positions are reported in. */
+    /** The coordinates paragraph positions are reported in. */
     val root: () -> LayoutCoordinates? = { null },
-    /** Called with a block's top and bottom, in px relative to [root]. */
+    /** Called with a paragraph's top and bottom, in px relative to [root]. */
     val onBlockBounds: ((blockId: String, top: Float, bottom: Float) -> Unit)? = null,
-    /** Draws an in-line picture block, given the text column's width. */
+    /** Draws an in-line picture, given the text width. */
     val imageBlock: (@Composable (BlockState, Dp) -> Unit)? = null,
 )
 
 /** Height an in-line picture occupies, rounded up to whole ruled lines so the text below stays on the lines. */
 @Composable
-fun inlineImageSlotHeight(block: BlockState, textWidth: Dp, styles: EditorStyles): Dp {
+fun inlineImageSlotHeight(block: BlockState, textWidth: Dp, styles: EditorStyles): Dp =
+    slotHeight(block, textWidth, styles, LocalDensity.current)
+
+private fun slotHeight(block: BlockState, textWidth: Dp, styles: EditorStyles, density: Density): Dp {
     val data = block.image ?: return 0.dp
-    val unit = with(LocalDensity.current) { styles.lineUnit.toDp() }
+    val unit = with(density) { styles.lineUnit.toDp() }
     val h = textWidth * block.imageWidth * data.heightFactor() + 16.dp
     val lines = kotlin.math.ceil(h / unit).toInt().coerceAtLeast(1)
     return unit * lines
@@ -208,92 +334,6 @@ private fun DefaultImageBlock(block: BlockState, textWidth: Dp, styles: EditorSt
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
-@Composable
-private fun BlockRow(
-    state: RichEditorState,
-    block: BlockState,
-    styles: EditorStyles,
-    contentColor: Color,
-    accent: Color,
-    readOnly: Boolean,
-    enabled: Boolean,
-) {
-    val resolver = LocalFontResolver.current
-    val typeStyle = styles.forType(block.type)
-    var textStyle = typeStyle.copy(color = contentColor, textAlign = block.align.toTextAlign())
-    if (block.type == BlockType.TASK && block.checked) {
-        textStyle = textStyle.copy(color = contentColor.copy(alpha = 0.5f), textDecoration = TextDecoration.LineThrough)
-    }
-    val spans = block.spans
-    val transformation = remember(spans, resolver) { BlockTransformation(spans, resolver) }
-    val lineHeight = with(LocalDensity.current) { typeStyle.lineHeight.toDp() }
-
-    val request = state.focusRequest
-    LaunchedEffect(request) {
-        if (request != null && request.blockId == block.id) {
-            runCatching { block.focusRequester.requestFocus() }
-        }
-    }
-
-    // Typing keeps the cursor on screen, even after scrolling away from it with the keyboard open.
-    val reveal = remember { BringIntoViewRequester() }
-    val tracker = remember { CursorTracker() }
-    val scope = rememberCoroutineScope()
-    val revealMargin = with(LocalDensity.current) { 24.dp.toPx() }
-
-    Row(Modifier.fillMaxWidth().padding(start = (block.indent * 24).dp)) {
-        when (block.type) {
-            BlockType.BULLET -> Box(Modifier.width(26.dp).height(lineHeight), contentAlignment = Alignment.Center) {
-                Box(Modifier.size(6.dp).background(contentColor, CircleShape))
-            }
-            BlockType.TASK -> TaskBox(
-                checked = block.checked,
-                height = lineHeight,
-                accent = accent,
-                contentColor = contentColor,
-                enabled = enabled && !readOnly,
-                onToggle = { state.toggleChecked(block) },
-            )
-            else -> Unit
-        }
-        BasicTextField(
-            value = block.value,
-            onValueChange = {
-                if (it.text != block.value.text) tracker.pending = true
-                state.onValueChange(block, it)
-            },
-            modifier = Modifier
-                .weight(1f)
-                .bringIntoViewRequester(reveal)
-                .focusRequester(block.focusRequester)
-                .onFocusChanged {
-                    tracker.focused = it.isFocused
-                    if (it.isFocused) state.onFocused(block)
-                },
-            enabled = enabled,
-            readOnly = readOnly,
-            onTextLayout = { layout ->
-                if (tracker.pending && tracker.focused) {
-                    tracker.pending = false
-                    // The hidden marker shifts every offset by one.
-                    val offset = (block.value.selection.end - 1).coerceIn(0, layout.layoutInput.text.length)
-                    val cursor = layout.getCursorRect(offset)
-                    scope.launch {
-                        runCatching {
-                            reveal.bringIntoView(cursor.copy(top = cursor.top - revealMargin / 2, bottom = cursor.bottom + revealMargin))
-                        }
-                    }
-                }
-            },
-            textStyle = textStyle,
-            cursorBrush = SolidColor(accent),
-            visualTransformation = transformation,
-            keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
-        )
-    }
-}
-
 @Composable
 private fun TaskBox(
     checked: Boolean,
@@ -302,11 +342,12 @@ private fun TaskBox(
     contentColor: Color,
     enabled: Boolean,
     onToggle: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     val shape = RoundedCornerShape(5.dp)
     Box(
-        Modifier
-            .width(32.dp)
+        modifier
+            .width(TaskColumn)
             .height(height)
             .then(
                 if (enabled) {
@@ -336,31 +377,104 @@ private fun TaskBox(
     }
 }
 
-/** Remembers, without causing recomposition, whether typing should bring the cursor into view. */
-private class CursorTracker {
-    var pending = false
-    var focused = false
-}
+/** How one paragraph looks, captured for the visual transformation. */
+private data class ParagraphLook(
+    val type: BlockType,
+    val align: Align,
+    val checked: Boolean,
+    val indent: Int,
+    val picture: Boolean,
+)
 
-/** Hides the leading marker character and renders the block's style spans. */
-private class BlockTransformation(
+/**
+ * Shows the document: hides the leading marker, turns line breaks into paragraph boundaries (each
+ * paragraph gets its own paragraph style), and renders headings, list indents, done tasks, picture
+ * lines and the character styles. Offsets map one to one apart from the marker.
+ */
+private class DocTransformation(
+    private val metas: List<ParagraphLook>,
+    private val slotHeights: List<Dp>,
     private val spans: List<StyleSpan>,
+    private val styles: EditorStyles,
+    private val contentColor: Color,
     private val resolver: FontResolver,
+    private val density: Density,
 ) : VisualTransformation {
 
     override fun filter(text: AnnotatedString): TransformedText {
-        val rawLength = text.length
-        val visible = if (text.text.startsWith(MARK)) text.text.substring(MARK.length) else text.text
-        val hidden = rawLength - visible.length
+        val raw = text.text
+        val doc = if (raw.startsWith(MARK)) raw.substring(MARK.length) else raw
+        val hidden = raw.length - doc.length
+        val parts = doc.split('\n')
+        val lastEmpty = parts.last().isEmpty()
+
+        // Line breaks become spaces at the end of each paragraph (the paragraph styles make the breaks),
+        // so offsets stay the same. Picture placeholders become zero-width spaces.
+        val sb = StringBuilder(doc.length + 1)
+        for (c in doc) sb.append(if (c == '\n') ' ' else if (c == OBJ) '​' else c)
+        // An empty last paragraph needs a character so it still gets its own line.
+        if (lastEmpty) sb.append('​')
+        val visible = sb.toString()
         val length = visible.length
         val builder = AnnotatedString.Builder(visible)
 
+        var start = 0
+        parts.forEachIndexed { i, part ->
+            val look = metas.getOrNull(i) ?: ParagraphLook(BlockType.BODY, Align.START, false, 0, false)
+            val end = start + part.length
+            val styleEnd = if (i < parts.lastIndex) end + 1 else length
+            val isPicture = look.picture && part == OBJ.toString()
+            val paragraph = if (isPicture) {
+                val h = slotHeights.getOrNull(i) ?: 0.dp
+                ParagraphStyle(
+                    textAlign = look.align.toTextAlign(),
+                    lineHeight = with(density) { h.toSp() },
+                    lineHeightStyle = CenteredLines,
+                )
+            } else {
+                val column = when (look.type) {
+                    BlockType.BULLET -> BulletColumn
+                    BlockType.TASK -> TaskColumn
+                    else -> 0.dp
+                }
+                val indent = IndentStep * look.indent + column
+                ParagraphStyle(
+                    textAlign = look.align.toTextAlign(),
+                    lineHeight = styles.lineUnit,
+                    lineHeightStyle = CenteredLines,
+                    textIndent = if (indent > 0.dp) with(density) { TextIndent(indent.toSp(), indent.toSp()) } else null,
+                )
+            }
+            if (styleEnd > start) builder.addStyle(paragraph, start, styleEnd)
+
+            if (end > start) {
+                when (look.type) {
+                    BlockType.HEADING -> builder.addStyle(SpanStyle(fontSize = styles.heading.fontSize, fontWeight = styles.heading.fontWeight), start, end)
+                    BlockType.SUBHEADING -> builder.addStyle(SpanStyle(fontSize = styles.subheading.fontSize, fontWeight = styles.subheading.fontWeight), start, end)
+                    else -> Unit
+                }
+                if (look.type == BlockType.TASK && look.checked) {
+                    builder.addStyle(SpanStyle(color = contentColor.copy(alpha = 0.5f), textDecoration = TextDecoration.LineThrough), start, end)
+                }
+            }
+            start = end + 1
+        }
+
+        addCharacterStyles(builder, doc.length)
+
+        val mapping = object : OffsetMapping {
+            override fun originalToTransformed(offset: Int): Int = (offset - hidden).coerceIn(0, length)
+            override fun transformedToOriginal(offset: Int): Int = (offset + hidden).coerceIn(0, raw.length)
+        }
+        return TransformedText(builder.toAnnotatedString(), mapping)
+    }
+
+    private fun addCharacterStyles(builder: AnnotatedString.Builder, length: Int) {
         fun add(style: SpanStyle, start: Int, end: Int) {
             val s = start.coerceIn(0, length)
             val e = end.coerceIn(0, length)
             if (s < e) builder.addStyle(style, s, e)
         }
-
         for (inline in StyleOrder) {
             for (sp in spans) {
                 if (sp.style != inline) continue
@@ -379,7 +493,6 @@ private class BlockTransformation(
                 add(style, sp.start, sp.end)
             }
         }
-
         // Where underline and strikethrough overlap, apply both (a later decoration would replace the earlier).
         val both = TextDecoration.combine(listOf(TextDecoration.Underline, TextDecoration.LineThrough))
         for (u in spans) {
@@ -391,12 +504,6 @@ private class BlockTransformation(
                 if (a < b) add(SpanStyle(textDecoration = both), a, b)
             }
         }
-        // The marker occupies original offset 0; everything after it shifts left by one.
-        val mapping = object : OffsetMapping {
-            override fun originalToTransformed(offset: Int): Int = (offset - hidden).coerceIn(0, length)
-            override fun transformedToOriginal(offset: Int): Int = (offset + hidden).coerceIn(0, rawLength)
-        }
-        return TransformedText(builder.toAnnotatedString(), mapping)
     }
 
     companion object {

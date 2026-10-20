@@ -119,7 +119,7 @@ val VoiceElementHeight: Dp = 56.dp
 private val GripWidth: Dp = 30.dp
 
 /** Where to put a picture relative to the text. */
-enum class PictureLayout { FLOAT, WRAP, INLINE }
+enum class PictureLayout { FLOAT, INLINE }
 
 /**
  * Interaction state for one page's canvas (selection, live drawing, item bounds).
@@ -1002,19 +1002,10 @@ private fun ElementToolbar(
                         DropdownMenu(expanded = layoutMenu, onDismissRequest = { layoutMenu = false }) {
                             DropdownMenuItem(
                                 text = { Text("Float freely") },
-                                trailingIcon = { if (!image.wraps) Icon(Icons.Rounded.Check, null) },
+                                trailingIcon = { Icon(Icons.Rounded.Check, null) },
                                 onClick = {
                                     layoutMenu = false
                                     actions.onPictureLayout(element, image, PictureLayout.FLOAT)
-                                },
-                            )
-                            DropdownMenuItem(
-                                text = { Text("Wrap text") },
-                                enabled = allowTextLayout,
-                                trailingIcon = { if (image.wraps) Icon(Icons.Rounded.Check, null) },
-                                onClick = {
-                                    layoutMenu = false
-                                    actions.onPictureLayout(element, image, PictureLayout.WRAP)
                                 },
                             )
                             DropdownMenuItem(

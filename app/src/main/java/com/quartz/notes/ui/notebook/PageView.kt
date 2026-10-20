@@ -115,13 +115,6 @@ import com.quartz.notes.ui.theme.contentColorFor
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.drop
-import kotlin.math.max
-
-/** Gap between a wrapped picture and the text beside it. */
-private val WrapGap: Dp = 12.dp
-
-/** Distance of a wrapped picture from the page edge. */
-private val WrapMargin: Dp = 16.dp
 
 /** One notebook page: title, text (or scrapbook items), and everything placed on it. */
 @OptIn(FlowPreview::class)
@@ -191,9 +184,9 @@ internal fun PageView(
     }
     // Typing in the page text puts away item toolbars and makes the page text the formatting target.
     LaunchedEffect(editor) {
-        snapshotFlow { editor.focusedId }.drop(1).collect {
+        snapshotFlow { editor.focused }.drop(1).collect {
             canvas.clearSelection()
-            if (it != null) session.activeEditor = null
+            if (it) session.activeEditor = null
         }
     }
     // A finished brush stroke stays on screen until the database has it.
@@ -279,14 +272,6 @@ internal fun PageView(
 
         // ---- Actions from the items on the page ----
 
-        fun snapWrap(e: PageElementEntity, data: ImageData): Pair<PageElementEntity, ImageData> {
-            val margin = with(density) { WrapMargin.toPx() } / widthPx
-            val left = e.x + e.width / 2 < 0.5f
-            val placement = if (left) ImagePlacement.WRAP_LEFT else ImagePlacement.WRAP_RIGHT
-            val x = if (left) margin else 1f - e.width - margin
-            return e.copy(x = x, rotation = 0f) to data.copy(placement = placement)
-        }
-
         fun toInline(e: PageElementEntity, data: ImageData) {
             val top = e.y * widthPx
             val blocks = editor.blocks
@@ -328,26 +313,12 @@ internal fun PageView(
                     canvas.selectedInlineBlock = null
                     if (id != null) focusManager.clearFocus()
                 },
-                onMove = { e ->
-                    val data = if (e.kind == ElementKind.IMAGE) decodeImageData(e.data) else null
-                    if (data != null && data.wraps) {
-                        val (snapped, newData) = snapWrap(e, data)
-                        vm.moveElement(snapped)
-                        if (newData.placement != data.placement) vm.updateElementData(e, newData.encode())
-                    } else {
-                        vm.moveElement(e)
-                    }
-                },
+                onMove = { e -> vm.moveElement(e) },
                 onView = { viewing = it.path },
                 onDecorate = { e, d -> decorating = e to d },
                 onPictureLayout = { e, d, layout ->
                     when (layout) {
                         PictureLayout.FLOAT -> if (d.wraps) vm.updateElementData(e, d.copy(placement = ImagePlacement.FLOAT).encode())
-                        PictureLayout.WRAP -> {
-                            val (snapped, newData) = snapWrap(e, d)
-                            vm.moveElement(snapped)
-                            vm.updateElementData(e, newData.encode())
-                        }
                         PictureLayout.INLINE -> toInline(e, d)
                     }
                 },
@@ -401,41 +372,9 @@ internal fun PageView(
             }
         }
 
-        // ---- Wrapping text around pictures ----
+        // ---- Pictures in line with the text ----
 
-        val gapPx = with(density) { WrapGap.toPx() }
-        val wrapRects = elements.mapNotNull { e ->
-            if (e.kind != ElementKind.IMAGE) return@mapNotNull null
-            val d = decodeImageData(e.data) ?: return@mapNotNull null
-            if (!d.wraps) return@mapNotNull null
-            val r = canvas.bounds[e.id] ?: return@mapNotNull null
-            d.placement to r
-        }
         val hooks = EditorLayoutHooks(
-            insets = if (wrapRects.isEmpty()) null else { id ->
-                val b = canvas.blockBounds[id]
-                if (b == null) {
-                    null
-                } else {
-                    var start = 0f
-                    var end = 0f
-                    for ((placement, r) in wrapRects) {
-                        if (b.first < r.bottom && b.second > r.top) {
-                            if (placement == ImagePlacement.WRAP_LEFT) start = max(start, r.right + gapPx - padHPx)
-                            else end = max(end, widthPx - r.left + gapPx - padHPx)
-                        }
-                    }
-                    // Never squeeze text narrower than this; a very wide picture just floats over it.
-                    val minText = with(density) { 110.dp.toPx() }
-                    if (start <= 0f && end <= 0f) {
-                        null
-                    } else if (textWidthPx - start.coerceAtLeast(0f) - end.coerceAtLeast(0f) < minText) {
-                        null
-                    } else {
-                        with(density) { start.coerceAtLeast(0f).toDp() to end.coerceAtLeast(0f).toDp() }
-                    }
-                }
-            },
             root = { canvas.contentCoords },
             onBlockBounds = { id, top, bottom ->
                 val v = top to bottom
