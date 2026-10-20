@@ -54,6 +54,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.drawWithContent
 import android.graphics.Picture
+import androidx.compose.ui.graphics.drawscope.draw
 import androidx.compose.ui.draw.alpha
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.withTimeout
