@@ -23,10 +23,10 @@ import androidx.compose.ui.unit.dp
 import com.quartz.notes.data.db.PageEntity
 
 /** Extra room at the screen edge for section tabs (on top of the page's own margin). */
-internal val TabExtra: Dp = 10.dp
+internal val TabExtra: Dp = 20.dp
 
 /** Visible width of a tab: the page margin (16dp) plus [TabExtra]. */
-private val TabVisible: Dp = 26.dp
+private val TabVisible: Dp = 16.dp + TabExtra
 
 /**
  * Notebook tabs, one per section, in the section page's color. In two-page view, sections already
