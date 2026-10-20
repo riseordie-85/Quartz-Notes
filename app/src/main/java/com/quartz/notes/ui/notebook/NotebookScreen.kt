@@ -145,6 +145,9 @@ import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.first
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalLayoutApi::class)
 @Composable
@@ -256,13 +259,16 @@ fun NotebookScreen(
 
         // Jump to a requested page (new page, search result, pages list).
         var scrollTarget by rememberSaveable { mutableLongStateOf(-1L) }
-        LaunchedEffect(scrollTarget, spreads) {
-            val target = scrollTarget
-            if (target >= 0 && pages.any { it.id == target }) {
-                // Cleared first, so an interrupted animation can't leave a stale jump behind.
-                scrollTarget = -1L
+        val latestSpreads by rememberUpdatedState(spreads)
+        LaunchedEffect(pagerState) {
+            // One long-running listener, so clearing the request never cancels the jump in progress.
+            // A newer request replaces an older one.
+            snapshotFlow { scrollTarget }.filter { it >= 0 }.collectLatest { target ->
+                // A brand-new page may not be in the list yet: wait for it to arrive.
+                val index = snapshotFlow { latestSpreads.indexOfFirst { s -> s.any { it?.id == target } } }.first { it >= 0 }
                 activePageId = target
-                pagerState.animateScrollToPage(spreadOf(target))
+                scrollTarget = -1L
+                pagerState.animateScrollToPage(index)
             }
         }
         // Folding, unfolding or spreading a page across both sides keeps the active page in view.
@@ -285,7 +291,6 @@ fun NotebookScreen(
             }
         }
         // Swiping to another spread makes its first page active, unless the active page is still showing.
-        val latestSpreads by rememberUpdatedState(spreads)
         LaunchedEffect(pagerState) {
             snapshotFlow { pagerState.settledPage }.collect { index ->
                 val visible = latestSpreads.getOrNull(index).orEmpty().filterNotNull()

@@ -14,8 +14,8 @@ android {
         applicationId = "com.quartz.notes"
         minSdk = 33
         targetSdk = 35
-        versionCode = 7
-        versionName = "0.4.0"
+        versionCode = 8
+        versionName = "0.4.1"
         vectorDrawables { useSupportLibrary = true }
     }
 
