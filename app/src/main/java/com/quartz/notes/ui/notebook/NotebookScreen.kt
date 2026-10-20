@@ -282,7 +282,10 @@ fun NotebookScreen(
         LaunchedEffect(pagerState) {
             snapshotFlow { pagerState.settledPage }.collect { index ->
                 val visible = latestSpreads.getOrNull(index).orEmpty().filterNotNull()
-                if (visible.isNotEmpty() && visible.none { it.id == activePageId }) activePageId = visible.first().id
+                // Prefer a real page over the index when both are showing.
+                if (visible.isNotEmpty() && visible.none { it.id == activePageId }) {
+                    activePageId = (visible.firstOrNull { it.id != INDEX_PAGE_ID } ?: visible.first()).id
+                }
             }
         }
 
