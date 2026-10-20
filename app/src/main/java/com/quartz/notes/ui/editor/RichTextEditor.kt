@@ -276,6 +276,21 @@ fun RichTextEditor(
                         ) {
                             val img = layout?.imageBlock
                             if (img != null) img(b, textWidth) else DefaultImageBlock(b, textWidth, styles)
+                            // A selected picture is tinted, like selected text.
+                            if (state.hasSelection && state.selStart <= start && state.selEnd > start) {
+                                val alignment = when (b.align) {
+                                    Align.CENTER, Align.JUSTIFY -> Alignment.Center
+                                    Align.END -> Alignment.CenterEnd
+                                    Align.START -> Alignment.CenterStart
+                                }
+                                val image = b.image
+                                Box(
+                                    Modifier
+                                        .align(alignment)
+                                        .size(textWidth * b.imageWidth, textWidth * b.imageWidth * (image?.heightFactor() ?: 1f))
+                                        .background(accent.copy(alpha = 0.3f)),
+                                )
+                            }
                         }
                     }
                 }
