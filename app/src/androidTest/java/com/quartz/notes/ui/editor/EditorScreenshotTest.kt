@@ -104,10 +104,11 @@ class EditorScreenshotTest {
         val field = rule.onNode(hasSetTextAction())
         field.performClick()
         field.performTextInputSelection(TextRange(state.value.text.length))
-        field.performTextInput("\nSecond")
-        field.performTextInput("\n")
-        field.performTextInput("\n") // empty bullet: ends the list
-        field.performTextInput("Plain text after the list")
+        // One key at a time, letting the screen catch up in between, like a person typing.
+        for (input in listOf("\nSecond", "\n", "\n" /* empty bullet: ends the list */, "Plain text after the list")) {
+            field.performTextInput(input)
+            rule.waitForIdle()
+        }
         save("02_typing")
         val doc = state.toDoc()
         assertEquals(listOf("First", "Second", "Plain text after the list"), doc.blocks.map { it.text })
