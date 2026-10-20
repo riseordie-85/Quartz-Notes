@@ -243,4 +243,70 @@ class RichEditorStateTest {
         assertEquals(s.text.count { it == '\n' } + 1, s.blocks.size)
         assertEquals(s.texts().size, s.blocks.size)
     }
+
+    @Test
+    fun deletingAnEmptyLineKeepsTheNextLinesLook() {
+        val s = doc(Block(text = "a"), Block(text = ""), Block(type = BlockType.HEADING, text = "Title"))
+        s.select(2) // on the empty line
+        s.backspace()
+        assertEquals(listOf("a", "Title"), s.texts())
+        assertEquals(listOf(BlockType.BODY, BlockType.HEADING), s.types())
+    }
+
+    @Test
+    fun backspaceAtStartWhenNoteStartsWithEmptyLineDoesNothing() {
+        val s = doc(Block(text = ""), Block(type = BlockType.TASK, text = "todo"))
+        s.select(0)
+        s.backspace()
+        assertEquals(listOf("", "todo"), s.texts())
+        assertEquals(listOf(BlockType.BODY, BlockType.TASK), s.types())
+    }
+
+    @Test
+    fun typingInFrontOfAPictureMakesOneLineAboveIt() {
+        val s = doc(Block(type = BlockType.IMAGE, image = ImageData(path = "p.jpg", aspect = 1f)), Block(text = "after"))
+        s.select(0)
+        s.type("h")
+        s.type("i")
+        assertEquals(listOf("hi", "", "after"), s.texts())
+        assertEquals(listOf(BlockType.BODY, BlockType.IMAGE, BlockType.BODY), s.types())
+    }
+
+    @Test
+    fun enterInFrontOfAPictureAddsAPlainLineAndKeepsThePicture() {
+        val s = doc(Block(type = BlockType.IMAGE, image = ImageData(path = "p.jpg", aspect = 1f), align = Align.CENTER), Block(text = "x"))
+        val id = s.blocks[0].id
+        s.select(0)
+        s.enter()
+        assertEquals(listOf(BlockType.BODY, BlockType.IMAGE, BlockType.BODY), s.types())
+        assertEquals(id, s.blocks[1].id)
+        assertEquals(Align.START, s.blocks[0].align)
+    }
+
+    @Test
+    fun deletingUpToAPictureKeepsThePicture() {
+        val s = doc(Block(text = "ab"), Block(type = BlockType.IMAGE, image = ImageData(path = "p.jpg", aspect = 1f)), Block(text = "c"))
+        s.select(1, 3) // "b\n"
+        s.backspace()
+        assertEquals(listOf("a", "", "c"), s.texts())
+        assertEquals(listOf(BlockType.BODY, BlockType.IMAGE, BlockType.BODY), s.types())
+    }
+
+    @Test
+    fun deletingTextBetweenTwoPicturesKeepsBoth() {
+        val pic = ImageData(path = "p.jpg", aspect = 1f)
+        val s = doc(Block(type = BlockType.IMAGE, image = pic), Block(text = "x"), Block(type = BlockType.IMAGE, image = pic), Block(text = ""))
+        s.select(1, 4) // "\nx\n"
+        s.backspace()
+        assertEquals(listOf(BlockType.IMAGE, BlockType.IMAGE, BlockType.BODY), s.types())
+    }
+
+    @Test
+    fun enterAfterACenteredPictureStartsALeftAlignedLine() {
+        val s = doc(Block(type = BlockType.IMAGE, image = ImageData(path = "p.jpg", aspect = 1f), align = Align.CENTER))
+        s.select(1)
+        s.enter()
+        assertEquals(listOf(BlockType.IMAGE, BlockType.BODY), s.types())
+        assertEquals(Align.START, s.blocks[1].align)
+    }
 }

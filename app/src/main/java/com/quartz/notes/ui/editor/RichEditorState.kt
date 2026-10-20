@@ -326,6 +326,14 @@ class RichEditorState(doc: RichDoc) {
         val old = value
         var raw = incoming
 
+        // Backspace at the very start deletes the hidden marker (even when the note starts with an empty line).
+        if (old.selection.collapsed && old.selection.start == MARK.length && incoming.selection.collapsed &&
+            incoming.text.length == old.text.length - MARK.length && incoming.text == old.text.substring(MARK.length)
+        ) {
+            backspaceAtStart()
+            return
+        }
+
         if (!raw.text.startsWith(MARK)) {
             val oldDoc = old.text.removePrefix(MARK)
             if (raw.text == oldDoc) {
@@ -375,8 +383,20 @@ class RichEditorState(doc: RichDoc) {
         while (s < minOf(oldText.length, newText.length) - p &&
             oldText[oldText.length - 1 - s] == newText[newText.length - 1 - s]
         ) s++
-        val removedEnd = oldText.length - s
-        val insertedEnd = newText.length - s
+        var removedEnd = oldText.length - s
+        var insertedEnd = newText.length - s
+        // A plain delete: use where the cursor was to tell which characters went ("\n\n" minus one).
+        val deleted = oldText.length - newText.length
+        if (old.selection.collapsed && deleted > 0 && removedEnd - p == deleted && insertedEnd == p) {
+            val c = old.selection.end - MARK.length
+            if (c - deleted >= 0 && c <= oldText.length && oldText.removeRange(c - deleted, c) == newText) {
+                p = c - deleted
+            } else if (c >= 0 && c + deleted <= oldText.length && oldText.removeRange(c, c + deleted) == newText) {
+                p = c
+            }
+            removedEnd = p + deleted
+            insertedEnd = p
+        }
         val removed = oldText.substring(p, removedEnd)
         val inserted = newText.substring(p, insertedEnd)
         val pi = paragraphAt(oldText, p).coerceIn(0, blocks.lastIndex)
@@ -439,28 +459,39 @@ class RichEditorState(doc: RichDoc) {
         val removedBreaks = removed.count { it == '\n' }
         val insertedBreaks = inserted.count { it == '\n' }
         val head = blocks[pi]
-        repeat(removedBreaks) { if (pi + 1 <= blocks.lastIndex) blocks.removeAt(pi + 1) }
+        val oldStarts = paragraphStarts(oldText)
+        val lastMerged = pi + removedBreaks
+        // An edit that stops exactly where a picture's line starts leaves the picture alone.
+        val keepPicture = removedBreaks > 0 && lastMerged <= blocks.lastIndex && blocks[lastMerged].isImage &&
+            oldStarts.getOrNull(lastMerged) == removedEnd
+        repeat(if (keepPicture) removedBreaks - 1 else removedBreaks) { if (pi + 1 <= blocks.lastIndex) blocks.removeAt(pi + 1) }
         if (insertedBreaks > 0) {
             val paraStart = oldText.lastIndexOf('\n', p - 1) + 1
             val atStart = p == paraStart && removed.isEmpty() && inserted == "\n" && paragraphText(oldText, pi).isNotEmpty()
-            if (atStart) {
+            if (atStart && head.isImage) {
+                // Enter in front of a picture: a plain empty line goes above it.
+                blocks.add(pi, BlockState.empty())
+            } else if (atStart) {
                 // Enter at the very start: the paragraph moves down; the empty line above is plain.
                 val below = head.copyNew()
-                if (head.isImage) {
-                    head.type = BlockType.BODY
-                    head.image = null
-                }
                 if (head.type in HeadingTypes) head.type = BlockType.BODY
                 head.checked = false
                 blocks.add(pi + 1, below)
             } else {
                 val newType = if (head.type in ListTypes) head.type else BlockType.BODY
-                repeat(insertedBreaks) { blocks.add(pi + 1, BlockState.empty(newType, head.align, head.indent)) }
+                val align = if (head.isImage) Align.START else head.align
+                val indent = if (head.isImage) 0 else head.indent
+                repeat(insertedBreaks) { blocks.add(pi + 1, BlockState.empty(newType, align, indent)) }
             }
         }
 
         spans = SpanOps.normalize(SpanOps.clip(newSpans, newText.length))
         value = raw
+        if (keepPicture) {
+            // Put back the line break in front of the picture.
+            val at = p + inserted.length
+            replace(at, at, "\n")
+        }
         normalizePictures()
         changed()
     }
@@ -501,8 +532,11 @@ class RichEditorState(doc: RichDoc) {
                             blocks.add(i + 1, BlockState.empty(align = Align.START))
                         }
                         if (before.isNotEmpty() || at != before.length) {
+                            val cursor = if (value.selection.collapsed) selEnd else -1
                             replace(start, start + at, before + "\n")
                             blocks.add(i, BlockState.empty(align = Align.START))
+                            // Typing in front of a picture keeps the cursor on the new line above it.
+                            if (cursor in start..(start + at)) setCursor(minOf(cursor, start + before.length))
                             i++
                         }
                     }

@@ -184,9 +184,11 @@ internal fun PageView(
     }
     // Typing in the page text puts away item toolbars and makes the page text the formatting target.
     LaunchedEffect(editor) {
-        snapshotFlow { editor.focused }.drop(1).collect {
-            canvas.clearSelection()
-            if (it) session.activeEditor = null
+        snapshotFlow { editor.focused }.drop(1).collect { focused ->
+            if (focused) {
+                canvas.clearSelection()
+                session.activeEditor = null
+            }
         }
     }
     // A finished brush stroke stays on screen until the database has it.
@@ -195,6 +197,13 @@ internal fun PageView(
         if (!canvas.drawing) canvas.liveStroke.clear()
     }
     LaunchedEffect(elements) {
+        // Text no longer wraps beside pictures: pictures saved as wrapped just float.
+        elements.forEach { e ->
+            if (e.kind == ElementKind.IMAGE) {
+                val d = decodeImageData(e.data)
+                if (d != null && d.wraps) vm.updateElementData(e, d.copy(placement = ImagePlacement.FLOAT).encode())
+            }
+        }
         // A dragged arrow's live copy is dropped once its saved row has changed.
         canvas.arrowDrag?.let { drag -> if (elements.none { it == drag.first }) canvas.arrowDrag = null }
         val ids = elements.map { it.id }.toSet()
@@ -894,10 +903,12 @@ private fun InlineImageSlot(
         Align.START -> Alignment.CenterStart
     }
     val accent = MaterialTheme.colorScheme.primary
+    val latestTap by rememberUpdatedState(onTap)
+    val latestLongPress by rememberUpdatedState(onLongPress)
     Box(Modifier.fillMaxWidth().heightIn(min = inlineImageSlotHeight(block, textWidth, styles)), contentAlignment = alignment) {
         Box(
             Modifier
-                .pointerInput(block.id) { detectTapGestures(onTap = { onTap() }, onLongPress = { onLongPress() }) }
+                .pointerInput(block.id) { detectTapGestures(onTap = { latestTap() }, onLongPress = { latestLongPress() }) }
                 .then(if (selected) Modifier.border(2.dp, accent, RoundedCornerShape(4.dp)).padding(2.dp) else Modifier),
         ) {
             DecoratedImage(data, textWidth * block.imageWidth)
