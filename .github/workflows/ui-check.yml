@@ -1,0 +1,69 @@
+name: UI check
+
+# Runs the editor's unit tests and on-device screenshot tests on an emulator, then pushes the
+# screenshots and test reports to the `ci-shots` branch so they can be looked at without artifacts.
+# Triggered by pushing to a branch named uicheck/<anything>.
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "uicheck/**" ]
+
+permissions:
+  contents: write
+
+jobs:
+  ui:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: Unit tests
+        shell: bash
+        run: |
+          chmod +x gradlew
+          ./gradlew testDebugUnitTest --stacktrace 2>&1 | tee unit.log || echo "UNIT_FAILED=1" >> "$GITHUB_ENV"
+          grep -E "^e: |FAILED|What went wrong" -A3 unit.log | head -60 | while IFS= read -r line; do echo "::warning::${line}"; done
+
+      - name: Emulator tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 33
+          arch: x86_64
+          target: google_apis
+          profile: pixel_6
+          disable-animations: true
+          script: |
+            ./gradlew connectedDebugAndroidTest -Pandroid.injected.androidTest.leaveApksInstalledAfterRun=true --stacktrace > connected.log 2>&1 || echo "connected tests failed"
+            mkdir -p out/shots && adb pull /sdcard/Android/data/com.quartz.notes/files/shots out/ || true
+
+      - name: Publish results to the ci-shots branch
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p out
+          cp unit.log connected.log out/ 2>/dev/null || true
+          mkdir -p out/unit out/connected
+          cp -r app/build/test-results/testDebugUnitTest/. out/unit/ 2>/dev/null || true
+          cp -r app/build/outputs/androidTest-results/. out/connected/ 2>/dev/null || true
+          cd out
+          git init -q
+          git config user.name "ci"
+          git config user.email "ci@users.noreply.github.com"
+          git checkout -q -b ci-shots
+          git add -A
+          git commit -q -m "UI check ${GITHUB_RUN_ID} for ${GITHUB_SHA}"
+          git push -q -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" ci-shots
