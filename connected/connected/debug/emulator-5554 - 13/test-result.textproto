@@ -1,0 +1,224 @@
+# 2026-10-20T19:19:33.649591187Z:
+test_suite_meta_data {
+  scheduled_test_case_count: 4
+}
+test_status: PASSED
+test_result {
+  test_case {
+    test_class: "EditorScreenshotTest"
+    test_package: "com.quartz.notes.ui.editor"
+    test_method: "typingEnterAndLists"
+    start_time {
+      seconds: 1792523951
+      nanos: 461000000
+    }
+    end_time {
+      seconds: 1792523958
+      nanos: 247000000
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/Quartz-Notes/Quartz-Notes/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 13/logcat-com.quartz.notes.ui.editor.EditorScreenshotTest-typingEnterAndLists.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/Quartz-Notes/Quartz-Notes/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 13/device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/Quartz-Notes/Quartz-Notes/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 13/meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/Quartz-Notes/Quartz-Notes/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 13/cpuinfo"
+    }
+  }
+}
+test_result {
+  test_case {
+    test_class: "EditorScreenshotTest"
+    test_package: "com.quartz.notes.ui.editor"
+    test_method: "selectAcrossParagraphs"
+    start_time {
+      seconds: 1792523958
+      nanos: 289000000
+    }
+    end_time {
+      seconds: 1792523966
+      nanos: 140000000
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/Quartz-Notes/Quartz-Notes/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 13/logcat-com.quartz.notes.ui.editor.EditorScreenshotTest-selectAcrossParagraphs.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/Quartz-Notes/Quartz-Notes/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 13/device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/Quartz-Notes/Quartz-Notes/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 13/meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/Quartz-Notes/Quartz-Notes/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 13/cpuinfo"
+    }
+  }
+}
+test_result {
+  test_case {
+    test_class: "EditorScreenshotTest"
+    test_package: "com.quartz.notes.ui.editor"
+    test_method: "layout"
+    start_time {
+      seconds: 1792523966
+      nanos: 197000000
+    }
+    end_time {
+      seconds: 1792523968
+      nanos: 252000000
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/Quartz-Notes/Quartz-Notes/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 13/logcat-com.quartz.notes.ui.editor.EditorScreenshotTest-layout.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/Quartz-Notes/Quartz-Notes/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 13/device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/Quartz-Notes/Quartz-Notes/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 13/meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/Quartz-Notes/Quartz-Notes/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 13/cpuinfo"
+    }
+  }
+}
+test_result {
+  test_case {
+    test_class: "EditorScreenshotTest"
+    test_package: "com.quartz.notes.ui.editor"
+    test_method: "picturesInLine"
+    start_time {
+      seconds: 1792523968
+      nanos: 256000000
+    }
+    end_time {
+      seconds: 1792523972
+      nanos: 415000000
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/Quartz-Notes/Quartz-Notes/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 13/logcat-com.quartz.notes.ui.editor.EditorScreenshotTest-picturesInLine.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/Quartz-Notes/Quartz-Notes/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 13/device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/Quartz-Notes/Quartz-Notes/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 13/meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/Quartz-Notes/Quartz-Notes/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 13/cpuinfo"
+    }
+  }
+}
+output_artifact {
+  label {
+    label: "test-results.log"
+    namespace: "com.google.testing.platform.runtime.android.driver.AndroidInstrumentationDriver"
+  }
+  source_path {
+    path: "/home/runner/work/Quartz-Notes/Quartz-Notes/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 13/testlog/test-results.log"
+  }
+  type: TEST_DATA
+  mime_type: "text/plain"
+}

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.quartz.notes.ui.editor.RichEditorStateTest" tests="24" skipped="0" failures="0" errors="0" timestamp="2026-10-20T19:16:06" hostname="runnervmxehtw" time="0.109">
+  <properties/>
+  <testcase name="enterAfterHeadingGivesPlainText" classname="com.quartz.notes.ui.editor.RichEditorStateTest" time="0.075"/>
+  <testcase name="backspaceAtStartWhenNoteStartsWithEmptyLineDoesNothing" classname="com.quartz.notes.ui.editor.RichEditorStateTest" time="0.001"/>
+  <testcase name="typingAndEnterMakeParagraphs" classname="com.quartz.notes.ui.editor.RichEditorStateTest" time="0.001"/>
+  <testcase name="listToggleAppliesToEverySelectedParagraph" classname="com.quartz.notes.ui.editor.RichEditorStateTest" time="0.003"/>
+  <testcase name="backspaceAfterPictureDoesNotMergeText" classname="com.quartz.notes.ui.editor.RichEditorStateTest" time="0.003"/>
+  <testcase name="deletingThePictureCharacterRemovesThePicture" classname="com.quartz.notes.ui.editor.RichEditorStateTest" time="0.001"/>
+  <testcase name="selectAllAndBoldCoversEveryParagraph" classname="com.quartz.notes.ui.editor.RichEditorStateTest" time="0.005"/>
+  <testcase name="deletingUpToAPictureKeepsThePicture" classname="com.quartz.notes.ui.editor.RichEditorStateTest" time="0.0"/>
+  <testcase name="typingInFrontOfAPictureMakesOneLineAboveIt" classname="com.quartz.notes.ui.editor.RichEditorStateTest" time="0.0"/>
+  <testcase name="picturesStayOnTheirOwnLine" classname="com.quartz.notes.ui.editor.RichEditorStateTest" time="0.0"/>
+  <testcase name="enterInFrontOfAPictureAddsAPlainLineAndKeepsThePicture" classname="com.quartz.notes.ui.editor.RichEditorStateTest" time="0.0"/>
+  <testcase name="selectingAcrossParagraphsAndDeletingMerges" classname="com.quartz.notes.ui.editor.RichEditorStateTest" time="0.001"/>
+  <testcase name="enterInListContinuesItAndEnterOnEmptyItemEndsIt" classname="com.quartz.notes.ui.editor.RichEditorStateTest" time="0.002"/>
+  <testcase name="backspaceAtVeryStartOfNoteRemovesListFormatting" classname="com.quartz.notes.ui.editor.RichEditorStateTest" time="0.0"/>
+  <testcase name="enterAtStartOfHeadingKeepsHeadingBelow" classname="com.quartz.notes.ui.editor.RichEditorStateTest" time="0.0"/>
+  <testcase name="blocksAlwaysMatchLines" classname="com.quartz.notes.ui.editor.RichEditorStateTest" time="0.002"/>
+  <testcase name="deletingTextBetweenTwoPicturesKeepsBoth" classname="com.quartz.notes.ui.editor.RichEditorStateTest" time="0.001"/>
+  <testcase name="removeBlockAndFocusEnd" classname="com.quartz.notes.ui.editor.RichEditorStateTest" time="0.001"/>
+  <testcase name="loadAndSaveKeepsEverything" classname="com.quartz.notes.ui.editor.RichEditorStateTest" time="0.0"/>
+  <testcase name="deletingAnEmptyLineKeepsTheNextLinesLook" classname="com.quartz.notes.ui.editor.RichEditorStateTest" time="0.001"/>
+  <testcase name="pendingBoldAppliesToTypedText" classname="com.quartz.notes.ui.editor.RichEditorStateTest" time="0.001"/>
+  <testcase name="enterAfterACenteredPictureStartsALeftAlignedLine" classname="com.quartz.notes.ui.editor.RichEditorStateTest" time="0.001"/>
+  <testcase name="backspaceAtStartOfListItemRemovesTheBulletFirst" classname="com.quartz.notes.ui.editor.RichEditorStateTest" time="0.001"/>
+  <testcase name="pastingSeveralLinesMakesParagraphs" classname="com.quartz.notes.ui.editor.RichEditorStateTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

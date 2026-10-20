@@ -1,0 +1,38 @@
+INFO: Constructing runner from config.
+INFO: Configuring Android Instrumentation driver: android_instrumentation_runtime {
+  instrumentation_info {
+    app_package: "com.quartz.notes"
+    test_package: "com.quartz.notes.test"
+    test_runner_class: "androidx.test.runner.AndroidJUnitRunner"
+  }
+  instrumentation_args {
+    args_map {
+      key: "additionalTestOutputDir"
+      value: "/sdcard/Android/media/com.quartz.notes/additional_test_output"
+    }
+  }
+}
+am_instrument_timeout: 31536000
+
+INFO: Configuring AndroidTestApkInstallerPlugin: apks_to_install {
+  apk_paths: "/home/runner/work/Quartz-Notes/Quartz-Notes/app/build/outputs/apk/debug/app-debug.apk"
+  install_options {
+  }
+}
+apks_to_install {
+  apk_paths: "/home/runner/work/Quartz-Notes/Quartz-Notes/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk"
+  install_options {
+  }
+}
+
+INFO: No installables found in test fixture. Nothing to install.
+INFO: Installing [/home/runner/work/Quartz-Notes/Quartz-Notes/app/build/outputs/apk/debug/app-debug.apk] on device emulator-5554.
+INFO: Installing [/home/runner/work/Quartz-Notes/Quartz-Notes/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk] on device emulator-5554.
+INFO: Start logcat streaming.
+INFO: Running Android Instrumentation driver.
+INFO: Copying files from device to host: /sdcard/Android/media/com.quartz.notes/additional_test_output to /home/runner/work/Quartz-Notes/Quartz-Notes/app/build/outputs/connected_android_test_additional_output/debugAndroidTest/connected/emulator-5554 - 13
+INFO: Stop logcat streaming.
+INFO: Execute com.quartz.notes.ui.editor.EditorScreenshotTest.typingEnterAndLists: PASSED
+INFO: Execute com.quartz.notes.ui.editor.EditorScreenshotTest.selectAcrossParagraphs: PASSED
+INFO: Execute com.quartz.notes.ui.editor.EditorScreenshotTest.layout: PASSED
+INFO: Execute com.quartz.notes.ui.editor.EditorScreenshotTest.picturesInLine: PASSED

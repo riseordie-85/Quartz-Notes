@@ -1,0 +1,154 @@
+10-20 19:19:25.949  5046  5112 I TestRunner: started: layout(com.quartz.notes.ui.editor.EditorScreenshotTest)
+10-20 19:19:25.957   365   382 W TransactionTracing: Could not find layer handle 0x7139508197b0
+10-20 19:19:25.957   365   382 W TransactionTracing: Could not find layer handle 0x7139508172f0
+10-20 19:19:25.957   365   382 W TransactionTracing: Could not find layer handle 0x713950819c90
+10-20 19:19:25.957   365   382 W TransactionTracing: Could not find layer handle 0x713950818f70
+10-20 19:19:25.957   365   382 W TransactionTracing: Could not find layer handle 0x71395081a0b0
+10-20 19:19:25.957   365   382 W TransactionTracing: Could not find layer handle 0x713950817050
+10-20 19:19:25.961  1095  1367 W LocalMediaManager: BluetoothAdapter is null or muting expected device not exist
+10-20 19:19:25.972  1489  1489 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+10-20 19:19:25.972  1489  1489 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.google.android.apps.nexuslauncher fieldId=-1 fieldName=null extras=null}, false)
+10-20 19:19:25.972  1489  1489 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+10-20 19:19:26.006   318   389 I RanchuHwc: validateDisplay: layer 37 CompositionType 1, fallback to client
+10-20 19:19:26.006   318   389 I RanchuHwc: validateDisplay: layer 36 CompositionType 1, fallback to client
+10-20 19:19:26.007  5046  5112 D IdlingRegistry: Registering idling resources: [androidx.compose.ui.test.EspressoLink@a24f32e]
+10-20 19:19:26.034  1489  1489 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+10-20 19:19:26.049   365   376 E SurfaceFlinger: Only WindowManager is allowed to use eEarlyWakeup[Start|End] flags
+10-20 19:19:26.066  5046  5112 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+10-20 19:19:26.106  1291  1291 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.chimera.container.moduleinstall.ModuleInstallService.START dat=chimera-action:/... cmp=com.google.android.gms/.chimera.GmsApiService }
+10-20 19:19:26.110  1291  1817 W gle.android.gms: Long monitor contention with owner main (1291) at boolean abnr.handleMessage(android.os.Message)(:com.google.android.gms@231818047@23.18.18 (190800-535401451):16) waiters=0 in void abnp.e(abno, android.content.ServiceConnection) for 150ms
+10-20 19:19:26.126  1057  1057 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.instantapps.START pkg=com.google.android.gms }
+10-20 19:19:26.151  1057  4942 I Fitness : FitCleanupIntentOperation received Intent android.intent.action.PACKAGE_CHANGED [CONTEXT service_id=17 ]
+10-20 19:19:26.161   761   817 D EGL_emulation: app_time_stats: avg=13773.44ms min=13773.44ms max=13773.44ms count=1
+10-20 19:19:26.197  1489  1727 D EGL_emulation: app_time_stats: avg=3093.69ms min=3093.69ms max=3093.69ms count=1
+10-20 19:19:26.207  1095  3818 D SlicesIndexer: Slices already indexed - returning.
+10-20 19:19:26.207  1095  3818 D SettingsSliceProvider: Built slice (content://android.settings.slices/action/battery_saver) in: 0
+10-20 19:19:26.254  1489  1844 I SP      : Registering emoji.20190807, url: https://www.gstatic.com/android/keyboard/modelpack/emoji/20190807165503/superpacks_manifest.zip, constraints: m:*:*:*, flags: fg, requested: 20190807, current: 20190807
+10-20 19:19:26.254  1489  1844 I SP      : Sync for emoji succeeded in 6003 ms: {added: [7b9ddb0b8c001e17cee03b1edf554b20], metadata: false
+10-20 19:19:26.267   761   808 D SplashScreenView: Build android.window.SplashScreenView{ec7a0d0 V.E...... ......ID 0,0-0,0}
+10-20 19:19:26.267   761   808 D SplashScreenView: Icon: view: null drawable: null size: 0
+10-20 19:19:26.267   761   808 D SplashScreenView: Branding: view: android.view.View{edf08c9 G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+10-20 19:19:26.269   761   817 W Parcel  : Expecting binder but got null!
+10-20 19:19:26.330  1095  1367 D SlicesIndexer: Slices already indexed - returning.
+10-20 19:19:26.333  1095  1367 D SettingsSliceProvider: Built slice (content://android.settings.slices/action/airplane_mode) in: 3
+10-20 19:19:26.364  1489  1844 I SP      : GC for 'emoji' (10) with ttl of 0 ms took 0 ms (0/0/0)
+10-20 19:19:26.364  1489  1844 I SP      : Sync for next-word-predictor succeeded in 6804 ms: {added: [tflite-nwp-9343e8ce723e0b22aa8e2733a7d475be], metadata: false
+10-20 19:19:26.392  1818  2335 I A       : GMSCore Auth returned 0 accounts.
+10-20 19:19:26.392  1818  2335 I A       : GoogleOwnersProvider returned 0 accounts.
+10-20 19:19:26.418  1095  1845 D WifiSlice: calling uid name : com.google.android.settings.intelligence
+10-20 19:19:26.420  1489  1844 I SP      : GC for 'next-word-predictor' (10) with ttl of 0 ms took 0 ms (0/0/0)
+10-20 19:19:26.422  1489  3596 I EmojiSuperpacksManager: EmojiSuperpacksManager.processPackSet():498 processPackSet() : isBundled = false
+10-20 19:19:26.422  1489  1854 I EmojiShortcutsLoader: EmojiShortcutsLoader.getEmojiShortcuts():117 Reading en_US emoji shortcuts
+10-20 19:19:26.424  1489  1844 I EmojiSlicingStrategy: EmojiSlicingStrategy.matchEnabledLocalesWithPackLocales():127 matchEnabledLocalesWithPackLocales() : User enabled 1 locales; returning 1 slices
+10-20 19:19:26.424  1489  1844 I SP      : Syncing emoji (20190807) with slices: [{7b9ddb0b8c001e17cee03b1edf554b20, m:*:*:*}], metadata: false
+10-20 19:19:26.433  1489  1854 I EmojiShortcutsLoader: EmojiShortcutsLoader.getEmojiShortcuts():134 Read en_US emoji shortcuts successfully.
+10-20 19:19:26.435  1489  1854 I EmojiShortcutsLoader: EmojiShortcutsLoader.call():63 1 emoji shortcut maps loaded.
+10-20 19:19:26.437  1489  1854 I EmojiShortcutsLoader: EmojiShortcutsLoader.call():72 Finished loading emoji shortcuts
+10-20 19:19:26.499  1021  1021 W FrameTracker: Missed App frame:UNKNOWN: 74, 8168, 0, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+10-20 19:19:26.500  1021  1021 W FrameTracker: Missed SF frame:UNKNOWN: 74, 8168, 0, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+10-20 19:19:26.500  1021  1021 W FrameTracker: Missing HWUI jank callback for vsyncId: 8168, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+10-20 19:19:26.500  1021  1021 W FrameTracker: Missed App frame:UNKNOWN: 328, 8175, 0, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+10-20 19:19:26.500  1021  1021 W FrameTracker: Missing HWUI jank callback for vsyncId: 8175, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+10-20 19:19:26.500  1021  1021 W FrameTracker: Missing SF jank callback for vsyncId: 8208, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+10-20 19:19:26.500  1021  2330 V PerfettoTrigger: Not triggering com.android.telemetry.interaction-jank-monitor-9 - not enough time since last trigger
+10-20 19:19:26.531  1653  1653 I GsaVoiceInteractionSrv: Handling ACTION_STOP_HOTWORD
+10-20 19:19:26.602  5046  5046 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@4b1d178 in: PRE_ON_CREATE
+10-20 19:19:26.607  5046  5046 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+10-20 19:19:26.614  5046  5046 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@4b1d178 in: CREATED
+10-20 19:19:26.619  5046  5046 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=androidx.activity.ComponentActivity@4b1d178
+10-20 19:19:26.620  5046  5046 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@4b1d178 in: STARTED
+10-20 19:19:26.620  5046  5046 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=androidx.activity.ComponentActivity@4b1d178
+10-20 19:19:26.626  5046  5046 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@4b1d178 in: RESUMED
+10-20 19:19:26.626  5046  5046 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=androidx.activity.ComponentActivity@4b1d178
+10-20 19:19:26.628  5046  5132 W Parcel  : Expecting binder but got null!
+10-20 19:19:26.655   365   382 W TransactionTracing: Could not find layer handle 0x71395081a050
+10-20 19:19:26.655   365   382 W TransactionTracing: Could not find layer handle 0x71395081b310
+10-20 19:19:26.655   365   382 W TransactionTracing: Could not find layer handle 0x71395081a050
+10-20 19:19:26.655   365   382 W TransactionTracing: Could not find layer handle 0x71395081a050
+10-20 19:19:26.655   365   382 W TransactionTracing: Could not find layer handle 0x71395081b310
+10-20 19:19:26.655   365   382 W TransactionTracing: Could not find layer handle 0x71395081b310
+10-20 19:19:26.724  1021  1867 D EGL_emulation: app_time_stats: avg=266.62ms min=41.53ms max=736.58ms count=7
+10-20 19:19:26.800   761   817 D EGL_emulation: app_time_stats: avg=5447.46ms min=5447.46ms max=5447.46ms count=1
+10-20 19:19:26.844   485   496 I system_server: Background young concurrent copying GC freed 854994(23MB) AllocSpace objects, 19(380KB) LOS objects, 51% free, 22MB/45MB, paused 47us,47us total 379.685ms
+10-20 19:19:26.878  1489  1844 I SP      : Sync for emoji succeeded in 456 ms: no changes
+10-20 19:19:26.880  1489  1844 I SP      : GC for 'emoji' (10) with ttl of 0 ms took 1 ms (0/1/0)
+10-20 19:19:26.938  1818  2335 W A       : GetSuggestions failed
+10-20 19:19:26.938  1818  2335 W A       : com.google.common.util.concurrent.dv: Timed out (timeout delayed by 20 ms after scheduled time): h@5dbd9d4[status=PENDING, setFuture=[h@8f2877d[status=PENDING, setFuture=[h@c39f672[status=PENDING, info=[inputFuture=[h@bf0dac3[status=PENDING, setFuture=[ch@e06bf40[status=PENDING, info=[delegate=[dz@2a51e79[status=PENDING, setFuture=[h@a2d07be[status=PENDING, setFuture=[ch@87c601f[status=PENDING, info=[delegate=[dz@9388f6c[status=PENDING, setFuture=[h@2502935[status=PENDING, setFuture=[h@cade1ca[status=PENDING, info=[function=[propagating=[com.google.android.libraries.storage.protostore.di@d10df3b]]]]]]]]]]]]]]]]]]]]], function=[propagating=[com.google.android.apps.search.googleapp.search.suggest.sources.a.be@6d53658]]]]]]]]
+10-20 19:19:26.945  1021  5374 E OneSearchSuggestProvider: Unable to get suggestions from AGA
+10-20 19:19:26.945  1021  5374 E OneSearchSuggestProvider: io.grpc.StatusRuntimeException: UNKNOWN
+10-20 19:19:26.945  1021  5374 E OneSearchSuggestProvider: 	at k2.c.o(Unknown Source:72)
+10-20 19:19:26.945  1021  5374 E OneSearchSuggestProvider: 	at io.grpc.internal.l.b(Unknown Source:32)
+10-20 19:19:26.945  1021  5374 E OneSearchSuggestProvider: 	at io.grpc.internal.l.a(Unknown Source:14)
+10-20 19:19:26.945  1021  5374 E OneSearchSuggestProvider: 	at io.grpc.internal.x.run(Unknown Source:6)
+10-20 19:19:26.945  1021  5374 E OneSearchSuggestProvider: 	at io.grpc.internal.H1.run(Unknown Source:16)
+10-20 19:19:26.945  1021  5374 E OneSearchSuggestProvider: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+10-20 19:19:26.945  1021  5374 E OneSearchSuggestProvider: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+10-20 19:19:26.945  1021  5374 E OneSearchSuggestProvider: 	at java.lang.Thread.run(Thread.java:1012)
+10-20 19:19:26.957   957  1249 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+10-20 19:19:26.958   957  1249 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 2
+10-20 19:19:26.959   485   571 W system_server: Long monitor contention with owner android.anim (509) at void com.android.server.wm.WindowAnimator.lambda$new$1(long)(WindowAnimator.java:110) waiters=0 in void com.android.server.wm.WindowManagerService.setInsetsWindow(com.android.server.wm.Session, android.view.IWindow, int, android.graphics.Rect, android.graphics.Rect, android.graphics.Region) for 103ms
+10-20 19:19:26.960  5046  5046 D AutofillManager: Fill dialog is enabled:false, hints=[]
+10-20 19:19:26.995   485   505 W ziparchive: Unable to open '/data/app/~~6ZMNY4LobWtcnqXZNSHEWg==/com.quartz.notes-dOK81_lLxkqTxbpmU1lHew==/base.dm': No such file or directory
+10-20 19:19:26.995   485   505 I ActivityTaskManager: Displayed com.quartz.notes/androidx.activity.ComponentActivity: +817ms
+10-20 19:19:27.051  1021  2280 D OneSearchSuggestProvider: Shut down the binder channel
+10-20 19:19:27.054  1021  5381 I s.nexuslauncher: oneway function results for code 2 on binder at 0x7b55a1eef530 will be dropped but finished with status UNKNOWN_TRANSACTION
+10-20 19:19:27.066   485   827 W InputManager-JNI: Input channel object '5cd8324 Splash Screen com.quartz.notes (client)' was disposed without first being removed with the input manager!
+10-20 19:19:27.069   365   382 W TransactionTracing: Could not find layer handle 0x713950819870
+10-20 19:19:27.069   365   382 W TransactionTracing: Could not find layer handle 0x713950817dd0
+10-20 19:19:27.099   365   382 W TransactionTracing: Could not find layer handle 0x71395081aad0
+10-20 19:19:27.100   365   382 W TransactionTracing: Could not find layer handle 0x713950819c90
+10-20 19:19:27.100   365   382 W TransactionTracing: Could not find layer handle 0x71395081aad0
+10-20 19:19:27.100   365   382 W TransactionTracing: Could not find layer handle 0x71395081a890
+10-20 19:19:27.100   365   382 W TransactionTracing: Could not find layer handle 0x71395081a890
+10-20 19:19:27.100   365   382 W TransactionTracing: Could not find layer handle 0x71395081a890
+10-20 19:19:27.197  1489  1489 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+10-20 19:19:27.198  1489  1489 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+10-20 19:19:27.198  1489  1489 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=null}, false)
+10-20 19:19:27.198  1489  1489 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+10-20 19:19:27.199  1489  1489 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+10-20 19:19:27.328  1057  5113 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.ads.social.GcmSchedulerWakeupService started execution. cause:5 exec_start_elapsed_seconds: 132 [CONTEXT service_id=218 ]
+10-20 19:19:27.330  1057  5113 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.ads.social.GcmSchedulerWakeupService finished executing. cause:5 result: 1 elapsed_millis: 699 uptime_millis: 699 exec_start_elapsed_seconds: 132 [CONTEXT service_id=218 ]
+10-20 19:19:27.454  1057  3304 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.gass.chimera.SchedulePeriodicTasksService started execution. cause:5 exec_start_elapsed_seconds: 137 [CONTEXT service_id=218 ]
+10-20 19:19:27.471  1057  5113 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.gass.chimera.SchedulePeriodicTasksService finished executing. cause:5 result: 1 elapsed_millis: 23 uptime_millis: 23 exec_start_elapsed_seconds: 137 [CONTEXT service_id=218 ]
+10-20 19:19:27.489  1057  3304 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.gass.chimera.SchedulePeriodicTasksService started execution. cause:5 exec_start_elapsed_seconds: 137 [CONTEXT service_id=218 ]
+10-20 19:19:27.563   761   808 D SplashScreenView: Build android.window.SplashScreenView{c0e233d V.E...... ......ID 0,0-0,0}
+10-20 19:19:27.563   761   808 D SplashScreenView: Icon: view: null drawable: null size: 0
+10-20 19:19:27.563   761   808 D SplashScreenView: Branding: view: android.view.View{eefc732 G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+10-20 19:19:27.565   761   817 W Parcel  : Expecting binder but got null!
+10-20 19:19:27.582  5046  5046 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@4b1d178 in: PAUSED
+10-20 19:19:27.584  5046  5046 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=androidx.activity.ComponentActivity@4b1d178
+10-20 19:19:27.650  5187  5225 W Parcel  : Expecting binder but got null!
+10-20 19:19:27.660  3801  3817 I RemoteProvisioningService: Notify key generated ping for secLevel: 1
+10-20 19:19:27.689   365   382 W TransactionTracing: Could not find layer handle 0x713950819c90
+10-20 19:19:27.690   365   382 W TransactionTracing: Could not find layer handle 0x71395081a230
+10-20 19:19:27.690   365   382 W TransactionTracing: Could not find layer handle 0x713950819c90
+10-20 19:19:27.690   365   382 W TransactionTracing: Could not find layer handle 0x713950819c90
+10-20 19:19:27.695   365   382 W TransactionTracing: Could not find layer handle 0x71395081a230
+10-20 19:19:27.695   365   382 W TransactionTracing: Could not find layer handle 0x71395081a230
+10-20 19:19:27.699  3801  3817 I RemoteProvisioner: Pool status 6, 5, 0, 6
+10-20 19:19:27.699  3801  3817 I RemoteProvisioningService: Pool status.
+10-20 19:19:27.699  3801  3817 I RemoteProvisioningService: Total: 6
+10-20 19:19:27.699  3801  3817 I RemoteProvisioningService: Attested: 6
+10-20 19:19:27.699  3801  3817 I RemoteProvisioningService: Unassigned: 5
+10-20 19:19:27.699  3801  3817 I RemoteProvisioningService: Expiring: 0
+10-20 19:19:27.699  3801  3817 I RemoteProvisioningService.KeyPoolStats: Sufficient keys are available, no CSR needed.
+10-20 19:19:27.699  3801  3817 I RemoteProvisioningService: No provisioning needed.
+10-20 19:19:27.728  2824  2865 D EGL_emulation: eglCreateContext: 0x7b5611e8ee10: maj 3 min 0 rcv 3
+10-20 19:19:27.750  5046  5046 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@4b1d178 in: STOPPED
+10-20 19:19:27.785  5046  5046 V ActivityScenario: Update currentActivityStage to STOPPED, currentActivity=androidx.activity.ComponentActivity@4b1d178
+10-20 19:19:27.907   365   382 W TransactionTracing: Could not find layer handle 0x713950816e10
+10-20 19:19:27.911   957  1249 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+10-20 19:19:27.914   485  1689 W AppSearchIcing: icing-search-engine.cc:217: Error: 5, Message: Document (com.google.android.googlequicksearchbox$OneSearchZeroStateGoogleSuggestions/default, zp) not found.
+10-20 19:19:27.915   957  1249 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 2
+10-20 19:19:27.918  1653  1653 I GsaVoiceInteractionSrv: Handling ACTION_START_HOTWORD
+10-20 19:19:27.920  1653  2405 I GsaVoiceInteractionSrv: disregardVoiceMatch: false
+10-20 19:19:27.922  1636  2057 I AiAiEcho: Predicting[0]:
+10-20 19:19:27.922  1636  2057 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:
+10-20 19:19:27.923  1636  2057 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0
+10-20 19:19:27.924  1636  2057 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0
+10-20 19:19:27.926  5046  5046 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@4b1d178 in: DESTROYED
+10-20 19:19:27.926  5046  5046 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
+10-20 19:19:27.951   485  1073 W InputManager-JNI: Input channel object '7b1c76d com.quartz.notes/androidx.activity.ComponentActivity (client)' was disposed without first being removed with the input manager!
+10-20 19:19:28.030  1021  2280 D OneSearchSuggestProvider: Created the binder channel successfully for end point service =com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService , mChannel=Q0{delegate=L0{logId=13, target=directaddress:///AndroidComponentAddress%5BIntent%20%7B%20act=grpc.io.action.BIND%20cmp=com.google.android.googlequicksearchbox/com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService%20%7D%5D}} , mOneSearchConnection=y1.J@9254877
+10-20 19:19:28.034  5046  5112 D IdlingRegistry: Unregistering idling resources: [androidx.compose.ui.test.EspressoLink@a24f32e]
+10-20 19:19:28.035  5046  5112 I TestRunner: finished: layout(com.quartz.notes.ui.editor.EditorScreenshotTest)
