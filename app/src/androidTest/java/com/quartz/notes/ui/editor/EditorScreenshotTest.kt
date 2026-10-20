@@ -41,6 +41,7 @@ import java.io.File
  * Lays the editor out on a real device and saves screenshots (CI pushes them to the `ci-shots`
  * branch) so the look can be checked: headings, lists, tasks, alignment and selection across paragraphs.
  */
+@OptIn(androidx.compose.ui.test.ExperimentalTestApi::class)
 @RunWith(AndroidJUnit4::class)
 class EditorScreenshotTest {
 
