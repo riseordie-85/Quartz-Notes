@@ -181,8 +181,12 @@ fun NotebookScreen(
     val activeSession = vm.session(activePage)
     // A text box being typed in takes the formatting tools; otherwise the page's own text does.
     // Scrapbook pages have no flowing text, so without an active text box there's nothing to format.
-    val currentEditor = activeSession.activeEditor
-        ?: if (activePage.layoutMode == "SCRAPBOOK") null else editors[activePage.id]
+    // A locked page can't be changed, so there's nothing to format.
+    val currentEditor = if (activePage.locked) {
+        null
+    } else {
+        activeSession.activeEditor ?: if (activePage.layoutMode == "SCRAPBOOK") null else editors[activePage.id]
+    }
 
     // Drawing and connecting tools.
     var tool by remember { mutableStateOf(PageTool.NONE) }
@@ -212,7 +216,7 @@ fun NotebookScreen(
         val page = latestPageList.firstOrNull { it.id == pageId } ?: return
         if (page.locked) {
             vm.setPageLocked(page, false)
-            Toast.makeText(context, "Page unlocked so the new item can be placed", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Page unlocked", Toast.LENGTH_SHORT).show()
         }
     }
     val imageAdder = rememberImageAdder { image ->
@@ -426,7 +430,14 @@ fun NotebookScreen(
                     ) { Icon(TextBoxIcon, null) }
                     ToolButton(
                         selected = tool == PageTool.BRUSH || tool == PageTool.ERASER,
-                        onClick = { tool = if (tool == PageTool.BRUSH || tool == PageTool.ERASER) PageTool.NONE else PageTool.BRUSH },
+                        onClick = {
+                            if (tool == PageTool.BRUSH || tool == PageTool.ERASER) {
+                                tool = PageTool.NONE
+                            } else {
+                                unlockForNewItem()
+                                tool = PageTool.BRUSH
+                            }
+                        },
                         description = "Brush",
                     ) { Icon(Icons.Rounded.Brush, null) }
                     Box {
@@ -461,7 +472,14 @@ fun NotebookScreen(
                     ) { Icon(Icons.AutoMirrored.Rounded.ArrowRightAlt, null) }
                     ToolButton(
                         selected = tool == PageTool.CONNECT,
-                        onClick = { tool = if (tool == PageTool.CONNECT) PageTool.NONE else PageTool.CONNECT },
+                        onClick = {
+                            if (tool == PageTool.CONNECT) {
+                                tool = PageTool.NONE
+                            } else {
+                                unlockForNewItem()
+                                tool = PageTool.CONNECT
+                            }
+                        },
                         description = "Connect two items",
                     ) { Icon(Icons.Rounded.AccountTree, null) }
                     ToolButton(onClick = { showStyle = true }, description = "Page style") {

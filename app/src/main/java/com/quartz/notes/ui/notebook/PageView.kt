@@ -219,14 +219,13 @@ internal fun PageView(
             onFocusTextBoxHandled()
         }
     }
-    // Locking the page puts away anything picked up for moving.
+    // Locking freezes the page: anything picked up or being typed in is put away.
     val locked = page.locked
     LaunchedEffect(locked) {
         if (locked) {
-            canvas.selectedId = null
-            canvas.editingShapeId = null
-            canvas.selectedInlineBlock = null
-            canvas.toolbarRect = null
+            canvas.clearSelection()
+            focusManager.clearFocus()
+            session.activeEditor = null
         }
     }
     // Tools put away selections.
@@ -400,7 +399,7 @@ internal fun PageView(
                 return
             }
             sweepBlankTextBoxes()
-            if (!scrapbook && p.y > titleBottomPx) {
+            if (!scrapbook && !page.locked && p.y > titleBottomPx) {
                 editor.focusEnd()
                 keyboard?.show()
             }
@@ -662,6 +661,7 @@ internal fun PageView(
                         BasicTextField(
                             value = title,
                             onValueChange = { session.title = it.replace("\n", "") },
+                            readOnly = locked,
                             textStyle = TextStyle(fontSize = 21.sp, fontWeight = FontWeight.Bold, color = ink),
                             cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
                             keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Words),
@@ -727,6 +727,7 @@ internal fun PageView(
                                 styles = styles,
                                 contentColor = ink,
                                 layout = hooks,
+                                readOnly = locked,
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .padding(start = padH, end = padH, top = 10.dp, bottom = 40.dp)

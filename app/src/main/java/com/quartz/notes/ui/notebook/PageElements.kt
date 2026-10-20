@@ -342,7 +342,7 @@ private fun ElementItem(
     }
 
     fun startTextEditing() {
-        canvas.selectedId = if (latestLocked) null else element.id
+        canvas.selectedId = element.id
         canvas.editingTextId = element.id
     }
 
@@ -362,11 +362,8 @@ private fun ElementItem(
                 detectTapGestures(
                     onTap = {
                         if (latestLocked) {
-                            // Locked page: nothing moves, but pictures still open and text can still be typed.
-                            when (kind) {
-                                ElementKind.IMAGE -> latestImage?.let(actions.onView)
-                                ElementKind.TEXT -> startTextEditing()
-                            }
+                            // Locked page: nothing moves or changes, but pictures still open full size.
+                            if (kind == ElementKind.IMAGE) latestImage?.let(actions.onView)
                         } else if (kind == ElementKind.TEXT && latestSelected) {
                             // Tapping a selected text box starts typing in it.
                             startTextEditing()
@@ -497,7 +494,7 @@ private fun ElementItem(
                     ink = ink,
                     styles = styles,
                     framed = (selected && !locked) || connecting,
-                    editing = canvas.editingTextId == element.id,
+                    editing = canvas.editingTextId == element.id && !locked,
                     canvas = canvas,
                     actions = actions,
                     onTextHeight = { textHeightPx = it },
