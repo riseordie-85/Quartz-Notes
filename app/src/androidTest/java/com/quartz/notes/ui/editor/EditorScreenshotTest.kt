@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
@@ -72,7 +73,7 @@ class EditorScreenshotTest {
         ),
     )
 
-    private fun setEditor(state: RichEditorState) {
+    private fun setEditor(state: RichEditorState, hooks: EditorLayoutHooks? = null) {
         rule.setContent {
             MaterialTheme {
                 Box(Modifier.fillMaxSize().background(Color.White).verticalScroll(rememberScrollState())) {
@@ -81,6 +82,7 @@ class EditorScreenshotTest {
                         styles = editorStyles(),
                         contentColor = Color(0xFF111114),
                         modifier = Modifier.fillMaxWidth().padding(20.dp).testTag("editor"),
+                        layout = hooks,
                     )
                 }
             }
@@ -130,5 +132,45 @@ class EditorScreenshotTest {
         save("05_select_all")
         assertEquals(0, state.selStart)
         assertEquals(state.text.length, state.selEnd)
+    }
+
+    @Test
+    fun picturesInLine() {
+        val picture = com.quartz.notes.data.model.ImageData(path = "none.jpg", aspect = 0.6f)
+        val state = RichEditorState(
+            RichDoc(
+                listOf(
+                    Block(text = "Text above the picture"),
+                    Block(type = BlockType.IMAGE, image = picture, imageWidth = 0.6f, align = Align.CENTER),
+                    Block(text = "Text below the picture"),
+                    Block(type = BlockType.IMAGE, image = picture, imageWidth = 0.4f, align = Align.END),
+                    Block(text = "After the second picture"),
+                ),
+            ),
+        )
+        // Pictures drawn as colored boxes (real ones need app storage).
+        val hooks = EditorLayoutHooks(
+            imageBlock = { block, width ->
+                Box(Modifier.fillMaxSize(), contentAlignment = if (block.align == Align.END) androidx.compose.ui.Alignment.CenterEnd else androidx.compose.ui.Alignment.Center) {
+                    Box(Modifier.size(width * block.imageWidth, width * block.imageWidth * 0.6f).background(Color(0xFF7FA7E0)))
+                }
+            },
+        )
+        setEditor(state, hooks)
+        save("06_pictures")
+        val field = rule.onNode(hasSetTextAction())
+        field.performClick()
+        // Cursor right after the first picture, then type: the words go on a new line under it.
+        val afterPicture = 1 + "Text above the picture\n".length + 1
+        field.performTextInputSelection(TextRange(afterPicture))
+        field.performTextInput("typed")
+        save("07_typed_after_picture")
+        assertEquals(
+            listOf(BlockType.BODY, BlockType.IMAGE, BlockType.BODY, BlockType.BODY, BlockType.IMAGE, BlockType.BODY),
+            state.toDoc().blocks.map { it.type },
+        )
+        // Select everything, pictures included.
+        field.performTextInputSelection(TextRange(0, state.value.text.length))
+        save("08_select_all_with_pictures")
     }
 }
