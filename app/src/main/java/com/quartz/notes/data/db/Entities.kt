@@ -42,6 +42,12 @@ data class NotebookEntity(
     val updatedAt: Long = System.currentTimeMillis(),
     /** Show pages side by side when the screen is wide (unfolded / tablet). */
     val twoPage: Boolean = true,
+    /** An index page at the front: every page, then every picture and recording. */
+    val showIndex: Boolean = false,
+    /** Section pages show as tabs along the page edges. */
+    val sectionTabs: Boolean = true,
+    /** New pictures and recordings go in a strip at the bottom of the page instead of anywhere on it. */
+    val attachAtBottom: Boolean = false,
 )
 
 @Entity(
@@ -80,6 +86,15 @@ data class PageEntity(
     val locked: Boolean = false,
     /** Scrapbook page that spans both sides of an open spread. */
     val spread: Boolean = false,
+    /**
+     * A section's opening page: its title, a description (kept in [content]/[plainText]) and an icon or
+     * photo, on a bold color ([backgroundArgb]). Sections also show as notebook tabs.
+     */
+    val isSection: Boolean = false,
+    /** Icon catalog key for a section page. */
+    val sectionIcon: String? = null,
+    /** Media path of a section page's photo (used instead of the icon). */
+    val sectionImage: String? = null,
 )
 
 /**
@@ -127,6 +142,8 @@ data class QuickNoteEntity(
     val pinned: Boolean = false,
     val createdAt: Long = System.currentTimeMillis(),
     val updatedAt: Long = System.currentTimeMillis(),
+    /** Put away: hidden from the quick notes list, found under Settings → Archive. */
+    val archived: Boolean = false,
 )
 
 @Entity(tableName = "attachments", indices = [Index("ownerType", "ownerId")])

@@ -35,6 +35,9 @@ enum class ImagePlacement {
 
     /** Snapped to the right edge; paragraphs beside it are narrowed. */
     WRAP_RIGHT,
+
+    /** In the attachments strip at the bottom of the page. */
+    ATTACHED,
 }
 
 /** Payload for an image element. [aspect] is height / width of the picture itself. */
@@ -48,7 +51,8 @@ data class ImageData(
     val caption: String = "",
     val placement: ImagePlacement = ImagePlacement.FLOAT,
 ) {
-    val wraps: Boolean get() = placement != ImagePlacement.FLOAT
+    val wraps: Boolean get() = placement == ImagePlacement.WRAP_LEFT || placement == ImagePlacement.WRAP_RIGHT
+    val attached: Boolean get() = placement == ImagePlacement.ATTACHED
 }
 
 /** Payload for a voice note element. */
@@ -56,7 +60,16 @@ data class ImageData(
 data class VoiceData(
     val path: String,
     val durationMs: Long,
+    /** In the attachments strip at the bottom of the page instead of placed on it. */
+    val attached: Boolean = false,
 )
+
+/** Is this picture or recording in the page's bottom attachments strip (rather than placed on the page)? */
+fun isAttachedElement(kind: String, data: String): Boolean = when (kind) {
+    ElementKind.IMAGE -> decodeImageData(data)?.attached == true
+    ElementKind.VOICE -> decodeVoiceData(data)?.attached == true
+    else -> false
+}
 
 /** A free text box. [doc] is an encoded [com.quartz.notes.data.rich.RichDoc]. */
 @Serializable

@@ -149,7 +149,9 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
 
     private suspend fun insertPageNow(notebookId: Long, afterIndex: Int): Long = db.withTransaction {
         val list = pages.getByNotebook(notebookId).toMutableList()
-        val template = list.getOrNull(afterIndex) ?: list.lastOrNull()
+        // Copy the look of the nearest ordinary page before it (section pages have their own colors).
+        val template = list.take((afterIndex + 1).coerceAtLeast(0)).lastOrNull { !it.isSection }
+            ?: list.firstOrNull { !it.isSection }
         val insertAt = (afterIndex + 1).coerceIn(0, list.size)
         val newPage = PageEntity(
             notebookId = notebookId,
@@ -164,6 +166,35 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
         renumber(list)
         id
     }
+
+    /** Adds a section's opening page at [insertAt] (0-based position) and returns its id. */
+    suspend fun insertSection(notebookId: Long, insertAt: Int, colorArgb: Int): Long = inOrder {
+        db.withTransaction {
+            val list = pages.getByNotebook(notebookId).toMutableList()
+            val at = insertAt.coerceIn(0, list.size)
+            val page = PageEntity(
+                notebookId = notebookId,
+                title = "New section",
+                position = at,
+                pageType = "PLAIN",
+                backgroundArgb = colorArgb,
+                isSection = true,
+            )
+            val id = pages.insert(page)
+            list.add(at, page.copy(id = id))
+            renumber(list)
+            id
+        }
+    }
+
+    /** Saves a section page's title, description, color and icon or photo. */
+    fun saveSection(pageId: Long, title: String, description: String, colorArgb: Int?, icon: String?, image: String?) = enqueue {
+        val doc = RichDoc.fromPlainText(description)
+        pages.updateSection(pageId, title, doc.encode(), description, colorArgb, icon, image, now())
+    }
+
+    /** Pictures, recordings and text boxes on every page of a notebook, for its index. */
+    fun observeNotebookMedia(notebookId: Long): Flow<List<PageElementEntity>> = elements.observeMediaForNotebook(notebookId)
 
     suspend fun getPage(id: Long): PageEntity? = inOrder { pages.get(id) }
 
@@ -197,7 +228,8 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
 
     fun applyStyleToAllPages(source: PageEntity) = enqueue {
         db.withTransaction {
-            val list = pages.getByNotebook(source.notebookId)
+            // Section pages keep their own look.
+            val list = pages.getByNotebook(source.notebookId).filter { !it.isSection }
             pages.updateAll(
                 list.map {
                     it.copy(
@@ -238,6 +270,12 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
     // ---- Quick notes ----
 
     fun observeNotes(): Flow<List<QuickNoteEntity>> = notes.observeAll()
+
+    fun observeArchivedNotes(): Flow<List<QuickNoteEntity>> = notes.observeArchived()
+
+    fun setNotePinned(id: Long, pinned: Boolean) = enqueue { notes.setPinned(id, pinned) }
+
+    fun setNoteArchived(id: Long, archived: Boolean) = enqueue { notes.setArchived(id, archived, now()) }
 
     suspend fun getNote(id: Long): QuickNoteEntity? = inOrder { notes.get(id) }
 
@@ -439,7 +477,7 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
         attachments.deleteOrphans()
         val fromAttachments = attachments.getAll().map { it.path }
         val fromElements = elements.getAll().flatMap { elementMediaPaths(it.kind, it.data) }
-        val inline = pages.getAll().flatMap { RichDoc.decode(it.content).mediaPaths() }
+        val inline = pages.getAll().flatMap(::pageMediaPaths)
         (fromAttachments + fromElements + inline).toSet()
     }
 
@@ -525,6 +563,10 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
 
     companion object {
         /** Media files an element uses: its picture or recording, or pictures in line inside a text box. */
+        /** Media files a page itself uses: in-line pictures and a section page's photo. */
+        fun pageMediaPaths(page: PageEntity): List<String> =
+            RichDoc.decode(page.content).mediaPaths() + listOfNotNull(page.sectionImage)
+
         fun elementMediaPaths(kind: String, data: String): List<String> = when (kind) {
             ElementKind.TEXT -> RichDoc.decode(decodePayload<TextBoxData>(data)?.doc).mediaPaths()
             else -> listOfNotNull(elementMediaPath(kind, data))

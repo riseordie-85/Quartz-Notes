@@ -15,7 +15,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
         QuickNoteEntity::class,
         AttachmentEntity::class,
     ],
-    version = 3,
+    version = 4,
     exportSchema = true,
 )
 abstract class QuartzDatabase : RoomDatabase() {
@@ -37,7 +37,7 @@ abstract class QuartzDatabase : RoomDatabase() {
                         )
                     }
                 })
-                .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
+                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
                 .build()
 
         /** Adds page lock and two-page (spread) flags. */
@@ -52,6 +52,19 @@ abstract class QuartzDatabase : RoomDatabase() {
         private val MIGRATION_2_3 = object : androidx.room.migration.Migration(2, 3) {
             override fun migrate(db: SupportSQLiteDatabase) {
                 db.execSQL("ALTER TABLE notebooks ADD COLUMN twoPage INTEGER NOT NULL DEFAULT 1")
+            }
+        }
+
+        /** Sections, notebook index/tabs/attachment options, and archived quick notes. */
+        private val MIGRATION_3_4 = object : androidx.room.migration.Migration(3, 4) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE pages ADD COLUMN isSection INTEGER NOT NULL DEFAULT 0")
+                db.execSQL("ALTER TABLE pages ADD COLUMN sectionIcon TEXT")
+                db.execSQL("ALTER TABLE pages ADD COLUMN sectionImage TEXT")
+                db.execSQL("ALTER TABLE notebooks ADD COLUMN showIndex INTEGER NOT NULL DEFAULT 0")
+                db.execSQL("ALTER TABLE notebooks ADD COLUMN sectionTabs INTEGER NOT NULL DEFAULT 1")
+                db.execSQL("ALTER TABLE notebooks ADD COLUMN attachAtBottom INTEGER NOT NULL DEFAULT 0")
+                db.execSQL("ALTER TABLE quick_notes ADD COLUMN archived INTEGER NOT NULL DEFAULT 0")
             }
         }
     }

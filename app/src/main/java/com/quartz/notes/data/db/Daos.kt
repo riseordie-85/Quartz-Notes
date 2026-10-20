@@ -115,6 +115,15 @@ interface PageDao {
     @Query("UPDATE pages SET spread = :spread WHERE id = :id")
     suspend fun setSpread(id: Long, spread: Boolean)
 
+    @Query(
+        """
+        UPDATE pages SET title = :title, content = :content, plainText = :plainText, backgroundArgb = :color,
+            sectionIcon = :icon, sectionImage = :image, updatedAt = :updatedAt
+        WHERE id = :id
+        """,
+    )
+    suspend fun updateSection(id: Long, title: String, content: String, plainText: String, color: Int?, icon: String?, image: String?, updatedAt: Long)
+
     @Query("SELECT COUNT(*) || ':' || COALESCE(MAX(updatedAt), 0) FROM pages")
     suspend fun fingerprint(): String
 
@@ -145,8 +154,19 @@ interface PageDao {
 
 @Dao
 interface QuickNoteDao {
-    @Query("SELECT * FROM quick_notes ORDER BY createdAt DESC")
+    /** Notes in the quick notes list: pinned ones first, archived ones left out. */
+    @Query("SELECT * FROM quick_notes WHERE archived = 0 ORDER BY pinned DESC, createdAt DESC")
     fun observeAll(): Flow<List<QuickNoteEntity>>
+
+    @Query("SELECT * FROM quick_notes WHERE archived = 1 ORDER BY updatedAt DESC")
+    fun observeArchived(): Flow<List<QuickNoteEntity>>
+
+    @Query("UPDATE quick_notes SET pinned = :pinned WHERE id = :id")
+    suspend fun setPinned(id: Long, pinned: Boolean)
+
+    /** Archiving also unpins, so a restored note comes back in its normal place. */
+    @Query("UPDATE quick_notes SET archived = :archived, pinned = 0, updatedAt = :updatedAt WHERE id = :id")
+    suspend fun setArchived(id: Long, archived: Boolean, updatedAt: Long)
 
     @Query("SELECT * FROM quick_notes WHERE id = :id")
     suspend fun get(id: Long): QuickNoteEntity?
@@ -190,7 +210,7 @@ interface QuickNoteDao {
     @Query(
         """
         SELECT * FROM quick_notes
-        WHERE title LIKE :pattern ESCAPE '\' OR plainText LIKE :pattern ESCAPE '\'
+        WHERE archived = 0 AND (title LIKE :pattern ESCAPE '\' OR plainText LIKE :pattern ESCAPE '\')
         ORDER BY createdAt DESC
         LIMIT 200
         """,
@@ -242,6 +262,16 @@ interface PageElementDao {
 
     @Query("SELECT * FROM page_elements WHERE pageId = :pageId ORDER BY z, id")
     suspend fun getForPage(pageId: Long): List<PageElementEntity>
+
+    /** Pictures and recordings on every page of a notebook (for its index). */
+    @Query(
+        """
+        SELECT e.* FROM page_elements e INNER JOIN pages p ON p.id = e.pageId
+        WHERE p.notebookId = :notebookId AND e.kind IN ('IMAGE', 'VOICE', 'TEXT')
+        ORDER BY p.position, e.y, e.x
+        """,
+    )
+    fun observeMediaForNotebook(notebookId: Long): Flow<List<PageElementEntity>>
 
     @Query("SELECT COUNT(*) || ':' || COALESCE(SUM(x + y + width + rotation), 0) || ':' || COALESCE(SUM(LENGTH(data)), 0) FROM page_elements")
     suspend fun fingerprint(): String
