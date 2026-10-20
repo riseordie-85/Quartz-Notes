@@ -30,22 +30,27 @@ import androidx.compose.material.icons.rounded.Edit
 import androidx.compose.material.icons.rounded.FileUpload
 import androidx.compose.material.icons.rounded.KeyboardArrowDown
 import androidx.compose.material.icons.rounded.KeyboardArrowUp
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.PrimaryTabRow
 import androidx.compose.material3.SegmentedButton
 import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Switch
+import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -125,9 +130,13 @@ private sealed interface SettingsDialog {
     data object BackgroundPicker : SettingsDialog
 }
 
-@OptIn(ExperimentalLayoutApi::class)
+/** The tabs along the top of the settings screen. */
+private val SettingsTabs = listOf("Settings", "Archive")
+
+/** @param onOpenNote opens a quick note in the editor (used by the Archive tab). */
+@OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun SettingsScreen(onBack: () -> Unit) {
+fun SettingsScreen(onBack: () -> Unit, onOpenNote: (Long) -> Unit) {
     val vm = quartzViewModel { SettingsViewModel(it.repository, it.settings, it.fonts) }
     val settings by vm.settings.collectAsStateWithLifecycle()
     val shelves by vm.shelves.collectAsStateWithLifecycle()
@@ -135,6 +144,7 @@ fun SettingsScreen(onBack: () -> Unit) {
     var dialog by remember { mutableStateOf<SettingsDialog?>(null) }
     val snackbar = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
+    var tab by rememberSaveable { mutableIntStateOf(0) }
 
     val fontPicker = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
         if (uri != null) vm.importFont(uri) { msg -> scope.launch { snackbar.showSnackbar(msg) } }
@@ -157,172 +167,201 @@ fun SettingsScreen(onBack: () -> Unit) {
                 Text("Settings", style = SectionTitleStyle, color = MaterialTheme.colorScheme.onBackground)
             }
 
-            LazyColumn(
-                contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 32.dp),
-                modifier = Modifier.fillMaxSize().widthIn(max = 720.dp).align(Alignment.CenterHorizontally),
+            PrimaryTabRow(
+                selectedTabIndex = tab,
+                containerColor = MaterialTheme.colorScheme.background,
+                contentColor = MaterialTheme.colorScheme.onBackground,
+                divider = { HorizontalDivider(color = LocalQuartzColors.current.divider) },
+                modifier = Modifier
+                    .widthIn(max = 720.dp)
+                    .align(Alignment.CenterHorizontally)
+                    .padding(horizontal = 16.dp),
             ) {
-                // ---- Appearance ----
-                item { SettingsSectionTitle("Appearance") }
-                item {
-                    QuartzCard(Modifier.fillMaxWidth()) {
-                        Column(Modifier.padding(18.dp)) {
-                            Text("Theme", fontSize = 16.sp)
-                            SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth().padding(top = 10.dp)) {
-                                ThemeMode.entries.forEachIndexed { i, mode ->
-                                    SegmentedButton(
-                                        selected = s.themeMode == mode,
-                                        onClick = { vm.setTheme(mode) },
-                                        shape = SegmentedButtonDefaults.itemShape(i, ThemeMode.entries.size),
-                                    ) { Text(mode.label) }
+                SettingsTabs.forEachIndexed { i, label ->
+                    Tab(
+                        selected = tab == i,
+                        onClick = { tab = i },
+                        selectedContentColor = MaterialTheme.colorScheme.primary,
+                        unselectedContentColor = LocalQuartzColors.current.textSecondary,
+                        text = { Text(label, fontSize = 16.sp) },
+                    )
+                }
+            }
+
+            if (tab == 1) {
+                ArchiveTab(
+                    snackbar = snackbar,
+                    onOpenNote = onOpenNote,
+                    modifier = Modifier.widthIn(max = 720.dp).align(Alignment.CenterHorizontally),
+                )
+            } else {
+                LazyColumn(
+                    contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 32.dp),
+                    modifier = Modifier.fillMaxSize().widthIn(max = 720.dp).align(Alignment.CenterHorizontally),
+                ) {
+                    // ---- Appearance ----
+                    item { SettingsSectionTitle("Appearance") }
+                    item {
+                        QuartzCard(Modifier.fillMaxWidth()) {
+                            Column(Modifier.padding(18.dp)) {
+                                Text("Theme", fontSize = 16.sp)
+                                SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth().padding(top = 10.dp)) {
+                                    ThemeMode.entries.forEachIndexed { i, mode ->
+                                        SegmentedButton(
+                                            selected = s.themeMode == mode,
+                                            onClick = { vm.setTheme(mode) },
+                                            shape = SegmentedButtonDefaults.itemShape(i, ThemeMode.entries.size),
+                                        ) { Text(mode.label) }
+                                    }
+                                }
+                            }
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                                HorizontalDivider(color = LocalQuartzColors.current.divider)
+                                ListRow(
+                                    title = "Use wallpaper colors",
+                                    subtitle = "Match your phone's Material You colors",
+                                    onClick = { vm.setDynamic(!s.dynamicColor) },
+                                    trailing = { Switch(checked = s.dynamicColor, onCheckedChange = { vm.setDynamic(it) }) },
+                                )
+                            }
+                            HorizontalDivider(color = LocalQuartzColors.current.divider)
+                            Column(Modifier.padding(18.dp)) {
+                                Text("Interface color", fontSize = 16.sp)
+                                if (s.dynamicColor) {
+                                    Text("Turn off wallpaper colors to use your own.", fontSize = 13.sp, color = LocalQuartzColors.current.textSecondary)
+                                }
+                                FlowRow(
+                                    Modifier.padding(top = 12.dp),
+                                    horizontalArrangement = Arrangement.spacedBy(10.dp),
+                                    verticalArrangement = Arrangement.spacedBy(10.dp),
+                                ) {
+                                    AccentPresets.forEach { c ->
+                                        Swatch(c, selected = s.accentArgb == c.toArgb(), onClick = { vm.setAccent(c.toArgb()) })
+                                    }
+                                    CustomSwatch { dialog = SettingsDialog.AccentPicker }
+                                }
+                            }
+                            HorizontalDivider(color = LocalQuartzColors.current.divider)
+                            Column(Modifier.padding(18.dp)) {
+                                Text("Background color", fontSize = 16.sp)
+                                FlowRow(
+                                    Modifier.padding(top = 12.dp),
+                                    horizontalArrangement = Arrangement.spacedBy(10.dp),
+                                    verticalArrangement = Arrangement.spacedBy(10.dp),
+                                ) {
+                                    DefaultSwatch(selected = s.backgroundArgb == 0, onClick = { vm.setBackground(0) })
+                                    BackgroundPresets.forEach { c ->
+                                        Swatch(c, selected = s.backgroundArgb == c.toArgb(), onClick = { vm.setBackground(c.toArgb()) })
+                                    }
+                                    CustomSwatch { dialog = SettingsDialog.BackgroundPicker }
                                 }
                             }
                         }
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    }
+
+                    // ---- Shelves ----
+                    item { SettingsSectionTitle("Shelves") }
+                    item {
+                        QuartzCard(Modifier.fillMaxWidth()) {
+                            shelves.forEachIndexed { i, shelf ->
+                                if (i > 0) HorizontalDivider(color = LocalQuartzColors.current.divider)
+                                ListRow(
+                                    title = shelf.name,
+                                    trailing = {
+                                        Row {
+                                            IconButton(enabled = i > 0, onClick = { vm.moveShelf(shelf, up = true) }) {
+                                                Icon(Icons.Rounded.KeyboardArrowUp, contentDescription = "Move up")
+                                            }
+                                            IconButton(enabled = i < shelves.lastIndex, onClick = { vm.moveShelf(shelf, up = false) }) {
+                                                Icon(Icons.Rounded.KeyboardArrowDown, contentDescription = "Move down")
+                                            }
+                                            IconButton(onClick = { dialog = SettingsDialog.RenameShelf(shelf) }) {
+                                                Icon(Icons.Rounded.Edit, contentDescription = "Rename")
+                                            }
+                                            IconButton(enabled = shelves.size > 1, onClick = { dialog = SettingsDialog.DeleteShelf(shelf) }) {
+                                                Icon(Icons.Rounded.DeleteOutline, contentDescription = "Delete")
+                                            }
+                                        }
+                                    },
+                                )
+                            }
                             HorizontalDivider(color = LocalQuartzColors.current.divider)
                             ListRow(
-                                title = "Use wallpaper colors",
-                                subtitle = "Match your phone's Material You colors",
-                                onClick = { vm.setDynamic(!s.dynamicColor) },
-                                trailing = { Switch(checked = s.dynamicColor, onCheckedChange = { vm.setDynamic(it) }) },
+                                title = "New shelf",
+                                onClick = { dialog = SettingsDialog.NewShelf },
+                                leading = { Icon(Icons.Rounded.Add, null, tint = MaterialTheme.colorScheme.primary) },
                             )
-                        }
-                        HorizontalDivider(color = LocalQuartzColors.current.divider)
-                        Column(Modifier.padding(18.dp)) {
-                            Text("Interface color", fontSize = 16.sp)
-                            if (s.dynamicColor) {
-                                Text("Turn off wallpaper colors to use your own.", fontSize = 13.sp, color = LocalQuartzColors.current.textSecondary)
-                            }
-                            FlowRow(
-                                Modifier.padding(top = 12.dp),
-                                horizontalArrangement = Arrangement.spacedBy(10.dp),
-                                verticalArrangement = Arrangement.spacedBy(10.dp),
-                            ) {
-                                AccentPresets.forEach { c ->
-                                    Swatch(c, selected = s.accentArgb == c.toArgb(), onClick = { vm.setAccent(c.toArgb()) })
-                                }
-                                CustomSwatch { dialog = SettingsDialog.AccentPicker }
-                            }
-                        }
-                        HorizontalDivider(color = LocalQuartzColors.current.divider)
-                        Column(Modifier.padding(18.dp)) {
-                            Text("Background color", fontSize = 16.sp)
-                            FlowRow(
-                                Modifier.padding(top = 12.dp),
-                                horizontalArrangement = Arrangement.spacedBy(10.dp),
-                                verticalArrangement = Arrangement.spacedBy(10.dp),
-                            ) {
-                                DefaultSwatch(selected = s.backgroundArgb == 0, onClick = { vm.setBackground(0) })
-                                BackgroundPresets.forEach { c ->
-                                    Swatch(c, selected = s.backgroundArgb == c.toArgb(), onClick = { vm.setBackground(c.toArgb()) })
-                                }
-                                CustomSwatch { dialog = SettingsDialog.BackgroundPicker }
-                            }
                         }
                     }
-                }
 
-                // ---- Shelves ----
-                item { SettingsSectionTitle("Shelves") }
-                item {
-                    QuartzCard(Modifier.fillMaxWidth()) {
-                        shelves.forEachIndexed { i, shelf ->
-                            if (i > 0) HorizontalDivider(color = LocalQuartzColors.current.divider)
-                            ListRow(
-                                title = shelf.name,
-                                trailing = {
-                                    Row {
-                                        IconButton(enabled = i > 0, onClick = { vm.moveShelf(shelf, up = true) }) {
-                                            Icon(Icons.Rounded.KeyboardArrowUp, contentDescription = "Move up")
+                    // ---- Fonts ----
+                    item { SettingsSectionTitle("Fonts") }
+                    item {
+                        QuartzCard(Modifier.fillMaxWidth()) {
+                            fonts.forEachIndexed { i, font ->
+                                if (i > 0) HorizontalDivider(color = LocalQuartzColors.current.divider)
+                                ListRow(
+                                    title = font.name,
+                                    subtitle = if (font.builtIn) "Built in" else "Imported",
+                                    leading = {
+                                        Text("Aa", fontSize = 22.sp, fontFamily = font.family, modifier = Modifier.widthIn(min = 36.dp))
+                                    },
+                                    trailing = if (font.builtIn) null else {
+                                        {
+                                            IconButton(onClick = { dialog = SettingsDialog.DeleteFont(font) }) {
+                                                Icon(Icons.Rounded.DeleteOutline, contentDescription = "Remove font")
+                                            }
                                         }
-                                        IconButton(enabled = i < shelves.lastIndex, onClick = { vm.moveShelf(shelf, up = false) }) {
-                                            Icon(Icons.Rounded.KeyboardArrowDown, contentDescription = "Move down")
-                                        }
-                                        IconButton(onClick = { dialog = SettingsDialog.RenameShelf(shelf) }) {
-                                            Icon(Icons.Rounded.Edit, contentDescription = "Rename")
-                                        }
-                                        IconButton(enabled = shelves.size > 1, onClick = { dialog = SettingsDialog.DeleteShelf(shelf) }) {
-                                            Icon(Icons.Rounded.DeleteOutline, contentDescription = "Delete")
-                                        }
-                                    }
-                                },
-                            )
-                        }
-                        HorizontalDivider(color = LocalQuartzColors.current.divider)
-                        ListRow(
-                            title = "New shelf",
-                            onClick = { dialog = SettingsDialog.NewShelf },
-                            leading = { Icon(Icons.Rounded.Add, null, tint = MaterialTheme.colorScheme.primary) },
-                        )
-                    }
-                }
-
-                // ---- Fonts ----
-                item { SettingsSectionTitle("Fonts") }
-                item {
-                    QuartzCard(Modifier.fillMaxWidth()) {
-                        fonts.forEachIndexed { i, font ->
-                            if (i > 0) HorizontalDivider(color = LocalQuartzColors.current.divider)
-                            ListRow(
-                                title = font.name,
-                                subtitle = if (font.builtIn) "Built in" else "Imported",
-                                leading = {
-                                    Text("Aa", fontSize = 22.sp, fontFamily = font.family, modifier = Modifier.widthIn(min = 36.dp))
-                                },
-                                trailing = if (font.builtIn) null else {
-                                    {
-                                        IconButton(onClick = { dialog = SettingsDialog.DeleteFont(font) }) {
-                                            Icon(Icons.Rounded.DeleteOutline, contentDescription = "Remove font")
-                                        }
-                                    }
-                                },
-                            )
-                        }
-                        HorizontalDivider(color = LocalQuartzColors.current.divider)
-                        ListRow(
-                            title = "Import font",
-                            subtitle = ".ttf or .otf file",
-                            onClick = {
-                                fontPicker.launch(
-                                    arrayOf(
-                                        "font/*",
-                                        "application/x-font-ttf",
-                                        "application/x-font-otf",
-                                        "application/font-sfnt",
-                                        "application/vnd.ms-opentype",
-                                        "application/octet-stream",
-                                    ),
+                                    },
                                 )
-                            },
-                            leading = { Icon(Icons.Rounded.FileUpload, null, tint = MaterialTheme.colorScheme.primary) },
+                            }
+                            HorizontalDivider(color = LocalQuartzColors.current.divider)
+                            ListRow(
+                                title = "Import font",
+                                subtitle = ".ttf or .otf file",
+                                onClick = {
+                                    fontPicker.launch(
+                                        arrayOf(
+                                            "font/*",
+                                            "application/x-font-ttf",
+                                            "application/x-font-otf",
+                                            "application/font-sfnt",
+                                            "application/vnd.ms-opentype",
+                                            "application/octet-stream",
+                                        ),
+                                    )
+                                },
+                                leading = { Icon(Icons.Rounded.FileUpload, null, tint = MaterialTheme.colorScheme.primary) },
+                            )
+                        }
+                    }
+
+                    // ---- Images ----
+                    item { SettingsSectionTitle("Images") }
+                    item {
+                        QuartzCard(Modifier.fillMaxWidth()) {
+                            ListRow(
+                                title = "Compress images when adding",
+                                subtitle = "Saves space; photos are resized to a sensible size",
+                                onClick = { vm.setCompress(!s.compressImages) },
+                                trailing = { Switch(checked = s.compressImages, onCheckedChange = { vm.setCompress(it) }) },
+                            )
+                        }
+                    }
+
+                    // ---- Backup ----
+                    item { SettingsSectionTitle("Backup & restore") }
+                    item { BackupSection(settings = s, snackbar = snackbar) }
+
+                    item {
+                        Text(
+                            "Quartz Notes · version 0.3.0",
+                            fontSize = 13.sp,
+                            color = LocalQuartzColors.current.textSecondary,
+                            modifier = Modifier.fillMaxWidth().padding(top = 28.dp),
+                            textAlign = androidx.compose.ui.text.style.TextAlign.Center,
                         )
                     }
-                }
-
-                // ---- Images ----
-                item { SettingsSectionTitle("Images") }
-                item {
-                    QuartzCard(Modifier.fillMaxWidth()) {
-                        ListRow(
-                            title = "Compress images when adding",
-                            subtitle = "Saves space; photos are resized to a sensible size",
-                            onClick = { vm.setCompress(!s.compressImages) },
-                            trailing = { Switch(checked = s.compressImages, onCheckedChange = { vm.setCompress(it) }) },
-                        )
-                    }
-                }
-
-                // ---- Backup ----
-                item { SettingsSectionTitle("Backup & restore") }
-                item { BackupSection(settings = s, snackbar = snackbar) }
-
-                item {
-                    Text(
-                        "Quartz Notes · version 0.3.0",
-                        fontSize = 13.sp,
-                        color = LocalQuartzColors.current.textSecondary,
-                        modifier = Modifier.fillMaxWidth().padding(top = 28.dp),
-                        textAlign = androidx.compose.ui.text.style.TextAlign.Center,
-                    )
                 }
             }
         }
