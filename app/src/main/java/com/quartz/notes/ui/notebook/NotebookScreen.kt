@@ -196,6 +196,8 @@ fun NotebookScreen(
 
     // Drawing and connecting tools.
     var tool by remember { mutableStateOf(PageTool.NONE) }
+    // Drawing and connecting only work on ordinary pages.
+    LaunchedEffect(activeIsPlain) { if (!activeIsPlain) tool = PageTool.NONE }
     var brushLevel by rememberSaveable { mutableIntStateOf(2) }
     var shapeMenu by remember { mutableStateOf(false) }
     // A text box added from the toolbar gets the cursor once it exists.
@@ -270,12 +272,17 @@ fun NotebookScreen(
             if (spreads.none { s -> s.any { it?.id == activePageId } }) {
                 // The active page was deleted: stay about where we were.
                 val index = pagerState.currentPage.coerceIn(0, spreads.lastIndex)
-                spreads[index].firstOrNull { it != null }?.let { activePageId = it.id }
+                (spreads[index].firstOrNull { it != null && it.id != INDEX_PAGE_ID } ?: spreads[index].firstOrNull { it != null })
+                    ?.let { activePageId = it.id }
                 if (pagerState.currentPage != index) pagerState.scrollToPage(index)
                 return@LaunchedEffect
             }
             val target = spreadOf(activePageId)
             if (pagerState.currentPage != target) pagerState.scrollToPage(target)
+            // With the index beside a real page (e.g. after unfolding), the real page is the one to act on.
+            if (activePageId == INDEX_PAGE_ID) {
+                spreads.getOrNull(target)?.firstOrNull { it != null && it.id != INDEX_PAGE_ID }?.let { activePageId = it.id }
+            }
         }
         // Swiping to another spread makes its first page active, unless the active page is still showing.
         val latestSpreads by rememberUpdatedState(spreads)
@@ -318,17 +325,9 @@ fun NotebookScreen(
                 },
             )
 
-            // Section tabs along the page edges (drawn first, so the pages sit on top of them).
+            // Section tabs along the page edges, in the margin beside the pages.
             val tabSections = if (nb.sectionTabs) pages.filter { it.isSection } else emptyList()
             BoxWithConstraints(Modifier.weight(1f).fillMaxWidth()) {
-                SectionTabs(
-                    sections = tabSections,
-                    indexOf = { section -> pages.indexOfFirst { it.id == section.id } },
-                    firstShown = shown.firstOrNull()?.let { p -> pages.indexOfFirst { it.id == p.id } } ?: -1,
-                    twoUp = twoUp,
-                    height = maxHeight,
-                    onOpen = { scrollTarget = it },
-                )
                 HorizontalPager(
                     state = pagerState,
                     key = { index -> spreads.getOrNull(index)?.firstOrNull()?.id ?: (Long.MIN_VALUE + index) },
@@ -403,6 +402,15 @@ fun NotebookScreen(
                         }
                     }
                 }
+                // Drawn after the pager so taps reach them.
+                SectionTabs(
+                    sections = tabSections,
+                    indexOf = { section -> pages.indexOfFirst { it.id == section.id } },
+                    firstShown = shown.firstOrNull()?.let { p -> pages.indexOfFirst { it.id == p.id } } ?: -1,
+                    twoUp = twoUp,
+                    height = maxHeight,
+                    onOpen = { scrollTarget = it },
+                )
             }
 
             if (tool == PageTool.BRUSH || tool == PageTool.ERASER) {
@@ -709,7 +717,9 @@ fun NotebookScreen(
         } else {
             SectionStyleSheet(
                 page = page,
-                onChange = { color, icon, image -> vm.saveSection(page, color, icon, image) },
+                onColor = { vm.setSectionColor(page, it) },
+                onIcon = { vm.setSectionIcon(page, it) },
+                onImage = { vm.setSectionImage(page, it) },
                 onDismiss = { sectionStyleId = null },
             )
         }

@@ -115,14 +115,17 @@ interface PageDao {
     @Query("UPDATE pages SET spread = :spread WHERE id = :id")
     suspend fun setSpread(id: Long, spread: Boolean)
 
-    @Query(
-        """
-        UPDATE pages SET title = :title, content = :content, plainText = :plainText, backgroundArgb = :color,
-            sectionIcon = :icon, sectionImage = :image, updatedAt = :updatedAt
-        WHERE id = :id
-        """,
-    )
-    suspend fun updateSection(id: Long, title: String, content: String, plainText: String, color: Int?, icon: String?, image: String?, updatedAt: Long)
+    @Query("UPDATE pages SET title = :title, content = :content, plainText = :plainText, updatedAt = :updatedAt WHERE id = :id")
+    suspend fun updateSectionText(id: Long, title: String, content: String, plainText: String, updatedAt: Long)
+
+    @Query("UPDATE pages SET backgroundArgb = :color, updatedAt = :updatedAt WHERE id = :id")
+    suspend fun setSectionColor(id: Long, color: Int, updatedAt: Long)
+
+    @Query("UPDATE pages SET sectionIcon = :icon, updatedAt = :updatedAt WHERE id = :id")
+    suspend fun setSectionIcon(id: Long, icon: String?, updatedAt: Long)
+
+    @Query("UPDATE pages SET sectionImage = :image, updatedAt = :updatedAt WHERE id = :id")
+    suspend fun setSectionImage(id: Long, image: String?, updatedAt: Long)
 
     @Query("SELECT COUNT(*) || ':' || COALESCE(MAX(updatedAt), 0) FROM pages")
     suspend fun fingerprint(): String

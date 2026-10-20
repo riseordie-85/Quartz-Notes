@@ -113,7 +113,7 @@ internal fun IndexPageView(
             item {
                 Text("Index", fontSize = 28.sp, fontWeight = FontWeight.Bold, color = ink)
                 Text(
-                    "${pages.count { !it.isSection }} pages" + if (anySections) " · ${pages.count { it.isSection }} sections" else "",
+                    "${pages.size} pages" + if (anySections) " · ${pages.count { it.isSection }} sections" else "",
                     fontSize = 14.sp,
                     color = secondary,
                     modifier = Modifier.padding(top = 2.dp, bottom = 14.dp),

@@ -295,13 +295,15 @@ private fun DescriptionField(value: String, onChange: (String) -> Unit, ink: Col
 @Composable
 internal fun SectionStyleSheet(
     page: PageEntity,
-    onChange: (color: Int?, icon: String?, image: String?) -> Unit,
+    onColor: (Int) -> Unit,
+    onIcon: (String?) -> Unit,
+    onImage: (String?) -> Unit,
     onDismiss: () -> Unit,
 ) {
     var custom by remember { mutableStateOf(false) }
     val accent = MaterialTheme.colorScheme.primary
-    val latestPage by rememberUpdatedState(page)
-    val imageAdder = rememberImageAdder { img -> onChange(latestPage.backgroundArgb, latestPage.sectionIcon, img.path) }
+    val latestOnImage by rememberUpdatedState(onImage)
+    val imageAdder = rememberImageAdder { img -> latestOnImage(img.path) }
 
     ModalBottomSheet(
         onDismissRequest = onDismiss,
@@ -321,7 +323,7 @@ internal fun SectionStyleSheet(
             FlowRow(horizontalArrangement = Arrangement.spacedBy(10.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 SectionColorPresets.forEach { c ->
                     Swatch(c, selected = page.sectionColor.toArgb() == c.toArgb(), size = 40.dp, onClick = {
-                        onChange(c.toArgb(), page.sectionIcon, page.sectionImage)
+                        onColor(c.toArgb())
                     })
                 }
                 Box(
@@ -342,7 +344,7 @@ internal fun SectionStyleSheet(
                     Text(if (page.sectionImage == null) "Choose photo" else "Change photo")
                 }
                 if (page.sectionImage != null) {
-                    OutlinedButton(onClick = { onChange(page.backgroundArgb, page.sectionIcon, null) }) {
+                    OutlinedButton(onClick = { onImage(null) }) {
                         Icon(Icons.Rounded.DeleteOutline, null, modifier = Modifier.size(18.dp))
                         Spacer(Modifier.size(8.dp))
                         Text("Remove")
@@ -353,11 +355,11 @@ internal fun SectionStyleSheet(
             SheetHeading(if (page.sectionImage == null) "Icon" else "Icon (shown when there's no photo)")
             FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 val current = page.sectionIcon ?: "none"
-                IconTile(selected = current == "none", accent = accent, onClick = { onChange(page.backgroundArgb, null, page.sectionImage) }) {
+                IconTile(selected = current == "none", accent = accent, onClick = { onIcon(null) }) {
                     Icon(Icons.Rounded.Block, contentDescription = "No icon", modifier = Modifier.size(22.dp))
                 }
                 NotebookIcons.all.forEach { (key, vector) ->
-                    IconTile(selected = current == key, accent = accent, onClick = { onChange(page.backgroundArgb, key, page.sectionImage) }) {
+                    IconTile(selected = current == key, accent = accent, onClick = { onIcon(key) }) {
                         Icon(vector, contentDescription = key, modifier = Modifier.size(22.dp))
                     }
                 }
@@ -372,7 +374,7 @@ internal fun SectionStyleSheet(
             onDismiss = { custom = false },
             onPick = { picked ->
                 custom = false
-                picked?.let { onChange(it.toArgb(), page.sectionIcon, page.sectionImage) }
+                picked?.let { onColor(it.toArgb()) }
             },
         )
     }

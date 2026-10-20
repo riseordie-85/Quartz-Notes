@@ -25,9 +25,6 @@ import com.quartz.notes.data.db.PageEntity
 /** Extra room at the screen edge for section tabs (on top of the page's own margin). */
 internal val TabExtra: Dp = 10.dp
 
-/** How far a tab reaches past the margin, tucked under the page edge. */
-private val TabTuck: Dp = 12.dp
-
 /** Visible width of a tab: the page margin (16dp) plus [TabExtra]. */
 private val TabVisible: Dp = 26.dp
 
@@ -64,7 +61,7 @@ internal fun BoxScope.SectionTabs(
             Modifier
                 .align(if (onLeft) Alignment.TopStart else Alignment.TopEnd)
                 .offset(y = top + (tabHeight + gap) * i)
-                .size(TabVisible + TabTuck, tabHeight)
+                .size(TabVisible, tabHeight)
                 .shadow(2.dp, shape)
                 .clip(shape)
                 .background(color)

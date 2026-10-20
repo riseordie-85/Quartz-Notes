@@ -127,17 +127,18 @@ class NotebookViewModel(
 
     // ---- Sections ----
 
-    /** Saves a section page's title and description, with its color, icon and photo. */
-    fun saveSection(
-        page: PageEntity,
-        color: Int? = page.backgroundArgb,
-        icon: String? = page.sectionIcon,
-        image: String? = page.sectionImage,
-    ) {
+    /** Saves a section page's title and description (its look is saved separately, field by field). */
+    fun saveSection(page: PageEntity) {
         val s = session(page)
-        repo.saveSection(page.id, s.title, s.description, color, icon, image)
+        repo.saveSectionText(page.id, s.title, s.description)
         s.markSectionSaved()
     }
+
+    fun setSectionColor(page: PageEntity, color: Int) = repo.setSectionColor(page.id, color)
+
+    fun setSectionIcon(page: PageEntity, icon: String?) = repo.setSectionIcon(page.id, icon)
+
+    fun setSectionImage(page: PageEntity, image: String?) = repo.setSectionImage(page.id, image)
 
     fun saveSectionIfChanged(page: PageEntity) {
         val s = sessions[page.id] ?: return
@@ -348,7 +349,12 @@ class NotebookViewModel(
             val s = session(page)
             s.title = ""
             s.editor.reset()
-            saveIfChanged(page.id)
+            if (page.isSection) {
+                s.description = ""
+                saveSection(page)
+            } else {
+                saveIfChanged(page.id)
+            }
         } else {
             sessions.remove(page.id)
             repo.deletePage(page)

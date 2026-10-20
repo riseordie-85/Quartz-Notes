@@ -150,7 +150,10 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
     private suspend fun insertPageNow(notebookId: Long, afterIndex: Int): Long = db.withTransaction {
         val list = pages.getByNotebook(notebookId).toMutableList()
         // Copy the look of the nearest ordinary page before it (section pages have their own colors).
-        val template = list.take((afterIndex + 1).coerceAtLeast(0)).lastOrNull { !it.isSection }
+        // After a section page, match the section's own pages (the ones following it).
+        val after = list.getOrNull(afterIndex)
+        val template = (if (after?.isSection == true) list.drop(afterIndex + 1).takeWhile { !it.isSection }.firstOrNull() else null)
+            ?: list.take((afterIndex + 1).coerceAtLeast(0)).lastOrNull { !it.isSection }
             ?: list.firstOrNull { !it.isSection }
         val insertAt = (afterIndex + 1).coerceIn(0, list.size)
         val newPage = PageEntity(
@@ -187,11 +190,17 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
         }
     }
 
-    /** Saves a section page's title, description, color and icon or photo. */
-    fun saveSection(pageId: Long, title: String, description: String, colorArgb: Int?, icon: String?, image: String?) = enqueue {
+    /** Saves a section page's title and description. */
+    fun saveSectionText(pageId: Long, title: String, description: String) = enqueue {
         val doc = RichDoc.fromPlainText(description)
-        pages.updateSection(pageId, title, doc.encode(), description, colorArgb, icon, image, now())
+        pages.updateSectionText(pageId, title, doc.encode(), description, now())
     }
+
+    fun setSectionColor(pageId: Long, colorArgb: Int) = enqueue { pages.setSectionColor(pageId, colorArgb, now()) }
+
+    fun setSectionIcon(pageId: Long, icon: String?) = enqueue { pages.setSectionIcon(pageId, icon, now()) }
+
+    fun setSectionImage(pageId: Long, image: String?) = enqueue { pages.setSectionImage(pageId, image, now()) }
 
     /** Pictures, recordings and text boxes on every page of a notebook, for its index. */
     fun observeNotebookMedia(notebookId: Long): Flow<List<PageElementEntity>> = elements.observeMediaForNotebook(notebookId)
@@ -562,10 +571,11 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
     // ---- Search ----
 
     companion object {
-        /** Media files an element uses: its picture or recording, or pictures in line inside a text box. */
         /** Media files a page itself uses: in-line pictures and a section page's photo. */
         fun pageMediaPaths(page: PageEntity): List<String> =
             RichDoc.decode(page.content).mediaPaths() + listOfNotNull(page.sectionImage)
+
+        /** Media files an element uses: its picture or recording, or pictures in line inside a text box. */
 
         fun elementMediaPaths(kind: String, data: String): List<String> = when (kind) {
             ElementKind.TEXT -> RichDoc.decode(decodePayload<TextBoxData>(data)?.doc).mediaPaths()
