@@ -67,6 +67,9 @@ interface NotebookDao {
     @Query("SELECT COALESCE(MAX(position), -1) FROM notebooks WHERE shelfId = :shelfId")
     suspend fun maxPosition(shelfId: Long): Int
 
+    @Query("UPDATE notebooks SET updatedAt = :updatedAt WHERE id = :id")
+    suspend fun touch(id: Long, updatedAt: Long)
+
     @Query("UPDATE notebooks SET shelfId = :toShelf WHERE shelfId = :fromShelf")
     suspend fun moveAll(fromShelf: Long, toShelf: Long)
 }

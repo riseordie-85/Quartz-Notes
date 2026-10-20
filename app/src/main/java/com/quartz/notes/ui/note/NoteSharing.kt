@@ -71,23 +71,23 @@ fun noteAsText(title: String, doc: RichDoc): String = buildString {
     }
 }.trimEnd()
 
-fun shareText(context: Context, title: String, text: String) {
+fun shareText(context: Context, title: String, text: String, chooserTitle: String = "Share note") {
     val send = Intent(Intent.ACTION_SEND).apply {
         type = "text/plain"
         if (title.isNotBlank()) putExtra(Intent.EXTRA_SUBJECT, title)
         putExtra(Intent.EXTRA_TEXT, text)
     }
-    context.startActivity(Intent.createChooser(send, "Share note"))
+    context.startActivity(Intent.createChooser(send, chooserTitle))
 }
 
-fun shareFile(context: Context, file: File, mime: String, authority: String) {
+fun shareFile(context: Context, file: File, mime: String, authority: String, chooserTitle: String = "Share note") {
     val uri = androidx.core.content.FileProvider.getUriForFile(context, authority, file)
     val send = Intent(Intent.ACTION_SEND).apply {
         type = mime
         putExtra(Intent.EXTRA_STREAM, uri)
         addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
     }
-    context.startActivity(Intent.createChooser(send, "Share note"))
+    context.startActivity(Intent.createChooser(send, chooserTitle))
 }
 
 /**

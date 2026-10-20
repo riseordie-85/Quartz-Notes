@@ -554,9 +554,15 @@ fun NotebookScreen(
                     return
                 }
                 scope.launch {
-                    runCatching { exporter.image() }
-                        .onSuccess { action(it) }
-                        .onFailure { Toast.makeText(context, "Couldn't make the picture", Toast.LENGTH_SHORT).show() }
+                    val file = try {
+                        exporter.image()
+                    } catch (e: kotlinx.coroutines.CancellationException) {
+                        throw e
+                    } catch (t: Throwable) {
+                        Toast.makeText(context, "Couldn't make the picture", Toast.LENGTH_SHORT).show()
+                        return@launch
+                    }
+                    action(file)
                 }
             }
             ShareNoteSheet(
@@ -565,9 +571,9 @@ fun NotebookScreen(
                     sharingId = null
                     val text = session.exporter?.text()
                         ?: listOf(session.title.trim(), page.plainText.trim()).filter { it.isNotEmpty() }.joinToString("\n\n")
-                    shareText(context, session.title, text)
+                    shareText(context, session.title, text, chooserTitle = "Share page")
                 },
-                onImage = { withImage { shareFile(context, it, "image/png", "${context.packageName}.files") } },
+                onImage = { withImage { shareFile(context, it, "image/png", "${context.packageName}.files", chooserTitle = "Share page") } },
                 onSaveImage = {
                     withImage { file ->
                         val saved = saveImageToGallery(context, file, file.nameWithoutExtension + " " + System.currentTimeMillis() / 1000)

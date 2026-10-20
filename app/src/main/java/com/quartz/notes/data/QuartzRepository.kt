@@ -427,7 +427,7 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
                 val to = idMap[cd.to] ?: return@forEach
                 elements.insert(c.copy(id = 0, pageId = newId, data = cd.copy(from = from, to = to).encodePayload()))
             }
-            notebooks.get(notebookId)?.let { notebooks.update(it.copy(updatedAt = stamp)) }
+            notebooks.touch(notebookId, stamp)
             newId
         }
     }

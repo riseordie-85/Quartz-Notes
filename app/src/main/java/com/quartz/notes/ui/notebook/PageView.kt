@@ -53,10 +53,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.drawWithContent
-import androidx.compose.ui.graphics.asAndroidBitmap
-import androidx.compose.ui.graphics.layer.drawLayer
-import androidx.compose.ui.graphics.rememberGraphicsLayer
-import androidx.compose.ui.graphics.toArgb
+import android.graphics.Picture
+import androidx.compose.ui.draw.alpha
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.withTimeout
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.runtime.withFrameNanos
 import com.quartz.notes.data.model.TextBoxData
@@ -487,32 +487,59 @@ internal fun PageView(
         val latestElements by rememberUpdatedState(elements)
 
         // ---- Sharing ----
-        val captureLayer = rememberGraphicsLayer()
+        // While a picture of the page is being made, controls and hints are hidden.
+        var exporting by remember { mutableStateOf(false) }
+        // Asks the next draw of the page to record itself (all of it, even the part scrolled away).
+        var pictureRequest by remember { mutableStateOf<CompletableDeferred<Picture>?>(null) }
         val context = LocalContext.current
         val latestPage by rememberUpdatedState(page)
-        val pageColor by rememberUpdatedState(bg)
-        DisposableEffect(session, captureLayer) {
+        DisposableEffect(session) {
             val exporter = PageExporter(
                 text = { pageAsText(session, latestPage, latestElements) },
                 image = {
-                    // Put away handles, toolbars and the cursor, and let the page redraw without them.
+                    // Put away handles, toolbars, the cursor and the title-line icons, and let the page redraw.
                     canvas.clearSelection()
                     focusManager.clearFocus()
                     session.activeEditor = null
-                    withFrameNanos { }
-                    withFrameNanos { }
-                    val shot = captureLayer.toImageBitmap().asAndroidBitmap().copy(android.graphics.Bitmap.Config.ARGB_8888, false)
-                    withContext(Dispatchers.IO) {
-                        val out = android.graphics.Bitmap.createBitmap(shot.width, shot.height, android.graphics.Bitmap.Config.ARGB_8888)
-                        android.graphics.Canvas(out).apply {
-                            drawColor(pageColor.toArgb())
-                            drawBitmap(shot, 0f, 0f, null)
+                    exporting = true
+                    val picture = try {
+                        withFrameNanos { }
+                        withFrameNanos { }
+                        val request = CompletableDeferred<Picture>()
+                        pictureRequest = request
+                        withTimeout(3000) { request.await() }
+                    } finally {
+                        pictureRequest = null
+                        exporting = false
+                    }
+                    withContext(Dispatchers.Default) {
+                        val w = picture.width
+                        val h = picture.height
+                        val out = android.graphics.Bitmap.createBitmap(w, h, android.graphics.Bitmap.Config.ARGB_8888)
+                        val target = android.graphics.Canvas(out)
+                        // Rendered in strips: a whole long page can be taller than the GPU allows in one go.
+                        val strip = 2048
+                        var top = 0
+                        while (top < h) {
+                            val sh = minOf(strip, h - top)
+                            val part = Picture()
+                            part.beginRecording(w, sh).apply {
+                                translate(0f, -top.toFloat())
+                                drawPicture(picture)
+                            }
+                            part.endRecording()
+                            val hw = android.graphics.Bitmap.createBitmap(part, w, sh, android.graphics.Bitmap.Config.ARGB_8888)
+                            val sw = hw.copy(android.graphics.Bitmap.Config.ARGB_8888, false)
+                            target.drawBitmap(sw, 0f, top.toFloat(), null)
+                            sw.recycle()
+                            hw.recycle()
+                            top += sh
                         }
                         val dir = File(context.cacheDir, "shared").apply { mkdirs() }
+                        dir.listFiles()?.forEach { if (System.currentTimeMillis() - it.lastModified() > 60 * 60 * 1000) it.delete() }
                         val name = session.title.replace(Regex("[^A-Za-z0-9 _-]"), "").take(40).trim().ifEmpty { "Page" }
-                        val file = File(dir, "$name.png")
+                        val file = File(dir, "$name ${System.currentTimeMillis() / 1000}.png")
                         file.outputStream().use { out.compress(android.graphics.Bitmap.CompressFormat.PNG, 100, it) }
-                        shot.recycle()
                         out.recycle()
                         file
                     }
@@ -536,10 +563,21 @@ internal fun PageView(
                     .fillMaxWidth()
                     .heightIn(min = maxOf(elementsBottom + 48.dp, viewport))
                     .onPlaced { canvas.contentCoords = it }
-                    // Keeps a recording of the whole page (even the part scrolled off screen) for "share as image".
                     .drawWithContent {
-                        captureLayer.record { this@drawWithContent.drawContent() }
-                        drawLayer(captureLayer)
+                        val request = pictureRequest
+                        if (request != null && !request.isCompleted && size.width >= 1f && size.height >= 1f) {
+                            // "Share as image": record the whole page, on its paper color and texture.
+                            val picture = Picture()
+                            val pictureCanvas = androidx.compose.ui.graphics.Canvas(picture.beginRecording(size.width.toInt(), size.height.toInt()))
+                            draw(this, layoutDirection, pictureCanvas, size) {
+                                drawRect(bg)
+                                texture?.let { drawRect(it) }
+                                this@drawWithContent.drawContent()
+                            }
+                            picture.endRecording()
+                            request.complete(picture)
+                        }
+                        drawContent()
                     }
                     .pointerInput(widthPx) {
                         // Lines (arrows/connectors) and taps on empty space. Tools use the overlay below instead.
@@ -629,13 +667,14 @@ internal fun PageView(
                             modifier = Modifier.weight(1f).padding(top = 10.dp, bottom = 10.dp),
                             decorationBox = { inner ->
                                 Box {
-                                    if (title.isEmpty()) {
+                                    if (title.isEmpty() && !exporting) {
                                         Text("Page title", style = TextStyle(fontSize = 21.sp, fontWeight = FontWeight.Bold, color = ink.copy(alpha = 0.32f)))
                                     }
                                     inner()
                                 }
                             },
                         )
+                        Row(Modifier.alpha(if (exporting) 0f else 1f), verticalAlignment = Alignment.CenterVertically) {
                         if (scrapbook && canSpread) {
                             PageToggle(
                                 on = page.spread,
@@ -656,6 +695,7 @@ internal fun PageView(
                             description = if (locked) "Unlock page" else "Lock page",
                             onClick = { vm.setPageLocked(page, !locked) },
                         )
+                        }
                     }
                     HorizontalDivider(
                         Modifier
@@ -691,7 +731,7 @@ internal fun PageView(
                                     .padding(start = padH, end = padH, top = 10.dp, bottom = 40.dp)
                                     .onFocusChanged { if (it.hasFocus) session.activeEditor = null },
                             )
-                        } else if (elements.none { it.kind == ElementKind.TEXT }) {
+                        } else if (elements.none { it.kind == ElementKind.TEXT } && !exporting) {
                             Text(
                                 "Scrapbook page: add text with the T button below",
                                 color = ink.copy(alpha = 0.35f),
