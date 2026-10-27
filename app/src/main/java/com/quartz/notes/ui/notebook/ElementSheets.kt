@@ -21,7 +21,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalBottomSheet
+import com.quartz.notes.ui.components.QuartzSheet
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
@@ -64,7 +64,7 @@ val ShapeFillPresets = listOf(
 @Composable
 fun ShapeStyleSheet(data: ShapeData, ink: Color, onChange: (ShapeData) -> Unit, onDismiss: () -> Unit) {
     var custom by remember { mutableStateOf<String?>(null) }
-    ModalBottomSheet(
+    QuartzSheet(
         onDismissRequest = onDismiss,
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
         containerColor = MaterialTheme.colorScheme.surface,
@@ -145,7 +145,7 @@ fun LineStyleSheet(
         arrow?.let { onArrow(it.copy(color = c)) }
         connector?.let { onConnector(it.copy(color = c)) }
     }
-    ModalBottomSheet(
+    QuartzSheet(
         onDismissRequest = onDismiss,
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
         containerColor = MaterialTheme.colorScheme.surface,

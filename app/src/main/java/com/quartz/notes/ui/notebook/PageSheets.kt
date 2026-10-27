@@ -36,7 +36,7 @@ import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalBottomSheet
+import com.quartz.notes.ui.components.QuartzSheet
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.SegmentedButton
 import androidx.compose.material3.SegmentedButtonDefaults
@@ -88,7 +88,7 @@ fun PageStyleSheet(
     val type = enumOrDefault(page.pageType, PageType.LINES)
     val texture = enumOrDefault(page.texture, Texture.NONE)
 
-    ModalBottomSheet(
+    QuartzSheet(
         onDismissRequest = onDismiss,
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
         containerColor = MaterialTheme.colorScheme.surface,
@@ -205,7 +205,7 @@ fun PagesSheet(
     onDismiss: () -> Unit,
 ) {
     var pendingDelete by remember { mutableStateOf<PageEntity?>(null) }
-    ModalBottomSheet(onDismissRequest = onDismiss, containerColor = MaterialTheme.colorScheme.surface) {
+    QuartzSheet(onDismissRequest = onDismiss, containerColor = MaterialTheme.colorScheme.surface) {
         Text("Pages", fontSize = 22.sp, fontWeight = FontWeight.Medium, modifier = Modifier.padding(horizontal = 20.dp))
         Spacer(Modifier.height(8.dp))
         LazyColumn(Modifier.navigationBarsPadding().padding(bottom = 16.dp)) {

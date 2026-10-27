@@ -16,6 +16,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.gestures.animateScrollBy
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.input.pointer.PointerEventPass
+import androidx.compose.ui.input.pointer.PointerEventType
+import androidx.compose.ui.input.pointer.pointerInput
+import kotlinx.coroutines.launch
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
@@ -25,7 +31,7 @@ import androidx.compose.material.icons.rounded.Mic
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalBottomSheet
+import com.quartz.notes.ui.components.QuartzSheet
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -87,12 +93,13 @@ internal fun PageTimelineSheet(
     val media by vm.notebookMedia.collectAsStateWithLifecycle()
     val byPage = remember(media) { media.groupBy { it.pageId } }
     val listState = rememberLazyListState()
+    val scope = rememberCoroutineScope()
     val current = pages.indexOfFirst { it.id in showing }.coerceAtLeast(0)
     LaunchedEffect(Unit) { listState.scrollToItem((current - 1).coerceAtLeast(0)) }
     val accent = MaterialTheme.colorScheme.primary
     val lineColor = LocalQuartzColors.current.textSecondary.copy(alpha = 0.35f)
 
-    ModalBottomSheet(onDismissRequest = onDismiss, containerColor = MaterialTheme.colorScheme.surface) {
+    QuartzSheet(onDismissRequest = onDismiss, containerColor = MaterialTheme.colorScheme.surface) {
         Column(Modifier.navigationBarsPadding().padding(bottom = 20.dp)) {
             Row(Modifier.fillMaxWidth().padding(start = 20.dp, end = 8.dp), verticalAlignment = Alignment.CenterVertically) {
                 Text("Pages", fontSize = 22.sp, fontWeight = FontWeight.Medium, modifier = Modifier.weight(1f))
@@ -101,6 +108,21 @@ internal fun PageTimelineSheet(
             Spacer(Modifier.height(10.dp))
             LazyRow(
                 state = listState,
+                modifier = Modifier.pointerInput(listState) {
+                    // An up/down mouse wheel scrolls the pages sideways (and never pulls the sheet shut).
+                    // Side-scrolling wheels and trackpads keep working as before.
+                    awaitPointerEventScope {
+                        while (true) {
+                            val event = awaitPointerEvent(PointerEventPass.Initial)
+                            if (event.type != PointerEventType.Scroll) continue
+                            val delta = event.changes.fold(Offset.Zero) { acc, c -> acc + c.scrollDelta }
+                            if (delta.y == 0f) continue
+                            event.changes.forEach { it.consume() }
+                            val step = (if (delta.x != 0f) delta.x else delta.y) * 96.dp.toPx()
+                            scope.launch { listState.animateScrollBy(step) }
+                        }
+                    }
+                },
                 contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 16.dp),
             ) {
                 itemsIndexed(pages, key = { _, p -> p.id }) { i, page ->

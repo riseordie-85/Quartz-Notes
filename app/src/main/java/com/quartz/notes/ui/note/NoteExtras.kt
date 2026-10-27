@@ -27,7 +27,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalBottomSheet
+import com.quartz.notes.ui.components.QuartzSheet
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -108,7 +108,7 @@ fun ShareNoteSheet(
     /** What's being shared, for the wording ("note" or "page"). */
     noun: String = "note",
 ) {
-    ModalBottomSheet(onDismissRequest = onDismiss, containerColor = MaterialTheme.colorScheme.surface) {
+    QuartzSheet(onDismissRequest = onDismiss, containerColor = MaterialTheme.colorScheme.surface) {
         Column(Modifier.navigationBarsPadding().padding(bottom = 16.dp)) {
             Text("Share ${noun}", fontSize = 22.sp, fontWeight = FontWeight.Medium, modifier = Modifier.padding(horizontal = 20.dp, vertical = 4.dp))
             ListRow(
@@ -146,7 +146,7 @@ fun NotebookPickerSheet(onPick: (NotebookEntity) -> Unit, onDismiss: () -> Unit)
     val repo = LocalAppContainer.current.repository
     val shelves by repo.observeShelves().collectAsStateWithLifecycle(initialValue = emptyList())
     val notebooks by repo.observeAllNotebooks().collectAsStateWithLifecycle(initialValue = null)
-    ModalBottomSheet(onDismissRequest = onDismiss, containerColor = MaterialTheme.colorScheme.surface) {
+    QuartzSheet(onDismissRequest = onDismiss, containerColor = MaterialTheme.colorScheme.surface) {
         Text("Send to notebook", fontSize = 22.sp, fontWeight = FontWeight.Medium, modifier = Modifier.padding(horizontal = 20.dp, vertical = 4.dp))
         val list = notebooks
         LazyColumn(Modifier.navigationBarsPadding().padding(bottom = 16.dp)) {

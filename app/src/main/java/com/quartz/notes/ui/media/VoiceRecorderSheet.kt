@@ -26,7 +26,7 @@ import androidx.compose.material.icons.rounded.Stop
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalBottomSheet
+import com.quartz.notes.ui.components.QuartzSheet
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -123,7 +123,7 @@ fun VoiceRecorderSheet(onSaved: (path: String, durationMs: Long) -> Unit, onDism
         }
     }
 
-    ModalBottomSheet(
+    QuartzSheet(
         // Swiping the sheet away keeps the recording; only "Discard" throws it out.
         onDismissRequest = { if (recorder != null && elapsed >= 800) save() else onDismiss() },
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),

@@ -16,6 +16,8 @@ import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.onFirst
+import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.performKeyInput
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performMouseInput
@@ -411,5 +413,63 @@ class PageInputTest {
         rule.waitForIdle()
         SystemClock.sleep(600)
         rule.onNode(androidx.compose.ui.test.hasText("2/4")).assertExists()
+    }
+
+    @Test
+    fun mouseWheelInTimeline() {
+        val app = ApplicationProvider.getApplicationContext<QuartzApp>()
+        val container = app.container
+        val notebookId = runBlocking {
+            val repo = container.repository
+            val shelf = repo.observeShelves().first().first()
+            val id = repo.createNotebook(shelf.id, "Wheel", 0xFF2E86DE.toInt(), "GLOSS", "none")
+            repeat(11) { repo.insertPage(id, it) }
+            repo.observePages(id).first()
+            id
+        }
+        val settings = runBlocking { container.settings.settings.first() }
+        rule.setContent {
+            CompositionLocalProvider(
+                LocalAppContainer provides container,
+                LocalFontResolver provides FontResolver(BuiltInFonts),
+            ) {
+                QuartzTheme(settings = settings, dark = false) {
+                    NotebookScreen(notebookId = notebookId, initialPageId = null, onBack = {}, onSearch = {})
+                }
+            }
+        }
+        rule.waitForIdle()
+        rule.onNode(androidx.compose.ui.test.hasContentDescription("Pages") and androidx.compose.ui.test.hasClickAction()).performClick()
+        rule.waitForIdle()
+        SystemClock.sleep(700)
+        // A plain up/down wheel over the pages scrolls them sideways.
+        rule.onNode(androidx.compose.ui.test.hasText("Reorder & delete")).assertExists()
+        rule.onAllNodes(androidx.compose.ui.test.hasText("1")).onFirst().assertIsDisplayed()
+        rule.onNode(androidx.compose.ui.test.hasScrollAction() and androidx.compose.ui.test.hasAnyChild(androidx.compose.ui.test.hasText("Untitled", substring = true)))
+            .performMouseInput { repeat(8) { scroll(1f) } }
+        rule.waitForIdle()
+        SystemClock.sleep(800)
+        screen("23_wheel_scrolled")
+        rule.onNode(androidx.compose.ui.test.hasText("Reorder & delete")).assertExists()
+        rule.onNode(androidx.compose.ui.test.hasText("12")).assertIsDisplayed()
+        // A wheel over the sheet's heading must never leave the app stuck.
+        rule.onNode(androidx.compose.ui.test.hasText("Reorder & delete")).performMouseInput { repeat(10) { scroll(-1f) } }
+        rule.waitForIdle()
+        SystemClock.sleep(800)
+        rule.onNode(androidx.compose.ui.test.hasText("Reorder & delete")).performMouseInput { repeat(10) { scroll(1f) } }
+        rule.waitForIdle()
+        SystemClock.sleep(1200)
+        screen("24_after_wheel_on_heading")
+        val sheetOpen = rule.onAllNodes(androidx.compose.ui.test.hasText("Reorder & delete")).fetchSemanticsNodes().isNotEmpty()
+        note("after wheel on heading: sheet open=$sheetOpen")
+        if (sheetOpen) {
+            rule.onNode(androidx.compose.ui.test.hasText("3") and androidx.compose.ui.test.hasClickAction().not()).assertExists()
+        } else {
+            // Closed: the notebook must still respond.
+            rule.onNode(androidx.compose.ui.test.hasContentDescription("Next page")).performClick()
+            rule.waitForIdle()
+            SystemClock.sleep(600)
+            rule.onNode(androidx.compose.ui.test.hasText("2/12")).assertExists()
+        }
     }
 }

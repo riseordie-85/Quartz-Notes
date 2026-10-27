@@ -29,7 +29,7 @@ import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalBottomSheet
+import com.quartz.notes.ui.components.QuartzSheet
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
@@ -141,7 +141,7 @@ fun ImageViewer(path: String, onDismiss: () -> Unit, onDelete: (() -> Unit)? = n
 @Composable
 fun DecorateSheet(data: ImageData, onChange: (ImageData) -> Unit, onDismiss: () -> Unit) {
     var caption by remember { mutableStateOf(data.caption) }
-    ModalBottomSheet(
+    QuartzSheet(
         onDismissRequest = {
             if (caption != data.caption) onChange(data.copy(caption = caption))
             onDismiss()

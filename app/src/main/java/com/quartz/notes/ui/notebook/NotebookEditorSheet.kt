@@ -34,7 +34,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalBottomSheet
+import com.quartz.notes.ui.components.QuartzSheet
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Switch
@@ -105,7 +105,7 @@ fun NotebookEditorSheet(
     var sectionTabs by remember { mutableStateOf(existing?.sectionTabs ?: true) }
     var attachAtBottom by remember { mutableStateOf(existing?.attachAtBottom ?: false) }
 
-    ModalBottomSheet(
+    QuartzSheet(
         onDismissRequest = onDismiss,
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
         containerColor = MaterialTheme.colorScheme.surface,
