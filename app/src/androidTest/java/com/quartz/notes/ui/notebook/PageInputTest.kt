@@ -396,7 +396,7 @@ class PageInputTest {
         rule.waitForIdle()
         SystemClock.sleep(700)
         screen("21_page_timeline")
-        rule.onNode(androidx.compose.ui.test.hasText("Travel")).performClick()
+        rule.onNode(androidx.compose.ui.test.hasText("Travel") and !hasSetTextAction() and androidx.compose.ui.test.hasClickAction()).performClick()
         rule.waitForIdle()
         SystemClock.sleep(700)
         rule.onNode(androidx.compose.ui.test.hasText("3/4")).assertExists()
