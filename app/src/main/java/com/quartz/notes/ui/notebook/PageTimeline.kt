@@ -133,6 +133,7 @@ internal fun PageTimelineSheet(
                     awaitPointerEventScope {
                         while (true) {
                             val event = awaitPointerEvent(PointerEventPass.Initial)
+                            android.util.Log.d("QuartzWheel", "event ${event.type} ${event.changes.firstOrNull()?.type}")
                             if (event.type != PointerEventType.Scroll) continue
                             val delta = event.changes.fold(Offset.Zero) { acc, c -> acc + c.scrollDelta }
                             if (delta.y == 0f) continue

@@ -448,7 +448,7 @@ class PageInputTest {
         rule.onNode(androidx.compose.ui.test.hasText("Reorder & delete")).assertExists()
         rule.onAllNodes(androidx.compose.ui.test.hasText("1")).onFirst().assertIsDisplayed()
         rule.onNode(androidx.compose.ui.test.hasScrollAction() and androidx.compose.ui.test.hasAnyChild(androidx.compose.ui.test.hasText("Untitled", substring = true)))
-            .performMouseInput { repeat(20) { scroll(1f) } }
+            .performMouseInput { moveTo(center); repeat(20) { scroll(1f) } }
         rule.waitForIdle()
         SystemClock.sleep(800)
         screen("23_wheel_scrolled")
