@@ -38,6 +38,8 @@ import com.quartz.notes.data.BuiltInFonts
 import com.quartz.notes.ui.theme.QuartzTheme
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -199,17 +201,16 @@ class PageInputTest {
         val line1 = l.getLineForOffset(start1 - 1)
         val y1 = (l.getLineTop(line1) + l.getLineBottom(line1)) / 2
 
-        mouseClick(onScreen(field, Offset(width - 20f, y1)))
-        note("mouse click right of line 2: selection=${selection(field)} expected end of line 2 = ${paragraphEnd(1) + 1}")
-        screen("10_mouse_click_line")
-
         fingerTap(onScreen(field, Offset(width - 20f, (l.getLineTop(0) + l.getLineBottom(0)) / 2)))
         note("finger tap right of line 1: selection=${selection(field)} expected ${paragraphEnd(0) + 1}")
+        assertEquals(TextRange(paragraphEnd(0) + 1), selection(field))
+        screen("10_tap_right_of_line")
 
         // Left margin of the page, beside line 4.
         val line3 = l.getLineForOffset(paragraphEnd(2) + 2)
         mouseClick(onScreen(field, Offset(-10f, (l.getLineTop(line3) + l.getLineBottom(line3)) / 2)))
         note("mouse click in left margin of line 4: selection=${selection(field)} expected start of line 4 = ${paragraphEnd(2) + 2}")
+        assertEquals(TextRange(paragraphEnd(2) + 2), selection(field))
     }
 
     /** Long-press a word in line 2, then drag the selection's end handle down two lines. */
@@ -222,6 +223,7 @@ class PageInputTest {
         rule.waitForIdle()
         val selected = selection(field)
         note("$label ${if (stylus) "pen" else "finger"} long press on line 2: selection=$selected")
+        assertEquals(TextRange(paragraphEnd(0) + 2, paragraphEnd(0) + 2 + "Another".length), selected)
         screen("16_${label}_${if (stylus) "pen" else "finger"}_selected")
         val sel = selected ?: return
         if (sel.collapsed) return
@@ -240,6 +242,7 @@ class PageInputTest {
         injectTool(MotionEvent.ACTION_UP, target, source, d2, stylus)
         rule.waitForIdle()
         note("$label ${if (stylus) "pen" else "finger"} drag end handle down 2 lines: selection=${selection(field)} (was $sel)")
+        assertTrue("end handle should move down", (selection(field)?.max ?: 0) > paragraphEnd(2))
         screen("17_${label}_${if (stylus) "pen" else "finger"}_handle_moved")
     }
 
@@ -282,6 +285,7 @@ class PageInputTest {
         }
         rule.waitForIdle()
         note("$label compose mouse click right of line 2: selection=${selection(field)} expected ${paragraphEnd(1) + 1}")
+        assertEquals(TextRange(paragraphEnd(1) + 1), selection(field))
         field.performMouseInput {
             moveTo(Offset(40f, lineY(0)))
             press()
@@ -298,15 +302,8 @@ class PageInputTest {
         }
         rule.waitForIdle()
         note("$label compose mouse drag select lines 1-4: selection=${selection(field)}")
+        assertTrue((selection(field)?.length ?: 0) > paragraphEnd(1))
         screen("14_${label}_mouse_drag")
-        // Now try moving the end of that selection with a finger on its handle (if handles show).
-        val sel = selection(field) ?: return
-        val l2 = layout(field)
-        val rect = l2.getCursorRect((sel.max - 1).coerceIn(0, l2.layoutInput.text.length))
-        val handle = onScreen(field, Offset(rect.left + 12f, rect.bottom + 24f))
-        fingerDrag(handle, handle + Offset(0f, l2.getLineBottom(1) - l2.getLineTop(0)))
-        note("$label after finger drag on end handle: selection=${selection(field)} (was $sel)")
-        screen("15_${label}_handle_drag")
     }
 
     @Test
