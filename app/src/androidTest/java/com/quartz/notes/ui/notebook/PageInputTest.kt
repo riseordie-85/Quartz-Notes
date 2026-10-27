@@ -16,6 +16,8 @@ import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performKeyInput
+import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performMouseInput
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.test.longClick
@@ -390,7 +392,7 @@ class PageInputTest {
         rule.waitForIdle()
         SystemClock.sleep(600)
         rule.onNode(androidx.compose.ui.test.hasText("2/4")).assertExists()
-        rule.onNode(androidx.compose.ui.test.hasContentDescription("Pages") and androidx.compose.ui.test.hasClickAction(), useUnmergedTree = true).performClick()
+        rule.onNode(androidx.compose.ui.test.hasContentDescription("Pages") and androidx.compose.ui.test.hasClickAction()).performClick()
         rule.waitForIdle()
         SystemClock.sleep(700)
         screen("21_page_timeline")
@@ -399,5 +401,14 @@ class PageInputTest {
         SystemClock.sleep(700)
         rule.onNode(androidx.compose.ui.test.hasText("3/4")).assertExists()
         screen("22_after_timeline_jump")
+        // Alt + Left goes back a page.
+        rule.onRoot().performKeyInput {
+            keyDown(androidx.compose.ui.input.key.Key.AltLeft)
+            pressKey(androidx.compose.ui.input.key.Key.DirectionLeft)
+            keyUp(androidx.compose.ui.input.key.Key.AltLeft)
+        }
+        rule.waitForIdle()
+        SystemClock.sleep(600)
+        rule.onNode(androidx.compose.ui.test.hasText("2/4")).assertExists()
     }
 }

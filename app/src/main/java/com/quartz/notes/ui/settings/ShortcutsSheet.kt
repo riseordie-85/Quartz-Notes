@@ -74,8 +74,8 @@ private val Groups = listOf(
     ShortcutGroup(
         title = "Notebook pages",
         items = listOf(
-            Shortcut(keys("Ctrl", "Page Down"), "Next page"),
-            Shortcut(keys("Ctrl", "Page Up"), "Previous page"),
+            Shortcut(keys("Alt", "→"), "Next page (or Ctrl + Page Down)"),
+            Shortcut(keys("Alt", "←"), "Previous page (or Ctrl + Page Up)"),
             Shortcut(keys("Ctrl", "Alt", "Home"), "First page"),
             Shortcut(keys("Ctrl", "Alt", "End"), "Last page"),
         ),

@@ -323,7 +323,8 @@ fun NotebookScreen(
             else -> "$firstShown/${pages.size}"
         }
 
-        // Ctrl+Page Down / Ctrl+Page Up turn the page (Ctrl+Alt+Home / Ctrl+Alt+End: first / last), even while typing.
+        // Alt+Right / Alt+Left (or Ctrl+Page Down / Ctrl+Page Up) turn the page; Ctrl+Alt+Home / End go to
+        // the first / last page. They work even while typing.
         fun turnTo(index: Int) {
             scope.launch { pagerState.animateScrollToPage(index.coerceIn(0, spreads.lastIndex)) }
         }
@@ -331,12 +332,17 @@ fun NotebookScreen(
             Modifier
                 .fillMaxSize()
                 .onPreviewKeyEvent { e ->
-                    if (e.type != KeyEventType.KeyDown || !(e.isCtrlPressed || e.isMetaPressed)) return@onPreviewKeyEvent false
-                    when (e.key) {
-                        Key.PageDown -> true.also { turnTo(pagerState.currentPage + 1) }
-                        Key.PageUp -> true.also { turnTo(pagerState.currentPage - 1) }
-                        Key.MoveHome -> if (e.isAltPressed) true.also { turnTo(0) } else false
-                        Key.MoveEnd -> if (e.isAltPressed) true.also { turnTo(spreads.lastIndex) } else false
+                    if (e.type != KeyEventType.KeyDown) return@onPreviewKeyEvent false
+                    val cmd = e.isCtrlPressed || e.isMetaPressed
+                    val alt = e.isAltPressed
+                    when {
+                        // Alt + arrows, like a browser's back and forward.
+                        alt && !cmd && e.key == Key.DirectionRight -> true.also { turnTo(pagerState.currentPage + 1) }
+                        alt && !cmd && e.key == Key.DirectionLeft -> true.also { turnTo(pagerState.currentPage - 1) }
+                        cmd && e.key == Key.PageDown -> true.also { turnTo(pagerState.currentPage + 1) }
+                        cmd && e.key == Key.PageUp -> true.also { turnTo(pagerState.currentPage - 1) }
+                        cmd && alt && e.key == Key.MoveHome -> true.also { turnTo(0) }
+                        cmd && alt && e.key == Key.MoveEnd -> true.also { turnTo(spreads.lastIndex) }
                         else -> false
                     }
                 },
@@ -894,7 +900,7 @@ private fun NotebookTopBar(
                     IconButton(onClick = onSearch) { Icon(Icons.Rounded.Search, contentDescription = "Search notebook", tint = onColor) }
                 }
                 IconButton(onClick = onShare) { Icon(Icons.Rounded.Share, contentDescription = "Share page", tint = onColor) }
-                IconButton(onClick = onPages) { Icon(Icons.Rounded.Layers, contentDescription = "Pages", tint = onColor) }
+                IconButton(onClick = onPages) { Icon(Icons.Rounded.Layers, contentDescription = "Page list", tint = onColor) }
                 IconButton(onClick = onEdit) { Icon(Icons.Rounded.Settings, contentDescription = "Notebook settings", tint = onColor) }
             }
         }
