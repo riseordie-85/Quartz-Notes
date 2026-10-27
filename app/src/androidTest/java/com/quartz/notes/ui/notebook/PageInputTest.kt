@@ -15,6 +15,11 @@ import androidx.compose.ui.test.hasSetTextAction
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.performSemanticsAction
+import androidx.compose.ui.test.performMouseInput
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextRange
 import androidx.test.core.app.ApplicationProvider
@@ -239,5 +244,70 @@ class PageInputTest {
         fingerDrag(handle, onScreen(field, Offset(rect.left + 12f, l2.getLineBottom(line4) + 24f)))
         note("after dragging end handle down: selection=${selection(field)} (was $beforeHandle)")
         screen("13_after_handle_drag")
+    }
+
+    private fun composeMouseChecks(field: SemanticsNodeInteraction, label: String) {
+        val l = layout(field)
+        val width = field.fetchSemanticsNode().size.width.toFloat()
+        fun lineY(i: Int) = (l.getLineTop(i) + l.getLineBottom(i)) / 2
+        field.performMouseInput {
+            moveTo(Offset(width - 20f, lineY(1)))
+            press()
+            release()
+        }
+        rule.waitForIdle()
+        note("$label compose mouse click right of line 2: selection=${selection(field)} expected ${paragraphEnd(1) + 1}")
+        field.performMouseInput {
+            moveTo(Offset(40f, lineY(0)))
+            press()
+            release()
+        }
+        rule.waitForIdle()
+        note("$label compose mouse click in line 1: selection=${selection(field)}")
+        field.performMouseInput {
+            moveTo(Offset(5f, lineY(0)))
+            press()
+            moveTo(Offset(100f, lineY(2)))
+            moveTo(Offset(200f, lineY(3)))
+            release()
+        }
+        rule.waitForIdle()
+        note("$label compose mouse drag select lines 1-4: selection=${selection(field)}")
+        screen("14_${label}_mouse_drag")
+        // Now try moving the end of that selection with a finger on its handle (if handles show).
+        val sel = selection(field) ?: return
+        val l2 = layout(field)
+        val rect = l2.getCursorRect((sel.max - 1).coerceIn(0, l2.layoutInput.text.length))
+        val handle = onScreen(field, Offset(rect.left + 12f, rect.bottom + 24f))
+        fingerDrag(handle, handle + Offset(0f, l2.getLineBottom(1) - l2.getLineTop(0)))
+        note("$label after finger drag on end handle: selection=${selection(field)} (was $sel)")
+        screen("15_${label}_handle_drag")
+    }
+
+    @Test
+    fun composeMouseOnPage() {
+        openPage()
+        composeMouseChecks(editor(), "page")
+    }
+
+    @Test
+    fun composeMouseOnBareEditor() {
+        val state = com.quartz.notes.ui.editor.RichEditorState(RichDoc(paragraphs.map { Block(type = BlockType.BODY, text = it) }))
+        rule.setContent {
+            androidx.compose.material3.MaterialTheme {
+                androidx.compose.foundation.layout.Box(
+                    androidx.compose.ui.Modifier.fillMaxSize().background(androidx.compose.ui.graphics.Color.White),
+                ) {
+                    com.quartz.notes.ui.editor.RichTextEditor(
+                        state = state,
+                        styles = com.quartz.notes.ui.editor.editorStyles(),
+                        contentColor = androidx.compose.ui.graphics.Color.Black,
+                        modifier = androidx.compose.ui.Modifier.padding(top = 80.dp, start = 20.dp, end = 20.dp),
+                    )
+                }
+            }
+        }
+        rule.waitForIdle()
+        composeMouseChecks(editor(), "bare")
     }
 }
