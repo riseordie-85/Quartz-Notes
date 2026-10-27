@@ -46,6 +46,8 @@ import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.TextRange
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.HorizontalDivider
@@ -219,7 +221,7 @@ fun RichTextEditor(
             value = state.value,
             onValueChange = {
                 if (it.text != state.value.text) holder.revealPending = true
-                state.onValueChange(it)
+                state.onValueChange(holder.fixTapPastLineEnd(state, it))
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -233,10 +235,14 @@ fun RichTextEditor(
                 }
                 .onPreviewKeyEvent { e -> if (enabled && !readOnly) handleShortcut(state, e) { focusManager.clearFocus() } else false }
                 .pointerInput(state) {
-                    // Right-click (mouse) opens the edit menu where it was clicked.
+                    // Right-click (mouse) opens the edit menu where it was clicked. Every press is also
+                    // noted (without taking it), so a tap past the end of a line can stay on that line.
                     awaitPointerEventScope {
                         while (true) {
                             val event = awaitPointerEvent(PointerEventPass.Initial)
+                            if (event.type == PointerEventType.Press || event.type == PointerEventType.Release) {
+                                event.changes.firstOrNull()?.let { holder.noteTap(it.position) }
+                            }
                             if (event.type == PointerEventType.Press && event.buttons.isSecondaryPressed) {
                                 val change = event.changes.firstOrNull() ?: continue
                                 change.consume()
@@ -436,6 +442,36 @@ private class LayoutHolder {
     var layout: TextLayoutResult? = null
     var coords: LayoutCoordinates? = null
     var revealPending = false
+    private var tapAt: Offset? = null
+    private var tapTime = 0L
+
+    fun noteTap(position: Offset) {
+        tapAt = position
+        tapTime = System.currentTimeMillis()
+    }
+
+    /**
+     * Each paragraph ends with a space standing in for its line break, so a tap or click to the right
+     * of a paragraph's last line lands after that space: the start of the next paragraph. When a tap
+     * just put the cursor at a paragraph's start but the tap was on an earlier line, keep it on that
+     * line, at the end of the paragraph.
+     */
+    fun fixTapPastLineEnd(state: RichEditorState, incoming: TextFieldValue): TextFieldValue {
+        val at = tapAt ?: return incoming
+        if (System.currentTimeMillis() - tapTime > 700) return incoming
+        val l = layout ?: return incoming
+        if (!incoming.selection.collapsed || incoming.text != state.value.text) return incoming
+        val doc = incoming.selection.start - MARK.length
+        val t = state.text
+        if (doc <= 0 || doc > t.length || t[doc - 1] != '
+') return incoming
+        val len = l.layoutInput.text.length
+        val cursorLine = l.getLineForOffset(doc.coerceIn(0, len))
+        val tapLine = l.getLineForVerticalPosition(at.y)
+        if (tapLine >= cursorLine) return incoming
+        tapAt = null
+        return incoming.copy(selection = TextRange(incoming.selection.start - 1))
+    }
 }
 
 /**
@@ -551,10 +587,11 @@ private class DocTransformation(
         val parts = doc.split('\n')
         val lastEmpty = parts.last().isEmpty()
 
-        // Each paragraph keeps its line break at its end (inside its paragraph style), so a tap past
-        // the end of a line lands on that line. Picture placeholders become zero-width spaces.
+        // Line breaks become spaces at the end of each paragraph (the paragraph styles make the breaks;
+        // a real line break there would add an empty line), so offsets stay the same. Picture
+        // placeholders become zero-width spaces.
         val sb = StringBuilder(doc.length + 1)
-        for (c in doc) sb.append(if (c == OBJ) '\u200B' else c)
+        for (c in doc) sb.append(if (c == '\n') ' ' else if (c == OBJ) '\u200B' else c)
         // An empty last paragraph needs a character so it still gets its own line.
         if (lastEmpty) sb.append('\u200B')
         val visible = sb.toString()

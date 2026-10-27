@@ -210,40 +210,66 @@ class PageInputTest {
         note("mouse click in left margin of line 4: selection=${selection(field)} expected start of line 4 = ${paragraphEnd(2) + 2}")
     }
 
-    @Test
-    fun mouseSelectThenMoveHandle() {
-        openPage()
-        val field = editor()
+    /** Long-press a word in line 2, then drag the selection's end handle down two lines. */
+    private fun handleChecks(field: SemanticsNodeInteraction, label: String, stylus: Boolean) {
         val l = layout(field)
-        val from = onScreen(field, Offset(4f, (l.getLineTop(0) + l.getLineBottom(0)) / 2))
-        val lastLine = l.getLineForOffset(paragraphEnd(2))
-        val to = onScreen(field, Offset(200f, (l.getLineTop(lastLine) + l.getLineBottom(lastLine)) / 2))
-        mouseDrag(from, to)
-        val afterMouse = selection(field)
-        note("mouse drag select: selection=$afterMouse")
-        screen("11_mouse_selected")
-
-        // Long-press with a finger to get the touch handles, then drag the end handle down two lines.
-        fingerTap(onScreen(field, Offset(30f, (l.getLineTop(0) + l.getLineBottom(0)) / 2)))
+        fun lineY(i: Int) = (l.getLineTop(i) + l.getLineBottom(i)) / 2
+        val word = onScreen(field, Offset(120f, lineY(1)))
         val down = SystemClock.uptimeMillis()
-        val pressAt = onScreen(field, Offset(30f, (l.getLineTop(1) + l.getLineBottom(1)) / 2))
-        inject(MotionEvent.ACTION_DOWN, pressAt, InputDevice.SOURCE_TOUCHSCREEN, down)
+        val source = if (stylus) InputDevice.SOURCE_STYLUS or InputDevice.SOURCE_TOUCHSCREEN else InputDevice.SOURCE_TOUCHSCREEN
+        injectTool(MotionEvent.ACTION_DOWN, word, source, down, stylus)
         SystemClock.sleep(900)
-        inject(MotionEvent.ACTION_UP, pressAt, InputDevice.SOURCE_TOUCHSCREEN, down)
+        injectTool(MotionEvent.ACTION_UP, word, source, down, stylus)
         rule.waitForIdle()
-        val beforeHandle = selection(field)
-        note("long press: selection=$beforeHandle")
-        screen("12_touch_selected")
-
-        val sel = beforeHandle ?: return
+        val selected = selection(field)
+        note("$label ${if (stylus) "pen" else "finger"} long press on line 2: selection=$selected")
+        screen("16_${label}_${if (stylus) "pen" else "finger"}_selected")
+        val sel = selected ?: return
+        if (sel.collapsed) return
         val l2 = layout(field)
-        val end = (sel.max - 1).coerceAtLeast(0)
-        val rect = l2.getCursorRect(end.coerceIn(0, l2.layoutInput.text.length))
-        val handle = onScreen(field, Offset(rect.left + 12f, rect.bottom + 24f))
-        val line4 = l2.getLineForOffset(paragraphEnd(3))
-        fingerDrag(handle, onScreen(field, Offset(rect.left + 12f, l2.getLineBottom(line4) + 24f)))
-        note("after dragging end handle down: selection=${selection(field)} (was $beforeHandle)")
-        screen("13_after_handle_drag")
+        val end = (sel.max - 1).coerceIn(0, l2.layoutInput.text.length)
+        val rect = l2.getCursorRect(end)
+        // The end handle hangs just below the end of the selection.
+        val handle = onScreen(field, Offset(rect.left + 14f, rect.bottom + 20f))
+        val target = handle + Offset(0f, (l2.getLineBottom(3) - l2.getLineBottom(1)))
+        val d2 = SystemClock.uptimeMillis()
+        injectTool(MotionEvent.ACTION_DOWN, handle, source, d2, stylus)
+        for (i in 1..20) {
+            SystemClock.sleep(16)
+            injectTool(MotionEvent.ACTION_MOVE, handle + (target - handle) * (i / 20f), source, d2, stylus)
+        }
+        injectTool(MotionEvent.ACTION_UP, target, source, d2, stylus)
+        rule.waitForIdle()
+        note("$label ${if (stylus) "pen" else "finger"} drag end handle down 2 lines: selection=${selection(field)} (was $sel)")
+        screen("17_${label}_${if (stylus) "pen" else "finger"}_handle_moved")
+    }
+
+    private fun injectTool(action: Int, at: Offset, source: Int, downTime: Long, stylus: Boolean) {
+        val props = MotionEvent.PointerProperties().apply {
+            id = 0
+            toolType = if (stylus) MotionEvent.TOOL_TYPE_STYLUS else MotionEvent.TOOL_TYPE_FINGER
+        }
+        val coords = MotionEvent.PointerCoords().apply {
+            x = at.x
+            y = at.y
+            pressure = 1f
+            size = 1f
+        }
+        val event = MotionEvent.obtain(downTime, SystemClock.uptimeMillis(), action, 1, arrayOf(props), arrayOf(coords), 0, 0, 1f, 1f, 0, 0, source, 0)
+        instrumentation.uiAutomation.injectInputEvent(event, true)
+        event.recycle()
+    }
+
+    @Test
+    fun handlesOnPage() {
+        openPage()
+        handleChecks(editor(), "page", stylus = false)
+    }
+
+    @Test
+    fun penHandlesOnPage() {
+        openPage()
+        handleChecks(editor(), "page", stylus = true)
     }
 
     private fun composeMouseChecks(field: SemanticsNodeInteraction, label: String) {
@@ -309,5 +335,26 @@ class PageInputTest {
         }
         rule.waitForIdle()
         composeMouseChecks(editor(), "bare")
+    }
+
+    @Test
+    fun handlesOnBareEditor() {
+        val state = com.quartz.notes.ui.editor.RichEditorState(RichDoc(paragraphs.map { Block(type = BlockType.BODY, text = it) }))
+        rule.setContent {
+            androidx.compose.material3.MaterialTheme {
+                androidx.compose.foundation.layout.Box(
+                    androidx.compose.ui.Modifier.fillMaxSize().background(androidx.compose.ui.graphics.Color.White),
+                ) {
+                    com.quartz.notes.ui.editor.RichTextEditor(
+                        state = state,
+                        styles = com.quartz.notes.ui.editor.editorStyles(),
+                        contentColor = androidx.compose.ui.graphics.Color.Black,
+                        modifier = androidx.compose.ui.Modifier.padding(top = 80.dp, start = 20.dp, end = 20.dp),
+                    )
+                }
+            }
+        }
+        rule.waitForIdle()
+        handleChecks(editor(), "bare", stylus = false)
     }
 }
