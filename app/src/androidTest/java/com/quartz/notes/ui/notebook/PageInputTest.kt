@@ -396,6 +396,11 @@ class PageInputTest {
         rule.waitForIdle()
         SystemClock.sleep(600)
         rule.onNode(androidx.compose.ui.test.hasText("2/4")).assertExists()
+        // Wait for the notebook's pages to load before using the buttons.
+        rule.waitUntil(10_000) {
+            rule.onAllNodes(androidx.compose.ui.test.hasContentDescription("Pages") and androidx.compose.ui.test.hasClickAction())
+                .fetchSemanticsNodes().isNotEmpty()
+        }
         rule.onNode(androidx.compose.ui.test.hasContentDescription("Pages") and androidx.compose.ui.test.hasClickAction()).performClick()
         rule.waitForIdle()
         SystemClock.sleep(700)
@@ -441,6 +446,11 @@ class PageInputTest {
             }
         }
         rule.waitForIdle()
+        // Wait for the notebook's pages to load before using the buttons.
+        rule.waitUntil(10_000) {
+            rule.onAllNodes(androidx.compose.ui.test.hasContentDescription("Pages") and androidx.compose.ui.test.hasClickAction())
+                .fetchSemanticsNodes().isNotEmpty()
+        }
         rule.onNode(androidx.compose.ui.test.hasContentDescription("Pages") and androidx.compose.ui.test.hasClickAction()).performClick()
         rule.waitForIdle()
         SystemClock.sleep(700)
@@ -511,6 +521,11 @@ class PageInputTest {
     fun rightClickThumbnailToDelete() {
         openNotebook("Menu", 4)
         rule.onNode(androidx.compose.ui.test.hasText("1/4")).assertExists()
+        // Wait for the notebook's pages to load before using the buttons.
+        rule.waitUntil(10_000) {
+            rule.onAllNodes(androidx.compose.ui.test.hasContentDescription("Pages") and androidx.compose.ui.test.hasClickAction())
+                .fetchSemanticsNodes().isNotEmpty()
+        }
         rule.onNode(androidx.compose.ui.test.hasContentDescription("Pages") and androidx.compose.ui.test.hasClickAction()).performClick()
         rule.waitForIdle()
         SystemClock.sleep(700)
