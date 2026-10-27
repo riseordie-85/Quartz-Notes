@@ -133,14 +133,12 @@ internal fun PageTimelineSheet(
                     awaitPointerEventScope {
                         while (true) {
                             val event = awaitPointerEvent(PointerEventPass.Initial)
-                            android.util.Log.d("QuartzWheel", "event ${event.type} ${event.changes.firstOrNull()?.type}")
                             if (event.type != PointerEventType.Scroll) continue
                             val delta = event.changes.fold(Offset.Zero) { acc, c -> acc + c.scrollDelta }
                             if (delta.y == 0f) continue
                             event.changes.forEach { it.consume() }
                             val step = (if (delta.x != 0f) delta.x else delta.y) * 96.dp.toPx()
-                            val used = listState.dispatchRawDelta(step)
-                            android.util.Log.d("QuartzWheel", "delta=$delta step=$step used=$used first=${listState.firstVisibleItemIndex}")
+                            listState.dispatchRawDelta(step)
                         }
                     }
                 },

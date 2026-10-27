@@ -465,7 +465,11 @@ class PageInputTest {
         val sheetOpen = rule.onAllNodes(androidx.compose.ui.test.hasText("Reorder & delete")).fetchSemanticsNodes().isNotEmpty()
         note("after wheel on heading: sheet open=$sheetOpen")
         if (sheetOpen) {
-            rule.onNode(androidx.compose.ui.test.hasText("3") and androidx.compose.ui.test.hasClickAction().not()).assertExists()
+            // Still open and still working: the last page opens from it.
+            rule.onNode(androidx.compose.ui.test.hasText("12") and androidx.compose.ui.test.hasClickAction()).performClick()
+            rule.waitForIdle()
+            SystemClock.sleep(800)
+            rule.onNode(androidx.compose.ui.test.hasText("12/12")).assertExists()
         } else {
             // Closed: the notebook must still respond.
             rule.onNode(androidx.compose.ui.test.hasContentDescription("Next page")).performClick()
