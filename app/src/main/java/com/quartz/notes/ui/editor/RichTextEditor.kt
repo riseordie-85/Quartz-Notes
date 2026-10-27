@@ -240,7 +240,7 @@ fun RichTextEditor(
                     awaitPointerEventScope {
                         while (true) {
                             val event = awaitPointerEvent(PointerEventPass.Initial)
-                            if (event.type == PointerEventType.Press || event.type == PointerEventType.Release) {
+                            if (event.type == PointerEventType.Release) {
                                 event.changes.firstOrNull()?.let { holder.noteTap(it.position) }
                             }
                             if (event.type == PointerEventType.Press && event.buttons.isSecondaryPressed) {
@@ -458,7 +458,9 @@ private class LayoutHolder {
      */
     fun fixTapPastLineEnd(state: RichEditorState, incoming: TextFieldValue): TextFieldValue {
         val at = tapAt ?: return incoming
-        if (System.currentTimeMillis() - tapTime > 700) return incoming
+        // Only the cursor move that comes straight from the tap (not later ones from the keyboard).
+        tapAt = null
+        if (System.currentTimeMillis() - tapTime > 400) return incoming
         val l = layout ?: return incoming
         if (!incoming.selection.collapsed || incoming.text != state.value.text) return incoming
         val doc = incoming.selection.start - MARK.length
@@ -468,7 +470,6 @@ private class LayoutHolder {
         val cursorLine = l.getLineForOffset(doc.coerceIn(0, len))
         val tapLine = l.getLineForVerticalPosition(at.y)
         if (tapLine >= cursorLine) return incoming
-        tapAt = null
         return incoming.copy(selection = TextRange(incoming.selection.start - 1))
     }
 }

@@ -81,6 +81,9 @@ import androidx.compose.material.icons.automirrored.rounded.ArrowRightAlt
 import androidx.compose.material.icons.rounded.Brush
 import androidx.compose.material.icons.rounded.Category
 import android.widget.Toast
+import androidx.compose.foundation.focusable
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.input.key.KeyEventType
 import androidx.compose.ui.input.key.isAltPressed
@@ -328,9 +331,16 @@ fun NotebookScreen(
         fun turnTo(index: Int) {
             scope.launch { pagerState.animateScrollToPage(index.coerceIn(0, spreads.lastIndex)) }
         }
+        // The notebook itself takes focus whenever nothing inside it has it, so page keys work even
+        // when nobody is typing.
+        val pageKeys = remember { FocusRequester() }
+        LaunchedEffect(Unit) { runCatching { pageKeys.requestFocus() } }
         Column(
             Modifier
                 .fillMaxSize()
+                .focusRequester(pageKeys)
+                .onFocusChanged { if (!it.hasFocus) scope.launch { runCatching { pageKeys.requestFocus() } } }
+                .focusable()
                 .onPreviewKeyEvent { e ->
                     if (e.type != KeyEventType.KeyDown) return@onPreviewKeyEvent false
                     val cmd = e.isCtrlPressed || e.isMetaPressed
