@@ -22,6 +22,7 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Keyboard
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Colorize
@@ -142,6 +143,11 @@ fun SettingsScreen(onBack: () -> Unit, onOpenNote: (Long) -> Unit) {
     val shelves by vm.shelves.collectAsStateWithLifecycle()
     val fonts by vm.fonts.collectAsStateWithLifecycle()
     var dialog by remember { mutableStateOf<SettingsDialog?>(null) }
+    var showShortcuts by remember { mutableStateOf(false) }
+    val appContext = androidx.compose.ui.platform.LocalContext.current
+    val versionName = remember {
+        runCatching { appContext.packageManager.getPackageInfo(appContext.packageName, 0).versionName }.getOrNull() ?: ""
+    }
     val snackbar = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
     var tab by rememberSaveable { mutableIntStateOf(0) }
@@ -349,13 +355,26 @@ fun SettingsScreen(onBack: () -> Unit, onOpenNote: (Long) -> Unit) {
                         }
                     }
 
+                    // ---- Keyboard, mouse and pen ----
+                    item { SettingsSectionTitle("Keyboard, mouse & pen") }
+                    item {
+                        QuartzCard(Modifier.fillMaxWidth()) {
+                            ListRow(
+                                title = "Keyboard shortcuts",
+                                subtitle = "Formatting, lists, undo, and what the mouse and pen can do",
+                                onClick = { showShortcuts = true },
+                                leading = { Icon(Icons.Rounded.Keyboard, null, tint = MaterialTheme.colorScheme.primary) },
+                            )
+                        }
+                    }
+
                     // ---- Backup ----
                     item { SettingsSectionTitle("Backup & restore") }
                     item { BackupSection(settings = s, snackbar = snackbar) }
 
                     item {
                         Text(
-                            "Quartz Notes · version 0.3.0",
+                            "Quartz Notes · version $versionName",
                             fontSize = 13.sp,
                             color = LocalQuartzColors.current.textSecondary,
                             modifier = Modifier.fillMaxWidth().padding(top = 28.dp),
@@ -367,6 +386,8 @@ fun SettingsScreen(onBack: () -> Unit, onOpenNote: (Long) -> Unit) {
         }
         SnackbarHost(snackbar, Modifier.align(Alignment.BottomCenter))
     }
+
+    if (showShortcuts) ShortcutsSheet(onDismiss = { showShortcuts = false })
 
     when (val d = dialog) {
         null -> Unit
