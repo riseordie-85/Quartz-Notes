@@ -46,6 +46,24 @@ import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.KeyEvent
+import androidx.compose.ui.input.key.KeyEventType
+import androidx.compose.ui.input.key.isCtrlPressed
+import androidx.compose.ui.input.key.isMetaPressed
+import androidx.compose.ui.input.key.isShiftPressed
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.onPreviewKeyEvent
+import androidx.compose.ui.input.key.type
+import androidx.compose.ui.input.pointer.PointerEventPass
+import androidx.compose.ui.input.pointer.PointerEventType
+import androidx.compose.ui.input.pointer.isSecondaryPressed
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLayoutResult
@@ -169,6 +187,9 @@ fun RichTextEditor(
         val reveal = remember { BringIntoViewRequester() }
         val scope = rememberCoroutineScope()
         val revealMargin = with(density) { 24.dp.toPx() }
+        val focusManager = LocalFocusManager.current
+        val clipboard = LocalClipboardManager.current
+        var contextMenuAt by remember { mutableStateOf<Offset?>(null) }
 
         LaunchedEffect(state.focusRequest) {
             if (state.focusRequest > 0) runCatching { state.focusRequester.requestFocus() }
@@ -207,7 +228,23 @@ fun RichTextEditor(
                 .onFocusChanged { state.onFocusChanged(it.isFocused) }
                 .onGloballyPositioned {
                     holder.coords = it
+                    state.fieldCoords = it
                     reportBounds()
+                }
+                .onPreviewKeyEvent { e -> if (enabled && !readOnly) handleShortcut(state, e) { focusManager.clearFocus() } else false }
+                .pointerInput(state) {
+                    // Right-click (mouse) opens the edit menu where it was clicked.
+                    awaitPointerEventScope {
+                        while (true) {
+                            val event = awaitPointerEvent(PointerEventPass.Initial)
+                            if (event.type == PointerEventType.Press && event.buttons.isSecondaryPressed) {
+                                val change = event.changes.firstOrNull() ?: continue
+                                change.consume()
+                                if (!state.hasSelection) holder.coords?.let { c -> state.placeCursorAt(change.position, c) }
+                                contextMenuAt = change.position
+                            }
+                        }
+                    }
                 }
                 .drawBehind {
                     // Bullets in front of list items.
@@ -232,6 +269,7 @@ fun RichTextEditor(
             onTextLayout = { result ->
                 textLayout = result
                 holder.layout = result
+                state.fieldLayout = result
                 reportBounds()
                 if (holder.revealPending && state.focused) {
                     holder.revealPending = false
@@ -297,8 +335,98 @@ fun RichTextEditor(
             }
         }
 
+        // Mouse right-click menu.
+        contextMenuAt?.let { at ->
+            Box(Modifier.offset { IntOffset(at.x.roundToInt(), at.y.roundToInt()) }) {
+                EditMenu(
+                    state = state,
+                    onDismiss = { contextMenuAt = null },
+                    onCopy = { clipboard.setText(AnnotatedString(state.selectedText())) },
+                    onPaste = { clipboard.getText()?.text?.let { state.insertText(it) } },
+                    readOnly = readOnly || !enabled,
+                )
+            }
+        }
+
         if (placeholder != null && state.blocks.size == 1 && state.text.isEmpty() && state.blocks[0].type == BlockType.BODY) {
             Text(text = placeholder, style = styles.body.copy(color = contentColor.copy(alpha = 0.38f)))
+        }
+    }
+}
+
+/**
+ * Keyboard shortcuts (Ctrl, or Cmd on a Mac keyboard): B / I / U bold, italic, underline; Shift+X
+ * strikethrough; Z undo, Shift+Z or Y redo; Shift+8 bullets; Shift+L checklist; Shift+U check or
+ * uncheck; Shift+H heading, Shift+J subheading, Shift+B body; ] / [ or Tab / Shift+Tab indent;
+ * Escape stops typing. Returns true when the key was used.
+ */
+private fun handleShortcut(state: RichEditorState, e: KeyEvent, onEscape: () -> Unit): Boolean {
+    if (e.type != KeyEventType.KeyDown) return false
+    val cmd = e.isCtrlPressed || e.isMetaPressed
+    val shift = e.isShiftPressed
+    fun done(action: () -> Unit): Boolean {
+        action()
+        return true
+    }
+    return when {
+        cmd && !shift && e.key == Key.Z -> done(state::undo)
+        cmd && ((shift && e.key == Key.Z) || (!shift && e.key == Key.Y)) -> done(state::redo)
+        cmd && !shift && e.key == Key.B -> done { state.toggleStyle(InlineStyle.BOLD) }
+        cmd && !shift && e.key == Key.I -> done { state.toggleStyle(InlineStyle.ITALIC) }
+        cmd && !shift && e.key == Key.U -> done { state.toggleStyle(InlineStyle.UNDERLINE) }
+        cmd && shift && e.key == Key.X -> done { state.toggleStyle(InlineStyle.STRIKE) }
+        cmd && shift && e.key == Key.Eight -> done { state.toggleBlockType(BlockType.BULLET) }
+        cmd && shift && e.key == Key.L -> done { state.toggleBlockType(BlockType.TASK) }
+        cmd && shift && e.key == Key.U -> done(state::toggleSelectedTasks)
+        cmd && shift && e.key == Key.H -> done { state.setBlockType(BlockType.HEADING) }
+        cmd && shift && e.key == Key.J -> done { state.setBlockType(BlockType.SUBHEADING) }
+        cmd && shift && e.key == Key.B -> done { state.setBlockType(BlockType.BODY) }
+        cmd && e.key == Key.RightBracket -> done { state.indent(1) }
+        cmd && e.key == Key.LeftBracket -> done { state.indent(-1) }
+        !cmd && e.key == Key.Tab -> done { state.indent(if (shift) -1 else 1) }
+        e.key == Key.Escape -> done(onEscape)
+        else -> false
+    }
+}
+
+/** Edit menu for a mouse right-click. */
+@Composable
+private fun EditMenu(
+    state: RichEditorState,
+    onDismiss: () -> Unit,
+    onCopy: () -> Unit,
+    onPaste: () -> Unit,
+    readOnly: Boolean,
+) {
+    val selected = state.hasSelection
+    DropdownMenu(expanded = true, onDismissRequest = onDismiss) {
+        @Composable
+        fun Item(label: String, shortcut: String, enabled: Boolean = true, action: () -> Unit) {
+            DropdownMenuItem(
+                text = { Text(label) },
+                trailingIcon = { Text(shortcut, color = MaterialTheme.colorScheme.onSurfaceVariant) },
+                enabled = enabled,
+                onClick = {
+                    onDismiss()
+                    action()
+                },
+            )
+        }
+        Item("Cut", "Ctrl+X", selected && !readOnly) {
+            onCopy()
+            state.insertText("")
+        }
+        Item("Copy", "Ctrl+C", selected) { onCopy() }
+        Item("Paste", "Ctrl+V", !readOnly) { onPaste() }
+        Item("Select all", "Ctrl+A") { state.selectAll() }
+        if (!readOnly) {
+            HorizontalDivider()
+            Item("Bold", "Ctrl+B") { state.toggleStyle(InlineStyle.BOLD) }
+            Item("Italic", "Ctrl+I") { state.toggleStyle(InlineStyle.ITALIC) }
+            Item("Underline", "Ctrl+U") { state.toggleStyle(InlineStyle.UNDERLINE) }
+            HorizontalDivider()
+            Item("Undo", "Ctrl+Z", state.canUndo) { state.undo() }
+            Item("Redo", "Ctrl+Y", state.canRedo) { state.redo() }
         }
     }
 }
@@ -423,12 +551,12 @@ private class DocTransformation(
         val parts = doc.split('\n')
         val lastEmpty = parts.last().isEmpty()
 
-        // Line breaks become spaces at the end of each paragraph (the paragraph styles make the breaks),
-        // so offsets stay the same. Picture placeholders become zero-width spaces.
+        // Each paragraph keeps its line break at its end (inside its paragraph style), so a tap past
+        // the end of a line lands on that line. Picture placeholders become zero-width spaces.
         val sb = StringBuilder(doc.length + 1)
-        for (c in doc) sb.append(if (c == '\n') ' ' else if (c == OBJ) '​' else c)
+        for (c in doc) sb.append(if (c == OBJ) '\u200B' else c)
         // An empty last paragraph needs a character so it still gets its own line.
-        if (lastEmpty) sb.append('​')
+        if (lastEmpty) sb.append('\u200B')
         val visible = sb.toString()
         val length = visible.length
         val builder = AnnotatedString.Builder(visible)

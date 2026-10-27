@@ -309,4 +309,56 @@ class RichEditorStateTest {
         assertEquals(listOf(BlockType.IMAGE, BlockType.BODY), s.types())
         assertEquals(Align.START, s.blocks[1].align)
     }
+
+    @Test
+    fun undoAndRedoTypingAndFormatting() {
+        val s = doc(Block(text = "one"))
+        s.select(3)
+        s.type(" two")
+        s.select(0, 3)
+        s.toggleStyle(InlineStyle.BOLD)
+        s.toggleBlockType(BlockType.BULLET)
+        assertEquals(BlockType.BULLET, s.types()[0])
+        s.undo() // bullet
+        assertEquals(BlockType.BODY, s.types()[0])
+        s.undo() // bold
+        assertTrue(s.toDoc().blocks[0].spans.isEmpty())
+        s.undo() // typing
+        assertEquals(listOf("one"), s.texts())
+        s.redo()
+        assertEquals(listOf("one two"), s.texts())
+        assertTrue(s.canUndo)
+        assertTrue(s.canRedo)
+    }
+
+    @Test
+    fun indentAndOutdent() {
+        val s = doc(Block(type = BlockType.BULLET, text = "a"), Block(type = BlockType.BULLET, text = "b"))
+        s.select(2)
+        s.indent(1)
+        assertEquals(listOf(0, 1), s.toDoc().blocks.map { it.indent })
+        s.indent(-1)
+        s.indent(-1)
+        assertEquals(listOf(0, 0), s.toDoc().blocks.map { it.indent })
+    }
+
+    @Test
+    fun selectedTextAndInsertText() {
+        val s = doc(Block(text = "hello"), Block(type = BlockType.IMAGE, image = ImageData(path = "p.jpg", aspect = 1f)), Block(text = "world"))
+        s.selectAll()
+        assertEquals("hello\n\nworld", s.selectedText())
+        s.select(0, 5)
+        s.insertText("bye")
+        assertEquals("bye", s.texts()[0])
+    }
+
+    @Test
+    fun checkingSelectedTasks() {
+        val s = doc(Block(type = BlockType.TASK, text = "a"), Block(type = BlockType.TASK, text = "b", checked = true))
+        s.select(0, 3)
+        s.toggleSelectedTasks()
+        assertTrue(s.toDoc().blocks.all { it.checked })
+        s.toggleSelectedTasks()
+        assertTrue(s.toDoc().blocks.none { it.checked })
+    }
 }

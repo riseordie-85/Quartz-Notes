@@ -10,6 +10,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.neverEqualPolicy
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.layout.LayoutCoordinates
+import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
 import com.quartz.notes.data.model.ImageData
@@ -34,6 +37,8 @@ internal const val MARK = "\n"
 internal const val OBJ = '￼'
 
 private val ListTypes = setOf(BlockType.BULLET, BlockType.TASK)
+private const val MaxIndent = 6
+private const val MaxUndo = 200
 private val HeadingTypes = setOf(BlockType.HEADING, BlockType.SUBHEADING)
 
 /**
@@ -81,6 +86,20 @@ class BlockState internal constructor(
     }
 }
 
+/** How a paragraph looked, for undo. */
+private data class BlockSnap(
+    val id: String,
+    val type: BlockType,
+    val align: Align,
+    val checked: Boolean,
+    val indent: Int,
+    val image: ImageData?,
+    val imageWidth: Float,
+)
+
+/** The whole document at one moment, for undo and redo. */
+private data class Snapshot(val value: TextFieldValue, val spans: List<StyleSpan>, val blocks: List<BlockSnap>)
+
 /**
  * Editing state for one rich text document, edited as one continuous text so selection, select all,
  * copy and paste work across paragraphs. Paragraphs are the text's lines; [blocks] holds how each one
@@ -112,6 +131,22 @@ class RichEditorState(doc: RichDoc) {
         private set
 
     val focusRequester = FocusRequester()
+
+    /** Where the field is and how its text is laid out (set by the editor), for placing the cursor from a tap. */
+    internal var fieldCoords: LayoutCoordinates? = null
+    internal var fieldLayout: TextLayoutResult? = null
+
+    // Undo / redo history.
+    private val undoStack = ArrayDeque<Snapshot>()
+    private val redoStack = ArrayDeque<Snapshot>()
+    private var lastRecordAt = 0L
+    private var lastRecordWasTyping = false
+
+    /** Whether there's something to undo / redo (observable). */
+    var canUndo by mutableStateOf(false)
+        private set
+    var canRedo by mutableStateOf(false)
+        private set
 
     // Styles toggled with a collapsed cursor, applied to the next typed characters.
     private var pendingOn by mutableStateOf<Map<InlineStyle, String?>>(emptyMap())
@@ -201,6 +236,9 @@ class RichEditorState(doc: RichDoc) {
 
     /** Replaces the whole document (e.g. when a page is cleared). */
     fun reset(doc: RichDoc = RichDoc()) {
+        undoStack.clear()
+        redoStack.clear()
+        updateHistoryFlags()
         load(doc)
         clearPending()
         changed()
@@ -209,6 +247,7 @@ class RichEditorState(doc: RichDoc) {
     /** Places the cursor at the end of the document. */
     fun focusEnd() {
         if (blocks.lastOrNull()?.isImage == true) {
+            record()
             // There's nowhere to type after a picture, so add a line.
             replace(text.length, text.length, "\n")
             blocks.add(BlockState.empty())
@@ -260,6 +299,7 @@ class RichEditorState(doc: RichDoc) {
 
     /** Inserts a picture paragraph before paragraph [index] (or at the end), with a line after it if needed. */
     fun insertImage(index: Int, data: ImageData, width: Float, align: Align = Align.CENTER): String {
+        record()
         val at = index.coerceIn(0, blocks.size)
         val meta = BlockState(newBlockId(), BlockType.IMAGE, align, false, 0, data, width.coerceIn(0.25f, 1f))
         if (at < blocks.size) {
@@ -284,6 +324,7 @@ class RichEditorState(doc: RichDoc) {
     fun removeBlock(id: String) {
         val index = blocks.indexOfFirst { it.id == id }
         if (index < 0) return
+        record()
         val t = text
         val starts = paragraphStarts(t)
         if (blocks.size == 1) {
@@ -301,6 +342,7 @@ class RichEditorState(doc: RichDoc) {
 
     fun updateImage(id: String, data: ImageData) {
         blocks.firstOrNull { it.id == id }?.let {
+            record()
             it.image = data
             changed()
         }
@@ -308,6 +350,7 @@ class RichEditorState(doc: RichDoc) {
 
     fun setImageWidth(id: String, width: Float) {
         blocks.firstOrNull { it.id == id }?.let {
+            record()
             it.imageWidth = width.coerceIn(0.25f, 1f)
             changed()
         }
@@ -315,6 +358,7 @@ class RichEditorState(doc: RichDoc) {
 
     fun setBlockAlign(id: String, align: Align) {
         blocks.firstOrNull { it.id == id }?.let {
+            record()
             it.align = align
             changed()
         }
@@ -369,6 +413,7 @@ class RichEditorState(doc: RichDoc) {
             value = raw
             return
         }
+        record(typing = true)
 
         // Find the edited region.
         val minLen = minOf(oldText.length, newText.length)
@@ -577,6 +622,7 @@ class RichEditorState(doc: RichDoc) {
         if (type == BlockType.IMAGE) return
         val targets = selectedParagraphs().filter { !it.isImage }
         if (targets.isEmpty()) return
+        record()
         val all = targets.all { it.type == type }
         val newType = if (all && type != BlockType.BODY) BlockType.BODY else type
         targets.forEach {
@@ -589,6 +635,7 @@ class RichEditorState(doc: RichDoc) {
 
     fun setBlockType(type: BlockType) {
         if (type == BlockType.IMAGE) return
+        record()
         selectedParagraphs().filter { !it.isImage }.forEach {
             it.type = type
             if (type != BlockType.TASK) it.checked = false
@@ -597,6 +644,7 @@ class RichEditorState(doc: RichDoc) {
     }
 
     fun toggleChecked(block: BlockState) {
+        record()
         block.checked = !block.checked
         changed()
     }
@@ -607,6 +655,7 @@ class RichEditorState(doc: RichDoc) {
     }
 
     fun setAlign(align: Align) {
+        record()
         selectedParagraphs().forEach { it.align = align }
         changed()
     }
@@ -632,6 +681,7 @@ class RichEditorState(doc: RichDoc) {
     /** Toggles a style on the selection, or for the next typed text when nothing is selected. */
     fun toggleStyle(style: InlineStyle, value: String? = null) {
         if (hasSelection) {
+            record()
             val s = selStart
             val e = selEnd
             spans = if (SpanOps.covers(spans, style, s, e)) {
@@ -652,6 +702,7 @@ class RichEditorState(doc: RichDoc) {
     /** Sets a valued style (color, highlight, font). A null [value] removes it. */
     fun applyValue(style: InlineStyle, value: String?) {
         if (hasSelection) {
+            record()
             spans = if (value == null) {
                 SpanOps.remove(spans, style, selStart, selEnd)
             } else {
@@ -665,6 +716,121 @@ class RichEditorState(doc: RichDoc) {
             pendingOff = pendingOff - style
             pendingOn = pendingOn + (style to value)
         }
+    }
+
+    // ---- Indent ----
+
+    /** Indents (or, with a negative [delta], outdents) the selected paragraphs. */
+    fun indent(delta: Int) {
+        val targets = selectedParagraphs().filter { !it.isImage }
+        if (targets.isEmpty() || targets.none { (it.indent + delta) in 0..MaxIndent }) return
+        record()
+        targets.forEach { it.indent = (it.indent + delta).coerceIn(0, MaxIndent) }
+        changed()
+    }
+
+    /** Toggles the done mark on the selected task items. */
+    fun toggleSelectedTasks() {
+        val tasks = selectedParagraphs().filter { it.type == BlockType.TASK }
+        if (tasks.isEmpty()) return
+        record()
+        val done = !tasks.all { it.checked }
+        tasks.forEach { it.checked = done }
+        changed()
+    }
+
+    // ---- Clipboard and pointer helpers ----
+
+    /** The selected words as plain text (pictures left out). */
+    fun selectedText(): String =
+        if (hasSelection) text.substring(selStart, selEnd).replace(OBJ.toString(), "") else ""
+
+    /** Replaces the selection with [s] (or inserts it at the cursor), as if typed. */
+    fun insertText(s: String) {
+        val v = value
+        val start = v.selection.min.coerceAtLeast(MARK.length)
+        val end = v.selection.max.coerceAtLeast(MARK.length)
+        onValueChange(TextFieldValue(v.text.substring(0, start) + s + v.text.substring(end), TextRange(start + s.length)))
+    }
+
+    fun selectAll() {
+        value = TextFieldValue(value.text, TextRange(MARK.length, value.text.length))
+    }
+
+    /**
+     * Puts the cursor where a tap or click landed. [point] is in [from]'s coordinates; points beside
+     * the text (in the page margin, or right of a short line) land on the nearest line.
+     */
+    fun placeCursorAt(point: Offset, from: LayoutCoordinates): Boolean {
+        val coords = fieldCoords ?: return false
+        val layout = fieldLayout ?: return false
+        if (!coords.isAttached || !from.isAttached) return false
+        val local = coords.localPositionOf(from, point)
+        val x = local.x.coerceIn(0f, coords.size.width.toFloat())
+        val y = local.y.coerceIn(0f, (coords.size.height - 1).coerceAtLeast(0).toFloat())
+        val offset = layout.getOffsetForPosition(Offset(x, y)).coerceIn(0, text.length)
+        clearPending()
+        setCursor(offset)
+        requestFocus()
+        return true
+    }
+
+    // ---- Undo / redo ----
+
+    private fun snapshot() = Snapshot(
+        value = TextFieldValue(value.text, value.selection),
+        spans = spans,
+        blocks = blocks.map { BlockSnap(it.id, it.type, it.align, it.checked, it.indent, it.image, it.imageWidth) },
+    )
+
+    /**
+     * Saves how things are before a change. Runs of typing within a moment of each other undo together;
+     * every other change is its own step.
+     */
+    private fun record(typing: Boolean = false) {
+        val now = System.currentTimeMillis()
+        val coalesce = typing && lastRecordWasTyping && now - lastRecordAt < 1200 && undoStack.isNotEmpty()
+        lastRecordAt = now
+        lastRecordWasTyping = typing
+        redoStack.clear()
+        if (!coalesce) {
+            val snap = snapshot()
+            if (undoStack.lastOrNull() != snap) {
+                undoStack.addLast(snap)
+                if (undoStack.size > MaxUndo) undoStack.removeFirst()
+            }
+        }
+        updateHistoryFlags()
+    }
+
+    private fun restore(snap: Snapshot) {
+        blocks.clear()
+        blocks.addAll(snap.blocks.map { BlockState(it.id, it.type, it.align, it.checked, it.indent, it.image, it.imageWidth) })
+        spans = snap.spans
+        value = TextFieldValue(snap.value.text, snap.value.selection)
+        clearPending()
+        changed()
+    }
+
+    fun undo() {
+        val snap = undoStack.removeLastOrNull() ?: return
+        redoStack.addLast(snapshot())
+        restore(snap)
+        lastRecordWasTyping = false
+        updateHistoryFlags()
+    }
+
+    fun redo() {
+        val snap = redoStack.removeLastOrNull() ?: return
+        undoStack.addLast(snapshot())
+        restore(snap)
+        lastRecordWasTyping = false
+        updateHistoryFlags()
+    }
+
+    private fun updateHistoryFlags() {
+        canUndo = undoStack.isNotEmpty()
+        canRedo = redoStack.isNotEmpty()
     }
 
     private fun applyPending(spans: List<StyleSpan>, start: Int, end: Int): List<StyleSpan> {

@@ -376,7 +376,21 @@ internal fun PageView(
             }
             sweepBlankTextBoxes()
             if (!scrapbook && !page.locked && p.y > titleBottomPx) {
-                editor.focusEnd()
+                val root = canvas.contentCoords
+                val field = editor.fieldCoords
+                val fieldRect = if (root != null && field != null && root.isAttached && field.isAttached) {
+                    root.localBoundingBoxOf(field, clipBounds = false)
+                } else {
+                    null
+                }
+                when {
+                    // On the text itself: the text field already put the cursor there (or selected).
+                    fieldRect != null && fieldRect.contains(p) -> Unit
+                    // Beside a line (in the page margin): that line.
+                    root != null && fieldRect != null && p.y <= fieldRect.bottom -> editor.placeCursorAt(p, root)
+                    // Below the text: the end.
+                    else -> editor.focusEnd()
+                }
                 keyboard?.show()
             }
         }
