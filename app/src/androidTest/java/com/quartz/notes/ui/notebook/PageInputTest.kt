@@ -404,7 +404,8 @@ class PageInputTest {
         // Alt + Left goes back a page.
         rule.onRoot().performKeyInput {
             keyDown(androidx.compose.ui.input.key.Key.AltLeft)
-            pressKey(androidx.compose.ui.input.key.Key.DirectionLeft)
+            keyDown(androidx.compose.ui.input.key.Key.DirectionLeft)
+            keyUp(androidx.compose.ui.input.key.Key.DirectionLeft)
             keyUp(androidx.compose.ui.input.key.Key.AltLeft)
         }
         rule.waitForIdle()
