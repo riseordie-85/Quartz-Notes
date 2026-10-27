@@ -72,6 +72,15 @@ private val Groups = listOf(
         ),
     ),
     ShortcutGroup(
+        title = "Notebook pages",
+        items = listOf(
+            Shortcut(keys("Ctrl", "Page Down"), "Next page"),
+            Shortcut(keys("Ctrl", "Page Up"), "Previous page"),
+            Shortcut(keys("Ctrl", "Alt", "Home"), "First page"),
+            Shortcut(keys("Ctrl", "Alt", "End"), "Last page"),
+        ),
+    ),
+    ShortcutGroup(
         title = "Mouse and pen",
         note = "Selections and handles work across paragraphs with a finger, mouse or pen.",
         items = listOf(

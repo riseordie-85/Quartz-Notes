@@ -81,6 +81,17 @@ import androidx.compose.material.icons.automirrored.rounded.ArrowRightAlt
 import androidx.compose.material.icons.rounded.Brush
 import androidx.compose.material.icons.rounded.Category
 import android.widget.Toast
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.KeyEventType
+import androidx.compose.ui.input.key.isAltPressed
+import androidx.compose.ui.input.key.isCtrlPressed
+import androidx.compose.ui.input.key.isMetaPressed
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.onPreviewKeyEvent
+import androidx.compose.ui.input.key.type
+import androidx.compose.material.icons.automirrored.rounded.KeyboardArrowLeft
+import androidx.compose.material.icons.automirrored.rounded.KeyboardArrowRight
+import androidx.compose.material.icons.rounded.ViewCarousel
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
@@ -210,6 +221,7 @@ fun NotebookScreen(
     var formatTarget by remember { mutableStateOf<RichEditorState?>(null) }
     var showStyle by remember { mutableStateOf(false) }
     var showPages by remember { mutableStateOf(false) }
+    var showTimeline by remember { mutableStateOf(false) }
     var showEdit by remember { mutableStateOf(false) }
     // Section page whose color / icon / photo is being changed.
     var sectionStyleId by remember { mutableStateOf<Long?>(null) }
@@ -311,7 +323,24 @@ fun NotebookScreen(
             else -> "$firstShown/${pages.size}"
         }
 
-        Column(Modifier.fillMaxSize()) {
+        // Ctrl+Page Down / Ctrl+Page Up turn the page (Ctrl+Alt+Home / Ctrl+Alt+End: first / last), even while typing.
+        fun turnTo(index: Int) {
+            scope.launch { pagerState.animateScrollToPage(index.coerceIn(0, spreads.lastIndex)) }
+        }
+        Column(
+            Modifier
+                .fillMaxSize()
+                .onPreviewKeyEvent { e ->
+                    if (e.type != KeyEventType.KeyDown || !(e.isCtrlPressed || e.isMetaPressed)) return@onPreviewKeyEvent false
+                    when (e.key) {
+                        Key.PageDown -> true.also { turnTo(pagerState.currentPage + 1) }
+                        Key.PageUp -> true.also { turnTo(pagerState.currentPage - 1) }
+                        Key.MoveHome -> if (e.isAltPressed) true.also { turnTo(0) } else false
+                        Key.MoveEnd -> if (e.isAltPressed) true.also { turnTo(spreads.lastIndex) } else false
+                        else -> false
+                    }
+                },
+        ) {
             NotebookTopBar(
                 notebook = nb,
                 wide = wide,
@@ -563,6 +592,15 @@ fun NotebookScreen(
                     }
                 }
                 Spacer(Modifier.width(12.dp))
+                PageNavPill(
+                    labels = wide,
+                    canPrevious = pagerState.currentPage > 0,
+                    canNext = pagerState.currentPage < spreads.lastIndex,
+                    onPrevious = { scope.launch { pagerState.animateScrollToPage((pagerState.currentPage - 1).coerceAtLeast(0)) } },
+                    onPages = { showTimeline = true },
+                    onNext = { scope.launch { pagerState.animateScrollToPage((pagerState.currentPage + 1).coerceAtMost(spreads.lastIndex)) } },
+                )
+                Spacer(Modifier.width(12.dp))
                 // Tap: new page after this one. Long-press: new section.
                 val haptics = LocalHapticFeedback.current
                 val insertAfter = if (onIndex) -1 else activeIndex
@@ -587,6 +625,27 @@ fun NotebookScreen(
                     Icon(Icons.Rounded.Add, contentDescription = "Add page (hold for a new section)", modifier = Modifier.size(32.dp), tint = MaterialTheme.colorScheme.onSurface)
                 }
             }
+        }
+
+        if (showTimeline) {
+            PageTimelineSheet(
+                pages = displayPages,
+                showing = shownAll.map { it.id }.toSet(),
+                vm = vm,
+                onOpen = { page ->
+                    showTimeline = false
+                    if (page.id == INDEX_PAGE_ID) {
+                        scope.launch { pagerState.animateScrollToPage(spreadOf(INDEX_PAGE_ID)) }
+                    } else {
+                        scrollTarget = page.id
+                    }
+                },
+                onManage = {
+                    showTimeline = false
+                    showPages = true
+                },
+                onDismiss = { showTimeline = false },
+            )
         }
 
         if (showPages) {
@@ -837,6 +896,50 @@ private fun NotebookTopBar(
                 IconButton(onClick = onShare) { Icon(Icons.Rounded.Share, contentDescription = "Share page", tint = onColor) }
                 IconButton(onClick = onPages) { Icon(Icons.Rounded.Layers, contentDescription = "Pages", tint = onColor) }
                 IconButton(onClick = onEdit) { Icon(Icons.Rounded.Settings, contentDescription = "Notebook settings", tint = onColor) }
+            }
+        }
+    }
+}
+
+/** Previous page, all pages (timeline) and next page, beside the add-page button. */
+@Composable
+private fun PageNavPill(
+    /** Room for words beside the icons (tablet / unfolded). */
+    labels: Boolean,
+    canPrevious: Boolean,
+    canNext: Boolean,
+    onPrevious: () -> Unit,
+    onPages: () -> Unit,
+    onNext: () -> Unit,
+) {
+    val content = MaterialTheme.colorScheme.onSurface
+    Surface(shape = CircleShape, color = LocalQuartzColors.current.pill, shadowElevation = 3.dp) {
+        Row(Modifier.height(58.dp).padding(horizontal = 6.dp), verticalAlignment = Alignment.CenterVertically) {
+            @Composable
+            fun Segment(enabled: Boolean, description: String, onClick: () -> Unit, content: @Composable () -> Unit) {
+                Row(
+                    Modifier
+                        .height(46.dp)
+                        .clip(CircleShape)
+                        .clickable(enabled = enabled, onClickLabel = description, onClick = onClick)
+                        .padding(horizontal = if (labels) 14.dp else 10.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) { content() }
+            }
+            Segment(canPrevious, "Previous page", onPrevious) {
+                Icon(Icons.AutoMirrored.Rounded.KeyboardArrowLeft, contentDescription = "Previous page", tint = content.copy(alpha = if (canPrevious) 1f else 0.3f))
+                if (labels) Text("Previous", fontSize = 15.sp, color = content.copy(alpha = if (canPrevious) 1f else 0.3f))
+            }
+            Segment(true, "All pages", onPages) {
+                Icon(Icons.Rounded.ViewCarousel, contentDescription = "Pages", tint = content)
+                if (labels) {
+                    Spacer(Modifier.width(8.dp))
+                    Text("Pages", fontSize = 15.sp, fontWeight = FontWeight.Medium, color = content)
+                }
+            }
+            Segment(canNext, "Next page", onNext) {
+                if (labels) Text("Next", fontSize = 15.sp, color = content.copy(alpha = if (canNext) 1f else 0.3f))
+                Icon(Icons.AutoMirrored.Rounded.KeyboardArrowRight, contentDescription = "Next page", tint = content.copy(alpha = if (canNext) 1f else 0.3f))
             }
         }
     }
