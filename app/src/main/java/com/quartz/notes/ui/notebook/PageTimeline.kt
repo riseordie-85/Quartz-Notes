@@ -138,7 +138,7 @@ internal fun PageTimelineSheet(
                             if (delta.y == 0f) continue
                             event.changes.forEach { it.consume() }
                             val step = (if (delta.x != 0f) delta.x else delta.y) * 96.dp.toPx()
-                            scope.launch { listState.animateScrollBy(step) }
+                            listState.dispatchRawDelta(step)
                         }
                     }
                 },

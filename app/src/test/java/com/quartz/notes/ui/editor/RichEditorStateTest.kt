@@ -361,4 +361,54 @@ class RichEditorStateTest {
         s.toggleSelectedTasks()
         assertTrue(s.toDoc().blocks.none { it.checked })
     }
+
+    @Test
+    fun dividerGoesBelowTheLineWithALineAfterIt() {
+        val s = doc(Block(text = "one"), Block(text = "two"))
+        s.select(1)
+        s.insertDivider()
+        assertEquals(listOf(BlockType.BODY, BlockType.DIVIDER, BlockType.BODY, BlockType.BODY), s.types())
+        assertEquals(listOf("one", "", "", "two"), s.texts())
+        // The cursor is on the new empty line under the divider.
+        s.type("x")
+        assertEquals(listOf("one", "", "x", "two"), s.texts())
+    }
+
+    @Test
+    fun dividerOnAnEmptyLineReplacesIt() {
+        val s = doc(Block(text = "one"), Block(text = ""), Block(text = "two"))
+        s.select(4)
+        s.insertDivider()
+        assertEquals(listOf(BlockType.BODY, BlockType.DIVIDER, BlockType.BODY), s.types())
+        assertEquals(listOf("one", "", "two"), s.texts())
+        assertEquals(s.paragraphStarts()[2], s.selStart)
+    }
+
+    @Test
+    fun dividerAtTheEndAddsALineAndSurvivesSaving() {
+        val s = doc(Block(text = "one"))
+        s.select(3)
+        s.insertDivider()
+        assertEquals(listOf(BlockType.BODY, BlockType.DIVIDER, BlockType.BODY), s.types())
+        val again = RichEditorState(s.toDoc())
+        assertEquals(listOf(BlockType.BODY, BlockType.DIVIDER, BlockType.BODY), again.types())
+        // Backspace just after the divider removes it and keeps the text.
+        again.select(again.paragraphStarts()[2])
+        again.type("z")
+        again.select(again.paragraphStarts()[2])
+        again.backspace()
+        assertEquals(listOf(BlockType.BODY, BlockType.BODY), again.types())
+        assertEquals(listOf("one", "z"), again.texts())
+        assertEquals(4, again.selStart)
+    }
+
+    @Test
+    fun deletingTheDividerAndUndo() {
+        val s = doc(Block(text = "one"), Block(type = BlockType.DIVIDER), Block(text = "two"))
+        s.select(3, 6)
+        s.backspace()
+        assertTrue(BlockType.DIVIDER !in s.types())
+        s.undo()
+        assertEquals(listOf(BlockType.BODY, BlockType.DIVIDER, BlockType.BODY), s.types())
+    }
 }

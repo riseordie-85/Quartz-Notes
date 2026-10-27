@@ -65,6 +65,9 @@ class BlockState internal constructor(
     var imageWidth by mutableFloatStateOf(imageWidth)
     val isImage: Boolean get() = type == BlockType.IMAGE
 
+    /** A picture or a divider: a line of its own holding just the [OBJ] placeholder, with no words. */
+    val isObject: Boolean get() = type == BlockType.IMAGE || type == BlockType.DIVIDER
+
     internal fun copyNew() = BlockState(newBlockId(), type, align, checked, indent, image, imageWidth)
 
     companion object {
@@ -178,7 +181,7 @@ class RichEditorState(doc: RichDoc) {
         source.forEachIndexed { i, b ->
             if (i > 0) sb.append('\n')
             val meta = BlockState.from(b)
-            if (meta.isImage) {
+            if (meta.isObject) {
                 sb.append(OBJ)
             } else {
                 val clean = b.text.replace('\n', ' ').replace(OBJ.toString(), "")
@@ -204,11 +207,13 @@ class RichEditorState(doc: RichDoc) {
             val meta = blocks.getOrNull(i) ?: BlockState.empty()
             if (meta.isImage && meta.image != null) {
                 Block(id = meta.id, type = BlockType.IMAGE, text = "", align = meta.align, image = meta.image, imageWidth = meta.imageWidth)
+            } else if (meta.type == BlockType.DIVIDER) {
+                Block(id = meta.id, type = BlockType.DIVIDER, text = "")
             } else {
                 val words = part.replace(OBJ.toString(), "")
                 Block(
                     id = meta.id,
-                    type = if (meta.isImage) BlockType.BODY else meta.type,
+                    type = if (meta.isObject) BlockType.BODY else meta.type,
                     text = words,
                     spans = if (words.length == part.length) SpanOps.normalize(SpanOps.slice(spans, start, start + part.length)) else emptyList(),
                     align = meta.align,
@@ -220,7 +225,7 @@ class RichEditorState(doc: RichDoc) {
         return RichDoc(out)
     }
 
-    fun isBlank(): Boolean = blocks.none { it.isImage } && text.isBlank()
+    fun isBlank(): Boolean = blocks.none { it.isObject } && text.isBlank()
 
     private fun changed() {
         version++
@@ -246,7 +251,7 @@ class RichEditorState(doc: RichDoc) {
 
     /** Places the cursor at the end of the document. */
     fun focusEnd() {
-        if (blocks.lastOrNull()?.isImage == true) {
+        if (blocks.lastOrNull()?.isObject == true) {
             record()
             // There's nowhere to type after a picture, so add a line.
             replace(text.length, text.length, "\n")
@@ -318,6 +323,43 @@ class RichEditorState(doc: RichDoc) {
         }
         changed()
         return meta.id
+    }
+
+    /**
+     * Inserts a divider line after the paragraph with the cursor (or replaces it, if it's an empty
+     * line), with a line after it to keep typing on.
+     */
+    fun insertDivider() {
+        record()
+        val t = text
+        val index = currentIndex
+        val starts = paragraphStarts(t)
+        val emptyLine = !blocks[index].isObject && paragraphText(t, index).isEmpty()
+        val divider = BlockState(newBlockId(), BlockType.DIVIDER, Align.START, false, 0)
+        val at: Int
+        if (emptyLine) {
+            // Turn the empty line into the divider.
+            replace(starts[index], starts[index], OBJ.toString())
+            blocks[index] = divider
+            at = index
+        } else {
+            val end = starts.getOrNull(index + 1)?.minus(1) ?: t.length
+            replace(end, end, "\n$OBJ")
+            blocks.add(index + 1, divider)
+            at = index + 1
+        }
+        // Somewhere to keep typing below it.
+        val after = paragraphStarts()
+        val lineAfter = at + 1
+        if (lineAfter > blocks.lastIndex || blocks[lineAfter].isObject) {
+            val pos = (after.getOrNull(lineAfter)?.minus(1)) ?: text.length
+            replace(pos, pos, "\n")
+            blocks.add(lineAfter, BlockState.empty())
+        }
+        setCursor(paragraphStarts()[lineAfter])
+        clearPending()
+        if (!focused) requestFocus()
+        changed()
     }
 
     /** Removes a paragraph (used to turn an in-line picture back into a floating one). */
@@ -451,7 +493,7 @@ class RichEditorState(doc: RichDoc) {
         if (inserted.isEmpty() && removed == "\n" && pi + 1 <= blocks.lastIndex) {
             val prev = blocks[pi]
             val next = blocks[pi + 1]
-            if (oldCursor == p + 1 && !next.isImage && next.type != BlockType.BODY) {
+            if (oldCursor == p + 1 && !next.isObject && next.type != BlockType.BODY) {
                 // First backspace removes list or heading formatting.
                 next.type = BlockType.BODY
                 next.checked = false
@@ -459,17 +501,25 @@ class RichEditorState(doc: RichDoc) {
                 changed()
                 return
             }
-            if (prev.isImage || next.isImage) {
+            if (prev.isObject || next.isObject) {
                 // Pictures keep their own line. An empty line beside one is removed instead.
                 val nextText = paragraphText(oldText, pi + 1)
                 val prevText = paragraphText(oldText, pi)
                 when {
-                    prev.isImage && !next.isImage && nextText.isEmpty() && pi + 1 < blocks.lastIndex -> {
+                    prev.type == BlockType.DIVIDER && !next.isObject && oldCursor == p + 1 && p >= 1 -> {
+                        // Backspace just after a divider removes the divider.
+                        resync(old)
+                        replace(p - 1, p + 1, "")
+                        blocks.removeAt(pi)
+                        setCursor(p - 1)
+                        changed()
+                    }
+                    prev.isObject && !next.isObject && nextText.isEmpty() && pi + 1 < blocks.lastIndex -> {
                         value = TextFieldValue(raw.text, TextRange(MARK.length + p + 1))
                         blocks.removeAt(pi + 1)
                         changed()
                     }
-                    next.isImage && !prev.isImage && prevText.isEmpty() -> {
+                    next.isObject && !prev.isObject && prevText.isEmpty() -> {
                         value = raw
                         blocks.removeAt(pi)
                         changed()
@@ -507,13 +557,13 @@ class RichEditorState(doc: RichDoc) {
         val oldStarts = paragraphStarts(oldText)
         val lastMerged = pi + removedBreaks
         // An edit that stops exactly where a picture's line starts leaves the picture alone.
-        val keepPicture = removedBreaks > 0 && lastMerged <= blocks.lastIndex && blocks[lastMerged].isImage &&
+        val keepPicture = removedBreaks > 0 && lastMerged <= blocks.lastIndex && blocks[lastMerged].isObject &&
             oldStarts.getOrNull(lastMerged) == removedEnd
         repeat(if (keepPicture) removedBreaks - 1 else removedBreaks) { if (pi + 1 <= blocks.lastIndex) blocks.removeAt(pi + 1) }
         if (insertedBreaks > 0) {
             val paraStart = oldText.lastIndexOf('\n', p - 1) + 1
             val atStart = p == paraStart && removed.isEmpty() && inserted == "\n" && paragraphText(oldText, pi).isNotEmpty()
-            if (atStart && head.isImage) {
+            if (atStart && head.isObject) {
                 // Enter in front of a picture: a plain empty line goes above it.
                 blocks.add(pi, BlockState.empty())
             } else if (atStart) {
@@ -524,8 +574,8 @@ class RichEditorState(doc: RichDoc) {
                 blocks.add(pi + 1, below)
             } else {
                 val newType = if (head.type in ListTypes) head.type else BlockType.BODY
-                val align = if (head.isImage) Align.START else head.align
-                val indent = if (head.isImage) 0 else head.indent
+                val align = if (head.isObject) Align.START else head.align
+                val indent = if (head.isObject) 0 else head.indent
                 repeat(insertedBreaks) { blocks.add(pi + 1, BlockState.empty(newType, align, indent)) }
             }
         }
@@ -560,7 +610,7 @@ class RichEditorState(doc: RichDoc) {
             val end = if (i + 1 < starts.size) starts[i + 1] - 1 else t.length
             val para = t.substring(start, end)
             val meta = blocks[i]
-            if (meta.isImage) {
+            if (meta.isObject) {
                 when {
                     para == OBJ.toString() -> Unit
                     OBJ !in para -> {
@@ -600,7 +650,7 @@ class RichEditorState(doc: RichDoc) {
 
     private fun backspaceAtStart() {
         val first = blocks.firstOrNull()
-        if (first != null && !first.isImage && first.type != BlockType.BODY) {
+        if (first != null && !first.isObject && first.type != BlockType.BODY) {
             first.type = BlockType.BODY
             first.checked = false
             changed()
@@ -620,7 +670,7 @@ class RichEditorState(doc: RichDoc) {
 
     fun toggleBlockType(type: BlockType) {
         if (type == BlockType.IMAGE) return
-        val targets = selectedParagraphs().filter { !it.isImage }
+        val targets = selectedParagraphs().filter { !it.isObject }
         if (targets.isEmpty()) return
         record()
         val all = targets.all { it.type == type }
@@ -636,7 +686,7 @@ class RichEditorState(doc: RichDoc) {
     fun setBlockType(type: BlockType) {
         if (type == BlockType.IMAGE) return
         record()
-        selectedParagraphs().filter { !it.isImage }.forEach {
+        selectedParagraphs().filter { !it.isObject }.forEach {
             it.type = type
             if (type != BlockType.TASK) it.checked = false
         }
@@ -722,7 +772,7 @@ class RichEditorState(doc: RichDoc) {
 
     /** Indents (or, with a negative [delta], outdents) the selected paragraphs. */
     fun indent(delta: Int) {
-        val targets = selectedParagraphs().filter { !it.isImage }
+        val targets = selectedParagraphs().filter { !it.isObject }
         if (targets.isEmpty() || targets.none { (it.indent + delta) in 0..MaxIndent }) return
         record()
         targets.forEach { it.indent = (it.indent + delta).coerceIn(0, MaxIndent) }

@@ -64,6 +64,7 @@ fun noteAsText(title: String, doc: RichDoc): String = buildString {
             when (b.type) {
                 BlockType.BULLET -> "• ${b.text}"
                 BlockType.TASK -> (if (b.checked) "☑ " else "☐ ") + b.text
+                BlockType.DIVIDER -> "────────────"
                 else -> b.text
             },
         )
@@ -118,7 +119,14 @@ suspend fun renderNoteImage(
         StaticLayout.Builder.obtain(text, 0, text.length, p, w).setAlignment(align).setLineSpacing(0f, 1.15f).build()
 
     // Lay everything out first to know the height.
-    data class Piece(val layout: StaticLayout, val indent: Float, val marker: String?, val markerPaint: TextPaint?, val gapAfter: Float)
+    data class Piece(
+        val layout: StaticLayout,
+        val indent: Float,
+        val marker: String?,
+        val markerPaint: TextPaint?,
+        val gapAfter: Float,
+        val rule: Boolean = false,
+    )
     val pieces = ArrayList<Piece>()
     if (title.isNotBlank()) pieces += Piece(layout(title.trim(), paint(26f, bold = true), contentWidth), 0f, null, null, 28f)
     doc.blocks.forEach { b ->
@@ -127,7 +135,7 @@ suspend fun renderNoteImage(
             BlockType.SUBHEADING -> Triple(paint(19f, bold = true), 0f, null)
             BlockType.BULLET -> Triple(paint(16f), 56f, "•")
             BlockType.TASK -> Triple(paint(16f), 64f, if (b.checked) "☑" else "☐")
-            BlockType.BODY, BlockType.IMAGE -> Triple(paint(16f), 0f, null)
+            BlockType.BODY, BlockType.IMAGE, BlockType.DIVIDER -> Triple(paint(16f), 0f, null)
         }
         val text = SpannableStringBuilder(b.text.ifEmpty { " " })
         b.spans.forEach { sp ->
@@ -154,7 +162,14 @@ suspend fun renderNoteImage(
             Align.END -> Layout.Alignment.ALIGN_OPPOSITE
             else -> Layout.Alignment.ALIGN_NORMAL
         }
-        pieces += Piece(layout(text, p, (contentWidth - indent).toInt(), align), indent, marker, if (marker != null) p else null, 10f)
+        pieces += Piece(
+            layout(text, p, (contentWidth - indent).toInt(), align),
+            indent,
+            marker,
+            if (marker != null) p else null,
+            10f,
+            rule = b.type == BlockType.DIVIDER,
+        )
     }
 
     // Pictures: decoded down to the card width, at most six.
@@ -185,10 +200,20 @@ suspend fun renderNoteImage(
             val baseline = y + piece.layout.getLineBaseline(0)
             canvas.drawText(piece.marker, pad + 6f, baseline, piece.markerPaint)
         }
-        canvas.save()
-        canvas.translate(pad + piece.indent, y)
-        piece.layout.draw(canvas)
-        canvas.restore()
+        if (piece.rule) {
+            val mid = y + piece.layout.height / 2f
+            val rulePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+                color = (ink and 0x00FFFFFF) or (0x60 shl 24)
+                strokeWidth = 4f
+                strokeCap = Paint.Cap.ROUND
+            }
+            canvas.drawLine(pad, mid, pad + contentWidth, mid, rulePaint)
+        } else {
+            canvas.save()
+            canvas.translate(pad + piece.indent, y)
+            piece.layout.draw(canvas)
+            canvas.restore()
+        }
         y += piece.layout.height + piece.gapAfter
     }
     if (images.isNotEmpty()) y += 24f

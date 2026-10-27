@@ -24,6 +24,7 @@ import androidx.compose.material.icons.automirrored.rounded.FormatListBulleted
 import androidx.compose.material.icons.rounded.Checklist
 import androidx.compose.material.icons.rounded.FormatAlignCenter
 import androidx.compose.material.icons.rounded.FormatAlignJustify
+import androidx.compose.material.icons.rounded.HorizontalRule
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -109,6 +110,9 @@ fun EditorToolbar(
                 onClick = { state?.toggleBlockType(BlockType.TASK) },
                 description = "Checklist",
             ) { Icon(Icons.Rounded.Checklist, null) }
+            ToolButton(onClick = { state?.insertDivider() }, description = "Divider") {
+                Icon(Icons.Rounded.HorizontalRule, null)
+            }
             trailing()
         }
     }

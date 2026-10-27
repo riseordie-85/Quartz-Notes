@@ -7,7 +7,7 @@ import kotlinx.serialization.json.Json
 import java.util.UUID
 
 @Serializable
-enum class BlockType { HEADING, SUBHEADING, BODY, BULLET, TASK, IMAGE }
+enum class BlockType { HEADING, SUBHEADING, BODY, BULLET, TASK, IMAGE, DIVIDER }
 
 @Serializable
 enum class Align { START, CENTER, END, JUSTIFY }
@@ -58,7 +58,7 @@ data class RichDoc(val blocks: List<Block> = listOf(Block())) {
     /** Text used for search indexing. */
     fun plainText(): String = blocks.joinToString("\n") { it.text }
 
-    fun isBlank(): Boolean = blocks.all { it.text.isBlank() && it.image == null }
+    fun isBlank(): Boolean = blocks.all { it.text.isBlank() && it.image == null && it.type != BlockType.DIVIDER }
 
     /** Media paths of in-line pictures. */
     fun mediaPaths(): List<String> = blocks.mapNotNull { it.image?.path }

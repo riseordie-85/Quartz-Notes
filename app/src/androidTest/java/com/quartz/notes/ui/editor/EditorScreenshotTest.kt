@@ -174,4 +174,35 @@ class EditorScreenshotTest {
         field.performTextInputSelection(TextRange(0, state.value.text.length))
         save("08_select_all_with_pictures")
     }
+
+    @Test
+    fun dividers() {
+        val state = RichEditorState(
+            RichDoc(
+                listOf(
+                    Block(type = BlockType.HEADING, text = "Part one"),
+                    Block(text = "Some words before the divider."),
+                    Block(type = BlockType.DIVIDER),
+                    Block(type = BlockType.HEADING, text = "Part two"),
+                    Block(text = "More words."),
+                ),
+            ),
+        )
+        setEditor(state)
+        save("20_dividers")
+        val field = rule.onNode(hasSetTextAction())
+        field.performClick()
+        // Put the cursor at the end of "More words." and add another divider from code (the toolbar's action).
+        field.performTextInputSelection(TextRange(state.value.text.length))
+        rule.runOnIdle { state.insertDivider() }
+        field.performTextInput("typed under it")
+        save("21_divider_added")
+        assertEquals(
+            listOf(BlockType.HEADING, BlockType.BODY, BlockType.DIVIDER, BlockType.HEADING, BlockType.BODY, BlockType.DIVIDER, BlockType.BODY),
+            state.toDoc().blocks.map { it.type },
+        )
+        // Selecting across the divider tints it.
+        field.performTextInputSelection(TextRange(1 + "Part one\n".length, 1 + "Part one\nSome words before the divider.\n\uFFFC\nPart".length))
+        save("22_divider_selected")
+    }
 }

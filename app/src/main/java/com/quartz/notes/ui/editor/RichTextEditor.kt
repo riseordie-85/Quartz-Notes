@@ -318,6 +318,24 @@ fun RichTextEditor(
                             onToggle = { state.toggleChecked(b) },
                             modifier = Modifier.offset { IntOffset((IndentStep * b.indent).roundToPx(), top.roundToInt()) },
                         )
+                        b.type == BlockType.DIVIDER -> {
+                            val selected = state.hasSelection && state.selStart <= start && state.selEnd > start
+                            Box(
+                                Modifier
+                                    .offset { IntOffset(0, top.roundToInt()) }
+                                    .width(textWidth)
+                                    .height(lineHeight)
+                                    .background(if (selected) accent.copy(alpha = 0.18f) else Color.Transparent),
+                                contentAlignment = Alignment.Center,
+                            ) {
+                                Box(
+                                    Modifier
+                                        .fillMaxWidth()
+                                        .height(2.dp)
+                                        .background(if (selected) accent else contentColor.copy(alpha = 0.35f), RoundedCornerShape(1.dp)),
+                                )
+                            }
+                        }
                         b.isImage && b.image != null -> Box(
                             Modifier
                                 .offset { IntOffset(0, top.roundToInt()) }

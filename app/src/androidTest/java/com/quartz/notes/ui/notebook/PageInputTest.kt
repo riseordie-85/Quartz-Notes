@@ -487,7 +487,8 @@ class PageInputTest {
             repo.observePages(id).first()
             id
         }
-        val settings = runBlocking { container.settings.settings.first() }.copy(toolbarOnTop = toolbarOnTop)
+        runBlocking { container.settings.setToolbarOnTop(toolbarOnTop) }
+        val settings = runBlocking { container.settings.settings.first() }
         rule.setContent {
             CompositionLocalProvider(
                 LocalAppContainer provides container,
@@ -531,6 +532,7 @@ class PageInputTest {
         val bar = rule.onNode(androidx.compose.ui.test.hasContentDescription("Next page") and androidx.compose.ui.test.hasClickAction()).fetchSemanticsNode()
         val page = editorAny().fetchSemanticsNode()
         assertTrue("page buttons should sit above the page", bar.positionInRoot.y < page.positionInRoot.y)
+        runBlocking { ApplicationProvider.getApplicationContext<QuartzApp>().container.settings.setToolbarOnTop(false) }
     }
 
     private fun editorAny(): SemanticsNodeInteraction = rule.onAllNodes(hasSetTextAction()).onLast()
