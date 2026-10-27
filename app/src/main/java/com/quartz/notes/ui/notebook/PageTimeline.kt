@@ -138,7 +138,8 @@ internal fun PageTimelineSheet(
                             if (delta.y == 0f) continue
                             event.changes.forEach { it.consume() }
                             val step = (if (delta.x != 0f) delta.x else delta.y) * 96.dp.toPx()
-                            listState.dispatchRawDelta(step)
+                            val used = listState.dispatchRawDelta(step)
+                            android.util.Log.d("QuartzWheel", "delta=$delta step=$step used=$used first=${listState.firstVisibleItemIndex}")
                         }
                     }
                 },

@@ -367,11 +367,11 @@ class RichEditorStateTest {
         val s = doc(Block(text = "one"), Block(text = "two"))
         s.select(1)
         s.insertDivider()
-        assertEquals(listOf(BlockType.BODY, BlockType.DIVIDER, BlockType.BODY, BlockType.BODY), s.types())
-        assertEquals(listOf("one", "", "", "two"), s.texts())
-        // The cursor is on the new empty line under the divider.
+        assertEquals(listOf(BlockType.BODY, BlockType.DIVIDER, BlockType.BODY), s.types())
+        assertEquals(listOf("one", "", "two"), s.texts())
+        // The cursor goes to the line under the divider.
         s.type("x")
-        assertEquals(listOf("one", "", "x", "two"), s.texts())
+        assertEquals(listOf("one", "", "xtwo"), s.texts())
     }
 
     @Test
