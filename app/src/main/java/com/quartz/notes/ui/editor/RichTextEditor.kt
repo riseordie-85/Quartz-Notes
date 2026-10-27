@@ -62,6 +62,7 @@ import androidx.compose.ui.input.key.onPreviewKeyEvent
 import androidx.compose.ui.input.key.type
 import androidx.compose.ui.input.pointer.PointerEventPass
 import androidx.compose.ui.input.pointer.PointerEventType
+import androidx.compose.ui.input.pointer.PointerType
 import androidx.compose.ui.input.pointer.isSecondaryPressed
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalClipboardManager
@@ -240,8 +241,13 @@ fun RichTextEditor(
                     awaitPointerEventScope {
                         while (true) {
                             val event = awaitPointerEvent(PointerEventPass.Initial)
-                            if (event.type == PointerEventType.Release) {
-                                event.changes.firstOrNull()?.let { holder.noteTap(it.position) }
+                            // A mouse moves the cursor when the button goes down; a finger or pen when it lifts.
+                            val change = event.changes.firstOrNull()
+                            if (change != null) {
+                                val mouse = change.type == PointerType.Mouse
+                                if ((mouse && event.type == PointerEventType.Press) || (!mouse && event.type == PointerEventType.Release)) {
+                                    holder.noteTap(change.position)
+                                }
                             }
                             if (event.type == PointerEventType.Press && event.buttons.isSecondaryPressed) {
                                 val change = event.changes.firstOrNull() ?: continue
