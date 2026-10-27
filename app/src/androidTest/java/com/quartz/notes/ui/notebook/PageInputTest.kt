@@ -16,6 +16,8 @@ import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.test.performMouseInput
+import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.test.longClick
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -214,12 +216,9 @@ class PageInputTest {
     private fun handleChecks(field: SemanticsNodeInteraction, label: String, stylus: Boolean) {
         val l = layout(field)
         fun lineY(i: Int) = (l.getLineTop(i) + l.getLineBottom(i)) / 2
-        val word = onScreen(field, Offset(120f, lineY(1)))
-        val down = SystemClock.uptimeMillis()
         val source = if (stylus) InputDevice.SOURCE_STYLUS or InputDevice.SOURCE_TOUCHSCREEN else InputDevice.SOURCE_TOUCHSCREEN
-        injectTool(MotionEvent.ACTION_DOWN, word, source, down, stylus)
-        SystemClock.sleep(900)
-        injectTool(MotionEvent.ACTION_UP, word, source, down, stylus)
+        // Long-press through Compose's own touch input (a raw injected hold doesn't register as a long press).
+        field.performTouchInput { longClick(Offset(120f, lineY(1))) }
         rule.waitForIdle()
         val selected = selection(field)
         note("$label ${if (stylus) "pen" else "finger"} long press on line 2: selection=$selected")
