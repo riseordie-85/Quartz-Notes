@@ -16,6 +16,19 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.combinedClickable
+import androidx.compose.material.icons.automirrored.rounded.KeyboardArrowLeft
+import androidx.compose.material.icons.automirrored.rounded.KeyboardArrowRight
+import androidx.compose.material.icons.automirrored.rounded.OpenInNew
+import androidx.compose.material.icons.rounded.Bookmark
+import androidx.compose.material.icons.rounded.DeleteOutline
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.input.pointer.isSecondaryPressed
+import com.quartz.notes.ui.components.ConfirmDialog
 import androidx.compose.foundation.gestures.animateScrollBy
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.input.pointer.PointerEventPass
@@ -78,7 +91,7 @@ private val ThumbHeight = 146.dp
  * Every page as a little thumbnail along a timeline, numbered across the top. The pages showing now
  * are highlighted; tap one to go there.
  */
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 internal fun PageTimelineSheet(
     /** Pages in order, the index (if shown) first. */
@@ -88,8 +101,14 @@ internal fun PageTimelineSheet(
     vm: NotebookViewModel,
     onOpen: (PageEntity) -> Unit,
     onManage: () -> Unit,
+    /** Moves a page one place earlier (-1) or later (+1). */
+    onMove: (PageEntity, Int) -> Unit,
+    onStartSection: (PageEntity) -> Unit,
+    onDelete: (PageEntity) -> Unit,
     onDismiss: () -> Unit,
 ) {
+    var pendingDelete by remember { mutableStateOf<PageEntity?>(null) }
+    val realPages = pages.filter { it.id != INDEX_PAGE_ID }
     val media by vm.notebookMedia.collectAsStateWithLifecycle()
     val byPage = remember(media) { media.groupBy { it.pageId } }
     val listState = rememberLazyListState()
@@ -129,10 +148,28 @@ internal fun PageTimelineSheet(
                     val isIndex = page.id == INDEX_PAGE_ID
                     val label = if (isIndex) "Index" else "${pages.subList(0, i + 1).count { it.id != INDEX_PAGE_ID }}"
                     val isShowing = page.id in showing
+                    var menu by remember { mutableStateOf(false) }
+                    Box {
                     Column(
                         Modifier
                             .width(ThumbWidth + 16.dp)
-                            .clickable { onOpen(page) },
+                            .pointerInput(page.id) {
+                                // Right-click opens the page's menu.
+                                awaitPointerEventScope {
+                                    while (true) {
+                                        val event = awaitPointerEvent(PointerEventPass.Initial)
+                                        if (event.type == PointerEventType.Press && event.buttons.isSecondaryPressed) {
+                                            event.changes.forEach { it.consume() }
+                                            if (!isIndex) menu = true
+                                        }
+                                    }
+                                }
+                            }
+                            .combinedClickable(
+                                onClick = { onOpen(page) },
+                                onLongClick = if (isIndex) null else ({ menu = true }),
+                                onLongClickLabel = "Page options",
+                            ),
                         horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
                         // The timeline: a line through every page's number.
@@ -190,9 +227,72 @@ internal fun PageTimelineSheet(
                             modifier = Modifier.width(ThumbWidth),
                         )
                     }
+                    val position = realPages.indexOfFirst { it.id == page.id }
+                    DropdownMenu(expanded = menu, onDismissRequest = { menu = false }) {
+                        DropdownMenuItem(
+                            text = { Text("Open") },
+                            leadingIcon = { Icon(Icons.AutoMirrored.Rounded.OpenInNew, null) },
+                            onClick = {
+                                menu = false
+                                onOpen(page)
+                            },
+                        )
+                        DropdownMenuItem(
+                            text = { Text("Move earlier") },
+                            leadingIcon = { Icon(Icons.AutoMirrored.Rounded.KeyboardArrowLeft, null) },
+                            enabled = position > 0,
+                            onClick = {
+                                menu = false
+                                onMove(page, -1)
+                            },
+                        )
+                        DropdownMenuItem(
+                            text = { Text("Move later") },
+                            leadingIcon = { Icon(Icons.AutoMirrored.Rounded.KeyboardArrowRight, null) },
+                            enabled = position in 0 until realPages.lastIndex,
+                            onClick = {
+                                menu = false
+                                onMove(page, 1)
+                            },
+                        )
+                        if (!page.isSection) {
+                            DropdownMenuItem(
+                                text = { Text("Start a section here") },
+                                leadingIcon = { Icon(Icons.Rounded.Bookmark, null) },
+                                onClick = {
+                                    menu = false
+                                    onStartSection(page)
+                                },
+                            )
+                        }
+                        DropdownMenuItem(
+                            text = { Text("Delete", color = MaterialTheme.colorScheme.error) },
+                            leadingIcon = { Icon(Icons.Rounded.DeleteOutline, null, tint = MaterialTheme.colorScheme.error) },
+                            onClick = {
+                                menu = false
+                                pendingDelete = page
+                            },
+                        )
+                    }
+                    }
                 }
             }
         }
+    }
+
+    pendingDelete?.let { page ->
+        val only = realPages.size <= 1
+        val number = realPages.indexOfFirst { it.id == page.id } + 1
+        ConfirmDialog(
+            title = if (only) "Clear page?" else if (page.isSection) "Delete section page?" else "Delete page $number?",
+            message = if (only) "This is the only page, so its content will be cleared." else "This page will be permanently deleted.",
+            confirmLabel = if (only) "Clear" else "Delete",
+            onDismiss = { pendingDelete = null },
+            onConfirm = {
+                pendingDelete = null
+                onDelete(page)
+            },
+        )
     }
 }
 

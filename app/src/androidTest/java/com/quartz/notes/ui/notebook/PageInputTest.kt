@@ -17,6 +17,8 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.onFirst
+import androidx.compose.ui.test.onLast
+import androidx.compose.ui.test.rightClick
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.performKeyInput
 import androidx.compose.ui.test.onRoot
@@ -472,4 +474,64 @@ class PageInputTest {
             rule.onNode(androidx.compose.ui.test.hasText("2/12")).assertExists()
         }
     }
+
+    /** Opens a fresh notebook with [pages] pages. */
+    private fun openNotebook(name: String, pages: Int, toolbarOnTop: Boolean = false) {
+        val app = ApplicationProvider.getApplicationContext<QuartzApp>()
+        val container = app.container
+        val notebookId = runBlocking {
+            val repo = container.repository
+            val shelf = repo.observeShelves().first().first()
+            val id = repo.createNotebook(shelf.id, name, 0xFF1ABC9C.toInt(), "GLOSS", "none")
+            repeat(pages - 1) { repo.insertPage(id, it) }
+            repo.observePages(id).first()
+            id
+        }
+        val settings = runBlocking { container.settings.settings.first() }.copy(toolbarOnTop = toolbarOnTop)
+        rule.setContent {
+            CompositionLocalProvider(
+                LocalAppContainer provides container,
+                LocalFontResolver provides FontResolver(BuiltInFonts),
+            ) {
+                QuartzTheme(settings = settings, dark = false) {
+                    NotebookScreen(notebookId = notebookId, initialPageId = null, onBack = {}, onSearch = {})
+                }
+            }
+        }
+        rule.waitForIdle()
+        SystemClock.sleep(500)
+    }
+
+    @Test
+    fun rightClickThumbnailToDelete() {
+        openNotebook("Menu", 4)
+        rule.onNode(androidx.compose.ui.test.hasText("1/4")).assertExists()
+        rule.onNode(androidx.compose.ui.test.hasContentDescription("Pages") and androidx.compose.ui.test.hasClickAction()).performClick()
+        rule.waitForIdle()
+        SystemClock.sleep(700)
+        rule.onNode(androidx.compose.ui.test.hasText("2") and androidx.compose.ui.test.hasClickAction()).performMouseInput { rightClick(center) }
+        rule.waitForIdle()
+        SystemClock.sleep(400)
+        screen("25_thumbnail_menu")
+        rule.onNode(androidx.compose.ui.test.hasText("Delete") and androidx.compose.ui.test.hasClickAction()).performClick()
+        rule.waitForIdle()
+        SystemClock.sleep(400)
+        screen("26_delete_confirm")
+        rule.onNode(androidx.compose.ui.test.hasText("Delete page 2?")).assertExists()
+        rule.onNode(androidx.compose.ui.test.hasText("Delete") and androidx.compose.ui.test.hasClickAction()).performClick()
+        rule.waitForIdle()
+        SystemClock.sleep(800)
+        rule.onNode(androidx.compose.ui.test.hasText("1/3")).assertExists()
+    }
+
+    @Test
+    fun toolbarOnTop() {
+        openNotebook("Top bar", 3, toolbarOnTop = true)
+        screen("27_toolbar_on_top")
+        val bar = rule.onNode(androidx.compose.ui.test.hasContentDescription("Next page") and androidx.compose.ui.test.hasClickAction()).fetchSemanticsNode()
+        val page = editorAny().fetchSemanticsNode()
+        assertTrue("page buttons should sit above the page", bar.positionInRoot.y < page.positionInRoot.y)
+    }
+
+    private fun editorAny(): SemanticsNodeInteraction = rule.onAllNodes(hasSetTextAction()).onLast()
 }

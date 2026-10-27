@@ -331,138 +331,10 @@ fun NotebookScreen(
         fun turnTo(index: Int) {
             scope.launch { pagerState.animateScrollToPage(index.coerceIn(0, spreads.lastIndex)) }
         }
-        // The notebook itself takes focus whenever nothing inside it has it, so page keys work even
-        // when nobody is typing.
-        val pageKeys = remember { FocusRequester() }
-        LaunchedEffect(Unit) { runCatching { pageKeys.requestFocus() } }
-        Column(
-            Modifier
-                .fillMaxSize()
-                .focusRequester(pageKeys)
-                .onFocusChanged { if (!it.hasFocus) scope.launch { runCatching { pageKeys.requestFocus() } } }
-                .focusable()
-                .onPreviewKeyEvent { e ->
-                    if (e.type != KeyEventType.KeyDown) return@onPreviewKeyEvent false
-                    val cmd = e.isCtrlPressed || e.isMetaPressed
-                    val alt = e.isAltPressed
-                    when {
-                        // Alt + arrows, like a browser's back and forward.
-                        alt && !cmd && e.key == Key.DirectionRight -> true.also { turnTo(pagerState.currentPage + 1) }
-                        alt && !cmd && e.key == Key.DirectionLeft -> true.also { turnTo(pagerState.currentPage - 1) }
-                        cmd && e.key == Key.PageDown -> true.also { turnTo(pagerState.currentPage + 1) }
-                        cmd && e.key == Key.PageUp -> true.also { turnTo(pagerState.currentPage - 1) }
-                        cmd && alt && e.key == Key.MoveHome -> true.also { turnTo(0) }
-                        cmd && alt && e.key == Key.MoveEnd -> true.also { turnTo(spreads.lastIndex) }
-                        else -> false
-                    }
-                },
-        ) {
-            NotebookTopBar(
-                notebook = nb,
-                wide = wide,
-                pageLabel = pageLabel,
-                onBack = onBack,
-                onSearch = onSearch,
-                onPages = { showPages = true },
-                onEdit = { showEdit = true },
-                onShare = {
-                    // Two pages showing: ask which one.
-                    when {
-                        shown.size > 1 -> shareChoices = shown
-                        shown.isNotEmpty() -> sharingId = shown.first().id
-                        else -> Toast.makeText(context, "Turn to a page to share it", Toast.LENGTH_SHORT).show()
-                    }
-                },
-            )
-
-            // Section tabs along the page edges, in the margin beside the pages.
-            val tabSections = if (nb.sectionTabs) pages.filter { it.isSection } else emptyList()
-            BoxWithConstraints(Modifier.weight(1f).fillMaxWidth()) {
-                HorizontalPager(
-                    state = pagerState,
-                    key = { index -> spreads.getOrNull(index)?.firstOrNull()?.id ?: (Long.MIN_VALUE + index) },
-                    userScrollEnabled = !WindowInsets.isImeVisible,
-                    beyondViewportPageCount = 0,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(start = if (tabSections.isNotEmpty() && twoUp) TabExtra else 0.dp, end = if (tabSections.isNotEmpty()) TabExtra else 0.dp),
-                ) { index ->
-                    val spread = spreads.getOrNull(index).orEmpty()
-
-                    @Composable
-                    fun Page(page: PageEntity, side: PageSide) {
-                        if (page.id == INDEX_PAGE_ID) {
-                            IndexPageView(pages = pages, vm = vm, side = side, onOpen = { scrollTarget = it })
-                            return
-                        }
-                        if (page.isSection) {
-                            SectionPageView(
-                                page = page,
-                                session = vm.session(page),
-                                vm = vm,
-                                side = side,
-                                onActivate = { activePageId = page.id },
-                                onStyle = {
-                                    activePageId = page.id
-                                    sectionStyleId = page.id
-                                },
-                            )
-                            return
-                        }
-                                    PageView(
-                                        page = page,
-                                        session = vm.session(page),
-                                        vm = vm,
-                                        side = side,
-                                        canSpread = twoUp,
-                                        tool = tool,
-                                        brushLevel = brushLevel,
-                                        inkArgb = settings?.inkArgb ?: 0,
-                                        onToolDone = { tool = PageTool.NONE },
-                                        focusTextBox = pendingTextFocus?.takeIf { it.first == page.id }?.second,
-                                        onFocusTextBoxHandled = { pendingTextFocus = null },
-                                        onActivate = { activePageId = page.id },
-                                        onEditorReady = { editors[page.id] = it },
-                                        onEditorGone = { editors.remove(page.id) },
-                                        onSave = { vm.saveIfChanged(page.id) },
-                                    )
-                    }
-
-                    Row(Modifier.fillMaxSize().padding(horizontal = if (perSpread == 2) 10.dp else 0.dp)) {
-                        if (spread.size == 1) {
-                            val page = spread[0]
-                            if (page != null) {
-                                Box(Modifier.weight(1f).fillMaxHeight()) {
-                                    key(page.id) { Page(page, if (perSpread == 2) PageSide.SPREAD else PageSide.SINGLE) }
-                                }
-                            }
-                        } else {
-                            for ((slot, page) in spread.withIndex()) {
-                                Box(Modifier.weight(1f).fillMaxHeight()) {
-                                    when {
-                                        page != null -> key(page.id) { Page(page, if (slot == 0) PageSide.LEFT else PageSide.RIGHT) }
-                                        index == spreads.lastIndex -> BlankPageSlot(side = PageSide.RIGHT, onClick = {
-                                            vm.addPage(pages.lastIndex) { newId -> scrollTarget = newId }
-                                        })
-                                        // The next page spreads across both sides, so this side is left blank.
-                                        else -> EmptyPageFace(side = PageSide.RIGHT)
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                // Drawn after the pager so taps reach them.
-                SectionTabs(
-                    sections = tabSections,
-                    indexOf = { section -> pages.indexOfFirst { it.id == section.id } },
-                    firstShown = shown.firstOrNull()?.let { p -> pages.indexOfFirst { it.id == p.id } } ?: -1,
-                    twoUp = twoUp,
-                    height = maxHeight,
-                    onOpen = { scrollTarget = it },
-                )
-            }
-
+        // The tools (formatting, items, page buttons, add page) sit at the bottom, or under the title
+        // bar when the "toolbar at the top" setting is on.
+        val toolsOnTop = settings?.toolbarOnTop == true
+        val brushBar: @Composable () -> Unit = {
             if (tool == PageTool.BRUSH || tool == PageTool.ERASER) {
                 BrushBar(
                     level = brushLevel,
@@ -478,7 +350,8 @@ fun NotebookScreen(
                     modifier = Modifier.padding(horizontal = 16.dp).padding(top = 6.dp),
                 )
             }
-
+        }
+        val toolRow: @Composable () -> Unit = {
             Row(
                 Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 10.dp),
                 verticalAlignment = Alignment.CenterVertically,
@@ -643,6 +516,148 @@ fun NotebookScreen(
             }
         }
 
+        // The notebook itself takes focus whenever nothing inside it has it, so page keys work even
+        // when nobody is typing.
+        val pageKeys = remember { FocusRequester() }
+        LaunchedEffect(Unit) { runCatching { pageKeys.requestFocus() } }
+        Column(
+            Modifier
+                .fillMaxSize()
+                .focusRequester(pageKeys)
+                .onFocusChanged { if (!it.hasFocus) scope.launch { runCatching { pageKeys.requestFocus() } } }
+                .focusable()
+                .onPreviewKeyEvent { e ->
+                    if (e.type != KeyEventType.KeyDown) return@onPreviewKeyEvent false
+                    val cmd = e.isCtrlPressed || e.isMetaPressed
+                    val alt = e.isAltPressed
+                    when {
+                        // Alt + arrows, like a browser's back and forward.
+                        alt && !cmd && e.key == Key.DirectionRight -> true.also { turnTo(pagerState.currentPage + 1) }
+                        alt && !cmd && e.key == Key.DirectionLeft -> true.also { turnTo(pagerState.currentPage - 1) }
+                        cmd && e.key == Key.PageDown -> true.also { turnTo(pagerState.currentPage + 1) }
+                        cmd && e.key == Key.PageUp -> true.also { turnTo(pagerState.currentPage - 1) }
+                        cmd && alt && e.key == Key.MoveHome -> true.also { turnTo(0) }
+                        cmd && alt && e.key == Key.MoveEnd -> true.also { turnTo(spreads.lastIndex) }
+                        else -> false
+                    }
+                },
+        ) {
+            NotebookTopBar(
+                notebook = nb,
+                wide = wide,
+                pageLabel = pageLabel,
+                onBack = onBack,
+                onSearch = onSearch,
+                onPages = { showPages = true },
+                onEdit = { showEdit = true },
+                onShare = {
+                    // Two pages showing: ask which one.
+                    when {
+                        shown.size > 1 -> shareChoices = shown
+                        shown.isNotEmpty() -> sharingId = shown.first().id
+                        else -> Toast.makeText(context, "Turn to a page to share it", Toast.LENGTH_SHORT).show()
+                    }
+                },
+            )
+            if (toolsOnTop) {
+                toolRow()
+                brushBar()
+            }
+
+            // Section tabs along the page edges, in the margin beside the pages.
+            val tabSections = if (nb.sectionTabs) pages.filter { it.isSection } else emptyList()
+            BoxWithConstraints(Modifier.weight(1f).fillMaxWidth()) {
+                HorizontalPager(
+                    state = pagerState,
+                    key = { index -> spreads.getOrNull(index)?.firstOrNull()?.id ?: (Long.MIN_VALUE + index) },
+                    userScrollEnabled = !WindowInsets.isImeVisible,
+                    beyondViewportPageCount = 0,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(start = if (tabSections.isNotEmpty() && twoUp) TabExtra else 0.dp, end = if (tabSections.isNotEmpty()) TabExtra else 0.dp),
+                ) { index ->
+                    val spread = spreads.getOrNull(index).orEmpty()
+
+                    @Composable
+                    fun Page(page: PageEntity, side: PageSide) {
+                        if (page.id == INDEX_PAGE_ID) {
+                            IndexPageView(pages = pages, vm = vm, side = side, onOpen = { scrollTarget = it })
+                            return
+                        }
+                        if (page.isSection) {
+                            SectionPageView(
+                                page = page,
+                                session = vm.session(page),
+                                vm = vm,
+                                side = side,
+                                onActivate = { activePageId = page.id },
+                                onStyle = {
+                                    activePageId = page.id
+                                    sectionStyleId = page.id
+                                },
+                            )
+                            return
+                        }
+                                    PageView(
+                                        page = page,
+                                        session = vm.session(page),
+                                        vm = vm,
+                                        side = side,
+                                        canSpread = twoUp,
+                                        tool = tool,
+                                        brushLevel = brushLevel,
+                                        inkArgb = settings?.inkArgb ?: 0,
+                                        onToolDone = { tool = PageTool.NONE },
+                                        focusTextBox = pendingTextFocus?.takeIf { it.first == page.id }?.second,
+                                        onFocusTextBoxHandled = { pendingTextFocus = null },
+                                        onActivate = { activePageId = page.id },
+                                        onEditorReady = { editors[page.id] = it },
+                                        onEditorGone = { editors.remove(page.id) },
+                                        onSave = { vm.saveIfChanged(page.id) },
+                                    )
+                    }
+
+                    Row(Modifier.fillMaxSize().padding(horizontal = if (perSpread == 2) 10.dp else 0.dp)) {
+                        if (spread.size == 1) {
+                            val page = spread[0]
+                            if (page != null) {
+                                Box(Modifier.weight(1f).fillMaxHeight()) {
+                                    key(page.id) { Page(page, if (perSpread == 2) PageSide.SPREAD else PageSide.SINGLE) }
+                                }
+                            }
+                        } else {
+                            for ((slot, page) in spread.withIndex()) {
+                                Box(Modifier.weight(1f).fillMaxHeight()) {
+                                    when {
+                                        page != null -> key(page.id) { Page(page, if (slot == 0) PageSide.LEFT else PageSide.RIGHT) }
+                                        index == spreads.lastIndex -> BlankPageSlot(side = PageSide.RIGHT, onClick = {
+                                            vm.addPage(pages.lastIndex) { newId -> scrollTarget = newId }
+                                        })
+                                        // The next page spreads across both sides, so this side is left blank.
+                                        else -> EmptyPageFace(side = PageSide.RIGHT)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                // Drawn after the pager so taps reach them.
+                SectionTabs(
+                    sections = tabSections,
+                    indexOf = { section -> pages.indexOfFirst { it.id == section.id } },
+                    firstShown = shown.firstOrNull()?.let { p -> pages.indexOfFirst { it.id == p.id } } ?: -1,
+                    twoUp = twoUp,
+                    height = maxHeight,
+                    onOpen = { scrollTarget = it },
+                )
+            }
+
+            if (!toolsOnTop) {
+                brushBar()
+                toolRow()
+            }
+        }
+
         if (showTimeline) {
             PageTimelineSheet(
                 pages = displayPages,
@@ -660,6 +675,17 @@ fun NotebookScreen(
                     showTimeline = false
                     showPages = true
                 },
+                onMove = { page, delta ->
+                    val from = pages.indexOfFirst { it.id == page.id }
+                    val to = from + delta
+                    if (from >= 0 && to in pages.indices) vm.movePage(from, to)
+                },
+                onStartSection = { page ->
+                    showTimeline = false
+                    val at = pages.indexOfFirst { it.id == page.id }
+                    if (at >= 0) vm.addSection(at) { newId -> scrollTarget = newId }
+                },
+                onDelete = { page -> vm.deletePage(page, isOnlyPage = pages.size <= 1) },
                 onDismiss = { showTimeline = false },
             )
         }

@@ -105,6 +105,8 @@ class SettingsViewModel(
     fun setBackground(argb: Int) = viewModelScope.launch { settingsRepo.setBackground(argb) }
     fun setCompress(enabled: Boolean) = viewModelScope.launch { settingsRepo.setCompressImages(enabled) }
 
+    fun setToolbarOnTop(onTop: Boolean) = viewModelScope.launch { settingsRepo.setToolbarOnTop(onTop) }
+
     fun addShelf(name: String) = viewModelScope.launch { repo.addShelf(name) }
     fun renameShelf(shelf: ShelfEntity, name: String) = viewModelScope.launch { repo.renameShelf(shelf, name) }
     fun moveShelf(shelf: ShelfEntity, up: Boolean) = viewModelScope.launch { repo.moveShelf(shelf, up) }
@@ -338,6 +340,19 @@ fun SettingsScreen(onBack: () -> Unit, onOpenNote: (Long) -> Unit) {
                                     )
                                 },
                                 leading = { Icon(Icons.Rounded.FileUpload, null, tint = MaterialTheme.colorScheme.primary) },
+                            )
+                        }
+                    }
+
+                    // ---- Toolbar ----
+                    item { SettingsSectionTitle("Toolbar") }
+                    item {
+                        QuartzCard(Modifier.fillMaxWidth()) {
+                            ListRow(
+                                title = "Toolbar at the top",
+                                subtitle = "Put the formatting tools and page buttons under the title bar instead of at the bottom of the screen",
+                                onClick = { vm.setToolbarOnTop(!s.toolbarOnTop) },
+                                trailing = { Switch(checked = s.toolbarOnTop, onCheckedChange = { vm.setToolbarOnTop(it) }) },
                             )
                         }
                     }

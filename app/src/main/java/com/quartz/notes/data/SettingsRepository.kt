@@ -37,6 +37,8 @@ data class AppSettings(
     val lastBackupAt: Long = 0L,
     val lastBackupError: String? = null,
     internal val lastBackupFingerprint: String? = null,
+    /** Formatting toolbar and page buttons under the title bar instead of at the bottom. */
+    val toolbarOnTop: Boolean = false,
 )
 
 private val Context.dataStore by preferencesDataStore(name = "quartz_settings")
@@ -61,6 +63,7 @@ class SettingsRepository(context: Context) {
         val lastBackupAt = longPreferencesKey("last_backup_at")
         val lastBackupError = stringPreferencesKey("last_backup_error")
         val lastBackupFingerprint = stringPreferencesKey("last_backup_fingerprint")
+        val toolbarOnTop = booleanPreferencesKey("toolbar_on_top")
     }
 
     val settings: Flow<AppSettings> = store.data.map { p ->
@@ -81,6 +84,7 @@ class SettingsRepository(context: Context) {
             lastBackupAt = p[Keys.lastBackupAt] ?: 0L,
             lastBackupError = p[Keys.lastBackupError],
             lastBackupFingerprint = p[Keys.lastBackupFingerprint],
+            toolbarOnTop = p[Keys.toolbarOnTop] ?: false,
         )
     }
 
@@ -95,6 +99,7 @@ class SettingsRepository(context: Context) {
     suspend fun setQuickNotesGrid(grid: Boolean) = set(Keys.grid, grid)
     suspend fun setSelectedShelf(id: Long) = set(Keys.shelf, id)
     suspend fun setCompressImages(enabled: Boolean) = set(Keys.compress, enabled)
+    suspend fun setToolbarOnTop(onTop: Boolean) = set(Keys.toolbarOnTop, onTop)
     suspend fun setInk(argb: Int) = set(Keys.ink, argb)
     suspend fun setHighlight(argb: Int) = set(Keys.highlight, argb)
     suspend fun setAutoBackup(enabled: Boolean) = set(Keys.autoBackup, enabled)

@@ -174,7 +174,58 @@ private fun NoteEditorContent(load: NoteLoad.Ready, vm: NoteViewModel, onClose: 
     val styles = remember { editorStyles() }
     val keyboard = LocalSoftwareKeyboardController.current
 
+    // Formatting toolbar under the note or, with "toolbar at the top" on, above it.
+    val toolsOnTop = settings?.toolbarOnTop == true
+    val toolbar: @Composable () -> Unit = {
+        val s = settings
+        EditorToolbar(
+            state = editor,
+            ink = s?.inkArgb?.takeIf { it != 0 }?.let { Color(it) },
+            autoInk = ink,
+            highlight = Color(s?.highlightArgb ?: 0xFFFFE14D.toInt()),
+            onInkChange = { c -> scope.launch { container.settings.setInk(c?.toArgb() ?: 0) } },
+            onHighlightChange = { c -> scope.launch { container.settings.setHighlight(c.toArgb()) } },
+            onFormat = { showFormat = true },
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Box {
+                ToolButton(onClick = { attachMenu = true }, description = "Attach") {
+                    Icon(Icons.Rounded.AttachFile, null)
+                }
+                DropdownMenu(expanded = attachMenu, onDismissRequest = { attachMenu = false }) {
+                    DropdownMenuItem(
+                        text = { Text("Photo library") },
+                        leadingIcon = { Icon(Icons.Rounded.PhotoLibrary, null) },
+                        onClick = {
+                            attachMenu = false
+                            imageAdder.pickFromGallery()
+                        },
+                    )
+                    DropdownMenuItem(
+                        text = { Text("Take photo") },
+                        leadingIcon = { Icon(Icons.Rounded.PhotoCamera, null) },
+                        onClick = {
+                            attachMenu = false
+                            imageAdder.takePhoto()
+                        },
+                    )
+                    DropdownMenuItem(
+                        text = { Text("Voice note") },
+                        leadingIcon = { Icon(Icons.Rounded.Mic, null) },
+                        onClick = {
+                            attachMenu = false
+                            askMic()
+                        },
+                    )
+                }
+            }
+        }
+    }
     Column(Modifier.fillMaxSize().imePadding()) {
+        if (toolsOnTop) {
+            toolbar()
+            Spacer(Modifier.height(12.dp))
+        }
         QuartzCard(Modifier.weight(1f).fillMaxWidth(), color = cardColor) {
             Row(Modifier.fillMaxWidth().padding(start = 6.dp, end = 6.dp, top = 6.dp), verticalAlignment = Alignment.CenterVertically) {
                 if (showBack) {
@@ -272,49 +323,9 @@ private fun NoteEditorContent(load: NoteLoad.Ready, vm: NoteViewModel, onClose: 
                 )
             }
         }
-        Spacer(Modifier.height(12.dp))
-        val s = settings
-        EditorToolbar(
-            state = editor,
-            ink = s?.inkArgb?.takeIf { it != 0 }?.let { Color(it) },
-            autoInk = ink,
-            highlight = Color(s?.highlightArgb ?: 0xFFFFE14D.toInt()),
-            onInkChange = { c -> scope.launch { container.settings.setInk(c?.toArgb() ?: 0) } },
-            onHighlightChange = { c -> scope.launch { container.settings.setHighlight(c.toArgb()) } },
-            onFormat = { showFormat = true },
-            modifier = Modifier.fillMaxWidth(),
-        ) {
-            Box {
-                ToolButton(onClick = { attachMenu = true }, description = "Attach") {
-                    Icon(Icons.Rounded.AttachFile, null)
-                }
-                DropdownMenu(expanded = attachMenu, onDismissRequest = { attachMenu = false }) {
-                    DropdownMenuItem(
-                        text = { Text("Photo library") },
-                        leadingIcon = { Icon(Icons.Rounded.PhotoLibrary, null) },
-                        onClick = {
-                            attachMenu = false
-                            imageAdder.pickFromGallery()
-                        },
-                    )
-                    DropdownMenuItem(
-                        text = { Text("Take photo") },
-                        leadingIcon = { Icon(Icons.Rounded.PhotoCamera, null) },
-                        onClick = {
-                            attachMenu = false
-                            imageAdder.takePhoto()
-                        },
-                    )
-                    DropdownMenuItem(
-                        text = { Text("Voice note") },
-                        leadingIcon = { Icon(Icons.Rounded.Mic, null) },
-                        onClick = {
-                            attachMenu = false
-                            askMic()
-                        },
-                    )
-                }
-            }
+        if (!toolsOnTop) {
+            Spacer(Modifier.height(12.dp))
+            toolbar()
         }
     }
 
