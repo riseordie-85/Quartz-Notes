@@ -463,8 +463,7 @@ private class LayoutHolder {
         if (!incoming.selection.collapsed || incoming.text != state.value.text) return incoming
         val doc = incoming.selection.start - MARK.length
         val t = state.text
-        if (doc <= 0 || doc > t.length || t[doc - 1] != '
-') return incoming
+        if (doc <= 0 || doc > t.length || t[doc - 1] != '\n') return incoming
         val len = l.layoutInput.text.length
         val cursorLine = l.getLineForOffset(doc.coerceIn(0, len))
         val tapLine = l.getLineForVerticalPosition(at.y)
