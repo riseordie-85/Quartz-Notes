@@ -15,6 +15,7 @@ import androidx.compose.ui.test.hasSetTextAction
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.performSemanticsAction
+import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performMouseInput
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.test.longClick
@@ -352,5 +353,51 @@ class PageInputTest {
         }
         rule.waitForIdle()
         handleChecks(editor(), "bare", stylus = false)
+    }
+
+    @Test
+    fun pageButtonsAndTimeline() {
+        val app = ApplicationProvider.getApplicationContext<QuartzApp>()
+        val container = app.container
+        val notebookId = runBlocking {
+            val repo = container.repository
+            val shelf = repo.observeShelves().first().first()
+            val id = repo.createNotebook(shelf.id, "Timeline", 0xFFD6006A.toInt(), "GLOSS", "none")
+            val first = repo.observePages(id).first().first()
+            repo.savePageContent(first.id, RichDoc(listOf(Block(text = "First page"), Block(type = BlockType.BULLET, text = "an item"))))
+            repo.insertPage(id, 0)
+            val sectionId = repo.insertSection(id, 2, 0xFFFF9F43.toInt())
+            repo.saveSectionText(sectionId, "Travel", "Trips and plans")
+            repo.insertPage(id, 2)
+            repo.getPage(first.id)
+            id
+        }
+        val settings = runBlocking { container.settings.settings.first() }
+        rule.setContent {
+            CompositionLocalProvider(
+                LocalAppContainer provides container,
+                LocalFontResolver provides FontResolver(BuiltInFonts),
+            ) {
+                QuartzTheme(settings = settings, dark = true) {
+                    NotebookScreen(notebookId = notebookId, initialPageId = null, onBack = {}, onSearch = {})
+                }
+            }
+        }
+        rule.waitForIdle()
+        SystemClock.sleep(500)
+        screen("20_page_buttons")
+        rule.onNode(androidx.compose.ui.test.hasContentDescription("Next page")).performClick()
+        rule.waitForIdle()
+        SystemClock.sleep(600)
+        rule.onNode(androidx.compose.ui.test.hasText("2/4")).assertExists()
+        rule.onNode(androidx.compose.ui.test.hasContentDescription("Pages") and androidx.compose.ui.test.hasClickAction(), useUnmergedTree = true).performClick()
+        rule.waitForIdle()
+        SystemClock.sleep(700)
+        screen("21_page_timeline")
+        rule.onNode(androidx.compose.ui.test.hasText("Travel")).performClick()
+        rule.waitForIdle()
+        SystemClock.sleep(700)
+        rule.onNode(androidx.compose.ui.test.hasText("3/4")).assertExists()
+        screen("22_after_timeline_jump")
     }
 }
