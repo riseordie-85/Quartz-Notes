@@ -23,7 +23,7 @@
   import VoicePlayer from "./VoicePlayer.svelte"
   import { store } from "../lib/store.svelte"
 
-  let { elements, W, ink }: { elements: PageElement[]; W: number; ink: string } = $props()
+  let { elements, W, ink, onpicture }: { elements: PageElement[]; W: number; ink: string; onpicture?: (path: string) => void } = $props()
 
   /** Element payloads arrive as JSON objects (or text, from older records). */
   function payload(e: PageElement): Record<string, any> {
@@ -183,7 +183,7 @@
         style:transform={e.rotation ? `rotate(${e.rotation}deg)` : null}
         bind:clientHeight={textHeights[e.id]}
       >
-        <RichView doc={decodeDoc(d.doc)} />
+        <RichView doc={decodeDoc(d.doc)} {onpicture} />
       </div>
     {:else if e.kind === "IMAGE"}
       {@const frame = d.frame ?? "WHITE"}
@@ -217,7 +217,9 @@
           style:border-radius={frame === "ROUNDED" ? `${0.07 * iw}px` : null}
           title={url ? d.caption || "Picture" : "This picture hasn't synced yet"}
         >
-          {#if url}<img src={url} alt={d.caption || ""} loading="lazy" />{/if}
+          {#if url}
+            <button class="open-picture" title="Open picture" onclick={() => onpicture?.(d.path)}><img src={url} alt={d.caption || ""} loading="lazy" /></button>
+          {/if}
         </div>
         {#if frame === "POLAROID" && d.caption}
           <div class="caption" style:top="{inset.top * iw + iw * (1 - 2 * inset.side) * aspect}px" style:height="{0.24 * iw}px" style:font-size="{0.075 * iw}px" style:padding="0 {0.04 * iw}px">{d.caption}</div>
@@ -287,6 +289,16 @@
     position: absolute;
     overflow: hidden;
     --ink: #777;
+  }
+  .open-picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: zoom-in;
+    pointer-events: auto;
   }
   .photo img {
     display: block;

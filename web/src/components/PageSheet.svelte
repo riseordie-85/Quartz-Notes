@@ -14,6 +14,7 @@
   import Toolbar from "./Toolbar.svelte"
   import ElementsLayer from "./ElementsLayer.svelte"
   import VoicePlayer from "./VoicePlayer.svelte"
+  import { lightbox, pagePictures } from "../lib/lightbox.svelte"
 
   let { page, onError }: { page: Page; onError: (msg: string | null) => void } = $props()
 
@@ -119,6 +120,10 @@
   })
 
   const padH = 22
+
+  function openPicture(path: string) {
+    lightbox.open(pagePictures(live), path)
+  }
 </script>
 
 <svelte:window onbeforeunload={() => save()} />
@@ -143,7 +148,7 @@
       {#if live.sectionImage}
         {@const url = store.mediaUrl(live.sectionImage)}
         <div class="section-photo" class:media-missing={!url} title={url ? "Section photo" : "This picture hasn't synced yet"}>
-          {#if url}<img src={url} alt="" />{/if}
+          {#if url}<button class="open-picture" title="Open picture" onclick={() => openPicture(live.sectionImage!)}><img src={url} alt="" /></button>{/if}
         </div>
       {:else if live.sectionIcon && SECTION_ICONS[live.sectionIcon]}
         <span class="material-symbols-rounded section-icon">{SECTION_ICONS[live.sectionIcon]}</span>
@@ -174,6 +179,7 @@
             placeholder="Write here"
             onchange={(d) => ((doc = d), changed())}
             onfocuschange={(f) => !f && save()}
+            onpicture={openPicture}
           />
         </div>
       {/if}
@@ -185,7 +191,7 @@
           {#each attached.filter((e) => e.kind === "IMAGE") as e (e.id)}
             {@const url = store.mediaUrl(payload(e).path)}
             {#if url}
-              <a class="thumb" href={url} target="_blank" rel="noopener"><img src={url} alt="" loading="lazy" /></a>
+              <button class="thumb open-picture" title="Open picture" onclick={() => openPicture(payload(e).path)}><img src={url} alt="" loading="lazy" /></button>
             {:else}
               <div class="thumb media-missing" title="This picture hasn't synced yet"></div>
             {/if}
@@ -196,7 +202,7 @@
         {/each}
       </div>
     {/if}
-    {#if W > 0}<ElementsLayer {elements} {W} {ink} />{/if}
+    {#if W > 0}<ElementsLayer {elements} {W} {ink} onpicture={openPicture} />{/if}
   {/if}
 </div>
 
@@ -303,6 +309,17 @@
     border-radius: 14px;
     overflow: hidden;
     box-shadow: 0 2px 6px rgb(0 0 0 / 0.18);
+  }
+  .open-picture {
+    display: block;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: zoom-in;
+  }
+  .section-photo .open-picture {
+    width: 100%;
+    height: 100%;
   }
   .thumb img,
   .section-photo img {

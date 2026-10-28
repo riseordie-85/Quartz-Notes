@@ -4,6 +4,7 @@
   import VoicePlayer from "./VoicePlayer.svelte"
   import Icon from "./Icon.svelte"
   import { errorMessage } from "../lib/pb"
+  import { lightbox, notePictures } from "../lib/lightbox.svelte"
 
   let { ownerType, ownerUid, editable = true }: { ownerType: string; ownerUid: string; editable?: boolean } = $props()
   const items = $derived(store.attachmentsOf(ownerType, ownerUid))
@@ -29,7 +30,7 @@
           {@const url = store.mediaUrl(a.path)}
           <div class="thumb" class:media-missing={!url} style:aspect-ratio={a.width && a.height ? `${a.width} / ${a.height}` : "1"}>
             {#if url}
-              <a href={url} target="_blank" rel="noopener" title="Open full size"><img src={url} alt="" loading="lazy" /></a>
+              <button class="open-picture" title="Open picture" onclick={() => lightbox.open(notePictures(ownerUid), a.path)}><img src={url} alt="" loading="lazy" /></button>
             {/if}
             {#if editable}
               <button class="remove" title="Remove picture" onclick={() => remove(a.id)}><Icon name="close" size={18} /></button>
@@ -64,6 +65,15 @@
     border-radius: 14px;
     overflow: hidden;
     box-shadow: 0 2px 6px rgb(0 0 0 / 0.18);
+  }
+  .open-picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: zoom-in;
   }
   .thumb img {
     display: block;

@@ -12,6 +12,7 @@
     placeholder = "",
     onchange,
     onfocuschange,
+    onpicture,
     editor = $bindable(null),
   }: {
     doc: RichDoc
@@ -19,6 +20,7 @@
     placeholder?: string
     onchange?: (doc: RichDoc) => void
     onfocuschange?: (focused: boolean) => void
+    onpicture?: (path: string) => void
     editor?: Editor | null
   } = $props()
 
@@ -27,7 +29,7 @@
   onMount(() => {
     editor = new Editor({
       element: el,
-      extensions: editorExtensions({ placeholder, resolveMedia: (path) => store.mediaUrl(path) }),
+      extensions: editorExtensions({ placeholder, resolveMedia: (path) => store.mediaUrl(path), openPicture: (path) => onpicture?.(path) }),
       content: toEditor(doc) as never,
       editable,
       editorProps: { attributes: { class: "rt", spellcheck: "true" } },

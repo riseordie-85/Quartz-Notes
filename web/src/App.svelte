@@ -9,6 +9,7 @@
   import NoteScreen from "./components/NoteScreen.svelte"
   import NotebookScreen from "./components/NotebookScreen.svelte"
   import SearchScreen from "./components/SearchScreen.svelte"
+  import Lightbox from "./components/Lightbox.svelte"
 
   let signedIn = $state(pb.authStore.isValid)
   let loadError = $state<string | null>(null)
@@ -85,6 +86,7 @@
       {/key}
     </main>
   </div>
+  <Lightbox />
 {/if}
 
 <style>

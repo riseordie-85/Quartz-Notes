@@ -3,7 +3,7 @@
   import { DEFAULT_IMAGE_WIDTH, styledSegments, type RichDoc } from "../lib/richdoc"
   import { store } from "../lib/store.svelte"
 
-  let { doc }: { doc: RichDoc } = $props()
+  let { doc, onpicture }: { doc: RichDoc; onpicture?: (path: string) => void } = $props()
 </script>
 
 <div class="rt">
@@ -19,7 +19,9 @@
           style:width="{(b.imageWidth ?? DEFAULT_IMAGE_WIDTH) * 100}%"
           style:aspect-ratio={1 / Math.max(0.1, Number(b.image.aspect) || 0.75)}
         >
-          {#if url}<img src={url} alt="" loading="lazy" />{/if}
+          {#if url}
+            <button class="open-picture" title="Open picture" onclick={() => onpicture?.(b.image!.path)}><img src={url} alt="" loading="lazy" /></button>
+          {/if}
         </div>
       </figure>
     {:else}
@@ -30,3 +32,16 @@
     {/if}
   {/each}
 </div>
+
+<style>
+  .open-picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: zoom-in;
+    pointer-events: auto;
+  }
+</style>

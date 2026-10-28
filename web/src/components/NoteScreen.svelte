@@ -12,6 +12,7 @@
   import Toolbar from "./Toolbar.svelte"
   import Attachments from "./Attachments.svelte"
   import { preparePicture } from "../lib/pictures"
+  import { lightbox, notePictures } from "../lib/lightbox.svelte"
 
   let { id, onMenu }: { id: string; onMenu: () => void } = $props()
 
@@ -171,7 +172,7 @@
     <div class="toolbar-row"><Toolbar {editor} /></div>
     <article class="note" style:background={bg} style:--ink={inkOn(bg)} style:color={inkOn(bg)}>
       <input class="title" placeholder="Title" bind:value={title} oninput={changed} aria-label="Title" />
-      <Editor bind:this={editorView} bind:editor {doc} placeholder="Note" onchange={(d) => ((doc = d), changed())} onfocuschange={(f) => !f && save()} />
+      <Editor bind:this={editorView} bind:editor {doc} placeholder="Note" onchange={(d) => ((doc = d), changed())} onfocuschange={(f) => !f && save()} onpicture={(path) => lightbox.open(notePictures(id), path)} />
       <Attachments ownerType="NOTE" ownerUid={id} />
     </article>
   </div>

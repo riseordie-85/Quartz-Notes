@@ -127,7 +127,7 @@ function typeFromTag(el: HTMLElement): BlockType {
 export type MediaResolver = (path: string) => string | null
 
 /** A picture on its own line. */
-export const Picture = Node.create<{ resolve: MediaResolver }>({
+export const Picture = Node.create<{ resolve: MediaResolver; open: (path: string) => void }>({
   name: "picture",
   group: "block",
   atom: true,
@@ -135,7 +135,7 @@ export const Picture = Node.create<{ resolve: MediaResolver }>({
   draggable: false,
 
   addOptions() {
-    return { resolve: () => null }
+    return { resolve: () => null, open: () => {} }
   },
 
   addAttributes() {
@@ -157,6 +157,7 @@ export const Picture = Node.create<{ resolve: MediaResolver }>({
 
   addNodeView() {
     const resolve = this.options.resolve
+    const open = this.options.open
     return ({ node }) => {
       const dom = document.createElement("figure")
       dom.className = "picture"
@@ -176,6 +177,9 @@ export const Picture = Node.create<{ resolve: MediaResolver }>({
           img.src = url
           img.alt = ""
           img.loading = "lazy"
+          img.title = "Open picture"
+          img.style.cursor = "zoom-in"
+          img.addEventListener("click", () => image?.path && open(image.path))
           frame.append(img)
         } else {
           frame.classList.add("missing")
@@ -527,12 +531,12 @@ const uniqueIds = new Plugin({
 })
 
 /** Everything the web editor needs. */
-export function editorExtensions(opts: { placeholder?: string; resolveMedia?: MediaResolver } = {}) {
+export function editorExtensions(opts: { placeholder?: string; resolveMedia?: MediaResolver; openPicture?: (path: string) => void } = {}) {
   return [
     Doc,
     Text,
     Para,
-    Picture.configure({ resolve: opts.resolveMedia ?? (() => null) }),
+    Picture.configure({ resolve: opts.resolveMedia ?? (() => null), open: opts.openPicture ?? (() => {}) }),
     Divider,
     Bold,
     Italic,

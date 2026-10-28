@@ -125,6 +125,26 @@ async def main():
         assert len(media) == 1, media
         ok("a picture added in the browser is uploaded and attached to the note")
 
+        # The picture viewer: opens on the picture clicked, arrows and keys move through the note's pictures.
+        await page.locator(".attachments .open-picture").first.click()
+        viewer = page.get_by_role("dialog", name="Picture viewer")
+        await expect(viewer).to_be_visible()
+        await expect(viewer.locator(".count")).to_have_text("1 / 2")
+        first_src = await viewer.locator(".stage img").get_attribute("src")
+        await viewer.get_by_role("button", name="Next (→)").click()
+        await expect(viewer.locator(".count")).to_have_text("2 / 2")
+        assert await viewer.locator(".stage img").get_attribute("src") != first_src
+        await page.keyboard.press("ArrowRight")
+        await expect(viewer.locator(".count")).to_have_text("1 / 2")
+        link = viewer.get_by_role("link", name="Open in new tab")
+        assert await link.get_attribute("target") == "_blank"
+        assert await link.get_attribute("href") == first_src
+        await page.wait_for_function("() => { const i = document.querySelector('.lightbox .stage img'); return i && i.complete && i.naturalWidth > 0 }")
+        await page.screenshot(path=f"{OUT}/w03b_viewer.png")
+        await page.keyboard.press("Escape")
+        await expect(viewer).to_have_count(0)
+        ok("pictures open in a viewer with arrows, keys and an open-in-new-tab button")
+
         # A new note.
         await page.goto(f"{BASE}/#/")
         await page.get_by_role("button", name="New note").click()
@@ -156,6 +176,11 @@ async def main():
         await expect(photo).to_have_count(1)
         await page.wait_for_function("() => { const i = document.querySelector('.layer .photo img'); return i && i.complete && i.naturalWidth === 160 }")
         ok("a synced picture shows in its frame")
+        await page.locator(".layer .photo .open-picture").click()
+        await expect(page.get_by_role("dialog", name="Picture viewer").locator(".caption")).to_have_text("Kyoto")
+        await expect(page.get_by_role("button", name="Next (→)")).to_have_count(0)
+        await page.get_by_role("button", name="Close (Esc)").click()
+        ok("a page's picture opens in the viewer with its caption")
         await page.locator(".layer .voice-item button.play").click()
         await page.wait_for_timeout(600)
         await expect(page.locator(".layer .voice-item button.play")).to_have_attribute("aria-label", "Pause")
