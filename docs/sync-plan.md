@@ -99,8 +99,12 @@ wins. Conflict copies of the losing version come in Phase 5.
 
 - Phase 1 (app groundwork) is done: database version 5.
 - Phase 2 (server and app text sync) is done: see `server/README.md` to set up the NUC.
-- Phase 3 (web app) is done: `web/`, served by the same server. Pictures, voice notes and imported
-  fonts show as outlines until Phase 4.
+- Phase 3 (web app) is done: `web/`, served by the same server.
+- Phase 4 (files) is done: pictures, voice notes and imported fonts are stored in the server's
+  `media` collection, one record per file, found by the app's path for it. Each sync uploads files
+  the server doesn't have and downloads the ones this device's notes use. Imported fonts are
+  uploaded when imported and downloaded where a note uses them. The web app shows and plays them
+  and can add pictures to quick notes and pages.
 
 ## Phases
 
