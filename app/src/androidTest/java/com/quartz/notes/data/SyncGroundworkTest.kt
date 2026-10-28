@@ -165,6 +165,25 @@ class SyncGroundworkTest {
     }
 
     @Test
+    fun wholeRowSavesAreTracked() = runBlocking {
+        val shelf = db.shelfDao().getAll().single().id
+        val nb = repo.createNotebook(shelf, "A", 0, "GLOSS", "none")
+        repo.insertPage(nb, 0)
+        val before = db.pageDao().getByNotebook(nb)
+        before.forEach { markSynced("pages", it.uid) }
+        repo.movePage(nb, 0, 1)
+        waitForQueue()
+        val after = db.pageDao().getByNotebook(nb)
+        assertEquals(before.reversed().map { it.uid }, after.map { it.uid })
+        after.forEach { assertEquals(1L, dirty("pages", it.uid)) }
+        // Renaming a shelf writes the whole row too.
+        val s = db.shelfDao().getAll().single()
+        markSynced("shelves", s.uid)
+        repo.renameShelf(s, "Renamed")
+        assertEquals(1L, dirty("shelves", s.uid))
+    }
+
+    @Test
     fun copiesGetTheirOwnIds() = runBlocking {
         val shelf = db.shelfDao().getAll().single().id
         val a = repo.createNotebook(shelf, "A", 0, "GLOSS", "none")

@@ -23,7 +23,10 @@ object SyncTriggers {
     fun install(db: SupportSQLiteDatabase) {
         db.execSQL("INSERT OR IGNORE INTO sync_flags (id, mode) VALUES (1, 0)")
         for (t in TABLES) {
-            val mark = "INSERT OR IGNORE INTO sync_state (tbl, uid, dirty, rev, changedAt) VALUES ('$t', NEW.uid, 1, 0, $NOW_MS); " +
+            // No "OR IGNORE" here: a trigger's conflict handling is replaced by that of the statement
+            // that fired it (Room's whole-row saves use OR ABORT), so check for the row instead.
+            val mark = "INSERT INTO sync_state (tbl, uid, dirty, rev, changedAt) SELECT '$t', NEW.uid, 1, 0, $NOW_MS " +
+                "WHERE NOT EXISTS (SELECT 1 FROM sync_state WHERE tbl = '$t' AND uid = NEW.uid); " +
                 "UPDATE sync_state SET dirty = 1, changedAt = $NOW_MS WHERE tbl = '$t' AND uid = NEW.uid;"
             db.execSQL("DROP TRIGGER IF EXISTS sync_${t}_insert")
             db.execSQL("CREATE TRIGGER sync_${t}_insert AFTER INSERT ON $t WHEN COALESCE($MODE, 0) != 1 BEGIN $mark END")
