@@ -340,6 +340,47 @@ class Store {
   }
 
   /** Adds a page after [after] (or at the end), with the look of the page before it. */
+  // ---- Notebooks ----
+
+  async renameNotebook(nb: Notebook, title: string) {
+    await this.save("notebooks", nb.id, { title: title.trim(), updatedAt: Date.now() })
+  }
+
+  /**
+   * Moves a notebook to [index] among the notebooks on [shelfId] (another shelf moves it there),
+   * renumbering the shelf so every device shows the same order.
+   */
+  async moveNotebook(nb: Notebook, shelfId: string, index: number) {
+    const from = nb.shelf
+    const target = this.notebooksOn(shelfId).filter((n) => n.id !== nb.id)
+    const at = Math.max(0, Math.min(target.length, index))
+    target.splice(at, 0, nb)
+    const saves: Promise<unknown>[] = []
+    target.forEach((n, i) => {
+      if (n.id === nb.id && (n.position !== i || n.shelf !== shelfId)) saves.push(this.save("notebooks", n.id, { shelf: shelfId, position: i }))
+      else if (n.id !== nb.id && n.position !== i) saves.push(this.save("notebooks", n.id, { position: i }))
+    })
+    if (from !== shelfId) {
+      this.notebooksOn(from)
+        .filter((n) => n.id !== nb.id)
+        .forEach((n, i) => n.position !== i && saves.push(this.save("notebooks", n.id, { position: i })))
+    }
+    await Promise.all(saves)
+  }
+
+  /** Deletes a notebook with its pages and everything on them, on every device. */
+  async deleteNotebook(nb: Notebook) {
+    const pages = this.pagesOf(nb.id)
+    await Promise.all(
+      pages.flatMap((p) => [
+        ...this.elementsOf(p.id).map((e) => this.remove("page_elements", e.id)),
+        ...this.attachmentsOf("PAGE", p.id).map((a) => this.remove("attachments", a.id)),
+      ]),
+    )
+    await Promise.all(pages.map((p) => this.remove("pages", p.id)))
+    await this.remove("notebooks", nb.id)
+  }
+
   async addPage(notebookId: string, after: Page | null): Promise<Page> {
     const pages = this.pagesOf(notebookId)
     const index = after ? pages.findIndex((p) => p.id === after.id) : pages.length - 1

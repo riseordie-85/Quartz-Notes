@@ -6,6 +6,7 @@
   import TopBar from "./TopBar.svelte"
   import Icon from "./Icon.svelte"
   import PageSheet from "./PageSheet.svelte"
+  import TextDialog from "./TextDialog.svelte"
   import { preparePicture } from "../lib/pictures"
 
   let { id, pageId, onMenu }: { id: string; pageId?: string; onMenu: () => void } = $props()
@@ -19,6 +20,30 @@
   let sheet: PageSheet | undefined = $state()
   let picker: HTMLInputElement | undefined = $state()
   let adding = $state(false)
+  let renaming = $state(false)
+
+  const shelf = $derived(notebook ? store.shelves.find((s) => s.id === notebook.shelf) : undefined)
+  const siblings = $derived(notebook ? store.notebooksOn(notebook.shelf) : [])
+  const place = $derived(siblings.findIndex((n) => n.id === id))
+  const otherShelves = $derived(store.shelves.filter((s) => s.id !== notebook?.shelf))
+  const canAddPictures = $derived(!!page && !page.isSection && !page.locked)
+
+  async function addPageAfter() {
+    await sheet?.save()
+    const p = await store.addPage(id, page ?? null)
+    router.go({ name: "notebook", id, page: p.id })
+  }
+
+  async function deleteNotebook() {
+    if (!notebook) return
+    const n = pages.length
+    const what = `"${notebook.title || "Untitled notebook"}" and its ${n} page${n === 1 ? "" : "s"}`
+    if (!confirm(`Delete ${what} on all your devices?`)) return
+    await act(async () => {
+      await store.deleteNotebook(notebook)
+      router.go({ name: "notes" }, true)
+    })
+  }
 
   async function addPictures(files: FileList | null) {
     if (!files?.length || !page) return
@@ -83,37 +108,54 @@
 {:else}
   <TopBar title={notebook.title || "Untitled notebook"} {onMenu}>
     {#snippet actions()}
-      {#if adding}<span class="count">Adding picture…</span>{/if}
-      <span class="count">{pages.length ? index + 1 : 0}/{pages.length}</span>
-      <button class="icon-btn" title="Previous page (Alt+←)" disabled={index <= 0} onclick={() => goTo(index - 1)}><Icon name="chevronLeft" /></button>
-      <button class="icon-btn" title="Next page (Alt+→)" disabled={index >= pages.length - 1} onclick={() => goTo(index + 1)}><Icon name="chevronRight" /></button>
+      <!-- The page arrows stay at the right edge; nothing beside them comes and goes. -->
+      <button class="icon-btn" title="Add a page after this one" onclick={() => act(addPageAfter)}><Icon name="addPage" /></button>
       <button
         class="icon-btn"
-        title="Add a page after this one"
-        onclick={() => act(async () => {
-          await sheet?.save()
-          const p = await store.addPage(id, page ?? null)
-          router.go({ name: "notebook", id, page: p.id })
-        })}><Icon name="add" /></button
+        title={canAddPictures ? "Add pictures to this page" : page?.locked ? "This page is locked" : "Pictures can't go on a section page"}
+        disabled={adding || !canAddPictures}
+        onclick={() => picker?.click()}><Icon name="image" /></button
       >
-      {#if page && !page.isSection && !page.locked}
-        <button class="icon-btn" title="Add pictures to this page" disabled={adding} onclick={() => picker?.click()}><Icon name="image" /></button>
-        <input bind:this={picker} type="file" accept="image/*" multiple hidden onchange={(e) => addPictures(e.currentTarget.files)} />
-      {/if}
+      <input bind:this={picker} type="file" accept="image/*" multiple hidden onchange={(e) => addPictures(e.currentTarget.files)} />
+      <div class="pager">
+        <button class="icon-btn" title="Previous page (Alt+←)" disabled={index <= 0} onclick={() => goTo(index - 1)}><Icon name="chevronLeft" /></button>
+        <span class="count">{pages.length ? index + 1 : 0}/{pages.length}</span>
+        <button class="icon-btn" title="Next page (Alt+→)" disabled={index >= pages.length - 1} onclick={() => goTo(index + 1)}><Icon name="chevronRight" /></button>
+      </div>
       <div class="anchor">
-        <button class="icon-btn" title="More" onclick={() => (more = !more)}><Icon name="more" /></button>
-        {#if more && page}
+        <button class="icon-btn" title="More" aria-expanded={more} onclick={() => (more = !more)}><Icon name="more" /></button>
+        {#if more}
           <div class="menu right">
-            <button onclick={() => act(() => store.save("pages", page.id, { locked: !page.locked }))}>
-              <Icon name={page.locked ? "lockOpen" : "lock"} size={20} />{page.locked ? "Unlock page" : "Lock page"}
+            {#if page}
+              <p class="label">This page</p>
+              <button onclick={() => act(addPageAfter)}><Icon name="addPage" size={20} />Add a page after it</button>
+              <button onclick={() => act(() => store.save("pages", page.id, { locked: !page.locked }))}>
+                <Icon name={page.locked ? "lockOpen" : "lock"} size={20} />{page.locked ? "Unlock page" : "Lock page"}
+              </button>
+              <button
+                disabled={pages.length <= 1}
+                title={pages.length <= 1 ? "A notebook keeps at least one page" : undefined}
+                onclick={() => confirm("Delete this page on all your devices?") && act(async () => {
+                  const next = pages[index + 1] ?? pages[index - 1]
+                  if (await store.deletePage(page)) router.go({ name: "notebook", id, page: next?.id }, true)
+                })}
+              ><Icon name="delete" size={20} />Delete page</button>
+              <hr />
+            {/if}
+            <p class="label">Notebook</p>
+            <button onclick={() => ((more = false), (renaming = true))}><Icon name="edit" size={20} />Rename</button>
+            <button disabled={place <= 0} onclick={() => act(() => store.moveNotebook(notebook, notebook.shelf, place - 1))}>
+              <Icon name="arrowUp" size={20} />Move up
             </button>
-            <button
-              disabled={pages.length <= 1}
-              onclick={() => confirm("Delete this page on all your devices?") && act(async () => {
-                const next = pages[index + 1] ?? pages[index - 1]
-                if (await store.deletePage(page)) router.go({ name: "notebook", id, page: next?.id }, true)
-              })}
-            ><Icon name="delete" size={20} />Delete page</button>
+            <button disabled={place < 0 || place >= siblings.length - 1} onclick={() => act(() => store.moveNotebook(notebook, notebook.shelf, place + 1))}>
+              <Icon name="arrowDown" size={20} />Move down
+            </button>
+            {#each otherShelves as s (s.id)}
+              <button onclick={() => act(() => store.moveNotebook(notebook, s.id, store.notebooksOn(s.id).length))}>
+                <Icon name="moveTo" size={20} />Move to {s.name}
+              </button>
+            {/each}
+            <button class="danger" onclick={() => ((more = false), deleteNotebook())}><Icon name="delete" size={20} />Delete notebook</button>
           </div>
         {/if}
       </div>
@@ -139,9 +181,12 @@
           {#if p.locked}<span class="tag" title="Locked"><Icon name="lock" size={17} /></span>{/if}
         </a>
       {/each}
+      <button class="add-page" onclick={() => act(addPageAfter)}><Icon name="add" size={20} />Add page</button>
+      {#if shelf}<p class="shelf">Shelf: {shelf.name}</p>{/if}
     </nav>
     <div class="page-area">
       {#if error}<p class="error" role="alert">{error}</p>{/if}
+      {#if adding}<p class="status">Adding picture…</p>{/if}
       {#if page}
         {#key page.id}
           <PageSheet bind:this={sheet} {page} onError={(m) => (error = m)} />
@@ -151,12 +196,77 @@
   </div>
 {/if}
 {#if more}<button class="scrim" aria-label="Close" onclick={() => (more = false)}></button>{/if}
+{#if renaming && notebook}
+  <TextDialog
+    title="Rename notebook"
+    value={notebook.title}
+    onCancel={() => (renaming = false)}
+    onSave={(t) => {
+      renaming = false
+      act(() => store.renameNotebook(notebook, t))
+    }}
+  />
+{/if}
 
 <style>
+  .pager {
+    display: flex;
+    align-items: center;
+    margin-left: 8px;
+  }
   .count {
+    min-width: 52px;
     font-size: 14px;
+    font-variant-numeric: tabular-nums;
+    text-align: center;
     color: var(--muted);
-    margin-right: 4px;
+  }
+  .icon-btn:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+  .add-page {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 38px;
+    margin-top: 6px;
+    padding: 0 12px 0 14px;
+    border: 1px dashed var(--divider);
+    border-radius: 19px;
+    background: transparent;
+    color: var(--muted);
+    font: inherit;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  .add-page:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+  .shelf {
+    margin: 10px 12px 0;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .status {
+    color: var(--muted);
+  }
+  .menu .label {
+    margin: 6px 12px 2px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .menu hr {
+    margin: 6px 4px;
+    border: 0;
+    border-top: 1px solid var(--divider);
+  }
+  .menu .danger {
+    color: #e53935;
   }
   .layout {
     display: flex;
@@ -228,6 +338,8 @@
   }
   .menu.right {
     right: 0;
+    min-width: 230px;
+    white-space: nowrap;
     top: 44px;
   }
   .menu button:disabled {
@@ -240,7 +352,7 @@
   .scrim {
     position: fixed;
     inset: 0;
-    z-index: 30;
+    z-index: 15;
     border: 0;
     background: transparent;
   }

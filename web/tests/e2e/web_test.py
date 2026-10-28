@@ -237,6 +237,76 @@ async def main():
         wait_for(lambda: len([p for p in api("GET", "/api/collections/pages/records?perPage=50", token=TOKEN)["items"] if not p["deleted"]]) >= 5, "the new page on the server")
         ok("a new page is added")
 
+        # The page arrows stay in the same place on every page (pictures can't go on the section page,
+        # which used to hide a button and shift them).
+        spots = set()
+        for _ in range(4):
+            await page.keyboard.press("Alt+ArrowLeft")
+            await page.wait_for_timeout(150)
+            box = await page.get_by_role("button", name="Next page (Alt+→)").bounding_box()
+            spots.add((round(box["x"]), round(box["y"])))
+        await expect(page.locator(".count")).to_have_text("1/5")
+        assert len(spots) == 1, spots
+        ok("the page arrows don't move between pages")
+        await page.screenshot(path=f"{OUT}/w07c_section_topbar.png")
+
+        # Page menu: lock, then delete the new page.
+        async def accept(d):
+            await d.accept()
+        page.on("dialog", accept)
+        for _ in range(4):
+            await page.keyboard.press("Alt+ArrowRight")
+            await page.wait_for_timeout(150)
+        await expect(page.locator(".count")).to_have_text("5/5")
+        await page.get_by_role("button", name="More").click()
+        await page.screenshot(path=f"{OUT}/w07d_notebook_menu.png")
+        await page.get_by_role("button", name="Lock page").click()
+        wait_for(lambda: [p for p in api("GET", "/api/collections/pages/records?perPage=50", token=TOKEN)["items"] if p["position"] == 4 and not p["deleted"] and p["locked"]], "the page to lock")
+        ok("Lock page in the menu works")
+        await page.get_by_role("button", name="More").click()
+        await page.get_by_role("button", name="Delete page").click()
+        await expect(page.locator(".count")).to_have_text("4/4")
+        wait_for(lambda: len([p for p in api("GET", "/api/collections/pages/records?perPage=50", token=TOKEN)["items"] if not p["deleted"]]) == 4, "the page deleted on the server")
+        ok("Delete page works")
+
+        # Notebook menu: rename and rearrange.
+        await page.get_by_role("button", name="More").click()
+        await page.get_by_role("button", name="Rename").click()
+        await page.get_by_role("textbox", name="Rename notebook").fill("Travel 2026")
+        await page.screenshot(path=f"{OUT}/w07e_rename.png")
+        await page.get_by_role("button", name="Save").click()
+        await expect(page.get_by_role("heading", name="Travel 2026")).to_be_visible()
+        wait_for(lambda: find("notebooks", 'title="Travel 2026"'), "the new name on the server")
+        ok("a notebook can be renamed")
+
+        def order(shelf_name):
+            s = find("shelves", f'name="{shelf_name}"')[0]
+            return [n["title"] for n in sorted(find("notebooks", f'shelf="{s["id"]}" && deleted=false'), key=lambda n: n["position"])]
+
+        await page.get_by_role("button", name="More").click()
+        await page.get_by_role("button", name="Move down").click()
+        wait_for(lambda: order("Notebooks") == ["Recipes", "Travel 2026"], "the new order on the server")
+        sidebar = page.locator("aside nav a")
+        await expect(sidebar.nth(2)).to_contain_text("Recipes")
+        await expect(sidebar.nth(3)).to_contain_text("Travel 2026")
+        ok("a notebook can be moved down")
+
+        # Drag a notebook onto another shelf in the sidebar.
+        await page.locator("aside nav a", has_text="Recipes").drag_to(page.locator("aside nav a", has_text="Meetings"), target_position={"x": 40, "y": 4})
+        wait_for(lambda: order("Work") == ["Recipes", "Meetings"] and order("Notebooks") == ["Travel 2026"], "the drag to reach the server")
+        ok("dragging a notebook in the sidebar moves it, also onto another shelf")
+        await page.screenshot(path=f"{OUT}/w07f_rearranged.png")
+
+        # Delete a notebook.
+        await page.locator("aside nav a", has_text="Recipes").click()
+        await page.get_by_role("button", name="More").click()
+        await page.get_by_role("button", name="Delete notebook").click()
+        await expect(page.get_by_role("heading", name="Quick notes")).to_be_visible()
+        wait_for(lambda: not find("notebooks", 'title="Recipes" && deleted=false'), "the notebook deleted on the server")
+        await expect(page.locator("aside nav a", has_text="Recipes")).to_have_count(0)
+        ok("a notebook can be deleted")
+        await page.locator("aside nav a", has_text="Travel 2026").click()
+
         # Search.
         await page.fill("input[type=search]", "ramen")
         await page.keyboard.press("Enter")

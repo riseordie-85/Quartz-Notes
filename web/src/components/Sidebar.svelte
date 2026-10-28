@@ -3,6 +3,7 @@
   import { store } from "../lib/store.svelte"
   import { href, router } from "../lib/router.svelte"
   import { argbToCss } from "../lib/richdoc"
+  import type { Notebook } from "../lib/types"
   import Icon from "./Icon.svelte"
 
   let { open, onClose, signOut }: { open: boolean; onClose: () => void; signOut: () => void } = $props()
@@ -10,6 +11,44 @@
 
   const r = $derived(router.route)
   const email = $derived((pb.authStore.record?.email as string | undefined) ?? "")
+
+  // Dragging notebooks to rearrange them (also onto another shelf).
+  // `held` is set at once; `dragging` (which changes the page) a moment later, because changing the
+  // page during dragstart makes the browser cancel the drag.
+  let held: Notebook | null = null
+  let dragging = $state<Notebook | null>(null)
+  let dropAt = $state<{ shelf: string; before: string | null } | null>(null)
+
+  function over(e: DragEvent, shelf: string, nb: Notebook | null) {
+    if (!held) return
+    e.preventDefault()
+    if (e.dataTransfer) e.dataTransfer.dropEffect = "move"
+    let before: string | null = null
+    if (nb) {
+      const box = (e.currentTarget as HTMLElement).getBoundingClientRect()
+      const list = shelfList(shelf)
+      before = e.clientY < box.top + box.height / 2 ? nb.id : (list[list.indexOf(nb) + 1]?.id ?? null)
+    }
+    if (dropAt?.shelf !== shelf || dropAt.before !== before) dropAt = { shelf, before }
+  }
+
+  async function drop(e: DragEvent) {
+    e.preventDefault()
+    const nb = held
+    const at = dropAt
+    held = null
+    dragging = null
+    dropAt = null
+    if (!nb || !at) return
+    const rest = shelfList(at.shelf).filter((n) => n.id !== nb.id)
+    const index = at.before ? rest.findIndex((n) => n.id === at.before) : rest.length
+    await store.moveNotebook(nb, at.shelf, index < 0 ? rest.length : index).catch(() => {})
+  }
+
+  function shelfList(shelfId: string): Notebook[] {
+    const first = store.shelves[0]?.id === shelfId
+    return [...store.notebooksOn(shelfId), ...(first ? store.strayNotebooks : [])]
+  }
 
   function search(e: SubmitEvent) {
     e.preventDefault()
@@ -37,17 +76,41 @@
       <Icon name="archive" size={22} /><span>Archive</span><small>{store.archived.length || ""}</small>
     </a>
 
-    {#each store.shelves as shelf, i (shelf.id)}
-      <h2>{shelf.name}</h2>
-      {#each [...store.notebooksOn(shelf.id), ...(i === 0 ? store.strayNotebooks : [])] as nb (nb.id)}
-        <a href={href({ name: "notebook", id: nb.id })} class:active={r.name === "notebook" && r.id === nb.id}>
+    {#each store.shelves as shelf (shelf.id)}
+      <h2 ondragover={(e) => over(e, shelf.id, null)} ondrop={drop}>{shelf.name}</h2>
+      {#each shelfList(shelf.id) as nb (nb.id)}
+        <a
+          href={href({ name: "notebook", id: nb.id })}
+          class:active={r.name === "notebook" && r.id === nb.id}
+          class:dragging={dragging?.id === nb.id}
+          class:drop-before={dropAt?.shelf === shelf.id && dropAt.before === nb.id}
+          draggable="true"
+          title="Drag to rearrange"
+          ondragstart={(e) => {
+            held = nb
+            setTimeout(() => (dragging = held))
+            e.dataTransfer?.setData("text/plain", nb.title)
+            if (e.dataTransfer) e.dataTransfer.effectAllowed = "move"
+          }}
+          ondragend={() => ((held = null), (dragging = null), (dropAt = null))}
+          ondragover={(e) => over(e, shelf.id, nb)}
+          ondrop={drop}
+        >
           <span class="book" style:background={argbToCss(nb.colorArgb)}></span>
           <span>{nb.title || "Untitled notebook"}</span>
           <small>{store.pagesOf(nb.id).length}</small>
         </a>
       {:else}
-        <p class="none">No notebooks</p>
+        <p class="none" ondragover={(e) => over(e, shelf.id, null)} ondrop={drop}>No notebooks</p>
       {/each}
+      <!-- Always there (and empty), so starting a drag doesn't shift the list. -->
+      <div
+        class="drop-end"
+        class:on={dropAt?.shelf === shelf.id && dropAt.before === null}
+        role="presentation"
+        ondragover={(e) => over(e, shelf.id, null)}
+        ondrop={drop}
+      ></div>
     {/each}
   </nav>
 
@@ -134,6 +197,21 @@
   nav small {
     color: var(--muted);
     font-weight: 400;
+  }
+  nav a.dragging {
+    opacity: 0.4;
+  }
+  nav a.drop-before {
+    box-shadow: inset 0 3px 0 var(--accent);
+  }
+  .drop-end {
+    flex: none;
+    height: 8px;
+    margin: 0 12px;
+    border-radius: 2px;
+  }
+  .drop-end.on {
+    box-shadow: inset 0 3px 0 var(--accent);
   }
   .book {
     width: 16px;

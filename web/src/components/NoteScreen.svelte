@@ -245,7 +245,7 @@
   .scrim {
     position: fixed;
     inset: 0;
-    z-index: 30;
+    z-index: 15; /* below the top bar, so its menu stays clickable */
     border: 0;
     background: transparent;
   }
