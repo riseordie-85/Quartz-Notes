@@ -2,6 +2,7 @@ package com.quartz.notes.data.db
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
@@ -14,6 +15,9 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ShelfDao {
+    @Query("SELECT uid FROM shelves WHERE id = :id")
+    suspend fun uidOf(id: Long): String?
+
     @Query("SELECT * FROM shelves WHERE deleted = 0 ORDER BY position, id")
     fun observeAll(): Flow<List<ShelfEntity>>
 
@@ -40,10 +44,17 @@ interface ShelfDao {
 
     @Query("UPDATE shelves SET deleted = 1 WHERE id IN (:ids) AND deleted = 0")
     suspend fun markDeleted(ids: List<Long>)
+
+    /** Gives a shelf another permanent id (merging a new device's shelf into the server's one). */
+    @Query("UPDATE shelves SET uid = :uid WHERE id = :id")
+    suspend fun setUid(id: Long, uid: String)
 }
 
 @Dao
 interface NotebookDao {
+    @Query("SELECT uid FROM notebooks WHERE id = :id")
+    suspend fun uidOf(id: Long): String?
+
     @Query("SELECT * FROM notebooks WHERE shelfId = :shelfId AND deleted = 0 ORDER BY position, id")
     fun observeByShelf(shelfId: Long): Flow<List<NotebookEntity>>
 
@@ -89,6 +100,9 @@ interface NotebookDao {
 
 @Dao
 interface PageDao {
+    @Query("SELECT uid FROM pages WHERE id = :id")
+    suspend fun uidOf(id: Long): String?
+
     @Query("SELECT * FROM pages WHERE notebookId = :notebookId AND deleted = 0 ORDER BY position, id")
     fun observeByNotebook(notebookId: Long): Flow<List<PageEntity>>
 
@@ -178,6 +192,9 @@ interface PageDao {
 
 @Dao
 interface QuickNoteDao {
+    @Query("SELECT uid FROM quick_notes WHERE id = :id")
+    suspend fun uidOf(id: Long): String?
+
     /** Notes in the quick notes list: pinned ones first, archived ones left out. */
     @Query("SELECT * FROM quick_notes WHERE archived = 0 AND deleted = 0 ORDER BY pinned DESC, createdAt DESC")
     fun observeAll(): Flow<List<QuickNoteEntity>>
@@ -250,6 +267,9 @@ interface QuickNoteDao {
 
 @Dao
 interface AttachmentDao {
+    @Query("SELECT uid FROM attachments WHERE id = :id")
+    suspend fun uidOf(id: Long): String?
+
     @Query("SELECT * FROM attachments WHERE ownerType = :ownerType AND ownerId = :ownerId AND deleted = 0 ORDER BY createdAt, id")
     fun observeFor(ownerType: String, ownerId: Long): Flow<List<AttachmentEntity>>
 
@@ -295,6 +315,9 @@ interface AttachmentDao {
 
 @Dao
 interface PageElementDao {
+    @Query("SELECT uid FROM page_elements WHERE id = :id")
+    suspend fun uidOf(id: Long): String?
+
     @Query("SELECT * FROM page_elements WHERE pageId = :pageId AND deleted = 0 ORDER BY z, id")
     fun observeFor(pageId: Long): Flow<List<PageElementEntity>>
 
@@ -362,7 +385,31 @@ interface SyncDao {
     @Query("SELECT COUNT(*) FROM sync_state WHERE dirty = 1")
     fun observeDirtyCount(): Flow<Int>
 
+    /** The newest local change waiting to upload (changes on every edit). */
+    @Query("SELECT MAX(changedAt) FROM sync_state WHERE dirty = 1")
+    fun observeNewestChange(): Flow<Long?>
+
+    @Query("SELECT MAX(changedAt) FROM sync_state WHERE dirty = 1")
+    suspend fun newestChange(): Long?
+
     /** Sets who's writing; see [SyncFlagsEntity]. */
     @Query("UPDATE sync_flags SET mode = :mode WHERE id = 1")
     suspend fun setMode(mode: Int)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun put(state: SyncStateEntity)
+
+    @Query("UPDATE sync_state SET rev = :rev WHERE tbl = :tbl AND uid = :uid")
+    suspend fun setRev(tbl: String, uid: String, rev: Long)
+
+    /** Marks a row uploaded, unless it changed again while it was being sent. */
+    @Query("UPDATE sync_state SET dirty = 0 WHERE tbl = :tbl AND uid = :uid AND changedAt = :changedAt")
+    suspend fun clearDirty(tbl: String, uid: String, changedAt: Long)
+
+    /** After signing out: everything uploads again to whichever server comes next. */
+    @Query("UPDATE sync_state SET dirty = 1, rev = 0")
+    suspend fun resetAll()
+
+    @Query("DELETE FROM sync_state WHERE tbl = :tbl AND uid = :uid")
+    suspend fun forget(tbl: String, uid: String)
 }

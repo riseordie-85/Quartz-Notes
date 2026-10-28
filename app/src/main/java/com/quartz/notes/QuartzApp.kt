@@ -11,6 +11,7 @@ import com.quartz.notes.data.MediaRepository
 import com.quartz.notes.data.QuartzRepository
 import com.quartz.notes.data.SettingsRepository
 import com.quartz.notes.data.db.QuartzDatabase
+import com.quartz.notes.data.sync.SyncManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -40,9 +41,11 @@ class AppContainer(context: Context) {
     val media = MediaRepository(context)
     val audio = AudioPlayer(media, appScope)
     val backup = BackupManager(context, repository, media, fonts)
+    val sync = SyncManager(context, database, appScope)
 
     fun startBackgroundTasks(context: Context) {
         val app = context.applicationContext
+        sync.start()
         // Keep the automatic backup schedule in step with the settings.
         appScope.launch {
             settings.settings

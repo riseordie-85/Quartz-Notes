@@ -383,6 +383,10 @@ fun SettingsScreen(onBack: () -> Unit, onOpenNote: (Long) -> Unit) {
                         }
                     }
 
+                    // ---- Sync ----
+                    item { SettingsSectionTitle("Sync") }
+                    item { SyncSection(onMessage = { msg -> scope.launch { snackbar.showSnackbar(msg) } }) }
+
                     // ---- Backup ----
                     item { SettingsSectionTitle("Backup & restore") }
                     item { BackupSection(settings = s, snackbar = snackbar) }

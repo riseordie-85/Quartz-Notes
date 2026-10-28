@@ -24,6 +24,16 @@ import com.quartz.notes.ui.editor.LocalFontResolver
 import com.quartz.notes.ui.theme.QuartzTheme
 
 class MainActivity : ComponentActivity() {
+    override fun onStart() {
+        super.onStart()
+        (application as QuartzApp).container.sync.setForeground(true)
+    }
+
+    override fun onStop() {
+        (application as QuartzApp).container.sync.setForeground(false)
+        super.onStop()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
