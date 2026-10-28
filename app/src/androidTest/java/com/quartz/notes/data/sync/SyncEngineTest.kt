@@ -89,7 +89,8 @@ class SyncEngineTest {
         assertNotNull("the note reached the second device", onB)
         assertEquals("Groceries", onB!!.title)
         assertEquals("mint", onB.colorKey)
-        assertEquals(RichDoc.fromPlainText("milk\neggs"), RichDoc.decode(onB.content))
+        assertEquals(listOf("milk", "eggs"), RichDoc.decode(onB.content).blocks.map { it.text })
+        assertEquals(RichDoc.decode(a.note(uid)!!.content), RichDoc.decode(onB.content))
 
         b.repo.saveNote(onB.id, "Groceries!", RichDoc.fromPlainText("milk\neggs\nbread"), "mint")
         b.settle()
