@@ -47,7 +47,8 @@ media path, aspect and width.
 Every collection has an `owner` (the logged-in user; rules allow access only to the owner's own
 records), a client-made `uid` (unique, permanent), `deleted` (tombstone), `rev` (increased on
 every change, used to detect conflicts), `device` (which device made the change, so a device can
-ignore its own live updates) and PocketBase's own `updated` time, which decides what's newer.
+ignore its own live updates), `editedAt` (when the change was made, by the device's clock) and
+PocketBase's own `updated` time, which devices use to ask for changes since their last sync.
 
 | Collection | Fields |
 |---|---|
@@ -59,8 +60,10 @@ ignore its own live updates) and PocketBase's own `updated` time, which decides 
 | attachments | ownerType, owner record (uid), kind, path, mimeType, durationMs, width, height |
 | media | path (the app's relative path, e.g. `media/abc.jpg` or `fonts/x.ttf`), sha256, file |
 
-A server hook checks `rev` on every save: if the record changed since the client last saw it, the
-save is refused as a conflict, and the client keeps its version as a conflict copy.
+Each record's id is the app row's uid. A server hook checks `rev` on every save: the client sends
+`baseRev`, the revision it last saw; if the record changed since, the save is refused with 409 and
+the client fetches the current version. The more recent edit (by `editedAt`, the device's clock)
+wins. Conflict copies of the losing version come in Phase 5.
 
 ## App changes
 
@@ -91,6 +94,11 @@ save is refused as a conflict, and the client keeps its version as a conflict co
 - Live updates both ways while a tab is open.
 - Scrapbook pages show every item in place (view only).
 - Installable from the browser. Online-only to start; offline reading later.
+
+## Status
+
+- Phase 1 (app groundwork) is done: database version 5.
+- Phase 2 (server and app text sync) is done: see `server/README.md` to set up the NUC.
 
 ## Phases
 
