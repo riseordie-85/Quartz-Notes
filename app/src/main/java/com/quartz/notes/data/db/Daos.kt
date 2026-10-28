@@ -1,18 +1,23 @@
 package com.quartz.notes.data.db
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
+/*
+ * Deleting: rows that have never reached the sync server are erased outright ("eraseUnsynced");
+ * the rest are kept as deleted markers ("markDeleted") so other devices hear about it. Every query
+ * the app shows leaves deleted rows out.
+ */
+
 @Dao
 interface ShelfDao {
-    @Query("SELECT * FROM shelves ORDER BY position, id")
+    @Query("SELECT * FROM shelves WHERE deleted = 0 ORDER BY position, id")
     fun observeAll(): Flow<List<ShelfEntity>>
 
-    @Query("SELECT * FROM shelves ORDER BY position, id")
+    @Query("SELECT * FROM shelves WHERE deleted = 0 ORDER BY position, id")
     suspend fun getAll(): List<ShelfEntity>
 
     @Insert
@@ -21,26 +26,31 @@ interface ShelfDao {
     @Update
     suspend fun update(shelf: ShelfEntity)
 
-    @Delete
-    suspend fun delete(shelf: ShelfEntity)
-
-    @Query("SELECT COALESCE(MAX(position), -1) FROM shelves")
+    @Query("SELECT COALESCE(MAX(position), -1) FROM shelves WHERE deleted = 0")
     suspend fun maxPosition(): Int
 
-    /** Also removes every notebook, page and page element (foreign keys cascade). */
-    @Query("DELETE FROM shelves")
-    suspend fun deleteAll()
+    @Query("SELECT * FROM shelves WHERE uid = :uid")
+    suspend fun byUid(uid: String): ShelfEntity?
+
+    @Query("SELECT id FROM shelves WHERE deleted = 0")
+    suspend fun liveIds(): List<Long>
+
+    @Query("DELETE FROM shelves WHERE id IN (:ids) AND uid NOT IN (SELECT uid FROM sync_state WHERE tbl = 'shelves' AND rev > 0)")
+    suspend fun eraseUnsynced(ids: List<Long>)
+
+    @Query("UPDATE shelves SET deleted = 1 WHERE id IN (:ids) AND deleted = 0")
+    suspend fun markDeleted(ids: List<Long>)
 }
 
 @Dao
 interface NotebookDao {
-    @Query("SELECT * FROM notebooks WHERE shelfId = :shelfId ORDER BY position, id")
+    @Query("SELECT * FROM notebooks WHERE shelfId = :shelfId AND deleted = 0 ORDER BY position, id")
     fun observeByShelf(shelfId: Long): Flow<List<NotebookEntity>>
 
-    @Query("SELECT * FROM notebooks WHERE id = :id")
+    @Query("SELECT * FROM notebooks WHERE id = :id AND deleted = 0")
     fun observe(id: Long): Flow<NotebookEntity?>
 
-    @Query("SELECT * FROM notebooks WHERE id = :id")
+    @Query("SELECT * FROM notebooks WHERE id = :id AND deleted = 0")
     suspend fun get(id: Long): NotebookEntity?
 
     @Insert
@@ -49,43 +59,46 @@ interface NotebookDao {
     @Update
     suspend fun update(notebook: NotebookEntity)
 
-    @Delete
-    suspend fun delete(notebook: NotebookEntity)
-
-    @Query("SELECT * FROM notebooks ORDER BY shelfId, position, id")
+    @Query("SELECT * FROM notebooks WHERE deleted = 0 ORDER BY shelfId, position, id")
     fun observeAll(): Flow<List<NotebookEntity>>
 
-    @Query("SELECT * FROM notebooks")
+    @Query("SELECT * FROM notebooks WHERE deleted = 0")
     suspend fun getAll(): List<NotebookEntity>
 
-    @Query("SELECT COUNT(*) || ':' || COALESCE(MAX(updatedAt), 0) FROM notebooks")
-    suspend fun fingerprint(): String
-
-    @Insert
-    suspend fun insertAll(notebooks: List<NotebookEntity>): List<Long>
-
-    @Query("SELECT COALESCE(MAX(position), -1) FROM notebooks WHERE shelfId = :shelfId")
+    @Query("SELECT COALESCE(MAX(position), -1) FROM notebooks WHERE shelfId = :shelfId AND deleted = 0")
     suspend fun maxPosition(shelfId: Long): Int
 
     @Query("UPDATE notebooks SET updatedAt = :updatedAt WHERE id = :id")
     suspend fun touch(id: Long, updatedAt: Long)
 
-    @Query("UPDATE notebooks SET shelfId = :toShelf WHERE shelfId = :fromShelf")
+    @Query("UPDATE notebooks SET shelfId = :toShelf WHERE shelfId = :fromShelf AND deleted = 0")
     suspend fun moveAll(fromShelf: Long, toShelf: Long)
+
+    @Query("SELECT * FROM notebooks WHERE uid = :uid")
+    suspend fun byUid(uid: String): NotebookEntity?
+
+    @Query("SELECT id FROM notebooks WHERE shelfId IN (:shelfIds) AND deleted = 0")
+    suspend fun liveIdsIn(shelfIds: List<Long>): List<Long>
+
+    @Query("DELETE FROM notebooks WHERE id IN (:ids) AND uid NOT IN (SELECT uid FROM sync_state WHERE tbl = 'notebooks' AND rev > 0)")
+    suspend fun eraseUnsynced(ids: List<Long>)
+
+    @Query("UPDATE notebooks SET deleted = 1 WHERE id IN (:ids) AND deleted = 0")
+    suspend fun markDeleted(ids: List<Long>)
 }
 
 @Dao
 interface PageDao {
-    @Query("SELECT * FROM pages WHERE notebookId = :notebookId ORDER BY position, id")
+    @Query("SELECT * FROM pages WHERE notebookId = :notebookId AND deleted = 0 ORDER BY position, id")
     fun observeByNotebook(notebookId: Long): Flow<List<PageEntity>>
 
-    @Query("SELECT * FROM pages WHERE notebookId = :notebookId ORDER BY position, id")
+    @Query("SELECT * FROM pages WHERE notebookId = :notebookId AND deleted = 0 ORDER BY position, id")
     suspend fun getByNotebook(notebookId: Long): List<PageEntity>
 
-    @Query("SELECT * FROM pages WHERE id = :id")
+    @Query("SELECT * FROM pages WHERE id = :id AND deleted = 0")
     suspend fun get(id: Long): PageEntity?
 
-    @Query("SELECT * FROM pages")
+    @Query("SELECT * FROM pages WHERE deleted = 0")
     suspend fun getAll(): List<PageEntity>
 
     @Insert
@@ -96,9 +109,6 @@ interface PageDao {
 
     @Update
     suspend fun updateAll(pages: List<PageEntity>)
-
-    @Delete
-    suspend fun delete(page: PageEntity)
 
     @Query("UPDATE pages SET content = :content, plainText = :plainText, updatedAt = :updatedAt WHERE id = :id")
     suspend fun updateContent(id: Long, content: String, plainText: String, updatedAt: Long)
@@ -127,15 +137,13 @@ interface PageDao {
     @Query("UPDATE pages SET sectionImage = :image, updatedAt = :updatedAt WHERE id = :id")
     suspend fun setSectionImage(id: Long, image: String?, updatedAt: Long)
 
-    @Query("SELECT COUNT(*) || ':' || COALESCE(MAX(updatedAt), 0) FROM pages")
-    suspend fun fingerprint(): String
-
     @Query(
         """
         SELECT p.id AS pageId, p.notebookId AS notebookId, p.title AS title, p.plainText AS plainText,
                p.updatedAt AS updatedAt, n.title AS notebookTitle, n.colorArgb AS notebookColor
         FROM pages p INNER JOIN notebooks n ON n.id = p.notebookId
-        WHERE (p.title LIKE :pattern ESCAPE '\' OR p.plainText LIKE :pattern ESCAPE '\')
+        WHERE p.deleted = 0 AND n.deleted = 0
+          AND (p.title LIKE :pattern ESCAPE '\' OR p.plainText LIKE :pattern ESCAPE '\')
           AND (:notebookId IS NULL OR p.notebookId = :notebookId)
         ORDER BY p.updatedAt DESC
         LIMIT 200
@@ -148,20 +156,33 @@ interface PageDao {
         SELECT p.id AS pageId, p.notebookId AS notebookId, p.title AS title, p.plainText AS plainText,
                p.updatedAt AS updatedAt, n.title AS notebookTitle, n.colorArgb AS notebookColor
         FROM pages p INNER JOIN notebooks n ON n.id = p.notebookId
+        WHERE p.deleted = 0 AND n.deleted = 0
         ORDER BY p.updatedAt DESC
         LIMIT :limit
         """,
     )
     fun observeRecent(limit: Int): Flow<List<PageHit>>
+
+    @Query("SELECT * FROM pages WHERE uid = :uid")
+    suspend fun byUid(uid: String): PageEntity?
+
+    @Query("SELECT id FROM pages WHERE notebookId IN (:notebookIds) AND deleted = 0")
+    suspend fun liveIdsIn(notebookIds: List<Long>): List<Long>
+
+    @Query("DELETE FROM pages WHERE id IN (:ids) AND uid NOT IN (SELECT uid FROM sync_state WHERE tbl = 'pages' AND rev > 0)")
+    suspend fun eraseUnsynced(ids: List<Long>)
+
+    @Query("UPDATE pages SET deleted = 1 WHERE id IN (:ids) AND deleted = 0")
+    suspend fun markDeleted(ids: List<Long>)
 }
 
 @Dao
 interface QuickNoteDao {
     /** Notes in the quick notes list: pinned ones first, archived ones left out. */
-    @Query("SELECT * FROM quick_notes WHERE archived = 0 ORDER BY pinned DESC, createdAt DESC")
+    @Query("SELECT * FROM quick_notes WHERE archived = 0 AND deleted = 0 ORDER BY pinned DESC, createdAt DESC")
     fun observeAll(): Flow<List<QuickNoteEntity>>
 
-    @Query("SELECT * FROM quick_notes WHERE archived = 1 ORDER BY updatedAt DESC")
+    @Query("SELECT * FROM quick_notes WHERE archived = 1 AND deleted = 0 ORDER BY updatedAt DESC")
     fun observeArchived(): Flow<List<QuickNoteEntity>>
 
     @Query("UPDATE quick_notes SET pinned = :pinned WHERE id = :id")
@@ -171,14 +192,17 @@ interface QuickNoteDao {
     @Query("UPDATE quick_notes SET archived = :archived, pinned = 0, updatedAt = :updatedAt WHERE id = :id")
     suspend fun setArchived(id: Long, archived: Boolean, updatedAt: Long)
 
-    @Query("SELECT * FROM quick_notes WHERE id = :id")
+    @Query("SELECT * FROM quick_notes WHERE id = :id AND deleted = 0")
     suspend fun get(id: Long): QuickNoteEntity?
 
-    @Query("SELECT * FROM quick_notes")
+    @Query("SELECT * FROM quick_notes WHERE deleted = 0")
     suspend fun getAll(): List<QuickNoteEntity>
 
     @Insert
     suspend fun insert(note: QuickNoteEntity): Long
+
+    @Update
+    suspend fun update(note: QuickNoteEntity)
 
     @Query(
         """
@@ -188,98 +212,109 @@ interface QuickNoteDao {
     )
     suspend fun updateContent(id: Long, title: String, content: String, plainText: String, colorKey: String, updatedAt: Long)
 
-    @Query("DELETE FROM quick_notes WHERE id = :id")
-    suspend fun deleteById(id: Long)
-
     @Query("UPDATE quick_notes SET updatedAt = :updatedAt WHERE id = :id")
     suspend fun touch(id: Long, updatedAt: Long)
 
-    @Query("DELETE FROM quick_notes")
-    suspend fun deleteAll()
-
-    /** Cheap change fingerprint: count and newest edit time. */
-    @Query("SELECT COUNT(*) || ':' || COALESCE(MAX(updatedAt), 0) FROM quick_notes")
-    suspend fun fingerprint(): String
-
+    /** Blank notes (no title, no text, no attachments), apart from [except]. */
     @Query(
         """
-        DELETE FROM quick_notes
-        WHERE id != :except AND TRIM(title) = '' AND TRIM(plainText, ' ' || char(9) || char(10) || char(13)) = ''
-          AND id NOT IN (SELECT ownerId FROM attachments WHERE ownerType = 'NOTE')
+        SELECT id FROM quick_notes
+        WHERE deleted = 0 AND id != :except AND TRIM(title) = '' AND TRIM(plainText, ' ' || char(9) || char(10) || char(13)) = ''
+          AND id NOT IN (SELECT ownerId FROM attachments WHERE ownerType = 'NOTE' AND deleted = 0)
         """,
     )
-    suspend fun deleteBlank(except: Long)
+    suspend fun blankIds(except: Long): List<Long>
 
     @Query(
         """
         SELECT * FROM quick_notes
-        WHERE archived = 0 AND (title LIKE :pattern ESCAPE '\' OR plainText LIKE :pattern ESCAPE '\')
+        WHERE archived = 0 AND deleted = 0 AND (title LIKE :pattern ESCAPE '\' OR plainText LIKE :pattern ESCAPE '\')
         ORDER BY createdAt DESC
         LIMIT 200
         """,
     )
     suspend fun search(pattern: String): List<QuickNoteEntity>
+
+    @Query("SELECT * FROM quick_notes WHERE uid = :uid")
+    suspend fun byUid(uid: String): QuickNoteEntity?
+
+    @Query("SELECT id FROM quick_notes WHERE deleted = 0")
+    suspend fun liveIds(): List<Long>
+
+    @Query("DELETE FROM quick_notes WHERE id IN (:ids) AND uid NOT IN (SELECT uid FROM sync_state WHERE tbl = 'quick_notes' AND rev > 0)")
+    suspend fun eraseUnsynced(ids: List<Long>)
+
+    @Query("UPDATE quick_notes SET deleted = 1 WHERE id IN (:ids) AND deleted = 0")
+    suspend fun markDeleted(ids: List<Long>)
 }
 
 @Dao
 interface AttachmentDao {
-    @Query("SELECT * FROM attachments WHERE ownerType = :ownerType AND ownerId = :ownerId ORDER BY createdAt, id")
+    @Query("SELECT * FROM attachments WHERE ownerType = :ownerType AND ownerId = :ownerId AND deleted = 0 ORDER BY createdAt, id")
     fun observeFor(ownerType: String, ownerId: Long): Flow<List<AttachmentEntity>>
 
-    @Query("SELECT * FROM attachments WHERE ownerType = :ownerType AND ownerId = :ownerId ORDER BY createdAt, id")
+    @Query("SELECT * FROM attachments WHERE ownerType = :ownerType AND ownerId = :ownerId AND deleted = 0 ORDER BY createdAt, id")
     suspend fun getFor(ownerType: String, ownerId: Long): List<AttachmentEntity>
 
-    @Query("SELECT * FROM attachments WHERE ownerType = :ownerType ORDER BY createdAt, id")
+    @Query("SELECT * FROM attachments WHERE ownerType = :ownerType AND deleted = 0 ORDER BY createdAt, id")
     fun observeAllOf(ownerType: String): Flow<List<AttachmentEntity>>
 
-    @Query("SELECT * FROM attachments")
+    @Query("SELECT * FROM attachments WHERE deleted = 0")
     suspend fun getAll(): List<AttachmentEntity>
 
     @Insert
     suspend fun insert(attachment: AttachmentEntity): Long
 
-    @Delete
-    suspend fun delete(attachment: AttachmentEntity)
+    @Update
+    suspend fun update(attachment: AttachmentEntity)
 
-    @Query("DELETE FROM attachments WHERE ownerType = :ownerType AND ownerId = :ownerId")
-    suspend fun deleteFor(ownerType: String, ownerId: Long)
+    @Query("SELECT id FROM attachments WHERE ownerType = :ownerType AND ownerId IN (:ownerIds) AND deleted = 0")
+    suspend fun liveIdsFor(ownerType: String, ownerIds: List<Long>): List<Long>
 
-    @Query("DELETE FROM attachments")
-    suspend fun deleteAll()
+    @Query("SELECT id FROM attachments WHERE deleted = 0")
+    suspend fun liveIds(): List<Long>
 
-    @Query("SELECT COUNT(*) || ':' || COALESCE(MAX(id), 0) FROM attachments")
-    suspend fun fingerprint(): String
+    /** Note attachments whose note is gone. */
+    @Query(
+        """
+        SELECT id FROM attachments WHERE deleted = 0 AND ownerType = 'NOTE'
+          AND ownerId NOT IN (SELECT id FROM quick_notes WHERE deleted = 0)
+        """,
+    )
+    suspend fun orphanIds(): List<Long>
 
-    /** Removes note attachments whose note no longer exists. */
-    @Query("DELETE FROM attachments WHERE ownerType = 'NOTE' AND ownerId NOT IN (SELECT id FROM quick_notes)")
-    suspend fun deleteOrphans()
+    @Query("SELECT * FROM attachments WHERE uid = :uid")
+    suspend fun byUid(uid: String): AttachmentEntity?
+
+    @Query("DELETE FROM attachments WHERE id IN (:ids) AND uid NOT IN (SELECT uid FROM sync_state WHERE tbl = 'attachments' AND rev > 0)")
+    suspend fun eraseUnsynced(ids: List<Long>)
+
+    @Query("UPDATE attachments SET deleted = 1 WHERE id IN (:ids) AND deleted = 0")
+    suspend fun markDeleted(ids: List<Long>)
 }
 
 @Dao
 interface PageElementDao {
-    @Query("SELECT * FROM page_elements WHERE pageId = :pageId ORDER BY z, id")
+    @Query("SELECT * FROM page_elements WHERE pageId = :pageId AND deleted = 0 ORDER BY z, id")
     fun observeFor(pageId: Long): Flow<List<PageElementEntity>>
 
-    @Query("SELECT * FROM page_elements")
+    @Query("SELECT * FROM page_elements WHERE deleted = 0")
     suspend fun getAll(): List<PageElementEntity>
 
-    @Query("SELECT * FROM page_elements WHERE pageId = :pageId ORDER BY z, id")
+    @Query("SELECT * FROM page_elements WHERE pageId = :pageId AND deleted = 0 ORDER BY z, id")
     suspend fun getForPage(pageId: Long): List<PageElementEntity>
 
     /** Pictures and recordings on every page of a notebook (for its index). */
     @Query(
         """
         SELECT e.* FROM page_elements e INNER JOIN pages p ON p.id = e.pageId
-        WHERE p.notebookId = :notebookId AND e.kind IN ('IMAGE', 'VOICE', 'TEXT')
+        WHERE p.notebookId = :notebookId AND e.deleted = 0 AND p.deleted = 0 AND e.kind IN ('IMAGE', 'VOICE', 'TEXT')
         ORDER BY p.position, e.y, e.x
         """,
     )
     fun observeMediaForNotebook(notebookId: Long): Flow<List<PageElementEntity>>
 
-    @Query("SELECT COUNT(*) || ':' || COALESCE(SUM(x + y + width + rotation), 0) || ':' || COALESCE(SUM(LENGTH(data)), 0) FROM page_elements")
-    suspend fun fingerprint(): String
-
-    @Query("SELECT COALESCE(MAX(z), 0) FROM page_elements WHERE pageId = :pageId")
+    @Query("SELECT COALESCE(MAX(z), 0) FROM page_elements WHERE pageId = :pageId AND deleted = 0")
     suspend fun maxZ(pageId: Long): Int
 
     @Insert
@@ -291,10 +326,10 @@ interface PageElementDao {
     @Query("UPDATE page_elements SET x = :x, y = :y, width = :width, height = :height, rotation = :rotation WHERE id = :id")
     suspend fun updateGeometry(id: Long, x: Float, y: Float, width: Float, height: Float, rotation: Float)
 
-    @Query("SELECT * FROM page_elements WHERE pageId = :pageId AND kind = :kind")
+    @Query("SELECT * FROM page_elements WHERE pageId = :pageId AND kind = :kind AND deleted = 0")
     suspend fun getKind(pageId: Long, kind: String): List<PageElementEntity>
 
-    @Query("SELECT * FROM page_elements WHERE id = :id")
+    @Query("SELECT * FROM page_elements WHERE id = :id AND deleted = 0")
     suspend fun get(id: Long): PageElementEntity?
 
     @Query("UPDATE page_elements SET data = :data WHERE id = :id")
@@ -303,6 +338,31 @@ interface PageElementDao {
     @Query("UPDATE page_elements SET z = :z WHERE id = :id")
     suspend fun updateZ(id: Long, z: Int)
 
-    @Query("DELETE FROM page_elements WHERE id = :id")
-    suspend fun deleteById(id: Long)
+    @Query("SELECT * FROM page_elements WHERE uid = :uid")
+    suspend fun byUid(uid: String): PageElementEntity?
+
+    @Query("SELECT id FROM page_elements WHERE pageId IN (:pageIds) AND deleted = 0")
+    suspend fun liveIdsIn(pageIds: List<Long>): List<Long>
+
+    @Query("DELETE FROM page_elements WHERE id IN (:ids) AND uid NOT IN (SELECT uid FROM sync_state WHERE tbl = 'page_elements' AND rev > 0)")
+    suspend fun eraseUnsynced(ids: List<Long>)
+
+    @Query("UPDATE page_elements SET deleted = 1 WHERE id IN (:ids) AND deleted = 0")
+    suspend fun markDeleted(ids: List<Long>)
+}
+
+@Dao
+interface SyncDao {
+    @Query("SELECT * FROM sync_state WHERE tbl = :tbl AND uid = :uid")
+    suspend fun state(tbl: String, uid: String): SyncStateEntity?
+
+    @Query("SELECT * FROM sync_state WHERE dirty = 1 ORDER BY changedAt")
+    suspend fun dirty(): List<SyncStateEntity>
+
+    @Query("SELECT COUNT(*) FROM sync_state WHERE dirty = 1")
+    fun observeDirtyCount(): Flow<Int>
+
+    /** Sets who's writing; see [SyncFlagsEntity]. */
+    @Query("UPDATE sync_flags SET mode = :mode WHERE id = 1")
+    suspend fun setMode(mode: Int)
 }

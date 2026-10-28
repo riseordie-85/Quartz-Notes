@@ -9,6 +9,7 @@ import com.quartz.notes.data.db.PageHit
 import com.quartz.notes.data.db.QuartzDatabase
 import com.quartz.notes.data.db.QuickNoteEntity
 import com.quartz.notes.data.db.ShelfEntity
+import com.quartz.notes.data.db.newUid
 import com.quartz.notes.data.model.AttachmentKind
 import com.quartz.notes.data.model.ElementKind
 import com.quartz.notes.data.model.ImageData
@@ -74,6 +75,52 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
 
     private fun now() = System.currentTimeMillis()
 
+    // ---- Deleting ----
+    // Rows that never reached the sync server are erased; synced ones become deleted markers so the
+    // other devices hear about it. Deleting something also deletes what's inside it. Call these in a
+    // transaction.
+
+    private suspend fun removeElements(ids: List<Long>) {
+        if (ids.isEmpty()) return
+        elements.eraseUnsynced(ids)
+        elements.markDeleted(ids)
+    }
+
+    private suspend fun removeAttachments(ids: List<Long>) {
+        if (ids.isEmpty()) return
+        attachments.eraseUnsynced(ids)
+        attachments.markDeleted(ids)
+    }
+
+    private suspend fun removePages(ids: List<Long>) {
+        if (ids.isEmpty()) return
+        removeElements(elements.liveIdsIn(ids))
+        removeAttachments(attachments.liveIdsFor(OwnerType.PAGE.name, ids))
+        pages.eraseUnsynced(ids)
+        pages.markDeleted(ids)
+    }
+
+    private suspend fun removeNotebooks(ids: List<Long>) {
+        if (ids.isEmpty()) return
+        removePages(pages.liveIdsIn(ids))
+        notebooks.eraseUnsynced(ids)
+        notebooks.markDeleted(ids)
+    }
+
+    private suspend fun removeShelves(ids: List<Long>) {
+        if (ids.isEmpty()) return
+        removeNotebooks(notebooks.liveIdsIn(ids))
+        shelves.eraseUnsynced(ids)
+        shelves.markDeleted(ids)
+    }
+
+    private suspend fun removeNotes(ids: List<Long>) {
+        if (ids.isEmpty()) return
+        removeAttachments(attachments.liveIdsFor(OwnerType.NOTE.name, ids))
+        notes.eraseUnsynced(ids)
+        notes.markDeleted(ids)
+    }
+
     // ---- Shelves ----
 
     fun observeShelves(): Flow<List<ShelfEntity>> = shelves.observeAll()
@@ -87,7 +134,7 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
     /** Deletes a shelf, moving its notebooks to [moveNotebooksTo] first. */
     suspend fun deleteShelf(shelf: ShelfEntity, moveNotebooksTo: Long) = db.withTransaction {
         notebooks.moveAll(shelf.id, moveNotebooksTo)
-        shelves.delete(shelf)
+        removeShelves(listOf(shelf.id))
     }
 
     suspend fun moveShelf(shelf: ShelfEntity, up: Boolean) = db.withTransaction {
@@ -136,7 +183,7 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
         notebooks.update(notebook.copy(title = notebook.title.trim(), position = position, updatedAt = now()))
     }
 
-    suspend fun deleteNotebook(notebook: NotebookEntity) = notebooks.delete(notebook)
+    suspend fun deleteNotebook(notebook: NotebookEntity) = db.withTransaction { removeNotebooks(listOf(notebook.id)) }
 
     // ---- Pages ----
 
@@ -256,7 +303,7 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
         db.withTransaction {
             val list = pages.getByNotebook(page.notebookId)
             if (list.size <= 1) return@withTransaction
-            pages.delete(page)
+            removePages(listOf(page.id))
             renumber(list.filter { it.id != page.id }.toMutableList())
         }
     }
@@ -295,22 +342,19 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
     }
 
     fun deleteNote(id: Long) = enqueue {
-        db.withTransaction {
-            attachments.deleteFor(OwnerType.NOTE.name, id)
-            notes.deleteById(id)
-        }
+        db.withTransaction { removeNotes(listOf(id)) }
     }
 
     /** Deletes the note if it has no title and no text (checked after all earlier saves land). */
     fun discardIfBlank(id: Long) = enqueue {
         val note = notes.get(id) ?: return@enqueue
         val hasAttachments = attachments.getFor(OwnerType.NOTE.name, id).isNotEmpty()
-        if (note.title.isBlank() && note.plainText.isBlank() && !hasAttachments) notes.deleteById(id)
+        if (note.title.isBlank() && note.plainText.isBlank() && !hasAttachments) db.withTransaction { removeNotes(listOf(id)) }
     }
 
     /** Removes blank notes left behind (e.g. the app was closed with an empty note open). */
     fun sweepBlankNotes(except: Long?) = enqueue {
-        notes.deleteBlank(except ?: -1L)
+        db.withTransaction { removeNotes(notes.blankIds(except ?: -1L)) }
     }
 
     // ---- Note attachments ----
@@ -340,7 +384,7 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
         notes.touch(noteId, now())
     }
 
-    fun deleteAttachment(attachment: AttachmentEntity) = enqueue { attachments.delete(attachment) }
+    fun deleteAttachment(attachment: AttachmentEntity) = enqueue { db.withTransaction { removeAttachments(listOf(attachment.id)) } }
 
     // ---- Page elements (pictures and voice notes placed on pages) ----
 
@@ -378,11 +422,11 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
     /** Removes an element, plus any connector lines attached to it. */
     fun deleteElement(element: PageElementEntity) = enqueue {
         db.withTransaction {
-            elements.deleteById(element.id)
-            elements.getKind(element.pageId, ElementKind.CONNECTOR).forEach { c ->
-                val data = decodePayload<ConnectorData>(c.data) ?: return@forEach
-                if (data.from == element.id || data.to == element.id) elements.deleteById(c.id)
+            val attached = elements.getKind(element.pageId, ElementKind.CONNECTOR).filter { c ->
+                val data = decodePayload<ConnectorData>(c.data)
+                data != null && (data.from == element.id || data.to == element.id)
             }
+            removeElements(listOf(element.id) + attached.map { it.id })
             pages.touch(element.pageId, now())
         }
     }
@@ -460,19 +504,22 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
             val position = pages.getByNotebook(notebookId).size
             val stamp = now()
             val newId = pages.insert(
-                page.copy(id = 0, notebookId = notebookId, position = position, locked = false, createdAt = stamp, updatedAt = stamp),
+                page.copy(
+                    id = 0, uid = newUid(), notebookId = notebookId, position = position, locked = false,
+                    createdAt = stamp, updatedAt = stamp,
+                ),
             )
             val idMap = HashMap<Long, Long>()
             val connectors = ArrayList<PageElementEntity>()
             elements.getForPage(pageId).forEach { e ->
-                if (e.kind == ElementKind.CONNECTOR) connectors += e else idMap[e.id] = elements.insert(e.copy(id = 0, pageId = newId))
+                if (e.kind == ElementKind.CONNECTOR) connectors += e else idMap[e.id] = elements.insert(e.copy(id = 0, uid = newUid(), pageId = newId))
             }
             // Connectors point at items by id, which are new on the copy.
             connectors.forEach { c ->
                 val cd = decodePayload<ConnectorData>(c.data) ?: return@forEach
                 val from = idMap[cd.from] ?: return@forEach
                 val to = idMap[cd.to] ?: return@forEach
-                elements.insert(c.copy(id = 0, pageId = newId, data = cd.copy(from = from, to = to).encodePayload()))
+                elements.insert(c.copy(id = 0, uid = newUid(), pageId = newId, data = cd.copy(from = from, to = to).encodePayload()))
             }
             notebooks.touch(notebookId, stamp)
             newId
@@ -483,7 +530,7 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
 
     /** Every media path still referenced by a note attachment or page element. */
     suspend fun referencedMedia(): Set<String> = inOrder {
-        attachments.deleteOrphans()
+        db.withTransaction { removeAttachments(attachments.orphanIds()) }
         val fromAttachments = attachments.getAll().map { it.path }
         val fromElements = elements.getAll().flatMap { elementMediaPaths(it.kind, it.data) }
         val inline = pages.getAll().flatMap(::pageMediaPaths)
@@ -508,22 +555,55 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
     }
 
     /**
-     * Imports a backup. With [replace], everything currently in the app is removed first; otherwise the
-     * backup is added alongside (shelves with the same name are merged). Ids are re-assigned.
+     * Imports a backup. With [replace], everything currently in the app is deleted first and the
+     * backup's notes come back with their own permanent ids (so a synced note restored from a backup
+     * updates the server's copy instead of making a duplicate). Otherwise the backup is added
+     * alongside (shelves with the same name are merged), and anything already here gets a new id.
      */
     suspend fun importBackup(data: BackupData, replace: Boolean): ImportSummary = inOrder {
         db.withTransaction {
+            val sync = db.syncDao()
+            // Restoring may bring back rows deleted here; changes are still marked for upload.
+            if (replace) sync.setMode(2)
+
+            /**
+             * Writes one row and returns its local id. Replacing: reuse the row with the same
+             * permanent id if there is one (even a deleted one). Adding: give a new permanent id if
+             * that one is already taken.
+             */
+            suspend fun <T> place(
+                uid: String,
+                find: suspend (String) -> T?,
+                idOf: (T) -> Long,
+                insert: suspend (String) -> Long,
+                overwrite: suspend (Long) -> Unit,
+            ): Long {
+                val existing = find(uid)
+                return when {
+                    existing == null -> insert(uid)
+                    replace -> idOf(existing).also { overwrite(it) }
+                    else -> insert(newUid())
+                }
+            }
+
             if (replace) {
-                attachments.deleteAll()
-                notes.deleteAll()
-                shelves.deleteAll()
+                removeNotes(notes.liveIds())
+                removeAttachments(attachments.liveIds())
+                removeShelves(shelves.liveIds())
             }
             val existingShelves = shelves.getAll()
             val shelfMap = HashMap<Long, Long>()
             var nextShelfPos = shelves.maxPosition() + 1
             data.shelves.sortedBy { it.position }.forEach { s ->
                 val match = if (replace) null else existingShelves.firstOrNull { it.name.equals(s.name, ignoreCase = true) }
-                shelfMap[s.id] = match?.id ?: shelves.insert(s.copy(id = 0, position = nextShelfPos++))
+                shelfMap[s.id] = match?.id ?: run {
+                    val row = s.copy(position = nextShelfPos++, deleted = false)
+                    place(
+                        s.uid, { shelves.byUid(it) }, { it.id },
+                        insert = { uid -> shelves.insert(row.copy(id = 0, uid = uid)) },
+                        overwrite = { id -> shelves.update(row.copy(id = id)) },
+                    )
+                }
             }
             val fallbackShelf = shelves.getAll().firstOrNull()?.id
                 ?: shelves.insert(ShelfEntity(name = "Notebooks", position = 0))
@@ -531,13 +611,31 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
             val notebookMap = HashMap<Long, Long>()
             data.notebooks.sortedBy { it.position }.forEach { n ->
                 val shelfId = shelfMap[n.shelfId] ?: fallbackShelf
-                notebookMap[n.id] = notebooks.insert(n.copy(id = 0, shelfId = shelfId, position = notebooks.maxPosition(shelfId) + 1))
+                val row = n.copy(shelfId = shelfId, position = notebooks.maxPosition(shelfId) + 1, deleted = false)
+                notebookMap[n.id] = place(
+                    n.uid, { notebooks.byUid(it) }, { it.id },
+                    insert = { uid -> notebooks.insert(row.copy(id = 0, uid = uid)) },
+                    overwrite = { id -> notebooks.update(row.copy(id = id)) },
+                )
             }
 
             val pageMap = HashMap<Long, Long>()
             data.pages.forEach { p ->
                 val nb = notebookMap[p.notebookId] ?: return@forEach
-                pageMap[p.id] = pages.insert(p.copy(id = 0, notebookId = nb))
+                val row = p.copy(notebookId = nb, deleted = false)
+                pageMap[p.id] = place(
+                    p.uid, { pages.byUid(it) }, { it.id },
+                    insert = { uid -> pages.insert(row.copy(id = 0, uid = uid)) },
+                    overwrite = { id -> pages.update(row.copy(id = id)) },
+                )
+            }
+
+            fun placeElement(e: PageElementEntity, row: PageElementEntity): suspend () -> Long = {
+                place(
+                    e.uid, { elements.byUid(it) }, { it.id },
+                    insert = { uid -> elements.insert(row.copy(id = 0, uid = uid)) },
+                    overwrite = { id -> elements.update(row.copy(id = id)) },
+                )
             }
             val elementMap = HashMap<Long, Long>()
             val connectors = ArrayList<PageElementEntity>()
@@ -546,7 +644,7 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
                 if (e.kind == ElementKind.CONNECTOR) {
                     connectors += e.copy(pageId = page)
                 } else {
-                    elementMap[e.id] = elements.insert(e.copy(id = 0, pageId = page))
+                    elementMap[e.id] = placeElement(e, e.copy(pageId = page, deleted = false))()
                 }
             }
             // Connectors point at other elements by id, which have all been re-numbered.
@@ -554,16 +652,29 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
                 val cd = decodePayload<ConnectorData>(c.data) ?: return@forEach
                 val from = elementMap[cd.from] ?: return@forEach
                 val to = elementMap[cd.to] ?: return@forEach
-                elements.insert(c.copy(id = 0, data = cd.copy(from = from, to = to).encodePayload()))
+                placeElement(c, c.copy(data = cd.copy(from = from, to = to).encodePayload(), deleted = false))()
             }
 
             val noteMap = HashMap<Long, Long>()
-            data.notes.forEach { n -> noteMap[n.id] = notes.insert(n.copy(id = 0)) }
+            data.notes.forEach { n ->
+                val row = n.copy(deleted = false)
+                noteMap[n.id] = place(
+                    n.uid, { notes.byUid(it) }, { it.id },
+                    insert = { uid -> notes.insert(row.copy(id = 0, uid = uid)) },
+                    overwrite = { id -> notes.update(row.copy(id = id)) },
+                )
+            }
             data.attachments.forEach { a ->
                 if (a.ownerType != OwnerType.NOTE.name) return@forEach
                 val owner = noteMap[a.ownerId] ?: return@forEach
-                attachments.insert(a.copy(id = 0, ownerId = owner))
+                val row = a.copy(ownerId = owner, deleted = false)
+                place(
+                    a.uid, { attachments.byUid(it) }, { it.id },
+                    insert = { uid -> attachments.insert(row.copy(id = 0, uid = uid)) },
+                    overwrite = { id -> attachments.update(row.copy(id = id)) },
+                )
             }
+            if (replace) sync.setMode(0)
             ImportSummary(notebooks = notebookMap.size, pages = pageMap.size, notes = noteMap.size)
         }
     }

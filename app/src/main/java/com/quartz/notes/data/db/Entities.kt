@@ -5,14 +5,22 @@ import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import kotlinx.serialization.Serializable
+import java.util.UUID
 
-@Entity(tableName = "shelves")
+/** A new permanent id for a synced row. Ids made by the database migration are 32 hex digits instead. */
+fun newUid(): String = UUID.randomUUID().toString()
+
+@Entity(tableName = "shelves", indices = [Index("uid", unique = true)])
 @Serializable
 data class ShelfEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val name: String,
     val position: Int = 0,
     val createdAt: Long = System.currentTimeMillis(),
+    /** Permanent id, the same on every device and on the sync server. */
+    val uid: String = newUid(),
+    /** Deleted, kept as a marker until every device has heard (see [SyncStateEntity]). */
+    val deleted: Boolean = false,
 )
 
 @Entity(
@@ -25,7 +33,7 @@ data class ShelfEntity(
             onDelete = ForeignKey.CASCADE,
         ),
     ],
-    indices = [Index("shelfId")],
+    indices = [Index("shelfId"), Index("uid", unique = true)],
 )
 @Serializable
 data class NotebookEntity(
@@ -48,6 +56,8 @@ data class NotebookEntity(
     val sectionTabs: Boolean = true,
     /** New pictures and recordings go in a strip at the bottom of the page instead of anywhere on it. */
     val attachAtBottom: Boolean = false,
+    val uid: String = newUid(),
+    val deleted: Boolean = false,
 )
 
 @Entity(
@@ -60,7 +70,7 @@ data class NotebookEntity(
             onDelete = ForeignKey.CASCADE,
         ),
     ],
-    indices = [Index("notebookId")],
+    indices = [Index("notebookId"), Index("uid", unique = true)],
 )
 @Serializable
 data class PageEntity(
@@ -95,6 +105,8 @@ data class PageEntity(
     val sectionIcon: String? = null,
     /** Media path of a section page's photo (used instead of the icon). */
     val sectionImage: String? = null,
+    val uid: String = newUid(),
+    val deleted: Boolean = false,
 )
 
 /**
@@ -111,7 +123,7 @@ data class PageEntity(
             onDelete = ForeignKey.CASCADE,
         ),
     ],
-    indices = [Index("pageId")],
+    indices = [Index("pageId"), Index("uid", unique = true)],
 )
 @Serializable
 data class PageElementEntity(
@@ -127,9 +139,11 @@ data class PageElementEntity(
     /** Kind-specific JSON payload. */
     val data: String = "",
     val createdAt: Long = System.currentTimeMillis(),
+    val uid: String = newUid(),
+    val deleted: Boolean = false,
 )
 
-@Entity(tableName = "quick_notes")
+@Entity(tableName = "quick_notes", indices = [Index("uid", unique = true)])
 @Serializable
 data class QuickNoteEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
@@ -144,9 +158,11 @@ data class QuickNoteEntity(
     val updatedAt: Long = System.currentTimeMillis(),
     /** Put away: hidden from the quick notes list, found under Settings → Archive. */
     val archived: Boolean = false,
+    val uid: String = newUid(),
+    val deleted: Boolean = false,
 )
 
-@Entity(tableName = "attachments", indices = [Index("ownerType", "ownerId")])
+@Entity(tableName = "attachments", indices = [Index("ownerType", "ownerId"), Index("uid", unique = true)])
 @Serializable
 data class AttachmentEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
@@ -162,6 +178,37 @@ data class AttachmentEntity(
     val width: Int? = null,
     val height: Int? = null,
     val createdAt: Long = System.currentTimeMillis(),
+    val uid: String = newUid(),
+    val deleted: Boolean = false,
+)
+
+/**
+ * Sync bookkeeping for one row of a synced table, kept apart from the row itself so ordinary saves
+ * (which write whole rows) can never overwrite it. Database triggers keep it up to date: any local
+ * insert or change marks the row [dirty]. See [SyncTriggers].
+ */
+@Entity(tableName = "sync_state", primaryKeys = ["tbl", "uid"])
+data class SyncStateEntity(
+    /** Table name, e.g. "pages". */
+    val tbl: String,
+    val uid: String,
+    /** Changed here since it was last sent to the server. */
+    val dirty: Boolean,
+    /** The server's revision of this row when this device last saw it; 0 if it has never been synced. */
+    val rev: Long,
+    /** When it last changed on this device (ms). */
+    val changedAt: Long,
+)
+
+/**
+ * One row (id 1). [mode] tells the triggers who is writing: 0 = the app (changes are marked for
+ * upload; deleted rows can't come back), 1 = the sync engine applying server changes (nothing is
+ * marked), 2 = restoring a backup over existing data (changes are marked; deleted rows can come back).
+ */
+@Entity(tableName = "sync_flags")
+data class SyncFlagsEntity(
+    @PrimaryKey val id: Int = 1,
+    val mode: Int = 0,
 )
 
 /** A page search hit or recent page, joined with its notebook. */
