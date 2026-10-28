@@ -38,6 +38,16 @@ jobs:
           ./gradlew testDebugUnitTest --stacktrace 2>&1 | tee unit.log || echo "UNIT_FAILED=1" >> "$GITHUB_ENV"
           { grep -E "^e: |FAILED|What went wrong" -A3 unit.log || true; } | head -60 | while IFS= read -r line; do echo "::warning::${line}"; done
 
+      - name: Start a test sync server
+        run: |
+          PB_VERSION=0.40.5
+          wget -q "https://github.com/pocketbase/pocketbase/releases/download/v${PB_VERSION}/pocketbase_${PB_VERSION}_linux_amd64.zip" -O pb.zip
+          unzip -q pb.zip pocketbase -d pbbin
+          pbbin/pocketbase superuser upsert admin@test.local adminpass123 --dir=pb_test_data --migrationsDir=server/pb_migrations
+          nohup pbbin/pocketbase serve --http=127.0.0.1:8090 --dir=pb_test_data --migrationsDir=server/pb_migrations --hooksDir=server/pb_hooks --publicDir=server/pb_public > pb.log 2>&1 &
+          for i in $(seq 1 50); do curl -s http://127.0.0.1:8090/api/health >/dev/null && break; sleep 0.2; done
+          curl -s http://127.0.0.1:8090/api/health
+
       - name: Emulator tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
@@ -55,7 +65,7 @@ jobs:
         shell: bash
         run: |
           mkdir -p out
-          cp unit.log connected.log out/ 2>/dev/null || true
+          cp unit.log connected.log pb.log out/ 2>/dev/null || true
           mkdir -p out/unit out/connected
           cp -r app/build/test-results/testDebugUnitTest/. out/unit/ 2>/dev/null || true
           cp -r app/build/outputs/androidTest-results/. out/connected/ 2>/dev/null || true

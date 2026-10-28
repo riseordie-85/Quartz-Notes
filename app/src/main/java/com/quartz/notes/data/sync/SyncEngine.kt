@@ -133,6 +133,10 @@ class SyncEngine(
             for (r in ordered) {
                 when (runCatching { apply(collection, r, force = false) }.getOrDefault(Applied.SKIPPED)) {
                     Applied.WRITTEN -> counts.downloaded++
+                    Applied.REPLACED_LOCAL -> {
+                        counts.downloaded++
+                        counts.conflicts++
+                    }
                     Applied.KEPT_LOCAL -> counts.conflicts++
                     Applied.SKIPPED -> Unit
                 }
@@ -141,7 +145,16 @@ class SyncEngine(
         }
     }
 
-    private enum class Applied { WRITTEN, KEPT_LOCAL, SKIPPED }
+    private enum class Applied {
+        WRITTEN,
+
+        /** Written over a local edit that was older. */
+        REPLACED_LOCAL,
+
+        /** Left alone: the local edit is newer and will be uploaded. */
+        KEPT_LOCAL,
+        SKIPPED,
+    }
 
     /**
      * Writes one server record into the database. Must run in a transaction with the sync mode on.
@@ -245,7 +258,7 @@ class SyncEngine(
         }
         if (!written) return Applied.SKIPPED
         sync.put(SyncStateEntity(collection, uid, dirty = false, rev = rev, changedAt = editedAt))
-        return Applied.WRITTEN
+        return if (state?.dirty == true) Applied.REPLACED_LOCAL else Applied.WRITTEN
     }
 
     // ---- Upload ----
