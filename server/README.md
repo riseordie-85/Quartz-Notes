@@ -77,11 +77,16 @@ When the server changes, GitHub publishes a new image. In Dockge open `quartz-sy
 (or `docker compose pull && docker compose up -d` in `/opt/stacks/quartz-sync`). Schema changes run
 by themselves on start.
 
-## Checking the rules
+## Is it working?
 
-`tests/smoke_test.py` checks the schema and sync rules against a running server. CI runs it on
-every change to `server/`:
+1. Open `https://rise-or-die.tail096730.ts.net:8443/api/health` in a browser on the tailnet. It
+   should say "API is healthy."
+2. In the dashboard (`…:8443/_/`), **Collections → quick_notes** lists your notes once a device
+   has synced.
+3. In the app, Settings → Sync shows when each device last synced, or why it couldn't.
 
-```sh
-python3 server/tests/smoke_test.py http://127.0.0.1:8090 admin@test.local adminpass123
-```
+## Automatic rule checks (nothing to do)
+
+`tests/smoke_test.py` tries to break the sync rules: reading another account's notes, signing up,
+deleting records, overwriting a newer edit. GitHub runs it on a throwaway server every time
+`server/` changes. **Don't run it against the NUC**: it creates test accounts and test notes.
