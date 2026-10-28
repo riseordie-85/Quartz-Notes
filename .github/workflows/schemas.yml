@@ -1,0 +1,39 @@
+name: Room schemas
+
+# Generates the Room schema JSON (app/schemas) and pushes it to the `ci-schemas` branch, so the
+# exported schema for a version can be committed and used by migration tests.
+# Triggered by pushing to a branch named schema/<anything>.
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "schema/**" ]
+
+permissions:
+  contents: write
+
+jobs:
+  schemas:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Generate schemas
+        run: |
+          chmod +x gradlew
+          ./gradlew kspDebugKotlin --stacktrace
+      - name: Publish to the ci-schemas branch
+        shell: bash
+        run: |
+          mkdir -p out && cp -r app/schemas/. out/
+          cd out
+          git init -q
+          git config user.name "ci"
+          git config user.email "ci@users.noreply.github.com"
+          git checkout -q -b ci-schemas
+          git add -A
+          git commit -q -m "Schemas ${GITHUB_RUN_ID} for ${GITHUB_SHA}"
+          git push -q -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" ci-schemas
