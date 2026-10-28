@@ -100,3 +100,15 @@ export interface Collections {
 }
 
 export const COLLECTIONS: CollectionName[] = ["shelves", "notebooks", "pages", "page_elements", "quick_notes", "attachments"]
+
+/** A stored file: picture, voice note or font, found by its app path. */
+export interface MediaFile {
+  id: string
+  collectionId: string
+  collectionName: string
+  owner: string
+  path: string
+  file: string
+  size: number
+  created: string
+}

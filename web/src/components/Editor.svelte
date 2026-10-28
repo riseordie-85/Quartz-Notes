@@ -3,6 +3,7 @@
   import { Editor } from "@tiptap/core"
   import { TextSelection } from "@tiptap/pm/state"
   import { editorExtensions } from "../lib/editor/schema"
+  import { store } from "../lib/store.svelte"
   import { fromEditor, toEditor, type PMNode, type RichDoc } from "../lib/richdoc"
 
   let {
@@ -26,7 +27,7 @@
   onMount(() => {
     editor = new Editor({
       element: el,
-      extensions: editorExtensions({ placeholder }),
+      extensions: editorExtensions({ placeholder, resolveMedia: (path) => store.mediaUrl(path) }),
       content: toEditor(doc) as never,
       editable,
       editorProps: { attributes: { class: "rt", spellcheck: "true" } },

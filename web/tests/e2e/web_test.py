@@ -103,6 +103,28 @@ async def main():
         await expect(page.locator("input.title")).to_have_value("Groceries (from phone)", timeout=8000)
         ok("a change from another device appears live")
 
+        # Pictures: a synced one on a note, and one added from the browser.
+        await page.goto(f"{BASE}/#/")
+        await page.get_by_role("link", name="Gift ideas").click()
+        await page.wait_for_function("() => [...document.querySelectorAll('.attachments img')].some(i => i.complete && i.naturalWidth === 120)")
+        ok("a note's synced picture shows")
+        pic = os.path.join(OUT, "upload-test.png")
+        with open(pic, "wb") as f:
+            import zlib, struct
+            raw = b"".join(b"\x00" + bytes([x % 256, y % 256, 128]) * 1 + b"".join(bytes([x % 256, y % 256, 128]) for x in range(1, 300)) for y in range(200) for x in [0])
+            def chunk(k, d):
+                return struct.pack(">I", len(d)) + k + d + struct.pack(">I", zlib.crc32(k + d) & 0xFFFFFFFF)
+            f.write(b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", struct.pack(">IIBBBBB", 300, 200, 8, 2, 0, 0, 0)) + chunk(b"IDAT", zlib.compress(raw)) + chunk(b"IEND", b""))
+        await page.locator("input[type=file]").set_input_files(pic)
+        await expect(page.locator(".attachments .thumb")).to_have_count(2, timeout=10000)
+        gift = find("quick_notes", 'title="Gift ideas"')[0]
+        atts = find("attachments", f'ownerUid="{gift["id"]}"')
+        added = [a for a in atts if a["path"] != "media/sunset.png"]
+        assert len(added) == 1 and added[0]["width"] == 300 and added[0]["height"] == 200 and added[0]["path"].startswith("media/"), added
+        media = find("media", f'path="{added[0]["path"]}"')
+        assert len(media) == 1, media
+        ok("a picture added in the browser is uploaded and attached to the note")
+
         # A new note.
         await page.goto(f"{BASE}/#/")
         await page.get_by_role("button", name="New note").click()
@@ -130,9 +152,26 @@ async def main():
         await expect(page.locator(".layer .text-box")).to_have_count(1)
         await expect(page.locator(".layer .lines path")).not_to_have_count(0)
         ok("scrapbook items are drawn")
+        photo = page.locator(".layer .photo img")
+        await expect(photo).to_have_count(1)
+        await page.wait_for_function("() => { const i = document.querySelector('.layer .photo img'); return i && i.complete && i.naturalWidth === 160 }")
+        ok("a synced picture shows in its frame")
+        await page.locator(".layer .voice-item button.play").click()
+        await page.wait_for_timeout(600)
+        await expect(page.locator(".layer .voice-item button.play")).to_have_attribute("aria-label", "Pause")
+        ok("a voice note plays")
         await page.screenshot(path=f"{OUT}/w06_scrapbook.png", full_page=True)
         await page.keyboard.press("Alt+ArrowRight")
         await page.screenshot(path=f"{OUT}/w07_grid_dark_page.png")
+
+        # Add a picture to the (dark) page.
+        await page.locator("input[type=file]").set_input_files(pic)
+        await expect(page.locator(".layer .photo img")).to_have_count(1, timeout=10000)
+        budget = find("pages", 'title="Budget"')[0]
+        imgs = find("page_elements", f'page="{budget["id"]}" && kind="IMAGE"')
+        assert len(imgs) == 1 and imgs[0]["data"]["frame"] == "WHITE" and abs(imgs[0]["data"]["aspect"] - 200 / 300) < 0.01, imgs
+        ok("a picture added to a page becomes a framed picture item")
+        await page.screenshot(path=f"{OUT}/w07b_page_with_picture.png")
 
         # Add a page after the current one.
         await page.get_by_role("button", name="Add a page after this one").click()

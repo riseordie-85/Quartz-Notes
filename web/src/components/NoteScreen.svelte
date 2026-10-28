@@ -11,6 +11,7 @@
   import Editor from "./Editor.svelte"
   import Toolbar from "./Toolbar.svelte"
   import Attachments from "./Attachments.svelte"
+  import { preparePicture } from "../lib/pictures"
 
   let { id, onMenu }: { id: string; onMenu: () => void } = $props()
 
@@ -27,6 +28,22 @@
   let colorMenu = $state(false)
   let error = $state<string | null>(null)
   let saving = $state(false)
+  let picker: HTMLInputElement | undefined = $state()
+  let adding = $state(false)
+
+  async function addPictures(files: FileList | null) {
+    if (!files?.length) return
+    adding = true
+    error = null
+    try {
+      for (const f of Array.from(files)) await store.addNotePicture(id, await preparePicture(f))
+    } catch (e) {
+      error = errorMessage(e)
+    } finally {
+      adding = false
+      if (picker) picker.value = ""
+    }
+  }
 
   function changed() {
     dirty = true
@@ -98,7 +115,9 @@
 <TopBar onBack={() => router.go({ name: note?.archived ? "archive" : "notes" })} {onMenu}>
   {#snippet actions()}
     {#if note}
-      <span class="status">{saving ? "Saving…" : ""}</span>
+      <span class="status">{adding ? "Adding picture…" : saving ? "Saving…" : ""}</span>
+      <button class="icon-btn" title="Add pictures" onclick={() => picker?.click()} disabled={adding}><Icon name="image" /></button>
+      <input bind:this={picker} type="file" accept="image/*" multiple hidden onchange={(e) => addPictures(e.currentTarget.files)} />
       <div class="anchor">
         <button class="icon-btn" title="Note color" onclick={() => (colorMenu = !colorMenu)}><Icon name="palette" /></button>
         {#if colorMenu}

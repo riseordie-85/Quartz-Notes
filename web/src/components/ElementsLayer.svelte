@@ -11,7 +11,6 @@
     argbAlpha,
     argbCss,
     FRAME_INSETS,
-    formatDuration,
     heightFactor,
     inkOr,
     lineWidth,
@@ -21,6 +20,8 @@
     type Rect,
   } from "../lib/scrapbook"
   import RichView from "./RichView.svelte"
+  import VoicePlayer from "./VoicePlayer.svelte"
+  import { store } from "../lib/store.svelte"
 
   let { elements, W, ink }: { elements: PageElement[]; W: number; ink: string } = $props()
 
@@ -191,6 +192,7 @@
       {@const aspect = Number(d.aspect) || 0.75}
       {@const ih = iw * heightFactor(frame, aspect)}
       {@const tw = Math.min(140, Math.max(36, 0.3 * iw))}
+      {@const url = store.mediaUrl(d.path)}
       <div
         class="item picture-item frame-{frame}"
         class:shadow={d.shadow !== false}
@@ -206,14 +208,17 @@
           <div class="gold" style:inset="{0.036 * iw}px" style:border-width="1px" style:border-color="#8C6D10"></div>
         {/if}
         <div
-          class="photo media-missing"
+          class="photo"
+          class:media-missing={!url}
           style:left="{inset.side * iw}px"
           style:top="{inset.top * iw}px"
           style:width="{iw * (1 - 2 * inset.side)}px"
           style:height="{iw * (1 - 2 * inset.side) * aspect}px"
           style:border-radius={frame === "ROUNDED" ? `${0.07 * iw}px` : null}
-          title="This picture hasn't synced yet"
-        ></div>
+          title={url ? d.caption || "Picture" : "This picture hasn't synced yet"}
+        >
+          {#if url}<img src={url} alt={d.caption || ""} loading="lazy" />{/if}
+        </div>
         {#if frame === "POLAROID" && d.caption}
           <div class="caption" style:top="{inset.top * iw + iw * (1 - 2 * inset.side) * aspect}px" style:height="{0.24 * iw}px" style:font-size="{0.075 * iw}px" style:padding="0 {0.04 * iw}px">{d.caption}</div>
         {/if}
@@ -223,10 +228,8 @@
         {/if}
       </div>
     {:else if e.kind === "VOICE"}
-      <div class="item voice" style:left="{e.x * W + 30}px" style:top="{e.y * W}px" style:width="{e.width * W}px">
-        <span class="play" title="Voice notes play in the app for now">▶</span>
-        <span class="track"></span>
-        <span class="time">{formatDuration(Number(d.durationMs) || 0)}</span>
+      <div class="item voice-item" style:left="{e.x * W + 30}px" style:top="{e.y * W}px" style:width="{e.width * W}px">
+        <VoicePlayer url={store.mediaUrl(d.path)} durationMs={Number(d.durationMs) || 0} />
       </div>
     {/if}
   {/each}
@@ -282,7 +285,14 @@
   }
   .photo {
     position: absolute;
+    overflow: hidden;
     --ink: #777;
+  }
+  .photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   .frame-WHITE .photo,
   .frame-POLAROID .photo {
@@ -313,37 +323,5 @@
     fill: rgb(239 230 200 / 0.72);
     stroke: rgb(255 255 255 / 0.25);
     stroke-width: 1px;
-  }
-  .voice {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    height: 56px;
-    padding: 0 14px 0 6px;
-    border-radius: 28px;
-    background: var(--surface-2);
-    color: var(--on-surface);
-    box-shadow: 0 1px 4px rgb(0 0 0 / 0.15);
-  }
-  .play {
-    display: grid;
-    place-items: center;
-    width: 44px;
-    height: 44px;
-    flex: none;
-    border-radius: 50%;
-    background: var(--accent);
-    color: white;
-    font-size: 15px;
-  }
-  .track {
-    flex: 1;
-    height: 4px;
-    border-radius: 2px;
-    background: color-mix(in srgb, currentColor 20%, transparent);
-  }
-  .time {
-    font-size: 13px;
-    opacity: 0.8;
   }
 </style>

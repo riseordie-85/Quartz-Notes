@@ -7,12 +7,13 @@
   import { store } from "../lib/store.svelte"
   import { DEVICE, errorMessage } from "../lib/pb"
   import { compactDoc, decodeDoc, fromPlainText, plainText, type RichDoc } from "../lib/richdoc"
-  import { contentColorFor, formatDuration, heightFactor } from "../lib/scrapbook"
+  import { contentColorFor, heightFactor } from "../lib/scrapbook"
   import { SECTION_ICONS } from "../lib/sectionIcons"
   import Editor from "./Editor.svelte"
   import Icon from "./Icon.svelte"
   import Toolbar from "./Toolbar.svelte"
   import ElementsLayer from "./ElementsLayer.svelte"
+  import VoicePlayer from "./VoicePlayer.svelte"
 
   let { page, onError }: { page: Page; onError: (msg: string | null) => void } = $props()
 
@@ -140,7 +141,10 @@
       <input class="section-title" placeholder="Section title" bind:value={title} oninput={changed} readonly={locked} aria-label="Section title" />
       <textarea class="section-desc" placeholder="Add a description" bind:value={description} oninput={changed} readonly={locked} rows={Math.max(1, description.split("\n").length)} aria-label="Description"></textarea>
       {#if live.sectionImage}
-        <div class="section-photo media-missing" title="This picture hasn't synced yet"></div>
+        {@const url = store.mediaUrl(live.sectionImage)}
+        <div class="section-photo" class:media-missing={!url} title={url ? "Section photo" : "This picture hasn't synced yet"}>
+          {#if url}<img src={url} alt="" />{/if}
+        </div>
       {:else if live.sectionIcon && SECTION_ICONS[live.sectionIcon]}
         <span class="material-symbols-rounded section-icon">{SECTION_ICONS[live.sectionIcon]}</span>
       {/if}
@@ -179,11 +183,16 @@
         <div class="label">Attachments</div>
         <div class="thumbs">
           {#each attached.filter((e) => e.kind === "IMAGE") as e (e.id)}
-            <div class="thumb media-missing" title="This picture hasn't synced yet"></div>
+            {@const url = store.mediaUrl(payload(e).path)}
+            {#if url}
+              <a class="thumb" href={url} target="_blank" rel="noopener"><img src={url} alt="" loading="lazy" /></a>
+            {:else}
+              <div class="thumb media-missing" title="This picture hasn't synced yet"></div>
+            {/if}
           {/each}
         </div>
         {#each attached.filter((e) => e.kind === "VOICE") as e (e.id)}
-          <div class="voice"><span class="play">▶</span><span class="track"></span><span>{formatDuration(Number(payload(e).durationMs) || 0)}</span></div>
+          <VoicePlayer url={store.mediaUrl(payload(e).path)} durationMs={Number(payload(e).durationMs) || 0} />
         {/each}
       </div>
     {/if}
@@ -292,32 +301,15 @@
     height: 104px;
     flex: none;
     border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgb(0 0 0 / 0.18);
   }
-  .voice {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    height: 56px;
-    padding: 0 14px 0 6px;
-    border-radius: 28px;
-    background: var(--surface-2);
-    color: var(--on-surface);
-    font-size: 13px;
-  }
-  .play {
-    display: grid;
-    place-items: center;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: var(--accent);
-    color: #fff;
-  }
-  .track {
-    flex: 1;
-    height: 4px;
-    border-radius: 2px;
-    background: color-mix(in srgb, currentColor 20%, transparent);
+  .thumb img,
+  .section-photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   .section-body {
     flex: 1;
@@ -366,6 +358,7 @@
     width: 180px;
     height: 180px;
     border-radius: 20px;
+    overflow: hidden;
     margin-top: 12px;
     box-shadow: 0 6px 16px rgb(0 0 0 / 0.2);
   }

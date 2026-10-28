@@ -1,6 +1,7 @@
 <script lang="ts">
   // A note's text shown read-only, looking the same as in the editor.
   import { DEFAULT_IMAGE_WIDTH, styledSegments, type RichDoc } from "../lib/richdoc"
+  import { store } from "../lib/store.svelte"
 
   let { doc }: { doc: RichDoc } = $props()
 </script>
@@ -10,12 +11,16 @@
     {#if b.type === "DIVIDER"}
       <hr class="divider" />
     {:else if b.type === "IMAGE" && b.image}
+      {@const url = store.mediaUrl(b.image.path)}
       <figure class="picture" data-align={b.align ?? "START"}>
         <div
-          class="picture-frame missing"
+          class="picture-frame"
+          class:missing={!url}
           style:width="{(b.imageWidth ?? DEFAULT_IMAGE_WIDTH) * 100}%"
           style:aspect-ratio={1 / Math.max(0.1, Number(b.image.aspect) || 0.75)}
-        ></div>
+        >
+          {#if url}<img src={url} alt="" loading="lazy" />{/if}
+        </div>
       </figure>
     {:else}
       <div class="blk" data-type={b.type ?? "BODY"} data-align={b.align ?? "START"} data-checked={b.checked ? "true" : "false"} style:--indent={b.indent ?? 0}>

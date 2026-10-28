@@ -302,8 +302,16 @@ export function argbToCss(argb: number | null | undefined): string | null {
   return a === 0xff ? `rgb(${r} ${g} ${b})` : `rgb(${r} ${g} ${b} / ${(a / 255).toFixed(3)})`
 }
 
-/** Built-in font ids → CSS. Imported fonts arrive with file sync (later); they fall back to the page font. */
+/** Imported fonts ("file:<name>") that have been loaded, → their CSS family name. */
+const importedFonts = new Map<string, string>()
+
+export function registerFont(id: string, family: string) {
+  importedFonts.set(id, family)
+}
+
+/** Font ids → CSS. Imported fonts the browser hasn't got fall back to the page font. */
 export function cssFont(id: string | null | undefined): string | null {
+  if (id && importedFonts.has(id)) return `"${importedFonts.get(id)}", system-ui, sans-serif`
   switch (id) {
     case "sans":
       return "system-ui, sans-serif"

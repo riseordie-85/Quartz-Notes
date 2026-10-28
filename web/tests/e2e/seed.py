@@ -5,7 +5,10 @@ every feature: rich text, sections, scrapbook items. Used by the web app's brows
 Usage: seed.py BASE_URL SUPERUSER_EMAIL SUPERUSER_PASSWORD
 """
 import json
+import math
+import struct
 import sys
+import zlib
 import time
 import urllib.request
 import uuid
@@ -42,6 +45,33 @@ now = int(time.time() * 1000)
 def put(collection, fields):
     rec = {"id": str(uuid.uuid4()), "deleted": False, "device": "seed", "editedAt": now, "createdAt": now, **fields}
     return call("POST", f"/api/collections/{collection}/records", rec, token)["id"]
+
+
+def png(w, h, color_fn):
+    """A small PNG, made without any libraries."""
+    raw = b"".join(b"\x00" + b"".join(bytes(color_fn(x, y)) for x in range(w)) for y in range(h))
+    def chunk(kind, data):
+        return struct.pack(">I", len(data)) + kind + data + struct.pack(">I", zlib.crc32(kind + data) & 0xFFFFFFFF)
+    return b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", struct.pack(">IIBBBBB", w, h, 8, 2, 0, 0, 0)) + chunk(b"IDAT", zlib.compress(raw)) + chunk(b"IEND", b"")
+
+
+def wav(seconds=2.0, rate=8000):
+    n = int(seconds * rate)
+    data = b"".join(struct.pack("<h", int(8000 * math.sin(2 * math.pi * 440 * i / rate))) for i in range(n))
+    return b"RIFF" + struct.pack("<I", 36 + len(data)) + b"WAVEfmt " + struct.pack("<IHHIIHH", 16, 1, 1, rate, rate * 2, 2, 16) + b"data" + struct.pack("<I", len(data)) + data
+
+
+def upload(path, data, filename):
+    boundary = "----quartz" + uuid.uuid4().hex
+    body = b""
+    body += f'--{boundary}\r\nContent-Disposition: form-data; name="path"\r\n\r\n{path}\r\n'.encode()
+    body += f'--{boundary}\r\nContent-Disposition: form-data; name="file"; filename="{filename}"\r\nContent-Type: application/octet-stream\r\n\r\n'.encode() + data + b"\r\n"
+    body += f"--{boundary}--\r\n".encode()
+    req = urllib.request.Request(BASE + "/api/collections/media/records", data=body, method="POST")
+    req.add_header("Content-Type", f"multipart/form-data; boundary={boundary}")
+    req.add_header("Authorization", token)
+    with urllib.request.urlopen(req) as r:
+        return json.loads(r.read())
 
 
 def doc(*blocks):
@@ -83,8 +113,11 @@ put("page_elements", {"page": board, "kind": "SHAPE", "x": 0.7, "y": 0.72, "widt
 put("page_elements", {"page": board, "kind": "CONNECTOR", "z": 5, "data": {"from": a, "to": b, "route": "ELBOW", "color": 0, "level": 3, "endHead": True}})
 put("page_elements", {"page": board, "kind": "ARROW", "x": 0.62, "y": 0.3, "z": 6, "data": {"dx": 0.2, "dy": 0.15, "color": signed(0xFFD6004C), "level": 3, "startHead": False, "endHead": True}})
 put("page_elements", {"page": board, "kind": "STROKE", "z": 7, "data": {"points": [0.1, 1.45, 0.2, 1.4, 0.3, 1.48, 0.4, 1.42, 0.5, 1.47], "color": signed(0xFF7C4DFF), "level": 3}})
-put("page_elements", {"page": board, "kind": "IMAGE", "x": 0.58, "y": 0.42, "width": 0.36, "height": 0.27, "rotation": 3, "z": 8, "data": {"path": "media/missing.jpg", "aspect": 0.75, "frame": "POLAROID", "tape": True, "shadow": True, "caption": "Kyoto", "placement": "FLOAT"}})
-put("page_elements", {"page": board, "kind": "VOICE", "x": 0.06, "y": 1.6, "width": 0.7, "z": 9, "data": {"path": "media/v.m4a", "durationMs": 83000, "attached": False}})
+put("page_elements", {"page": board, "kind": "IMAGE", "x": 0.58, "y": 0.42, "width": 0.36, "height": 0.27, "rotation": 3, "z": 8, "data": {"path": "media/kyoto.png", "aspect": 0.75, "frame": "POLAROID", "tape": True, "shadow": True, "caption": "Kyoto", "placement": "FLOAT"}})
+put("page_elements", {"page": board, "kind": "VOICE", "x": 0.06, "y": 1.6, "width": 0.7, "z": 9, "data": {"path": "media/hello.wav", "durationMs": 2000, "attached": False}})
+upload("media/kyoto.png", png(160, 120, lambda x, y: (40 + x, 90 + y // 2, 200 - x // 2)), "kyoto.png")
+upload("media/hello.wav", wav(), "hello.wav")
+upload("media/sunset.png", png(120, 90, lambda x, y: (250, 120 + y, 60 + x)), "sunset.png")
 
 notes = [
     ("Groceries", doc({"type": "TASK", "text": "Milk", "checked": True}, {"type": "TASK", "text": "Eggs"}, {"type": "TASK", "text": "Bread"}), "yellow", True, False),
@@ -93,6 +126,8 @@ notes = [
     ("Old plans", doc({"text": "Archived thoughts."}), "gray", False, True),
 ]
 for i, (title, d, color, pinned, archived) in enumerate(notes):
-    put("quick_notes", {"title": title, "content": d, "plainText": plain(d), "colorKey": color, "pinned": pinned, "archived": archived, "createdAt": now - i * 60000, "updatedAt": now})
+    nid = put("quick_notes", {"title": title, "content": d, "plainText": plain(d), "colorKey": color, "pinned": pinned, "archived": archived, "createdAt": now - i * 60000, "updatedAt": now})
+    if title == "Gift ideas":
+        put("attachments", {"ownerType": "NOTE", "ownerUid": nid, "kind": "IMAGE", "path": "media/sunset.png", "mimeType": "", "durationMs": None, "width": 120, "height": 90})
 
 print("Seeded demo account", EMAIL)

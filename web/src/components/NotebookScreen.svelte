@@ -6,6 +6,7 @@
   import TopBar from "./TopBar.svelte"
   import Icon from "./Icon.svelte"
   import PageSheet from "./PageSheet.svelte"
+  import { preparePicture } from "../lib/pictures"
 
   let { id, pageId, onMenu }: { id: string; pageId?: string; onMenu: () => void } = $props()
 
@@ -16,6 +17,22 @@
   let error = $state<string | null>(null)
   let more = $state(false)
   let sheet: PageSheet | undefined = $state()
+  let picker: HTMLInputElement | undefined = $state()
+  let adding = $state(false)
+
+  async function addPictures(files: FileList | null) {
+    if (!files?.length || !page) return
+    adding = true
+    error = null
+    try {
+      for (const f of Array.from(files)) await store.addPagePicture(page, await preparePicture(f))
+    } catch (e) {
+      error = errorMessage(e)
+    } finally {
+      adding = false
+      if (picker) picker.value = ""
+    }
+  }
 
   // Open the first page when none is chosen (or the chosen one was deleted).
   $effect(() => {
@@ -66,6 +83,7 @@
 {:else}
   <TopBar title={notebook.title || "Untitled notebook"} {onMenu}>
     {#snippet actions()}
+      {#if adding}<span class="count">Adding picture…</span>{/if}
       <span class="count">{pages.length ? index + 1 : 0}/{pages.length}</span>
       <button class="icon-btn" title="Previous page (Alt+←)" disabled={index <= 0} onclick={() => goTo(index - 1)}><Icon name="chevronLeft" /></button>
       <button class="icon-btn" title="Next page (Alt+→)" disabled={index >= pages.length - 1} onclick={() => goTo(index + 1)}><Icon name="chevronRight" /></button>
@@ -78,6 +96,10 @@
           router.go({ name: "notebook", id, page: p.id })
         })}><Icon name="add" /></button
       >
+      {#if page && !page.isSection && !page.locked}
+        <button class="icon-btn" title="Add pictures to this page" disabled={adding} onclick={() => picker?.click()}><Icon name="image" /></button>
+        <input bind:this={picker} type="file" accept="image/*" multiple hidden onchange={(e) => addPictures(e.currentTarget.files)} />
+      {/if}
       <div class="anchor">
         <button class="icon-btn" title="More" onclick={() => (more = !more)}><Icon name="more" /></button>
         {#if more && page}

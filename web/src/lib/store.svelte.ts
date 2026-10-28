@@ -4,6 +4,7 @@
 import { DEVICE, isConflict, pb } from "./pb"
 import {
   COLLECTIONS,
+  type MediaFile,
   type Attachment,
   type CollectionName,
   type Collections,
@@ -14,7 +15,7 @@ import {
   type Shelf,
   type SyncedRecord,
 } from "./types"
-import { emptyDoc, newId } from "./richdoc"
+import { emptyDoc, newId, registerFont } from "./richdoc"
 
 type Lists = { [K in CollectionName]: Collections[K][] }
 
@@ -24,6 +25,8 @@ class Store {
   error = $state<string | null>(null)
   /** Bumps when a record changes on another device (editors use it to reload). */
   remoteVersion = $state(0)
+  /** Stored files by app path ("media/abc.jpg", "fonts/Lora.ttf"). */
+  media: Record<string, MediaFile> = $state({})
   private unsubscribers: (() => void)[] = []
 
   async load() {
@@ -32,16 +35,67 @@ class Store {
       COLLECTIONS.map((c) => pb.collection(c).getFullList({ filter: "deleted = false", batch: 500 })),
     )
     COLLECTIONS.forEach((c, i) => ((this.lists[c] as SyncedRecord[]) = results[i] as unknown as SyncedRecord[]))
+    const files = (await pb.collection("media").getFullList({ batch: 500 })) as unknown as MediaFile[]
+    for (const f of files) this.media[f.path] = f
+    await this.loadFonts(files)
     this.loaded = true
     await this.subscribe()
   }
 
   private async subscribe() {
     this.stop()
+    this.unsubscribers.push(
+      await pb.collection("media").subscribe("*", (e) => {
+        const f = e.record as unknown as MediaFile
+        this.media[f.path] = f
+        if (f.path.startsWith("fonts/")) this.loadFonts([f])
+      }),
+    )
     for (const c of COLLECTIONS) {
       const off = await pb.collection(c).subscribe("*", (e) => this.put(c, e.record as unknown as SyncedRecord))
       this.unsubscribers.push(off)
     }
+  }
+
+  /** Makes imported fonts available to the page (they're used as "file:<name>"). */
+  private async loadFonts(files: MediaFile[]) {
+    await Promise.all(
+      files
+        .filter((f) => f.path.startsWith("fonts/"))
+        .map(async (f) => {
+          const name = f.path.slice("fonts/".length)
+          const family = `Quartz ${name.replace(/\.[^.]+$/, "")}`
+          try {
+            const face = new FontFace(family, `url("${this.fileUrl(f)}")`)
+            document.fonts.add(await face.load())
+            registerFont(`file:${name}`, family)
+          } catch {
+            // A font the browser can't read just isn't used.
+          }
+        }),
+    )
+  }
+
+  fileUrl(f: MediaFile): string {
+    return pb.files.getURL(f as never, f.file)
+  }
+
+  /** A URL for a stored file, or null if it hasn't been synced. */
+  mediaUrl(path: string | null | undefined): string | null {
+    if (!path) return null
+    const f = this.media[path]
+    return f ? this.fileUrl(f) : null
+  }
+
+  /** Uploads a file as [path] (e.g. "media/<id>.jpg"). */
+  async uploadFile(path: string, blob: Blob, filename: string): Promise<MediaFile> {
+    const form = new FormData()
+    form.append("path", path)
+    form.append("size", String(blob.size))
+    form.append("file", blob, filename)
+    const f = (await pb.collection("media").create(form)) as unknown as MediaFile
+    this.media[f.path] = f
+    return f
   }
 
   stop() {
@@ -52,6 +106,7 @@ class Store {
   reset() {
     this.stop()
     for (const c of COLLECTIONS) (this.lists[c] as SyncedRecord[]) = []
+    this.media = {}
     this.loaded = false
   }
 
@@ -197,6 +252,51 @@ class Store {
   async deleteNote(id: string) {
     for (const a of this.attachmentsOf("NOTE", id)) await this.remove("attachments", a.id)
     await this.remove("quick_notes", id)
+  }
+
+  /** Stores a picture file and attaches it to a quick note. */
+  async addNotePicture(noteId: string, pic: { blob: Blob; ext: string; width: number; height: number }) {
+    const name = `${newId()}.${pic.ext}`
+    await this.uploadFile(`media/${name}`, pic.blob, name)
+    await this.create("attachments", {
+      ownerType: "NOTE",
+      ownerUid: noteId,
+      kind: "IMAGE",
+      path: `media/${name}`,
+      mimeType: "",
+      durationMs: null,
+      width: pic.width,
+      height: pic.height,
+    })
+    await this.save("quick_notes", noteId, { updatedAt: Date.now() })
+  }
+
+  private stagger = 0
+
+  /**
+   * Stores a picture file and puts it on a notebook page, the way the app does: a framed picture
+   * near the top, slightly tilted (or in the attachments strip, if the notebook keeps them there).
+   */
+  async addPagePicture(page: Page, pic: { blob: Blob; ext: string; width: number; height: number }) {
+    const name = `${newId()}.${pic.ext}`
+    await this.uploadFile(`media/${name}`, pic.blob, name)
+    const atBottom = this.notebook(page.notebook)?.attachAtBottom ?? false
+    const aspect = pic.width > 0 ? pic.height / pic.width : 1
+    const width = 0.6
+    const step = this.stagger++ % 5
+    const z = Math.max(0, ...this.elementsOf(page.id).map((e) => e.z)) + 1
+    await this.create("page_elements", {
+      page: page.id,
+      kind: "IMAGE",
+      x: (1 - width) / 2 + (step - 2) * 0.03,
+      y: 0.18 + step * 0.06,
+      width,
+      height: width * aspect,
+      rotation: atBottom ? 0 : [-3, 2, -1.5, 3, 0][step],
+      z,
+      data: { path: `media/${name}`, aspect, frame: "WHITE", tape: false, shadow: true, caption: "", placement: atBottom ? "ATTACHED" : "FLOAT" },
+    })
+    await this.save("pages", page.id, { updatedAt: Date.now() })
   }
 
   /** Adds a page after [after] (or at the end), with the look of the page before it. */
