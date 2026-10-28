@@ -58,6 +58,8 @@ fun NotebookCover(
     modifier: Modifier = Modifier,
     onClick: () -> Unit = {},
     onLongClick: (() -> Unit)? = null,
+    /** Extra touch handling that sees touches before the click does (e.g. drag to rearrange). */
+    gestures: Modifier = Modifier,
 ) {
     val textureBrush = rememberTextureBrush(texture, whiteInk = false)
     BoxWithConstraints(
@@ -66,7 +68,8 @@ fun NotebookCover(
             .shadow(6.dp, CoverShape, clip = false)
             .clip(CoverShape)
             .background(color)
-            .combinedClickable(onClick = onClick, onLongClick = onLongClick),
+            .combinedClickable(onClick = onClick, onLongClick = onLongClick)
+            .then(gestures),
     ) {
         val w = maxWidth
         Canvas(Modifier.fillMaxSize()) {

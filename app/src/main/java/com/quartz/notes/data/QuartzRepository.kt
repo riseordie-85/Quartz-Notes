@@ -233,6 +233,14 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
         notebooks.update(notebook.copy(title = notebook.title.trim(), position = position, updatedAt = now()))
     }
 
+    /** Puts a shelf's notebooks in the order of [ids] (any not listed keep their order, after them). */
+    suspend fun reorderNotebooks(shelfId: Long, ids: List<Long>) = db.withTransaction {
+        val onShelf = notebooks.getAll().filter { it.shelfId == shelfId }.sortedWith(compareBy({ it.position }, { it.id }))
+        val byId = onShelf.associateBy { it.id }
+        val ordered = ids.mapNotNull { byId[it] } + onShelf.filter { it.id !in ids }
+        ordered.forEachIndexed { i, nb -> if (nb.position != i) notebooks.update(nb.copy(position = i)) }
+    }
+
     suspend fun deleteNotebook(notebook: NotebookEntity) = db.withTransaction { removeNotebooks(listOf(notebook.id)) }
 
     // ---- Pages ----

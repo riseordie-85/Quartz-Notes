@@ -39,6 +39,8 @@ data class AppSettings(
     internal val lastBackupFingerprint: String? = null,
     /** Formatting toolbar and page buttons under the title bar instead of at the bottom. */
     val toolbarOnTop: Boolean = false,
+    /** On wide screens (tablet, unfolded phone), quick notes open beside the list. */
+    val splitView: Boolean = true,
 )
 
 private val Context.dataStore by preferencesDataStore(name = "quartz_settings")
@@ -64,6 +66,7 @@ class SettingsRepository(context: Context) {
         val lastBackupError = stringPreferencesKey("last_backup_error")
         val lastBackupFingerprint = stringPreferencesKey("last_backup_fingerprint")
         val toolbarOnTop = booleanPreferencesKey("toolbar_on_top")
+        val splitView = booleanPreferencesKey("split_view")
     }
 
     val settings: Flow<AppSettings> = store.data.map { p ->
@@ -85,6 +88,7 @@ class SettingsRepository(context: Context) {
             lastBackupError = p[Keys.lastBackupError],
             lastBackupFingerprint = p[Keys.lastBackupFingerprint],
             toolbarOnTop = p[Keys.toolbarOnTop] ?: false,
+            splitView = p[Keys.splitView] ?: true,
         )
     }
 
@@ -100,6 +104,7 @@ class SettingsRepository(context: Context) {
     suspend fun setSelectedShelf(id: Long) = set(Keys.shelf, id)
     suspend fun setCompressImages(enabled: Boolean) = set(Keys.compress, enabled)
     suspend fun setToolbarOnTop(onTop: Boolean) = set(Keys.toolbarOnTop, onTop)
+    suspend fun setSplitView(enabled: Boolean) = set(Keys.splitView, enabled)
     suspend fun setInk(argb: Int) = set(Keys.ink, argb)
     suspend fun setHighlight(argb: Int) = set(Keys.highlight, argb)
     suspend fun setAutoBackup(enabled: Boolean) = set(Keys.autoBackup, enabled)

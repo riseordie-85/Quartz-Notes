@@ -51,6 +51,7 @@ data class HomeState(
     val notebooks: List<NotebookEntity> = emptyList(),
     val groups: List<NoteGroup> = emptyList(),
     val grid: Boolean = false,
+    val splitView: Boolean = true,
 )
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -75,7 +76,7 @@ class HomeViewModel(
     }.flowOn(Dispatchers.Default)
 
     val state: StateFlow<HomeState> = combine(shelves, selectedShelf, notebooks, groups, settings.settings) { sh, sel, nb, gr, s ->
-        HomeState(loaded = true, shelves = sh, selectedShelf = sel, notebooks = nb, groups = gr, grid = s.quickNotesGrid)
+        HomeState(loaded = true, shelves = sh, selectedShelf = sel, notebooks = nb, groups = gr, grid = s.quickNotesGrid, splitView = s.splitView)
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), HomeState())
 
     fun selectShelf(id: Long) = viewModelScope.launch { settings.setSelectedShelf(id) }
@@ -103,6 +104,10 @@ class HomeViewModel(
     fun updateNotebook(notebook: NotebookEntity) = viewModelScope.launch { repo.updateNotebook(notebook) }
 
     fun deleteNotebook(notebook: NotebookEntity) = viewModelScope.launch { repo.deleteNotebook(notebook) }
+
+    fun reorderNotebooks(shelfId: Long, ids: List<Long>) = viewModelScope.launch { repo.reorderNotebooks(shelfId, ids) }
+
+    fun setSplitView(enabled: Boolean) = viewModelScope.launch { settings.setSplitView(enabled) }
 
     fun createNote(onCreated: (Long) -> Unit) = viewModelScope.launch {
         onCreated(repo.createNote())

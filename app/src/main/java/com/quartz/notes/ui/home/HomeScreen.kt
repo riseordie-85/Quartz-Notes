@@ -60,6 +60,16 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.foundation.gestures.detectDragGesturesAfterLongPress
+import androidx.compose.material.icons.rounded.VerticalSplit
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.zIndex
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -135,7 +145,8 @@ fun HomeRoute(
     LaunchedEffect(Unit) { vm.sweepBlankNotes(except = selectedNote) }
 
     BoxWithConstraints(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
-        val twoPane = maxWidth >= TwoPaneMinWidth
+        val wide = maxWidth >= TwoPaneMinWidth
+        val twoPane = wide && state.splitView
 
         // Folding the device closed while a note is open moves it to its own screen.
         LaunchedEffect(twoPane) {
@@ -183,6 +194,8 @@ fun HomeRoute(
                 onNewNote = { vm.createNote(openNote) },
                 onOpenNotebook = onOpenNotebook,
                 onEditNotebook = { notebookSheet = NotebookSheet(it) },
+                onReorderNotebooks = { ids -> state.selectedShelf?.let { vm.reorderNotebooks(it.id, ids) } },
+                splitToggle = if (wide) ({ vm.setSplitView(!state.splitView) }) else null,
                 onNewNotebook = { notebookSheet = NotebookSheet(null) },
                 onOpenRecent = onOpenRecent,
                 onSelectShelf = vm::selectShelf,
@@ -292,6 +305,8 @@ private fun HomeContent(
     onNewNote: () -> Unit,
     onOpenNotebook: (Long) -> Unit,
     onEditNotebook: (NotebookEntity) -> Unit,
+    onReorderNotebooks: (List<Long>) -> Unit,
+    splitToggle: (() -> Unit)?,
     onNewNotebook: () -> Unit,
     onOpenRecent: () -> Unit,
     onSelectShelf: (Long) -> Unit,
@@ -323,6 +338,8 @@ private fun HomeContent(
                 coverWidth = coverWidth,
                 onOpenNotebook = onOpenNotebook,
                 onEditNotebook = onEditNotebook,
+                onReorderNotebooks = onReorderNotebooks,
+                splitToggle = splitToggle,
                 onNewNotebook = onNewNotebook,
                 onOpenRecent = onOpenRecent,
                 onSelectShelf = onSelectShelf,
@@ -419,6 +436,8 @@ private fun HomeHeader(
     coverWidth: Dp,
     onOpenNotebook: (Long) -> Unit,
     onEditNotebook: (NotebookEntity) -> Unit,
+    onReorderNotebooks: (List<Long>) -> Unit,
+    splitToggle: (() -> Unit)?,
     onNewNotebook: () -> Unit,
     onOpenRecent: () -> Unit,
     onSelectShelf: (Long) -> Unit,
@@ -435,6 +454,17 @@ private fun HomeHeader(
                 color = MaterialTheme.colorScheme.onSurface,
             )
             com.quartz.notes.ui.components.SyncIndicator()
+            if (splitToggle != null) {
+                // Wide screens only: open quick notes beside the list, or on their own.
+                IconButton(onClick = splitToggle) {
+                    Icon(
+                        Icons.Rounded.VerticalSplit,
+                        contentDescription = if (state.splitView) "Turn off split view" else "Turn on split view",
+                        tint = if (state.splitView) MaterialTheme.colorScheme.primary else LocalQuartzColors.current.textSecondary,
+                        modifier = Modifier.size(28.dp),
+                    )
+                }
+            }
             IconButton(onClick = onSettings) {
                 Icon(Icons.Rounded.Settings, contentDescription = "Settings", tint = LocalQuartzColors.current.textSecondary, modifier = Modifier.size(30.dp))
             }
@@ -442,29 +472,15 @@ private fun HomeHeader(
 
         ShelfSelector(state, onSelectShelf, onNewShelf)
 
-        LazyRow(
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
-            contentPadding = PaddingValues(vertical = 6.dp, horizontal = 2.dp),
-            modifier = Modifier.fillMaxWidth(),
-        ) {
-            item(key = "recent") {
-                RecentCover(Icons.Rounded.History, Modifier.width(coverWidth), onClick = onOpenRecent)
-            }
-            items(state.notebooks, key = { it.id }) { nb ->
-                NotebookCover(
-                    title = nb.title,
-                    color = Color(nb.colorArgb),
-                    texture = enumOrDefault(nb.texture, Texture.GLOSS),
-                    icon = NotebookIcons.of(nb.icon),
-                    modifier = Modifier.width(coverWidth),
-                    onClick = { onOpenNotebook(nb.id) },
-                    onLongClick = { onEditNotebook(nb) },
-                )
-            }
-            item(key = "new") {
-                NewNotebookCover(Modifier.width(coverWidth), onClick = onNewNotebook)
-            }
-        }
+        NotebookRow(
+            notebooks = state.notebooks,
+            coverWidth = coverWidth,
+            onOpenNotebook = onOpenNotebook,
+            onEditNotebook = onEditNotebook,
+            onReorder = onReorderNotebooks,
+            onNewNotebook = onNewNotebook,
+            onOpenRecent = onOpenRecent,
+        )
 
         Box(Modifier.fillMaxWidth().padding(top = 18.dp, bottom = 4.dp)) {
             Text("Quick Notes", style = SectionTitleStyle, color = MaterialTheme.colorScheme.onBackground, modifier = Modifier.align(Alignment.Center))
@@ -476,6 +492,99 @@ private fun HomeHeader(
                     modifier = Modifier.size(28.dp),
                 )
             }
+        }
+    }
+}
+
+/**
+ * The shelf's notebooks. Touch and hold a notebook, then drag it sideways to move it; holding
+ * without dragging opens its settings.
+ */
+@Composable
+private fun NotebookRow(
+    notebooks: List<NotebookEntity>,
+    coverWidth: Dp,
+    onOpenNotebook: (Long) -> Unit,
+    onEditNotebook: (NotebookEntity) -> Unit,
+    onReorder: (List<Long>) -> Unit,
+    onNewNotebook: () -> Unit,
+    onOpenRecent: () -> Unit,
+) {
+    // The order shown: follows the database, except while a notebook is being dragged.
+    var order by remember { mutableStateOf(notebooks) }
+    var draggingId by remember { mutableStateOf<Long?>(null) }
+    var dragOffset by remember { mutableFloatStateOf(0f) }
+    LaunchedEffect(notebooks) { if (draggingId == null) order = notebooks }
+    val haptics = LocalHapticFeedback.current
+    val density = LocalDensity.current
+    val step = with(density) { (coverWidth + 12.dp).toPx() }
+    val slop = with(density) { 12.dp.toPx() }
+
+    fun finish(nb: NotebookEntity, travelled: Float) {
+        val ids = order.map { it.id }
+        if (ids != notebooks.map { it.id }) onReorder(ids) else if (travelled < slop) onEditNotebook(nb)
+        draggingId = null
+        dragOffset = 0f
+    }
+
+    LazyRow(
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+        contentPadding = PaddingValues(vertical = 6.dp, horizontal = 2.dp),
+        modifier = Modifier.fillMaxWidth(),
+    ) {
+        item(key = "recent") {
+            RecentCover(Icons.Rounded.History, Modifier.width(coverWidth), onClick = onOpenRecent)
+        }
+        items(order, key = { it.id }) { nb ->
+            val dragging = nb.id == draggingId
+            val lift by animateFloatAsState(if (dragging) 1.07f else 1f, label = "lift")
+            NotebookCover(
+                title = nb.title,
+                color = Color(nb.colorArgb),
+                texture = enumOrDefault(nb.texture, Texture.GLOSS),
+                icon = NotebookIcons.of(nb.icon),
+                modifier = Modifier
+                    .width(coverWidth)
+                    .then(if (dragging) Modifier.zIndex(1f) else Modifier.animateItem(fadeInSpec = null, fadeOutSpec = null))
+                    .graphicsLayer {
+                        translationX = if (dragging) dragOffset else 0f
+                        scaleX = lift
+                        scaleY = lift
+                    },
+                onClick = { onOpenNotebook(nb.id) },
+                gestures = Modifier.pointerInput(nb.id) {
+                    var travelled = 0f
+                    detectDragGesturesAfterLongPress(
+                        onDragStart = {
+                            haptics.performHapticFeedback(HapticFeedbackType.LongPress)
+                            draggingId = nb.id
+                            dragOffset = 0f
+                            travelled = 0f
+                        },
+                        onDrag = { change, amount ->
+                            change.consume()
+                            dragOffset += amount.x
+                            travelled += kotlin.math.abs(amount.x) + kotlin.math.abs(amount.y)
+                            val i = order.indexOfFirst { it.id == nb.id }
+                            val target = when {
+                                dragOffset > step / 2 && i < order.lastIndex -> i + 1
+                                dragOffset < -step / 2 && i > 0 -> i - 1
+                                else -> i
+                            }
+                            if (target != i) {
+                                order = order.toMutableList().apply { add(target, removeAt(i)) }
+                                dragOffset -= (target - i) * step
+                                haptics.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                            }
+                        },
+                        onDragEnd = { finish(nb, travelled) },
+                        onDragCancel = { finish(nb, travelled) },
+                    )
+                },
+            )
+        }
+        item(key = "new") {
+            NewNotebookCover(Modifier.width(coverWidth), onClick = onNewNotebook)
         }
     }
 }
