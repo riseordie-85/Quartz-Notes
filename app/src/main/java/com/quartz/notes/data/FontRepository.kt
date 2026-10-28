@@ -98,4 +98,9 @@ class FontRepository(context: Context) {
         font.file?.delete()
         _fonts.value = load()
     }
+
+    /** Picks up font files that arrived by sync. */
+    suspend fun reload() = withContext(Dispatchers.IO) {
+        _fonts.value = load()
+    }
 }

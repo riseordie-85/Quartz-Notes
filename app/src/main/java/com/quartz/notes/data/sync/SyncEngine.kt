@@ -23,9 +23,21 @@ import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
+import com.quartz.notes.data.QuartzRepository
+import com.quartz.notes.data.model.TextBoxData
+import com.quartz.notes.data.rich.InlineStyle
+import com.quartz.notes.data.rich.RichDoc
+import java.io.File
+import java.security.MessageDigest
 
 /** What one sync did. */
-data class SyncResult(val uploaded: Int, val downloaded: Int, val conflicts: Int)
+data class SyncResult(
+    val uploaded: Int,
+    val downloaded: Int,
+    val conflicts: Int,
+    val filesUploaded: Int = 0,
+    val filesDownloaded: Int = 0,
+)
 
 /**
  * Keeps this device's database and the sync server in step.
@@ -38,6 +50,10 @@ class SyncEngine(
     private val db: QuartzDatabase,
     private val client: SyncClient,
     private val store: SyncStore,
+    /** The app's files folder, holding media/ (pictures, recordings) and fonts/. */
+    private val files: File,
+    /** Called after files arrive; true when fonts were among them. */
+    private val onFilesArrived: (fontsChanged: Boolean) -> Unit = {},
     private val now: () -> Long = System::currentTimeMillis,
 ) {
     private val mutex = Mutex()
@@ -90,9 +106,10 @@ class SyncEngine(
                 val counts = Counts()
                 for (c in SyncTriggers.TABLES) pull(auth, c, counts)
                 push(auth, store.deviceId(), counts)
+                syncFiles(auth, counts)
                 purgeOldDeleted()
                 store.recordResult(now(), null)
-                SyncResult(counts.uploaded, counts.downloaded, counts.conflicts)
+                SyncResult(counts.uploaded, counts.downloaded, counts.conflicts, counts.filesUp, counts.filesDown)
             } catch (e: SyncException) {
                 store.recordResult(now(), e.message)
                 throw e
@@ -104,6 +121,8 @@ class SyncEngine(
         var uploaded = 0
         var downloaded = 0
         var conflicts = 0
+        var filesUp = 0
+        var filesDown = 0
     }
 
     // ---- Download ----
@@ -350,6 +369,86 @@ class SyncEngine(
         return JsonObject(SyncCodec.common(st.uid, deleted, device, st.changedAt) + body)
     }
 
+    // ---- Files ----
+
+    /**
+     * Pictures, recordings and fonts: uploads the ones the server doesn't have, and downloads the
+     * ones the notes here use but this device doesn't have. Fonts go up whenever they're imported
+     * and come down when a note uses them.
+     */
+    private suspend fun syncFiles(auth: SyncAuth, counts: Counts) {
+        val remote = client.files(auth)
+        val used = usedFiles()
+        val localFonts = File(files, FONTS_DIR).listFiles()
+            ?.filter { it.isFile && it.extension.lowercase() in setOf("ttf", "otf") }
+            ?.map { "$FONTS_DIR/${it.name}" }
+            .orEmpty()
+        for (path in (used + localFonts).toSortedSet()) {
+            if (path in remote || !safePath(path)) continue
+            val file = File(files, path)
+            if (!file.isFile) continue
+            client.upload(auth, path, file, sha256(file))
+            counts.filesUp++
+        }
+        var fonts = false
+        for (path in used.toSortedSet()) {
+            val r = remote[path] ?: continue
+            if (!safePath(path)) continue
+            val file = File(files, path)
+            if (file.exists()) continue
+            try {
+                client.download(auth, r, file)
+                counts.filesDown++
+                if (path.startsWith("$FONTS_DIR/")) fonts = true
+            } catch (e: SyncException.Server) {
+                // One broken file shouldn't stop the rest; it's tried again next time.
+            }
+        }
+        if (counts.filesDown > 0) onFilesArrived(fonts)
+    }
+
+    /** Every file the notes on this device use: pictures, recordings, section photos and fonts. */
+    private suspend fun usedFiles(): Set<String> {
+        val out = HashSet<String>()
+        attachments.getAll().forEach { out += it.path }
+        fun fontsIn(raw: String?) {
+            RichDoc.decode(raw).blocks.forEach { b ->
+                b.spans.forEach { s ->
+                    val v = s.value
+                    if (s.style == InlineStyle.FONT && v != null && v.startsWith("file:")) out += "$FONTS_DIR/${v.removePrefix("file:")}"
+                }
+            }
+        }
+        elements.getAll().forEach { e ->
+            out += QuartzRepository.elementMediaPaths(e.kind, e.data)
+            if (e.kind == ElementKind.TEXT) fontsIn(decodePayload<TextBoxData>(e.data)?.doc)
+        }
+        pages.getAll().forEach { p ->
+            out += QuartzRepository.pageMediaPaths(p)
+            fontsIn(p.content)
+        }
+        notes.getAll().forEach { n ->
+            out += RichDoc.decode(n.content).mediaPaths()
+            fontsIn(n.content)
+        }
+        return out
+    }
+
+    private fun safePath(path: String) = SAFE_PATH.matches(path)
+
+    private fun sha256(file: File): String {
+        val digest = MessageDigest.getInstance("SHA-256")
+        file.inputStream().use { input ->
+            val buf = ByteArray(64 * 1024)
+            while (true) {
+                val n = input.read(buf)
+                if (n < 0) break
+                digest.update(buf, 0, n)
+            }
+        }
+        return digest.digest().joinToString("") { "%02x".format(it) }
+    }
+
     // ---- Tidying ----
 
     /** Deleted markers every device has had a month to hear about. */
@@ -366,5 +465,7 @@ class SyncEngine(
 
     companion object {
         const val PURGE_AFTER_MS = 30L * 24 * 60 * 60 * 1000
+        private const val FONTS_DIR = "fonts"
+        private val SAFE_PATH = Regex("^(media|fonts)/[A-Za-z0-9 ._-]+$")
     }
 }

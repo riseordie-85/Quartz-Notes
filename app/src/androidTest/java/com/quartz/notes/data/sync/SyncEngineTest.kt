@@ -35,6 +35,7 @@ import org.junit.Assert.fail
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import java.io.File
 import java.util.UUID
 
 /**
@@ -46,6 +47,7 @@ class SyncEngineTest {
     private val context = InstrumentationRegistry.getInstrumentation().targetContext
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
     private val opened = ArrayList<QuartzDatabase>()
+    private val dirs = ArrayList<File>()
     private lateinit var auth: SyncAuth
 
     /** One simulated device: its own database, repository and sync engine, same account. */
@@ -53,7 +55,9 @@ class SyncEngineTest {
         val db = QuartzDatabase.build(context, name = null).also { opened += it }
         val repo = QuartzRepository(db, scope)
         val store = MemorySyncStore(auth)
-        val engine = SyncEngine(db, SyncClient(), store)
+        val files = File(context.cacheDir, "device-${UUID.randomUUID()}").apply { mkdirs() }.also { dirs += it }
+        var arrivals = 0
+        val engine = SyncEngine(db, SyncClient(), store, files, onFilesArrived = { arrivals++ })
 
         fun sync(): SyncResult = runBlocking { engine.sync() }
         fun settle() = runBlocking { repo.getNote(-1) }
@@ -70,6 +74,7 @@ class SyncEngineTest {
     fun tearDown() {
         scope.cancel()
         opened.forEach { it.close() }
+        dirs.forEach { it.deleteRecursively() }
     }
 
     // ---- Tests ----
@@ -291,6 +296,39 @@ class SyncEngineTest {
         assertTrue(b.notes().none { it.title == "Brief" })
         assertTrue(b.db.quickNoteDao().getAll().isEmpty())
         assertTrue(b.repo.observeNotes().first().isEmpty())
+    }
+
+    @Test
+    fun picturesRecordingsAndFontsTravel() {
+        val a = Device()
+        val b = Device()
+        val picture = ByteArray(50_000) { (it * 7).toByte() }
+        File(a.files, "media").mkdirs()
+        File(a.files, "media/photo-${UUID.randomUUID()}.jpg").also { it.writeBytes(picture) }.let { f ->
+            val noteId = runBlocking { a.repo.createNote() }
+            val fontName = "Handwriting-${UUID.randomUUID().toString().take(6)}.ttf"
+            File(a.files, "fonts").mkdirs()
+            File(a.files, "fonts/$fontName").writeBytes(byteArrayOf(0, 1, 0, 0, 9, 9, 9))
+            val doc = RichDoc(listOf(com.quartz.notes.data.rich.Block(text = "Fancy", spans = listOf(com.quartz.notes.data.rich.StyleSpan(0, 5, com.quartz.notes.data.rich.InlineStyle.FONT, "file:$fontName")))))
+            a.repo.saveNote(noteId, "With a photo", doc, "default")
+            a.repo.addNoteImage(noteId, "media/${f.name}", 100, 100)
+            // A font that no note uses yet still goes up (and stays off devices that don't need it).
+            File(a.files, "fonts/Unused-${UUID.randomUUID().toString().take(6)}.otf").writeBytes(byteArrayOf(1, 2, 3))
+            a.settle()
+            val up = a.sync()
+            assertEquals(3, up.filesUploaded)
+
+            val down = b.sync()
+            assertEquals(2, down.filesDownloaded)
+            assertTrue(picture.contentEquals(File(b.files, "media/${f.name}").readBytes()))
+            assertTrue(File(b.files, "fonts/$fontName").isFile)
+            assertEquals(1, b.arrivals)
+            assertEquals(0, File(b.files, "fonts").listFiles()!!.count { it.name.startsWith("Unused-") })
+
+            // Nothing more to move either way.
+            assertEquals(0, a.sync().filesUploaded)
+            assertEquals(0, b.sync().filesDownloaded)
+        }
     }
 
     // ---- Test server ----

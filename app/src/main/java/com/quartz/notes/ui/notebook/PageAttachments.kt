@@ -1,6 +1,7 @@
 package com.quartz.notes.ui.notebook
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import com.quartz.notes.ui.media.model
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -77,7 +78,7 @@ internal fun PageAttachments(
                     var menu by remember { mutableStateOf(false) }
                     Box {
                         AsyncImage(
-                            model = media.file(data.path),
+                            model = media.model(data.path),
                             contentDescription = data.caption.ifBlank { "Picture" },
                             contentScale = ContentScale.Crop,
                             modifier = Modifier

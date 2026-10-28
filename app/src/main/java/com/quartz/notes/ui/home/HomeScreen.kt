@@ -1,6 +1,7 @@
 package com.quartz.notes.ui.home
 
 import androidx.activity.compose.BackHandler
+import com.quartz.notes.ui.media.model
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -718,7 +719,7 @@ private fun NoteGridCard(note: NoteUi, selected: Boolean, onClick: () -> Unit) {
                 Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                     note.images.forEach { path ->
                         coil.compose.AsyncImage(
-                            model = media.file(path),
+                            model = media.model(path),
                             contentDescription = null,
                             contentScale = androidx.compose.ui.layout.ContentScale.Crop,
                             modifier = Modifier.weight(1f).aspectRatio(1f).clip(RoundedCornerShape(10.dp)),

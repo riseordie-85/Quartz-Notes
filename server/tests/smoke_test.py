@@ -114,4 +114,44 @@ for name, rec in [
     status, body = call("POST", f"/api/collections/{name}/records", rec, tim)
     check(status == 200, f"create in {name} ({status} {body})")
 
+# ---- Media files ----
+
+
+def upload(path, data, token, filename="f.bin"):
+    boundary = "----quartz" + uuid.uuid4().hex
+    parts = []
+    for name, value in (("path", path), ("size", str(len(data)))):
+        parts.append(f'--{boundary}\r\nContent-Disposition: form-data; name="{name}"\r\n\r\n{value}\r\n'.encode())
+    parts.append(f'--{boundary}\r\nContent-Disposition: form-data; name="file"; filename="{filename}"\r\nContent-Type: application/octet-stream\r\n\r\n'.encode() + data + b"\r\n")
+    parts.append(f"--{boundary}--\r\n".encode())
+    req = urllib.request.Request(BASE + "/api/collections/media/records", data=b"".join(parts), method="POST")
+    req.add_header("Content-Type", f"multipart/form-data; boundary={boundary}")
+    req.add_header("Authorization", token)
+    try:
+        with urllib.request.urlopen(req) as r:
+            return r.status, json.loads(r.read())
+    except urllib.error.HTTPError as e:
+        return e.code, json.loads(e.read() or b"null")
+
+
+pic = bytes(range(256)) * 40
+status, media = upload("media/test-pic.jpg", pic, tim, "test-pic.jpg")
+check(status == 200 and media["owner"] == tim_id and media["path"] == "media/test-pic.jpg", f"upload a picture ({status} {media})")
+with urllib.request.urlopen(f"{BASE}/api/files/media/{media['id']}/{media['file']}") as r:
+    check(r.read() == pic, "the file downloads unchanged")
+status, _ = upload("media/test-pic.jpg", b"other", tim)
+check(status == 400, "the same path can't be uploaded twice")
+status, _ = upload("../etc/passwd", b"x", tim)
+check(status == 400, "odd paths are refused")
+status, other_media = upload("media/test-pic.jpg", b"theirs", other)
+check(status == 200 and other_media["owner"] != tim_id, "another account can use the same path for its own file")
+status, page = call("GET", "/api/collections/media/records?perPage=50", token=tim)
+check(status == 200 and [m["path"] for m in page["items"]] == ["media/test-pic.jpg"] and page["items"][0]["id"] == media["id"], "each account lists only its own files")
+status, _ = call("PATCH", f"/api/collections/media/records/{media['id']}", {"path": "media/x.jpg"}, tim)
+check(status in (403, 404), "files can't be changed")
+status, _ = call("DELETE", f"/api/collections/media/records/{media['id']}", token=tim)
+check(status in (403, 404), "files can't be deleted through the API")
+status, font = upload("fonts/My Font.ttf", b"\x00\x01\x00\x00font", tim, "My Font.ttf")
+check(status == 200, "fonts upload too")
+
 print("All server checks passed.")

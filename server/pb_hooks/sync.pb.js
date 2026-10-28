@@ -7,7 +7,8 @@
 // - an update must say which revision it was based on (`baseRev` in the request body). If the
 //   record has changed since, the update is refused with 409, and the device fetches the current
 //   version to decide what to do. Otherwise rev goes up by one;
-// - records can't change owner.
+// - records can't change owner;
+// - media files belong to whoever uploaded them.
 
 onRecordCreateRequest(
   (e) => {
@@ -47,3 +48,8 @@ onRecordUpdateRequest(
   "quick_notes",
   "attachments",
 )
+
+onRecordCreateRequest((e) => {
+  if (!e.hasSuperuserAuth()) e.record.set("owner", e.auth.id)
+  e.next()
+}, "media")

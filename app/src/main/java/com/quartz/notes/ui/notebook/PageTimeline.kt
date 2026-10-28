@@ -1,6 +1,7 @@
 package com.quartz.notes.ui.notebook
 
 import androidx.compose.foundation.background
+import com.quartz.notes.ui.media.model
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -366,7 +367,7 @@ private fun PageThumbnail(page: PageEntity, elements: List<PageElementEntity>, h
                 val icon = NotebookIcons.of(page.sectionIcon ?: "none")
                 when {
                     page.sectionImage != null -> AsyncImage(
-                        model = files.file(page.sectionImage),
+                        model = files.model(page.sectionImage),
                         contentDescription = null,
                         contentScale = ContentScale.Crop,
                         modifier = Modifier.padding(top = 8.dp).size(44.dp).clip(RoundedCornerShape(8.dp)),
@@ -380,7 +381,7 @@ private fun PageThumbnail(page: PageEntity, elements: List<PageElementEntity>, h
                 }
                 if (picture != null) {
                     AsyncImage(
-                        model = files.file(picture),
+                        model = files.model(picture),
                         contentDescription = null,
                         contentScale = ContentScale.Crop,
                         modifier = Modifier.padding(top = 4.dp).fillMaxWidth().height(46.dp).clip(RoundedCornerShape(4.dp)),

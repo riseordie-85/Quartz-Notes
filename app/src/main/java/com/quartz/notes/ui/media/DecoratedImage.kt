@@ -97,7 +97,7 @@ fun DecoratedImage(data: ImageData, width: Dp, modifier: Modifier = Modifier) {
             ) {
                 val innerWidth = width * (1f - 2 * insets.side)
                 AsyncImage(
-                    model = media.file(data.path),
+                    model = media.model(data.path),
                     contentDescription = data.caption.ifBlank { "Picture" },
                     contentScale = ContentScale.Crop,
                     modifier = Modifier

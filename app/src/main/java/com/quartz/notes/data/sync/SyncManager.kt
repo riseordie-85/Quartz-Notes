@@ -23,11 +23,13 @@ class SyncManager(
     context: Context,
     db: QuartzDatabase,
     private val scope: CoroutineScope,
+    /** Pictures, recordings or fonts arrived (true when fonts did). */
+    onFilesArrived: (fontsChanged: Boolean) -> Unit = {},
 ) {
     private val app = context.applicationContext
     private val syncDao = db.syncDao()
     val store = DataStoreSyncStore(app)
-    val engine = SyncEngine(db, SyncClient(), store)
+    val engine = SyncEngine(db, SyncClient(), store, app.filesDir, onFilesArrived)
 
     /** What the Sync settings show. */
     val prefs: Flow<SyncPrefs> = store.prefs

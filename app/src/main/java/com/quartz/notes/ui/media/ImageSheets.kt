@@ -76,7 +76,7 @@ fun ImageViewer(path: String, onDismiss: () -> Unit, onDelete: (() -> Unit)? = n
     Dialog(onDismissRequest = onDismiss, properties = DialogProperties(usePlatformDefaultWidth = false, decorFitsSystemWindows = false)) {
         Box(Modifier.fillMaxSize().background(Color.Black)) {
             AsyncImage(
-                model = media.file(path),
+                model = media.model(path),
                 contentDescription = "Picture",
                 contentScale = ContentScale.Fit,
                 modifier = Modifier

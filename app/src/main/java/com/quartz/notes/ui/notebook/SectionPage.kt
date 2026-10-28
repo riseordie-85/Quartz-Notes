@@ -1,6 +1,7 @@
 package com.quartz.notes.ui.notebook
 
 import androidx.compose.foundation.background
+import com.quartz.notes.ui.media.model
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -212,7 +213,7 @@ internal fun SectionPageView(
                 val icon = NotebookIcons.of(page.sectionIcon ?: "none")
                 when {
                     image != null -> AsyncImage(
-                        model = media.file(image),
+                        model = media.model(image),
                         contentDescription = "Section photo",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier

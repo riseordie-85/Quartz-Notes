@@ -9,6 +9,9 @@ import android.media.MediaMetadataRetriever
 import android.net.Uri
 import androidx.core.content.FileProvider
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.util.UUID
@@ -30,6 +33,15 @@ class MediaRepository(context: Context) {
     private val mediaDir = File(filesDir, MEDIA_DIR).apply { mkdirs() }
 
     fun file(path: String): File = File(filesDir, path)
+
+    private val _arrivals = MutableStateFlow(0)
+
+    /** Goes up whenever files arrive by sync, so pictures that were missing can show. */
+    val arrivals: StateFlow<Int> = _arrivals.asStateFlow()
+
+    fun notifyArrived() {
+        _arrivals.value++
+    }
 
     /** Copies an image into app storage, optionally downscaling and re-encoding it to save space. */
     suspend fun importImage(uri: Uri, compress: Boolean): Result<StoredImage> = withContext(Dispatchers.IO) {

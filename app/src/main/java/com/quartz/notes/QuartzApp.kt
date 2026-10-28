@@ -41,7 +41,10 @@ class AppContainer(context: Context) {
     val media = MediaRepository(context)
     val audio = AudioPlayer(media, appScope)
     val backup = BackupManager(context, repository, media, fonts)
-    val sync = SyncManager(context, database, appScope)
+    val sync = SyncManager(context, database, appScope) { fontsChanged ->
+        media.notifyArrived()
+        if (fontsChanged) appScope.launch { fonts.reload() }
+    }
 
     fun startBackgroundTasks(context: Context) {
         val app = context.applicationContext

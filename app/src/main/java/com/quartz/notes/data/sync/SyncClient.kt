@@ -16,6 +16,7 @@ import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.IOException
 import java.util.concurrent.TimeUnit
@@ -96,6 +97,91 @@ class SyncClient(private val http: OkHttpClient = defaultHttp) {
     suspend fun update(auth: SyncAuth, collection: String, id: String, baseRev: Long, record: JsonObject): JsonObject {
         val body = JsonObject(record + ("baseRev" to kotlinx.serialization.json.JsonPrimitive(baseRev)))
         return send(auth.serverUrl, auth.token, "PATCH", listOf("api", "collections", collection, "records", id), body = body)
+    }
+
+    // ---- Files ----
+
+    /** One stored file on the server. */
+    data class RemoteFile(val id: String, val path: String, val fileName: String)
+
+    /** Every file this account has on the server, by app path. */
+    suspend fun files(auth: SyncAuth): Map<String, RemoteFile> {
+        val out = HashMap<String, RemoteFile>()
+        var page = 1
+        while (true) {
+            val res = send(
+                auth.serverUrl, auth.token, "GET", listOf("api", "collections", "media", "records"),
+                query = listOf("page" to page.toString(), "perPage" to "500", "fields" to "id,path,file"),
+            )
+            val items = res["items"]?.jsonArray?.map { it.jsonObject }.orEmpty()
+            for (r in items) {
+                val f = RemoteFile(r["id"].text(), r["path"].text(), r["file"].text())
+                if (f.path.isNotEmpty()) out[f.path] = f
+            }
+            val total = res["totalPages"]?.jsonPrimitive?.int ?: 1
+            if (page >= total || items.isEmpty()) break
+            page++
+        }
+        return out
+    }
+
+    /** Uploads [file] as [path]. A path that's already there counts as done. */
+    suspend fun upload(auth: SyncAuth, path: String, file: java.io.File, sha256: String) = withContext(Dispatchers.IO) {
+        val body = okhttp3.MultipartBody.Builder()
+            .setType(okhttp3.MultipartBody.FORM)
+            .addFormDataPart("path", path)
+            .addFormDataPart("sha256", sha256)
+            .addFormDataPart("size", file.length().toString())
+            .addFormDataPart("file", file.name, file.asRequestBody("application/octet-stream".toMediaType()))
+            .build()
+        val url = auth.serverUrl.toHttpUrlOrNull()?.newBuilder()
+            ?.addPathSegments("api/collections/media/records")?.build()
+            ?: throw SyncException.Server(0, "That server address isn't valid")
+        val request = Request.Builder().url(url).post(body).header("Authorization", auth.token).build()
+        val response = try {
+            http.newCall(request).execute()
+        } catch (e: IOException) {
+            throw SyncException.Offline(e)
+        }
+        response.use { r ->
+            if (r.isSuccessful) return@use
+            val json = runCatching { Json.parseToJsonElement(r.body?.string().orEmpty()) as? JsonObject }.getOrNull() ?: JsonObject(emptyMap())
+            val fields = (json["data"] as? JsonObject)?.keys.orEmpty()
+            when {
+                r.code == 400 && "path" in fields -> Unit // Already uploaded (by an earlier try that lost its answer).
+                r.code == 401 || r.code == 403 -> throw SyncException.SignedOut()
+                else -> throw SyncException.Server(r.code, describe(r.code, json), fields)
+            }
+        }
+    }
+
+    /** Downloads a stored file into [target] (written whole, or not at all). */
+    suspend fun download(auth: SyncAuth, remote: RemoteFile, target: java.io.File) = withContext(Dispatchers.IO) {
+        val url = auth.serverUrl.toHttpUrlOrNull()?.newBuilder()
+            ?.addPathSegment("api")?.addPathSegment("files")?.addPathSegment("media")
+            ?.addPathSegment(remote.id)?.addPathSegment(remote.fileName)?.build()
+            ?: throw SyncException.Server(0, "That server address isn't valid")
+        val request = Request.Builder().url(url).get().header("Authorization", auth.token).build()
+        val response = try {
+            http.newCall(request).execute()
+        } catch (e: IOException) {
+            throw SyncException.Offline(e)
+        }
+        response.use { r ->
+            if (!r.isSuccessful) throw SyncException.Server(r.code, "Couldn't download ${remote.path}")
+            target.parentFile?.mkdirs()
+            val temp = java.io.File(target.parentFile, ".${target.name}.part")
+            try {
+                r.body!!.byteStream().use { input -> temp.outputStream().use { input.copyTo(it) } }
+            } catch (e: IOException) {
+                temp.delete()
+                throw SyncException.Offline(e)
+            }
+            if (!temp.renameTo(target)) {
+                temp.delete()
+                throw SyncException.Server(0, "Couldn't save ${remote.path}")
+            }
+        }
     }
 
     // ---- Plumbing ----

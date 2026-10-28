@@ -1,6 +1,7 @@
 package com.quartz.notes.ui.note
 
 import androidx.compose.foundation.clickable
+import com.quartz.notes.ui.media.model
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -69,7 +70,7 @@ fun NoteAttachments(
             LazyRow(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                 items(images, key = { it.id }) { a ->
                     AsyncImage(
-                        model = media.file(a.path),
+                        model = media.model(a.path),
                         contentDescription = "Picture",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier

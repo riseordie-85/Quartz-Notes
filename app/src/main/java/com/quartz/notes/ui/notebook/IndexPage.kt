@@ -1,6 +1,7 @@
 package com.quartz.notes.ui.notebook
 
 import androidx.compose.foundation.background
+import com.quartz.notes.ui.media.model
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -189,7 +190,7 @@ internal fun IndexPageView(
                     val voice = a.voice
                     if (image != null) {
                         AsyncImage(
-                            model = files.file(image.path),
+                            model = files.model(image.path),
                             contentDescription = null,
                             contentScale = ContentScale.Crop,
                             modifier = Modifier.size(52.dp).clip(RoundedCornerShape(10.dp)),
