@@ -434,6 +434,7 @@ private fun HomeHeader(
                 fontSize = 24.sp,
                 color = MaterialTheme.colorScheme.onSurface,
             )
+            com.quartz.notes.ui.components.SyncIndicator()
             IconButton(onClick = onSettings) {
                 Icon(Icons.Rounded.Settings, contentDescription = "Settings", tint = LocalQuartzColors.current.textSecondary, modifier = Modifier.size(30.dp))
             }

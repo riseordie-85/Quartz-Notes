@@ -392,6 +392,9 @@ interface SyncDao {
     @Query("SELECT MAX(changedAt) FROM sync_state WHERE dirty = 1")
     suspend fun newestChange(): Long?
 
+    @Query("SELECT mode FROM sync_flags WHERE id = 1")
+    suspend fun mode(): Int
+
     /** Sets who's writing; see [SyncFlagsEntity]. */
     @Query("UPDATE sync_flags SET mode = :mode WHERE id = 1")
     suspend fun setMode(mode: Int)

@@ -57,7 +57,8 @@ class SyncEngineTest {
         val store = MemorySyncStore(auth)
         val files = File(context.cacheDir, "device-${UUID.randomUUID()}").apply { mkdirs() }.also { dirs += it }
         var arrivals = 0
-        val engine = SyncEngine(db, SyncClient(), store, files, onFilesArrived = { arrivals++ })
+        val remote = java.util.Collections.synchronizedList(ArrayList<Pair<String, String>>())
+        val engine = SyncEngine(db, SyncClient(), store, files, onFilesArrived = { arrivals++ }, onRemoteChange = { t, u -> remote += t to u })
 
         fun sync(): SyncResult = runBlocking { engine.sync() }
         fun settle() = runBlocking { repo.getNote(-1) }
@@ -328,6 +329,103 @@ class SyncEngineTest {
             // Nothing more to move either way.
             assertEquals(0, a.sync().filesUploaded)
             assertEquals(0, b.sync().filesDownloaded)
+        }
+    }
+
+    @Test
+    fun conflictingNoteEditsKeepBothVersions() {
+        val a = Device()
+        val b = Device()
+        val id = runBlocking { a.repo.createNote() }
+        a.repo.saveNote(id, "Plan", RichDoc.fromPlainText("start"), "default")
+        a.settle()
+        val uid = runBlocking { a.db.quickNoteDao().get(id)!!.uid }
+        a.sync()
+        b.sync()
+        val idB = b.note(uid)!!.id
+
+        // Both change it while apart; B's edit is the newer one.
+        a.repo.saveNote(id, "Plan", RichDoc.fromPlainText("from A"), "default")
+        a.settle()
+        SystemClock.sleep(40)
+        b.repo.saveNote(idB, "Plan", RichDoc.fromPlainText("from B"), "default")
+        b.settle()
+        a.sync()
+        val r = b.sync()
+        assertEquals(1, r.conflicts)
+        assertEquals("A's losing version is kept as a copy", 1, r.copies)
+        a.sync()
+        for (d in listOf(a, b)) {
+            assertEquals("from B", d.note(uid)!!.plainText)
+            val copy = d.notes().single { it.uid != uid }
+            assertEquals("Plan (conflict copy)", copy.title)
+            assertEquals("from A", copy.plainText)
+        }
+    }
+
+    @Test
+    fun conflictingPageEditsKeepBothVersions() {
+        val a = Device()
+        val b = Device()
+        val nb = runBlocking { a.repo.createNotebook(a.db.shelfDao().getAll().single().id, "Journal", 0, "GLOSS", "none") }
+        val page = runBlocking { a.db.pageDao().getByNotebook(nb).single() }
+        a.repo.savePageContent(page.id, RichDoc.fromPlainText("start"))
+        a.settle()
+        a.sync()
+        b.sync()
+        val pageB = runBlocking { b.db.pageDao().byUid(page.uid)!! }
+
+        // A's edit is newer, but B syncs last: B's older edit gives way and is kept as a copy.
+        b.repo.savePageContent(pageB.id, RichDoc.fromPlainText("older, from B"))
+        b.settle()
+        SystemClock.sleep(40)
+        a.repo.savePageContent(page.id, RichDoc.fromPlainText("newer, from A"))
+        a.settle()
+        a.sync()
+        assertEquals(1, b.sync().copies)
+        a.sync()
+        for (d in listOf(a, b)) {
+            val nbId = runBlocking { d.db.notebookDao().getAll().single { it.title == "Journal" }.id }
+            val pages = runBlocking { d.db.pageDao().getByNotebook(nbId) }
+            assertEquals(listOf("newer, from A", "older, from B"), pages.map { it.plainText })
+            assertEquals("Conflict copy", pages[1].title)
+        }
+    }
+
+    @Test
+    fun remoteChangesAreReported() {
+        val a = Device()
+        val b = Device()
+        val id = runBlocking { a.repo.createNote() }
+        a.repo.saveNote(id, "Hello", RichDoc(), "default")
+        a.settle()
+        val uid = runBlocking { a.db.quickNoteDao().get(id)!!.uid }
+        a.sync()
+        b.sync()
+        assertTrue(("quick_notes" to uid) in b.remote)
+        // A device's own uploads don't count as changes from elsewhere.
+        assertTrue(a.remote.none { it.second == uid })
+    }
+
+    @Test
+    fun liveChangesArriveWithinSeconds() {
+        val a = Device()
+        val heard = java.util.concurrent.LinkedBlockingQueue<RealtimeEvent>()
+        val open = java.util.concurrent.CountDownLatch(1)
+        val listener = RealtimeClient().listen(auth, listOf("quick_notes"), onEvent = { heard += it }, onOpen = { open.countDown() })
+        try {
+            assertTrue("live connection opened", open.await(10, java.util.concurrent.TimeUnit.SECONDS))
+            val id = runBlocking { a.repo.createNote() }
+            a.repo.saveNote(id, "Live", RichDoc(), "default")
+            a.settle()
+            val uid = runBlocking { a.db.quickNoteDao().get(id)!!.uid }
+            a.sync()
+            val event = heard.poll(10, java.util.concurrent.TimeUnit.SECONDS)
+            assertNotNull("heard about the change", event)
+            assertEquals("quick_notes", event!!.collection)
+            assertEquals(uid, (event.record["id"] as kotlinx.serialization.json.JsonPrimitive).content)
+        } finally {
+            listener.close()
         }
     }
 

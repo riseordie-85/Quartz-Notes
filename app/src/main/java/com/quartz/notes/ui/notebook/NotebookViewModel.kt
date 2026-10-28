@@ -82,6 +82,22 @@ class PageSession(page: PageEntity) {
     internal fun markTitleSaved() {
         savedTitle = title
     }
+
+    val anyDirty: Boolean get() = contentDirty || titleDirty || sectionDirty
+
+    /** True when [page] says the same as what's showing. */
+    fun matches(page: PageEntity): Boolean =
+        page.title == title && RichDoc.decode(page.content) == editor.toDoc() &&
+            (!page.isSection || page.plainText == description)
+
+    /** Shows another device's newer version (only when nothing here is unsaved). */
+    fun adopt(page: PageEntity) {
+        editor.replaceFromRemote(RichDoc.decode(page.content))
+        title = page.title
+        if (page.isSection) description = page.plainText
+        markContentSaved()
+        markSectionSaved()
+    }
 }
 
 /** Shares what's on a page that's currently showing. */
@@ -111,6 +127,34 @@ class NotebookViewModel(
     private val sessions = HashMap<Long, PageSession>()
 
     fun session(page: PageEntity): PageSession = sessions.getOrPut(page.id) { PageSession(page) }
+
+    init {
+        // Pages and text boxes changed on another device: show the new version where nothing is
+        // unsaved here; otherwise keep the other version of the page as a copy.
+        viewModelScope.launch {
+            repo.remoteChanges.collect { change ->
+                when (change.table) {
+                    "pages" -> {
+                        val page = repo.pageByUidNow(change.uid) ?: return@collect
+                        val session = sessions[page.id] ?: return@collect
+                        if (session.matches(page)) return@collect
+                        if (session.anyDirty) repo.keepPageCopy(page) else session.adopt(page)
+                    }
+                    "page_elements" -> {
+                        val element = repo.elementByUidNow(change.uid) ?: return@collect
+                        if (element.kind != ElementKind.TEXT) return@collect
+                        val session = sessions[element.pageId] ?: return@collect
+                        val state = session.textBoxes[element.id] ?: return@collect
+                        if (session.textBoxSaved[element.id] != state.version) return@collect
+                        val doc = RichDoc.decode(decodePayload<TextBoxData>(element.data)?.doc)
+                        if (doc == state.toDoc()) return@collect
+                        state.replaceFromRemote(doc)
+                        session.textBoxSaved[element.id] = state.version
+                    }
+                }
+            }
+        }
+    }
 
     /** Saves a page's text and title if either changed. Opening or swiping past a page writes nothing. */
     fun saveIfChanged(pageId: Long) {

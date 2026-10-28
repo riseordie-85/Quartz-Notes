@@ -27,6 +27,7 @@ import com.quartz.notes.data.QuartzRepository
 import com.quartz.notes.data.model.TextBoxData
 import com.quartz.notes.data.rich.InlineStyle
 import com.quartz.notes.data.rich.RichDoc
+import com.quartz.notes.data.db.newUid
 import java.io.File
 import java.security.MessageDigest
 
@@ -35,6 +36,8 @@ data class SyncResult(
     val uploaded: Int,
     val downloaded: Int,
     val conflicts: Int,
+    /** Losing versions of conflicting edits, kept as their own notes or pages. */
+    val copies: Int = 0,
     val filesUploaded: Int = 0,
     val filesDownloaded: Int = 0,
 )
@@ -54,6 +57,8 @@ class SyncEngine(
     private val files: File,
     /** Called after files arrive; true when fonts were among them. */
     private val onFilesArrived: (fontsChanged: Boolean) -> Unit = {},
+    /** Called after a change from the server is written here (so open editors can show it). */
+    private val onRemoteChange: (table: String, uid: String) -> Unit = { _, _ -> },
     private val now: () -> Long = System::currentTimeMillis,
 ) {
     private val mutex = Mutex()
@@ -109,7 +114,7 @@ class SyncEngine(
                 syncFiles(auth, counts)
                 purgeOldDeleted()
                 store.recordResult(now(), null)
-                SyncResult(counts.uploaded, counts.downloaded, counts.conflicts, counts.filesUp, counts.filesDown)
+                SyncResult(counts.uploaded, counts.downloaded, counts.conflicts, counts.copies, counts.filesUp, counts.filesDown)
             } catch (e: SyncException) {
                 store.recordResult(now(), e.message)
                 throw e
@@ -121,6 +126,7 @@ class SyncEngine(
         var uploaded = 0
         var downloaded = 0
         var conflicts = 0
+        var copies = 0
         var filesUp = 0
         var filesDown = 0
     }
@@ -147,14 +153,19 @@ class SyncEngine(
     private suspend fun applyAll(collection: String, records: List<JsonObject>, counts: Counts) {
         // Connectors point at other items, so place those first.
         val ordered = if (collection == ELEMENTS) records.sortedBy { it.str("kind") == ElementKind.CONNECTOR } else records
+        val changed = ArrayList<String>()
         db.withTransaction {
             sync.setMode(1)
             for (r in ordered) {
-                when (runCatching { apply(collection, r, force = false) }.getOrDefault(Applied.SKIPPED)) {
-                    Applied.WRITTEN -> counts.downloaded++
+                when (runCatching { apply(collection, r, force = false, counts) }.getOrDefault(Applied.SKIPPED)) {
+                    Applied.WRITTEN -> {
+                        counts.downloaded++
+                        changed += r.str("id")
+                    }
                     Applied.REPLACED_LOCAL -> {
                         counts.downloaded++
                         counts.conflicts++
+                        changed += r.str("id")
                     }
                     Applied.KEPT_LOCAL -> counts.conflicts++
                     Applied.SKIPPED -> Unit
@@ -162,6 +173,7 @@ class SyncEngine(
             }
             sync.setMode(0)
         }
+        changed.forEach { onRemoteChange(collection, it) }
     }
 
     private enum class Applied {
@@ -180,7 +192,7 @@ class SyncEngine(
      * Unless [force], a record this device already has, or one that lost to a newer local edit, is
      * left alone.
      */
-    private suspend fun apply(collection: String, r: JsonObject, force: Boolean): Applied {
+    private suspend fun apply(collection: String, r: JsonObject, force: Boolean, counts: Counts): Applied {
         val uid = r.str("id")
         val rev = r.long("rev")
         val editedAt = r.long("editedAt")
@@ -188,9 +200,15 @@ class SyncEngine(
         val state = sync.state(collection, uid)
         if (!force && state != null && rev <= state.rev) return Applied.SKIPPED
         if (!force && state != null && state.dirty && editedAt <= state.changedAt) {
-            // Changed here more recently: keep it, and upload it on top of the server's version.
+            // Changed here more recently: keep it, and upload it on top of the server's version,
+            // which is kept as a copy.
+            if (keepCopy(collection, r, Loser.SERVER)) counts.copies++
             sync.setRev(collection, uid, rev)
             return Applied.KEPT_LOCAL
+        }
+        if (!force && state != null && state.dirty) {
+            // The server's edit is newer; this device's edit is kept as a copy.
+            if (keepCopy(collection, r, Loser.LOCAL)) counts.copies++
         }
         val written = when (collection) {
             SHELVES -> {
@@ -311,15 +329,74 @@ class SyncEngine(
         if (server.long("editedAt") > st.changedAt) {
             db.withTransaction {
                 sync.setMode(1)
-                apply(st.tbl, server, force = true)
+                if (keepCopy(st.tbl, server, Loser.LOCAL)) counts.copies++
+                apply(st.tbl, server, force = true, counts)
                 sync.setMode(0)
             }
             counts.conflicts++
+            onRemoteChange(st.tbl, st.uid)
         } else {
+            db.withTransaction { if (keepCopy(st.tbl, server, Loser.SERVER)) counts.copies++ }
             uploaded(st, client.update(auth, st.tbl, st.uid, server.long("rev"), record).long("rev"))
             counts.uploaded++
+            counts.conflicts++
         }
     }
+
+    private enum class Loser { LOCAL, SERVER }
+
+    /**
+     * When two devices changed the same quick note or page, keeps the losing version (this device's
+     * or the server's) as a new note or page next to it, so no writing is lost. Does nothing when
+     * the two versions say the same thing, or for deletions. Must run in a transaction; returns
+     * whether a copy was made.
+     */
+    private suspend fun keepCopy(collection: String, server: JsonObject, loser: Loser): Boolean {
+        if (server.bool("deleted")) return false
+        val uid = server.str("id")
+        val stamp = now()
+        val mode = sync.mode()
+        when (collection) {
+            NOTES -> {
+                val local = notes.byUid(uid) ?: return false
+                if (local.deleted) return false
+                val theirs = SyncCodec.note(server, local.id)
+                if (local.title == theirs.title && RichDoc.decode(local.content) == RichDoc.decode(theirs.content)) return false
+                val source = if (loser == Loser.LOCAL) local else theirs
+                sync.setMode(0)
+                notes.insert(
+                    source.copy(
+                        id = 0, uid = newUid(), deleted = false, title = copyTitle(source.title), pinned = false,
+                        createdAt = stamp, updatedAt = stamp,
+                    ),
+                )
+                sync.setMode(mode)
+                return true
+            }
+            PAGES -> {
+                val local = pages.byUid(uid) ?: return false
+                if (local.deleted) return false
+                val theirs = SyncCodec.page(server, local.id, local.notebookId)
+                if (local.title == theirs.title && RichDoc.decode(local.content) == RichDoc.decode(theirs.content) &&
+                    local.plainText == theirs.plainText
+                ) return false
+                val source = if (loser == Loser.LOCAL) local else theirs
+                val position = (pages.getByNotebook(local.notebookId).maxOfOrNull { it.position } ?: -1) + 1
+                sync.setMode(0)
+                pages.insert(
+                    source.copy(
+                        id = 0, uid = newUid(), deleted = false, title = copyTitle(source.title), position = position,
+                        locked = false, createdAt = stamp, updatedAt = stamp,
+                    ),
+                )
+                sync.setMode(mode)
+                return true
+            }
+            else -> return false
+        }
+    }
+
+    private fun copyTitle(title: String) = if (title.isBlank()) "Conflict copy" else "$title (conflict copy)"
 
     private suspend fun uploaded(st: SyncStateEntity, rev: Long) {
         sync.setRev(st.tbl, st.uid, rev)

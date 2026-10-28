@@ -41,10 +41,16 @@ class AppContainer(context: Context) {
     val media = MediaRepository(context)
     val audio = AudioPlayer(media, appScope)
     val backup = BackupManager(context, repository, media, fonts)
-    val sync = SyncManager(context, database, appScope) { fontsChanged ->
-        media.notifyArrived()
-        if (fontsChanged) appScope.launch { fonts.reload() }
-    }
+    val sync = SyncManager(
+        context,
+        database,
+        appScope,
+        onFilesArrived = { fontsChanged ->
+            media.notifyArrived()
+            if (fontsChanged) appScope.launch { fonts.reload() }
+        },
+        onRemoteChange = repository::notifyRemoteChange,
+    )
 
     fun startBackgroundTasks(context: Context) {
         val app = context.applicationContext

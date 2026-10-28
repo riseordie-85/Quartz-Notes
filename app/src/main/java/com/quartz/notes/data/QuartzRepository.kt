@@ -26,7 +26,13 @@ import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
+
+/** A row that sync just changed with a newer version from another device. */
+data class RemoteChange(val table: String, val uid: String)
 
 data class SearchResults(
     val notes: List<QuickNoteEntity>,
@@ -74,6 +80,50 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
     }
 
     private fun now() = System.currentTimeMillis()
+
+    // ---- Changes from other devices ----
+
+    private val _remoteChanges = MutableSharedFlow<RemoteChange>(extraBufferCapacity = 256)
+
+    /** Rows sync just updated from the server, so open editors can show the new version. */
+    val remoteChanges: SharedFlow<RemoteChange> = _remoteChanges.asSharedFlow()
+
+    fun notifyRemoteChange(table: String, uid: String) {
+        _remoteChanges.tryEmit(RemoteChange(table, uid))
+    }
+
+    /** The row as it is right now (not waiting for queued saves). */
+    suspend fun noteNow(id: Long): QuickNoteEntity? = notes.get(id)
+
+    suspend fun pageByUidNow(uid: String): PageEntity? = pages.byUid(uid)?.takeIf { !it.deleted }
+
+    suspend fun elementByUidNow(uid: String): PageElementEntity? = elements.byUid(uid)?.takeIf { !it.deleted }
+
+    /**
+     * Keeps another device's version of a note that's being edited here as its own note, so the
+     * edits here (saved over it) don't lose it.
+     */
+    suspend fun keepNoteCopy(version: QuickNoteEntity) {
+        val stamp = now()
+        notes.insert(
+            version.copy(
+                id = 0, uid = newUid(), deleted = false, pinned = false, createdAt = stamp, updatedAt = stamp,
+                title = if (version.title.isBlank()) "Conflict copy" else "${version.title} (conflict copy)",
+            ),
+        )
+    }
+
+    /** The same for a notebook page: the other version goes at the end of the notebook. */
+    suspend fun keepPageCopy(version: PageEntity) = db.withTransaction {
+        val stamp = now()
+        val position = (pages.getByNotebook(version.notebookId).maxOfOrNull { it.position } ?: -1) + 1
+        pages.insert(
+            version.copy(
+                id = 0, uid = newUid(), deleted = false, locked = false, position = position, createdAt = stamp, updatedAt = stamp,
+                title = if (version.title.isBlank()) "Conflict copy" else "${version.title} (conflict copy)",
+            ),
+        )
+    }
 
     // ---- Deleting ----
     // Rows that never reached the sync server are erased; synced ones become deleted markers so the

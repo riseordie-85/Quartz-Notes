@@ -249,6 +249,21 @@ class RichEditorState(doc: RichDoc) {
         changed()
     }
 
+    /**
+     * Shows a newer version of the text from another device, keeping the cursor about where it
+     * was. Undo starts over, since the old steps belong to the old text.
+     */
+    fun replaceFromRemote(doc: RichDoc) {
+        val cursor = selStart
+        undoStack.clear()
+        redoStack.clear()
+        updateHistoryFlags()
+        load(doc)
+        setCursor(cursor.coerceAtMost(text.length))
+        clearPending()
+        changed()
+    }
+
     /** Places the cursor at the end of the document. */
     fun focusEnd() {
         if (blocks.lastOrNull()?.isObject == true) {
