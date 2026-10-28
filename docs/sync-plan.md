@@ -25,7 +25,7 @@ No Firebase and nothing exposed to the internet.
 ```
 app/       Android app
 server/    docker-compose.yml, PocketBase schema migrations (pb_migrations), hooks (pb_hooks)
-web/       Web app (Vite + TypeScript + TipTap), built into server/pb_public
+web/       Web app (Svelte + TypeScript + TipTap), built into the server image
 docs/      This plan and the note format definition
 shared/    Sample notes used by both the app's and the web app's tests
 ```
@@ -99,6 +99,8 @@ wins. Conflict copies of the losing version come in Phase 5.
 
 - Phase 1 (app groundwork) is done: database version 5.
 - Phase 2 (server and app text sync) is done: see `server/README.md` to set up the NUC.
+- Phase 3 (web app) is done: `web/`, served by the same server. Pictures, voice notes and imported
+  fonts show as outlines until Phase 4.
 
 ## Phases
 

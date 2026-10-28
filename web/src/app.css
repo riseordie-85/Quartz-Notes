@@ -1,0 +1,347 @@
+/* Quartz Notes web: colors and sizes follow the Android app (see docs/scrapbook-rendering.md). */
+
+:root {
+  --bg: #efeff1;
+  --surface: #ffffff;
+  --surface-2: #f2f2f5;
+  --on-surface: #111114;
+  --muted: #6b6b75;
+  --divider: rgb(17 17 20 / 0.1);
+  --accent: #d6004c;
+  --on-accent: #ffffff;
+  --page: #ffffff;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.06), 0 4px 14px rgb(0 0 0 / 0.07);
+  --radius: 22px;
+  /* Text color inside rich text; pages and colored notes set their own. */
+  --ink: var(--on-surface);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #101013;
+    --surface: #1c1c21;
+    --surface-2: #26262c;
+    --on-surface: #ededf0;
+    --muted: #9a9aa5;
+    --divider: rgb(237 237 240 / 0.12);
+    --page: #1c1c21;
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 4px 14px rgb(0 0 0 / 0.35);
+    --ink: var(--on-surface);
+    color-scheme: dark;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--on-surface);
+  font: 16px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+#app {
+  height: 100%;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+/* Icon-font glyphs stay hidden until the font has loaded, so their names never show as words. */
+.material-symbols-rounded {
+  visibility: hidden;
+  font-family: "Material Symbols Rounded";
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+}
+html.icons-ready .material-symbols-rounded {
+  visibility: visible;
+}
+
+/* ---- Shared controls ---- */
+
+.icon-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex: none;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  color: inherit;
+}
+.icon-btn:hover {
+  background: color-mix(in srgb, currentColor 9%, transparent);
+}
+.icon-btn:focus-visible,
+.pill-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.icon-btn[aria-pressed="true"] {
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: var(--accent);
+}
+.icon-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 40px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 20px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 600;
+  cursor: pointer;
+}
+.pill-btn.quiet {
+  background: var(--surface-2);
+  color: var(--on-surface);
+}
+.pill-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.menu {
+  position: absolute;
+  z-index: 40;
+  min-width: 190px;
+  padding: 6px;
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: 0 8px 30px rgb(0 0 0 / 0.22);
+}
+.menu button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 12px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+.menu button:hover {
+  background: var(--surface-2);
+}
+
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(5, 30px);
+  gap: 8px;
+  padding: 6px;
+}
+.swatch {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--divider);
+  cursor: pointer;
+  padding: 0;
+}
+.swatch[aria-pressed="true"] {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.empty-state {
+  padding: 48px 16px;
+  text-align: center;
+  color: var(--muted);
+}
+
+/* ---- Rich text (editor and read-only views share these) ---- */
+
+.rt {
+  color: var(--ink);
+  font-size: 17px;
+  line-height: 30px;
+  letter-spacing: 0.2px;
+  outline: none;
+  overflow-wrap: anywhere;
+}
+.rt .blk {
+  position: relative;
+  margin: 0;
+  min-height: 30px;
+  padding-left: calc(var(--indent, 0) * 24px);
+}
+.rt .blk-text {
+  white-space: pre-wrap;
+  min-height: 30px;
+}
+.rt .blk[data-align="CENTER"] .blk-text {
+  text-align: center;
+}
+.rt .blk[data-align="END"] .blk-text {
+  text-align: end;
+}
+.rt .blk[data-align="JUSTIFY"] .blk-text {
+  text-align: justify;
+}
+.rt .blk[data-type="HEADING"] .blk-text {
+  font-size: 25px;
+  font-weight: 700;
+}
+.rt .blk[data-type="SUBHEADING"] .blk-text {
+  font-size: 20px;
+  font-weight: 600;
+}
+.rt .blk[data-type="BULLET"] {
+  padding-left: calc(var(--indent, 0) * 24px + 26px);
+}
+.rt .blk[data-type="BULLET"]::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--indent, 0) * 24px + 10px);
+  top: 12px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ink);
+}
+.rt .blk[data-type="TASK"] {
+  padding-left: calc(var(--indent, 0) * 24px + 32px);
+}
+.rt .task-box {
+  position: absolute;
+  left: calc(var(--indent, 0) * 24px);
+  top: 5.5px;
+  width: 19px;
+  height: 19px;
+  margin: 0;
+  padding: 0;
+  border: 2px solid color-mix(in srgb, var(--ink) 55%, transparent);
+  border-radius: 5px;
+  background: transparent;
+  cursor: pointer;
+}
+.rt .task-box[hidden] {
+  display: none;
+}
+.rt .blk[data-checked="true"] .task-box {
+  border-color: var(--accent);
+  background: var(--accent)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E")
+    center / 15px no-repeat;
+}
+.rt .blk[data-type="TASK"][data-checked="true"] .blk-text {
+  color: color-mix(in srgb, var(--ink) 50%, transparent);
+  text-decoration: line-through;
+}
+.rt mark {
+  border-radius: 3px;
+  padding: 0 1px;
+}
+.rt hr.divider {
+  height: 2px;
+  margin: 14px 0;
+  border: 0;
+  border-radius: 1px;
+  background: color-mix(in srgb, var(--ink) 35%, transparent);
+}
+.rt .picture {
+  display: flex;
+  margin: 0;
+  padding: 8px 0;
+}
+.rt .picture[data-align="CENTER"],
+.rt .picture[data-align="JUSTIFY"] {
+  justify-content: center;
+}
+.rt .picture[data-align="END"] {
+  justify-content: flex-end;
+}
+.rt .picture-frame {
+  overflow: hidden;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--ink) 8%, transparent);
+}
+.rt .picture-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.picture-frame.missing,
+.media-missing {
+  display: grid;
+  place-items: center;
+  background:
+    repeating-linear-gradient(135deg, color-mix(in srgb, var(--ink, #888) 6%, transparent) 0 10px, transparent 10px 20px),
+    color-mix(in srgb, var(--ink, #888) 7%, transparent) !important;
+}
+.picture-frame.missing::after {
+  content: "image";
+  font-family: "Material Symbols Rounded";
+  font-size: 34px;
+  color: color-mix(in srgb, var(--ink) 35%, transparent);
+}
+.rt .ProseMirror-selectednode {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.rt .blk.is-editor-empty:first-child::after {
+  content: attr(data-placeholder);
+  position: absolute;
+  top: 0;
+  left: calc(var(--indent, 0) * 24px);
+  color: color-mix(in srgb, var(--ink) 38%, transparent);
+  pointer-events: none;
+}
+.ProseMirror {
+  outline: none;
+  white-space: pre-wrap;
+}
+
+/* ---- Layout ---- */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

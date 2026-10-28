@@ -44,7 +44,7 @@ jobs:
           wget -q "https://github.com/pocketbase/pocketbase/releases/download/v${PB_VERSION}/pocketbase_${PB_VERSION}_linux_amd64.zip" -O pb.zip
           unzip -q pb.zip pocketbase -d pbbin
           pbbin/pocketbase superuser upsert admin@test.local adminpass123 --dir=pb_test_data --migrationsDir=server/pb_migrations
-          nohup pbbin/pocketbase serve --http=127.0.0.1:8090 --dir=pb_test_data --migrationsDir=server/pb_migrations --hooksDir=server/pb_hooks --publicDir=server/pb_public > pb.log 2>&1 &
+          nohup pbbin/pocketbase serve --http=127.0.0.1:8090 --dir=pb_test_data --migrationsDir=server/pb_migrations --hooksDir=server/pb_hooks --publicDir=web/dist > pb.log 2>&1 &
           for i in $(seq 1 50); do curl -s http://127.0.0.1:8090/api/health >/dev/null && break; sleep 0.2; done
           curl -s http://127.0.0.1:8090/api/health
 

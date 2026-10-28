@@ -1,15 +1,16 @@
 name: Sync server
 
-# Checks the sync server's schema and rules against a real PocketBase, and on main publishes the
-# server image (ghcr.io/<owner>/quartz-sync) that the NUC runs.
+# Checks the sync server's schema and rules and the web app against a real PocketBase, pushes the
+# web app's screenshots to the `ci-web-shots` branch, and on main publishes the server image
+# (ghcr.io/<owner>/quartz-sync) that the NUC runs.
 on:
   push:
     branches: [ "**" ]
-    paths: [ "server/**", ".github/workflows/server.yml" ]
+    paths: [ "server/**", "web/**", "shared/**", ".github/workflows/server.yml" ]
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   packages: write
 
 env:
@@ -20,27 +21,59 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - name: Start PocketBase with the repo's schema and rules
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - name: Web app checks and build
+        working-directory: web
+        run: |
+          npm ci
+          npm run check
+          npm test
+          npm run build
+      - name: Start PocketBase with the repo's schema, rules and web app
         run: |
           wget -q "https://github.com/pocketbase/pocketbase/releases/download/v${PB_VERSION}/pocketbase_${PB_VERSION}_linux_amd64.zip" -O pb.zip
           unzip -q pb.zip pocketbase
           ./pocketbase superuser upsert admin@test.local adminpass123 --dir=pb_data --migrationsDir=server/pb_migrations
-          ./pocketbase serve --http=127.0.0.1:8090 --dir=pb_data --migrationsDir=server/pb_migrations --hooksDir=server/pb_hooks --publicDir=server/pb_public > pb.log 2>&1 &
+          ./pocketbase serve --http=127.0.0.1:8090 --dir=pb_data --migrationsDir=server/pb_migrations --hooksDir=server/pb_hooks --publicDir=web/dist > pb.log 2>&1 &
           for i in $(seq 1 50); do curl -s http://127.0.0.1:8090/api/health >/dev/null && break; sleep 0.2; done
       - name: Server checks
         run: python3 server/tests/smoke_test.py http://127.0.0.1:8090 admin@test.local adminpass123
+      - name: Browser checks
+        run: |
+          pip install --quiet playwright==1.56.0
+          python3 -m playwright install --with-deps chromium > /dev/null
+          python3 web/tests/e2e/seed.py http://127.0.0.1:8090 admin@test.local adminpass123
+          python3 web/tests/e2e/web_test.py http://127.0.0.1:8090 web-shots
       - name: Server log
         if: failure()
         run: tail -50 pb.log
+      - name: Publish screenshots to the ci-web-shots branch
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p web-shots && cp pb.log web-shots/ 2>/dev/null || true
+          cd web-shots
+          git init -q
+          git config user.name "ci"
+          git config user.email "ci@users.noreply.github.com"
+          git checkout -q -b ci-web-shots
+          git add -A
+          git commit -q -m "Web checks ${GITHUB_RUN_ID} for ${GITHUB_SHA}" || exit 0
+          git push -q -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" ci-web-shots
 
   image:
+    # Built on every branch to prove it builds; published only from main.
     needs: check
-    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
       - uses: docker/setup-buildx-action@v3
       - uses: docker/login-action@v3
+        if: github.ref == 'refs/heads/main'
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -50,9 +83,10 @@ jobs:
         run: echo "image=ghcr.io/$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')/quartz-sync" >> "$GITHUB_OUTPUT"
       - uses: docker/build-push-action@v6
         with:
-          context: server
+          context: .
+          file: server/Dockerfile
           build-args: PB_VERSION=${{ env.PB_VERSION }}
-          push: true
+          push: ${{ github.ref == 'refs/heads/main' }}
           tags: |
             ${{ steps.name.outputs.image }}:latest
             ${{ steps.name.outputs.image }}:${{ github.sha }}

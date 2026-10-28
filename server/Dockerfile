@@ -1,4 +1,13 @@
-# Quartz Notes sync server: PocketBase with the Quartz schema, sync rules and (later) the web app.
+# Quartz Notes sync server: PocketBase with the Quartz schema, the sync rules and the web app.
+# Built from the repository root: docker build -f server/Dockerfile .
+
+FROM node:22-alpine AS web
+WORKDIR /src/web
+COPY web/package.json web/package-lock.json ./
+RUN npm ci
+COPY web/ ./
+RUN npm run build
+
 FROM alpine:3.20
 
 ARG PB_VERSION=0.40.5
@@ -9,9 +18,9 @@ RUN apk add --no-cache ca-certificates tzdata unzip wget \
     && unzip -q /tmp/pb.zip pocketbase -d /pb \
     && rm /tmp/pb.zip
 
-COPY pb_migrations /pb/pb_migrations
-COPY pb_hooks /pb/pb_hooks
-COPY pb_public /pb/pb_public
+COPY server/pb_migrations /pb/pb_migrations
+COPY server/pb_hooks /pb/pb_hooks
+COPY --from=web /src/web/dist /pb/pb_public
 
 EXPOSE 8090
 VOLUME /pb/pb_data

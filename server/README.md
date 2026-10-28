@@ -1,7 +1,7 @@
 # Quartz Notes sync server
 
-PocketBase with the Quartz Notes schema (`pb_migrations`), sync rules (`pb_hooks`) and, later, the
-web app (`pb_public`). GitHub builds it into a Docker image, `ghcr.io/riseordie-85/quartz-sync`,
+PocketBase with the Quartz Notes schema (`pb_migrations`), sync rules (`pb_hooks`) and the web app
+(built from `web/`). GitHub builds it into a Docker image, `ghcr.io/riseordie-85/quartz-sync`,
 whenever `server/` changes on main. The NUC runs that image; Tailscale makes it reachable from your
 devices and nowhere else.
 
@@ -62,6 +62,12 @@ Quartz Notes → Settings → Sync → **Set up sync**:
 - Email and password: the notes account from step 5
 
 Do the same on each device. The first sync merges whatever each device already has.
+
+### 7. The web app
+
+Open **https://rise-or-die.tail096730.ts.net:8443** in any browser on your tailnet and sign in with
+the same notes account. In Chrome or Edge you can install it as an app (the install icon in the
+address bar, or the menu → Install).
 
 ## Backups
 
