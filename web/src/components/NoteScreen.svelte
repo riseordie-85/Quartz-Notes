@@ -1,7 +1,8 @@
 <script lang="ts">
   import { onDestroy } from "svelte"
   import type { Editor as TipTap } from "@tiptap/core"
-  import { store } from "../lib/store.svelte"
+  import { sameText, store } from "../lib/store.svelte"
+  import type { QuickNote } from "../lib/types"
   import { router } from "../lib/router.svelte"
   import { DEVICE, errorMessage } from "../lib/pb"
   import { compactDoc, decodeDoc, plainText, type RichDoc } from "../lib/richdoc"
@@ -25,7 +26,10 @@
   let editorView: Editor | undefined = $state()
   let dirty = false
   let timer: ReturnType<typeof setTimeout> | undefined
+  // The version last shown or saved here. Saves are based on it, so if another device changed the
+  // text in the meantime the save conflicts and the other version is kept as a copy.
   let seenRev = initial?.rev ?? 0
+  let seen: QuickNote | undefined = initial
   let colorMenu = $state(false)
   let error = $state<string | null>(null)
   let saving = $state(false)
@@ -58,13 +62,13 @@
     dirty = false
     saving = true
     try {
-      const saved = await store.save("quick_notes", id, {
-        title,
-        content: compactDoc(doc),
-        plainText: plainText(doc),
-        updatedAt: Date.now(),
-      })
-      if (saved) seenRev = saved.rev
+      const saved = await store.save(
+        "quick_notes",
+        id,
+        { title, content: compactDoc(doc), plainText: plainText(doc), updatedAt: Date.now() },
+        seenRev,
+      )
+      if (saved) (seenRev = saved.rev), (seen = saved)
       error = null
     } catch (e) {
       dirty = true
@@ -78,8 +82,17 @@
   $effect(() => {
     const n = note
     if (!n || n.rev <= seenRev) return
-    seenRev = n.rev
+    // A change to something else (pinned, colour) is fine to build on.
+    if (seen && sameText(n, seen)) {
+      seenRev = n.rev
+      seen = n
+      return
+    }
+    // A save from here is still on its way (it sets seenRev when done), or there's typing here
+    // that hasn't been saved: the save sorts out which version wins.
     if (n.device === DEVICE || dirty) return
+    seenRev = n.rev
+    seen = n
     title = n.title
     doc = decodeDoc(n.content)
     editorView?.load(doc)

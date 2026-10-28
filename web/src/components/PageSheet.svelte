@@ -1,10 +1,10 @@
 <script lang="ts">
   // One notebook page, drawn like the app's (docs/scrapbook-rendering.md): paper color and rulings,
   // title, the page's text (editable unless the page is locked), and scrapbook items on top.
-  import { onDestroy } from "svelte"
+  import { onDestroy, untrack } from "svelte"
   import type { Editor as TipTap } from "@tiptap/core"
   import type { Page, PageElement } from "../lib/types"
-  import { store } from "../lib/store.svelte"
+  import { sameText, store } from "../lib/store.svelte"
   import { DEVICE, errorMessage } from "../lib/pb"
   import { compactDoc, decodeDoc, fromPlainText, plainText, type RichDoc } from "../lib/richdoc"
   import { contentColorFor, heightFactor } from "../lib/scrapbook"
@@ -77,7 +77,9 @@
   let editor = $state<TipTap | null>(null)
   let editorView: Editor | undefined = $state()
   let dirty = false
+  // The version last shown or saved here (see NoteScreen).
   let seenRev = page.rev
+  let seen: Page = untrack(() => page)
   let timer: ReturnType<typeof setTimeout> | undefined
 
   function changed() {
@@ -94,8 +96,8 @@
       const fields = live.isSection
         ? { title, content: compactDoc(fromPlainText(description)), plainText: description, updatedAt: Date.now() }
         : { title, content: compactDoc(doc), plainText: plainText(doc), updatedAt: Date.now() }
-      const saved = await store.save("pages", pageId, fields)
-      if (saved) seenRev = saved.rev
+      const saved = await store.save("pages", pageId, fields, seenRev)
+      if (saved) (seenRev = saved.rev), (seen = saved)
       onError(null)
     } catch (e) {
       dirty = true
@@ -107,8 +109,14 @@
   $effect(() => {
     const p = live
     if (p.rev <= seenRev) return
-    seenRev = p.rev
+    if (sameText(p, seen)) {
+      seenRev = p.rev
+      seen = p
+      return
+    }
     if (p.device === DEVICE || dirty) return
+    seenRev = p.rev
+    seen = p
     title = p.title
     description = p.plainText
     doc = decodeDoc(p.content)

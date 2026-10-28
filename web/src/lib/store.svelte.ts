@@ -15,7 +15,16 @@ import {
   type Shelf,
   type SyncedRecord,
 } from "./types"
-import { emptyDoc, newId, registerFont } from "./richdoc"
+import { compactDoc, decodeDoc, emptyDoc, newId, registerFont } from "./richdoc"
+
+/** True when two versions of a note or page say the same thing. */
+export function sameText(a: QuickNote | Page, b: QuickNote | Page): boolean {
+  return (
+    a.title === b.title &&
+    a.plainText === b.plainText &&
+    JSON.stringify(compactDoc(decodeDoc(a.content))) === JSON.stringify(compactDoc(decodeDoc(b.content)))
+  )
+}
 
 type Lists = { [K in CollectionName]: Collections[K][] }
 
@@ -178,22 +187,30 @@ class Store {
   // ---- Writing ----
 
   /**
-   * Saves changes to a record. If it changed elsewhere since we last saw it, the more recent edit
-   * wins (like the app): ours is re-sent on top, unless the other edit is newer.
+   * Saves changes to a record. [baseRev] is the revision the changes were made on (editors pass the
+   * one they last showed; otherwise the newest one here). If the record changed elsewhere since,
+   * the more recent edit wins, like the app, and for notes and pages the other version is kept as
+   * a "conflict copy" so nothing is lost.
    */
-  async save<C extends CollectionName>(c: C, id: string, changes: Partial<Collections[C]>): Promise<Collections[C] | null> {
+  async save<C extends CollectionName>(
+    c: C,
+    id: string,
+    changes: Partial<Collections[C]>,
+    baseRev?: number,
+  ): Promise<Collections[C] | null> {
     const list = this.lists[c] as SyncedRecord[]
     const current = list.find((r) => r.id === id)
     if (!current) return null
     const editedAt = Date.now()
     const body = { ...changes, editedAt, device: DEVICE }
+    const mine = { ...current, ...changes, device: DEVICE } as SyncedRecord
     // Show the change straight away.
     const i = list.indexOf(current)
-    list[i] = { ...current, ...changes } as SyncedRecord
-    let baseRev = current.rev
+    list[i] = mine
+    let base = baseRev ?? current.rev
     for (let attempt = 0; attempt < 3; attempt++) {
       try {
-        const saved = await pb.collection(c).update(id, { ...body, baseRev })
+        const saved = await pb.collection(c).update(id, { ...body, baseRev: base })
         this.put(c, saved as unknown as SyncedRecord)
         return saved as unknown as Collections[C]
       } catch (e) {
@@ -203,13 +220,36 @@ class Store {
         }
         const latest = (await pb.collection(c).getOne(id)) as unknown as SyncedRecord
         if (latest.editedAt > editedAt) {
+          // The other edit is newer: it stays, and ours becomes the copy.
           this.put(c, latest)
+          await this.keepCopy(c, mine, latest)
           return null
         }
-        baseRev = latest.rev
+        if (attempt === 0) await this.keepCopy(c, latest, mine)
+        base = latest.rev
       }
     }
     return null
+  }
+
+  /** Keeps [loser] as a new note or page, if its text differs from [winner]'s. */
+  private async keepCopy(c: CollectionName, loser: SyncedRecord, winner: SyncedRecord) {
+    if (c !== "quick_notes" && c !== "pages") return
+    const a = loser as QuickNote | Page
+    const b = winner as QuickNote | Page
+    if (a.deleted || b.deleted || sameText(a, b)) return
+    const title = a.title.trim() ? `${a.title} (conflict copy)` : "Conflict copy"
+    const now = Date.now()
+    const fields: Record<string, unknown> = { ...a }
+    for (const k of ["id", "owner", "rev", "created", "updated", "collectionId", "collectionName", "expand", "editedAt", "device"])
+      delete fields[k]
+    if (c === "quick_notes") {
+      await this.create("quick_notes", { ...(fields as Partial<QuickNote>), title, pinned: false, createdAt: now, updatedAt: now })
+    } else {
+      const page = a as Page
+      const position = Math.max(-1, ...this.pagesOf(page.notebook).map((p) => p.position)) + 1
+      await this.create("pages", { ...(fields as Partial<Page>), title, locked: false, position, createdAt: now, updatedAt: now })
+    }
   }
 
   async create<C extends CollectionName>(c: C, fields: Partial<Collections[C]>): Promise<Collections[C]> {

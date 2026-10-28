@@ -63,7 +63,8 @@ PocketBase's own `updated` time, which devices use to ask for changes since thei
 Each record's id is the app row's uid. A server hook checks `rev` on every save: the client sends
 `baseRev`, the revision it last saw; if the record changed since, the save is refused with 409 and
 the client fetches the current version. The more recent edit (by `editedAt`, the device's clock)
-wins. Conflict copies of the losing version come in Phase 5.
+wins, and for notes and pages the losing version is kept as a new note or page titled
+"… (conflict copy)" (only when its text actually differs).
 
 ## App changes
 
@@ -105,6 +106,11 @@ wins. Conflict copies of the losing version come in Phase 5.
   the server doesn't have and downloads the ones this device's notes use. Imported fonts are
   uploaded when imported and downloaded where a note uses them. The web app shows and plays them
   and can add pictures to quick notes and pages.
+- Phase 5 (live updates and conflicts) is done: while the app is open it keeps a live connection
+  to the server and syncs within a second of a change elsewhere; an open note or page shows the
+  change straight away, or, if it has unsaved typing, keeps the other version as a conflict copy.
+  Both the app and the web keep the losing version of a note or page as a conflict copy. A cloud
+  icon on the home screen shows syncing, synced, offline or a problem (tap it to sync now).
 
 ## Phases
 

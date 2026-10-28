@@ -103,6 +103,39 @@ async def main():
         await expect(page.locator("input.title")).to_have_value("Groceries (from phone)", timeout=8000)
         ok("a change from another device appears live")
 
+        # Typing here while another device changes the text: the edit here is newer, so it stays,
+        # and the phone's version is kept as a conflict copy.
+        await editor.locator(".blk-text", has_text="Coffee beans").click()
+        await page.keyboard.press("End")
+        await page.keyboard.press("Enter")
+        await page.keyboard.type("Oat milk")
+        current = find("quick_notes", 'title="Groceries (from phone)"')[0]
+        api("PATCH", f"/api/collections/quick_notes/records/{current['id']}", {
+            "content": {"blocks": [{"text": "Written on the phone"}]}, "plainText": "Written on the phone",
+            "baseRev": current["rev"], "device": "phone", "editedAt": int(time.time() * 1000) - 60000,
+        }, TOKEN)
+        wait_for(lambda: "Oat milk" in api("GET", f"/api/collections/quick_notes/records/{current['id']}", token=TOKEN)["plainText"], "the edit here to win")
+        copy = wait_for(lambda: next(iter(find("quick_notes", 'title="Groceries (from phone) (conflict copy)"')), None), "a conflict copy")
+        assert copy["plainText"] == "Written on the phone", copy
+        assert not copy["pinned"], copy
+        await expect(page.locator("input.title")).to_have_value("Groceries (from phone)")
+        ok("when both change a note, the newer edit wins and the other is kept as a copy")
+
+        # The other way round: the phone's edit is newer, so it shows here and the typing becomes the copy.
+        await editor.locator(".blk-text", has_text="Oat milk").click()
+        await page.keyboard.press("End")
+        await page.keyboard.type(" (typed in the browser)")
+        current = api("GET", f"/api/collections/quick_notes/records/{current['id']}", token=TOKEN)
+        api("PATCH", f"/api/collections/quick_notes/records/{current['id']}", {
+            "content": {"blocks": [{"text": "Newer, from the phone"}]}, "plainText": "Newer, from the phone",
+            "baseRev": current["rev"], "device": "phone", "editedAt": int(time.time() * 1000) + 60000,
+        }, TOKEN)
+        mine = wait_for(lambda: next((n for n in find("quick_notes", 'title="Groceries (from phone) (conflict copy)"') if "typed in the browser" in n["plainText"]), None), "the typing kept as a copy")
+        assert "Oat milk" in mine["plainText"], mine
+        await expect(editor).to_have_text("Newer, from the phone", timeout=8000)
+        assert api("GET", f"/api/collections/quick_notes/records/{current['id']}", token=TOKEN)["plainText"] == "Newer, from the phone"
+        ok("when the other edit is newer, it shows here and the typing is kept as a copy")
+
         # Pictures: a synced one on a note, and one added from the browser.
         await page.goto(f"{BASE}/#/")
         await page.get_by_role("link", name="Gift ideas").click()
