@@ -1,0 +1,12 @@
+# Quartz Notes sync server. Put this file in /opt/stacks/quartz-sync/ and start it from Dockge.
+# It only listens on the NUC itself; Tailscale serve makes it reachable on the tailnet (see README).
+services:
+  quartz-sync:
+    image: ghcr.io/riseordie-85/quartz-sync:latest
+    container_name: quartz-sync
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8090:8090"
+    volumes:
+      # The database and uploaded files. Back this folder up (Syncthing, like Nodebook).
+      - /mnt/storage/quartz-sync/pb_data:/pb/pb_data
