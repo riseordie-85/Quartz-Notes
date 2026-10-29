@@ -29,11 +29,20 @@ import androidx.compose.material.icons.rounded.ShoppingCart
 import androidx.compose.material.icons.rounded.SportsEsports
 import androidx.compose.material.icons.rounded.Star
 import androidx.compose.material.icons.rounded.Work
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.PathFillType
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.vector.addPathNodes
+import androidx.compose.ui.unit.dp
 
-/** Icons available for notebook covers, keyed by a stable id stored in the database. */
+/**
+ * Icons for notebook covers and section pages, keyed by a stable id stored in the database. The
+ * list and groups come from shared/icons/icons.json (shared with the web app): the first icons are
+ * Material icons, the rest are drawn from SVG paths (IconPaths.kt).
+ */
 object NotebookIcons {
-    val all: List<Pair<String, ImageVector>> = listOf(
+    private val material: Map<String, ImageVector> = mapOf(
         "book" to Icons.AutoMirrored.Rounded.MenuBook,
         "story" to Icons.Rounded.AutoStories,
         "lock" to Icons.Rounded.Lock,
@@ -64,7 +73,34 @@ object NotebookIcons {
         "calendar" to Icons.Rounded.CalendarMonth,
     )
 
-    private val byKey = all.toMap()
+    private val byKey: Map<String, ImageVector> by lazy {
+        material + iconPaths.mapValues { (key, icon) -> vectorOf(key, icon) }
+    }
 
-    fun of(key: String?): ImageVector? = byKey[key]
+    /** The pickers' groups, in order: a title and its icons. */
+    val groups: List<Pair<String, List<Pair<String, ImageVector>>>> by lazy {
+        iconGroups.map { (title, keys) -> title to keys.mapNotNull { k -> byKey[k]?.let { k to it } } }
+    }
+
+    val all: List<Pair<String, ImageVector>> by lazy { groups.flatMap { it.second } }
+
+    fun of(key: String?): ImageVector? = key?.let { byKey[it] }
+
+    private fun vectorOf(key: String, icon: IconPaths): ImageVector {
+        val builder = ImageVector.Builder(
+            name = key,
+            defaultWidth = 24.dp,
+            defaultHeight = 24.dp,
+            viewportWidth = 24f,
+            viewportHeight = 24f,
+        )
+        for (d in icon.paths) {
+            builder.addPath(
+                pathData = addPathNodes(d),
+                fill = SolidColor(Color.Black),
+                pathFillType = if (icon.evenOdd) PathFillType.EvenOdd else PathFillType.NonZero,
+            )
+        }
+        return builder.build()
+    }
 }

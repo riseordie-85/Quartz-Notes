@@ -64,6 +64,7 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.gestures.detectDragGesturesAfterLongPress
 import androidx.compose.material.icons.rounded.VerticalSplit
 import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.pointer.pointerInput
@@ -515,6 +516,10 @@ private fun NotebookRow(
     var draggingId by remember { mutableStateOf<Long?>(null) }
     var dragOffset by remember { mutableFloatStateOf(0f) }
     LaunchedEffect(notebooks) { if (draggingId == null) order = notebooks }
+    // The drag handlers outlive recompositions, so they read these instead of the parameters.
+    val latestNotebooks by rememberUpdatedState(notebooks)
+    val latestReorder by rememberUpdatedState(onReorder)
+    val latestEdit by rememberUpdatedState(onEditNotebook)
     val haptics = LocalHapticFeedback.current
     val density = LocalDensity.current
     val step = with(density) { (coverWidth + 12.dp).toPx() }
@@ -522,7 +527,8 @@ private fun NotebookRow(
 
     fun finish(nb: NotebookEntity, travelled: Float) {
         val ids = order.map { it.id }
-        if (ids != notebooks.map { it.id }) onReorder(ids) else if (travelled < slop) onEditNotebook(nb)
+        if (ids != latestNotebooks.map { it.id }) latestReorder(ids) else if (travelled < slop) latestEdit(nb)
+        if (ids == latestNotebooks.map { it.id }) order = latestNotebooks
         draggingId = null
         dragOffset = 0f
     }

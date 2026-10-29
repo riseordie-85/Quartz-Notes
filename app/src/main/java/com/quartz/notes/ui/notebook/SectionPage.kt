@@ -359,9 +359,18 @@ internal fun SectionStyleSheet(
                 IconTile(selected = current == "none", accent = accent, onClick = { onIcon(null) }) {
                     Icon(Icons.Rounded.Block, contentDescription = "No icon", modifier = Modifier.size(22.dp))
                 }
-                NotebookIcons.all.forEach { (key, vector) ->
-                    IconTile(selected = current == key, accent = accent, onClick = { onIcon(key) }) {
-                        Icon(vector, contentDescription = key, modifier = Modifier.size(22.dp))
+                NotebookIcons.groups.forEach { (title, icons) ->
+                    // A full-width heading starts each group on its own line.
+                    Text(
+                        title,
+                        fontSize = 12.sp,
+                        color = LocalQuartzColors.current.textSecondary,
+                        modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
+                    )
+                    icons.forEach { (key, vector) ->
+                        IconTile(selected = current == key, accent = accent, onClick = { onIcon(key) }) {
+                            Icon(vector, contentDescription = key, modifier = Modifier.size(22.dp))
+                        }
                     }
                 }
             }

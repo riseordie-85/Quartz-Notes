@@ -49,6 +49,17 @@ import com.quartz.notes.ui.components.QuartzSheet
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.foundation.gestures.detectDragGesturesAfterLongPress
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.runtime.withFrameNanos
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.semantics.onLongClick
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.zIndex
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -90,7 +101,8 @@ private val ThumbHeight = 146.dp
 
 /**
  * Every page as a little thumbnail along a timeline, numbered across the top. The pages showing now
- * are highlighted; tap one to go there.
+ * are highlighted; tap one to go there. Touch and hold a page, then drag it sideways to move it
+ * (holding without dragging opens its menu).
  */
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
@@ -104,6 +116,8 @@ internal fun PageTimelineSheet(
     onManage: () -> Unit,
     /** Moves a page one place earlier (-1) or later (+1). */
     onMove: (PageEntity, Int) -> Unit,
+    /** Moves a page to a position among the real pages (0 = first page after the index). */
+    onMoveTo: (PageEntity, Int) -> Unit,
     onStartSection: (PageEntity) -> Unit,
     onDelete: (PageEntity) -> Unit,
     onDismiss: () -> Unit,
@@ -118,6 +132,67 @@ internal fun PageTimelineSheet(
     LaunchedEffect(Unit) { listState.scrollToItem((current - 1).coerceAtLeast(0)) }
     val accent = MaterialTheme.colorScheme.primary
     val lineColor = LocalQuartzColors.current.textSecondary.copy(alpha = 0.35f)
+
+    // Dragging a page: the order shown follows the notebook, except while a page is being dragged.
+    var order by remember { mutableStateOf(pages) }
+    var draggingId by remember { mutableStateOf<Long?>(null) }
+    var dragOffset by remember { mutableFloatStateOf(0f) }
+    LaunchedEffect(pages) { if (draggingId == null) order = pages }
+    // The drag handlers outlive recompositions, so they read these instead of the parameters.
+    val latestPages by rememberUpdatedState(pages)
+    val latestMoveTo by rememberUpdatedState(onMoveTo)
+    val haptics = LocalHapticFeedback.current
+    val density = LocalDensity.current
+    val step = with(density) { (ThumbWidth + 16.dp).toPx() }
+    val slop = with(density) { 12.dp.toPx() }
+    val edge = with(density) { 56.dp.toPx() }
+
+    /** Swaps the dragged page with its neighbour once it has moved past half of it. */
+    fun settle(id: Long) {
+        while (true) {
+            val i = order.indexOfFirst { it.id == id }
+            if (i < 0) return
+            val first = if (order.firstOrNull()?.id == INDEX_PAGE_ID) 1 else 0
+            val target = when {
+                dragOffset > step / 2 && i < order.lastIndex -> i + 1
+                dragOffset < -step / 2 && i > first -> i - 1
+                else -> return
+            }
+            order = order.toMutableList().apply { add(target, removeAt(i)) }
+            dragOffset -= (target - i) * step
+            haptics.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+        }
+    }
+
+    fun finish(page: PageEntity, travelled: Float, openMenu: () -> Unit) {
+        val from = latestPages.filter { it.id != INDEX_PAGE_ID }.indexOfFirst { it.id == page.id }
+        val to = order.filter { it.id != INDEX_PAGE_ID }.indexOfFirst { it.id == page.id }
+        if (from >= 0 && to >= 0 && from != to) latestMoveTo(page, to) else if (travelled < slop) openMenu()
+        if (from == to) order = latestPages
+        draggingId = null
+        dragOffset = 0f
+    }
+
+    // Near either edge while dragging, the timeline scrolls along.
+    LaunchedEffect(draggingId) {
+        val id = draggingId ?: return@LaunchedEffect
+        while (draggingId == id) {
+            withFrameNanos { }
+            val info = listState.layoutInfo
+            val item = info.visibleItemsInfo.firstOrNull { it.key == id } ?: continue
+            val left = item.offset + dragOffset
+            val right = left + item.size
+            val speed = when {
+                left < info.viewportStartOffset + edge -> -((info.viewportStartOffset + edge - left) / edge).coerceIn(0f, 1f) * 18f
+                right > info.viewportEndOffset - edge -> ((right - (info.viewportEndOffset - edge)) / edge).coerceIn(0f, 1f) * 18f
+                else -> 0f
+            }
+            if (speed == 0f) continue
+            val moved = listState.dispatchRawDelta(speed)
+            dragOffset += moved
+            settle(id)
+        }
+    }
 
     QuartzSheet(onDismissRequest = onDismiss, containerColor = MaterialTheme.colorScheme.surface) {
         Column(Modifier.navigationBarsPadding().padding(bottom = 20.dp)) {
@@ -145,12 +220,24 @@ internal fun PageTimelineSheet(
                 },
                 contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 16.dp),
             ) {
-                itemsIndexed(pages, key = { _, p -> p.id }) { i, page ->
+                itemsIndexed(order, key = { _, p -> p.id }) { i, page ->
                     val isIndex = page.id == INDEX_PAGE_ID
-                    val label = if (isIndex) "Index" else "${pages.subList(0, i + 1).count { it.id != INDEX_PAGE_ID }}"
+                    val label = if (isIndex) "Index" else "${order.subList(0, i + 1).count { it.id != INDEX_PAGE_ID }}"
                     val isShowing = page.id in showing
                     var menu by remember { mutableStateOf(false) }
-                    Box {
+                    val dragging = page.id == draggingId
+                    val lift by animateFloatAsState(if (dragging) 1.08f else 1f, label = "lift")
+                    Box(
+                        if (dragging) {
+                            Modifier.zIndex(1f).graphicsLayer {
+                                translationX = dragOffset
+                                scaleX = lift
+                                scaleY = lift
+                            }
+                        } else {
+                            Modifier.animateItem(fadeInSpec = null, fadeOutSpec = null)
+                        },
+                    ) {
                     Column(
                         Modifier
                             .width(ThumbWidth + 16.dp)
@@ -166,11 +253,33 @@ internal fun PageTimelineSheet(
                                     }
                                 }
                             }
-                            .combinedClickable(
-                                onClick = { onOpen(page) },
-                                onLongClick = if (isIndex) null else ({ menu = true }),
-                                onLongClickLabel = "Page options",
-                            ),
+                            .combinedClickable(onClick = { onOpen(page) })
+                            .then(
+                                if (isIndex) {
+                                    Modifier
+                                } else {
+                                    Modifier.pointerInput(page.id) {
+                                        var travelled = 0f
+                                        detectDragGesturesAfterLongPress(
+                                            onDragStart = {
+                                                haptics.performHapticFeedback(HapticFeedbackType.LongPress)
+                                                draggingId = page.id
+                                                dragOffset = 0f
+                                                travelled = 0f
+                                            },
+                                            onDrag = { change, amount ->
+                                                change.consume()
+                                                dragOffset += amount.x
+                                                travelled += kotlin.math.abs(amount.x) + kotlin.math.abs(amount.y)
+                                                settle(page.id)
+                                            },
+                                            onDragEnd = { finish(page, travelled) { menu = true } },
+                                            onDragCancel = { finish(page, Float.MAX_VALUE) {} },
+                                        )
+                                    }
+                                },
+                            )
+                            .semantics { if (!isIndex) onLongClick("Page options") { menu = true; true } },
                         horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
                         // The timeline: a line through every page's number.
@@ -181,7 +290,7 @@ internal fun PageTimelineSheet(
                                 .drawBehind {
                                     val y = size.height / 2
                                     val startX = if (i == 0) size.width / 2 else 0f
-                                    val endX = if (i == pages.lastIndex) size.width / 2 else size.width
+                                    val endX = if (i == order.lastIndex) size.width / 2 else size.width
                                     drawLine(lineColor, Offset(startX, y), Offset(endX, y), strokeWidth = 2.dp.toPx())
                                 },
                             contentAlignment = Alignment.Center,

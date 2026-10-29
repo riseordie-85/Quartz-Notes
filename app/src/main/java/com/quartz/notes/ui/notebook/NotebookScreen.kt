@@ -680,6 +680,10 @@ fun NotebookScreen(
                     val to = from + delta
                     if (from >= 0 && to in pages.indices) vm.movePage(from, to)
                 },
+                onMoveTo = { page, to ->
+                    val from = pages.indexOfFirst { it.id == page.id }
+                    if (from >= 0 && to in pages.indices && to != from) vm.movePage(from, to)
+                },
                 onStartSection = { page ->
                     showTimeline = false
                     val at = pages.indexOfFirst { it.id == page.id }

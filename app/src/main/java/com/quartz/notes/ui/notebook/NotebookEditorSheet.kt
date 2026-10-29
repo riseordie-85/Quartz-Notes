@@ -179,9 +179,18 @@ fun NotebookEditorSheet(
                 IconChoice(selected = icon == "none", onClick = { icon = "none" }) {
                     Icon(Icons.Rounded.Block, contentDescription = "No icon", modifier = Modifier.size(22.dp))
                 }
-                NotebookIcons.all.forEach { (key, vector) ->
-                    IconChoice(selected = icon == key, onClick = { icon = key }) {
-                        Icon(vector, contentDescription = key, modifier = Modifier.size(22.dp))
+                NotebookIcons.groups.forEach { (title, icons) ->
+                    // A full-width heading starts each group on its own line.
+                    Text(
+                        title,
+                        fontSize = 12.sp,
+                        color = LocalQuartzColors.current.textSecondary,
+                        modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
+                    )
+                    icons.forEach { (key, vector) ->
+                        IconChoice(selected = icon == key, onClick = { icon = key }) {
+                            Icon(vector, contentDescription = key, modifier = Modifier.size(22.dp))
+                        }
                     }
                 }
             }
