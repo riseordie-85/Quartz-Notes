@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { theme } from "../lib/theme.svelte"
   import { onDestroy } from "svelte"
   import type { Editor as TipTap } from "@tiptap/core"
   import { sameText, store } from "../lib/store.svelte"
@@ -18,7 +19,7 @@
   let { id, onMenu }: { id: string; onMenu: () => void } = $props()
 
   const note = $derived(store.note(id))
-  const dark = typeof matchMedia !== "undefined" && matchMedia("(prefers-color-scheme: dark)").matches
+  const dark = $derived(theme.dark)
   const initial = store.note(id)
   let title = $state(initial?.title ?? "")
   let doc: RichDoc = $state.raw(initial ? decodeDoc(initial.content) : decodeDoc(null))

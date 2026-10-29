@@ -5,12 +5,22 @@
   import { argbToCss } from "../lib/richdoc"
   import type { Notebook } from "../lib/types"
   import Icon from "./Icon.svelte"
+  import NotebookDialog from "./NotebookDialog.svelte"
+  import { theme, type ThemeMode } from "../lib/theme.svelte"
 
   let { open, onClose, signOut }: { open: boolean; onClose: () => void; signOut: () => void } = $props()
   let query = $state(router.route.name === "search" ? router.route.q : "")
 
   const r = $derived(router.route)
   const email = $derived((pb.authStore.record?.email as string | undefined) ?? "")
+
+  let creating = $state(false)
+
+  const MODES: { mode: ThemeMode; label: string; icon: "autoMode" | "lightMode" | "darkMode" }[] = [
+    { mode: "system", label: "Match this computer", icon: "autoMode" },
+    { mode: "light", label: "Light", icon: "lightMode" },
+    { mode: "dark", label: "Dark", icon: "darkMode" },
+  ]
 
   // Dragging notebooks to rearrange them (also onto another shelf).
   // `held` is set at once; `dragging` (which changes the page) a moment later, because changing the
@@ -112,13 +122,31 @@
         ondrop={drop}
       ></div>
     {/each}
+    <button class="new-notebook" onclick={() => (creating = true)}><Icon name="newNotebook" size={20} /><span>New notebook</span></button>
   </nav>
+
+  <div class="theme" role="radiogroup" aria-label="Theme">
+    {#each MODES as m (m.mode)}
+      <button role="radio" aria-checked={theme.mode === m.mode} class:on={theme.mode === m.mode} title={m.label} aria-label={m.label} onclick={() => theme.set(m.mode)}>
+        <Icon name={m.icon} size={18} />
+      </button>
+    {/each}
+  </div>
 
   <div class="account">
     <span title={email}>{email}</span>
     <button class="icon-btn" title="Sign out" onclick={signOut}><Icon name="logout" size={20} /></button>
   </div>
 </aside>
+{#if creating}
+  <NotebookDialog
+    onCancel={() => (creating = false)}
+    onDone={(nb) => {
+      creating = false
+      router.go({ name: "notebook", id: nb.id })
+    }}
+  />
+{/if}
 
 <style>
   aside {
@@ -232,6 +260,49 @@
     margin: 0 12px;
     font-size: 14px;
     color: var(--muted);
+  }
+  .new-notebook {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 42px;
+    margin-top: 10px;
+    padding: 0 12px;
+    border: 1px dashed var(--divider);
+    border-radius: 21px;
+    background: transparent;
+    color: var(--muted);
+    font: inherit;
+    cursor: pointer;
+  }
+  .new-notebook:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+  .theme {
+    display: flex;
+    gap: 2px;
+    align-self: flex-start;
+    margin-left: 8px;
+    padding: 3px;
+    border-radius: 18px;
+    background: var(--surface-2);
+  }
+  .theme button {
+    width: 36px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    border: 0;
+    border-radius: 15px;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+  }
+  .theme button.on {
+    background: var(--surface);
+    color: var(--accent);
+    box-shadow: var(--shadow);
   }
   .account {
     display: flex;

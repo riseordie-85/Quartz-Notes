@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { theme } from "../lib/theme.svelte"
   // One notebook page, drawn like the app's (docs/scrapbook-rendering.md): paper color and rulings,
   // title, the page's text (editable unless the page is locked), and scrapbook items on top.
   import { onDestroy, untrack } from "svelte"
@@ -8,7 +9,8 @@
   import { DEVICE, errorMessage } from "../lib/pb"
   import { compactDoc, decodeDoc, fromPlainText, plainText, type RichDoc } from "../lib/richdoc"
   import { contentColorFor, heightFactor } from "../lib/scrapbook"
-  import { SECTION_ICONS } from "../lib/sectionIcons"
+  import { coverIcon } from "../lib/coverIcons"
+  import CoverIcon from "./CoverIcon.svelte"
   import Editor from "./Editor.svelte"
   import Icon from "./Icon.svelte"
   import Toolbar from "./Toolbar.svelte"
@@ -18,8 +20,8 @@
 
   let { page, onError }: { page: Page; onError: (msg: string | null) => void } = $props()
 
-  const dark = typeof matchMedia !== "undefined" && matchMedia("(prefers-color-scheme: dark)").matches
-  const DEFAULT_PAGE = dark ? 0xff1c1c21 | 0 : 0xffffffff | 0
+  const dark = $derived(theme.dark)
+  const DEFAULT_PAGE = $derived(dark ? 0xff1c1c21 | 0 : 0xffffffff | 0)
 
   let W = $state(0)
   const pageId = page.id
@@ -158,8 +160,8 @@
         <div class="section-photo" class:media-missing={!url} title={url ? "Section photo" : "This picture hasn't synced yet"}>
           {#if url}<button class="open-picture" title="Open picture" onclick={() => openPicture(live.sectionImage!)}><img src={url} alt="" /></button>{/if}
         </div>
-      {:else if live.sectionIcon && SECTION_ICONS[live.sectionIcon]}
-        <span class="material-symbols-rounded section-icon">{SECTION_ICONS[live.sectionIcon]}</span>
+      {:else if coverIcon(live.sectionIcon)}
+        <div class="section-icon"><CoverIcon name={live.sectionIcon} size={96} /></div>
       {/if}
     </div>
   {:else}
@@ -376,7 +378,8 @@
     opacity: 0.4;
   }
   .section-icon {
-    font-size: 96px;
+    display: grid;
+    place-items: center;
     margin-top: 12px;
   }
   .section-photo {

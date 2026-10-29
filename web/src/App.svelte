@@ -3,6 +3,7 @@
   import { pb, errorMessage } from "./lib/pb"
   import { store } from "./lib/store.svelte"
   import { router } from "./lib/router.svelte"
+  import { theme } from "./lib/theme.svelte"
   import Login from "./components/Login.svelte"
   import Sidebar from "./components/Sidebar.svelte"
   import NotesGrid from "./components/NotesGrid.svelte"
@@ -45,6 +46,9 @@
     store.reset()
     signedIn = false
   }
+
+  // Light/dark and the app's accent and background colours.
+  $effect(() => theme.apply(store.prefs))
 
   // Close the drawer when moving to another screen.
   $effect(() => {

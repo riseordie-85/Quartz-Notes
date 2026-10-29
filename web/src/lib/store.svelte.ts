@@ -11,6 +11,7 @@ import {
   type Notebook,
   type Page,
   type PageElement,
+  type Prefs,
   type QuickNote,
   type Shelf,
   type SyncedRecord,
@@ -34,6 +35,8 @@ class Store {
   error = $state<string | null>(null)
   /** Bumps when a record changes on another device (editors use it to reload). */
   remoteVersion = $state(0)
+  /** Accent and background colours picked in the app (null until loaded or if never set). */
+  prefs = $state<Prefs | null>(null)
   /** Stored files by app path ("media/abc.jpg", "fonts/Lora.ttf"). */
   media: Record<string, MediaFile> = $state({})
   private unsubscribers: (() => void)[] = []
@@ -44,6 +47,7 @@ class Store {
       COLLECTIONS.map((c) => pb.collection(c).getFullList({ filter: "deleted = false", batch: 500 })),
     )
     COLLECTIONS.forEach((c, i) => ((this.lists[c] as SyncedRecord[]) = results[i] as unknown as SyncedRecord[]))
+    this.prefs = ((await pb.collection("prefs").getFullList().catch(() => []))[0] as unknown as Prefs | undefined) ?? null
     const files = (await pb.collection("media").getFullList({ batch: 500 })) as unknown as MediaFile[]
     for (const f of files) this.media[f.path] = f
     await this.loadFonts(files)
@@ -59,6 +63,9 @@ class Store {
         this.media[f.path] = f
         if (f.path.startsWith("fonts/")) this.loadFonts([f])
       }),
+    )
+    this.unsubscribers.push(
+      await pb.collection("prefs").subscribe("*", (e) => (this.prefs = e.record as unknown as Prefs)).catch(() => () => {}),
     )
     for (const c of COLLECTIONS) {
       const off = await pb.collection(c).subscribe("*", (e) => this.put(c, e.record as unknown as SyncedRecord))
@@ -116,6 +123,7 @@ class Store {
     this.stop()
     for (const c of COLLECTIONS) (this.lists[c] as SyncedRecord[]) = []
     this.media = {}
+    this.prefs = null
     this.loaded = false
   }
 
@@ -342,8 +350,44 @@ class Store {
   /** Adds a page after [after] (or at the end), with the look of the page before it. */
   // ---- Notebooks ----
 
-  async renameNotebook(nb: Notebook, title: string) {
-    await this.save("notebooks", nb.id, { title: title.trim(), updatedAt: Date.now() })
+  /** A new notebook at the end of [shelfId], with one blank page (like the app). */
+  async createNotebook(shelfId: string, fields: { title: string; colorArgb: number; icon: string }): Promise<Notebook> {
+    const now = Date.now()
+    const nb = await this.create("notebooks", {
+      shelf: shelfId,
+      title: fields.title.trim(),
+      colorArgb: fields.colorArgb,
+      texture: "GLOSS",
+      icon: fields.icon,
+      position: this.notebooksOn(shelfId).length,
+      createdAt: now,
+      updatedAt: now,
+      twoPage: true,
+      showIndex: false,
+      sectionTabs: true,
+      attachAtBottom: false,
+    })
+    await this.addPage(nb.id, null)
+    return nb
+  }
+
+  /** Changes a notebook's title, colour and icon, and moves it if [shelfId] is another shelf. */
+  async editNotebook(nb: Notebook, fields: { title: string; colorArgb: number; icon: string }, shelfId: string) {
+    await this.save("notebooks", nb.id, { title: fields.title.trim(), colorArgb: fields.colorArgb, icon: fields.icon, updatedAt: Date.now() })
+    if (shelfId !== nb.shelf) {
+      const moved = this.notebook(nb.id)
+      if (moved) await this.moveNotebook(moved, shelfId, this.notebooksOn(shelfId).length)
+    }
+  }
+
+  // ---- Pages ----
+
+  /** Moves a page to [index] in its notebook, renumbering the others. */
+  async movePage(page: Page, index: number) {
+    const pages = this.pagesOf(page.notebook).filter((p) => p.id !== page.id)
+    pages.splice(Math.max(0, Math.min(pages.length, index)), 0, page)
+    await Promise.all(pages.map((p, i) => (p.position !== i ? this.save("pages", p.id, { position: i }) : null)))
+    await this.save("notebooks", page.notebook, { updatedAt: Date.now() })
   }
 
   /**

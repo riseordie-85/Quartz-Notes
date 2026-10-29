@@ -17,19 +17,18 @@
   color-scheme: light;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #101013;
-    --surface: #1c1c21;
-    --surface-2: #26262c;
-    --on-surface: #ededf0;
-    --muted: #9a9aa5;
-    --divider: rgb(237 237 240 / 0.12);
-    --page: #1c1c21;
-    --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 4px 14px rgb(0 0 0 / 0.35);
-    --ink: var(--on-surface);
-    color-scheme: dark;
-  }
+/* Dark colours: chosen in the menu, or following the computer (theme.svelte.ts sets data-theme). */
+:root[data-theme="dark"] {
+  --bg: #101013;
+  --surface: #1c1c21;
+  --surface-2: #26262c;
+  --on-surface: #ededf0;
+  --muted: #9a9aa5;
+  --divider: rgb(237 237 240 / 0.12);
+  --page: #1c1c21;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 4px 14px rgb(0 0 0 / 0.35);
+  --ink: var(--on-surface);
+  color-scheme: dark;
 }
 
 * {

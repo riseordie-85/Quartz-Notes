@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { theme } from "../lib/theme.svelte"
   import { store } from "../lib/store.svelte"
   import { router } from "../lib/router.svelte"
   import { decodeDoc, previewLines } from "../lib/richdoc"
@@ -9,7 +10,7 @@
   import type { QuickNote } from "../lib/types"
 
   let { archive, onMenu }: { archive: boolean; onMenu: () => void } = $props()
-  const dark = typeof matchMedia !== "undefined" && matchMedia("(prefers-color-scheme: dark)").matches
+  const dark = $derived(theme.dark)
   const notes = $derived(archive ? store.archived : store.notes)
   let error = $state<string | null>(null)
 

@@ -6,7 +6,8 @@
   import TopBar from "./TopBar.svelte"
   import Icon from "./Icon.svelte"
   import PageSheet from "./PageSheet.svelte"
-  import TextDialog from "./TextDialog.svelte"
+  import NotebookDialog from "./NotebookDialog.svelte"
+  import type { Page } from "../lib/types"
   import { preparePicture } from "../lib/pictures"
 
   let { id, pageId, onMenu }: { id: string; pageId?: string; onMenu: () => void } = $props()
@@ -20,7 +21,39 @@
   let sheet: PageSheet | undefined = $state()
   let picker: HTMLInputElement | undefined = $state()
   let adding = $state(false)
-  let renaming = $state(false)
+  let editing = $state(false)
+
+  // Dragging pages in the list to rearrange them. `held` is set at once, the rest a moment later
+  // (changing the page during dragstart makes the browser cancel the drag).
+  let held: Page | null = null
+  let dragging = $state<Page | null>(null)
+  let dropBefore = $state<string | null | undefined>(undefined)
+
+  function dragOver(e: DragEvent, p: Page | null) {
+    if (!held) return
+    e.preventDefault()
+    if (e.dataTransfer) e.dataTransfer.dropEffect = "move"
+    let before: string | null = null
+    if (p) {
+      const box = (e.currentTarget as HTMLElement).getBoundingClientRect()
+      before = e.clientY < box.top + box.height / 2 ? p.id : (pages[pages.indexOf(p) + 1]?.id ?? null)
+    }
+    dropBefore = before
+  }
+
+  async function dropPage(e: DragEvent) {
+    e.preventDefault()
+    const p = held
+    const before = dropBefore
+    held = null
+    dragging = null
+    dropBefore = undefined
+    if (!p || before === undefined || before === p.id) return
+    const rest = pages.filter((x) => x.id !== p.id)
+    const to = before === null ? rest.length : rest.findIndex((x) => x.id === before)
+    if (to < 0 || to === pages.indexOf(p)) return
+    await act(() => store.movePage(p, to))
+  }
 
   const shelf = $derived(notebook ? store.shelves.find((s) => s.id === notebook.shelf) : undefined)
   const siblings = $derived(notebook ? store.notebooksOn(notebook.shelf) : [])
@@ -129,6 +162,8 @@
             {#if page}
               <p class="label">This page</p>
               <button onclick={() => act(addPageAfter)}><Icon name="addPage" size={20} />Add a page after it</button>
+              <button disabled={index <= 0} onclick={() => act(() => store.movePage(page, index - 1))}><Icon name="arrowBack" size={20} />Move earlier</button>
+              <button disabled={index >= pages.length - 1} onclick={() => act(() => store.movePage(page, index + 1))}><Icon name="arrowForward" size={20} />Move later</button>
               <button onclick={() => act(() => store.save("pages", page.id, { locked: !page.locked }))}>
                 <Icon name={page.locked ? "lockOpen" : "lock"} size={20} />{page.locked ? "Unlock page" : "Lock page"}
               </button>
@@ -143,7 +178,7 @@
               <hr />
             {/if}
             <p class="label">Notebook</p>
-            <button onclick={() => ((more = false), (renaming = true))}><Icon name="edit" size={20} />Rename</button>
+            <button onclick={() => ((more = false), (editing = true))}><Icon name="edit" size={20} />Notebook settings</button>
             <button disabled={place <= 0} onclick={() => act(() => store.moveNotebook(notebook, notebook.shelf, place - 1))}>
               <Icon name="arrowUp" size={20} />Move up
             </button>
@@ -169,6 +204,18 @@
           href={`#/notebook/${id}/${p.id}`}
           class:active={p.id === page?.id}
           class:section={p.isSection}
+          class:dragging={dragging?.id === p.id}
+          class:drop-before={dropBefore === p.id}
+          draggable="true"
+          ondragstart={(e) => {
+            held = p
+            setTimeout(() => (dragging = held))
+            e.dataTransfer?.setData("text/plain", pageLabel(i))
+            if (e.dataTransfer) e.dataTransfer.effectAllowed = "move"
+          }}
+          ondragend={() => ((held = null), (dragging = null), (dropBefore = undefined))}
+          ondragover={(e) => dragOver(e, p)}
+          ondrop={dropPage}
           style:--section={p.isSection ? (argbToCss(p.backgroundArgb ?? (0xfff9c78a | 0)) ?? undefined) : undefined}
           onclick={(e) => {
             e.preventDefault()
@@ -181,6 +228,7 @@
           {#if p.locked}<span class="tag" title="Locked"><Icon name="lock" size={17} /></span>{/if}
         </a>
       {/each}
+      <div class="drop-end" class:on={dropBefore === null} role="presentation" ondragover={(e) => dragOver(e, null)} ondrop={dropPage}></div>
       <button class="add-page" onclick={() => act(addPageAfter)}><Icon name="add" size={20} />Add page</button>
       {#if shelf}<p class="shelf">Shelf: {shelf.name}</p>{/if}
     </nav>
@@ -196,16 +244,8 @@
   </div>
 {/if}
 {#if more}<button class="scrim" aria-label="Close" onclick={() => (more = false)}></button>{/if}
-{#if renaming && notebook}
-  <TextDialog
-    title="Rename notebook"
-    value={notebook.title}
-    onCancel={() => (renaming = false)}
-    onSave={(t) => {
-      renaming = false
-      act(() => store.renameNotebook(notebook, t))
-    }}
-  />
+{#if editing && notebook}
+  <NotebookDialog {notebook} onCancel={() => (editing = false)} onDone={() => (editing = false)} />
 {/if}
 
 <style>
@@ -225,12 +265,25 @@
     opacity: 0.35;
     cursor: default;
   }
+  .pages a.dragging {
+    opacity: 0.4;
+  }
+  .pages a.drop-before {
+    box-shadow: inset 0 3px 0 var(--accent);
+  }
+  .drop-end {
+    flex: none;
+    height: 8px;
+    border-radius: 2px;
+  }
+  .drop-end.on {
+    box-shadow: inset 0 3px 0 var(--accent);
+  }
   .add-page {
     display: flex;
     align-items: center;
     gap: 10px;
     min-height: 38px;
-    margin-top: 6px;
     padding: 0 12px 0 14px;
     border: 1px dashed var(--divider);
     border-radius: 19px;

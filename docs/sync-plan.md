@@ -111,6 +111,9 @@ wins, and for notes and pages the losing version is kept as a new note or page t
   change straight away, or, if it has unsaved typing, keeps the other version as a conflict copy.
   Both the app and the web keep the losing version of a note or page as a conflict copy. A cloud
   icon on the home screen shows syncing, synced, offline or a problem (tap it to sync now).
+- Appearance: the accent and background colours picked in the app are kept in the server's
+  `prefs` collection (one record per account; the newest change wins) and used by every device and
+  the web app. The web app also has its own Light / Dark / System switch.
 
 ## Phases
 

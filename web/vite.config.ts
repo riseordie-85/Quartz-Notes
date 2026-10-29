@@ -7,6 +7,8 @@ export default defineConfig({
   plugins: [svelte()],
   server: {
     proxy: { "/api": { target: process.env.PB_URL ?? "http://127.0.0.1:8090", ws: true } },
+    // shared/ (icons used by the app too) sits next to web/.
+    fs: { allow: [".."] },
   },
   build: { outDir: "dist", emptyOutDir: true },
   test: { include: ["tests/**/*.test.ts"] },

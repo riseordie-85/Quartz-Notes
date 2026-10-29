@@ -112,3 +112,11 @@ export interface MediaFile {
   size: number
   created: string
 }
+
+/** Accent and background colours shared by the app (ARGB ints; background 0 = theme default). */
+export interface Prefs {
+  id: string
+  accentArgb: number
+  backgroundArgb: number
+  editedAt: number
+}

@@ -11,6 +11,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&display=block" />
     <title>Quartz Notes</title>
+    <script>
+      // Pick light or dark before the page draws, so it doesn't flash (theme.svelte.ts takes over).
+      try {
+        const m = localStorage.getItem("quartz-theme")
+        const dark = m === "dark" || (m !== "light" && matchMedia("(prefers-color-scheme: dark)").matches)
+        document.documentElement.dataset.theme = dark ? "dark" : "light"
+      } catch {}
+    </script>
   </head>
   <body>
     <div id="app"></div>

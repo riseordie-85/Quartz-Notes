@@ -180,7 +180,7 @@ async def main():
 
         # A new note.
         await page.goto(f"{BASE}/#/")
-        await page.get_by_role("button", name="New note").click()
+        await page.get_by_role("button", name="New note", exact=True).click()
         await expect(page.locator(".ProseMirror")).to_be_visible()
         await page.fill("input.title", "Made on the web")
         await page.locator(".ProseMirror").click()
@@ -269,15 +269,41 @@ async def main():
         wait_for(lambda: len([p for p in api("GET", "/api/collections/pages/records?perPage=50", token=TOKEN)["items"] if not p["deleted"]]) == 4, "the page deleted on the server")
         ok("Delete page works")
 
-        # Notebook menu: rename and rearrange.
+        # Page menu: move the current page (Budget, 4th) earlier, then back.
+        budget_id = find("pages", 'title="Budget"')[0]["id"]
         await page.get_by_role("button", name="More").click()
-        await page.get_by_role("button", name="Rename").click()
-        await page.get_by_role("textbox", name="Rename notebook").fill("Travel 2026")
-        await page.screenshot(path=f"{OUT}/w07e_rename.png")
+        await page.get_by_role("button", name="Move earlier").click()
+        wait_for(lambda: find("pages", f'id="{budget_id}"')[0]["position"] == 2, "the page to move earlier")
+        await expect(page.locator(".count")).to_have_text("3/4")
+        await page.get_by_role("button", name="More").click()
+        await page.get_by_role("button", name="Move later").click()
+        wait_for(lambda: find("pages", f'id="{budget_id}"')[0]["position"] == 3, "the page to move back")
+        ok("pages move earlier and later from the menu")
+
+        # Drag a page to the top of the page list.
+        def page_titles():
+            nb = find("notebooks", 'title="Travel"')[0]
+            return [p["title"] for p in sorted(find("pages", f'notebook="{nb["id"]}" && deleted=false'), key=lambda p: p["position"])]
+
+        await page.locator("nav.pages a", has_text="Budget").drag_to(page.locator("nav.pages a", has_text="Kyoto"), target_position={"x": 40, "y": 4})
+        wait_for(lambda: page_titles() == ["Budget", "Kyoto", "Japan", "Mood board"], "the dragged page order on the server")
+        await expect(page.locator("nav.pages a").first).to_contain_text("Budget")
+        ok("dragging a page in the list moves it")
+        await page.locator("nav.pages a", has_text="Budget").drag_to(page.locator("nav.pages .drop-end"))
+        wait_for(lambda: page_titles() == ["Kyoto", "Japan", "Mood board", "Budget"], "the page dragged back to the end")
+
+        # Notebook settings: title, colour and icon.
+        await page.get_by_role("button", name="More").click()
+        await page.get_by_role("button", name="Notebook settings").click()
+        await page.locator("dialog[open]").get_by_role("textbox", name="Title").fill("Travel 2026")
+        await page.locator("dialog[open]").get_by_role("radio", name="astronaut").click()
+        await page.locator("dialog[open] .swatch").nth(4).click()
+        await page.screenshot(path=f"{OUT}/w07e_notebook_settings.png")
         await page.get_by_role("button", name="Save").click()
         await expect(page.get_by_role("heading", name="Travel 2026")).to_be_visible()
-        wait_for(lambda: find("notebooks", 'title="Travel 2026"'), "the new name on the server")
-        ok("a notebook can be renamed")
+        nb = wait_for(lambda: next(iter(find("notebooks", 'title="Travel 2026"')), None), "the new settings on the server")
+        assert nb["icon"] == "astronaut" and nb["colorArgb"] == 0xFF2E9E5B - 2**32, nb
+        ok("a notebook's title, colour and icon can be changed")
 
         def order(shelf_name):
             s = find("shelves", f'name="{shelf_name}"')[0]
@@ -305,7 +331,45 @@ async def main():
         wait_for(lambda: not find("notebooks", 'title="Recipes" && deleted=false'), "the notebook deleted on the server")
         await expect(page.locator("aside nav a", has_text="Recipes")).to_have_count(0)
         ok("a notebook can be deleted")
+
+        # A new notebook, on the Work shelf, with one of the new icons.
+        await page.get_by_role("button", name="New notebook").click()
+        await page.locator("dialog[open]").get_by_role("textbox", name="Title").fill("Comics")
+        await page.locator("dialog[open]").get_by_role("combobox", name="Shelf").select_option(label="Work")
+        await page.locator("dialog[open]").get_by_role("radio", name="skull", exact=True).click()
+        await page.screenshot(path=f"{OUT}/w07g_new_notebook.png")
+        await page.get_by_role("button", name="Create").click()
+        await expect(page.get_by_role("heading", name="Comics")).to_be_visible()
+        await expect(page.locator(".count")).to_have_text("1/1")
+        comics = wait_for(lambda: next(iter(find("notebooks", 'title="Comics"')), None), "the new notebook on the server")
+        assert comics["icon"] == "skull" and comics["shelf"] == find("shelves", 'name="Work"')[0]["id"], comics
+        assert len(find("pages", f'notebook="{comics["id"]}"')) == 1
+        ok("a new notebook can be made, with its first page")
+
+        # Section pages show the new (drawn) icons too.
+        japan = find("pages", 'title="Japan"')[0]
+        api("PATCH", f"/api/collections/pages/records/{japan['id']}", {"sectionIcon": "pirate", "baseRev": japan["rev"], "device": "phone", "editedAt": int(time.time() * 1000)}, TOKEN)
         await page.locator("aside nav a", has_text="Travel 2026").click()
+        await page.locator("nav.pages a", has_text="Japan").click()
+        await expect(page.locator(".section-icon svg")).to_be_visible()
+        ok("a section shows one of the new icons")
+
+        # Light, dark and the app's colours.
+        await page.get_by_role("radio", name="Dark").click()
+        await expect(page.locator("html")).to_have_attribute("data-theme", "dark")
+        await page.screenshot(path=f"{OUT}/w07h_dark.png")
+        await page.get_by_role("radio", name="Light").click()
+        await expect(page.locator("html")).to_have_attribute("data-theme", "light")
+        await page.reload()
+        await expect(page.locator("html")).to_have_attribute("data-theme", "light")
+        ok("light and dark can be chosen, and the choice is remembered")
+        api("POST", "/api/collections/prefs/records", {"accentArgb": 0xFF0050D0 - 2**32, "backgroundArgb": 0xFFE9F0F6 - 2**32, "editedAt": int(time.time() * 1000), "device": "phone"}, TOKEN)
+        await page.wait_for_function("() => getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() === 'rgb(0 80 208)'", timeout=8000)
+        bg = await page.evaluate("() => getComputedStyle(document.body).backgroundColor")
+        assert bg == "rgb(233, 240, 246)", bg
+        await page.screenshot(path=f"{OUT}/w07i_app_colours.png")
+        ok("the accent and background picked in the app show on the web")
+        await page.get_by_role("radio", name="Match this computer").click()
 
         # Search.
         await page.fill("input[type=search]", "ramen")

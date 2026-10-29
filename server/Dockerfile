@@ -6,6 +6,8 @@ WORKDIR /src/web
 COPY web/package.json web/package-lock.json ./
 RUN npm ci
 COPY web/ ./
+# Notebook icons are shared with the app.
+COPY shared/icons /src/shared/icons
 RUN npm run build
 
 FROM alpine:3.20
