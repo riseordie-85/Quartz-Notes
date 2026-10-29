@@ -83,6 +83,15 @@ class SyncClient(private val http: OkHttpClient = defaultHttp) {
         )
     }
 
+    /** The first page of records in [collection] (for small collections such as prefs). */
+    suspend fun list(auth: SyncAuth, collection: String): List<JsonObject> =
+        send(auth.serverUrl, auth.token, "GET", listOf("api", "collections", collection, "records"), query = listOf("perPage" to "50"))["items"]
+            ?.jsonArray?.map { it.jsonObject }.orEmpty()
+
+    /** Changes fields of a record that isn't revision-checked (prefs). */
+    suspend fun patch(auth: SyncAuth, collection: String, id: String, record: JsonObject): JsonObject =
+        send(auth.serverUrl, auth.token, "PATCH", listOf("api", "collections", collection, "records", id), body = record)
+
     suspend fun get(auth: SyncAuth, collection: String, id: String): JsonObject =
         send(auth.serverUrl, auth.token, "GET", listOf("api", "collections", collection, "records", id))
 

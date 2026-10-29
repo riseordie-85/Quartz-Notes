@@ -30,6 +30,8 @@ object SyncCodec {
     const val ELEMENTS = "page_elements"
     const val NOTES = "quick_notes"
     const val ATTACHMENTS = "attachments"
+    /** Appearance settings: one record per account, not part of the row sync. */
+    const val PREFS = "prefs"
 
     /** Fields every record carries, whatever the table. */
     fun common(uid: String, deleted: Boolean, device: String, editedAt: Long): JsonObject = buildJsonObject {

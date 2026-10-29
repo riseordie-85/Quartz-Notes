@@ -8,7 +8,7 @@
 //   record has changed since, the update is refused with 409, and the device fetches the current
 //   version to decide what to do. Otherwise rev goes up by one;
 // - records can't change owner;
-// - media files belong to whoever uploaded them.
+// - media files and appearance settings belong to whoever made them.
 
 onRecordCreateRequest(
   (e) => {
@@ -49,7 +49,17 @@ onRecordUpdateRequest(
   "attachments",
 )
 
-onRecordCreateRequest((e) => {
-  if (!e.hasSuperuserAuth()) e.record.set("owner", e.auth.id)
+onRecordCreateRequest(
+  (e) => {
+    if (!e.hasSuperuserAuth()) e.record.set("owner", e.auth.id)
+    e.next()
+  },
+  "media",
+  "prefs",
+)
+
+// Appearance settings keep their owner.
+onRecordUpdateRequest((e) => {
+  if (!e.hasSuperuserAuth()) e.record.set("owner", e.record.original().getString("owner"))
   e.next()
-}, "media")
+}, "prefs")

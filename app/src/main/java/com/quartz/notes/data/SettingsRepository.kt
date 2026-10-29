@@ -9,7 +9,11 @@ import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.quartz.notes.data.model.enumOrDefault
+import com.quartz.notes.data.sync.Appearance
+import com.quartz.notes.data.sync.AppearanceStore
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
 enum class ThemeMode(val label: String) { SYSTEM("System"), LIGHT("Light"), DARK("Dark") }
@@ -67,6 +71,7 @@ class SettingsRepository(context: Context) {
         val lastBackupFingerprint = stringPreferencesKey("last_backup_fingerprint")
         val toolbarOnTop = booleanPreferencesKey("toolbar_on_top")
         val splitView = booleanPreferencesKey("split_view")
+        val appearanceChangedAt = longPreferencesKey("appearance_changed_at")
     }
 
     val settings: Flow<AppSettings> = store.data.map { p ->
@@ -98,8 +103,40 @@ class SettingsRepository(context: Context) {
 
     suspend fun setThemeMode(mode: ThemeMode) = set(Keys.themeMode, mode.name)
     suspend fun setDynamicColor(enabled: Boolean) = set(Keys.dynamicColor, enabled)
-    suspend fun setAccent(argb: Int) = set(Keys.accent, argb)
-    suspend fun setBackground(argb: Int) = set(Keys.background, argb)
+    suspend fun setAccent(argb: Int) = store.edit {
+        it[Keys.accent] = argb
+        it[Keys.appearanceChangedAt] = System.currentTimeMillis()
+    }
+    suspend fun setBackground(argb: Int) = store.edit {
+        it[Keys.background] = argb
+        it[Keys.appearanceChangedAt] = System.currentTimeMillis()
+    }
+
+    // ---- Appearance shared through sync (accent and background) ----
+
+    suspend fun appearance(): Appearance {
+        val p = store.data.first()
+        val accent = p[Keys.accent] ?: DEFAULT_ACCENT
+        val background = p[Keys.background] ?: 0
+        // Colours picked before syncing them existed count as set, but older than any new change.
+        val changedAt = p[Keys.appearanceChangedAt] ?: if (accent != DEFAULT_ACCENT || background != 0) 1L else 0L
+        return Appearance(accent, background, changedAt)
+    }
+
+    suspend fun applyRemoteAppearance(a: Appearance) = store.edit {
+        it[Keys.accent] = a.accentArgb
+        it[Keys.background] = a.backgroundArgb
+        it[Keys.appearanceChangedAt] = a.changedAt
+    }
+
+    fun appearanceChanges(): Flow<Any> =
+        settings.map { it.accentArgb to it.backgroundArgb }.distinctUntilChanged()
+
+    val appearanceStore: AppearanceStore = object : AppearanceStore {
+        override suspend fun local() = appearance()
+        override suspend fun applyRemote(appearance: Appearance) = applyRemoteAppearance(appearance).let { }
+        override fun changes() = appearanceChanges()
+    }
     suspend fun setQuickNotesGrid(grid: Boolean) = set(Keys.grid, grid)
     suspend fun setSelectedShelf(id: Long) = set(Keys.shelf, id)
     suspend fun setCompressImages(enabled: Boolean) = set(Keys.compress, enabled)

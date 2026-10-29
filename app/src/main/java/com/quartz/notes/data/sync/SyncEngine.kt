@@ -14,7 +14,9 @@ import com.quartz.notes.data.sync.SyncCodec.NOTEBOOKS
 import com.quartz.notes.data.sync.SyncCodec.NOTES
 import com.quartz.notes.data.sync.SyncCodec.PAGES
 import com.quartz.notes.data.sync.SyncCodec.SHELVES
+import com.quartz.notes.data.sync.SyncCodec.PREFS
 import com.quartz.notes.data.sync.SyncCodec.bool
+import com.quartz.notes.data.sync.SyncCodec.int
 import com.quartz.notes.data.sync.SyncCodec.long
 import com.quartz.notes.data.sync.SyncCodec.str
 import kotlinx.coroutines.Dispatchers
@@ -23,6 +25,8 @@ import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 import com.quartz.notes.data.QuartzRepository
 import com.quartz.notes.data.model.TextBoxData
 import com.quartz.notes.data.rich.InlineStyle
@@ -59,6 +63,8 @@ class SyncEngine(
     private val onFilesArrived: (fontsChanged: Boolean) -> Unit = {},
     /** Called after a change from the server is written here (so open editors can show it). */
     private val onRemoteChange: (table: String, uid: String) -> Unit = { _, _ -> },
+    /** Accent and background colours, shared with the other devices and the web app. */
+    private val appearance: AppearanceStore? = null,
     private val now: () -> Long = System::currentTimeMillis,
 ) {
     private val mutex = Mutex()
@@ -112,6 +118,7 @@ class SyncEngine(
                 for (c in SyncTriggers.TABLES) pull(auth, c, counts)
                 push(auth, store.deviceId(), counts)
                 syncFiles(auth, counts)
+                syncAppearance(auth, store.deviceId())
                 purgeOldDeleted()
                 store.recordResult(now(), null)
                 SyncResult(counts.uploaded, counts.downloaded, counts.conflicts, counts.copies, counts.filesUp, counts.filesDown)
@@ -340,6 +347,36 @@ class SyncEngine(
             uploaded(st, client.update(auth, st.tbl, st.uid, server.long("rev"), record).long("rev"))
             counts.uploaded++
             counts.conflicts++
+        }
+    }
+
+    /** The newer of this device's and the server's appearance settings wins. */
+    private suspend fun syncAppearance(auth: SyncAuth, device: String) {
+        val store = appearance ?: return
+        val local = store.local()
+        val body = { a: Appearance ->
+            buildJsonObject {
+                put("accentArgb", a.accentArgb)
+                put("backgroundArgb", a.backgroundArgb)
+                put("editedAt", a.changedAt)
+                put("device", device)
+            }
+        }
+        val remote = client.list(auth, PREFS).firstOrNull()
+        if (remote == null) {
+            // First device to sync them. Another may have just done the same: then try again next time.
+            try {
+                client.create(auth, PREFS, body(local))
+            } catch (e: SyncException.Server) {
+                if (e.status != 400) throw e
+            } catch (_: SyncException.Conflict) {
+            }
+            return
+        }
+        val theirs = Appearance(remote.int("accentArgb"), remote.int("backgroundArgb"), remote.long("editedAt"))
+        when {
+            local.changedAt > theirs.changedAt -> client.patch(auth, PREFS, remote.str("id"), body(local))
+            theirs != local -> store.applyRemote(theirs)
         }
     }
 

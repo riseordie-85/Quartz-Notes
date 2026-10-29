@@ -50,6 +50,7 @@ class AppContainer(context: Context) {
             if (fontsChanged) appScope.launch { fonts.reload() }
         },
         onRemoteChange = repository::notifyRemoteChange,
+        appearance = settings.appearanceStore,
     )
 
     fun startBackgroundTasks(context: Context) {

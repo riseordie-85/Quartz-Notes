@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.distinctUntilChangedBy
+import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
@@ -27,11 +28,13 @@ class SyncManager(
     onFilesArrived: (fontsChanged: Boolean) -> Unit = {},
     /** A row was updated with a newer version from another device. */
     onRemoteChange: (table: String, uid: String) -> Unit = { _, _ -> },
+    /** Accent and background colours, shared through the server. */
+    private val appearance: AppearanceStore? = null,
 ) {
     private val app = context.applicationContext
     private val syncDao = db.syncDao()
     val store = DataStoreSyncStore(app)
-    val engine = SyncEngine(db, SyncClient(), store, app.filesDir, onFilesArrived, onRemoteChange)
+    val engine = SyncEngine(db, SyncClient(), store, app.filesDir, onFilesArrived, onRemoteChange, appearance)
     private val realtime = RealtimeClient()
     private var live: java.io.Closeable? = null
     private var liveLoop: Job? = null
@@ -70,6 +73,8 @@ class SyncManager(
             store.prefs.distinctUntilChangedBy { it.signedIn }.collect { SyncWorker.schedule(app, it.signedIn) }
         }
         scope.launch { store.prefs.collect { refreshStatus() } }
+        // Accent or background changed here: share it soon.
+        appearance?.let { a -> scope.launch { a.changes().drop(1).collect { requestSync(EDIT_DELAY_MS) } } }
     }
 
     /** The app came to the front (true) or went to the back (false). */
@@ -104,7 +109,7 @@ class SyncManager(
                 val closed = kotlinx.coroutines.CompletableDeferred<Unit>()
                 live = realtime.listen(
                     auth,
-                    com.quartz.notes.data.db.SyncTriggers.TABLES + "media",
+                    com.quartz.notes.data.db.SyncTriggers.TABLES + "media" + SyncCodec.PREFS,
                     onEvent = { e ->
                         // Our own changes come back too; only other devices' need a sync.
                         val from = (e.record["device"] as? kotlinx.serialization.json.JsonPrimitive)?.content

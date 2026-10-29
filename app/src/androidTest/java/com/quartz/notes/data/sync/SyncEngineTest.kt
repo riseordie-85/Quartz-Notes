@@ -58,7 +58,8 @@ class SyncEngineTest {
         val files = File(context.cacheDir, "device-${UUID.randomUUID()}").apply { mkdirs() }.also { dirs += it }
         var arrivals = 0
         val remote = java.util.Collections.synchronizedList(ArrayList<Pair<String, String>>())
-        val engine = SyncEngine(db, SyncClient(), store, files, onFilesArrived = { arrivals++ }, onRemoteChange = { t, u -> remote += t to u })
+        val looks = MemoryAppearanceStore()
+        val engine = SyncEngine(db, SyncClient(), store, files, onFilesArrived = { arrivals++ }, onRemoteChange = { t, u -> remote += t to u }, appearance = looks)
 
         fun sync(): SyncResult = runBlocking { engine.sync() }
         fun settle() = runBlocking { repo.getNote(-1) }
@@ -427,6 +428,27 @@ class SyncEngineTest {
         } finally {
             listener.close()
         }
+    }
+
+    @Test
+    fun accentAndBackgroundAreShared() {
+        val a = Device()
+        val b = Device()
+        a.looks.set(0xFF0050D0.toInt(), 0, 100)
+        a.sync()
+        b.sync()
+        assertEquals(Appearance(0xFF0050D0.toInt(), 0, 100), b.looks.value)
+
+        b.looks.set(0xFF2E9E5B.toInt(), 0xFF101013.toInt(), 200)
+        b.sync()
+        a.sync()
+        assertEquals(Appearance(0xFF2E9E5B.toInt(), 0xFF101013.toInt(), 200), a.looks.value)
+
+        // A change made earlier somewhere else doesn't win.
+        val c = Device()
+        c.looks.set(0xFFD32F2F.toInt(), 0, 150)
+        c.sync()
+        assertEquals(0xFF2E9E5B.toInt(), c.looks.value.accentArgb)
     }
 
     // ---- Test server ----

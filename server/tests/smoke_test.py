@@ -154,4 +154,17 @@ check(status in (403, 404), "files can't be deleted through the API")
 status, font = upload("fonts/My Font.ttf", b"\x00\x01\x00\x00font", tim, "My Font.ttf")
 check(status == 200, "fonts upload too")
 
+# ---- Appearance settings ----
+
+status, prefs = call("POST", "/api/collections/prefs/records", {"accentArgb": -16756528, "backgroundArgb": 0, "editedAt": 5, "owner": "x"}, tim)
+check(status == 200 and prefs["owner"] == tim_id, f"appearance settings are saved for the account ({status} {prefs})")
+status, _ = call("POST", "/api/collections/prefs/records", {"accentArgb": 1, "editedAt": 6}, tim)
+check(status == 400, "an account has one set of appearance settings")
+status, rec = call("PATCH", f"/api/collections/prefs/records/{prefs['id']}", {"accentArgb": -2949044, "editedAt": 7, "owner": "x"}, tim)
+check(status == 200 and rec["accentArgb"] == -2949044 and rec["owner"] == tim_id, "appearance settings can be changed, not given away")
+status, page = call("GET", "/api/collections/prefs/records", token=other)
+check(status == 200 and page["totalItems"] == 0, "another account can't see them")
+status, _ = call("PATCH", f"/api/collections/prefs/records/{prefs['id']}", {"accentArgb": 1}, other)
+check(status == 404, "another account can't change them")
+
 print("All server checks passed.")
