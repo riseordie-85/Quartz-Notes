@@ -8,7 +8,12 @@ import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.hasScrollToNodeAction
+import androidx.compose.ui.test.hasText
+import androidx.compose.ui.test.onAllNodesWithText
+import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performSemanticsAction
@@ -166,6 +171,8 @@ class FreeformTest {
 
     @Test
     fun aNewNotebookIsSetUpStepByStep() {
+        // An empty shelf of its own, so its New cover is on screen whatever other tests left behind.
+        runBlocking { repo.addShelf("Setup test") }
         val settings = runBlocking { container.settings.settings.first() }
         rule.setContent {
             CompositionLocalProvider(LocalAppContainer provides container, LocalFontResolver provides FontResolver(BuiltInFonts)) {
@@ -175,7 +182,12 @@ class FreeformTest {
             }
         }
         settle()
-        rule.onNodeWithText("New").performSemanticsAction(SemanticsActions.OnClick) // may be past the edge of the shelf
+        rule.onAllNodes(hasScrollToNodeAction()).onFirst().performScrollToNode(hasText("Setup test"))
+        settle()
+        val shelfTop = rule.onNodeWithText("Setup test").fetchSemanticsNode().boundsInRoot.top
+        val covers = rule.onAllNodesWithText("New").fetchSemanticsNodes()
+        val mine = covers.indices.filter { covers[it].boundsInRoot.top > shelfTop }.minBy { covers[it].boundsInRoot.top }
+        rule.onAllNodesWithText("New")[mine].performSemanticsAction(SemanticsActions.OnClick)
         settle()
         rule.onNodeWithText("What should your notebook be called?").assertExists()
         rule.onNode(SemanticsMatcher("title field") { it.config.getOrNull(SemanticsActions.SetText) != null }).performTextInput("Wizard test")
