@@ -228,21 +228,21 @@ class PageInputTest {
                 left -= step
             }
         }
+        // Taps and clicks go in back to back at real speed (redrawing between them is slow enough on
+        // an emulator to push a second tap past the double-tap time); the app catches up afterwards.
         fun tap(at: Offset, source: Int = touch, stylus: Boolean = false) {
             val down = SystemClock.uptimeMillis()
             injectTool(MotionEvent.ACTION_DOWN, at, source, down, stylus)
-            pause(50)
+            SystemClock.sleep(50)
             injectTool(MotionEvent.ACTION_UP, at, source, down, stylus)
-            pause(16)
         }
         fun click(at: Offset) {
             val down = SystemClock.uptimeMillis()
             inject(MotionEvent.ACTION_DOWN, at, InputDevice.SOURCE_MOUSE, down, MotionEvent.BUTTON_PRIMARY)
             inject(MotionEvent.ACTION_BUTTON_PRESS, at, InputDevice.SOURCE_MOUSE, down, MotionEvent.BUTTON_PRIMARY)
-            pause(50)
+            SystemClock.sleep(50)
             inject(MotionEvent.ACTION_BUTTON_RELEASE, at, InputDevice.SOURCE_MOUSE, down, 0)
             inject(MotionEvent.ACTION_UP, at, InputDevice.SOURCE_MOUSE, down, 0)
-            pause(16)
         }
         fun hold(at: Offset, millis: Long, source: Int, stylus: Boolean, dragTo: Offset? = null) {
             val down = SystemClock.uptimeMillis()
@@ -279,7 +279,7 @@ class PageInputTest {
         try {
             reset()
             tap(another)
-            pause(90)
+            SystemClock.sleep(90)
             tap(another)
             // How the selection develops (the keyboard may change it afterwards).
             val timeline = StringBuilder()
@@ -307,20 +307,20 @@ class PageInputTest {
 
             reset()
             tap(another, pen, stylus = true)
-            pause(90)
+            SystemClock.sleep(90)
             tap(another, pen, stylus = true)
             results["pen double tap"] = read()
 
             reset()
             click(another)
-            pause(60)
+            SystemClock.sleep(60)
             click(another)
             results["mouse double click"] = read()
 
             reset()
             repeat(3) {
                 click(another)
-                pause(60)
+                SystemClock.sleep(60)
             }
             results["mouse triple click"] = read()
             screen("33_${label}_triple_click")
