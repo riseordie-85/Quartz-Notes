@@ -148,7 +148,7 @@ class BrushTest {
         assertEquals(5, runBlocking { strokes(pageId) }.size)
         // Each brush keeps its own size.
         tap("Pencil")
-        val saved = runBlocking { SystemClock.sleep(800); container.settings.settings.first() }
+        val saved = runBlocking { SystemClock.sleep(1200); container.settings.settings.first() }
         assertEquals(12f, saved.brushSizes[BrushType.HIGHLIGHTER]!!, 0.001f)
         assertTrue(saved.brushSizes[BrushType.PENCIL] == null || saved.brushSizes[BrushType.PENCIL] == BrushType.defaultSize(BrushType.PENCIL))
         tap("Done")

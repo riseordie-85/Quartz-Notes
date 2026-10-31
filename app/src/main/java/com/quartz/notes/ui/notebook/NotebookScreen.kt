@@ -170,7 +170,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.first
 
-@OptIn(ExperimentalFoundationApi::class, ExperimentalLayoutApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalLayoutApi::class, FlowPreview::class)
 @Composable
 fun NotebookScreen(
     notebookId: Long,
@@ -227,11 +227,17 @@ fun NotebookScreen(
     val brushType = chosenBrush ?: settings?.brushType ?: BrushType.PEN
     val draggedSizes = remember { mutableStateMapOf<String, Float>() }
     val brushSize = draggedSizes[brushType] ?: settings?.brushSizes?.get(brushType) ?: BrushType.defaultSize(brushType)
-    LaunchedEffect(brushType, brushSize, settings == null) {
-        val saved = settings ?: return@LaunchedEffect
-        delay(400) // a slider being dragged saves once it settles
-        if (saved.brushType != brushType) container.settings.setBrushType(brushType)
-        if (saved.brushSizes[brushType] != brushSize) container.settings.setBrushSize(brushType, brushSize)
+    // Picking a brush is saved straight away; sizes once the slider settles (every brush's, even
+    // after switching to another).
+    LaunchedEffect(chosenBrush) {
+        val type = chosenBrush ?: return@LaunchedEffect
+        if (settings?.brushType != type) container.settings.setBrushType(type)
+    }
+    LaunchedEffect(Unit) {
+        snapshotFlow { draggedSizes.toMap() }.debounce(400).collect { sizes ->
+            val saved = container.settings.settings.first().brushSizes
+            sizes.forEach { (type, size) -> if (saved[type] != size) container.settings.setBrushSize(type, size) }
+        }
     }
     var shapeMenu by remember { mutableStateOf(false) }
     // A text box added from the toolbar gets the cursor once it exists.

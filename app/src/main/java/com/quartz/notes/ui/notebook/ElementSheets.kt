@@ -364,7 +364,12 @@ fun BrushBar(
                                     .clickable(onClickLabel = "Size ${formatSize(s)}") { onSize(s) },
                                 contentAlignment = Alignment.Center,
                             ) {
-                                Box(Modifier.size((2f + s * 0.75f).coerceAtMost(24f).dp).background(ink, CircleShape))
+                                Box(
+                                    Modifier
+                                        .size((3f + s * 0.75f).coerceAtMost(24f).dp)
+                                        .background(ink, CircleShape)
+                                        .border(0.75.dp, muted.copy(alpha = 0.5f), CircleShape),
+                                )
                             }
                         }
                     }
