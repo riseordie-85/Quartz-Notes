@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.quartz.notes.data.sync.SyncCodecTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-10-31T20:33:28" hostname="runnervm48cm3" time="0.182">
+  <properties/>
+  <testcase name="quickNoteAndAttachmentRoundTrip" classname="com.quartz.notes.data.sync.SyncCodecTest" time="0.006"/>
+  <testcase name="deletedFlagTravels" classname="com.quartz.notes.data.sync.SyncCodecTest" time="0.001"/>
+  <testcase name="shelfRoundTrip" classname="com.quartz.notes.data.sync.SyncCodecTest" time="0.0"/>
+  <testcase name="notebookRoundTrip" classname="com.quartz.notes.data.sync.SyncCodecTest" time="0.001"/>
+  <testcase name="serverAddressesAreTidied" classname="com.quartz.notes.data.sync.SyncCodecTest" time="0.156"/>
+  <testcase name="otherElementsKeepTheirPayload" classname="com.quartz.notes.data.sync.SyncCodecTest" time="0.01"/>
+  <testcase name="pageRoundTripKeepsContentAndNulls" classname="com.quartz.notes.data.sync.SyncCodecTest" time="0.003"/>
+  <testcase name="connectorsPointAtElementsByUid" classname="com.quartz.notes.data.sync.SyncCodecTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

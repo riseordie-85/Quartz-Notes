@@ -1,0 +1,224 @@
+10-31 20:37:03.437  4657  4747 I TestRunner: started: firstSyncMergesWhatBothDevicesHad(com.quartz.notes.data.sync.SyncEngineTest)
+10-31 20:37:03.442  4657  4747 D TrafficStats: tagSocket(98) with statsTag=0xffffffff, statsUid=-1
+10-31 20:37:03.471  1049  5312 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.droidguard.DroidGuardGcmTaskService started execution. cause:7 exec_start_elapsed_seconds: 151 [CONTEXT service_id=218 ]
+10-31 20:37:03.475  1277  5303 I LSRModuleInit: New Geofences: [] [CONTEXT service_id=277 ]
+10-31 20:37:03.475  1277  5303 I LSRModuleInit: Attempting to change container components state to enabled: true [CONTEXT service_id=277 ]
+10-31 20:37:03.482  1049  5209 I LSR     : Handling LSR module init in persistent process [CONTEXT service_id=277 ]
+10-31 20:37:03.482  1049  5209 I LSR     : Refreshing periodic location reporting state [CONTEXT service_id=277 ]
+10-31 20:37:03.485  1049  5309 I LSR     : No upload requests, reporting should be disabled [CONTEXT service_id=277 ]
+10-31 20:37:03.485  1049  5308 I LSR     : Reporting should be enabled: false [CONTEXT service_id=277 ]
+10-31 20:37:03.486  1049  5308 I LSR     : Stopping periodic location reporting [CONTEXT service_id=277 ]
+10-31 20:37:03.494  1049  5309 I LSR     : Cancelling periodic location reporting maintenance task [CONTEXT service_id=277 ]
+10-31 20:37:03.495  1277  5303 W MagicTether: [MagicTetherInitializer] Invalid account list. [CONTEXT service_id=276 ]
+10-31 20:37:03.497  1277  4684 I Icing   : MaintenanceDriver: Registering all GCM Tasks.
+10-31 20:37:03.508  1277  5303 I Google Maps Android API: Validating conditions for requesting maps_core feature. [CONTEXT service_id=71 ]
+10-31 20:37:03.508  1277  5303 I Google Maps Android API: Is maps_core feature installed? 1 [CONTEXT service_id=71 ]
+10-31 20:37:03.510  1277  5303 I Google Maps Android API: cutoffSize=2147483648, internalFreeBytes=5325328384
+10-31 20:37:03.510  1277  5303 I Google Maps Android API: Eligible to request maps_core feature. [CONTEXT service_id=71 ]
+10-31 20:37:03.512  1277  5303 I Google Maps Android API: maps_core feature request succeeded. [CONTEXT service_id=71 ]
+10-31 20:37:03.518  1277  5146 I MS_Utils: version of com.google.android.apps.maps = 1067529190
+10-31 20:37:03.521  1277  3348 I MdiSyncModule: initializing module...
+10-31 20:37:03.522  1277  3348 I MdiSyncModule: module initialization completed
+10-31 20:37:03.530  1277  3348 W MDM     : [137] aywf.d: Q+ devices does not need device admin.
+10-31 20:37:03.531  1277  3348 I MlBenchmarkInstaller: Intent: com.google.android.chimera.IntentOperation.NEW_MODULE [CONTEXT service_id=340 ]
+10-31 20:37:03.532  1277  3348 I MlBenchmarkInstaller: onInitRuntimeState(), intent action=com.google.android.chimera.IntentOperation.NEW_MODULE [CONTEXT service_id=340 ]
+10-31 20:37:03.532  1277  3348 I MlBenchmarkInstaller: Feature is disabled. [CONTEXT service_id=340 ]
+10-31 20:37:03.534  1277  3348 W ChimeraUtils: Module com.google.android.gms.mobiledataplan missing resource null(0)
+10-31 20:37:03.536  1277  1277 I MlBenchmarkInstaller: Feature unrequest success = true [CONTEXT service_id=340 ]
+10-31 20:37:03.542  1277  3348 W libc    : Access denied finding property "ro.hardware.chipname"
+10-31 20:37:03.543  1277  3348 W ChipsetHelper: Unknown chipset! [CONTEXT service_id=301 ]
+10-31 20:37:03.543  1277  3348 I NnApiDriverManager: Registering application with chipset 'unknown' [CONTEXT service_id=301 ]
+10-31 20:37:03.551  1277  3348 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_multi_configs ANDROID_EMU_hwc_color_transform GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0
+10-31 20:37:03.552  1049  3149 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+10-31 20:37:03.553  1277  3348 D EGL_emulation: eglCreateContext: 0x7a1b2c55c690: maj 3 min 0 rcv 3
+10-31 20:37:03.554  1277  3348 D EGL_emulation: eglMakeCurrent: 0x7a1b2c55c690: ver 3 0 (tinfo 0x7a1d40ee0180) (first time)
+10-31 20:37:03.564  1049  3149 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+10-31 20:37:03.566  1277  3348 I NnApiDriverManager: Registering application with GPU 'Android Emulator OpenGL ES Translator (Google SwiftShader)' by 'Google (Google Inc.)' [CONTEXT service_id=301 ]
+10-31 20:37:03.570  1049  5312 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.droidguard.DroidGuardGcmTaskService finished executing. cause:7 result: 1 elapsed_millis: 96 uptime_millis: 96 exec_start_elapsed_seconds: 151 [CONTEXT service_id=218 ]
+10-31 20:37:03.577  1049  4681 W MagicTether: [TetherListenerService] Invalid account list. [CONTEXT service_id=276 ]
+10-31 20:37:03.591  1049  3149 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+10-31 20:37:03.599  1277  5305 I OcrModelUpStIntentOp: Downloading text recognizer
+10-31 20:37:03.600   485   496 I system_server: Background young concurrent copying GC freed 803623(16MB) AllocSpace objects, 0(0B) LOS objects, 35% free, 27MB/43MB, paused 51us,50us total 222.156ms
+10-31 20:37:03.602  1277  2627 I Pay     : Requested immediate check to see whether to show pay module downloading complete notification. [CONTEXT service_id=198 ]
+10-31 20:37:03.604  1049  1049 I MagicTether: [AutoDisconnectIntentOperation] Canceling task. [CONTEXT service_id=276 ]
+10-31 20:37:03.613  1049  5209 I MagicTether: [AutoDisconnectIntentOperation] Canceling task. [CONTEXT service_id=276 ]
+10-31 20:37:03.620  1277  1277 D BoundBrokerSvc: onRebind: Intent { act=com.google.android.gms.chimera.container.moduleinstall.ModuleInstallService.START dat=chimera-action:/... cmp=com.google.android.gms/.chimera.GmsApiService }
+10-31 20:37:03.624  1277  1277 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.ocr.service.internal.START dat=chimera-action:/... cmp=com.google.android.gms/.chimera.GmsInternalApiService }
+10-31 20:37:03.624  1277  1277 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.ocr.service.internal.START dat=chimera-action:/... cmp=com.google.android.gms/.chimera.GmsInternalApiService }
+10-31 20:37:03.629  3473  3487 I RemoteProvisioningService: Notify key generated ping for secLevel: 1
+10-31 20:37:03.631  3473  3487 I RemoteProvisioner: Pool status 6, 5, 0, 6
+10-31 20:37:03.632  3473  3487 I RemoteProvisioningService: Pool status.
+10-31 20:37:03.632  3473  3487 I RemoteProvisioningService: Total: 6
+10-31 20:37:03.632  3473  3487 I RemoteProvisioningService: Attested: 6
+10-31 20:37:03.632  3473  3487 I RemoteProvisioningService: Unassigned: 5
+10-31 20:37:03.632  3473  3487 I RemoteProvisioningService: Expiring: 0
+10-31 20:37:03.632  3473  3487 I RemoteProvisioningService.KeyPoolStats: Sufficient keys are available, no CSR needed.
+10-31 20:37:03.632  3473  3487 I RemoteProvisioningService: No provisioning needed.
+10-31 20:37:03.651   283  5341 I resolv  : GetAddrInfoHandler::run: {100 786532 100 983140 10120 0}
+10-31 20:37:03.652  2518  5244 D TrafficStats: tagSocket(109) with statsTag=0x1809, statsUid=-1
+10-31 20:37:03.653  1049  5267 I TapAndPay: Disabling TapAndPay HCE service [CONTEXT service_id=79 ]
+10-31 20:37:03.655  2518  5244 D TrafficStats: tagSocket(109) with statsTag=0x1809, statsUid=-1
+10-31 20:37:03.656  1277  2627 W Pay     : Active account was null, notification task will be cancelled. [CONTEXT service_id=198 ]
+10-31 20:37:03.656  1277  2627 W Pay     : [eMoney card recovery task] exiting without init: active tapandpay account not found! [CONTEXT service_id=198 ]
+10-31 20:37:03.658  2518  5244 D TrafficStats: tagSocket(109) with statsTag=0x1809, statsUid=-1
+10-31 20:37:03.660  1049  5267 I TapAndPay: Disabling TapAndPay HCE service [CONTEXT service_id=79 ]
+10-31 20:37:03.661  1277  2627 W Pay     : Active account was null, notification task will be cancelled. [CONTEXT service_id=198 ]
+10-31 20:37:03.661  1277  2627 W Pay     : [eMoney txn sync] exiting without init: active tapandpay account not found! [CONTEXT service_id=198 ]
+10-31 20:37:03.661  1277  2627 I Pay     : Requested check of feature migrations. [CONTEXT service_id=198 ]
+10-31 20:37:03.664  1277  2627 W Pay     : Mdl not supported. Not triggering periodic MSO refresh task. [CONTEXT service_id=198 ]
+10-31 20:37:03.674  1049  1049 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.semanticlocation.service.START_ODLH pkg=com.google.android.gms }
+10-31 20:37:03.675  2518  5244 W libc    : Access denied finding property "persist.adb.tls_server.enable"
+10-31 20:37:03.676  2518  5244 W libc    : Access denied finding property "service.adb.tls.port"
+10-31 20:37:03.660  2518  2518 W IntentService[D: type=1400 audit(0.0:52): avc: denied { read } for name="u:object_r:system_adbd_prop:s0" dev="tmpfs" ino=269 scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:object_r:system_adbd_prop:s0 tclass=file permissive=0 app=com.google.android.gms
+10-31 20:37:03.678  1277  2627 W PeoplePU: getServiceInfo failed.
+10-31 20:37:03.678  1277  2627 W PeoplePU: android.content.pm.PackageManager$NameNotFoundException: ComponentInfo{com.google.android.gms/com.google.android.gms.people.sync.focus.ContactsSyncAdapterService}
+10-31 20:37:03.678  1277  2627 W PeoplePU: 	at android.app.ApplicationPackageManager.getServiceInfo(ApplicationPackageManager.java:613)
+10-31 20:37:03.678  1277  2627 W PeoplePU: 	at android.app.ApplicationPackageManager.getServiceInfo(ApplicationPackageManager.java:596)
+10-31 20:37:03.678  1277  2627 W PeoplePU: 	at bvox.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+10-31 20:37:03.678  1277  2627 W PeoplePU: 	at bvgq.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+10-31 20:37:03.678  1277  2627 W PeoplePU: 	at com.google.android.gms.people.api.init.PeopleModuleInitIntentOperation.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):9)
+10-31 20:37:03.678  1277  2627 W PeoplePU: 	at zdm.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):7)
+10-31 20:37:03.678  1277  2627 W PeoplePU: 	at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+10-31 20:37:03.678  1277  2627 W PeoplePU: 	at zhv.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+10-31 20:37:03.678  1277  2627 W PeoplePU: 	at hjm.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+10-31 20:37:03.678  1277  2627 W PeoplePU: 	at hjl.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):11)
+10-31 20:37:03.678  1277  2627 W PeoplePU: 	at dfhf.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+10-31 20:37:03.678  1277  2627 W PeoplePU: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+10-31 20:37:03.678  1277  2627 W PeoplePU: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+10-31 20:37:03.678  1277  2627 W PeoplePU: 	at java.lang.Thread.run(Thread.java:1012)
+10-31 20:37:03.679  1277  2627 W PeoplePU: getComponentEnabledSetting failed.
+10-31 20:37:03.679  1277  2627 W PeoplePU: java.lang.IllegalArgumentException: Unknown component: ComponentInfo{com.google.android.syncadapters.contacts/com.google.android.syncadapters.contacts.ContactsSyncAdapterService}
+10-31 20:37:03.679  1277  2627 W PeoplePU: 	at android.os.Parcel.createExceptionOrNull(Parcel.java:3015)
+10-31 20:37:03.679  1277  2627 W PeoplePU: 	at android.os.Parcel.createException(Parcel.java:2995)
+10-31 20:37:03.679  1277  2627 W PeoplePU: 	at android.os.Parcel.readException(Parcel.java:2978)
+10-31 20:37:03.679  1277  2627 W PeoplePU: 	at android.os.Parcel.readException(Parcel.java:2920)
+10-31 20:37:03.679  1277  2627 W PeoplePU: 	at android.content.pm.IPackageManager$Stub$Proxy.getComponentEnabledSetting(IPackageManager.java:5916)
+10-31 20:37:03.679  1277  2627 W PeoplePU: 	at android.app.ApplicationPackageManager.getComponentEnabledSetting(ApplicationPackageManager.java:3068)
+10-31 20:37:03.679  1277  2627 W PeoplePU: 	at bvox.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+10-31 20:37:03.679  1277  2627 W PeoplePU: 	at bvgq.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):5)
+10-31 20:37:03.679  1277  2627 W PeoplePU: 	at com.google.android.gms.people.api.init.PeopleModuleInitIntentOperation.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):9)
+10-31 20:37:03.679  1277  2627 W PeoplePU: 	at zdm.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):7)
+10-31 20:37:03.679  1277  2627 W PeoplePU: 	at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+10-31 20:37:03.679  1277  2627 W PeoplePU: 	at zhv.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+10-31 20:37:03.679  1277  2627 W PeoplePU: 	at hjm.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+10-31 20:37:03.679  1277  2627 W PeoplePU: 	at hjl.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):11)
+10-31 20:37:03.679  1277  2627 W PeoplePU: 	at dfhf.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+10-31 20:37:03.679  1277  2627 W PeoplePU: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+10-31 20:37:03.679  1277  2627 W PeoplePU: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+10-31 20:37:03.679  1277  2627 W PeoplePU: 	at java.lang.Thread.run(Thread.java:1012)
+10-31 20:37:03.679  1277  2627 W PeoplePU: Caused by: android.os.RemoteException: Remote stack trace:
+10-31 20:37:03.679  1277  2627 W PeoplePU: 	at com.android.server.pm.ComputerEngine.getComponentEnabledSettingInternal(ComputerEngine.java:5234)
+10-31 20:37:03.679  1277  2627 W PeoplePU: 	at com.android.server.pm.ComputerEngine.getComponentEnabledSetting(ComputerEngine.java:5216)
+10-31 20:37:03.679  1277  2627 W PeoplePU: 	at com.android.server.pm.IPackageManagerBase.getComponentEnabledSetting(IPackageManagerBase.java:387)
+10-31 20:37:03.679  1277  2627 W PeoplePU: 	at android.content.pm.IPackageManager$Stub.onTransact(IPackageManager.java:2953)
+10-31 20:37:03.679  1277  2627 W PeoplePU: 	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.onTransact(PackageManagerService.java:5980)
+10-31 20:37:03.679  1277  2627 W PeoplePU:
+10-31 20:37:03.688  1277  2627 I FsaEntryPointSwitcher: setting component enabled=1 for com.google.android.gms.people.sync.focus.ContactsSyncAdapterService
+10-31 20:37:03.672  2518  2518 W IntentService[D: type=1400 audit(0.0:53): avc: denied { read } for name="u:object_r:adbd_prop:s0" dev="tmpfs" ino=61 scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:object_r:adbd_prop:s0 tclass=file permissive=0 app=com.google.android.gms
+10-31 20:37:03.697  1277  2627 I FsaEntryPointSwitcher: Setting component enabled succeeds.
+10-31 20:37:03.698  1277  2627 W PeoplePU: getComponentEnabledSetting failed.
+10-31 20:37:03.698  1277  2627 W PeoplePU: java.lang.IllegalArgumentException: Unknown component: ComponentInfo{com.google.android.syncadapters.contacts/com.google.android.syncadapters.contacts.ContactsSyncAdapterService}
+10-31 20:37:03.698  1277  2627 W PeoplePU: 	at android.os.Parcel.createExceptionOrNull(Parcel.java:3015)
+10-31 20:37:03.698  1277  2627 W PeoplePU: 	at android.os.Parcel.createException(Parcel.java:2995)
+10-31 20:37:03.698  1277  2627 W PeoplePU: 	at android.os.Parcel.readException(Parcel.java:2978)
+10-31 20:37:03.698  1277  2627 W PeoplePU: 	at android.os.Parcel.readException(Parcel.java:2920)
+10-31 20:37:03.698  1277  2627 W PeoplePU: 	at android.content.pm.IPackageManager$Stub$Proxy.getComponentEnabledSetting(IPackageManager.java:5916)
+10-31 20:37:03.698  1277  2627 W PeoplePU: 	at android.app.ApplicationPackageManager.getComponentEnabledSetting(ApplicationPackageManager.java:3068)
+10-31 20:37:03.698  1277  2627 W PeoplePU: 	at bvox.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+10-31 20:37:03.698  1277  2627 W PeoplePU: 	at bvgq.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):29)
+10-31 20:37:03.698  1277  2627 W PeoplePU: 	at com.google.android.gms.people.api.init.PeopleModuleInitIntentOperation.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):9)
+10-31 20:37:03.698  1277  2627 W PeoplePU: 	at zdm.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):7)
+10-31 20:37:03.698  1277  2627 W PeoplePU: 	at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+10-31 20:37:03.698  1277  2627 W PeoplePU: 	at zhv.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+10-31 20:37:03.698  1277  2627 W PeoplePU: 	at hjm.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+10-31 20:37:03.698  1277  2627 W PeoplePU: 	at hjl.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):11)
+10-31 20:37:03.698  1277  2627 W PeoplePU: 	at dfhf.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+10-31 20:37:03.698  1277  2627 W PeoplePU: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+10-31 20:37:03.698  1277  2627 W PeoplePU: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+10-31 20:37:03.698  1277  2627 W PeoplePU: 	at java.lang.Thread.run(Thread.java:1012)
+10-31 20:37:03.699  1277  2627 W PeoplePU: getComponentEnabledSetting failed.
+10-31 20:37:03.699  1277  2627 W PeoplePU: java.lang.IllegalArgumentException: Unknown component: ComponentInfo{com.google.android.syncadapters.contacts/com.google.android.syncadapters.contacts.ProxyGalProvider}
+10-31 20:37:03.699  1277  2627 W PeoplePU: 	at android.os.Parcel.createExceptionOrNull(Parcel.java:3015)
+10-31 20:37:03.699  1277  2627 W PeoplePU: 	at android.os.Parcel.createException(Parcel.java:2995)
+10-31 20:37:03.699  1277  2627 W PeoplePU: 	at android.os.Parcel.readException(Parcel.java:2978)
+10-31 20:37:03.699  1277  2627 W PeoplePU: 	at android.os.Parcel.readException(Parcel.java:2920)
+10-31 20:37:03.699  1277  2627 W PeoplePU: 	at android.content.pm.IPackageManager$Stub$Proxy.getComponentEnabledSetting(IPackageManager.java:5916)
+10-31 20:37:03.699  1277  2627 W PeoplePU: 	at android.app.ApplicationPackageManager.getComponentEnabledSetting(ApplicationPackageManager.java:3068)
+10-31 20:37:03.699  1277  2627 W PeoplePU: 	at bvox.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+10-31 20:37:03.699  1277  2627 W PeoplePU: 	at buru.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+10-31 20:37:03.699  1277  2627 W PeoplePU: 	at com.google.android.gms.people.api.init.PeopleModuleInitIntentOperation.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):10)
+10-31 20:37:03.699  1277  2627 W PeoplePU: 	at zdm.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):7)
+10-31 20:37:03.699  1277  2627 W PeoplePU: 	at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+10-31 20:37:03.699  1277  2627 W PeoplePU: 	at zhv.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+10-31 20:37:03.699  1277  2627 W PeoplePU: 	at hjm.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+10-31 20:37:03.699  1277  2627 W PeoplePU: 	at hjl.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):11)
+10-31 20:37:03.699  1277  2627 W PeoplePU: 	at dfhf.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+10-31 20:37:03.699  1277  2627 W PeoplePU: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+10-31 20:37:03.699  1277  2627 W PeoplePU: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+10-31 20:37:03.699  1277  2627 W PeoplePU: 	at java.lang.Thread.run(Thread.java:1012)
+10-31 20:37:03.717  1277  2627 I PeopleGalProvider: Gal directories started.
+10-31 20:37:03.718  1277  2627 I PeopleGalProvider: Method 1 completed.
+10-31 20:37:03.718  1277  2627 I PeopleGalProvider: Method 1 finished successfully.
+10-31 20:37:03.721  1277  2627 I GalProviderController: setting component enabled=1 for com.google.android.gms.people.service.galprovider.PeopleGalProvider
+10-31 20:37:03.722  1277  2627 I GalProviderController: Setting component enabled succeeds.
+10-31 20:37:03.727  1277  2627 I PeopleGalProvider: Gal directories started.
+10-31 20:37:03.728  1277  2627 I PeopleGalProvider: Method 1 completed.
+10-31 20:37:03.728  1277  2627 I PeopleGalProvider: Method 1 finished successfully.
+10-31 20:37:03.732  1277  2627 I DeletedNullContactsCleanup: Scheduling the service.
+10-31 20:37:03.733  1277  2627 I BackupAndSyncValidation: Scheduling the service.
+10-31 20:37:03.738  1277  2627 I PeopleInitIntentOp: Not initializing debuggability [CONTEXT service_id=5 ]
+10-31 20:37:03.742  1277  2627 I HeterodyneSyncScheduler: Cancel all previously scheduled polling [CONTEXT service_id=51 ]
+10-31 20:37:03.743  1277  2627 I HeterodyneSyncScheduler: Scheduling Phenotype for first execution 11192 seconds from now (1793479023742) [CONTEXT service_id=51 ]
+10-31 20:37:03.751  1277  2627 W ChimeraUtils: Module com.google.android.gms.phonesky_recovery missing resource null(0)
+10-31 20:37:03.758  1277  1277 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+10-31 20:37:03.759  1277  1277 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+10-31 20:37:03.761  1277  1277 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+10-31 20:37:03.766  1277  1277 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+10-31 20:37:03.767  1277  1277 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+10-31 20:37:03.769  1277  1277 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+10-31 20:37:03.794  1277  5305 I AlarmManager: setExactAndAllowWhileIdle [name: RemindersNSREFRESH_TIME_REMINDERS_ALARM type: 0 triggerAtMillis: 1793491200000]
+10-31 20:37:03.801  1049  1049 I rcs     : [RcsBindingManager] Checking if we should rebind to previous service. Attempt 0
+10-31 20:37:03.801  1049  1049 I rcs     : [RcsBindingManager] No valid settings for binding.
+10-31 20:37:03.837  2518  5244 W SystemServiceRegistry: No service published for: persistent_data_block
+10-31 20:37:03.847  1277  5303 I SemanticLocation: [Scheduler] Periodic Task com.google.android.gms.semanticlocationhistory.geller.GellerCleanupService.GellerCleanup is scheduled to run EVERY_DAY [CONTEXT service_id=173 ]
+10-31 20:37:03.865  1277  5303 V SmartDevice: [ModuleInitializer] ModuleInitializer got intent Intent { act=com.google.android.chimera.IntentOperation.NEW_MODULE (has extras) } with flag 12
+10-31 20:37:03.866  1277  5303 W ChimeraUtils: Module com.google.android.gms.smartdevice missing resource null(0)
+10-31 20:37:03.866  1277  5303 D SmartDevice: [ModuleInitializer] Module init - scheduling buffered logs cleanup task
+10-31 20:37:03.868  1277  5303 I SmartDevice: [CleanBufferedLogsService] Periodic task upload_buffered_logs_periodic scheduled!
+10-31 20:37:03.904  2518  5244 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_multi_configs ANDROID_EMU_hwc_color_transform GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0
+10-31 20:37:03.911  2518  5244 D EGL_emulation: eglCreateContext: 0x7a1b2c556450: maj 3 min 0 rcv 3
+10-31 20:37:03.912  2518  5244 D EGL_emulation: eglMakeCurrent: 0x7a1b2c556450: ver 3 0 (tinfo 0x7a1d4751c280) (first time)
+10-31 20:37:04.001  1049  5217 I SemanticLocation: [MDD] ModelBundleMetadata: File not found [CONTEXT service_id=173 ]
+10-31 20:37:04.001  1049  5217 I SemanticLocation: java.io.FileNotFoundException: /data/user/0/com.google.android.gms/files/model_bundle_metadata.pb: open failed: ENOENT (No such file or directory)
+10-31 20:37:04.001  1049  5217 I SemanticLocation: 	at libcore.io.IoBridge.open(IoBridge.java:574)
+10-31 20:37:04.001  1049  5217 I SemanticLocation: 	at java.io.FileInputStream.<init>(FileInputStream.java:160)
+10-31 20:37:04.001  1049  5217 I SemanticLocation: 	at android.app.ContextImpl.openFileInput(ContextImpl.java:714)
+10-31 20:37:04.001  1049  5217 I SemanticLocation: 	at android.content.ContextWrapper.openFileInput(ContextWrapper.java:245)
+10-31 20:37:04.001  1049  5217 I SemanticLocation: 	at android.content.ContextWrapper.openFileInput(ContextWrapper.java:245)
+10-31 20:37:04.001  1049  5217 I SemanticLocation: 	at android.content.ContextWrapper.openFileInput(ContextWrapper.java:245)
+10-31 20:37:04.001  1049  5217 I SemanticLocation: 	at bzxt.h(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+10-31 20:37:04.001  1049  5217 I SemanticLocation: 	at bzxd.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):9)
+10-31 20:37:04.001  1049  5217 I SemanticLocation: 	at bzxd.<init>(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+10-31 20:37:04.001  1049  5217 I SemanticLocation: 	at cadn.j(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+10-31 20:37:04.001  1049  5217 I SemanticLocation: 	at cadn.h(:com.google.android.gms@231818047@23.18.18 (190800-535401451):36)
+10-31 20:37:04.001  1049  5217 I SemanticLocation: 	at cadn.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+10-31 20:37:04.001  1049  5217 I SemanticLocation: 	at com.google.android.gms.semanticlocation.service.SemanticLocationChimeraService.k(:com.google.android.gms@231818047@23.18.18 (190800-535401451):9)
+10-31 20:37:04.001  1049  5217 I SemanticLocation: 	at com.google.android.gms.semanticlocation.service.SemanticLocationChimeraService.h(:com.google.android.gms@231818047@23.18.18 (190800-535401451):17)
+10-31 20:37:04.001  1049  5217 I SemanticLocation: 	at cacs.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):68)
+10-31 20:37:04.001  1049  5217 I SemanticLocation: 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:463)
+10-31 20:37:04.001  1049  5217 I SemanticLocation: 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+10-31 20:37:04.001  1049  5217 I SemanticLocation: 	at aced.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+10-31 20:37:04.001  1049  5217 I SemanticLocation: 	at aced.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):7)
+10-31 20:37:04.001  1049  5217 I SemanticLocation: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+10-31 20:37:04.001  1049  5217 I SemanticLocation: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+10-31 20:37:04.001  1049  5217 I SemanticLocation: 	at acjn.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+10-31 20:37:04.001  1049  5217 I SemanticLocation: 	at java.lang.Thread.run(Thread.java:1012)
+10-31 20:37:04.001  1049  5217 I SemanticLocation: Caused by: android.system.ErrnoException: open failed: ENOENT (No such file or directory)
+10-31 20:37:04.001  1049  5217 I SemanticLocation: 	at libcore.io.Linux.open(Native Method)
+10-31 20:37:04.001  1049  5217 I SemanticLocation: 	at libcore.io.ForwardingOs.open(ForwardingOs.java:563)
+10-31 20:37:04.001  1049  5217 I SemanticLocation: 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:274)
+10-31 20:37:04.001  1049  5217 I SemanticLocation: 	at libcore.io.ForwardingOs.open(ForwardingOs.java:563)
+10-31 20:37:04.001  1049  5217 I SemanticLocation: 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7810)
+10-31 20:37:04.001  1049  5217 I SemanticLocation: 	at libcore.io.IoBridge.open(IoBridge.java:560)
+10-31 20:37:04.001  1049  5217 I SemanticLocation: 	... 22 more
+10-31 20:37:04.031  4657  4747 I TestRunner: finished: firstSyncMergesWhatBothDevicesHad(com.quartz.notes.data.sync.SyncEngineTest)

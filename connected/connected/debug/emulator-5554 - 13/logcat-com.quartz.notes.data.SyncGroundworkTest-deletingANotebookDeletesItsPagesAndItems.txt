@@ -1,0 +1,23 @@
+10-31 20:36:47.103  4657  4747 I TestRunner: started: deletingANotebookDeletesItsPagesAndItems(com.quartz.notes.data.SyncGroundworkTest)
+10-31 20:36:47.113   283   283 I netd    : tetherGetStats() -> {[]} <0.43ms>
+10-31 20:36:47.135   283   283 I netd    : bandwidthSetGlobalAlert(2097152) <0.07ms>
+10-31 20:36:47.136   283   283 I netd    : bandwidthRemoveInterfaceQuota(eth0) <0.38ms>
+10-31 20:36:47.137   283   283 I netd    : bandwidthSetInterfaceQuota(eth0, 9223372036854775807) <0.36ms>
+10-31 20:36:47.139   485   758 D NetworkStatsObservers: Unregistering RequestInfo from pid/uid:485/1000(android) for DataUsageRequest [ requestId=7, networkTemplate=NetworkTemplate: matchRule=MOBILE, matchSubscriberIds=[310260...], matchWifiNetworkKeys=[], metered=YES, defaultNetwork=NO, thresholdInBytes=3451664 ] accessLevel:3
+10-31 20:36:47.142   485   691 D NetworkStatsObservers: Registering observer for RequestInfo from pid/uid:485/1000(android) for DataUsageRequest [ requestId=8, networkTemplate=NetworkTemplate: matchRule=MOBILE, matchSubscriberIds=[310260...], matchWifiNetworkKeys=[], metered=YES, defaultNetwork=NO, thresholdInBytes=3449150 ] accessLevel:3
+10-31 20:36:47.224  1049  4607 I WakefulBroadcastRcvr: Processing wakeful broadcast: BootOrGmsUpdated
+10-31 20:36:47.233  1049  3569 I NearbyConnections: Runtime state initialization complete. Nearby connections setting is disabled [CONTEXT service_id=54 ]
+10-31 20:36:47.276  1049  1326 I NearbyMediums: BluetoothAdapter's name was not set by Nearby Connections, ignoring call to restore default scan mode. [CONTEXT service_id=54 ]
+10-31 20:36:47.278  1277  4570 E PhenotypeRegOp: Attempting to overwrite config package for com.google.android.gms.games [CONTEXT service_id=231 ]
+10-31 20:36:47.295  1277  4570 E PhenotypeRegOp: Attempting to overwrite config package for com.google.android.gms.maps#com.google.android.gms [CONTEXT service_id=231 ]
+10-31 20:36:47.310  1277  4570 E PhenotypeRegOp: Attempting to overwrite config package for com.google.android.gms.cast [CONTEXT service_id=231 ]
+10-31 20:36:47.330  1277  4570 E PhenotypeRegOp: Attempting to overwrite config package for com.google.android.gms.mobile_data_plan [CONTEXT service_id=231 ]
+10-31 20:36:47.334  1277  4570 E PhenotypeRegOp: Attempting to overwrite config package for com.google.android.gms.udc [CONTEXT service_id=231 ]
+10-31 20:36:47.341  1049  1326 I NearbyMediums: BluetoothAdapter's name was not set by Nearby Connections, ignoring call to restore device name [CONTEXT service_id=54 ]
+10-31 20:36:47.342  1894  1894 I CalRefreshTaskCtrl: #onDeviceInstallOrBoot(): Starting calendar refresh task.
+10-31 20:36:47.342  1894  1894 I CalRefreshTaskCtrl: #refreshCalendarData()
+10-31 20:36:47.347  1894  1894 I CalRefreshTaskCtrl: Do not refresh calendar data because Smartspace is not available on device.
+10-31 20:36:47.348  1894  1894 I CalWorkerScheduler: Scheduling calendar refresh task status check worker at device reboot or app install.
+10-31 20:36:47.366  1894  1901 I earchbox:search: JIT allocated 77KB for compiled code of java.lang.Object com.google.android.apps.gsa.binaries.velvet.app.amm.d()
+10-31 20:36:47.397  1894  1894 I A       : Setting OMP browser to 2.
+10-31 20:36:47.398  4657  4747 I TestRunner: finished: deletingANotebookDeletesItsPagesAndItems(com.quartz.notes.data.SyncGroundworkTest)

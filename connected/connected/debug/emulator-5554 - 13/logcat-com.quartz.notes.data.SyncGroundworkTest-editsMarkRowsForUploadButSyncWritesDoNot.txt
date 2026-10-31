@@ -1,0 +1,44 @@
+10-31 20:36:46.572  4657  4747 I TestRunner: started: editsMarkRowsForUploadButSyncWritesDoNot(com.quartz.notes.data.SyncGroundworkTest)
+10-31 20:36:46.593  1049  2753 W Auth    : [AccountStateSyncher] Unable to look up account state from server: couldn't fetch accessToken [CONTEXT service_id=153 ]
+10-31 20:36:46.594  1049  2753 W Auth    : [GaiaServicesFlagManager] Services not available! [CONTEXT service_id=153 ]
+10-31 20:36:46.620  1049  2753 E AuthPII : [GoogleAccountDataServiceImpl] getToken() -> BAD_AUTHENTICATION. App: com.google.android.gms, Service: oauth2:https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/account.capabilities https://www.googleapis.com/auth/account.service_flags
+10-31 20:36:46.620  1049  2753 E AuthPII : abcp: Long live credential not available.
+10-31 20:36:46.620  1049  2753 E AuthPII : 	at mbt.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):8)
+10-31 20:36:46.620  1049  2753 E AuthPII : 	at mca.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+10-31 20:36:46.620  1049  2753 E AuthPII : 	at lzx.m(:com.google.android.gms@231818047@23.18.18 (190800-535401451):48)
+10-31 20:36:46.620  1049  2753 E AuthPII : 	at lyz.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):22)
+10-31 20:36:46.620  1049  2753 E AuthPII : 	at lze.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+10-31 20:36:46.620  1049  2753 E AuthPII : 	at mcs.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+10-31 20:36:46.620  1049  2753 E AuthPII : 	at mcs.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+10-31 20:36:46.620  1049  2753 E AuthPII : 	at lye.hasFeatures(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+10-31 20:36:46.620  1049  2753 E AuthPII : 	at android.accounts.AbstractAccountAuthenticator$Transport.hasFeatures(AbstractAccountAuthenticator.java:313)
+10-31 20:36:46.620  1049  2753 E AuthPII : 	at android.accounts.IAccountAuthenticator$Stub.onTransact(IAccountAuthenticator.java:288)
+10-31 20:36:46.620  1049  2753 E AuthPII : 	at android.os.Binder.transact(Binder.java:1164)
+10-31 20:36:46.620  1049  2753 E AuthPII : 	at aumo.onTransact(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+10-31 20:36:46.620  1049  2753 E AuthPII : 	at android.os.Binder.transact(Binder.java:1164)
+10-31 20:36:46.620  1049  2753 E AuthPII : 	at aoey.onTransact(:com.google.android.gms@231818047@23.18.18 (190800-535401451):22)
+10-31 20:36:46.620  1049  2753 E AuthPII : 	at android.os.Binder.execTransactInternal(Binder.java:1285)
+10-31 20:36:46.620  1049  2753 E AuthPII : 	at android.os.Binder.execTransact(Binder.java:1244)
+10-31 20:36:46.620  1049  2753 E AuthPII : Message is Long live credential not available.
+10-31 20:36:46.620  1049  2753 E AuthPII : abcp: Long live credential not available.
+10-31 20:36:46.620  1049  2753 E AuthPII : 	at mbt.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):8)
+10-31 20:36:46.620  1049  2753 E AuthPII : 	at mca.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+10-31 20:36:46.620  1049  2753 E AuthPII : 	at lzx.m(:com.google.android.gms@231818047@23.18.18 (190800-535401451):48)
+10-31 20:36:46.620  1049  2753 E AuthPII : 	at lyz.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):22)
+10-31 20:36:46.620  1049  2753 E AuthPII : 	at lze.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+10-31 20:36:46.620  1049  2753 E AuthPII : 	at mcs.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+10-31 20:36:46.620  1049  2753 E AuthPII : 	at mcs.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+10-31 20:36:46.620  1049  2753 E AuthPII : 	at lye.hasFeatures(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+10-31 20:36:46.620  1049  2753 E AuthPII : 	at android.accounts.AbstractAccountAuthenticator$Transport.hasFeatures(AbstractAccountAuthenticator.java:313)
+10-31 20:36:46.620  1049  2753 E AuthPII : 	at android.accounts.IAccountAuthenticator$Stub.onTransact(IAccountAuthenticator.java:288)
+10-31 20:36:46.620  1049  2753 E AuthPII : 	at android.os.Binder.transact(Binder.java:1164)
+10-31 20:36:46.620  1049  2753 E AuthPII : 	at aumo.onTransact(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+10-31 20:36:46.620  1049  2753 E AuthPII : 	at android.os.Binder.transact(Binder.java:1164)
+10-31 20:36:46.620  1049  2753 E AuthPII : 	at aoey.onTransact(:com.google.android.gms@231818047@23.18.18 (190800-535401451):22)
+10-31 20:36:46.620  1049  2753 E AuthPII : 	at android.os.Binder.execTransactInternal(Binder.java:1285)
+10-31 20:36:46.620  1049  2753 E AuthPII : 	at android.os.Binder.execTransact(Binder.java:1244)
+10-31 20:36:46.620  1049  2753 W Auth    : [AccountStateSyncher] Unable to look up account state from server: couldn't fetch accessToken [CONTEXT service_id=153 ]
+10-31 20:36:46.621  1049  2753 W Auth    : [GaiaServicesFlagManager] Services not available! [CONTEXT service_id=153 ]
+10-31 20:36:46.651  4748  4766 D CompatibilityChangeReporter: Compat change id reported: 150939131; UID 10145; state: ENABLED
+10-31 20:36:46.660  1277  4605 I Icing   : Indexing done com.google.android.apps.messaging-internal.3p:Person_no_gsa
+10-31 20:36:46.688  4657  4747 I TestRunner: finished: editsMarkRowsForUploadButSyncWritesDoNot(com.quartz.notes.data.SyncGroundworkTest)

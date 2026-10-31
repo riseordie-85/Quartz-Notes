@@ -1,0 +1,191 @@
+10-31 20:38:26.843  4657  4747 I TestRunner: started: aSmallPageIsCenteredAndPinchingAPictureResizesIt(com.quartz.notes.ui.notebook.FreeformTest)
+10-31 20:38:26.863  1012  1012 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+10-31 20:38:26.872   485  1825 W AppSearchIcing: icing-search-engine.cc:217: Error: 5, Message: Document (com.google.android.googlequicksearchbox$OneSearchZeroStateGoogleSuggestions/default, zp) not found.
+10-31 20:38:26.879  1012  2299 D OneSearchSuggestProvider: Created the binder channel successfully for end point service =com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService , mChannel=Q0{delegate=L0{logId=37, target=directaddress:///AndroidComponentAddress%5BIntent%20%7B%20act=grpc.io.action.BIND%20cmp=com.google.android.googlequicksearchbox/com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService%20%7D%5D}} , mOneSearchConnection=y1.J@9242bab
+10-31 20:38:26.921  4657  4747 D IdlingRegistry: Registering idling resources: [androidx.compose.ui.test.EspressoLink@ae2f3f2]
+10-31 20:38:26.958  4657  4747 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+10-31 20:38:27.003  1707  2075 I AiAiEcho: Predicting[0]:
+10-31 20:38:27.003  1707  2075 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:
+10-31 20:38:27.004  1707  2075 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0
+10-31 20:38:27.004  1707  2075 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0
+10-31 20:38:27.033  1012  1038 I s.nexuslauncher: oneway function results for code 2 on binder at 0x7a1abc5c6c40 will be dropped but finished with status UNKNOWN_TRANSACTION
+10-31 20:38:27.035   759   805 D SplashScreenView: Build android.window.SplashScreenView{c8486c0 V.E...... ......ID 0,0-0,0}
+10-31 20:38:27.035   759   805 D SplashScreenView: Icon: view: null drawable: null size: 0
+10-31 20:38:27.035   759   805 D SplashScreenView: Branding: view: android.view.View{dfc0ff9 G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+10-31 20:38:27.036   759   814 W Parcel  : Expecting binder but got null!
+10-31 20:38:27.063  1894  2465 I A       : Using proto config with mendel
+10-31 20:38:27.071  6488  6488 W SystemServiceRegistry: No service published for: persistent_data_block
+10-31 20:38:27.074   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb82110
+10-31 20:38:27.075   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb82d10
+10-31 20:38:27.078  1894  2465 I A       : Using proto config with mendel
+10-31 20:38:27.136  6502  6502 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.checkin.START pkg=com.google.android.gms }
+10-31 20:38:27.201  1894  2344 I A       : group apa_head_suggest not present without account in *
+10-31 20:38:27.214  6502  6502 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.checkin.START pkg=com.google.android.gms }
+10-31 20:38:27.225  1894  2345 I A       : incrementApaDataDownloadStoreStatus(latency = PT0.139S, appVersion = 13.17.16.23, status = NOT_FOUND, locale = *, fileGroupnames = apa_head_suggest, accountScoped = false, localGroupsAvailable = false, timeSinceSearchBoot = Optional[PT3M2.915S] (ONE_TO_FIVE_MINUTES), timeSinceDataDownloadInit = PT37.463S (THIRTY_SECONDS_TO_ONE_MINUTE))
+10-31 20:38:27.234   950  1243 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+10-31 20:38:27.237   950  1243 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+10-31 20:38:27.239   950  1243 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 1
+10-31 20:38:27.243  1894  2345 I A       : incrementApaDataDownloadStoreStatusNotFound(appVersion = 13.17.16.23, locale = *, groupName = apa_head_suggest, accountScoped = false, foundGroups = 0, status = 0, localGroupsAvailable = false)
+10-31 20:38:27.249  1012  1012 D MainContentCaptureSession: Flushing 2 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARING
+10-31 20:38:27.249  1012  1012 D MainContentCaptureSession: Flushing 32 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARED
+10-31 20:38:27.261  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@610d616 in: PRE_ON_CREATE
+10-31 20:38:27.262  4657  4657 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+10-31 20:38:27.264  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@610d616 in: CREATED
+10-31 20:38:27.267  1012  1012 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+10-31 20:38:27.268  4657  4657 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=androidx.activity.ComponentActivity@610d616
+10-31 20:38:27.269  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@610d616 in: STARTED
+10-31 20:38:27.271  4657  4657 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=androidx.activity.ComponentActivity@610d616
+10-31 20:38:27.274  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@610d616 in: RESUMED
+10-31 20:38:27.275   485   509 W InputManager-JNI: Input channel object 'fe2585 Splash Screen com.quartz.notes.test (client)' was disposed without first being removed with the input manager!
+10-31 20:38:27.275  4657  4657 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=androidx.activity.ComponentActivity@610d616
+10-31 20:38:27.365  4657  5427 W Parcel  : Expecting binder but got null!
+10-31 20:38:27.398  1894  2492 I PBSessionCacheImpl: Deleted sessionId[8331693570961195] from persistence.
+10-31 20:38:27.399  1012  2299 D OneSearchSuggestProvider: Shut down the binder channel
+10-31 20:38:27.411  1894  2465 W SearchServiceCore: Abort, client detached.
+10-31 20:38:27.441  6502  6575 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+10-31 20:38:27.442  6502  6575 I Icing   : Indexing done com.google.android.gms-apps
+10-31 20:38:27.577  1894  2345 I A       : GMSCore Auth returned 0 accounts.
+10-31 20:38:27.577  1894  2345 I A       : GoogleOwnersProvider returned 0 accounts.
+10-31 20:38:27.578  1012  6445 I s.nexuslauncher: oneway function results for code 2 on binder at 0x7a1abc5bbf90 will be dropped but finished with status UNKNOWN_TRANSACTION
+10-31 20:38:27.633  1012  1012 D MainContentCaptureSession: Flushing 3 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARING
+10-31 20:38:27.633  1012  1012 D MainContentCaptureSession: Flushing 2 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARED
+10-31 20:38:27.639   485   505 W ziparchive: Unable to open '/data/app/~~NaCDcvl8pEfH3jUii6w5KA==/com.quartz.notes-5rFpeCYkV8uU0I8d8yBjEA==/base.dm': No such file or directory
+10-31 20:38:27.651   116   116 E prng_seeder: main: Launch terminated: Err(hwrng.read_exact in reseed
+10-31 20:38:27.651   116   116 E prng_seeder:
+10-31 20:38:27.651   116   116 E prng_seeder: Caused by:
+10-31 20:38:27.651   116   116 E prng_seeder:     Try again (os error 11))
+10-31 20:38:27.685  4657  4657 D AutofillManager: Fill dialog is enabled:false, hints=[password, passwordAuto, creditCardNumber, creditCardSecurityCode, creditCardExpirationDate]
+10-31 20:38:27.701   485   505 I ActivityTaskManager: Displayed com.quartz.notes/androidx.activity.ComponentActivity: +637ms
+10-31 20:38:27.706   485  2203 W InputManager-JNI: Input channel object 'ef4bf14 Splash Screen com.quartz.notes (client)' was disposed without first being removed with the input manager!
+10-31 20:38:27.727   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb826b0
+10-31 20:38:27.728   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb83df0
+10-31 20:38:27.729   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb81030
+10-31 20:38:27.730   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb826b0
+10-31 20:38:27.731   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb826b0
+10-31 20:38:27.731   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb81030
+10-31 20:38:27.731   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb83df0
+10-31 20:38:27.743   485   687 W InputManager-JNI: Input channel object '1ebabcb com.quartz.notes.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity (client)' was disposed without first being removed with the input manager!
+10-31 20:38:27.755   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb832b0
+10-31 20:38:27.755   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb82230
+10-31 20:38:27.755   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb832b0
+10-31 20:38:27.772  5380  5380 I A       : Trimming objects from memory, since app is in the background.
+10-31 20:38:27.790   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb83550
+10-31 20:38:27.790   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb80730
+10-31 20:38:27.805  2896  3081 W Bugle   : TextClassifierLibManagerImpl: Reclaiming memory at level: 40
+10-31 20:38:27.853   759   814 D EGL_emulation: app_time_stats: avg=650.78ms min=202.13ms max=1049.38ms count=3
+10-31 20:38:27.925   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb82c50
+10-31 20:38:28.013  6858  6858 I prng_seeder: main: Starting listen loop
+10-31 20:38:28.016  5380  5380 I A       : Trimming objects from memory, since app is in the background.
+10-31 20:38:28.094   485   496 I system_server: NativeAlloc concurrent copying GC freed 567768(17MB) AllocSpace objects, 11(236KB) LOS objects, 49% free, 24MB/48MB, paused 33.701ms,34us total 725.226ms
+10-31 20:38:28.096   485   497 W JavaBinder: BinderProxy is being destroyed but the application did not call unlinkToDeath to unlink all of its death recipients beforehand.  Releasing leaked death recipient: com.android.server.wm.ActivityRecord$$ExternalSyntheticLambda0
+10-31 20:38:28.096   485   497 I BpBinder: onLastStrongRef automatically unlinking death recipients: <uncached descriptor>
+10-31 20:38:28.096   485   497 W JavaBinder: BinderProxy is being destroyed but the application did not call unlinkToDeath to unlink all of its death recipients beforehand.  Releasing leaked death recipient: com.android.server.wm.ActivityRecord$$ExternalSyntheticLambda0
+10-31 20:38:28.096   485   497 I BpBinder: onLastStrongRef automatically unlinking death recipients: <uncached descriptor>
+10-31 20:38:28.135  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+10-31 20:38:28.136  4657  4664 I om.quartz.notes: Background young concurrent copying GC freed 175967(7216KB) AllocSpace objects, 2(68KB) LOS objects, 38% free, 10MB/17MB, paused 7.221ms,232us total 255.982ms
+10-31 20:38:28.141  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+10-31 20:38:28.141  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=null}, false)
+10-31 20:38:28.141  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+10-31 20:38:28.142  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+10-31 20:38:28.153   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb82650
+10-31 20:38:28.295   485   700 D ConnectivityService: NetReassign [no changes] [c 0] [a 1] [i 2]
+10-31 20:38:28.401  4657  6870 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_multi_configs ANDROID_EMU_hwc_color_transform GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0
+10-31 20:38:28.403  4657  6870 W OpenGLRenderer: Failed to initialize 101010-2 format, error = EGL_SUCCESS
+10-31 20:38:28.405  4657  6870 D EGL_emulation: eglCreateContext: 0x7a1b2c5634d0: maj 3 min 0 rcv 3
+10-31 20:38:28.407  4657  6870 D EGL_emulation: eglMakeCurrent: 0x7a1b2c5634d0: ver 3 0 (tinfo 0x7a1d53f6c100) (first time)
+10-31 20:38:28.414  4657  4755 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_multi_configs ANDROID_EMU_hwc_color_transform GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0
+10-31 20:38:29.811  4657  5427 D EGL_emulation: app_time_stats: avg=457.13ms min=134.17ms max=1209.45ms count=5
+10-31 20:38:30.375  1644  1654 D StrictMode: StrictMode policy violation: android.os.strictmode.SqliteObjectLeakedViolation: Finalizing a Cursor that has not been deactivated or closed. database = /data/user/0/com.android.providers.contacts/databases/contacts2.db, table = raw_contacts, query = SELECT contacts_view._id AS _id, contacts_view.display_name AS display_name, contacts_view.photo_thumb_uri AS photo_thumb_uri, data1 AS number, data2 AS type, data3 AS label, contacts_view.lookup AS lookup FROM raw_contacts JOIN view_contacts as contacts_view ON (contacts_view._id = raw_contacts.contact_id) JOIN (SELECT data_id,normalized_number FROM phone_lookup WHERE (phone_lookup.min_match = '7654321')) AS lookup ON lookup.data_id=data._id JOIN data ON data.raw_contact_id=raw_contacts._id WHERE (PHONE_NUMBERS_EQUAL(data.data1, '+15551234567', 0, 7)) ORDER BY  length(lookup.normalized_number) DESC
+10-31 20:38:30.375  1644  1654 D StrictMode: 	at android.os.StrictMode.onSqliteObjectLeaked(StrictMode.java:2185)
+10-31 20:38:30.375  1644  1654 D StrictMode: 	at android.database.sqlite.SQLiteCursor.finalize(SQLiteCursor.java:282)
+10-31 20:38:30.375  1644  1654 D StrictMode: 	at java.lang.Daemons$FinalizerDaemon.doFinalize(Daemons.java:319)
+10-31 20:38:30.375  1644  1654 D StrictMode: 	at java.lang.Daemons$FinalizerDaemon.runInternal(Daemons.java:306)
+10-31 20:38:30.375  1644  1654 D StrictMode: 	at java.lang.Daemons$Daemon.run(Daemons.java:140)
+10-31 20:38:30.375  1644  1654 D StrictMode: 	at java.lang.Thread.run(Thread.java:1012)
+10-31 20:38:30.378  1644  1654 D StrictMode: StrictMode policy violation: android.os.strictmode.LeakedClosableViolation: A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+10-31 20:38:30.378  1644  1654 D StrictMode: 	at android.os.StrictMode$AndroidCloseGuardReporter.report(StrictMode.java:1986)
+10-31 20:38:30.378  1644  1654 D StrictMode: 	at dalvik.system.CloseGuard.warnIfOpen(CloseGuard.java:336)
+10-31 20:38:30.378  1644  1654 D StrictMode: 	at android.database.AbstractCursor.finalize(AbstractCursor.java:531)
+10-31 20:38:30.378  1644  1654 D StrictMode: 	at android.database.sqlite.SQLiteCursor.finalize(SQLiteCursor.java:291)
+10-31 20:38:30.378  1644  1654 D StrictMode: 	at java.lang.Daemons$FinalizerDaemon.doFinalize(Daemons.java:319)
+10-31 20:38:30.378  1644  1654 D StrictMode: 	at java.lang.Daemons$FinalizerDaemon.runInternal(Daemons.java:306)
+10-31 20:38:30.378  1644  1654 D StrictMode: 	at java.lang.Daemons$Daemon.run(Daemons.java:140)
+10-31 20:38:30.378  1644  1654 D StrictMode: 	at java.lang.Thread.run(Thread.java:1012)
+10-31 20:38:30.378  1644  1654 D StrictMode: Caused by: java.lang.Throwable: Explicit termination method 'AbstractCursor.close' not called
+10-31 20:38:30.378  1644  1654 D StrictMode: 	at dalvik.system.CloseGuard.openWithCallSite(CloseGuard.java:288)
+10-31 20:38:30.378  1644  1654 D StrictMode: 	at dalvik.system.CloseGuard.open(CloseGuard.java:257)
+10-31 20:38:30.378  1644  1654 D StrictMode: 	at android.database.AbstractCursor.<init>(AbstractCursor.java:227)
+10-31 20:38:30.378  1644  1654 D StrictMode: 	at android.database.AbstractWindowedCursor.<init>(AbstractWindowedCursor.java:39)
+10-31 20:38:30.378  1644  1654 D StrictMode: 	at android.database.sqlite.SQLiteCursor.<init>(SQLiteCursor.java:98)
+10-31 20:38:30.378  1644  1654 D StrictMode: 	at android.database.sqlite.SQLiteDirectCursorDriver.query(SQLiteDirectCursorDriver.java:52)
+10-31 20:38:30.378  1644  1654 D StrictMode: 	at android.database.sqlite.SQLiteDatabase.rawQueryWithFactory(SQLiteDatabase.java:1712)
+10-31 20:38:30.378  1644  1654 D StrictMode: 	at android.database.sqlite.SQLiteQueryBuilder.query(SQLiteQueryBuilder.java:592)
+10-31 20:38:30.378  1644  1654 D StrictMode: 	at com.android.providers.contacts.ContactsProvider2.doQuery(ContactsProvider2.java:7249)
+10-31 20:38:30.378  1644  1654 D StrictMode: 	at com.android.providers.contacts.ContactsProvider2.queryLocal(ContactsProvider2.java:6955)
+10-31 20:38:30.378  1644  1654 D StrictMode: 	at com.android.providers.contacts.ContactsProvider2.queryCorpLookupIfNecessary(ContactsProvider2.java:7419)
+10-31 20:38:30.378  1644  1654 D StrictMode: 	at com.android.providers.contacts.ContactsProvider2.queryLookupEnterprise(ContactsProvider2.java:7558)
+10-31 20:38:30.378  1644  1654 D StrictMode: 	at com.android.providers.contacts.ContactsProvider2.queryPhoneLookupEnterprise(ContactsProvider2.java:7529)
+10-31 20:38:30.378  1644  1654 D StrictMode: 	at com.android.providers.contacts.ContactsProvider2.queryLocal(ContactsProvider2.java:6878)
+10-31 20:38:30.378  1644  1654 D StrictMode: 	at com.android.providers.contacts.ContactsProvider2.queryDirectoryIfNecessary(ContactsProvider2.java:5667)
+10-31 20:38:30.378  1644  1654 D StrictMode: 	at com.android.providers.contacts.ContactsProvider2.queryInternal(ContactsProvider2.java:5609)
+10-31 20:38:30.378  1644  1654 D StrictMode: 	at com.android.providers.contacts.ContactsProvider2.query(ContactsProvider2.java:5559)
+10-31 20:38:30.378  1644  1654 D StrictMode: 	at android.content.ContentProvider.query(ContentProvider.java:1551)
+10-31 20:38:30.378  1644  1654 D StrictMode: 	at android.content.ContentProvider$Transport.query(ContentProvider.java:285)
+10-31 20:38:30.378  1644  1654 D StrictMode: 	at android.content.ContentProviderNative.onTransact(ContentProviderNative.java:107)
+10-31 20:38:30.378  1644  1654 D StrictMode: 	at android.os.Binder.execTransactInternal(Binder.java:1280)
+10-31 20:38:30.378  1644  1654 D StrictMode: 	at android.os.Binder.execTransact(Binder.java:1244)
+10-31 20:38:30.457  6502  6584 E PhenotypeRegOp: Attempting to overwrite config package for com.google.android.gms.games [CONTEXT service_id=231 ]
+10-31 20:38:30.458  6502  6584 E PhenotypeRegOp: Attempting to overwrite config package for com.google.android.gms.maps#com.google.android.gms [CONTEXT service_id=231 ]
+10-31 20:38:30.459  6502  6584 E PhenotypeRegOp: Attempting to overwrite config package for com.google.android.gms.cast [CONTEXT service_id=231 ]
+10-31 20:38:30.459  6502  6584 E PhenotypeRegOp: Attempting to overwrite config package for com.google.android.gms.mobile_data_plan [CONTEXT service_id=231 ]
+10-31 20:38:30.461  6502  6584 E PhenotypeRegOp: Attempting to overwrite config package for com.google.android.gms.udc [CONTEXT service_id=231 ]
+10-31 20:38:30.636  6488  6708 I HeterodyneSyncer: Removed 0 invalid users [CONTEXT service_id=51 ]
+10-31 20:38:30.684  4657  4663 I om.quartz.notes: Compiler allocated 6297KB to compile void com.quartz.notes.ui.notebook.PageElementsKt.ElementItem-qqMMWhw(com.quartz.notes.data.db.PageElementEntity, float, long, com.quartz.notes.ui.notebook.PageTool, boolean, com.quartz.notes.ui.notebook.PageCanvasState, com.quartz.notes.ui.editor.EditorStyles, kotlin.jvm.functions.Function1, com.quartz.notes.ui.notebook.ElementActions, androidx.compose.runtime.Composer, int)
+10-31 20:38:31.033  4657  5427 D EGL_emulation: app_time_stats: avg=610.73ms min=190.62ms max=1030.83ms count=2
+10-31 20:38:31.459  6502  6581 I ChimeraConfigurator: Starting update, reason: 4 urgentFeatures: vision.ocr:-1
+10-31 20:38:31.478  6502  6581 I ChimeraConfigurator: Detected pending changes for urgent request: [vision.ocr]. Pending module sets: container:2318189190800+mlkit.ocr.common,tflite_dynamite:2640104055100800+tflite_dynamite,vision_ocr:2316024025100000+vision.ocr
+10-31 20:38:31.489  6502  6581 I GmsDebugLogger: [73] 1801
+10-31 20:38:31.495  6502  6581 W ZappDownloader: No successful module downloads for requested features [vision.ocr].
+10-31 20:38:31.495  6502  6581 I GmsDebugLogger: [30] [VisionOcrDynamite.integ:231602402100000],[TfliteDynamiteDynamite.integ:264010405100800],[MlkitOcrCommon.optional:231818100800]
+10-31 20:38:31.503  6502  6581 W ChimeraConfigService: Retry attempt was throttled. [CONTEXT service_id=264 ]
+10-31 20:38:31.504  6502  6581 I GmsDebugLogger: [83] 1 [vision.ocr]
+10-31 20:38:31.505  6502  6731 W Vision  : Request for optional module download of ocr failed. Request again.
+10-31 20:38:31.506  6502  6731 W Vision  : Would have logged:
+10-31 20:38:31.506  6502  6731 W Vision  : # dsae@37884fe7
+10-31 20:38:31.506  6502  6731 I Vision  : Schedule retrying download ocr at 239809 with backoff 20 seconds
+10-31 20:38:32.402  6502  6502 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.constellation.service.START pkg=com.google.android.gms }
+10-31 20:38:32.463  4627  4650 W System  : A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+10-31 20:38:32.463  4627  4650 W System  : java.lang.Throwable: Explicit termination method 'HardwareBuffer.close' not called
+10-31 20:38:32.463  4627  4650 W System  : 	at dalvik.system.CloseGuard.openWithCallSite(CloseGuard.java:288)
+10-31 20:38:32.463  4627  4650 W System  : 	at dalvik.system.CloseGuard.open(CloseGuard.java:257)
+10-31 20:38:32.463  4627  4650 W System  : 	at android.hardware.HardwareBuffer.<init>(HardwareBuffer.java:272)
+10-31 20:38:32.463  4627  4650 W System  : A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+10-31 20:38:32.463  4627  4650 W System  : java.lang.Throwable: Explicit termination method 'HardwareBuffer.close' not called
+10-31 20:38:32.463  4627  4650 W System  : 	at dalvik.system.CloseGuard.openWithCallSite(CloseGuard.java:288)
+10-31 20:38:32.463  4627  4650 W System  : 	at dalvik.system.CloseGuard.open(CloseGuard.java:257)
+10-31 20:38:32.463  4627  4650 W System  : 	at android.hardware.HardwareBuffer.<init>(HardwareBuffer.java:272)
+10-31 20:38:32.615   759   805 D SplashScreenView: Build android.window.SplashScreenView{e271ff0 V.E...... ......ID 0,0-0,0}
+10-31 20:38:32.615   759   805 D SplashScreenView: Icon: view: null drawable: null size: 0
+10-31 20:38:32.615   759   805 D SplashScreenView: Branding: view: android.view.View{603e969 G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+10-31 20:38:32.617   759   814 W Parcel  : Expecting binder but got null!
+10-31 20:38:32.621  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@610d616 in: PAUSED
+10-31 20:38:32.630  4657  4657 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=androidx.activity.ComponentActivity@610d616
+10-31 20:38:32.659  5451  5471 W Parcel  : Expecting binder but got null!
+10-31 20:38:32.820  6488  6488 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.pseudonymous.service.START dat=chimera-action:/... cmp=com.google.android.gms/.chimera.PersistentApiService }
+10-31 20:38:32.905   759   814 D EGL_emulation: app_time_stats: avg=5050.87ms min=5050.87ms max=5050.87ms count=1
+10-31 20:38:32.908   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb819f0
+10-31 20:38:32.984  1012  1012 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+10-31 20:38:33.001   485  1825 W AppSearchIcing: icing-search-engine.cc:217: Error: 5, Message: Document (com.google.android.googlequicksearchbox$OneSearchZeroStateGoogleSuggestions/default, zp) not found.
+10-31 20:38:33.003  1012  2299 D OneSearchSuggestProvider: Created the binder channel successfully for end point service =com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService , mChannel=Q0{delegate=L0{logId=41, target=directaddress:///AndroidComponentAddress%5BIntent%20%7B%20act=grpc.io.action.BIND%20cmp=com.google.android.googlequicksearchbox/com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService%20%7D%5D}} , mOneSearchConnection=y1.J@8e46095
+10-31 20:38:33.020  6488  6488 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.clearcut.bootcount.service.START dat=chimera-action:/... cmp=com.google.android.gms/.chimera.PersistentBoundBrokerService }
+10-31 20:38:33.023  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@610d616 in: STOPPED
+10-31 20:38:33.023  4657  4657 V ActivityScenario: Update currentActivityStage to STOPPED, currentActivity=androidx.activity.ComponentActivity@610d616
+10-31 20:38:33.032  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@610d616 in: DESTROYED
+10-31 20:38:33.033  4657  4657 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
+10-31 20:38:33.034   485  1670 W InputManager-JNI: Input channel object 'a5077e6 com.quartz.notes/androidx.activity.ComponentActivity (client)' was disposed without first being removed with the input manager!
+10-31 20:38:33.040   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb7f110
+10-31 20:38:33.040   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb834f0
+10-31 20:38:33.040   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb82d70
+10-31 20:38:33.040   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb834f0
+10-31 20:38:33.046  4657  4747 D IdlingRegistry: Unregistering idling resources: [androidx.compose.ui.test.EspressoLink@ae2f3f2]
+10-31 20:38:33.047  4657  4747 I TestRunner: finished: aSmallPageIsCenteredAndPinchingAPictureResizesIt(com.quartz.notes.ui.notebook.FreeformTest)

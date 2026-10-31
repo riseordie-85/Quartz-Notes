@@ -1,0 +1,21 @@
+10-31 20:36:48.178  4657  4747 I TestRunner: started: pagesAddedInTheTemplatesNotebookAreTemplates(com.quartz.notes.data.TemplatesTest)
+10-31 20:36:48.209  4748  4833 E PhenotypeFlagCommitter: Retrieving snapshot for com.google.android.gm#com.google.android.gm_Hub failed
+10-31 20:36:48.209  4748  4833 E PhenotypeFlagCommitter: java.util.concurrent.TimeoutException: Timed out waiting for Task
+10-31 20:36:48.209  4748  4833 E PhenotypeFlagCommitter: 	at ogi.v(PG:7)
+10-31 20:36:48.209  4748  4833 E PhenotypeFlagCommitter: 	at qgi.a(PG:2)
+10-31 20:36:48.209  4748  4833 E PhenotypeFlagCommitter: 	at qgi.j(PG:2)
+10-31 20:36:48.209  4748  4833 E PhenotypeFlagCommitter: 	at qgi.h(Unknown Source:4)
+10-31 20:36:48.209  4748  4833 E PhenotypeFlagCommitter: 	at gdz.run(PG:7)
+10-31 20:36:48.209  4748  4833 E PhenotypeFlagCommitter: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+10-31 20:36:48.209  4748  4833 E PhenotypeFlagCommitter: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+10-31 20:36:48.209  4748  4833 E PhenotypeFlagCommitter: 	at java.lang.Thread.run(Thread.java:1012)
+10-31 20:36:48.248   485   516 W system_server: Long monitor contention with owner PackageManager (540) at int com.android.server.am.ActivityManagerService$LocalService.broadcastIntent(android.content.Intent, android.content.IIntentReceiver, java.lang.String[], boolean, int, int[], android.os.Bundle)(ActivityManagerService.java:17133) waiters=3 in void com.android.server.am.BroadcastQueue.processNextBroadcast(boolean) for 343ms
+10-31 20:36:48.258   950   950 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+10-31 20:36:48.258   950   950 D MediaPlayerList: Name of package changed: com.google.android.googlequicksearchbox
+10-31 20:36:48.258   950   950 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+10-31 20:36:48.259   950   950 D MediaPlayerList: Name of package changed: com.google.android.googlequicksearchbox
+10-31 20:36:48.262   485   580 I RoleService: Granting default roles...
+10-31 20:36:48.263   485   590 I InputReader: Reconfiguring input devices, changes=KEYBOARD_LAYOUTS |
+10-31 20:36:48.265   759   759 D ControlsListingControllerImpl: ServiceConfig reloaded, count: 0
+10-31 20:36:48.282  2896  3124 I Bugle   : BroadcastReceiverAsyncWorkTracker: Acknowledging broadcast of atsi@eca0e6a
+10-31 20:36:48.293  4657  4747 I TestRunner: finished: pagesAddedInTheTemplatesNotebookAreTemplates(com.quartz.notes.data.TemplatesTest)

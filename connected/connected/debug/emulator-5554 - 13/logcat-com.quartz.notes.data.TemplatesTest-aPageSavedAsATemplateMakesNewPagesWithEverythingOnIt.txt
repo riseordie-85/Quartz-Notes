@@ -1,0 +1,55 @@
+10-31 20:36:48.296  4657  4747 I TestRunner: started: aPageSavedAsATemplateMakesNewPagesWithEverythingOnIt(com.quartz.notes.data.TemplatesTest)
+10-31 20:36:48.303   485   590 I InputReader: Reconfiguring input devices, changes=KEYBOARD_LAYOUTS |
+10-31 20:36:48.304   950   950 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+10-31 20:36:48.304   950   950 D MediaPlayerList: Name of package changed: com.google.android.gm
+10-31 20:36:48.305   950   950 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+10-31 20:36:48.305   950   950 D MediaPlayerList: Name of package changed: com.google.android.gm
+10-31 20:36:48.306   759   759 D ControlsListingControllerImpl: ServiceConfig reloaded, count: 0
+10-31 20:36:48.310   980   980 D CarrierSvcBindHelper: onPackageModified: com.google.android.googlequicksearchbox
+10-31 20:36:48.312  2896  3124 I Bugle   : BroadcastReceiverAsyncWorkTracker: Acknowledging broadcast of atsi@eca0e6a
+10-31 20:36:48.313   980   980 D CarrierSvcBindHelper: No carrier app for: 0
+10-31 20:36:48.326  1049  1049 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.presencemanager.service.START dat=chimera-action:/... cmp=com.google.android.gms/.chimera.PersistentApiService }
+10-31 20:36:48.343  2537  2537 I CarrierServices: [2] CarrierServicesBaseApp.initialize:126 Initialized already, return.
+10-31 20:36:48.344   760   930 W Role    : Default holder doesn't have required signing certificate: com.google.android.apps.work.clouddpc:23962F4B43B9857638EA66F4D419518EAE282491ACDA4B94707BD59003C45E58
+10-31 20:36:48.347  1049  1049 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.presencemanager.service.INTERNAL_IDENTITY dat=chimera-action:/... cmp=com.google.android.gms/.chimera.PersistentApiService }
+10-31 20:36:48.354  1277  1277 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.wallet.service.BIND pkg=com.google.android.gms }
+10-31 20:36:48.354  1277  1277 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.wallet.service.BIND pkg=com.google.android.gms }
+10-31 20:36:48.359  1049  4607 I Fitness : OnPackageChangedOperation got intent: Intent { act=android.intent.action.PACKAGE_CHANGED dat=package: flg=0x45000010 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.PersistentIntentOperationService (has extras) } [CONTEXT service_id=17 ]
+10-31 20:36:48.362  1894  1894 V ClearcutMetricXmitter: Transmission is done.
+10-31 20:36:48.368  3751  4868 I ProvidersCache: Provider returned no roots. Possibly naughty: com.google.android.apps.docs.storage
+10-31 20:36:48.379  1049  3569 I Fitness : FitCleanupIntentOperation received Intent android.intent.action.PACKAGE_CHANGED [CONTEXT service_id=17 ]
+10-31 20:36:48.383  1049  1049 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.tapandpay.service.BIND dat=chimera-action:/... cmp=com.google.android.gms/.chimera.PersistentApiService }
+10-31 20:36:48.384  1049  1049 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.tapandpay.service.BIND dat=chimera-action:/... cmp=com.google.android.gms/.chimera.PersistentApiService }
+10-31 20:36:48.387  2537  2537 I CarrierServices: [2] RcsAutoStartReceiver.a: RcsAutoStartReceiver triggered. Fetching RCS State. Action: android.intent.action.BOOT_COMPLETED
+10-31 20:36:48.388  2537  2537 I CarrierServices: [2] RcsStateFetcher.bindService:108 Migration binding to RcsMigrationService
+10-31 20:36:48.389  1049  3569 I Fitness : OnPackageChangedOperation got intent: Intent { act=android.intent.action.PACKAGE_CHANGED dat=package: flg=0x45000010 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.PersistentIntentOperationService (has extras) } [CONTEXT service_id=17 ]
+10-31 20:36:48.391   980   980 D CarrierSvcBindHelper: onPackageModified: com.google.android.gm
+10-31 20:36:48.393   980   980 D CarrierSvcBindHelper: No carrier app for: 0
+10-31 20:36:48.393   980   980 D ImsResolver: maybeAddedImsService, packageName: com.google.android.googlequicksearchbox
+10-31 20:36:48.395  2896  2896 I BugleDataModel: RcsMigrationService: Returning RCS state provider.
+10-31 20:36:48.397  1049  4402 I Fitness : FitCleanupIntentOperation received Intent android.intent.action.PACKAGE_CHANGED [CONTEXT service_id=17 ]
+10-31 20:36:48.408  1490  1609 I LauncherIconVisibilityInitializerBase: LauncherIconVisibilityInitializerBase.lambda$doUpdate$1():69 doUpdate() : Visible = false
+10-31 20:36:48.411   287   287 D Zygote  : Forked child process 4874
+10-31 20:36:48.415   760  3588 I PermissionControllerServiceImpl: Updating user sensitive for uid 10119
+10-31 20:36:48.416   760  3588 I PermissionControllerServiceImpl: Updating user sensitive for uid 10145
+10-31 20:36:48.416   485   515 W system_server: Long monitor contention with owner ActivityManager (516) at boolean android.os.MessageQueue.enqueueMessage(android.os.Message, long)(MessageQueue.java:600) waiters=0 in android.os.Message android.os.MessageQueue.next() for 166ms
+10-31 20:36:48.421   980   980 D ImsResolver: maybeAddedImsService, packageName: com.google.android.gm
+10-31 20:36:48.422  4874  4874 I timeinitializer: Using CollectorTypeCC GC.
+10-31 20:36:48.424  4874  4874 W timeinitializer: Unexpected CPU variant for x86: x86_64.
+10-31 20:36:48.424  4874  4874 W timeinitializer: Known variants: atom, sandybridge, silvermont, kabylake, default
+10-31 20:36:48.427  2582  2653 I .android.as.oss: Background concurrent copying GC freed 37906(3874KB) AllocSpace objects, 0(0B) LOS objects, 49% free, 2729KB/5459KB, paused 87us,9us total 231.512ms
+10-31 20:36:48.434  2896  4764 I RcsProvisioning: Failed to read config: no config found /data/user/0/com.google.android.apps.messaging/files/rcsconfig: open failed: ENOENT (No such file or directory)
+10-31 20:36:48.442   375   407 I adbd    : jdwp connection from 4874
+10-31 20:36:48.510  4874  4874 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10110; state: ENABLED
+10-31 20:36:48.523  4874  4874 D nativeloader: Configuring vendor-classloader-namespace for unbundled product apk /product/priv-app/GoogleOneTimeInitializer/GoogleOneTimeInitializer.apk. target_sdk_version=33, uses_libraries=, library_path=/product/priv-app/GoogleOneTimeInitializer/lib/x86_64:/product/lib64:/system/product/lib64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.onetimeinitializer:/product/lib64:/system/product/lib64
+10-31 20:36:48.537  4874  4874 V GraphicsEnvironment: ANGLE Developer option for 'com.google.android.onetimeinitializer' set to: 'default'
+10-31 20:36:48.537  4874  4874 V GraphicsEnvironment: ANGLE GameManagerService for com.google.android.onetimeinitializer: false
+10-31 20:36:48.537  4874  4874 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+10-31 20:36:48.539  4874  4874 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+10-31 20:36:48.539  4874  4874 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+10-31 20:36:48.540  4874  4874 V OneTimeInitializerReceiver: OneTimeInitializerReceiver.onReceive
+10-31 20:36:48.542  4874  4893 V OneTimeInitializer: OneTimeInitializer.initialize
+10-31 20:36:48.544  4874  4893 V OneTimeInitializer: Device Policy is not installed, doing nothing.
+10-31 20:36:48.557  1277  1277 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.pay.service.BIND dat=chimera-action:/... cmp=com.google.android.gms/.chimera.GmsApiService }
+10-31 20:36:48.558  1277  1277 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.pay.service.BIND dat=chimera-action:/... cmp=com.google.android.gms/.chimera.GmsApiService }
+10-31 20:36:48.572  4657  4747 I TestRunner: finished: aPageSavedAsATemplateMakesNewPagesWithEverythingOnIt(com.quartz.notes.data.TemplatesTest)

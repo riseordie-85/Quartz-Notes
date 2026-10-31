@@ -1,0 +1,108 @@
+10-31 20:37:05.775  4657  4747 I TestRunner: started: liveChangesArriveWithinSeconds(com.quartz.notes.data.sync.SyncEngineTest)
+10-31 20:37:05.778  4657  4747 D TrafficStats: tagSocket(101) with statsTag=0xffffffff, statsUid=-1
+10-31 20:37:05.852  1277  5147 I Icing   : Indexing com.google.android.gms-internal.3p:MobileApplication from com.google.android.gms
+10-31 20:37:05.882  1277  5147 I Icing   : Indexing done com.google.android.gms-internal.3p:MobileApplication
+10-31 20:37:05.923  1277  1277 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.auth.service.START pkg=com.google.android.gms }
+10-31 20:37:06.007  1049  1324 I HeterodyneSyncScheduler: Scheduling Phenotype for a PhenotypeSyncImmediately(6, com.google.android.platform.statsd_java_boot) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+10-31 20:37:06.015  1049  1324 W bwft    : Succeeded but not registered: com.google.android.libraries.consentverifier#com.google.android.gms [CONTEXT service_id=51 ]
+10-31 20:37:06.017  1049  3303 W .gms.persistent: Long monitor contention with owner [com.google.android.gms.chimera.container.intentoperation.PersistentIntentOperationChimeraService-Executor] processing com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener for action com.google.android.gms.chimera.container.CONTAINER_UPDATED (3042) at void hjm.run()(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3) waiters=0 in void hjm.run() for 73.534s
+10-31 20:37:06.018  1049  4608 W .gms.persistent: Long monitor contention with owner [com.google.android.gms.chimera.container.intentoperation.PersistentIntentOperationChimeraService-Executor] processing com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener for action com.google.android.gms.chimera.container.CONTAINER_UPDATED (3042) at void hjm.run()(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3) waiters=1 in void hjm.run() for 18.780s
+10-31 20:37:06.019  1049  3303 I NewModuleComplete: Received com.google.android.chimera.IntentOperation.NEW_MODULE(com.google.android.gms.chimera.PersistentIntentOperationService,2,true)
+10-31 20:37:06.021  1049  1324 W bwft    : Succeeded but not registered: com.google.android.gms.tron.metrics [CONTEXT service_id=51 ]
+10-31 20:37:06.024  1277  5146 I NewModuleHelper: Received com.google.android.chimera.container.NEW_MODULE_FINALIZE(2/0): com.google.android.gms.chimera.PersistentIntentOperationService,2,true
+10-31 20:37:06.177  1049  1055 I .gms.persistent: Compiler allocated 4994KB to compile void bwhy.C(java.util.Set, long, dmuh, dmui, java.util.List, java.util.LinkedHashMap, dzew, bwhx, boolean)
+10-31 20:37:06.519  4657  5378 D TrafficStats: tagSocket(102) with statsTag=0xffffffff, statsUid=-1
+10-31 20:37:06.579  1049  3681 I HeterodyneSyncScheduler: Scheduling Phenotype for a PhenotypeSyncImmediately(6, com.google.android.gms.device_performance#com.google.android.youtube) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+10-31 20:37:06.580  1049  1325 W .gms.persistent: Long monitor contention with owner lowpool[17] (5224) at long bwdg.a(bwdv)(:com.google.android.gms@231818047@23.18.18 (190800-535401451):12) waiters=0 in void bwdg.b() for 229ms
+10-31 20:37:06.590  1049  3681 I HeterodyneSyncer: Removed 0 invalid users [CONTEXT service_id=51 ]
+10-31 20:37:06.615  2896  3082 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+10-31 20:37:06.649  1894  1894 I BgTaskExecutorImpl: Starting EXCLUSIVE background task FETCH_CONFIGS_FROM_PHENOTYPE.
+10-31 20:37:06.659  2896  2896 W BugleRcsEngine: [2] benk.i: Unable to send RCS extension log
+10-31 20:37:06.665  2896  2896 W BugleRcsEngine: [2] benk.i: Unable to send RCS extension log
+10-31 20:37:06.691   287   287 D Zygote  : Forked child process 5380
+10-31 20:37:06.711  5380  5380 I equicksearchbox: Using CollectorTypeCC GC.
+10-31 20:37:06.713  1490  1490 I PhenotypeModule: PhenotypeModule.receiveBroadcast():373 onReceive() urgent = false
+10-31 20:37:06.719  1490  1490 I PhenotypeModule: PhenotypeModule.maybeFetchAndUpdate():166 maybeFetchAndUpdate: start new task to fetch
+10-31 20:37:06.721  5380  5380 W equicksearchbox: Unexpected CPU variant for x86: x86_64.
+10-31 20:37:06.721  5380  5380 W equicksearchbox: Known variants: atom, sandybridge, silvermont, kabylake, default
+10-31 20:37:06.751   375   407 I adbd    : jdwp connection from 5380
+10-31 20:37:06.790  5380  5380 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10119; state: ENABLED
+10-31 20:37:06.813  5380  5380 D nativeloader: Configuring classloader-namespace for other apk /system/framework/org.apache.http.legacy.jar. target_sdk_version=31, uses_libraries=ALL, library_path=/product/priv-app/Velvet/lib/x86_64:/product/priv-app/Velvet/Velvet.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.googlequicksearchbox
+10-31 20:37:06.817  5380  5380 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.extensions.jar. target_sdk_version=31, uses_libraries=ALL, library_path=/product/priv-app/Velvet/lib/x86_64:/product/priv-app/Velvet/Velvet.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.googlequicksearchbox
+10-31 20:37:06.818  5380  5380 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.sidecar.jar. target_sdk_version=31, uses_libraries=ALL, library_path=/product/priv-app/Velvet/lib/x86_64:/product/priv-app/Velvet/Velvet.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.googlequicksearchbox
+10-31 20:37:06.829  5380  5380 D nativeloader: Configuring vendor-classloader-namespace for unbundled product apk /product/priv-app/Velvet/Velvet.apk. target_sdk_version=31, uses_libraries=, library_path=/product/priv-app/Velvet/lib/x86_64:/product/priv-app/Velvet/Velvet.apk!/lib/x86_64:/product/lib64:/system/product/lib64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.googlequicksearchbox:/product/lib64:/system/product/lib64
+10-31 20:37:06.852  1049  1324 I HeterodyneSyncScheduler: Scheduling Phenotype for a PhenotypeSyncImmediately(16, com.google.apps.drive.android#com.google.android.apps.docs) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+10-31 20:37:06.890  1049  1325 E bwfc    : Phenotype API error. Event # edax@cdee3fa6, EventCode: 5 [CONTEXT service_id=51 ]
+10-31 20:37:06.890  1049  1325 E bwfc    : bwdx: 29501: Stale snapshot for com.google.android.libraries.consentverifier#com.google.android.googlequicksearchbox(change count changed - expected 1  but was 0)
+10-31 20:37:06.890  1049  1325 E bwfc    : 	at bwfg.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):16)
+10-31 20:37:06.890  1049  1325 E bwfc    : 	at bwff.g(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+10-31 20:37:06.890  1049  1325 E bwfc    : 	at bwfc.e(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+10-31 20:37:06.890  1049  1325 E bwfc    : 	at bwfc.f(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+10-31 20:37:06.890  1049  1325 E bwfc    : 	at avsy.eo(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+10-31 20:37:06.890  1049  1325 E bwfc    : 	at avtf.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):14)
+10-31 20:37:06.890  1049  1325 E bwfc    : 	at dfhf.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+10-31 20:37:06.890  1049  1325 E bwfc    : 	at aced.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+10-31 20:37:06.890  1049  1325 E bwfc    : 	at aced.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):8)
+10-31 20:37:06.890  1049  1325 E bwfc    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+10-31 20:37:06.890  1049  1325 E bwfc    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+10-31 20:37:06.890  1049  1325 E bwfc    : 	at acjn.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+10-31 20:37:06.890  1049  1325 E bwfc    : 	at java.lang.Thread.run(Thread.java:1012)
+10-31 20:37:06.891  1049  1325 W AsyncOperation: operation=CommitToConfigurationOperationCall, opStatusCode=29501 [CONTEXT service_id=51 ]
+10-31 20:37:06.891  1049  1325 W AsyncOperation: OperationException[Status{statusCode=Stale snapshot for com.google.android.libraries.consentverifier#com.google.android.googlequicksearchbox(change count changed - expected 1  but was 0), resolution=null}]
+10-31 20:37:06.891  1049  1325 W AsyncOperation: 	at bwfc.e(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+10-31 20:37:06.891  1049  1325 W AsyncOperation: 	at bwfc.f(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+10-31 20:37:06.891  1049  1325 W AsyncOperation: 	at avsy.eo(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+10-31 20:37:06.891  1049  1325 W AsyncOperation: 	at avtf.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):14)
+10-31 20:37:06.891  1049  1325 W AsyncOperation: 	at dfhf.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+10-31 20:37:06.891  1049  1325 W AsyncOperation: 	at aced.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+10-31 20:37:06.891  1049  1325 W AsyncOperation: 	at aced.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):8)
+10-31 20:37:06.891  1049  1325 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+10-31 20:37:06.891  1049  1325 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+10-31 20:37:06.891  1049  1325 W AsyncOperation: 	at acjn.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+10-31 20:37:06.891  1049  1325 W AsyncOperation: 	at java.lang.Thread.run(Thread.java:1012)
+10-31 20:37:06.894  1894  2476 W MobStoreFlagStore: Failed to commit due to stale snapshot for com.google.android.libraries.consentverifier#com.google.android.googlequicksearchbox, triggering flag update.
+10-31 20:37:06.894  1894  2476 W MobStoreFlagStore: com.google.android.libraries.phenotype.client.a.h: 29501: 29501: Stale snapshot for com.google.android.libraries.consentverifier#com.google.android.googlequicksearchbox(change count changed - expected 1  but was 0)
+10-31 20:37:06.894  1894  2476 W MobStoreFlagStore: 	at com.google.android.libraries.phenotype.client.a.j.apply(PG:1)
+10-31 20:37:06.894  1894  2476 W MobStoreFlagStore: 	at com.google.common.util.concurrent.a.e(PG:2)
+10-31 20:37:06.894  1894  2476 W MobStoreFlagStore: 	at com.google.common.util.concurrent.c.run(PG:12)
+10-31 20:37:06.894  1894  2476 W MobStoreFlagStore: 	at com.google.common.util.concurrent.bf.execute(PG:1)
+10-31 20:37:06.894  1894  2476 W MobStoreFlagStore: 	at com.google.common.util.concurrent.d.i(PG:1)
+10-31 20:37:06.894  1894  2476 W MobStoreFlagStore: 	at com.google.common.util.concurrent.d.l(PG:12)
+10-31 20:37:06.894  1894  2476 W MobStoreFlagStore: 	at com.google.common.util.concurrent.d.o(PG:3)
+10-31 20:37:06.894  1894  2476 W MobStoreFlagStore: 	at com.google.android.libraries.v.c.a(PG:5)
+10-31 20:37:06.894  1894  2476 W MobStoreFlagStore: 	at com.google.android.gms.tasks.n.run(PG:1)
+10-31 20:37:06.894  1894  2476 W MobStoreFlagStore: 	at com.google.common.util.concurrent.bf.execute(PG:1)
+10-31 20:37:06.894  1894  2476 W MobStoreFlagStore: 	at com.google.android.gms.tasks.o.a(PG:3)
+10-31 20:37:06.894  1894  2476 W MobStoreFlagStore: 	at com.google.android.gms.tasks.ad.b(PG:5)
+10-31 20:37:06.894  1894  2476 W MobStoreFlagStore: 	at com.google.android.gms.tasks.aj.s(PG:4)
+10-31 20:37:06.894  1894  2476 W MobStoreFlagStore: 	at com.google.android.gms.common.api.internal.df.a(PG:4)
+10-31 20:37:06.894  1894  2476 W MobStoreFlagStore: 	at com.google.android.gms.phenotype.t.a(PG:1)
+10-31 20:37:06.894  1894  2476 W MobStoreFlagStore: 	at com.google.android.gms.phenotype.a.a.dispatchTransaction(PG:43)
+10-31 20:37:06.894  1894  2476 W MobStoreFlagStore: 	at com.google.android.a.b.onTransact(PG:2)
+10-31 20:37:06.894  1894  2476 W MobStoreFlagStore: 	at android.os.Binder.execTransactInternal(Binder.java:1285)
+10-31 20:37:06.894  1894  2476 W MobStoreFlagStore: 	at android.os.Binder.execTransact(Binder.java:1244)
+10-31 20:37:06.894  1894  2476 W MobStoreFlagStore: Caused by: com.google.android.gms.common.api.n: 29501: Stale snapshot for com.google.android.libraries.consentverifier#com.google.android.googlequicksearchbox(change count changed - expected 1  but was 0)
+10-31 20:37:06.894  1894  2476 W MobStoreFlagStore: 	at com.google.android.gms.common.internal.a.a(PG:1)
+10-31 20:37:06.894  1894  2476 W MobStoreFlagStore: 	at com.google.android.gms.common.api.internal.df.a(PG:3)
+10-31 20:37:06.894  1894  2476 W MobStoreFlagStore: 	... 5 more
+10-31 20:37:06.913  5380  5380 V GraphicsEnvironment: ANGLE Developer option for 'com.google.android.googlequicksearchbox' set to: 'default'
+10-31 20:37:06.919  1049  1055 I .gms.persistent: Compiler allocated 4803KB to compile void bwhy.D(java.util.Set, java.util.List, dmtw, java.lang.String, boolean, dzew, bwhx, java.util.LinkedHashMap, dhlq, boolean, edam)
+10-31 20:37:06.931  5380  5380 V GraphicsEnvironment: ANGLE GameManagerService for com.google.android.googlequicksearchbox: false
+10-31 20:37:06.931  5380  5380 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+10-31 20:37:06.934  5380  5380 D NetworkSecurityConfig: Using Network Security Config from resource network_security_config debugBuild: false
+10-31 20:37:06.937  5380  5380 D NetworkSecurityConfig: Using Network Security Config from resource network_security_config debugBuild: false
+10-31 20:37:06.954  1049  1324 I HeterodyneSyncer: Removed 0 invalid users [CONTEXT service_id=51 ]
+10-31 20:37:06.957   283  5399 I resolv  : GetAddrInfoHandler::run: {100 786532 100 983140 10120 0}
+10-31 20:37:06.963   283  5402 I resolv  : res_nmkquery: (QUERY, IN, A)
+10-31 20:37:06.963   283  5402 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x7ebffa5ca530
+10-31 20:37:06.963   283  5402 I resolv  : doQuery: rcode=0, ancount=8, return value=164
+10-31 20:37:06.963   283  5401 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+10-31 20:37:06.963   283  5401 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x7ec00a5d7a10
+10-31 20:37:06.963   283  5401 I resolv  : doQuery: rcode=0, ancount=8, return value=260
+10-31 20:37:06.966  1049  3463 D TrafficStats: tagSocket(97) with statsTag=0x1203, statsUid=10120
+10-31 20:37:06.991  1049  1325 I HeterodyneSyncScheduler: Scheduling Phenotype for a PhenotypeSyncImmediately(6, com.google.android.gms.phenotype) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+10-31 20:37:07.013  5380  5380 I MultiDex: VM with version 2.1.0 has multidex support
+10-31 20:37:07.013  5380  5380 I MultiDex: Installing application
+10-31 20:37:07.013  5380  5380 I MultiDex: VM has multidex support, MultiDex support library is disabled.
+10-31 20:37:07.023  5380  5380 I DefaultInitializer: Initialized process com.google.android.googlequicksearchbox
+10-31 20:37:07.039  4657  4747 I TestRunner: finished: liveChangesArriveWithinSeconds(com.quartz.notes.data.sync.SyncEngineTest)

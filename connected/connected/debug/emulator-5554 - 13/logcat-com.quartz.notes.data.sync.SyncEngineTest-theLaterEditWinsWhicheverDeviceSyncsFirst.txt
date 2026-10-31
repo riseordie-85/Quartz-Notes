@@ -1,0 +1,60 @@
+10-31 20:37:02.699  4657  4747 I TestRunner: started: theLaterEditWinsWhicheverDeviceSyncsFirst(com.quartz.notes.data.sync.SyncEngineTest)
+10-31 20:37:02.702  4657  4747 D TrafficStats: tagSocket(97) with statsTag=0xffffffff, statsUid=-1
+10-31 20:37:02.731  1049  1326 I TapAndPay: Disabling TapAndPay HCE service [CONTEXT service_id=79 ]
+10-31 20:37:02.734  1049  5309 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService started execution. cause:5 exec_start_elapsed_seconds: 151 [CONTEXT service_id=218 ]
+10-31 20:37:02.738  1049  5312 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService finished executing. cause:5 result: 1 elapsed_millis: 22 uptime_millis: 22 exec_start_elapsed_seconds: 151 [CONTEXT service_id=218 ]
+10-31 20:37:02.780  1049  5309 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.udc.service.UdcContextInitService started execution. cause:5 exec_start_elapsed_seconds: 151 [CONTEXT service_id=218 ]
+10-31 20:37:02.803  1049  5312 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.udc.service.UdcContextInitService finished executing. cause:5 result: 1 elapsed_millis: 27 uptime_millis: 27 exec_start_elapsed_seconds: 151 [CONTEXT service_id=218 ]
+10-31 20:37:03.008  1277  5287 E PhenotypeFlagCommitter: Retrieving snapshot for com.google.lighter.android#com.google.android.gms failed
+10-31 20:37:03.008  1277  5287 E PhenotypeFlagCommitter: java.util.concurrent.TimeoutException: Timed out waiting for Task
+10-31 20:37:03.008  1277  5287 E PhenotypeFlagCommitter: 	at cfsz.o(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+10-31 20:37:03.008  1277  5287 E PhenotypeFlagCommitter: 	at bwch.e(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+10-31 20:37:03.008  1277  5287 E PhenotypeFlagCommitter: 	at bwch.j(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+10-31 20:37:03.008  1277  5287 E PhenotypeFlagCommitter: 	at bwch.h(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+10-31 20:37:03.008  1277  5287 E PhenotypeFlagCommitter: 	at crqn.apply(:com.google.android.gms@231818047@23.18.18 (190800-535401451):10)
+10-31 20:37:03.008  1277  5287 E PhenotypeFlagCommitter: 	at dlny.d(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+10-31 20:37:03.008  1277  5287 E PhenotypeFlagCommitter: 	at dlnz.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):9)
+10-31 20:37:03.008  1277  5287 E PhenotypeFlagCommitter: 	at dlpk.execute(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+10-31 20:37:03.008  1277  5287 E PhenotypeFlagCommitter: 	at dlnv.h(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+10-31 20:37:03.008  1277  5287 E PhenotypeFlagCommitter: 	at dlnv.l(:com.google.android.gms@231818047@23.18.18 (190800-535401451):10)
+10-31 20:37:03.008  1277  5287 E PhenotypeFlagCommitter: 	at dlnv.o(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+10-31 20:37:03.008  1277  5287 E PhenotypeFlagCommitter: 	at dlrs.e(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+10-31 20:37:03.008  1277  5287 E PhenotypeFlagCommitter: 	at dlqs.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+10-31 20:37:03.008  1277  5287 E PhenotypeFlagCommitter: 	at dlrt.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+10-31 20:37:03.008  1277  5287 E PhenotypeFlagCommitter: 	at crqq.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+10-31 20:37:03.008  1277  5287 E PhenotypeFlagCommitter: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+10-31 20:37:03.008  1277  5287 E PhenotypeFlagCommitter: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+10-31 20:37:03.008  1277  5287 E PhenotypeFlagCommitter: 	at crri.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+10-31 20:37:03.008  1277  5287 E PhenotypeFlagCommitter: 	at java.lang.Thread.run(Thread.java:1012)
+10-31 20:37:03.128  4657  4663 I om.quartz.notes: JIT allocated 63KB for compiled code of java.lang.Object com.quartz.notes.data.sync.SyncEngine.apply(java.lang.String, kotlinx.serialization.json.JsonObject, boolean, com.quartz.notes.data.sync.SyncEngine$Counts, kotlin.coroutines.Continuation)
+10-31 20:37:03.283  1277  4570 W gle.android.gms: Long monitor contention with owner [com.google.android.gms.chimera.container.intentoperation.GmsIntentOperationChimeraService-Executor] processing com.google.android.gms.droidguard.DroidGuardModuleInitIntentOperation for action com.google.android.chimera.IntentOperation.NEW_MODULE (3348) at void hjm.run()(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3) waiters=0 in void hjm.run() for 4.054s
+10-31 20:37:03.285  1277  3348 I Dtdi    : [DtdiModuleInitIntentOperation] Cannot initialize Device Discovery. Flag is disabled. [CONTEXT service_id=312 ]
+10-31 20:37:03.285  1277  3348 I Dtdi    : [DtdiModuleInitIntentOperation] Cannot initialize Spatial Orchestration. Flag is disabled. [CONTEXT service_id=312 ]
+10-31 20:37:03.285  1277  3348 I Dtdi    : [DtdiModuleInitIntentOperation] Cannot initialize Media Transfer. Flag is disabled. [CONTEXT service_id=312 ]
+10-31 20:37:03.288  1894  2493 W A       : [Download] response code: 400
+10-31 20:37:03.292  1277  3348 I EnterpriseLoader: [ConditionsChecker] ZT config not present. [CONTEXT service_id=225 ]
+10-31 20:37:03.293   283  5337 I resolv  : GetAddrInfoHandler::run: {100 786532 100 983140 10120 0}
+10-31 20:37:03.293  1277  3348 I EsimModuleInit: onHandleIntent action: com.google.android.chimera.IntentOperation.NEW_MODULE [CONTEXT service_id=333 ]
+10-31 20:37:03.296   283  5339 I resolv  : res_nmkquery: (QUERY, IN, A)
+10-31 20:37:03.296   283  5339 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x7ebffa5ca530
+10-31 20:37:03.297   283  5339 I resolv  : doQuery: rcode=0, ancount=8, return value=164
+10-31 20:37:03.297   283  5338 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+10-31 20:37:03.298   283  5338 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x7ec00a5d7a10
+10-31 20:37:03.298   283  5338 I resolv  : doQuery: rcode=0, ancount=8, return value=260
+10-31 20:37:03.300  1277  4570 D TrafficStats: tagSocket(94) with statsTag=0x30001803, statsUid=-1
+10-31 20:37:03.300   283   319 E BpfHandler: Unsupported protocol: 1
+10-31 20:37:03.300  1277  4570 I TrafficStats: tagSocketFd(94, 805312515, -1) failed with errno-93
+10-31 20:37:03.302  1277  3348 I Fido    : [FidoInitIntentOperation] Initializing Fido module, InitRuntimeState=12
+10-31 20:37:03.340  1277  3348 W ChimeraUtils: Module com.google.android.gms.growth missing resource growth_module_display_name(0)
+10-31 20:37:03.341  1277  3348 W ChimeraUtils: Module com.google.android.gms.growth missing resource growth_module_display_name(0)
+10-31 20:37:03.353  1049  5209 I Herrevad: [350] aqwl.a: updateListenState
+10-31 20:37:03.355  1277  2627 I MobileDataHub: Scheduling periodic tasks
+10-31 20:37:03.355  1277  2627 W MobileDataHub: [Service] appsupload-periodic periodic task disabled
+10-31 20:37:03.357  1277  2627 I SnapshotHandler: Unable to retrieve flag snapshot for com.google.android.gms.inappreach#com.google.android.gms, using defaults.
+10-31 20:37:03.385  1277  5146 I NewModuleOp: Enable component: com.google.android.gms.languageprofile.GcmReceiverService [CONTEXT service_id=167 ]
+10-31 20:37:03.388  1277  5146 I NewModuleOp: Enable component: com.google.android.gms.languageprofile.GcmTaskService [CONTEXT service_id=167 ]
+10-31 20:37:03.389  1277  5146 I NewModuleOp: Schedule LanguageProfileGcmTaskChimeraService tasks. [CONTEXT service_id=167 ]
+10-31 20:37:03.390  1277  5146 I LPGcmTaskChimeraService: Scheduling sync task. [CONTEXT service_id=167 ]
+10-31 20:37:03.392  1277  5146 I GmsSyncPolicyEngine: Periodic sync 2 disabled by policy, cancelled.
+10-31 20:37:03.393  1277  5146 I GmsSyncPolicyEngine: Periodic sync 6 disabled
+10-31 20:37:03.436  4657  4747 I TestRunner: finished: theLaterEditWinsWhicheverDeviceSyncsFirst(com.quartz.notes.data.sync.SyncEngineTest)

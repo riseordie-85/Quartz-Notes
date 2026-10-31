@@ -1,0 +1,324 @@
+10-31 20:36:58.951  4657  4747 I TestRunner: started: conflictingNoteEditsKeepBothVersions(com.quartz.notes.data.sync.SyncEngineTest)
+10-31 20:36:58.957  1680  3526 I MediaProvider: Scanned external_primary due to REASON_DEMAND, found 0 items in 10ms, 0 inserts 0 updates 0 deletes
+10-31 20:36:58.962  4657  4747 D TrafficStats: tagSocket(93) with statsTag=0xffffffff, statsUid=-1
+10-31 20:36:59.013  1277  1277 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+10-31 20:36:59.013  1277  1277 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+10-31 20:36:59.056  1277  4570 I Backup  : [GmsBackupAccountManager] Backup account not found in gmscore.
+10-31 20:36:59.057  1277  5146 I Checkin : [EventLogChimeraService] Opted in for usage reporting: false
+10-31 20:36:59.058  1277  1277 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+10-31 20:36:59.058  1277  2627 V Backup  : [MmsBackupScheduler] Scheduled task to run in 1440 minutes, while idle: true, require charging: true, require wifi: true
+10-31 20:36:59.065  1277  2627 I SyncIntentOperation: Handling the intent: Intent { act=android.intent.action.BOOT_COMPLETED flg=0x89000010 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.GmsIntentOperationService (has extras) }. [CONTEXT service_id=80 ]
+10-31 20:36:59.069  1049  5206 W ChimeraUtils: Module com.google.android.gms.backup_base missing resource null(0)
+10-31 20:36:59.070  1049  5206 V Backup  : [BackupAccountNotifier] Handling new intent. Show notification: true
+10-31 20:36:59.074  1277  2918 W BpBinder: Large outgoing transaction of 1056768 bytes, interface descriptor <uncached descriptor>, code 1
+10-31 20:36:59.074  1277  2918 E JavaBinder: !!! FAILED BINDER TRANSACTION !!!  (parcel size = 1056768)
+10-31 20:36:59.086  1049  1049 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.chimera.container.BIND_FIND_BUFFER_SIZE dat=chimera-action:/... cmp=com.google.android.gms/.chimera.PersistentInternalBoundBrokerService }
+10-31 20:36:59.096  1277  2918 I AppDoctorManager: Updating appdoctor Uri Permissions. [CONTEXT service_id=256 ]
+10-31 20:36:59.102  1277  4570 V Backup  : [AccountChangedIO] currentDestinationString: null
+10-31 20:36:59.132  1277  5208 I constellation: [intent_handler] Received onBootCompleted intent
+10-31 20:36:59.132  1277  5208 I constellation: [reboot_checker] Reboot checker check status.
+10-31 20:36:59.137  1277  4570 W ChimeraUtils: Module com.google.android.gms.dck_stub missing resource null(0)
+10-31 20:36:59.149  1277  5146 W GmsTaskScheduler: ScheduledCheckinGmsTaskService is not available. This may cause the task to be lost.
+10-31 20:36:59.156  1277  4570 I DckStubModuleInit: Loading stub module components [CONTEXT service_id=289 ]
+10-31 20:36:59.156  1277  4570 I Dck     : doesDeviceHaveSupportedWirelessCapabilities: wccSysProp:0, wccMendel:1, deviceWccOverride:false [CONTEXT service_id=289 ]
+10-31 20:36:59.157  1277  4570 I Dck     : isDckModuleEligible: isAtLeastR:true, hasWccSupport:false, downloadAllowed:false [CONTEXT service_id=289 ]
+10-31 20:36:59.157  1277  4570 W Dck     : Dck module not eligible for asynchronous downloading [CONTEXT service_id=289 ]
+10-31 20:36:59.158  1433  1433 I DialerStatusCheckJobService: com.android.voicemail.impl.StatusCheckJobService.onStartJob:100 attempting to reactivate ComponentInfo{com.android.phone/com.android.services.telephony.TelephonyConnectionService}, 1, UserHandle{0} [CONTEXT enable_persistent_logger=true ]
+10-31 20:36:59.165  1277  1277 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+10-31 20:36:59.165  1277  1277 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+10-31 20:36:59.172  1277  5146 I Checkin : [EventLogChimeraService] Accumulating logs since 1793478993181
+10-31 20:36:59.187  4904  4923 I PermissionControllerServiceImpl: Updating user sensitive for uid 10120
+10-31 20:36:59.188   950   950 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+10-31 20:36:59.188   950   950 D MediaPlayerList: Name of package changed: com.google.android.gms
+10-31 20:36:59.191   485   590 I InputReader: Reconfiguring input devices, changes=KEYBOARD_LAYOUTS |
+10-31 20:36:59.192   950   950 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+10-31 20:36:59.192   950   950 D MediaPlayerList: Name of package changed: com.google.android.gms
+10-31 20:36:59.196   759   759 D ControlsListingControllerImpl: ServiceConfig reloaded, count: 0
+10-31 20:36:59.204  2896  3124 I Bugle   : BroadcastReceiverAsyncWorkTracker: Acknowledging broadcast of atsi@eca0e6a
+10-31 20:36:59.227  1277  4570 I AlarmManager: set [name: ApiService type: 2 triggerAtMillis: 120000 windowMillis: -1 intervalMillis: 0]
+10-31 20:36:59.228  1433  1433 I DialerTaskReceiver: com.android.voicemail.impl.scheduling.TaskReceiver.onReceive:68 task received [CONTEXT enable_persistent_logger=true ]
+10-31 20:36:59.235  1433  1433 I DialerTaskReceiver: com.android.voicemail.impl.scheduling.TaskReceiver.onReceive:73 TaskExecutor already running [CONTEXT enable_persistent_logger=true ]
+10-31 20:36:59.235  1433  1433 I DialerTasks: com.android.voicemail.impl.scheduling.Tasks.createTask:59 Task.createTask create task:com.android.voicemail.impl.ActivationTask [CONTEXT enable_persistent_logger=true ]
+10-31 20:36:59.235  1277  2594 I PeopleGalProvider: Gal directories started.
+10-31 20:36:59.238  3751  5232 I ProvidersCache: Provider returned no roots. Possibly naughty: com.google.android.apps.docs.storage
+10-31 20:36:59.242  1277  5208 I constellation: [reboot_checker] Reboot Sync didn't run.
+10-31 20:36:59.246  1277  1277 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+10-31 20:36:59.248  4904  4904 I PermissionEventCleanupJobService: onStartJob
+10-31 20:36:59.265  1277  2594 I PeopleGalProvider: Method 1 completed.
+10-31 20:36:59.265  1277  2594 I PeopleGalProvider: Method 1 finished successfully.
+10-31 20:36:59.283   980   980 D CarrierSvcBindHelper: onPackageModified: com.google.android.gms
+10-31 20:36:59.284   980   980 D CarrierSvcBindHelper: No carrier app for: 0
+10-31 20:36:59.299  5000  5037 W MetricsFeatureProvider: Disabled westworld logs writing!!!
+10-31 20:36:59.329  1277  1277 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+10-31 20:36:59.329  1277  1277 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+10-31 20:36:59.372  1049  5207 I Fitness : OnPackageChangedOperation got intent: Intent { act=android.intent.action.PACKAGE_CHANGED dat=package: flg=0x45000010 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.PersistentIntentOperationService (has extras) } [CONTEXT service_id=17 ]
+10-31 20:36:59.375  4904  5236 D BasePermissionEventStorage: 0 old permission events removed
+10-31 20:36:59.376   980   980 D ImsResolver: maybeAddedImsService, packageName: com.google.android.gms
+10-31 20:36:59.388  1049  5205 I Fitness : FitCleanupIntentOperation received Intent android.intent.action.PACKAGE_CHANGED [CONTEXT service_id=17 ]
+10-31 20:36:59.409  5000  5037 W AppSearchIndex: schedule indexing, force = true
+10-31 20:36:59.416  5000  5037 W MetricsFeatureProvider: Disabled westworld logs writing!!!
+10-31 20:36:59.419  1433  1433 I DialerTaskQueue: com.android.voicemail.impl.scheduling.TaskQueue.add:85 TaskQueue.add duplicated task added [CONTEXT enable_persistent_logger=true ]
+10-31 20:36:59.424  1433  1433 I DialerTaskExecutor: com.android.voicemail.impl.scheduling.TaskExecutor.addTask:299 com.android.voicemail.impl.ActivationTask@9c4ac70 added [CONTEXT enable_persistent_logger=true ]
+10-31 20:36:59.449  1894  1894 I BgTaskExecutorImpl: Starting EXCLUSIVE background task UPLOAD_ASSISTANT_DEVICE_SETTINGS.
+10-31 20:36:59.464  1277  1277 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+10-31 20:36:59.470  1277  1277 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.checkin.START pkg=com.google.android.gms }
+10-31 20:36:59.470  1277  1277 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.checkin.START pkg=com.google.android.gms }
+10-31 20:36:59.529  1894  2794 W LocationOracle: getBestLocation(): no location is available
+10-31 20:36:59.531  1277  1277 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+10-31 20:36:59.532  1049  5224 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.checkin.CheckinService started execution. cause:7 exec_start_elapsed_seconds: 147 [CONTEXT service_id=218 ]
+10-31 20:36:59.540  1277  1277 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+10-31 20:36:59.543  1894  2792 I NetworkRecognitionRnr: Using pair HTTP connection
+10-31 20:36:59.545  5095  5124 W System  : A resource failed to call AbstractCursor.close.
+10-31 20:36:59.552  1277  5208 I constellation: [intent_handler] on init with intent Intent { act=android.intent.action.BOOT_COMPLETED flg=0x89000010 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.GmsIntentOperationService (has extras) }
+10-31 20:36:59.553  1277  1277 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+10-31 20:36:59.564  1277  5208 I SnapshotHandler: Unable to retrieve flag snapshot for com.google.android.gms.dtdi#com.google.android.gms, using defaults.
+10-31 20:36:59.565  1277  5208 I Dtdi    : [DtdiModuleInitIntentOperation] Cannot initialize Device Discovery. Flag is disabled. [CONTEXT service_id=312 ]
+10-31 20:36:59.565  1277  5208 I Dtdi    : [DtdiModuleInitIntentOperation] Cannot initialize Spatial Orchestration. Flag is disabled. [CONTEXT service_id=312 ]
+10-31 20:36:59.565  1277  5208 I Dtdi    : [DtdiModuleInitIntentOperation] Cannot initialize Media Transfer. Flag is disabled. [CONTEXT service_id=312 ]
+10-31 20:36:59.574  1049  2718 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.checkin.CheckinService finished executing. cause:7 result: 3 elapsed_millis: 98 uptime_millis: 98 exec_start_elapsed_seconds: 147 [CONTEXT service_id=218 ]
+10-31 20:36:59.588  1277  5210 I EnterpriseLoader: [ConditionsChecker] ZT config not present. [CONTEXT service_id=225 ]
+10-31 20:36:59.588  1277  5210 I EsimModuleInit: onHandleIntent action: android.intent.action.BOOT_COMPLETED [CONTEXT service_id=333 ]
+10-31 20:36:59.592  1277  5210 I Fido    : [FidoInitIntentOperation] Initializing Fido module, InitRuntimeState=2
+10-31 20:36:59.596  1894  2492 I A       : [Upload] Connected
+10-31 20:36:59.623  1894  2205 W LocationOracle: No location returned by GMS core getLastLocation()
+10-31 20:36:59.639  1894  1894 E A       : onError
+10-31 20:36:59.639  1894  1894 E A       : com.google.android.apps.gsa.shared.speech.a.m: errorCode: 65561, engine: 2
+10-31 20:36:59.639  1894  1894 E A       : 	at com.google.android.apps.gsa.staticplugins.dc.a.e.a(PG:3)
+10-31 20:36:59.639  1894  1894 E A       : 	at com.google.android.apps.gsa.s3.n.hh(PG:1)
+10-31 20:36:59.639  1894  1894 E A       : 	at com.google.cd.g.a.f.e(PG:2)
+10-31 20:36:59.639  1894  1894 E A       : 	at com.google.android.apps.gsa.speech.k.a.g.d(PG:22)
+10-31 20:36:59.639  1894  1894 E A       : 	at com.google.android.apps.gsa.speech.k.a.g.ks(PG:6)
+10-31 20:36:59.639  1894  1894 E A       : 	at com.google.android.apps.gsa.s3.o.e(PG:14)
+10-31 20:36:59.639  1894  1894 E A       : 	at com.google.android.apps.gsa.s3.p.run(PG:1)
+10-31 20:36:59.639  1894  1894 E A       : 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:463)
+10-31 20:36:59.639  1894  1894 E A       : 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+10-31 20:36:59.639  1894  1894 E A       : 	at com.google.android.apps.gsa.shared.util.c.a.e.run(PG:2)
+10-31 20:36:59.639  1894  1894 E A       : 	at com.google.android.apps.gsa.shared.util.c.a.bi.run(PG:1)
+10-31 20:36:59.639  1894  1894 E A       : 	at com.google.android.apps.gsa.shared.util.c.a.bi.run(PG:1)
+10-31 20:36:59.639  1894  1894 E A       : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+10-31 20:36:59.639  1894  1894 E A       : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+10-31 20:36:59.639  1894  1894 E A       : 	at java.lang.Thread.run(Thread.java:1012)
+10-31 20:36:59.639  1894  1894 E A       : 	at com.google.android.apps.gsa.shared.util.c.a.l.run(PG:5)
+10-31 20:36:59.639  1894  1894 E A       : Caused by: com.google.android.apps.gsa.shared.speech.a.o: errorCode: 65586, engine: 2
+10-31 20:36:59.639  1894  1894 E A       : 	... 15 more
+10-31 20:36:59.639  1894  1894 E A       : Caused by: com.google.android.apps.gsa.shared.speech.a.k: errorCode: 401, engine: 2
+10-31 20:36:59.639  1894  1894 E A       : 	at com.google.android.apps.gsa.assistant.shared.n.h.a(PG:5)
+10-31 20:36:59.639  1894  1894 E A       : 	at com.google.android.apps.gsa.s3.producers.j.hE(PG:2)
+10-31 20:36:59.639  1894  1894 E A       : 	at com.google.android.apps.gsa.speech.k.a.g.d(PG:16)
+10-31 20:36:59.639  1894  1894 E A       : 	... 12 more
+10-31 20:36:59.641  1894  2492 I NetworkRecognitionRnr: Using pair HTTP connection
+10-31 20:36:59.644  1894  2344 W A       : Failed to get connectivityLock in 4000 ms
+10-31 20:36:59.645  1894  2794 I A       : [Upload] Connected
+10-31 20:36:59.646  1894  1894 W A       : Failed to sync device settings.
+10-31 20:36:59.647  1894  1894 I A       : Retrying to sync device settings.
+10-31 20:36:59.653  1894  2345 W CronetNetworkRqstWrppr: Upload request without a content type.
+10-31 20:36:59.658  1012  1022 I s.nexuslauncher: Background concurrent copying GC freed 94862(3828KB) AllocSpace objects, 25(2428KB) LOS objects, 49% free, 5644KB/11MB, paused 21us,10us total 110.967ms
+10-31 20:36:59.663  1894  1894 I BgTaskExecutorImpl: Starting EXCLUSIVE background task OPA_NOTIFICATION_DELAYED_TRIGGER_SYNC.
+10-31 20:36:59.682  1049  5224 I AlarmManager: setExactAndAllowWhileIdle [name: GCM_CONN_ALARM type: 2 triggerAtMillis: 177986]
+10-31 20:36:59.698  1277  5208 W ChimeraUtils: Module com.google.android.gms.growth missing resource growth_module_display_name(0)
+10-31 20:36:59.701  1012  2044 D EGL_emulation: app_time_stats: avg=163.20ms min=21.10ms max=358.44ms count=8
+10-31 20:36:59.702  1277  5208 W ChimeraUtils: Module com.google.android.gms.growth missing resource growth_module_display_name(0)
+10-31 20:36:59.778  1049  5207 I Herrevad: [349] aqwl.a: updateListenState
+10-31 20:36:59.792  1277  5210 I MobileDataHub: Scheduling periodic tasks
+10-31 20:36:59.795  1277  5210 W MobileDataHub: [Service] appsupload-periodic periodic task disabled
+10-31 20:36:59.911  3473  3487 I RemoteProvisioningService: Notify key generated ping for secLevel: 1
+10-31 20:36:59.915  3473  3487 I RemoteProvisioner: Pool status 6, 5, 0, 6
+10-31 20:36:59.915  3473  3487 I RemoteProvisioningService: Pool status.
+10-31 20:36:59.915  3473  3487 I RemoteProvisioningService: Total: 6
+10-31 20:36:59.915  3473  3487 I RemoteProvisioningService: Attested: 6
+10-31 20:36:59.915  3473  3487 I RemoteProvisioningService: Unassigned: 5
+10-31 20:36:59.915  3473  3487 I RemoteProvisioningService: Expiring: 0
+10-31 20:36:59.915  3473  3487 I RemoteProvisioningService.KeyPoolStats: Sufficient keys are available, no CSR needed.
+10-31 20:36:59.915  3473  3487 I RemoteProvisioningService: No provisioning needed.
+10-31 20:36:59.948  2518  3388 W libc    : Access denied finding property "persist.adb.tls_server.enable"
+10-31 20:36:59.949  2518  3388 W libc    : Access denied finding property "service.adb.tls.port"
+10-31 20:36:59.936  2518  2518 W binder:2518_5: type=1400 audit(0.0:48): avc: denied { read } for name="u:object_r:system_adbd_prop:s0" dev="tmpfs" ino=269 scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:object_r:system_adbd_prop:s0 tclass=file permissive=0 app=com.google.android.gms
+10-31 20:36:59.965  1277  5210 I LSRModuleInit: Attempting to change container components state to enabled: true [CONTEXT service_id=277 ]
+10-31 20:36:59.944  2518  2518 W binder:2518_5: type=1400 audit(0.0:49): avc: denied { read } for name="u:object_r:adbd_prop:s0" dev="tmpfs" ino=61 scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:object_r:adbd_prop:s0 tclass=file permissive=0 app=com.google.android.gms
+10-31 20:36:59.970  1049  5207 I LSR     : Handling LSR module init in persistent process [CONTEXT service_id=277 ]
+10-31 20:36:59.971  1277  5210 I SnapshotHandler: Unable to retrieve flag snapshot for com.google.android.gms.magictether, using defaults.
+10-31 20:36:59.974  1277  5210 W MagicTether: [MagicTetherInitializer] Invalid account list. [CONTEXT service_id=276 ]
+10-31 20:36:59.976  1049  5217 I LSR     : No upload requests, reporting should be disabled [CONTEXT service_id=277 ]
+10-31 20:36:59.976  1049  5207 I LSR     : Refreshing periodic location reporting state [CONTEXT service_id=277 ]
+10-31 20:36:59.977  1049  5217 I LSR     : No upload requests, reporting should be disabled [CONTEXT service_id=277 ]
+10-31 20:36:59.978  1049  5224 I LSR     : Reporting should be enabled: false [CONTEXT service_id=277 ]
+10-31 20:36:59.978  1049  5224 I LSR     : Stopping periodic location reporting [CONTEXT service_id=277 ]
+10-31 20:36:59.979  1049  1049 I SnapshotHandler: Unable to retrieve flag snapshot for com.google.android.gms.magictether, using defaults.
+10-31 20:36:59.986  1277  5210 I SnapshotHandler: Unable to retrieve flag snapshot for com.google.android.gms.maps#com.google.android.gms, using defaults.
+10-31 20:36:59.988  1277  5210 I Google Maps Android API: Validating conditions for requesting maps_core feature. [CONTEXT service_id=71 ]
+10-31 20:36:59.990  1277  5210 I Google Maps Android API: Is maps_core feature installed? 1 [CONTEXT service_id=71 ]
+10-31 20:36:59.992  1277  5210 I Google Maps Android API: cutoffSize=2147483648, internalFreeBytes=5335191552
+10-31 20:36:59.993  1277  5210 I Google Maps Android API: Eligible to request maps_core feature. [CONTEXT service_id=71 ]
+10-31 20:36:59.995  1277  5210 I Google Maps Android API: maps_core feature request succeeded. [CONTEXT service_id=71 ]
+10-31 20:37:00.006  1277  5208 I MS_Utils: version of com.google.android.apps.maps = 1067529190
+10-31 20:37:00.054  1049  1321 I LSR     : Cancelling periodic location reporting maintenance task [CONTEXT service_id=277 ]
+10-31 20:37:00.057  1277  1277 W ProviderHelper: Unknown dynamite feature providerinstaller.dynamite
+10-31 20:37:00.059  1707  2075 I AiAiEcho: Predicting[0]:
+10-31 20:37:00.059  1707  2075 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:
+10-31 20:37:00.061  1277  1277 I DynamiteModule: Considering local module com.google.android.gms.providerinstaller.dynamite:1 and remote module com.google.android.gms.providerinstaller.dynamite:0
+10-31 20:37:00.062  1277  1277 I DynamiteModule: Selected local version of com.google.android.gms.providerinstaller.dynamite
+10-31 20:37:00.062  1707  2075 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0
+10-31 20:37:00.063  1707  2075 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0
+10-31 20:37:00.064  1277  2918 I MS_RegisterService: Tachyon host: www.google.com, Tachyon port: 443
+10-31 20:37:00.069  2518  3388 D EGL_emulation: eglCreateContext: 0x7a1b2c556450: maj 3 min 0 rcv 3
+10-31 20:37:00.074  1277  5147 I LSR     : Empty geofences. [CONTEXT service_id=277 ]
+10-31 20:37:00.075  1277  5210 I GmsDebugLogger: [53] +maps_core:-1
+10-31 20:37:00.207  1277  5208 I MdiSyncModule: initializing module...
+10-31 20:37:00.215  1277  5208 I MdiSyncModule: module initialization completed
+10-31 20:37:00.231  1277  5210 W MDM     : [300] aywf.d: Q+ devices does not need device admin.
+10-31 20:37:00.235   759   814 D EGL_emulation: app_time_stats: avg=1839.55ms min=1839.55ms max=1839.55ms count=1
+10-31 20:37:00.236  1277  5210 I MlBenchmarkInstaller: Intent: android.intent.action.BOOT_COMPLETED [CONTEXT service_id=340 ]
+10-31 20:37:00.236  1277  5210 I MlBenchmarkInstaller: onInitRuntimeState(), intent action=android.intent.action.BOOT_COMPLETED [CONTEXT service_id=340 ]
+10-31 20:37:00.240  1277  5210 I MlBenchmarkInstaller: Feature is disabled. [CONTEXT service_id=340 ]
+10-31 20:37:00.242  1277  1277 I MlBenchmarkInstaller: Feature unrequest success = true [CONTEXT service_id=340 ]
+10-31 20:37:00.280  1277  5208 W ChimeraUtils: Module com.google.android.gms.mobiledataplan missing resource null(0)
+10-31 20:37:00.293  1277  2918 I MS_RegUtils: checking registration with Lighter
+10-31 20:37:00.300  1277  5208 I Nearby  : is blocked device type false, isAuto=false, isIot=false, isLatchsky=false, isChinaWearable=false, isTv=false, isWearable=false (supportWearOs=false), isChromeOsDevice=false (supportChromeOs=false) [CONTEXT service_id=49 ]
+10-31 20:37:00.311  1277  5208 I NearbyDiscovery: Trigger rescan contextual cards [CONTEXT service_id=265 ]
+10-31 20:37:00.316  2896  3063 W Bugle   : TextClassifierLibManagerImpl: Reclaiming memory at level: 40
+10-31 20:37:00.335  1277  2835 I FastPair: FastPair: provider is called with method [getCardList]
+10-31 20:37:00.338  1277  5208 I NearbyDiscovery: FastPair: HeadsetPieceImage, grant permission files:0 [CONTEXT service_id=265 ]
+10-31 20:37:00.343  1049  4681 I Nearby  : is blocked device type false, isAuto=false, isIot=false, isLatchsky=false, isChinaWearable=false, isTv=false, isWearable=false (supportWearOs=false), isChromeOsDevice=false (supportChromeOs=false) [CONTEXT service_id=49 ]
+10-31 20:37:00.361  1049  5217 I TetheringManager: registerTetheringEventCallback:com.google.android.gms
+10-31 20:37:00.365  1049  1056 I .gms.persistent: Background young concurrent copying GC freed 225665(12MB) AllocSpace objects, 4(208KB) LOS objects, 37% free, 20MB/32MB, paused 39us,25us total 315.501ms
+10-31 20:37:00.385  5000  5257 W RankingPostProcessor: A card with invalid score: content://com.android.settings.slices/intent/screen_timeout
+10-31 20:37:00.385  5000  5257 W RankingPostProcessor: A card with invalid score: content://com.google.android.settings.intelligence.modules.contextualcards.slices/suggestion/com.google.android.as/com.google.intelligence.sense.ambientmusic.AmbientMusicSetupWizardActivity
+10-31 20:37:00.386  5000  5257 W RankingPostProcessor: A card with invalid score: content://com.google.android.settings.intelligence.modules.contextualcards.slices/suggestion/com.android.settings/com.android.settings.notification.zen.ZenSuggestionActivity
+10-31 20:37:00.386  5000  5257 W RankingPostProcessor: A card with invalid score: content://com.google.android.settings.intelligence.modules.contextualcards.slices/suggestion/com.google.android.gms/com.google.android.gms.trustlet.onbody.discovery.OnbodyPromotionActivity
+10-31 20:37:00.387  2518  3388 W SystemServiceRegistry: No service published for: persistent_data_block
+10-31 20:37:00.428   283  5266 I resolv  : GetAddrInfoHandler::run: {100 786532 100 983140 10120 0}
+10-31 20:37:00.431  2518  3388 D TrafficStats: tagSocket(109) with statsTag=0x1809, statsUid=-1
+10-31 20:37:00.435  2518  3388 D TrafficStats: tagSocket(109) with statsTag=0x1809, statsUid=-1
+10-31 20:37:00.436  2518  3388 D TrafficStats: tagSocket(109) with statsTag=0x1809, statsUid=-1
+10-31 20:37:00.452  1277  5208 I NearbyFastPair: onInitRuntimeState isEnableWearableListener: false [CONTEXT service_id=265 ]
+10-31 20:37:00.472  1277  5208 I NearbyFastPair: FastPairInitIntentOperation: check the Footprints sync tasks. [CONTEXT service_id=265 ]
+10-31 20:37:00.474  1277  5208 I NearbyFastPair: TaskSchedulerUtils cancelTask TAG_FOOTPRINTS_PERIODIC_SCHEDULE success. [CONTEXT service_id=265 ]
+10-31 20:37:00.475  1277  5208 I NearbyFastPair: TSS cancel footprints recon sync [CONTEXT service_id=265 ]
+10-31 20:37:00.475  1277  5208 I NearbyFastPair: TaskSchedulerUtils cancelTask TAG_FOOTPRINTS_RECON_SYNC_SCHEDULE success. [CONTEXT service_id=265 ]
+10-31 20:37:00.476  1277  5208 I NearbyFastPair: TSS scheduleFootprintsOneOffSync: not enable [CONTEXT service_id=265 ]
+10-31 20:37:00.483  1277  3982 I NearbySharing: onBindSlice failed since shareTargets is empty [CONTEXT service_id=194 ]
+10-31 20:37:00.484  1277  5208 I NearbySharing: Runtime state initialization complete. Sharing is enabled. [CONTEXT service_id=194 ]
+10-31 20:37:00.485  1277  5208 W libc    : Access denied finding property "ro.hardware.chipname"
+10-31 20:37:00.486  1277  5208 W ChipsetHelper: Unknown chipset! [CONTEXT service_id=301 ]
+10-31 20:37:00.486  1277  5208 I NnApiDriverManager: Registering application with chipset 'unknown' [CONTEXT service_id=301 ]
+10-31 20:37:00.487  1049  1049 I NearbySharing: ReceiveSurfaceService started [CONTEXT service_id=194 ]
+10-31 20:37:00.491  1277  3982 I NearbySharing: Granted slice and Uri permissions to android [CONTEXT service_id=194 ]
+10-31 20:37:00.499  1277  4684 I LT_StubFactory: tachyonHostName = instantmessaging-pa.googleapis.com and tachyonPortNumber = 443
+10-31 20:37:00.499  1277  5208 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_multi_configs ANDROID_EMU_hwc_color_transform GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0
+10-31 20:37:00.513  1277  5208 D EGL_emulation: eglCreateContext: 0x7a1b2c555910: maj 3 min 0 rcv 3
+10-31 20:37:00.514  1277  4684 D LT_OkHttpChannelBuilder: Using Spatula header keyless authentication.
+10-31 20:37:00.516  1277  5208 D EGL_emulation: eglMakeCurrent: 0x7a1b2c555910: ver 3 0 (tinfo 0x7a1d40ee0100) (first time)
+10-31 20:37:00.526  1049  5217 W MagicTether: [TetherListenerService] Invalid account list. [CONTEXT service_id=276 ]
+10-31 20:37:00.532  1049  3149 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+10-31 20:37:00.541  1277  5208 I NnApiDriverManager: Registering application with GPU 'Android Emulator OpenGL ES Translator (Google SwiftShader)' by 'Google (Google Inc.)' [CONTEXT service_id=301 ]
+10-31 20:37:00.542  1049  3397 I Nearby  : is blocked device type false, isAuto=false, isIot=false, isLatchsky=false, isChinaWearable=false, isTv=false, isWearable=false (supportWearOs=false), isChromeOsDevice=false (supportChromeOs=false) [CONTEXT service_id=49 ]
+10-31 20:37:00.543  1049  3397 I NearbyDiscovery: DiscoveryController, showNotification, itemSize=0 [CONTEXT service_id=265 ]
+10-31 20:37:00.543  1049  3397 I NearbyDiscovery: Show notifications: 0 total, no changes since last shown, no-op. [CONTEXT service_id=265 ]
+10-31 20:37:00.585  4904  4923 I PermissionControllerServiceImpl: Updating user sensitive for uid 10120
+10-31 20:37:00.587   485   590 I InputReader: Reconfiguring input devices, changes=KEYBOARD_LAYOUTS |
+10-31 20:37:00.588   950   950 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+10-31 20:37:00.588   950   950 D MediaPlayerList: Name of package changed: com.google.android.gms
+10-31 20:37:00.588   950   950 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+10-31 20:37:00.589   950   950 D MediaPlayerList: Name of package changed: com.google.android.gms
+10-31 20:37:00.592  2896  3137 I Bugle   : BroadcastReceiverAsyncWorkTracker: Acknowledging broadcast of atsi@eca0e6a
+10-31 20:37:00.595   485   580 I RoleService: Granting default roles...
+10-31 20:37:00.600  1277  2835 I PeopleGalProvider: Gal directories started.
+10-31 20:37:00.600  1277  2835 I PeopleGalProvider: Method 1 completed.
+10-31 20:37:00.600  1277  2835 I PeopleGalProvider: Method 1 finished successfully.
+10-31 20:37:00.605  3751  5276 I ProvidersCache: Provider returned no roots. Possibly naughty: com.google.android.apps.docs.storage
+10-31 20:37:00.619  4904  4965 W Role    : Default holder doesn't have required signing certificate: com.google.android.apps.work.clouddpc:23962F4B43B9857638EA66F4D419518EAE282491ACDA4B94707BD59003C45E58
+10-31 20:37:00.626   759   759 D ControlsListingControllerImpl: ServiceConfig reloaded, count: 0
+10-31 20:37:00.661  1049  3149 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+10-31 20:37:00.668   980   980 D CarrierSvcBindHelper: onPackageModified: com.google.android.gms
+10-31 20:37:00.668   980   980 D CarrierSvcBindHelper: No carrier app for: 0
+10-31 20:37:00.673  1049  5224 I NearbyShared: FastPairSlice: enableBindServiceForDiscoveryItem called, isBind = false
+10-31 20:37:00.673   980   980 D ImsResolver: maybeAddedImsService, packageName: com.google.android.gms
+10-31 20:37:00.681   980  1006 I m.android.phone: Background young concurrent copying GC freed 68484(3209KB) AllocSpace objects, 0(0B) LOS objects, 45% free, 3873KB/7043KB, paused 48us,11us total 286.875ms
+10-31 20:37:00.682   980  1008 W System  : A resource failed to call AbstractCursor.close.
+10-31 20:37:00.682   980  1008 W System  : A resource failed to call AbstractCursor.close.
+10-31 20:37:00.683   980  1008 W System  : A resource failed to call AbstractCursor.close.
+10-31 20:37:00.684  1277  1277 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.auth.service.START pkg=com.google.android.gms }
+10-31 20:37:00.684  1277  1277 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.auth.service.START pkg=com.google.android.gms }
+10-31 20:37:00.689  1049  3149 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+10-31 20:37:00.702  1277  5146 I Checkin : [CheckinOperation] Starting Checkin: Default Task Reason : 1 Force : false UserId : 0 Start time : 149004
+10-31 20:37:00.706  1277  5146 I CheckinUtil: Classify the device as Phone. [CONTEXT service_id=130 ]
+10-31 20:37:00.726  1277  5210 I Pay     : Closed loop HCE not migrated or access is not enabled. [CONTEXT service_id=198 ]
+10-31 20:37:00.728  1277  5210 I Pay     : Requested immediate check to see whether to show pay module downloading complete notification. [CONTEXT service_id=198 ]
+10-31 20:37:00.738  1277  2835 I FastPair: ServiceBindHelper.onSlicePinned, slice already pinned, uri = content://com.google.android.gms.nearby.fastpair/method_bind_service_for_discovery_item?is_bind=false
+10-31 20:37:00.741  1277  4684 D LT_LitBstrpCntrl: Initializing BootstrapController Instance
+10-31 20:37:00.759  1049  2718 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.ads.social.GcmSchedulerWakeupService started execution. cause:5 exec_start_elapsed_seconds: 148 [CONTEXT service_id=218 ]
+10-31 20:37:00.762  1049  5267 I TapAndPay: Disabling TapAndPay HCE service [CONTEXT service_id=79 ]
+10-31 20:37:00.774  1049  2718 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.ads.social.GcmSchedulerWakeupService finished executing. cause:5 result: 1 elapsed_millis: 95 uptime_millis: 95 exec_start_elapsed_seconds: 148 [CONTEXT service_id=218 ]
+10-31 20:37:00.777  1277  5210 W Pay     : Active account was null, notification task will be cancelled. [CONTEXT service_id=198 ]
+10-31 20:37:00.778  1277  5210 W Pay     : [eMoney card recovery task] exiting without init: active tapandpay account not found! [CONTEXT service_id=198 ]
+10-31 20:37:00.779  4904  4919 I ssioncontroller: Background concurrent copying GC freed 135898(7373KB) AllocSpace objects, 33(852KB) LOS objects, 49% free, 3582KB/7164KB, paused 22us,12us total 181.710ms
+10-31 20:37:00.805  1049  1326 I TapAndPay: Disabling TapAndPay HCE service [CONTEXT service_id=79 ]
+10-31 20:37:00.806  1277  5210 W Pay     : Active account was null, notification task will be cancelled. [CONTEXT service_id=198 ]
+10-31 20:37:00.817  1049  1049 I MagicTether: [AutoDisconnectIntentOperation] Canceling task. [CONTEXT service_id=276 ]
+10-31 20:37:00.824  1049  5207 I MagicTether: [AutoDisconnectIntentOperation] Canceling task. [CONTEXT service_id=276 ]
+10-31 20:37:00.830  1277  5210 W Pay     : [eMoney txn sync] exiting without init: active tapandpay account not found! [CONTEXT service_id=198 ]
+10-31 20:37:00.830  1277  5210 I Pay     : Requested check of feature migrations. [CONTEXT service_id=198 ]
+10-31 20:37:00.832  1277  5210 I Pay     : Closed loop HCE not migrated and campus id not enabled. [CONTEXT service_id=198 ]
+10-31 20:37:00.837  1277  5210 W Pay     : Mdl not supported. Not triggering periodic MSO refresh task. [CONTEXT service_id=198 ]
+10-31 20:37:00.843  1049  5209 I Fitness : OnPackageChangedOperation got intent: Intent { act=android.intent.action.PACKAGE_CHANGED dat=package: flg=0x45000010 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.PersistentIntentOperationService (has extras) } [CONTEXT service_id=17 ]
+10-31 20:37:00.850  1049  5209 I Fitness : FitCleanupIntentOperation received Intent android.intent.action.PACKAGE_CHANGED [CONTEXT service_id=17 ]
+10-31 20:37:00.861  1277  5210 W PeoplePU: getComponentEnabledSetting failed.
+10-31 20:37:00.861  1277  5210 W PeoplePU: java.lang.IllegalArgumentException: Unknown component: ComponentInfo{com.google.android.syncadapters.contacts/com.google.android.syncadapters.contacts.ProxyGalProvider}
+10-31 20:37:00.861  1277  5210 W PeoplePU: 	at android.os.Parcel.createExceptionOrNull(Parcel.java:3015)
+10-31 20:37:00.861  1277  5210 W PeoplePU: 	at android.os.Parcel.createException(Parcel.java:2995)
+10-31 20:37:00.861  1277  5210 W PeoplePU: 	at android.os.Parcel.readException(Parcel.java:2978)
+10-31 20:37:00.861  1277  5210 W PeoplePU: 	at android.os.Parcel.readException(Parcel.java:2920)
+10-31 20:37:00.861  1277  5210 W PeoplePU: 	at android.content.pm.IPackageManager$Stub$Proxy.getComponentEnabledSetting(IPackageManager.java:5916)
+10-31 20:37:00.861  1277  5210 W PeoplePU: 	at android.app.ApplicationPackageManager.getComponentEnabledSetting(ApplicationPackageManager.java:3068)
+10-31 20:37:00.861  1277  5210 W PeoplePU: 	at bvox.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+10-31 20:37:00.861  1277  5210 W PeoplePU: 	at buru.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+10-31 20:37:00.861  1277  5210 W PeoplePU: 	at com.google.android.gms.people.api.init.PeopleModuleInitIntentOperation.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):5)
+10-31 20:37:00.861  1277  5210 W PeoplePU: 	at zdm.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+10-31 20:37:00.861  1277  5210 W PeoplePU: 	at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+10-31 20:37:00.861  1277  5210 W PeoplePU: 	at zhv.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+10-31 20:37:00.861  1277  5210 W PeoplePU: 	at hjm.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+10-31 20:37:00.861  1277  5210 W PeoplePU: 	at hjl.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):11)
+10-31 20:37:00.861  1277  5210 W PeoplePU: 	at dfhf.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+10-31 20:37:00.861  1277  5210 W PeoplePU: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+10-31 20:37:00.861  1277  5210 W PeoplePU: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+10-31 20:37:00.861  1277  5210 W PeoplePU: 	at java.lang.Thread.run(Thread.java:1012)
+10-31 20:37:00.861  1277  5210 W PeoplePU: Caused by: android.os.RemoteException: Remote stack trace:
+10-31 20:37:00.861  1277  5210 W PeoplePU: 	at com.android.server.pm.ComputerEngine.getComponentEnabledSettingInternal(ComputerEngine.java:5234)
+10-31 20:37:00.861  1277  5210 W PeoplePU: 	at com.android.server.pm.ComputerEngine.getComponentEnabledSetting(ComputerEngine.java:5216)
+10-31 20:37:00.861  1277  5210 W PeoplePU: 	at com.android.server.pm.IPackageManagerBase.getComponentEnabledSetting(IPackageManagerBase.java:387)
+10-31 20:37:00.861  1277  5210 W PeoplePU: 	at android.content.pm.IPackageManager$Stub.onTransact(IPackageManager.java:2953)
+10-31 20:37:00.861  1277  5210 W PeoplePU: 	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.onTransact(PackageManagerService.java:5980)
+10-31 20:37:00.861  1277  5210 W PeoplePU:
+10-31 20:37:00.868  1277  5272 W PeoplePU: getServiceInfo failed.
+10-31 20:37:00.868  1277  5272 W PeoplePU: android.content.pm.PackageManager$NameNotFoundException: ComponentInfo{com.google.android.gms/com.google.android.gms.people.sync.focus.ContactsSyncAdapterService}
+10-31 20:37:00.868  1277  5272 W PeoplePU: 	at android.app.ApplicationPackageManager.getServiceInfo(ApplicationPackageManager.java:613)
+10-31 20:37:00.868  1277  5272 W PeoplePU: 	at android.app.ApplicationPackageManager.getServiceInfo(ApplicationPackageManager.java:596)
+10-31 20:37:00.868  1277  5272 W PeoplePU: 	at bvox.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+10-31 20:37:00.868  1277  5272 W PeoplePU: 	at com.google.android.gms.people.sync.focus.ContactsSyncIntentOperation.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):43)
+10-31 20:37:00.868  1277  5272 W PeoplePU: 	at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+10-31 20:37:00.868  1277  5272 W PeoplePU: 	at zhv.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+10-31 20:37:00.868  1277  5272 W PeoplePU: 	at hjm.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+10-31 20:37:00.868  1277  5272 W PeoplePU: 	at hjl.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):11)
+10-31 20:37:00.868  1277  5272 W PeoplePU: 	at dfhf.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+10-31 20:37:00.868  1277  5272 W PeoplePU: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+10-31 20:37:00.868  1277  5272 W PeoplePU: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+10-31 20:37:00.868  1277  5272 W PeoplePU: 	at java.lang.Thread.run(Thread.java:1012)
+10-31 20:37:00.869  1277  5272 I FSA2_ContactsSyncIntentOp: Sync is disabled. Skip prepareToSync
+10-31 20:37:00.874  1049  2753 W GLSUser : [DeviceKeyStore] Cannot load key: Device key file not found.
+10-31 20:37:00.894  1277  2918 W gle.android.gms: Long monitor contention with owner highpool[16] (4684) at cooe cooe.a(android.content.Context)(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2) waiters=0 in cooe cooe.a(android.content.Context) for 541ms
+10-31 20:37:00.903  1277  5146 I Checkin : [AndroidCheckinProtoModule] Checkin reason type: 1 attempt count: 1.
+10-31 20:37:00.919  1049  2753 W GLSUser : [DeviceKeyStore] Cannot load key: Device key file not found.
+10-31 20:37:00.920  1277  1277 D LT_ClntIntrcptrFctryV12: Spatula header: CjYKFmNvbS5nb29nbGUuYW5kcm9pZC5nbXMaHFdPSEVFejkwUWV3OUxDY0NjS0ZJQXRwSHVnND0YtfmMyMidkvg4
+10-31 20:37:00.945  1277  5210 I PeopleGalProvider: Gal directories started.
+10-31 20:37:00.946  1277  5210 I PeopleGalProvider: Method 1 completed.
+10-31 20:37:00.946  1277  5210 I PeopleGalProvider: Method 1 finished successfully.
+10-31 20:37:00.952   950   950 D BluetoothPbapService:  onChange on contact uri
+10-31 20:37:00.959  1277  5210 I GalProviderController: setting component enabled=1 for com.google.android.gms.people.service.galprovider.PeopleGalProvider
+10-31 20:37:00.959  1277  5210 I GalProviderController: Setting component enabled succeeds.
+10-31 20:37:00.968  1277  5210 I PeopleGalProvider: Gal directories started.
+10-31 20:37:00.969  1277  5210 I PeopleGalProvider: Method 1 completed.
+10-31 20:37:00.969  1277  5210 I PeopleGalProvider: Method 1 finished successfully.
+10-31 20:37:00.979  1277  5210 I DeletedNullContactsCleanup: Scheduling the service.
+10-31 20:37:00.982   950  5292 D BluetoothPbapUtils: primaryVersionCounter = 0, secondaryVersionCounter=0
+10-31 20:37:00.991  1277  5210 I BackupAndSyncValidation: Scheduling the service.
+10-31 20:37:01.002  4657  4747 I TestRunner: finished: conflictingNoteEditsKeepBothVersions(com.quartz.notes.data.sync.SyncEngineTest)

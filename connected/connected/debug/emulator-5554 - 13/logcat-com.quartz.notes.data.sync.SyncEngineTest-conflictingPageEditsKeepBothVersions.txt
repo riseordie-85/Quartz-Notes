@@ -1,0 +1,145 @@
+10-31 20:37:04.807  4657  4747 I TestRunner: started: conflictingPageEditsKeepBothVersions(com.quartz.notes.data.sync.SyncEngineTest)
+10-31 20:37:04.811  4657  4747 D TrafficStats: tagSocket(100) with statsTag=0xffffffff, statsUid=-1
+10-31 20:37:04.825  1098  1114 W SliceData: Highlight menu key res is empty: com.android.settings.deviceinfo.firmwareversion.FirmwareVersionDetailPreferenceController
+10-31 20:37:04.844  1098  1114 D RefreshRatePrefCtr: DEFAULT_REFRESH_RATE : 60.0 mPeakRefreshRate : 60.0
+10-31 20:37:04.844  1098  1114 W SliceData: Highlight menu key res is empty: com.android.settings.deviceinfo.hardwareinfo.DeviceModelPreferenceController
+10-31 20:37:04.849  1680  2243 W MediaProvider: isAppCloneUserPair for user 0: false
+10-31 20:37:04.855  1680  2243 W MediaProvider: isAppCloneUserPair for user 0: false
+10-31 20:37:04.857  1680  2243 W MediaProvider: isAppCloneUserPair for user 0: false
+10-31 20:37:04.858  1680  2243 W MediaProvider: isAppCloneUserPair for user 0: false
+10-31 20:37:04.868  1098  1114 D CustomizableLockScreenUtils: is_custom_lock_screen_quick_affordances_feature_enabled=0
+10-31 20:37:04.870  1098  1114 D CustomizableLockScreenUtils: is_custom_lock_screen_quick_affordances_feature_enabled=0
+10-31 20:37:04.871  1098  1114 D CustomizableLockScreenUtils: is_custom_lock_screen_quick_affordances_feature_enabled=0
+10-31 20:37:04.871  1680  1849 E StorageManager: Failed to set extended attributes for /storage/emulated/0/Android to set project id.: Operation not permitted
+10-31 20:37:04.872  1680  1849 W MediaProvider: Failed to update quota type for /storage/emulated/0/Android
+10-31 20:37:04.872  1680  1849 W MediaProvider: java.io.IOException: Failed to update quota type for /storage/emulated/0/Android
+10-31 20:37:04.872  1680  1849 W MediaProvider: 	at android.os.storage.StorageManager.updateExternalStorageFileQuotaType(StorageManager.java:2618)
+10-31 20:37:04.872  1680  1849 W MediaProvider: 	at com.android.providers.media.MediaProvider.updateQuotaTypeForFileInternal(MediaProvider.java:851)
+10-31 20:37:04.872  1680  1849 W MediaProvider: 	at com.android.providers.media.MediaProvider.updateQuotaTypeForUri(MediaProvider.java:826)
+10-31 20:37:04.872  1680  1849 W MediaProvider: 	at com.android.providers.media.MediaProvider.-$$Nest$mupdateQuotaTypeForUri(Unknown Source:0)
+10-31 20:37:04.872  1680  1849 W MediaProvider: 	at com.android.providers.media.MediaProvider$4.lambda$onInsert$0(MediaProvider.java:880)
+10-31 20:37:04.872  1680  1849 W MediaProvider: 	at com.android.providers.media.MediaProvider$4.$r8$lambda$DnIEye5Sx8fODP4Bt_qvKpm3U-Q(Unknown Source:0)
+10-31 20:37:04.872  1680  1849 W MediaProvider: 	at com.android.providers.media.MediaProvider$4$$ExternalSyntheticLambda0.run(Unknown Source:6)
+10-31 20:37:04.872  1680  1849 W MediaProvider: 	at android.os.Handler.handleCallback(Handler.java:942)
+10-31 20:37:04.872  1680  1849 W MediaProvider: 	at android.os.Handler.dispatchMessage(Handler.java:99)
+10-31 20:37:04.872  1680  1849 W MediaProvider: 	at android.os.Looper.loopOnce(Looper.java:201)
+10-31 20:37:04.872  1680  1849 W MediaProvider: 	at android.os.Looper.loop(Looper.java:288)
+10-31 20:37:04.872  1680  1849 W MediaProvider: 	at android.os.HandlerThread.run(HandlerThread.java:67)
+10-31 20:37:04.873  1098  1114 W libc    : Access denied finding property "ro.vendor.aware_available"
+10-31 20:37:04.874  1680  1849 E StorageManager: Failed to set extended attributes for /storage/emulated/0/Android/media to set project id.: Operation not permitted
+10-31 20:37:04.874  1680  1849 W MediaProvider: Failed to update quota type for /storage/emulated/0/Android/media
+10-31 20:37:04.874  1680  1849 W MediaProvider: java.io.IOException: Failed to update quota type for /storage/emulated/0/Android/media
+10-31 20:37:04.874  1680  1849 W MediaProvider: 	at android.os.storage.StorageManager.updateExternalStorageFileQuotaType(StorageManager.java:2618)
+10-31 20:37:04.874  1680  1849 W MediaProvider: 	at com.android.providers.media.MediaProvider.updateQuotaTypeForFileInternal(MediaProvider.java:851)
+10-31 20:37:04.874  1680  1849 W MediaProvider: 	at com.android.providers.media.MediaProvider.updateQuotaTypeForUri(MediaProvider.java:826)
+10-31 20:37:04.874  1680  1849 W MediaProvider: 	at com.android.providers.media.MediaProvider.-$$Nest$mupdateQuotaTypeForUri(Unknown Source:0)
+10-31 20:37:04.874  1680  1849 W MediaProvider: 	at com.android.providers.media.MediaProvider$4.lambda$onInsert$0(MediaProvider.java:880)
+10-31 20:37:04.874  1680  1849 W MediaProvider: 	at com.android.providers.media.MediaProvider$4.$r8$lambda$DnIEye5Sx8fODP4Bt_qvKpm3U-Q(Unknown Source:0)
+10-31 20:37:04.874  1680  1849 W MediaProvider: 	at com.android.providers.media.MediaProvider$4$$ExternalSyntheticLambda0.run(Unknown Source:6)
+10-31 20:37:04.874  1680  1849 W MediaProvider: 	at android.os.Handler.handleCallback(Handler.java:942)
+10-31 20:37:04.874  1680  1849 W MediaProvider: 	at android.os.Handler.dispatchMessage(Handler.java:99)
+10-31 20:37:04.874  1680  1849 W MediaProvider: 	at android.os.Looper.loopOnce(Looper.java:201)
+10-31 20:37:04.874  1680  1849 W MediaProvider: 	at android.os.Looper.loop(Looper.java:288)
+10-31 20:37:04.874  1680  1849 W MediaProvider: 	at android.os.HandlerThread.run(HandlerThread.java:67)
+10-31 20:37:04.875  1098  1114 W libc    : Access denied finding property "ro.vendor.aware_available"
+10-31 20:37:04.879  1098  1114 W LocalMediaManager: BluetoothAdapter is null or muting expected device not exist
+10-31 20:37:04.884  1098  1114 D RTTSettingsCtr: init controller
+10-31 20:37:04.886  1098  1114 D AssistGesture: mAssistOnly:false, isSupported:false, isSensorAvailable:false
+10-31 20:37:04.886  1098  1114 D AssistGesture: mAssistOnly:false, isSupported:false, isSensorAvailable:false
+10-31 20:37:04.886  1680  2243 I MediaProvider: Scanned external_primary due to REASON_MOUNTED, found 17 items in 191ms, 4 inserts 0 updates 0 deletes
+10-31 20:37:04.893  1680  2243 I MediaProvider: End Intent { act=com.android.providers.media.action.SCAN_VOLUME (has extras) }
+10-31 20:37:04.897  1680  2243 I MediaProvider: Begin Intent { act=android.intent.action.MEDIA_MOUNTED dat=file:///... flg=0x5000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService (has extras) }
+10-31 20:37:04.899  1680  2243 I MediaProvider: Volume MediaVolume name: [external_primary] id: [emulated;0] user: [UserHandle{0}] path: [/storage/emulated/0] externallyManaged: [false] mPublicVolume: [false] already attached
+10-31 20:37:04.899  1680  2243 I MediaProvider: End Intent { act=android.intent.action.MEDIA_MOUNTED dat=file:///... flg=0x5000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService (has extras) }
+10-31 20:37:04.907  1098  1114 W SliceData: Highlight menu key res is empty: com.android.settings.accessibility.AccessibilitySlicePreferenceController
+10-31 20:37:04.907  1098  1114 W SliceData: Highlight menu key res is empty: com.android.settings.accessibility.AccessibilitySlicePreferenceController
+10-31 20:37:04.907  1098  1114 W SliceData: Highlight menu key res is empty: com.android.settings.accessibility.AccessibilitySlicePreferenceController
+10-31 20:37:04.909  1098  1114 D SlicesIndexer: Indexing slices database took: 199
+10-31 20:37:04.919  1098  1114 D SettingsSliceProvider: Allowlisting 16 uris to 3 pkgs.
+10-31 20:37:04.934  1098  1114 D SlicesIndexer: Slices already indexed - returning.
+10-31 20:37:04.934  1098  1114 D SettingsSliceProvider: Allowlisting 5 uris to 3 pkgs.
+10-31 20:37:04.946  1098  1114 D SettingsSliceProvider: onBindSlice start: content://com.android.settings.slices/action/gesture_double_tap_power
+10-31 20:37:04.947  1098  1356 D SlicesIndexer: Slices already indexed - returning.
+10-31 20:37:04.948  1098  1114 V SettingsSliceProvider: onBindSlice end
+10-31 20:37:04.949  1098  1356 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/gesture_double_tap_power) in: 2
+10-31 20:37:04.954  1098  3750 D SlicesIndexer: Slices already indexed - returning.
+10-31 20:37:04.954  1098  3750 W SliceData: Highlight menu key res is empty: com.android.settings.deviceinfo.firmwareversion.FirmwareVersionDetailPreferenceController
+10-31 20:37:04.956  1098  3750 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/os_firmware_version) in: 2
+10-31 20:37:04.957  1098  1356 D SlicesIndexer: Slices already indexed - returning.
+10-31 20:37:04.958  1098  1356 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/auto_rotate) in: 1
+10-31 20:37:04.959  1098  3750 D SlicesIndexer: Slices already indexed - returning.
+10-31 20:37:04.960  1098  3750 W SliceData: Highlight menu key res is empty: com.android.settings.deviceinfo.hardwareinfo.DeviceModelPreferenceController
+10-31 20:37:04.960  1098  3750 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/hardware_info_device_model) in: 1
+10-31 20:37:04.961  1049  3127 W .gms.persistent: Long monitor contention with owner lowpool[20] (5312) at void bytb.v(byps, byps, int)(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2) waiters=0 in int bytb.l(bysm, aphn) for 154ms
+10-31 20:37:04.970  1098  1356 D SlicesIndexer: Slices already indexed - returning.
+10-31 20:37:04.970  1098  1356 D VolumeSliceHelper: Registering uri for broadcast relay: content://com.android.settings.slices/action/media_volume
+10-31 20:37:04.970  1098  1356 D SliceBroadcastRelay: Registering Uri for broadcast relay: content://com.android.settings.slices/action/volume_slices
+10-31 20:37:04.971  1098  1098 D SettingsSliceProvider: Starting background worker for: content://com.android.settings.slices/action/media_volume
+10-31 20:37:04.971  1098  1098 D SliceBackgroundWorker: create instance: class com.android.settings.media.MediaOutputIndicatorWorker
+10-31 20:37:04.973  1098  3750 W LocalMediaManager: BluetoothAdapter is null or muting expected device not exist
+10-31 20:37:04.974  1098  1356 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/media_volume) in: 4
+10-31 20:37:04.975  1098  3750 D SlicesIndexer: Slices already indexed - returning.
+10-31 20:37:04.977  1098  3750 D VolumeSliceHelper: Registering uri for broadcast relay: content://com.android.settings.slices/action/call_volume
+10-31 20:37:04.977  1098  3750 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/call_volume) in: 2
+10-31 20:37:04.984  1098  1356 D SlicesIndexer: Slices already indexed - returning.
+10-31 20:37:04.984  1098  1356 D VolumeSliceHelper: Registering uri for broadcast relay: content://com.android.settings.slices/action/ring_volume
+10-31 20:37:04.984  1098  1356 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/ring_volume) in: 0
+10-31 20:37:04.986  1098  3750 D SlicesIndexer: Slices already indexed - returning.
+10-31 20:37:04.986  1098  3750 D VolumeSliceHelper: Registering uri for broadcast relay: content://com.android.settings.slices/action/separate_ring_volume
+10-31 20:37:04.987  1098  3750 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/separate_ring_volume) in: 1
+10-31 20:37:04.988  1098  1356 D SlicesIndexer: Slices already indexed - returning.
+10-31 20:37:04.988  1098  1356 D VolumeSliceHelper: Registering uri for broadcast relay: content://com.android.settings.slices/action/notification_volume
+10-31 20:37:04.988  1098  1356 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/notification_volume) in: 0
+10-31 20:37:04.989  1098  3750 D SlicesIndexer: Slices already indexed - returning.
+10-31 20:37:04.990  1098  3750 D VolumeSliceHelper: Registering uri for broadcast relay: content://com.android.settings.slices/action/alarm_volume
+10-31 20:37:04.990  1098  3750 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/alarm_volume) in: 1
+10-31 20:37:04.992  1098  1356 D SlicesIndexer: Slices already indexed - returning.
+10-31 20:37:04.993  1098  1356 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/screen_magnification_gestures_preference_screen) in: 1
+10-31 20:37:04.995  1098  3750 D SlicesIndexer: Slices already indexed - returning.
+10-31 20:37:04.996  1098  3750 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/smart_battery) in: 1
+10-31 20:37:05.070  1049  5312 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService started execution. cause:7 exec_start_elapsed_seconds: 152 [CONTEXT service_id=218 ]
+10-31 20:37:05.070  1049  5312 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService finished executing. cause:7 result: 1 elapsed_millis: 59 uptime_millis: 59 exec_start_elapsed_seconds: 152 [CONTEXT service_id=218 ]
+10-31 20:37:05.094  1098  1114 D WifiCallingSliceHelper: Wifi calling is either not provisioned or not enabled by Platform
+10-31 20:37:05.114  1098  1356 D SlicesIndexer: Slices already indexed - returning.
+10-31 20:37:05.117  1049  2718 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.ipa.base.IpaGcmTaskService started execution. cause:7 exec_start_elapsed_seconds: 153 [CONTEXT service_id=218 ]
+10-31 20:37:05.117  1098  1356 D SettingsSliceProvider: Built slice (content://android.settings.slices/action/airplane_mode) in: 3
+10-31 20:37:05.125  1098  3750 D SlicesIndexer: Slices already indexed - returning.
+10-31 20:37:05.130  1098  3750 D SettingsSliceProvider: Built slice (content://android.settings.slices/action/battery_saver) in: 5
+10-31 20:37:05.139  1098  1114 D WifiSlice: calling uid name : com.google.android.settings.intelligence
+10-31 20:37:05.143  1049  3127 I NetworkScheduler: ignoring stale queue check message
+10-31 20:37:05.146  1049  5312 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.ipa.base.IpaGcmTaskService finished executing. cause:7 result: 1 elapsed_millis: 49 uptime_millis: 49 exec_start_elapsed_seconds: 153 [CONTEXT service_id=218 ]
+10-31 20:37:05.175  1049  2718 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService started execution. cause:5 exec_start_elapsed_seconds: 153 [CONTEXT service_id=218 ]
+10-31 20:37:05.179  1049  5312 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService finished executing. cause:5 result: 1 elapsed_millis: 13 uptime_millis: 13 exec_start_elapsed_seconds: 153 [CONTEXT service_id=218 ]
+10-31 20:37:05.202  1049  2718 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService started execution. cause:5 exec_start_elapsed_seconds: 153 [CONTEXT service_id=218 ]
+10-31 20:37:05.205  1049  5267 I TapAndPay: Disabling TapAndPay HCE service [CONTEXT service_id=79 ]
+10-31 20:37:05.206  1277  5335 W Pay     : Active account was null, notification task will be cancelled. [CONTEXT service_id=198 ]
+10-31 20:37:05.207  1277  5335 W Pay     : No account found on the task or the device. Notification task will not be rescheduled. [CONTEXT service_id=198 ]
+10-31 20:37:05.209  1049  5312 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService finished executing. cause:5 result: 2 elapsed_millis: 17 uptime_millis: 17 exec_start_elapsed_seconds: 153 [CONTEXT service_id=218 ]
+10-31 20:37:05.232  1049  2718 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService started execution. cause:5 exec_start_elapsed_seconds: 153 [CONTEXT service_id=218 ]
+10-31 20:37:05.233  1049  5267 I TapAndPay: Disabling TapAndPay HCE service [CONTEXT service_id=79 ]
+10-31 20:37:05.234  1277  5147 W Pay     : Active account was null, notification task will be cancelled. [CONTEXT service_id=198 ]
+10-31 20:37:05.235  1277  5147 E Pay     : [Migration operation] Active tapandpay account not found! [CONTEXT service_id=198 ]
+10-31 20:37:05.236  1277  5147 I Pay     : Migration flag not enabled. [CONTEXT service_id=198 ]
+10-31 20:37:05.241  1277  5147 I Pay     : Migration already completed. [CONTEXT service_id=198 ]
+10-31 20:37:05.243  1277  5147 I Pay     : Migration already completed. [CONTEXT service_id=198 ]
+10-31 20:37:05.244  1277  5147 I Pay     : Migration flag not enabled. [CONTEXT service_id=198 ]
+10-31 20:37:05.244  1277  5147 I Pay     : Migration flag not enabled. [CONTEXT service_id=198 ]
+10-31 20:37:05.244  1277  5147 I Pay     : Migration flag not enabled. [CONTEXT service_id=198 ]
+10-31 20:37:05.245  1277  5147 I Pay     : Migration flag not enabled. [CONTEXT service_id=198 ]
+10-31 20:37:05.245  1277  5147 I Pay     : [SeTosMigration] walletJpEligibility is not enabled [CONTEXT service_id=198 ]
+10-31 20:37:05.246  1277  5147 I Pay     : Wallet install state NOT_INSTALLED [CONTEXT service_id=198 ]
+10-31 20:37:05.246  1277  5147 I Pay     : Migration flag not enabled. [CONTEXT service_id=198 ]
+10-31 20:37:05.248  1049  5312 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService finished executing. cause:5 result: 1 elapsed_millis: 25 uptime_millis: 25 exec_start_elapsed_seconds: 153 [CONTEXT service_id=218 ]
+10-31 20:37:05.276  1049  2718 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService started execution. cause:5 exec_start_elapsed_seconds: 153 [CONTEXT service_id=218 ]
+10-31 20:37:05.279  1049  5312 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService finished executing. cause:5 result: 1 elapsed_millis: 13 uptime_millis: 13 exec_start_elapsed_seconds: 153 [CONTEXT service_id=218 ]
+10-31 20:37:05.301  1049  2718 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService started execution. cause:5 exec_start_elapsed_seconds: 153 [CONTEXT service_id=218 ]
+10-31 20:37:05.301  1277  5147 I Pay     : Device does not support HCE. [CONTEXT service_id=198 ]
+10-31 20:37:05.303  1049  5312 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService finished executing. cause:5 result: 2 elapsed_millis: 8 uptime_millis: 8 exec_start_elapsed_seconds: 153 [CONTEXT service_id=218 ]
+10-31 20:37:05.333  1049  2718 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService started execution. cause:5 exec_start_elapsed_seconds: 153 [CONTEXT service_id=218 ]
+10-31 20:37:05.335  1049  5267 I TapAndPay: Disabling TapAndPay HCE service [CONTEXT service_id=79 ]
+10-31 20:37:05.340  1049  5312 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService finished executing. cause:5 result: 1 elapsed_millis: 16 uptime_millis: 16 exec_start_elapsed_seconds: 153 [CONTEXT service_id=218 ]
+10-31 20:37:05.379  1049  2718 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.udc.service.UdcContextInitService started execution. cause:5 exec_start_elapsed_seconds: 153 [CONTEXT service_id=218 ]
+10-31 20:37:05.385  1049  5312 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.udc.service.UdcContextInitService finished executing. cause:5 result: 1 elapsed_millis: 20 uptime_millis: 20 exec_start_elapsed_seconds: 153 [CONTEXT service_id=218 ]
+10-31 20:37:05.420  1049  2718 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.auth.account.be.legacy.AuthCronService started execution. cause:5 exec_start_elapsed_seconds: 153 [CONTEXT service_id=218 ]
+10-31 20:37:05.427  1049  5312 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.auth.account.be.legacy.AuthCronService finished executing. cause:5 result: 3 elapsed_millis: 20 uptime_millis: 20 exec_start_elapsed_seconds: 153 [CONTEXT service_id=218 ]
+10-31 20:37:05.773  4657  4747 I TestRunner: finished: conflictingPageEditsKeepBothVersions(com.quartz.notes.data.sync.SyncEngineTest)

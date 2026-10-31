@@ -1,0 +1,523 @@
+10-31 20:38:47.193  4657  4747 I TestRunner: started: groupsMoveCopyAndPaste(com.quartz.notes.ui.notebook.FreeformToolsTest)
+10-31 20:38:47.223  1012  1022 I s.nexuslauncher: NativeAlloc concurrent copying GC freed 41373(2036KB) AllocSpace objects, 4(480KB) LOS objects, 49% free, 5321KB/10MB, paused 27us,11us total 155.898ms
+10-31 20:38:47.234  1012  1024 W System  : A resource failed to call release.
+10-31 20:38:47.234  1012  1024 W System  : A resource failed to call release.
+10-31 20:38:47.234  1012  1024 W System  : A resource failed to call release.
+10-31 20:38:47.234  1012  1024 W System  : A resource failed to call release.
+10-31 20:38:47.244  1433  1433 I DialerTaskExecutor: com.android.voicemail.impl.scheduling.TaskExecutor.addTask:299 com.android.voicemail.impl.ActivationTask@ea21062 added [CONTEXT enable_persistent_logger=true ]
+10-31 20:38:47.244  1433  1433 I DialerTaskExecutor: com.android.voicemail.impl.scheduling.TaskExecutor.runNextTask:345 minimal wait time:4828 [CONTEXT enable_persistent_logger=true ]
+10-31 20:38:47.244  1433  1433 I DialerTaskExecutor: com.android.voicemail.impl.scheduling.TaskExecutor.sleep:355 sleep for 4828 millis [CONTEXT enable_persistent_logger=true ]
+10-31 20:38:47.282  1012  1012 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+10-31 20:38:47.304  4657  4747 D IdlingRegistry: Registering idling resources: [androidx.compose.ui.test.EspressoLink@c5b2db3]
+10-31 20:38:47.308   485  1806 W system_server: Long monitor contention with owner binder:485_E (1552) at void com.android.server.appop.AppOpsService.collectAsyncNotedOp(int, java.lang.String, int, java.lang.String, int, java.lang.String, boolean)(AppOpsService.java:3745) waiters=0 in com.android.server.appop.AppOpsService$PackageVerificationResult com.android.server.appop.AppOpsService.verifyAndGetBypass(int, java.lang.String, java.lang.String, java.lang.String) for 164ms
+10-31 20:38:47.313  1012  1012 D MainContentCaptureSession: Flushing 2 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARING
+10-31 20:38:47.313   485  1825 W AppSearchIcing: icing-search-engine.cc:217: Error: 5, Message: Document (com.google.android.googlequicksearchbox$OneSearchZeroStateGoogleSuggestions/default, zp) not found.
+10-31 20:38:47.314  1012  1012 D MainContentCaptureSession: Flushing 32 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARED
+10-31 20:38:47.327  1012  2299 D OneSearchSuggestProvider: Created the binder channel successfully for end point service =com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService , mChannel=Q0{delegate=L0{logId=53, target=directaddress:///AndroidComponentAddress%5BIntent%20%7B%20act=grpc.io.action.BIND%20cmp=com.google.android.googlequicksearchbox/com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService%20%7D%5D}} , mOneSearchConnection=y1.J@1ca8b4b
+10-31 20:38:47.357  4657  4747 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+10-31 20:38:47.357  2896  3144 I RcsClientLib: shouldUseCarrierServicesJibeService: true, CarrierServices rcs service found: true
+10-31 20:38:47.362  1707  2075 I AiAiEcho: Predicting[0]:
+10-31 20:38:47.362  1707  2075 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:
+10-31 20:38:47.363  1707  2075 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0
+10-31 20:38:47.363  1707  2075 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0
+10-31 20:38:47.378  2896  3144 I RcsClientLib: com.google.android.rcs.client.lifecycle.RcsEngineLifecycleService connected
+10-31 20:38:47.384  2537  2799 I CarrierServices: [42] RcsEngineImpl.triggerStopRcsStack: RcsEngineImpl[DUAL_REG]:[46afadd4-f15d]: triggerStopRcsStack for msisdn:redacted-pii:phone_number[chars:0,last2:]
+10-31 20:38:47.384  2537  3226 I CarrierServices: [58] fne.handleMessage: RcsEngineImpl[DUAL_REG]:[46afadd4-f15d]>Handler: handleMessage processing message:[STOP_RCS_STACK] with [non-null]:RcsEngineImpl reference
+10-31 20:38:47.384  2537  3226 I CarrierServices: [58] fne.handleMessage: RcsEngineImpl[DUAL_REG]:[46afadd4-f15d]>Handler: RCS engine STOP RCS stack
+10-31 20:38:47.384  2537  3226 W CarrierServices: [58] RcsEngineImpl.e: RcsEngineImpl[DUAL_REG]:[46afadd4-f15d]: imsModule is null, shutdown not required
+10-31 20:38:47.384  2537  3226 I CarrierServices: [58] RcsEngineImpl.stopRcsStackInternal: RcsEngineImpl[DUAL_REG]:[46afadd4-f15d]: skipping imsModule.stop
+10-31 20:38:47.384  2537  3226 I CarrierServices: [58] fne.handleMessage: RcsEngineImpl[DUAL_REG]:[46afadd4-f15d]>Handler: handleMessage processing message:[NOTIFY_UPTIME_IGNORE_STATE_CHANGED] with [non-null]:RcsEngineImpl reference
+10-31 20:38:47.384  2896  3137 I RcsClientLib: Disconnecting RcsEngineLifecycleService
+10-31 20:38:47.404  6488  6906 W .gms.persistent: Long monitor contention with owner [com.google.android.gms.chimera.container.intentoperation.PersistentIntentOperationChimeraService-Executor] processing com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener for action com.google.android.gms.phenotype.UPDATE (6910) at void hjm.run()(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3) waiters=0 in void hjm.run() for 693ms
+10-31 20:38:47.417  6488  6906 I PTCommittedOperation: Receive new configuration for com.google.android.gms.mdisync
+10-31 20:38:47.441  6488  6910 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-31 20:38:47.441  6488  6910 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-31 20:38:47.441  6488  6910 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-31 20:38:47.442  6488  6910 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-31 20:38:47.463  1012  1012 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_ROOT
+10-31 20:38:47.463  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+10-31 20:38:47.483  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+10-31 20:38:47.484  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.google.android.apps.nexuslauncher fieldId=-1 fieldName=null extras=null}, false)
+10-31 20:38:47.484  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+10-31 20:38:47.484  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+10-31 20:38:47.537  6488  6910 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-31 20:38:47.537  6488  6910 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-31 20:38:47.538  6488  6910 I NamespaceManager: Package 1 name not found! Using module version.
+10-31 20:38:47.539   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb80130
+10-31 20:38:47.542  2537  3226 I CarrierServices: [58] fjp.f: No RCS Configuration was found in Bugle for simID: redacted-pii:sim_id[chars:20,last3:897]
+10-31 20:38:47.549  6488  6910 I NamespaceManager: Package rkpd name not found! Using module version.
+10-31 20:38:47.551  6488  6910 I NamespaceManager: Package com.google.android.devicelockcontroller name not found! Using module version.
+10-31 20:38:47.552  6488  6910 I NamespaceManager: Package com.google.android.healthfitness name not found! Using module version.
+10-31 20:38:47.554   759   814 D EGL_emulation: app_time_stats: avg=2856.58ms min=2856.58ms max=2856.58ms count=1
+10-31 20:38:47.668   485  1477 W system_server: Long monitor contention with owner binder:485_18 (1794) at java.util.HashMap com.android.providers.settings.SettingsProvider.getAllConfigFlags(java.lang.String)(SettingsProvider.java:1332) waiters=2 in java.util.HashMap com.android.providers.settings.SettingsProvider.getAllConfigFlags(java.lang.String) for 114ms
+10-31 20:38:47.670   485   563 W system_server: Long monitor contention with owner android.display (508) at void com.android.server.am.ProcessRecord.updateProcessInfo(boolean, boolean, boolean)(ProcessRecord.java:1321) waiters=2 in int com.android.server.am.ActivityManagerService.stopService(android.app.IApplicationThread, android.content.Intent, java.lang.String, int) for 376ms
+10-31 20:38:47.686  6488  6910 I NamespaceManager: Package android.companion name not found! Using module version.
+10-31 20:38:47.700   485   524 W system_server: Long monitor contention with owner android.display (508) at void com.android.server.am.ProcessRecord.updateProcessInfo(boolean, boolean, boolean)(ProcessRecord.java:1321) waiters=5 in boolean com.android.server.am.ActivityManagerService$LocalService.isProfileOwner(int) for 328ms
+10-31 20:38:47.730  6488  6910 I NamespaceManager: Package com.google.android.healthfitness name not found! Using module version.
+10-31 20:38:47.730  6488  6910 I NamespaceManager: Package com.google.android.aicore name not found! Using module version.
+10-31 20:38:47.731  6488  6910 I NamespaceManager: Package com.google.android.audioproxy name not found! Using module version.
+10-31 20:38:47.731  6488  6910 I NamespaceManager: Package com.google.android.healthfitness name not found! Using module version.
+10-31 20:38:47.731  6488  6910 I NamespaceManager: Package com.google.android.apps.pixel.psi name not found! Using module version.
+10-31 20:38:47.732  6488  6910 I NamespaceManager: Package com.google.android.apps.safetycore name not found! Using module version.
+10-31 20:38:47.732  6488  6910 I NamespaceManager: Package com.google.android.crashrecovery name not found! Using module version.
+10-31 20:38:47.747   485  1807 W system_server: Long monitor contention with owner android.display (508) at void com.android.server.am.ProcessRecord.updateProcessInfo(boolean, boolean, boolean)(ProcessRecord.java:1321) waiters=1 in void com.android.server.am.ActivityManagerService.finishReceiver(android.os.IBinder, int, java.lang.String, android.os.Bundle, boolean, int) for 502ms
+10-31 20:38:47.762  6488  6910 I NamespaceManager: Package com.google.android.profiling name not found! Using module version.
+10-31 20:38:47.763  6488  6910 I NamespaceManager: Package com.google.android.bt name not found! Using module version.
+10-31 20:38:47.763  6488  6910 I NamespaceManager: Package com.google.android.nfcservices name not found! Using module version.
+10-31 20:38:47.763  6488  6910 I NamespaceManager: Package com.google.android.webapp name not found! Using module version.
+10-31 20:38:47.769  6488  6910 I NamespaceManager: Package com.google.android.telephonycore name not found! Using module version.
+10-31 20:38:47.787  6488  6910 I NamespaceManager: Package com.google.android.uprobestats name not found! Using module version.
+10-31 20:38:47.834  1894  1894 I Choreographer: Skipped 32 frames!  The application may be doing too much work on its main thread.
+10-31 20:38:48.024  6488  6910 I bwir    : updateFromConfigurations using legacy put method [CONTEXT service_id=204 ]
+10-31 20:38:48.036   759   814 W Parcel  : Expecting binder but got null!
+10-31 20:38:48.045  6488  7122 I PTCommittedOperation: Receive new configuration for com.google.android.gms.audit
+10-31 20:38:48.054  2896  3144 I BugleRcsProvisioning: RcsProvisioningTrigger: Schedule provisioning on system binding.
+10-31 20:38:48.055  2896  3144 W BugleRcsEngine: [63] bfvz.c: [SR]: Single Registration is disabled. Skipping Single Registration capability check for subId: 1, OS.isAtLeastS:[true], enableSingleRegistrationProvisioning:[false]
+10-31 20:38:48.055  2896  3144 I BugleRcsProvisioning: RcsProvisioningTrigger: DR is active, initializing DR provisioning. DUAL_REG
+10-31 20:38:48.055  2896  3137 I Bugle   : BroadcastReceiverAsyncWorkTracker: Acknowledging broadcast of com.google.android.apps.messaging.rcsprovisioning.RcsProvisioningBroadcastReceiver@2317d88
+10-31 20:38:48.056  2896  3064 W BugleRcsEngine: [42] bfvz.c: [SR]: Single Registration is disabled. Skipping Single Registration capability check for subId: 1, OS.isAtLeastS:[true], enableSingleRegistrationProvisioning:[false]
+10-31 20:38:48.056  2896  3064 I BugleRcsEngine: [42] bgfx.d: No RCS Configuration was found in Bugle for simID: redacted-pii:sim_id[chars:20,last3:897]
+10-31 20:38:48.068   759   805 D SplashScreenView: Build android.window.SplashScreenView{f34b630 V.E...... ......ID 0,0-0,0}
+10-31 20:38:48.068   759   805 D SplashScreenView: Icon: view: null drawable: null size: 0
+10-31 20:38:48.068   759   805 D SplashScreenView: Branding: view: android.view.View{21462a9 G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+10-31 20:38:48.073   485   868 W InputManager-JNI: Input channel object 'f0a40aa com.quartz.notes.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity (client)' was disposed without first being removed with the input manager!
+10-31 20:38:48.076  5451  5451 I Choreographer: Skipped 41 frames!  The application may be doing too much work on its main thread.
+10-31 20:38:48.084  6502  6930 I PeopleGalProvider: Gal directories started.
+10-31 20:38:48.087  6502  6930 I PeopleGalProvider: Method 1 completed.
+10-31 20:38:48.087  6502  6930 I PeopleGalProvider: Method 1 finished successfully.
+10-31 20:38:48.097   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb7f470
+10-31 20:38:48.098   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb806d0
+10-31 20:38:48.098   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb82110
+10-31 20:38:48.098   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb82d70
+10-31 20:38:48.138  1894  1894 I A       : Created gRPC endpoint to "search" for service class com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService
+10-31 20:38:48.143   950   950 D BluetoothPbapService:  onChange on contact uri
+10-31 20:38:48.165  2896  3064 I BugleRcsEngine: [42] vfa.k: Scheduled provisioning task with 0 seconds delay, KEEP policy
+10-31 20:38:48.176  6502  6930 I GalProviderController: setting component enabled=1 for com.google.android.gms.people.service.galprovider.PeopleGalProvider
+10-31 20:38:48.182  6502  6930 I GalProviderController: Setting component enabled succeeds.
+10-31 20:38:48.205  1012  1012 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+10-31 20:38:48.208  6502  6930 I PeopleGalProvider: Gal directories started.
+10-31 20:38:48.209  6502  6930 I PeopleGalProvider: Method 1 completed.
+10-31 20:38:48.209  6502  6930 I PeopleGalProvider: Method 1 finished successfully.
+10-31 20:38:48.476  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@25b1407 in: PRE_ON_CREATE
+10-31 20:38:48.476  4657  4657 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+10-31 20:38:48.478  1012  2044 D EGL_emulation: app_time_stats: avg=150.70ms min=89.60ms max=495.59ms count=8
+10-31 20:38:48.486   485  1806 W system_server: Long monitor contention with owner binder:485_13 (1667) at void com.android.server.am.ActivityManagerService.serviceDoneExecuting(android.os.IBinder, int, int, int)(ActivityManagerService.java:12817) waiters=1 in android.app.ContentProviderHolder com.android.server.am.ContentProviderHelper.getContentProviderImpl(android.app.IApplicationThread, java.lang.String, android.os.IBinder, int, java.lang.String, java.lang.String, boolean, int) for 155ms
+10-31 20:38:48.515   485  1790 W system_server: Long monitor contention with owner binder:485_13 (1667) at void com.android.server.am.ActivityManagerService.serviceDoneExecuting(android.os.IBinder, int, int, int)(ActivityManagerService.java:12817) waiters=2 in android.app.ContentProviderHolder com.android.server.am.ContentProviderHelper.getContentProviderImpl(android.app.IApplicationThread, java.lang.String, android.os.IBinder, int, java.lang.String, java.lang.String, boolean, int) for 334ms
+10-31 20:38:48.518   485  1827 W system_server: Long monitor contention with owner binder:485_13 (1667) at void com.android.server.am.ActivityManagerService.serviceDoneExecuting(android.os.IBinder, int, int, int)(ActivityManagerService.java:12817) waiters=3 in android.app.ContentProviderHolder com.android.server.am.ContentProviderHelper.getContentProviderImpl(android.app.IApplicationThread, java.lang.String, android.os.IBinder, int, java.lang.String, java.lang.String, boolean, int) for 334ms
+10-31 20:38:48.527   485  1665 W system_server: Long monitor contention with owner binder:485_13 (1667) at void com.android.server.am.ActivityManagerService.serviceDoneExecuting(android.os.IBinder, int, int, int)(ActivityManagerService.java:12817) waiters=4 in void com.android.server.am.ActivityManagerService.setHasTopUi(boolean) for 325ms
+10-31 20:38:48.590  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@25b1407 in: CREATED
+10-31 20:38:48.591  4657  4657 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=androidx.activity.ComponentActivity@25b1407
+10-31 20:38:48.592  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@25b1407 in: STARTED
+10-31 20:38:48.593  4657  4657 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=androidx.activity.ComponentActivity@25b1407
+10-31 20:38:48.600  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@25b1407 in: RESUMED
+10-31 20:38:48.600  4657  4657 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=androidx.activity.ComponentActivity@25b1407
+10-31 20:38:48.606  4657  5427 W Parcel  : Expecting binder but got null!
+10-31 20:38:48.666  6502  6930 W ChimeraUtils: Module com.google.android.gms.people missing resource null(0)
+10-31 20:38:48.672  6502  6930 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:48.672  6502  6930 V Backup  : [PhenotypeConfigIO] Phenotype broadcast received for different package
+10-31 20:38:48.673  6502  6930 I SyncIntentOperation: Handling the intent: Intent { act=com.google.android.gms.phenotype.COMMITTED flg=0x10 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.GmsIntentOperationService (has extras) }. [CONTEXT service_id=80 ]
+10-31 20:38:48.811   950  7132 D BluetoothPbapUtils: primaryVersionCounter = 0, secondaryVersionCounter=0
+10-31 20:38:48.892  6502  6584 I MdiSyncModule: flag handling is skipping irrelevant intent.
+10-31 20:38:48.895  6502  6923 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:48.896  6502  6584 I MlBenchmarkInstaller: Intent: com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=340 ]
+10-31 20:38:48.896  6502  6584 I MlBenchmarkInstaller: COMMITTED Extra package name: com.google.android.gms.cast [CONTEXT service_id=340 ]
+10-31 20:38:48.897  1012  1012 W FrameTracker: Missed App frame:UNKNOWN: 74, 24283, 0, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+10-31 20:38:48.898  6502  6584 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:48.899  6502  6584 I GmsSyncPolicyEngine: Periodic sync 1 disabled by policy, cancelled.
+10-31 20:38:48.901  6502  6584 I GmsSyncPolicyEngine: Periodic sync 2 disabled by policy, cancelled.
+10-31 20:38:48.901  6502  6584 I GmsSyncPolicyEngine: Periodic sync 3 disabled by policy, cancelled.
+10-31 20:38:48.902  6502  6584 I LocationHistory: [IntentOperation] Handling action com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=314 ]
+10-31 20:38:48.903  6502  6938 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:48.904   759   814 D EGL_emulation: app_time_stats: avg=1024.53ms min=691.47ms max=1357.60ms count=2
+10-31 20:38:48.906  1012  1012 W FrameTracker: Missed SF frame:UNKNOWN: 74, 24283, 0, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+10-31 20:38:48.914  1012  1012 W FrameTracker: Missing HWUI jank callback for vsyncId: 24283, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+10-31 20:38:48.914  1012  1012 W FrameTracker: Missed App frame:UNKNOWN: 74, 24298, 0, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+10-31 20:38:48.914  1012  1012 W FrameTracker: Missed SF frame:UNKNOWN: 74, 24298, 0, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+10-31 20:38:48.914  1012  1012 W FrameTracker: Missing HWUI jank callback for vsyncId: 24298, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+10-31 20:38:48.914  1012  1012 W FrameTracker: Missed App frame:UNKNOWN: 72, 24306, 283488620, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+10-31 20:38:48.914  1012  1012 W FrameTracker: Missed App frame:UNKNOWN: 74, 24330, 0, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+10-31 20:38:48.914  1012  1012 W FrameTracker: Missed SF frame:UNKNOWN: 74, 24330, 0, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+10-31 20:38:48.914  1012  1012 W FrameTracker: Missing HWUI jank callback for vsyncId: 24330, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+10-31 20:38:48.914  1012  1012 W FrameTracker: Missing SF jank callback for vsyncId: 24346, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+10-31 20:38:48.934  6488  7122 W .gms.persistent: Long monitor contention with owner [com.google.android.gms.chimera.container.intentoperation.PersistentIntentOperationChimeraService-Executor] processing com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener for action com.google.android.gms.phenotype.UPDATE (6910) at void hjm.run()(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3) waiters=0 in void hjm.run() for 889ms
+10-31 20:38:48.937  6488  6910 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-31 20:38:48.946  6488  7122 I PTCommittedOperation: Receive new configuration for com.google.android.gms.drive
+10-31 20:38:48.948  6488  6910 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-31 20:38:48.951  6502  6923 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:48.955  6502  6923 V Backup  : [PhenotypeConfigIO] Phenotype broadcast received for different package
+10-31 20:38:48.956   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb82770
+10-31 20:38:48.956  6502  6923 I SyncIntentOperation: Handling the intent: Intent { act=com.google.android.gms.phenotype.COMMITTED flg=0x10 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.GmsIntentOperationService (has extras) }. [CONTEXT service_id=80 ]
+10-31 20:38:48.957  6502  6938 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:48.958  6502  6937 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:48.958  6502  6937 I MdiSyncModule: flag handling is skipping irrelevant intent.
+10-31 20:38:48.958  6502  6937 I MlBenchmarkInstaller: Intent: com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=340 ]
+10-31 20:38:48.959  6502  6937 I MlBenchmarkInstaller: COMMITTED Extra package name: com.google.android.gms.fido [CONTEXT service_id=340 ]
+10-31 20:38:48.960  6502  6923 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:48.960  6502  6923 I LocationHistory: [IntentOperation] Handling action com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=314 ]
+10-31 20:38:48.972  6502  6937 I GmsSyncPolicyEngine: Periodic sync 1 disabled by policy, cancelled.
+10-31 20:38:48.973  6502  6937 I GmsSyncPolicyEngine: Periodic sync 2 disabled by policy, cancelled.
+10-31 20:38:48.973  6502  6937 I GmsSyncPolicyEngine: Periodic sync 3 disabled by policy, cancelled.
+10-31 20:38:48.974  6502  6922 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:48.974  6502  6922 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:48.975  6502  6922 I SyncIntentOperation: Handling the intent: Intent { act=com.google.android.gms.phenotype.COMMITTED flg=0x10 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.GmsIntentOperationService (has extras) }. [CONTEXT service_id=80 ]
+10-31 20:38:48.975  6502  6924 V Backup  : [PhenotypeConfigIO] Phenotype broadcast received for different package
+10-31 20:38:48.975  6502  6919 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:48.976  6502  6919 I MdiSyncModule: flag handling is skipping irrelevant intent.
+10-31 20:38:48.976  6502  6919 I MlBenchmarkInstaller: Intent: com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=340 ]
+10-31 20:38:48.977  6502  6919 I MlBenchmarkInstaller: COMMITTED Extra package name: com.google.android.gms.gass [CONTEXT service_id=340 ]
+10-31 20:38:48.977  6502  6919 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:48.978  6502  6919 I LocationHistory: [IntentOperation] Handling action com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=314 ]
+10-31 20:38:48.979  6502  6924 I GmsSyncPolicyEngine: Periodic sync 1 disabled by policy, cancelled.
+10-31 20:38:48.981  6502  6924 I GmsSyncPolicyEngine: Periodic sync 2 disabled by policy, cancelled.
+10-31 20:38:48.981  6502  6924 I GmsSyncPolicyEngine: Periodic sync 3 disabled by policy, cancelled.
+10-31 20:38:48.982  6502  6924 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:48.983  6502  6924 V Backup  : [PhenotypeConfigIO] Phenotype broadcast received for different package
+10-31 20:38:48.983  6502  6924 I SyncIntentOperation: Handling the intent: Intent { act=com.google.android.gms.phenotype.COMMITTED flg=0x10 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.GmsIntentOperationService (has extras) }. [CONTEXT service_id=80 ]
+10-31 20:38:48.983  6502  6922 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:48.984  6502  6922 I MdiSyncModule: flag handling is skipping irrelevant intent.
+10-31 20:38:48.984  6502  6922 I MlBenchmarkInstaller: Intent: com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=340 ]
+10-31 20:38:48.984  6502  6922 I MlBenchmarkInstaller: COMMITTED Extra package name: com.google.android.gms.auth_folsom [CONTEXT service_id=340 ]
+10-31 20:38:48.986  6502  6926 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:48.986  6502  6926 I GmsSyncPolicyEngine: Periodic sync 1 disabled by policy, cancelled.
+10-31 20:38:48.986  6502  6926 I GmsSyncPolicyEngine: Periodic sync 2 disabled by policy, cancelled.
+10-31 20:38:48.987  6502  6926 I GmsSyncPolicyEngine: Periodic sync 3 disabled by policy, cancelled.
+10-31 20:38:48.987  6502  6926 I LocationHistory: [IntentOperation] Handling action com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=314 ]
+10-31 20:38:48.988  6502  6930 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:48.988  6502  6924 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:48.989  6488  6910 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-31 20:38:48.989  6502  6924 V Backup  : [PhenotypeConfigIO] Phenotype broadcast received for different package
+10-31 20:38:48.990  6502  6934 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:48.990  6502  6934 I SyncIntentOperation: Handling the intent: Intent { act=com.google.android.gms.phenotype.COMMITTED flg=0x10 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.GmsIntentOperationService (has extras) }. [CONTEXT service_id=80 ]
+10-31 20:38:48.991  6502  6930 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:48.991  6502  6930 I MdiSyncModule: flag handling is skipping irrelevant intent.
+10-31 20:38:48.991  6502  6930 I MlBenchmarkInstaller: Intent: com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=340 ]
+10-31 20:38:48.992  6502  6930 I MlBenchmarkInstaller: COMMITTED Extra package name: com.google.android.gms.trustagent [CONTEXT service_id=340 ]
+10-31 20:38:48.994  6502  6930 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:48.998  6488  6910 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-31 20:38:48.998  6502  6930 I LocationHistory: [IntentOperation] Handling action com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=314 ]
+10-31 20:38:49.001  6502  6934 I GmsSyncPolicyEngine: Periodic sync 1 disabled by policy, cancelled.
+10-31 20:38:49.002  6502  6934 I GmsSyncPolicyEngine: Periodic sync 2 disabled by policy, cancelled.
+10-31 20:38:49.003  6502  6934 I GmsSyncPolicyEngine: Periodic sync 3 disabled by policy, cancelled.
+10-31 20:38:49.003   485   754 W system_server: Long monitor contention with owner android.anim (509) at void com.android.server.wm.SurfaceAnimator.lambda$getFinishedCallback$1(com.android.server.wm.SurfaceAnimator$OnAnimationFinishedCallback, int, com.android.server.wm.AnimationAdapter)(SurfaceAnimator.java:146) waiters=5 in android.content.res.CompatibilityInfo com.android.server.wm.ActivityTaskManagerService$LocalService.compatibilityInfoForPackage(android.content.pm.ApplicationInfo) for 168ms
+10-31 20:38:49.004   485  1334 W system_server: Long monitor contention with owner android.anim (509) at void com.android.server.wm.SurfaceAnimator.lambda$getFinishedCallback$1(com.android.server.wm.SurfaceAnimator$OnAnimationFinishedCallback, int, com.android.server.wm.AnimationAdapter)(SurfaceAnimator.java:146) waiters=2 in android.app.ActivityTaskManager$RootTaskInfo com.android.server.wm.ActivityTaskManagerService.getFocusedRootTaskInfo() for 291ms
+10-31 20:38:49.005   485  1477 W system_server: Long monitor contention with owner android.anim (509) at void com.android.server.wm.SurfaceAnimator.lambda$getFinishedCallback$1(com.android.server.wm.SurfaceAnimator$OnAnimationFinishedCallback, int, com.android.server.wm.AnimationAdapter)(SurfaceAnimator.java:146) waiters=3 in boolean com.android.server.wm.WindowManagerService.getInTouchMode() for 223ms
+10-31 20:38:49.029  6502  6930 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:49.031  6488  6910 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-31 20:38:49.035  6502  6930 V Backup  : [PhenotypeConfigIO] Phenotype broadcast received for different package
+10-31 20:38:49.036  6488  6910 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-31 20:38:49.037  6502  6936 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:49.037  6502  6936 I SyncIntentOperation: Handling the intent: Intent { act=com.google.android.gms.phenotype.COMMITTED flg=0x10 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.GmsIntentOperationService (has extras) }. [CONTEXT service_id=80 ]
+10-31 20:38:49.037  6502  6922 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:49.039  6502  6922 I MdiSyncModule: flag handling is skipping irrelevant intent.
+10-31 20:38:49.039  6502  6922 I MlBenchmarkInstaller: Intent: com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=340 ]
+10-31 20:38:49.039  6502  6922 I MlBenchmarkInstaller: COMMITTED Extra package name: com.google.android.gms.languageprofile [CONTEXT service_id=340 ]
+10-31 20:38:49.040  6502  6929 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:49.041  6502  6929 I GmsSyncPolicyEngine: Periodic sync 1 disabled by policy, cancelled.
+10-31 20:38:49.041  6502  6929 I GmsSyncPolicyEngine: Periodic sync 2 disabled by policy, cancelled.
+10-31 20:38:49.065   950  1243 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+10-31 20:38:49.066   950  1243 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+10-31 20:38:49.066   950  1243 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 1
+10-31 20:38:49.068  6488  6910 I NamespaceManager: Package 1 name not found! Using module version.
+10-31 20:38:49.069  6488  6910 I NamespaceManager: Package rkpd name not found! Using module version.
+10-31 20:38:49.069  6488  6910 I NamespaceManager: Package com.google.android.devicelockcontroller name not found! Using module version.
+10-31 20:38:49.070  6488  6910 I NamespaceManager: Package com.google.android.healthfitness name not found! Using module version.
+10-31 20:38:49.070  6488  6910 I NamespaceManager: Package android.companion name not found! Using module version.
+10-31 20:38:49.071  6488  6910 I NamespaceManager: Package com.google.android.healthfitness name not found! Using module version.
+10-31 20:38:49.072  6502  6929 I GmsSyncPolicyEngine: Periodic sync 3 disabled by policy, cancelled.
+10-31 20:38:49.073  6502  6929 I LocationHistory: [IntentOperation] Handling action com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=314 ]
+10-31 20:38:49.086   485   505 W ziparchive: Unable to open '/data/app/~~NaCDcvl8pEfH3jUii6w5KA==/com.quartz.notes-5rFpeCYkV8uU0I8d8yBjEA==/base.dm': No such file or directory
+10-31 20:38:49.088   485   505 I ActivityTaskManager: Displayed com.quartz.notes/androidx.activity.ComponentActivity: +1s233ms
+10-31 20:38:49.098   759   814 D EGL_emulation: app_time_stats: avg=1543.37ms min=1543.37ms max=1543.37ms count=1
+10-31 20:38:49.133  6488  6910 I NamespaceManager: Package com.google.android.aicore name not found! Using module version.
+10-31 20:38:49.163  6502  6936 I LPGcmTaskChimeraService: Scheduling sync task. [CONTEXT service_id=167 ]
+10-31 20:38:49.167  6488  6910 I NamespaceManager: Package com.google.android.audioproxy name not found! Using module version.
+10-31 20:38:49.170  6488  6910 I NamespaceManager: Package com.google.android.healthfitness name not found! Using module version.
+10-31 20:38:49.170  6488  6910 I NamespaceManager: Package com.google.android.apps.pixel.psi name not found! Using module version.
+10-31 20:38:49.171  6488  6910 I NamespaceManager: Package com.google.android.apps.safetycore name not found! Using module version.
+10-31 20:38:49.171  6488  6910 I NamespaceManager: Package com.google.android.crashrecovery name not found! Using module version.
+10-31 20:38:49.171  6488  6910 I NamespaceManager: Package com.google.android.profiling name not found! Using module version.
+10-31 20:38:49.172  6488  6910 I NamespaceManager: Package com.google.android.bt name not found! Using module version.
+10-31 20:38:49.172  6488  6910 I NamespaceManager: Package com.google.android.nfcservices name not found! Using module version.
+10-31 20:38:49.172  6488  6910 I NamespaceManager: Package com.google.android.webapp name not found! Using module version.
+10-31 20:38:49.172  6488  6910 I NamespaceManager: Package com.google.android.telephonycore name not found! Using module version.
+10-31 20:38:49.173  6488  6910 I NamespaceManager: Package com.google.android.uprobestats name not found! Using module version.
+10-31 20:38:49.269  1894  2345 I A       : group apa_head_suggest not present without account in *
+10-31 20:38:49.270  1894  2345 I A       : incrementApaDataDownloadStoreStatus(latency = PT0.062S, appVersion = 13.17.16.23, status = NOT_FOUND, locale = *, fileGroupnames = apa_head_suggest, accountScoped = false, localGroupsAvailable = false, timeSinceSearchBoot = Optional[PT3M25.062S] (ONE_TO_FIVE_MINUTES), timeSinceDataDownloadInit = PT59.61S (THIRTY_SECONDS_TO_ONE_MINUTE))
+10-31 20:38:49.298  1894  2344 I A       : incrementApaDataDownloadStoreStatusNotFound(appVersion = 13.17.16.23, locale = *, groupName = apa_head_suggest, accountScoped = false, foundGroups = 0, status = 0, localGroupsAvailable = false)
+10-31 20:38:49.330   485   496 I system_server: Background young concurrent copying GC freed 490592(19MB) AllocSpace objects, 11(276KB) LOS objects, 44% free, 23MB/42MB, paused 70us,117us total 1.130s
+10-31 20:38:49.342  6488  7118 W .gms.persistent: Long monitor contention with owner [com.google.android.gms.chimera.container.intentoperation.PersistentIntentOperationChimeraService-Executor] processing com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener for action com.google.android.gms.phenotype.UPDATE (6910) at void hjm.run()(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3) waiters=0 in void hjm.run() for 404ms
+10-31 20:38:49.345  6488  7118 I PTCommittedOperation: Receive new configuration for com.google.android.gms.games
+10-31 20:38:49.354   485  1790 W system_server: Long monitor contention with owner binder:485_D (1477) at int com.android.server.wm.WindowManagerService.relayoutWindow(com.android.server.wm.Session, android.view.IWindow, android.view.WindowManager$LayoutParams, int, int, int, int, int, int, android.window.ClientWindowFrames, android.util.MergedConfiguration, android.view.SurfaceControl, android.view.InsetsState, android.view.InsetsSourceControl[], android.os.Bundle)(WindowManagerService.java:2630) waiters=4 in int com.android.server.wm.WindowManagerService.relayoutWindow(com.android.server.wm.Session, android.view.IWindow, android.view.WindowManager$LayoutParams, int, int, int, int, int, int, android.window.ClientWindowFrames, android.util.MergedConfiguration, android.view.SurfaceControl, android.view.InsetsState, android.view.InsetsSourceControl[], android.os.Bundle) for 223ms
+10-31 20:38:49.361   485   508 W system_server: Long monitor contention with owner binder:485_5 (754) at void com.android.server.am.ActivityManagerService.finishReceiver(android.os.IBinder, int, java.lang.String, android.os.Bundle, boolean, int)(ActivityManagerService.java:14660) waiters=2 in void com.android.server.am.ActivityManagerService.trimApplications(boolean, java.lang.String) for 283ms
+10-31 20:38:49.374  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+10-31 20:38:49.383  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+10-31 20:38:49.383  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=null}, false)
+10-31 20:38:49.383  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+10-31 20:38:49.409   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb83910
+10-31 20:38:49.411   485   563 W InputManager-JNI: Input channel object '8e4fe7f Splash Screen com.quartz.notes (client)' was disposed without first being removed with the input manager!
+10-31 20:38:49.412   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb80130
+10-31 20:38:49.418  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+10-31 20:38:49.418  6502  6936 I GmsSyncPolicyEngine: Periodic sync 2 disabled by policy, cancelled.
+10-31 20:38:49.420   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb819f0
+10-31 20:38:49.421   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb82fb0
+10-31 20:38:49.441  1012  2299 D OneSearchSuggestProvider: Shut down the binder channel
+10-31 20:38:49.442  6488  6910 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-31 20:38:49.442  6488  6910 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-31 20:38:49.444  6488  6910 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-31 20:38:49.444  6502  6936 I GmsSyncPolicyEngine: Periodic sync 6 disabled
+10-31 20:38:49.444  6488  6910 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-31 20:38:49.444  6488  6910 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-31 20:38:49.444  6488  6910 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-31 20:38:49.445  6488  6910 I NamespaceManager: Package 1 name not found! Using module version.
+10-31 20:38:49.445  6488  6910 I NamespaceManager: Package rkpd name not found! Using module version.
+10-31 20:38:49.446  6488  6910 I NamespaceManager: Package com.google.android.devicelockcontroller name not found! Using module version.
+10-31 20:38:49.446  6488  6910 I NamespaceManager: Package com.google.android.healthfitness name not found! Using module version.
+10-31 20:38:49.446  6488  6910 I NamespaceManager: Package android.companion name not found! Using module version.
+10-31 20:38:49.446  6488  6910 I NamespaceManager: Package com.google.android.healthfitness name not found! Using module version.
+10-31 20:38:49.446  6488  6910 I NamespaceManager: Package com.google.android.aicore name not found! Using module version.
+10-31 20:38:49.446  6488  6910 I NamespaceManager: Package com.google.android.audioproxy name not found! Using module version.
+10-31 20:38:49.446  6488  6910 I NamespaceManager: Package com.google.android.healthfitness name not found! Using module version.
+10-31 20:38:49.446  6488  6910 I NamespaceManager: Package com.google.android.apps.pixel.psi name not found! Using module version.
+10-31 20:38:49.447  6488  6910 I NamespaceManager: Package com.google.android.apps.safetycore name not found! Using module version.
+10-31 20:38:49.447  6488  6910 I NamespaceManager: Package com.google.android.crashrecovery name not found! Using module version.
+10-31 20:38:49.447  6488  6910 I NamespaceManager: Package com.google.android.profiling name not found! Using module version.
+10-31 20:38:49.447  6488  6910 I NamespaceManager: Package com.google.android.bt name not found! Using module version.
+10-31 20:38:49.447  6488  6910 I NamespaceManager: Package com.google.android.nfcservices name not found! Using module version.
+10-31 20:38:49.447  6488  6910 I NamespaceManager: Package com.google.android.webapp name not found! Using module version.
+10-31 20:38:49.447  6488  6910 I NamespaceManager: Package com.google.android.telephonycore name not found! Using module version.
+10-31 20:38:49.447  6488  6910 I NamespaceManager: Package com.google.android.uprobestats name not found! Using module version.
+10-31 20:38:49.448  6488  6910 W PhenotypeConfigurationU: Update for unknown DeviceConfig package com.google.android.gms.phenotype [CONTEXT service_id=204 ]
+10-31 20:38:49.448  6488  6910 W PhenotypeConfigurationU: bwix: No package exists for config package: com.google.android.gms.phenotype
+10-31 20:38:49.448  6488  6910 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+10-31 20:38:49.448  6488  6910 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+10-31 20:38:49.448  6488  6910 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):21)
+10-31 20:38:49.448  6488  6910 W PhenotypeConfigurationU: 	at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+10-31 20:38:49.448  6488  6910 W PhenotypeConfigurationU: 	at zhv.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+10-31 20:38:49.448  6488  6910 W PhenotypeConfigurationU: 	at hjm.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+10-31 20:38:49.448  6488  6910 W PhenotypeConfigurationU: 	at hjl.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):11)
+10-31 20:38:49.448  6488  6910 W PhenotypeConfigurationU: 	at dfhf.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+10-31 20:38:49.448  6488  6910 W PhenotypeConfigurationU: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+10-31 20:38:49.448  6488  6910 W PhenotypeConfigurationU: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+10-31 20:38:49.448  6488  6910 W PhenotypeConfigurationU: 	at java.lang.Thread.run(Thread.java:1012)
+10-31 20:38:49.468  1012  5577 I s.nexuslauncher: oneway function results for code 2 on binder at 0x7a1abc5c40f0 will be dropped but finished with status UNKNOWN_TRANSACTION
+10-31 20:38:49.490  6502  6934 W gle.android.gms: Long monitor contention with owner [com.google.android.gms.chimera.container.intentoperation.GmsIntentOperationChimeraService-Executor] processing com.google.android.gms.icing.service.SystemEventIntentOperation for action com.google.android.gms.phenotype.com.google.android.gms.icing.COMMITTED (6937) at void hjm.run()(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3) waiters=0 in void hjm.run() for 453ms
+10-31 20:38:49.494  1894  1894 W A       : Queue length for executor EventBus is now 11. Perhaps some tasks are too long, or the pool is too small.
+10-31 20:38:49.501  6488  6910 I PTCommittedOperation: Receive new configuration for com.google.android.gms.droidguard
+10-31 20:38:49.508  6502  6934 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:49.509  6502  6936 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:49.513  6502  6936 I SyncIntentOperation: Handling the intent: Intent { act=com.google.android.gms.phenotype.COMMITTED flg=0x10 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.GmsIntentOperationService (has extras) }. [CONTEXT service_id=80 ]
+10-31 20:38:49.514  6502  6930 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:49.515  6502  6934 V Backup  : [PhenotypeConfigIO] Phenotype broadcast received for different package
+10-31 20:38:49.516  6502  6584 I MdiSyncModule: flag handling is skipping irrelevant intent.
+10-31 20:38:49.518  6502  6584 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:49.521  6502  6934 I LocationHistory: [IntentOperation] Handling action com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=314 ]
+10-31 20:38:49.523  6502  6584 I GmsSyncPolicyEngine: Periodic sync 1 disabled by policy, cancelled.
+10-31 20:38:49.524  6502  6930 I MlBenchmarkInstaller: Intent: com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=340 ]
+10-31 20:38:49.524  6502  6930 I MlBenchmarkInstaller: COMMITTED Extra package name: com.google.android.gms.mobile_data_plan [CONTEXT service_id=340 ]
+10-31 20:38:49.526  6502  6584 I GmsSyncPolicyEngine: Periodic sync 2 disabled by policy, cancelled.
+10-31 20:38:49.527  6502  6584 I GmsSyncPolicyEngine: Periodic sync 3 disabled by policy, cancelled.
+10-31 20:38:49.528  6502  6934 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:49.529  6502  6934 V Backup  : [PhenotypeConfigIO] Phenotype broadcast received for different package
+10-31 20:38:49.529  6502  7148 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:49.530  6502  6584 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:49.531  6502  7148 I MdiSyncModule: flag handling is skipping irrelevant intent.
+10-31 20:38:49.532  6502  7148 I MlBenchmarkInstaller: Intent: com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=340 ]
+10-31 20:38:49.532  6502  7148 I MlBenchmarkInstaller: COMMITTED Extra package name: com.google.android.gms.checkin [CONTEXT service_id=340 ]
+10-31 20:38:49.535  6502  7148 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:49.535  6502  7148 I LocationHistory: [IntentOperation] Handling action com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=314 ]
+10-31 20:38:49.536  6502  6584 I GmsSyncPolicyEngine: Periodic sync 1 disabled by policy, cancelled.
+10-31 20:38:49.537  6502  6584 I GmsSyncPolicyEngine: Periodic sync 2 disabled by policy, cancelled.
+10-31 20:38:49.537  6502  6584 I GmsSyncPolicyEngine: Periodic sync 3 disabled by policy, cancelled.
+10-31 20:38:49.538  6502  6934 I SyncIntentOperation: Handling the intent: Intent { act=com.google.android.gms.phenotype.COMMITTED flg=0x10 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.GmsIntentOperationService (has extras) }. [CONTEXT service_id=80 ]
+10-31 20:38:49.539  6502  6934 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:49.542  6502  6934 V Backup  : [PhenotypeConfigIO] Phenotype broadcast received for different package
+10-31 20:38:49.542  6502  6934 I SyncIntentOperation: Handling the intent: Intent { act=com.google.android.gms.phenotype.COMMITTED flg=0x10 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.GmsIntentOperationService (has extras) }. [CONTEXT service_id=80 ]
+10-31 20:38:49.545  6502  6936 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:49.548  6502  6937 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:49.551  6502  6936 I MdiSyncModule: handling relevant flag change...
+10-31 20:38:49.553  6502  6937 I MlBenchmarkInstaller: Intent: com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=340 ]
+10-31 20:38:49.553  6502  6937 I MlBenchmarkInstaller: COMMITTED Extra package name: com.google.android.gms.mdisync [CONTEXT service_id=340 ]
+10-31 20:38:49.558  1012  1012 D MainContentCaptureSession: Flushing 2 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARING
+10-31 20:38:49.561  6502  6934 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:49.563  6502  6924 I GmsSyncPolicyEngine: Periodic sync 1 disabled by policy, cancelled.
+10-31 20:38:49.563  6502  6924 I GmsSyncPolicyEngine: Periodic sync 2 disabled by policy, cancelled.
+10-31 20:38:49.564  6502  6924 I GmsSyncPolicyEngine: Periodic sync 3 disabled by policy, cancelled.
+10-31 20:38:49.565  6502  6937 I LocationHistory: [IntentOperation] Handling action com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=314 ]
+10-31 20:38:49.578  6488  7121 I PTCommittedOperation: Receive new configuration for com.google.android.gms.recaptcha
+10-31 20:38:49.598  6502  6502 I NearbySharing: SharingTileService destroyed [CONTEXT service_id=194 ]
+10-31 20:38:49.605  6502  6936 I MdiSyncModule: flag handling completed
+10-31 20:38:49.610  6488  7123 I PTCommittedOperation: Receive new configuration for com.google.android.gms.smartdevice
+10-31 20:38:49.615  1012  1012 D MainContentCaptureSession: Flushing 2 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARED
+10-31 20:38:49.626  6502  6602 W Icing   : Package com.google.android.googlequicksearchbox targets Android P and isn't allowed to use AppDataSearch indexing API
+10-31 20:38:49.634  1894  2465 I A       : Using proto config with mendel
+10-31 20:38:49.636   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb805b0
+10-31 20:38:49.651  1894  2465 I A       : Using proto config with mendel
+10-31 20:38:49.659  6488  7121 I PTCommittedOperation: Receive new configuration for com.google.android.gms
+10-31 20:38:49.659  6488  7121 I PTCommittedOperation: Running Fixer Framework for com.google.android.gms
+10-31 20:38:49.674  1894  2492 I PBSessionCacheImpl: Deleted sessionId[8331693570961211] from persistence.
+10-31 20:38:49.679  6502  6934 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:49.679  6502  6934 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:49.680  6502  7146 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:49.680  6502  7146 V Backup  : [PhenotypeConfigIO] Phenotype broadcast received for different package
+10-31 20:38:49.680  6502  7146 I SyncIntentOperation: Handling the intent: Intent { act=com.google.android.gms.phenotype.COMMITTED flg=0x10 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.GmsIntentOperationService (has extras) }. [CONTEXT service_id=80 ]
+10-31 20:38:49.682  1894  2465 W SearchServiceCore: Abort, client detached.
+10-31 20:38:49.682  6502  7149 I MdiSyncModule: flag handling is skipping irrelevant intent.
+10-31 20:38:49.682  6502  7149 I MlBenchmarkInstaller: Intent: com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=340 ]
+10-31 20:38:49.682  6502  7149 I MlBenchmarkInstaller: COMMITTED Extra package name: com.google.android.gms.audit [CONTEXT service_id=340 ]
+10-31 20:38:49.682  6502  7149 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:49.683  6502  7149 I GmsSyncPolicyEngine: Periodic sync 1 disabled by policy, cancelled.
+10-31 20:38:49.683  6502  7146 I LocationHistory: [IntentOperation] Handling action com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=314 ]
+10-31 20:38:49.685  1894  2465 E AttachedClient: Dropping clientEvent = 114 coming from client[8331693570961105]
+10-31 20:38:49.686  1894  2465 E AttachedClient: Dropping clientEvent = 114 coming from client[8331693570961105]
+10-31 20:38:49.694  6502  7149 I GmsSyncPolicyEngine: Periodic sync 2 disabled by policy, cancelled.
+10-31 20:38:49.696  6502  7149 I GmsSyncPolicyEngine: Periodic sync 3 disabled by policy, cancelled.
+10-31 20:38:49.721  6488  6618 W .gms.persistent: Long monitor contention with owner netscheduler-queue-handler (6604) at void bytb.o(int)(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4) waiters=0 in void bytb.t(boolean, awbu) for 774ms
+10-31 20:38:49.723  6502  6934 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:49.723  6502  6934 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:49.723  6502  6934 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:49.723  6502  6934 V Backup  : [PhenotypeConfigIO] Phenotype broadcast received for different package
+10-31 20:38:49.723  6502  6934 I SyncIntentOperation: Handling the intent: Intent { act=com.google.android.gms.phenotype.COMMITTED flg=0x10 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.GmsIntentOperationService (has extras) }. [CONTEXT service_id=80 ]
+10-31 20:38:49.724  6502  6923 I MdiSyncModule: flag handling is skipping irrelevant intent.
+10-31 20:38:49.729  6502  6935 I MlBenchmarkInstaller: Intent: com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=340 ]
+10-31 20:38:49.729  6502  6935 I MlBenchmarkInstaller: COMMITTED Extra package name: com.google.android.gms.drive [CONTEXT service_id=340 ]
+10-31 20:38:49.730  6502  6938 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:49.731  6502  6938 I GmsSyncPolicyEngine: Periodic sync 1 disabled by policy, cancelled.
+10-31 20:38:49.731  6502  6938 I GmsSyncPolicyEngine: Periodic sync 2 disabled by policy, cancelled.
+10-31 20:38:49.731  6502  6938 I GmsSyncPolicyEngine: Periodic sync 3 disabled by policy, cancelled.
+10-31 20:38:49.731  6502  6938 I LocationHistory: [IntentOperation] Handling action com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=314 ]
+10-31 20:38:49.743  6502  6935 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:49.743  6502  6935 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:49.743  6502  6935 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:49.743  6502  6935 V Backup  : [PhenotypeConfigIO] Phenotype broadcast received for different package
+10-31 20:38:49.743  6502  6935 I SyncIntentOperation: Handling the intent: Intent { act=com.google.android.gms.phenotype.COMMITTED flg=0x10 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.GmsIntentOperationService (has extras) }. [CONTEXT service_id=80 ]
+10-31 20:38:49.744  6502  7142 I MdiSyncModule: flag handling is skipping irrelevant intent.
+10-31 20:38:49.744  6502  7142 I MlBenchmarkInstaller: Intent: com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=340 ]
+10-31 20:38:49.744  6502  7142 I MlBenchmarkInstaller: COMMITTED Extra package name: com.google.android.gms.games [CONTEXT service_id=340 ]
+10-31 20:38:49.745  6502  7145 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:49.745  6502  7145 I GmsSyncPolicyEngine: Periodic sync 1 disabled by policy, cancelled.
+10-31 20:38:49.746  6502  7142 I LocationHistory: [IntentOperation] Handling action com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=314 ]
+10-31 20:38:49.746  6502  7145 I GmsSyncPolicyEngine: Periodic sync 2 disabled by policy, cancelled.
+10-31 20:38:49.746  6502  7145 I GmsSyncPolicyEngine: Periodic sync 3 disabled by policy, cancelled.
+10-31 20:38:49.747  6502  6935 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:49.747  6502  6935 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:49.747  6502  6935 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:49.747  6502  6935 V Backup  : [PhenotypeConfigIO] Phenotype broadcast received for different package
+10-31 20:38:49.747  6502  6935 I SyncIntentOperation: Handling the intent: Intent { act=com.google.android.gms.phenotype.COMMITTED flg=0x10 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.GmsIntentOperationService (has extras) }. [CONTEXT service_id=80 ]
+10-31 20:38:49.749  6502  6919 I MdiSyncModule: flag handling is skipping irrelevant intent.
+10-31 20:38:49.750  6502  6919 I MlBenchmarkInstaller: Intent: com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=340 ]
+10-31 20:38:49.750  6502  6919 I MlBenchmarkInstaller: COMMITTED Extra package name: com.google.android.gms.droidguard [CONTEXT service_id=340 ]
+10-31 20:38:49.750  6502  6919 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:49.751  6502  6919 I LocationHistory: [IntentOperation] Handling action com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=314 ]
+10-31 20:38:49.751  6502  7141 I GmsSyncPolicyEngine: Periodic sync 1 disabled by policy, cancelled.
+10-31 20:38:49.751  6502  7141 I GmsSyncPolicyEngine: Periodic sync 2 disabled by policy, cancelled.
+10-31 20:38:49.752  6502  7141 I GmsSyncPolicyEngine: Periodic sync 3 disabled by policy, cancelled.
+10-31 20:38:49.752  6502  6935 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:49.753  6502  6935 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:49.753  6502  6935 I SyncIntentOperation: Handling the intent: Intent { act=com.google.android.gms.phenotype.COMMITTED flg=0x10 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.GmsIntentOperationService (has extras) }. [CONTEXT service_id=80 ]
+10-31 20:38:49.753  6502  6938 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:49.754  6502  7141 V Backup  : [PhenotypeConfigIO] Phenotype broadcast received for different package
+10-31 20:38:49.754  6502  7141 I MdiSyncModule: flag handling is skipping irrelevant intent.
+10-31 20:38:49.754  6502  7141 I MlBenchmarkInstaller: Intent: com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=340 ]
+10-31 20:38:49.754  6502  7141 I MlBenchmarkInstaller: COMMITTED Extra package name: com.google.android.gms.recaptcha [CONTEXT service_id=340 ]
+10-31 20:38:49.755  6502  7141 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:49.757  6502  7141 I GmsSyncPolicyEngine: Periodic sync 1 disabled by policy, cancelled.
+10-31 20:38:49.757  6502  7141 I GmsSyncPolicyEngine: Periodic sync 2 disabled by policy, cancelled.
+10-31 20:38:49.757  6502  7141 I GmsSyncPolicyEngine: Periodic sync 3 disabled by policy, cancelled.
+10-31 20:38:49.758  6502  7141 I LocationHistory: [IntentOperation] Handling action com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=314 ]
+10-31 20:38:49.799   759   805 D SplashScreenView: Build android.window.SplashScreenView{1be571d V.E...... ......ID 0,0-0,0}
+10-31 20:38:49.799   759   805 D SplashScreenView: Icon: view: null drawable: null size: 0
+10-31 20:38:49.799   759   805 D SplashScreenView: Branding: view: android.view.View{a041d92 G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+10-31 20:38:49.799   759   814 W Parcel  : Expecting binder but got null!
+10-31 20:38:49.813  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@25b1407 in: PAUSED
+10-31 20:38:49.814  4657  4657 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=androidx.activity.ComponentActivity@25b1407
+10-31 20:38:49.845  5451  5471 W Parcel  : Expecting binder but got null!
+10-31 20:38:49.859  6502  6602 W Icing   : Package com.google.android.gm targets Android P and isn't allowed to use AppDataSearch indexing API
+10-31 20:38:49.938  6502  6935 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:49.943  6502  6938 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:49.954  6502  6936 I SyncIntentOperation: Handling the intent: Intent { act=com.google.android.gms.phenotype.COMMITTED flg=0x10 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.GmsIntentOperationService (has extras) }. [CONTEXT service_id=80 ]
+10-31 20:38:50.008  6502  6936 I MdiSyncModule: flag handling is skipping irrelevant intent.
+10-31 20:38:50.009  6502  6936 I MlBenchmarkInstaller: Intent: com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=340 ]
+10-31 20:38:50.020  6488  7118 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-31 20:38:50.033   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb83490
+10-31 20:38:50.033   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb824d0
+10-31 20:38:50.033   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb83490
+10-31 20:38:50.033   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb83490
+10-31 20:38:50.033   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb824d0
+10-31 20:38:50.033   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb824d0
+10-31 20:38:50.034  6502  6936 I MlBenchmarkInstaller: COMMITTED Extra package name: com.google.android.gms.smartdevice [CONTEXT service_id=340 ]
+10-31 20:38:50.039  6502  7155 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:50.085  6488  7118 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-31 20:38:50.093  6502  7155 I GmsSyncPolicyEngine: Periodic sync 1 disabled by policy, cancelled.
+10-31 20:38:50.118  6502  6924 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+10-31 20:38:50.119  6502  6924 I LocationHistory: [IntentOperation] Handling action com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=314 ]
+10-31 20:38:50.121  6502  7148 V Backup  : [G1ModuleInitIntentOperation] Flags updated
+10-31 20:38:50.140  6502  6938 V Backup  : [PhenotypeConfigIO] Phenotype broadcast received for different package
+10-31 20:38:50.143  6502  7148 V Backup  : [G1ModuleInitIntentOperation] Running restore operation is disabled by flag
+10-31 20:38:50.148  6502  7141 V Backup  : [CustomDownloadSchedulingIO] Received Action: com.google.android.gms.phenotype.com.google.android.gms.backup.COMMITTED
+10-31 20:38:50.148  6502  7141 V Backup  : [CustomDownloadSchedulingIO] listenToSetupWizardFinishedBroadcast or customBackupDownloadEnableSuwTriggerWithGmsUpdateCheck flag on
+10-31 20:38:50.149  6502  7148 W ChimeraUtils: Module com.google.android.gms.backup_g1 missing resource null(0)
+10-31 20:38:50.150  6502  7155 I GmsSyncPolicyEngine: Periodic sync 2 disabled by policy, cancelled.
+10-31 20:38:50.151  6502  7155 I GmsSyncPolicyEngine: Periodic sync 3 disabled by policy, cancelled.
+10-31 20:38:50.152  6488  7118 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-31 20:38:50.152  6488  7118 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-31 20:38:50.153  6488  7118 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-31 20:38:50.158   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb82fb0
+10-31 20:38:50.170  6488  7118 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-31 20:38:50.202  6502  6935 V Backup  : [ShowPhotosNotifIO] Flag not enabled; returning.
+10-31 20:38:50.266  6502  7148 W ChimeraUtils: Module com.google.android.gms.backup_g1 missing resource null(0)
+10-31 20:38:50.268  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@25b1407 in: STOPPED
+10-31 20:38:50.268  4657  4657 V ActivityScenario: Update currentActivityStage to STOPPED, currentActivity=androidx.activity.ComponentActivity@25b1407
+10-31 20:38:50.270  6502  7148 W ChimeraUtils: Module com.google.android.gms.backup_g1 missing resource null(0)
+10-31 20:38:50.272   759   814 D EGL_emulation: app_time_stats: avg=682.93ms min=658.33ms max=707.52ms count=2
+10-31 20:38:50.272  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@25b1407 in: DESTROYED
+10-31 20:38:50.273  4657  4657 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
+10-31 20:38:50.310   759   770 I ndroid.systemui: NativeAlloc concurrent copying GC freed 62835(3126KB) AllocSpace objects, 2(40KB) LOS objects, 49% free, 16MB/32MB, paused 38us,23us total 245.681ms
+10-31 20:38:50.371  6502  6602 D SharedPreferencesImpl: Time required to fsync /data/user/0/com.google.android.gms/shared_prefs/AppDataSearch-main-icing-settings.xml: [<1: 1, <2: 0, <4: 3, <8: 1, <16: 0, <32: 1, <64: 1, <128: 0, <256: 0, <512: 1, <1024: 0, <2048: 0, <4096: 0, <8192: 0, <16384: 0, >=16384: 0]
+10-31 20:38:50.372  6488  6495 I .gms.persistent: Background young concurrent copying GC freed 289352(14MB) AllocSpace objects, 26(808KB) LOS objects, 46% free, 16MB/30MB, paused 299us,25us total 761.201ms
+10-31 20:38:50.383  6502  6602 I Icing   : updateResources: need to parse arkh{com.google.android.gms}
+10-31 20:38:50.386  6488  7118 I NamespaceManager: Package 1 name not found! Using module version.
+10-31 20:38:50.389  6488  7118 I NamespaceManager: Package rkpd name not found! Using module version.
+10-31 20:38:50.389  6488  7118 I NamespaceManager: Package com.google.android.devicelockcontroller name not found! Using module version.
+10-31 20:38:50.390  6488  7118 I NamespaceManager: Package com.google.android.healthfitness name not found! Using module version.
+10-31 20:38:50.390  6488  7118 I NamespaceManager: Package android.companion name not found! Using module version.
+10-31 20:38:50.392  6488  7118 I NamespaceManager: Package com.google.android.healthfitness name not found! Using module version.
+10-31 20:38:50.393  6488  7118 I NamespaceManager: Package com.google.android.aicore name not found! Using module version.
+10-31 20:38:50.393  6488  7118 I NamespaceManager: Package com.google.android.audioproxy name not found! Using module version.
+10-31 20:38:50.398  6488  7118 I NamespaceManager: Package com.google.android.healthfitness name not found! Using module version.
+10-31 20:38:50.409   485   508 W system_server: Long monitor contention with owner binder:485_15 (1773) at boolean com.android.server.wm.ActivityClientController.finishActivity(android.os.IBinder, int, android.content.Intent, int)(ActivityClientController.java:487) waiters=1 in void com.android.server.wm.RootWindowContainer$RankTaskLayersRunnable.run() for 132ms
+10-31 20:38:50.434  6488  7118 I NamespaceManager: Package com.google.android.apps.pixel.psi name not found! Using module version.
+10-31 20:38:50.442  1012  1012 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+10-31 20:38:50.447   485  1825 W AppSearchIcing: icing-search-engine.cc:217: Error: 5, Message: Document (com.google.android.googlequicksearchbox$OneSearchZeroStateGoogleSuggestions/default, zp) not found.
+10-31 20:38:50.448  1012  2299 D OneSearchSuggestProvider: Created the binder channel successfully for end point service =com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService , mChannel=Q0{delegate=L0{logId=57, target=directaddress:///AndroidComponentAddress%5BIntent%20%7B%20act=grpc.io.action.BIND%20cmp=com.google.android.googlequicksearchbox/com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService%20%7D%5D}} , mOneSearchConnection=y1.J@dc5165d
+10-31 20:38:50.450   485  1807 W InputManager-JNI: Input channel object '29ee721 com.quartz.notes/androidx.activity.ComponentActivity (client)' was disposed without first being removed with the input manager!
+10-31 20:38:50.452  6488  7118 I NamespaceManager: Package com.google.android.apps.safetycore name not found! Using module version.
+10-31 20:38:50.457   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb83cd0
+10-31 20:38:50.459  6488  7118 I NamespaceManager: Package com.google.android.crashrecovery name not found! Using module version.
+10-31 20:38:50.460  6488  7118 I NamespaceManager: Package com.google.android.profiling name not found! Using module version.
+10-31 20:38:50.463  6488  7118 I NamespaceManager: Package com.google.android.bt name not found! Using module version.
+10-31 20:38:50.465  6488  7118 I NamespaceManager: Package com.google.android.nfcservices name not found! Using module version.
+10-31 20:38:50.466  6488  7118 I NamespaceManager: Package com.google.android.webapp name not found! Using module version.
+10-31 20:38:50.467  6488  7118 I NamespaceManager: Package com.google.android.telephonycore name not found! Using module version.
+10-31 20:38:50.467  6488  7118 I NamespaceManager: Package com.google.android.uprobestats name not found! Using module version.
+10-31 20:38:50.468  6488  7118 W PhenotypeConfigurationU: Update for unknown DeviceConfig package com.google.android.gms.backup [CONTEXT service_id=204 ]
+10-31 20:38:50.468  6488  7118 W PhenotypeConfigurationU: bwix: No package exists for config package: com.google.android.gms.backup
+10-31 20:38:50.468  6488  7118 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+10-31 20:38:50.468  6488  7118 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+10-31 20:38:50.468  6488  7118 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):21)
+10-31 20:38:50.468  6488  7118 W PhenotypeConfigurationU: 	at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+10-31 20:38:50.468  6488  7118 W PhenotypeConfigurationU: 	at zhv.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+10-31 20:38:50.468  6488  7118 W PhenotypeConfigurationU: 	at hjm.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+10-31 20:38:50.468  6488  7118 W PhenotypeConfigurationU: 	at hjl.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):11)
+10-31 20:38:50.468  6488  7118 W PhenotypeConfigurationU: 	at dfhf.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+10-31 20:38:50.468  6488  7118 W PhenotypeConfigurationU: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+10-31 20:38:50.468  6488  7118 W PhenotypeConfigurationU: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+10-31 20:38:50.468  6488  7118 W PhenotypeConfigurationU: 	at java.lang.Thread.run(Thread.java:1012)
+10-31 20:38:50.476  2896  3063 W Bugle   : TextClassifierLibManagerImpl: Reclaiming memory at level: 40
+10-31 20:38:50.485   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb81ed0
+10-31 20:38:50.485   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb83a90
+10-31 20:38:50.506   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb80130
+10-31 20:38:50.545   950  1243 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+10-31 20:38:50.545   950  1243 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+10-31 20:38:50.545   950  1243 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 1
+10-31 20:38:50.547  4657  4747 D IdlingRegistry: Unregistering idling resources: [androidx.compose.ui.test.EspressoLink@c5b2db3]
+10-31 20:38:50.564  4657  4747 I TestRunner: finished: groupsMoveCopyAndPaste(com.quartz.notes.ui.notebook.FreeformToolsTest)

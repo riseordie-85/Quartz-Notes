@@ -1,0 +1,253 @@
+10-31 20:38:24.264  4657  4747 I TestRunner: started: picturesOnATextPageGoInLine(com.quartz.notes.ui.notebook.FreeformTest)
+10-31 20:38:24.276   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb832b0
+10-31 20:38:24.277   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb7ef90
+10-31 20:38:24.277   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb80d90
+10-31 20:38:24.279   950   950 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+10-31 20:38:24.281   950   950 D MediaPlayerList: Name of package changed: com.google.android.gms
+10-31 20:38:24.320  4657  4747 D IdlingRegistry: Registering idling resources: [androidx.compose.ui.test.EspressoLink@2e27530]
+10-31 20:38:24.327  4657  4747 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+10-31 20:38:24.362  2896  3124 I Bugle   : BroadcastReceiverAsyncWorkTracker: Acknowledging broadcast of atsi@eca0e6a
+10-31 20:38:24.426   305   381 I RanchuHwc: validateDisplay: layer 110 CompositionType 1, fallback to client
+10-31 20:38:24.469   305   381 I RanchuHwc: validateDisplay: layer 110 CompositionType 1, fallback to client
+10-31 20:38:24.471   759   759 D ControlsListingControllerImpl: ServiceConfig reloaded, count: 0
+10-31 20:38:24.473   485   508 W system_server: Long monitor contention with owner android.bg (515) at android.content.res.Resources android.app.ResourcesManager.createResources(android.content.res.ResourcesKey, java.lang.ClassLoader, android.app.ResourcesManager$ApkAssetsSupplier)(ResourcesManager.java:1033) waiters=0 in android.content.res.ApkAssets android.app.ResourcesManager.loadApkAssets(android.app.ResourcesManager$ApkKey) for 349ms
+10-31 20:38:24.489   485   590 I InputReader: Reconfiguring input devices, changes=KEYBOARD_LAYOUTS |
+10-31 20:38:24.528   759   814 D EGL_emulation: app_time_stats: avg=532.79ms min=356.52ms max=709.07ms count=2
+10-31 20:38:24.534   485  1667 W system_server: Long monitor contention with owner ActivityManager (516) at void com.android.server.am.BroadcastQueue.processNextBroadcast(boolean)(BroadcastQueue.java:1156) waiters=1 in android.content.Intent com.android.server.am.ActivityManagerService.registerReceiverWithFeature(android.app.IApplicationThread, java.lang.String, java.lang.String, java.lang.String, android.content.IIntentReceiver, android.content.IntentFilter, java.lang.String, int, int) for 360ms
+10-31 20:38:24.536   305   381 I RanchuHwc: validateDisplay: layer 110 CompositionType 1, fallback to client
+10-31 20:38:24.540  6488  6640 I Nearby  : [MBleClient] Start ble scanning from NearbyDirect:BluetoothAdapterWrapper, context tag = nearby_messages [CONTEXT service_id=49 ]
+10-31 20:38:24.540  6488  6640 D BluetoothAdapter: isLeEnabled(): ON
+10-31 20:38:24.620   305   381 I RanchuHwc: validateDisplay: layer 110 CompositionType 1, fallback to client
+10-31 20:38:24.654  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+10-31 20:38:24.657  1012  1012 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_ROOT
+10-31 20:38:24.686  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+10-31 20:38:24.686  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.google.android.apps.nexuslauncher fieldId=-1 fieldName=null extras=null}, false)
+10-31 20:38:24.686  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+10-31 20:38:24.686  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+10-31 20:38:24.709   759   814 D EGL_emulation: app_time_stats: avg=8096.25ms min=962.07ms max=15230.44ms count=2
+10-31 20:38:24.711   485  1809 W system_server: Long monitor contention with owner ActivityManager (516) at void com.android.server.am.BroadcastQueue.processNextBroadcast(boolean)(BroadcastQueue.java:1156) waiters=2 in android.app.ContentProviderHolder com.android.server.am.ContentProviderHelper.getContentProviderImpl(android.app.IApplicationThread, java.lang.String, android.os.IBinder, int, java.lang.String, java.lang.String, boolean, int) for 407ms
+10-31 20:38:24.745   485   868 W system_server: Long monitor contention with owner ActivityManager (516) at void com.android.server.am.BroadcastQueue.processNextBroadcast(boolean)(BroadcastQueue.java:1156) waiters=4 in android.content.ComponentName com.android.server.am.ActivityManagerService.startService(android.app.IApplicationThread, android.content.Intent, java.lang.String, boolean, java.lang.String, java.lang.String, int) for 376ms
+10-31 20:38:24.747  1894  1894 W View    : requestLayout() improperly called by android.widget.FrameLayout{5be44a7 V.E...... ......ID 0,0-1080,525 #7f0b0fee app:id/googleapp_discover_header_container} during layout: running second layout pass
+10-31 20:38:24.753  6502  6517 I PeopleGalProvider: Gal directories started.
+10-31 20:38:24.769  6502  6517 I PeopleGalProvider: Method 1 completed.
+10-31 20:38:24.769  6502  6517 I PeopleGalProvider: Method 1 finished successfully.
+10-31 20:38:24.770   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb80eb0
+10-31 20:38:24.782   485  1253 W system_server: Long monitor contention with owner ActivityManager (516) at void com.android.server.am.BroadcastQueue.processNextBroadcast(boolean)(BroadcastQueue.java:1156) waiters=6 in boolean com.android.server.am.ActivityManagerService.unbindService(android.app.IServiceConnection) for 350ms
+10-31 20:38:24.782   485  1773 W system_server: Long monitor contention with owner ActivityManager (516) at void com.android.server.am.BroadcastQueue.processNextBroadcast(boolean)(BroadcastQueue.java:1156) waiters=7 in int com.android.server.am.ActivityManagerService.bindServiceInstance(android.app.IApplicationThread, android.os.IBinder, android.content.Intent, java.lang.String, android.app.IServiceConnection, int, java.lang.String, boolean, int, java.lang.String, java.lang.String, int) for 335ms
+10-31 20:38:24.784  6488  6488 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.auth.account.data.service.START pkg=com.google.android.gms }
+10-31 20:38:24.784  6488  6488 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.auth.account.data.service.START pkg=com.google.android.gms }
+10-31 20:38:24.793   485  1665 W system_server: Long monitor contention with owner ActivityManager (516) at void com.android.server.am.BroadcastQueue.processNextBroadcast(boolean)(BroadcastQueue.java:1156) waiters=3 in int com.android.server.am.ActivityManagerService.broadcastIntentWithFeature(android.app.IApplicationThread, java.lang.String, android.content.Intent, java.lang.String, android.content.IIntentReceiver, int, java.lang.String, android.os.Bundle, java.lang.String[], java.lang.String[], java.lang.String[], int, android.os.Bundle, boolean, boolean, int) for 461ms
+10-31 20:38:24.857  6502  6502 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.findmydevice.spot.service.locationreport.START dat=chimera-action:/... cmp=com.google.android.gms/.chimera.GmsApiService }
+10-31 20:38:24.863  6488  6553 I NearbySharing: FastInitiation warming period has ended [CONTEXT service_id=194 ]
+10-31 20:38:24.915   485  1809 W InputManager-JNI: Input channel object '210ddf2 com.quartz.notes.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity (client)' was disposed without first being removed with the input manager!
+10-31 20:38:24.931  1707  2075 I AiAiEcho: Predicting[0]:
+10-31 20:38:24.931  1707  2075 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:
+10-31 20:38:24.933  1707  2075 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0
+10-31 20:38:24.933  1707  2075 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0
+10-31 20:38:24.961   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb81a50
+10-31 20:38:24.961   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb82d10
+10-31 20:38:24.961   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb82d10
+10-31 20:38:24.962  1894  2446 I OpenGLRenderer: Davey! duration=825ms; Flags=0, FrameTimelineVsyncId=19322, IntendedVsync=232389011630, Vsync=232672344952, InputEventId=0, HandleInputStart=232685236644, AnimationStart=232685236974, PerformTraversalsStart=232685237165, DrawStart=233050917043, FrameDeadline=232455678294, FrameInterval=232685233629, FrameStartTime=16666666, SyncQueued=233160987908, SyncStart=233161011633, IssueDrawCommandsStart=233161076304, SwapBuffers=233161146174, FrameCompleted=233214851543, DequeueBufferDuration=4859, QueueBufferDuration=43011124, GpuCompleted=233214780089, SwapBuffersCompleted=233214851543, DisplayPresentTime=-5571871737429802072, CommandSubmissionCompleted=233161146174,
+10-31 20:38:24.990   759   805 D SplashScreenView: Build android.window.SplashScreenView{e8a0da4 V.E...... ......ID 0,0-0,0}
+10-31 20:38:24.990   759   805 D SplashScreenView: Icon: view: null drawable: null size: 0
+10-31 20:38:24.990   759   805 D SplashScreenView: Branding: view: android.view.View{1c7f70d G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+10-31 20:38:25.142  6488  6690 I NearbyDiscovery: FastPairScanner: isScreenOn=true, scanWithScreenOff=false, isLocationEnabled=true, disableLocationRequirement=true, isDiscoveryScanningEnabled=true, during24GhzWifiWarmingUpPeriod=false [CONTEXT service_id=265 ]
+10-31 20:38:25.142  6488  6690 D BluetoothAdapter: isLeEnabled(): ON
+10-31 20:38:25.143  6488  6690 I NearbyDiscovery: FastPairScanner: eventType=INTERNAL_DOWNGRADE_SCAN, intReq=true, scanning=true, scanAllowed=true, bleEnabled=true, bleScanAvailable=false, lockScanRate=false, startScanningByLowPowerMode=false [CONTEXT service_id=265 ]
+10-31 20:38:25.144  6488  6690 I NearbyDiscovery: FastPairScanner: Stopping scan [CONTEXT service_id=265 ]
+10-31 20:38:25.144  6488  6690 D BluetoothAdapter: isLeEnabled(): ON
+10-31 20:38:25.181  1012  1012 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+10-31 20:38:25.232  1894  1894 I A       : Successfully updated last shown time for signed out error.
+10-31 20:38:25.233  1894  1894 I Choreographer: Skipped 31 frames!  The application may be doing too much work on its main thread.
+10-31 20:38:25.247   485  1825 W AppSearchIcing: icing-search-engine.cc:217: Error: 5, Message: Document (com.google.android.googlequicksearchbox$OneSearchZeroStateGoogleSuggestions/default, zp) not found.
+10-31 20:38:25.256  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@58e32f4 in: PRE_ON_CREATE
+10-31 20:38:25.257  4657  4657 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+10-31 20:38:25.265  1012  2044 D EGL_emulation: app_time_stats: avg=95.03ms min=13.08ms max=270.79ms count=11
+10-31 20:38:25.274  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@58e32f4 in: CREATED
+10-31 20:38:25.277  4657  4657 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=androidx.activity.ComponentActivity@58e32f4
+10-31 20:38:25.278  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@58e32f4 in: STARTED
+10-31 20:38:25.278  4657  4657 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=androidx.activity.ComponentActivity@58e32f4
+10-31 20:38:25.282   980   980 D CarrierSvcBindHelper: onPackageModified: com.google.android.gms
+10-31 20:38:25.283   980   980 D CarrierSvcBindHelper: No carrier app for: 0
+10-31 20:38:25.288  4904  6725 W Role    : Default holder doesn't have required signing certificate: com.google.android.apps.work.clouddpc:23962F4B43B9857638EA66F4D419518EAE282491ACDA4B94707BD59003C45E58
+10-31 20:38:25.305   759   770 I ndroid.systemui: NativeAlloc concurrent copying GC freed 71549(3832KB) AllocSpace objects, 5(100KB) LOS objects, 49% free, 15MB/31MB, paused 80us,29us total 1.641s
+10-31 20:38:25.312  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@58e32f4 in: RESUMED
+10-31 20:38:25.312  4657  4657 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=androidx.activity.ComponentActivity@58e32f4
+10-31 20:38:25.363   950   969 D BtGatt.GattService: stopScan() - queue size =3
+10-31 20:38:25.367   980   980 D ImsResolver: maybeAddedImsService, packageName: com.google.android.gms
+10-31 20:38:25.370   759   814 W Parcel  : Expecting binder but got null!
+10-31 20:38:25.371   950   969 D ActivityAttributionService: notifyActivityAttributionInfo UID=1002 packageName=com.google.android.bluetooth deviceAddress=no_active_device_address
+10-31 20:38:25.371   950   969 I bt_btif : packages/modules/Bluetooth/system/btif/src/bluetooth.cc:465 get_profile_interface: get_profile_interface: id = activity_attribution
+10-31 20:38:25.372   950   969 D BtGatt.GattService: stopScan() - queue size =3
+10-31 20:38:25.372   950   969 D ActivityAttributionService: notifyActivityAttributionInfo UID=1002 packageName=com.google.android.bluetooth deviceAddress=no_active_device_address
+10-31 20:38:25.373   950   969 I bt_btif : packages/modules/Bluetooth/system/btif/src/bluetooth.cc:465 get_profile_interface: get_profile_interface: id = activity_attribution
+10-31 20:38:25.373   950   969 D BtGatt.GattService: unregisterScanner() - scannerId=3
+10-31 20:38:25.373   950   969 I bt_stack: [INFO:le_scanning_manager.cc(148)] Unregister in shim layer, scanner_id:3
+10-31 20:38:25.374  6488  6690 I NearbyDiscovery: FastPairScanner: isScreenOn=true, scanWithScreenOff=false, isLocationEnabled=true, disableLocationRequirement=true, isDiscoveryScanningEnabled=true, during24GhzWifiWarmingUpPeriod=false [CONTEXT service_id=265 ]
+10-31 20:38:25.374  6488  6690 I NearbyDiscovery: FastPairScanner: Start scanning internally in LOW_POWER_SCANNING [CONTEXT service_id=265 ]
+10-31 20:38:25.374  6488  6690 D BluetoothAdapter: isLeEnabled(): ON
+10-31 20:38:25.378   950   969 D BtGatt.GattService: registerScanner() - UUID=a37fd26d-4b58-48e6-a964-1f258f3f3783
+10-31 20:38:25.378   950   969 I bt_stack: [INFO:le_scanning_manager.cc(141)] RegisterScanner in shim layer
+10-31 20:38:25.379  1490  1609 I ProtoXDBBufferWrapper: ProtoXDBBufferWrapper.flushToStorage():153 Flushed 7 data item(s) to storage.
+10-31 20:38:25.380   950  1243 D BtGatt.ScanManager: handling stopping scan  [ScanClient scanModeApp 2 scanModeUsed 2 [appScanStats com.google.uid.shared:10120]]
+10-31 20:38:25.380   950  1243 I bt_stack: [INFO:le_scanning_manager.cc(174)] ScanFilterParamSetup in shim layer
+10-31 20:38:25.382   950  1212 D BtGatt.GattService: onScannerRegistered() - UUID=a37fd26d-4b58-48e6-a964-1f258f3f3783, scannerId=3, status=0
+10-31 20:38:25.383  6488  6499 D BluetoothLeScanner: onScannerRegistered() - status=0 scannerId=3 mScannerId=0
+10-31 20:38:25.383   950  1345 D BtGatt.GattService: start scan with filters
+10-31 20:38:25.385   950  1212 D BtGatt.GattService: onScanFilterParamsConfigured() - clientIf=1, status=0, action=0, availableSpace=0
+10-31 20:38:25.385   950  1212 D BtGatt.ScanManager: callback done for scannerId - 1 status - 0
+10-31 20:38:25.385   950  1243 I bt_stack: [INFO:le_scanning_manager.cc(174)] ScanFilterParamSetup in shim layer
+10-31 20:38:25.385   950  1212 D BtGatt.GattService: onScanFilterParamsConfigured() - clientIf=1, status=0, action=0, availableSpace=0
+10-31 20:38:25.385   950  1212 D BtGatt.ScanManager: callback done for scannerId - 1 status - 0
+10-31 20:38:25.385   950  1243 I bt_stack: [INFO:le_scanning_manager.cc(174)] ScanFilterParamSetup in shim layer
+10-31 20:38:25.385   950  1212 D BtGatt.GattService: onScanFilterParamsConfigured() - clientIf=1, status=0, action=0, availableSpace=0
+10-31 20:38:25.385   950  1212 D BtGatt.ScanManager: callback done for scannerId - 1 status - 0
+10-31 20:38:25.386   950  1243 I bt_stack: [INFO:le_scanning_manager.cc(174)] ScanFilterParamSetup in shim layer
+10-31 20:38:25.389   950  1345 D BtGatt.GattService: enforcePrivilegedPermissionIfNeeded([BluetoothLeScanFilter [mDeviceName=null, mDeviceAddress=null, mUuid=null, mUuidMask=null, mServiceSolicitationUuid=null, mServiceSolicitationUuidMask=null, mServiceDataUuid=0000fff6-0000-1000-8000-00805f9b34fb, mServiceData=[0], mServiceDataMask=[0], mManufacturerId=-1, mManufacturerData=null, mManufacturerDataMask=null, mAdvertisingDataType=-1, mAdvertisingData=null, mAdvertisingDataMask=null], BluetoothLeScanFilter [mDeviceName=null, mDeviceAddress=null, mUuid=null, mUuidMask=null, mServiceSolicitationUuid=null, mServiceSolicitationUuidMask=null, mServiceDataUuid=0000fe2c-0000-1000-8000-00805f9b34fb, mServiceData=[0], mServiceDataMask=[0], mManufacturerId=-1, mManufacturerData=null, mManufacturerDataMask=null, mAdvertisingDataType=-1, mAdvertisingData=null, mAdvertisingDataMask=null]])
+10-31 20:38:25.390   950  1212 D BtGatt.GattService: onScanFilterParamsConfigured() - clientIf=1, status=0, action=0, availableSpace=0
+10-31 20:38:25.391   950  1212 D BtGatt.ScanManager: callback done for scannerId - 1 status - 0
+10-31 20:38:25.391   950  1243 I bt_stack: [INFO:le_scanning_manager.cc(174)] ScanFilterParamSetup in shim layer
+10-31 20:38:25.392   950  1212 D BtGatt.GattService: onScanFilterParamsConfigured() - clientIf=1, status=0, action=0, availableSpace=0
+10-31 20:38:25.392   950  1212 D BtGatt.ScanManager: callback done for scannerId - 1 status - 0
+10-31 20:38:25.392   950  1243 D BtGatt.ScanManager: configureRegularScanParams() - queue=2
+10-31 20:38:25.394   950  1243 D BtGatt.ScanManager: handling stopping scan  [ScanClient scanModeApp 2 scanModeUsed 2 [appScanStats com.google.uid.shared:10120]]
+10-31 20:38:25.394   950  1243 D BtGatt.ScanManager: stop gattClientScanNative
+10-31 20:38:25.394   950  1243 I bt_stack: [INFO:le_scanning_manager.cc(154)] Scan in shim layer stopped
+10-31 20:38:25.394   950  1248 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:190 unregister_client: Client unregistered
+10-31 20:38:25.394   950  1248 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:194 unregister_client: Cancelled address rotation alarm
+10-31 20:38:25.395   950  1243 I bt_stack: [INFO:le_scanning_manager.cc(174)] ScanFilterParamSetup in shim layer
+10-31 20:38:25.415   950  1212 D BtGatt.GattService: onScanFilterParamsConfigured() - clientIf=3, status=0, action=0, availableSpace=0
+10-31 20:38:25.415   950  1212 D BtGatt.ScanManager: callback done for scannerId - 3 status - 0
+10-31 20:38:25.415   950  1243 I bt_stack: [INFO:le_scanning_manager.cc(174)] ScanFilterParamSetup in shim layer
+10-31 20:38:25.415   950  1212 D BtGatt.GattService: onScanFilterParamsConfigured() - clientIf=3, status=0, action=0, availableSpace=0
+10-31 20:38:25.415   950  1212 D BtGatt.ScanManager: callback done for scannerId - 3 status - 0
+10-31 20:38:25.415   950  1243 D BtGatt.ScanManager: configureRegularScanParams() - queue=1
+10-31 20:38:25.415   950  1243 D BtGatt.ScanManager: configureRegularScanParams() - queue empty, scan stopped
+10-31 20:38:25.454  1894  2465 I A       : Using proto config with mendel
+10-31 20:38:25.455   950  1345 D BtGatt.ScanManager: startScan()  [ScanClient scanModeApp 1 scanModeUsed 1 [appScanStats com.google.uid.shared:10120]]
+10-31 20:38:25.460   950  1345 D ActivityAttributionService: notifyActivityAttributionInfo UID=1002 packageName=com.google.android.bluetooth deviceAddress=no_active_device_address
+10-31 20:38:25.460   950  1345 I bt_btif : packages/modules/Bluetooth/system/btif/src/bluetooth.cc:465 get_profile_interface: get_profile_interface: id = activity_attribution
+10-31 20:38:25.472   950  1243 D BtGatt.ScanManager: handling starting scan
+10-31 20:38:25.473   950  1243 I bt_stack: [INFO:le_scanning_manager.cc(238)] ScanFilterEnable in shim layer
+10-31 20:38:25.475   950  1212 D BtGatt.GattService: onScanFilterEnableDisabled() - clientIf=3, status=0, action=1
+10-31 20:38:25.475   950  1212 D BtGatt.ScanManager: callback done for scannerId - 3 status - 0
+10-31 20:38:25.476   950  1243 I bt_stack: [INFO:le_scanning_manager.cc(213)] ScanFilterAdd in shim layer
+10-31 20:38:25.477   950  1212 D BtGatt.GattService: onScanFilterConfig() - clientIf=3, action = 0 status = 0, filterType=0, availableSpace=0
+10-31 20:38:25.479  3751  6832 I ProvidersCache: Provider returned no roots. Possibly naughty: com.google.android.apps.docs.storage
+10-31 20:38:25.479  3751  6831 W oid.documentsui: Long monitor contention with owner pool-82-thread-6 (6834) at void com.android.documentsui.roots.ProvidersCache$MultiProviderUpdateTask.handleDocumentsProvider(android.content.pm.ProviderInfo, com.android.documentsui.base.UserId)(ProvidersCache.java:646) waiters=2 in void com.android.documentsui.roots.ProvidersCache$MultiProviderUpdateTask.handleDocumentsProvider(android.content.pm.ProviderInfo, com.android.documentsui.base.UserId) for 1.114s
+10-31 20:38:25.480   950  1248 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_scanning_manager.cc:1347 on_advertising_filter_complete: Got a Command complete LE_ADV_FILTER, status UNKNOWN_CONNECTION
+10-31 20:38:25.526   950  1212 D BtGatt.ScanManager: callback done for scannerId - 3 status - 0
+10-31 20:38:25.530  4657  5427 W Parcel  : Expecting binder but got null!
+10-31 20:38:25.535  1012  2299 D OneSearchSuggestProvider: Created the binder channel successfully for end point service =com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService , mChannel=Q0{delegate=L0{logId=33, target=directaddress:///AndroidComponentAddress%5BIntent%20%7B%20act=grpc.io.action.BIND%20cmp=com.google.android.googlequicksearchbox/com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService%20%7D%5D}} , mOneSearchConnection=y1.J@52d12d8
+10-31 20:38:25.579  3751  6830 W oid.documentsui: Long monitor contention with owner pool-82-thread-6 (6834) at void com.android.documentsui.roots.ProvidersCache$MultiProviderUpdateTask.handleDocumentsProvider(android.content.pm.ProviderInfo, com.android.documentsui.base.UserId)(ProvidersCache.java:646) waiters=3 in void com.android.documentsui.roots.ProvidersCache$MultiProviderUpdateTask.handleDocumentsProvider(android.content.pm.ProviderInfo, com.android.documentsui.base.UserId) for 1.213s
+10-31 20:38:25.585  3751  6829 W oid.documentsui: Long monitor contention with owner pool-82-thread-6 (6834) at void com.android.documentsui.roots.ProvidersCache$MultiProviderUpdateTask.handleDocumentsProvider(android.content.pm.ProviderInfo, com.android.documentsui.base.UserId)(ProvidersCache.java:646) waiters=4 in void com.android.documentsui.roots.ProvidersCache$MultiProviderUpdateTask.handleDocumentsProvider(android.content.pm.ProviderInfo, com.android.documentsui.base.UserId) for 1.220s
+10-31 20:38:25.619  6488  6690 I NearbyDiscovery: FastPairScanner: Starting LOW_POWER_SCANNING scanning [CONTEXT service_id=265 ]
+10-31 20:38:25.620   950  1243 D BtGatt.ScanManager: configureFilterParamter 500 10000 1 0
+10-31 20:38:25.622   950  1243 I bt_stack: [INFO:le_scanning_manager.cc(174)] ScanFilterParamSetup in shim layer
+10-31 20:38:25.637   950  1212 D BtGatt.GattService: onScanFilterParamsConfigured() - clientIf=3, status=0, action=0, availableSpace=0
+10-31 20:38:25.699   950  1212 D BtGatt.ScanManager: callback done for scannerId - 3 status - 0
+10-31 20:38:25.707  1894  2344 I A       : group apa_head_suggest not present without account in *
+10-31 20:38:25.711  1894  2344 I A       : incrementApaDataDownloadStoreStatus(latency = PT0.435S, appVersion = 13.17.16.23, status = NOT_FOUND, locale = *, fileGroupnames = apa_head_suggest, accountScoped = false, localGroupsAvailable = false, timeSinceSearchBoot = Optional[PT3M1.126S] (ONE_TO_FIVE_MINUTES), timeSinceDataDownloadInit = PT35.674S (THIRTY_SECONDS_TO_ONE_MINUTE))
+10-31 20:38:25.765   950  1243 I bt_stack: [INFO:le_scanning_manager.cc(213)] ScanFilterAdd in shim layer
+10-31 20:38:25.767   950  1345 D BtGatt.GattService: unregisterScanner() - scannerId=1
+10-31 20:38:25.767   950  1345 I bt_stack: [INFO:le_scanning_manager.cc(148)] Unregister in shim layer, scanner_id:1
+10-31 20:38:25.783  1894  2345 I A       : incrementApaDataDownloadStoreStatusNotFound(appVersion = 13.17.16.23, locale = *, groupName = apa_head_suggest, accountScoped = false, foundGroups = 0, status = 0, localGroupsAvailable = false)
+10-31 20:38:25.787   759   814 D EGL_emulation: app_time_stats: avg=539.07ms min=482.91ms max=595.23ms count=2
+10-31 20:38:25.791   950  1248 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_scanning_manager.cc:1347 on_advertising_filter_complete: Got a Command complete LE_ADV_FILTER, status UNKNOWN_CONNECTION
+10-31 20:38:25.802   950  1212 D BtGatt.GattService: onScanFilterConfig() - clientIf=3, action = 0 status = 0, filterType=0, availableSpace=0
+10-31 20:38:25.854   950  1212 D BtGatt.ScanManager: callback done for scannerId - 3 status - 0
+10-31 20:38:25.865   950  1243 D BtGatt.ScanManager: configureFilterParamter 500 10000 1 0
+10-31 20:38:25.867   950  1243 I bt_stack: [INFO:le_scanning_manager.cc(174)] ScanFilterParamSetup in shim layer
+10-31 20:38:25.868   950  1212 D BtGatt.GattService: onScanFilterParamsConfigured() - clientIf=3, status=0, action=0, availableSpace=0
+10-31 20:38:25.868   950  1212 D BtGatt.ScanManager: callback done for scannerId - 3 status - 0
+10-31 20:38:25.868   950  1243 D BtGatt.ScanManager: start gattClientScanNative from startRegularScan()
+10-31 20:38:25.869   950  1243 I bt_stack: [INFO:le_scanning_manager.cc(154)] Scan in shim layer started
+10-31 20:38:25.869   950  1248 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_scanning_manager.cc:659 stop_scan: Scanning already stopped, return!
+10-31 20:38:25.870   950  1248 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:172 register_client: Scheduled address rotation for first client registered
+10-31 20:38:25.870   950  1248 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:175 register_client: Client registered
+10-31 20:38:25.870   950  1243 D BtGatt.ScanManager: configureRegularScanParams() - queue=2
+10-31 20:38:25.871   950  1243 I bt_stack: [INFO:le_scanning_manager.cc(154)] Scan in shim layer stopped
+10-31 20:38:25.881   950  1248 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:190 unregister_client: Client unregistered
+10-31 20:38:25.881   950  1248 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:194 unregister_client: Cancelled address rotation alarm
+10-31 20:38:25.881   950  1243 D BtGatt.ScanManager: Start gattClientScanNative with old scanMode -1 new scanMode 1 ( in MS: 730 / 183, in scan unit: 1168 / 292 ) [ScanClient scanModeApp 1 scanModeUsed 1 [appScanStats com.google.uid.shared:10120]]
+10-31 20:38:25.881   950  1243 I bt_stack: [INFO:le_scanning_manager.cc(250)] SetScanParameters in shim layer
+10-31 20:38:25.881   950  1212 D BtGatt.GattService: onScanParamSetupCompleted : 0
+10-31 20:38:25.882   950  1243 I bt_stack: [INFO:le_scanning_manager.cc(154)] Scan in shim layer started
+10-31 20:38:25.882  6488  6640 I Nearby  : [MBleClient] M hardware scan: 1 clients, scanMode= OPPORTUNISTIC, filters size = 5 [CONTEXT service_id=49 ]
+10-31 20:38:25.882  6488  6640 D BluetoothAdapter: isLeEnabled(): ON
+10-31 20:38:25.882   950  1248 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_scanning_manager.cc:659 stop_scan: Scanning already stopped, return!
+10-31 20:38:25.882   950  1248 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:172 register_client: Scheduled address rotation for first client registered
+10-31 20:38:25.882   950  1248 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:175 register_client: Client registered
+10-31 20:38:25.882   950  1243 D BtGatt.ScanManager: apply scan timeout (300000)to scannerId 3
+10-31 20:38:25.897   759   814 D EGL_emulation: app_time_stats: avg=1367.16ms min=1367.16ms max=1367.16ms count=1
+10-31 20:38:25.909   950  1345 D BtGatt.GattService: registerScanner() - UUID=790c2a35-adcf-474e-8058-abd9cb48f3c3
+10-31 20:38:25.921   485   509 W system_server: Long monitor contention with owner binder:485_9 (1253) at android.content.res.Configuration com.android.server.wm.ActivityTaskManagerService.getGlobalConfigurationForPid(int)(ActivityTaskManagerService.java:1128) waiters=1 in void com.android.server.wm.SurfaceAnimator.lambda$getFinishedCallback$1(com.android.server.wm.SurfaceAnimator$OnAnimationFinishedCallback, int, com.android.server.wm.AnimationAdapter) for 130ms
+10-31 20:38:25.972   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb82ef0
+10-31 20:38:25.975   950  1345 I bt_stack: [INFO:le_scanning_manager.cc(141)] RegisterScanner in shim layer
+10-31 20:38:25.976   950  1212 D BtGatt.GattService: onScannerRegistered() - UUID=790c2a35-adcf-474e-8058-abd9cb48f3c3, scannerId=1, status=0
+10-31 20:38:25.976  6488  6499 D BluetoothLeScanner: onScannerRegistered() - status=0 scannerId=1 mScannerId=0
+10-31 20:38:25.978   950  1345 D BtGatt.GattService: start scan with filters
+10-31 20:38:25.980   950  1345 D BtGatt.GattService: enforcePrivilegedPermissionIfNeeded([BluetoothLeScanFilter [mDeviceName=null, mDeviceAddress=null, mUuid=null, mUuidMask=null, mServiceSolicitationUuid=null, mServiceSolicitationUuidMask=null, mServiceDataUuid=null, mServiceData=null, mServiceDataMask=null, mManufacturerId=224, mManufacturerData=[0, 0, 0], mManufacturerDataMask=[0, 0, -1], mAdvertisingDataType=-1, mAdvertisingData=null, mAdvertisingDataMask=null], BluetoothLeScanFilter [mDeviceName=null, mDeviceAddress=null, mUuid=0000fef3-0000-1000-8000-00805f9b34fb, mUuidMask=null, mServiceSolicitationUuid=null, mServiceSolicitationUuidMask=null, mServiceDataUuid=null, mServiceData=null, mServiceDataMask=null, mManufacturerId=-1, mManufacturerData=null, mManufacturerDataMask=null, mAdvertisingDataType=-1, mAdvertisingData=null, mAdvertisingDataMask=null], BluetoothLeScanFilter [mDeviceName=null, mDeviceAddress=null, mUuid=0000feaa-0000-1000-8000-00805f9b34fb, mUuidMask=null, mServiceSolicitationUuid=null, mServiceSolicitationUuidMask=null, mServiceDataUuid=null, mServiceData=null, mServiceDataMask=null, mManufacturerId=-1, mManufacturerData=null, mManufacturerDataMask=null, mAdvertisingDataType=-1, mAdvertisingData=null, mAdvertisingDataMask=null], BluetoothLeScanFilter [mDeviceName=null, mDeviceAddress=null, mUuid=0000fea0-0000-1000-8000-00805f9b34fb, mUuidMask=null, mServiceSolicitationUuid=null, mServiceSolicitationUuidMask=null, mServiceDataUuid=null, mServiceData=null, mServiceDataMask=null, mManufacturerId=-1, mManufacturerData=null, mManufacturerDataMask=null, mAdvertisingDataType=-1, mAdvertisingData=null, mAdvertisingDataMask=null], BluetoothLeScanFilter [mDeviceName=null, mDeviceAddress=null, mUuid=null, mUuidMask=null, mServiceSolicitationUuid=null, mServiceSolicitationUuidMask=null, mServiceDataUuid=null, mServiceData=null, mServiceDataMask=null, mManufacturerId=76, mManufacturerData=[2, 21], mManufacturerDataMask=[-1, -1], mAdvertisingDataType=-1, mAdvertisingData=null, mAdvertisingDataMask=null]])
+10-31 20:38:25.988   950  1243 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+10-31 20:38:25.989   485   505 W ziparchive: Unable to open '/data/app/~~NaCDcvl8pEfH3jUii6w5KA==/com.quartz.notes-5rFpeCYkV8uU0I8d8yBjEA==/base.dm': No such file or directory
+10-31 20:38:25.990   485   505 I ActivityTaskManager: Displayed com.quartz.notes/androidx.activity.ComponentActivity: +1s190ms
+10-31 20:38:25.994   950  1243 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 1
+10-31 20:38:26.012  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+10-31 20:38:26.019  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+10-31 20:38:26.019  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=null}, false)
+10-31 20:38:26.019  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+10-31 20:38:26.019  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+10-31 20:38:26.020   950  1345 D BtGatt.ScanManager: startScan()  [ScanClient scanModeApp -1 scanModeUsed -1 [appScanStats com.google.uid.shared:10120]]
+10-31 20:38:26.022  6488  6648 I Fitness : OnPackageChangedOperation got intent: Intent { act=android.intent.action.PACKAGE_CHANGED dat=package: flg=0x45000010 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.PersistentIntentOperationService (has extras) } [CONTEXT service_id=17 ]
+10-31 20:38:26.031   950  1345 D ActivityAttributionService: notifyActivityAttributionInfo UID=1002 packageName=com.google.android.bluetooth deviceAddress=no_active_device_address
+10-31 20:38:26.031   950  1345 I bt_btif : packages/modules/Bluetooth/system/btif/src/bluetooth.cc:465 get_profile_interface: get_profile_interface: id = activity_attribution
+10-31 20:38:26.032   950  1243 D BtGatt.ScanManager: handling starting scan
+10-31 20:38:26.034  6488  6614 W .gms.persistent: Long monitor contention with owner NearbyDirectMain (6640) at void bamh.b(balv, com.google.android.gms.nearby.common.ble.BleSettings)(:com.google.android.gms@231818047@23.18.18 (190800-535401451):10) waiters=0 in void bamh.e(int) for 1.331s
+10-31 20:38:26.047   485   500 W InputManager-JNI: Input channel object '3806b9c Splash Screen com.quartz.notes (client)' was disposed without first being removed with the input manager!
+10-31 20:38:26.149   759   805 D SplashScreenView: Build android.window.SplashScreenView{43cbebc V.E...... ......ID 0,0-0,0}
+10-31 20:38:26.149   759   805 D SplashScreenView: Icon: view: null drawable: null size: 0
+10-31 20:38:26.149   759   805 D SplashScreenView: Branding: view: android.view.View{162ae45 G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+10-31 20:38:26.154  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@58e32f4 in: PAUSED
+10-31 20:38:26.155  4657  4657 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=androidx.activity.ComponentActivity@58e32f4
+10-31 20:38:26.159   759   814 W Parcel  : Expecting binder but got null!
+10-31 20:38:26.164  1894  1894 I A       : Created gRPC endpoint to "search" for service class com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService
+10-31 20:38:26.210  6502  6621 I Icing   : updateResources: need to parse arkh{com.google.android.gms}
+10-31 20:38:26.293  6488  6553 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+10-31 20:38:26.347  6488  6553 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+10-31 20:38:26.372   485  5544 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_multi_configs ANDROID_EMU_hwc_color_transform GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0
+10-31 20:38:26.374   485  5544 W OpenGLRenderer: Failed to initialize 101010-2 format, error = EGL_SUCCESS
+10-31 20:38:26.377   485  5544 D EGL_emulation: eglCreateContext: 0x7a1b2c581650: maj 3 min 0 rcv 3
+10-31 20:38:26.381   485  5544 D EGL_emulation: eglMakeCurrent: 0x7a1b2c581650: ver 3 0 (tinfo 0x7a1d40cfb180) (first time)
+10-31 20:38:26.384  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@58e32f4 in: STOPPED
+10-31 20:38:26.384  4657  4657 V ActivityScenario: Update currentActivityStage to STOPPED, currentActivity=androidx.activity.ComponentActivity@58e32f4
+10-31 20:38:26.385   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb7f3b0
+10-31 20:38:26.386   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb84270
+10-31 20:38:26.387   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb84270
+10-31 20:38:26.387   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb84270
+10-31 20:38:26.387   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb7f3b0
+10-31 20:38:26.387   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb7f3b0
+10-31 20:38:26.387   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb81450
+10-31 20:38:26.395  6488  6648 I Fitness : FitCleanupIntentOperation received Intent android.intent.action.PACKAGE_CHANGED [CONTEXT service_id=17 ]
+10-31 20:38:26.422  1894  2465 I A       : Using proto config with mendel
+10-31 20:38:26.437  1894  2465 W A       : Task o[ServiceTransaction[SessionController#handleGenericClientEvent]] was queued for 1832ms before starting on executor EventBus
+10-31 20:38:26.470  1012  1012 D MainContentCaptureSession: Flushing 2 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARING
+10-31 20:38:26.471  1894  1894 W A       : Could not collect restore state: The DisplayCoordinator's controller has not taken over yet.
+10-31 20:38:26.472  1012  1012 D MainContentCaptureSession: Flushing 2 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARED
+10-31 20:38:26.486   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb832b0
+10-31 20:38:26.489  1012  2299 D OneSearchSuggestProvider: Shut down the binder channel
+10-31 20:38:26.581  1894  2492 I PBSessionCacheImpl: Deleted sessionId[8331693570961194] from persistence.
+10-31 20:38:26.650  5451  5471 W Parcel  : Expecting binder but got null!
+10-31 20:38:26.678   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb83df0
+10-31 20:38:26.678   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb83df0
+10-31 20:38:26.690   485  1666 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_multi_configs ANDROID_EMU_hwc_color_transform GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0
+10-31 20:38:26.693  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@58e32f4 in: DESTROYED
+10-31 20:38:26.697  4657  4657 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
+10-31 20:38:26.724   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb81ed0
+10-31 20:38:26.726   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb833d0
+10-31 20:38:26.728  1894  2465 W SearchServiceCore: Abort, client detached.
+10-31 20:38:26.755  4657  4747 D IdlingRegistry: Unregistering idling resources: [androidx.compose.ui.test.EspressoLink@2e27530]
+10-31 20:38:26.808   950  1243 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+10-31 20:38:26.810   485  2320 W InputManager-JNI: Input channel object 'b2191f6 com.quartz.notes/androidx.activity.ComponentActivity (client)' was disposed without first being removed with the input manager!
+10-31 20:38:26.811   950  1243 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+10-31 20:38:26.812   950  1243 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 1
+10-31 20:38:26.828  4657  4747 I TestRunner: finished: picturesOnATextPageGoInLine(com.quartz.notes.ui.notebook.FreeformTest)

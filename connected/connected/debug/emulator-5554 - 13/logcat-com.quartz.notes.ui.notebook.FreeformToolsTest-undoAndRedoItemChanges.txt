@@ -1,0 +1,69 @@
+10-31 20:38:58.663  4657  4747 I TestRunner: started: undoAndRedoItemChanges(com.quartz.notes.ui.notebook.FreeformToolsTest)
+10-31 20:38:58.678   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb82530
+10-31 20:38:58.680  4657  4747 D IdlingRegistry: Registering idling resources: [androidx.compose.ui.test.EspressoLink@84463bc]
+10-31 20:38:58.685   759   814 D EGL_emulation: app_time_stats: avg=7398.17ms min=7398.17ms max=7398.17ms count=1
+10-31 20:38:58.714  4657  4747 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+10-31 20:38:58.722   485  5474 W OpenGLRenderer: Failed to initialize 101010-2 format, error = EGL_SUCCESS
+10-31 20:38:58.730   485  5474 D EGL_emulation: eglCreateContext: 0x7a1b2c582910: maj 3 min 0 rcv 3
+10-31 20:38:58.847   485  5474 D EGL_emulation: eglMakeCurrent: 0x7a1b2c582910: ver 3 0 (tinfo 0x7a1d40cfb100) (first time)
+10-31 20:38:58.852   759   814 W Parcel  : Expecting binder but got null!
+10-31 20:38:58.872   759   805 D SplashScreenView: Build android.window.SplashScreenView{aaee8dd V.E...... ......ID 0,0-0,0}
+10-31 20:38:58.872   759   805 D SplashScreenView: Icon: view: null drawable: null size: 0
+10-31 20:38:58.872   759   805 D SplashScreenView: Branding: view: android.view.View{f5aac52 G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+10-31 20:38:58.875   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb80430
+10-31 20:38:58.877  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@feb1bc0 in: PRE_ON_CREATE
+10-31 20:38:58.877  4657  4657 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+10-31 20:38:58.931  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@feb1bc0 in: CREATED
+10-31 20:38:58.932  4657  4657 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=androidx.activity.ComponentActivity@feb1bc0
+10-31 20:38:58.936  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@feb1bc0 in: STARTED
+10-31 20:38:58.937  4657  4657 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=androidx.activity.ComponentActivity@feb1bc0
+10-31 20:38:58.938  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@feb1bc0 in: RESUMED
+10-31 20:38:58.938  4657  4657 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=androidx.activity.ComponentActivity@feb1bc0
+10-31 20:38:58.940  4657  5427 W Parcel  : Expecting binder but got null!
+10-31 20:38:59.127   485   509 W InputManager-JNI: Input channel object '841c408 Splash Screen com.quartz.notes.test (client)' was disposed without first being removed with the input manager!
+10-31 20:38:59.138   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb82f50
+10-31 20:38:59.138   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb842d0
+10-31 20:38:59.138   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb82f50
+10-31 20:38:59.329   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb822f0
+10-31 20:38:59.340   485   505 W ziparchive: Unable to open '/data/app/~~NaCDcvl8pEfH3jUii6w5KA==/com.quartz.notes-5rFpeCYkV8uU0I8d8yBjEA==/base.dm': No such file or directory
+10-31 20:38:59.341   485   505 I ActivityTaskManager: Displayed com.quartz.notes/androidx.activity.ComponentActivity: +524ms
+10-31 20:38:59.397   485  1659 W InputManager-JNI: Input channel object 'a66f5a com.quartz.notes.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity (client)' was disposed without first being removed with the input manager!
+10-31 20:38:59.397  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+10-31 20:38:59.403   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb83010
+10-31 20:38:59.403   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb80eb0
+10-31 20:38:59.403   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb7ef90
+10-31 20:38:59.403  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+10-31 20:38:59.404  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=null}, false)
+10-31 20:38:59.404  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+10-31 20:38:59.484  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+10-31 20:38:59.553   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb815d0
+10-31 20:38:59.553   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb82530
+10-31 20:38:59.670   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb84090
+10-31 20:38:59.670   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb84090
+10-31 20:38:59.730   485  1477 W InputManager-JNI: Input channel object '5a899ae Splash Screen com.quartz.notes (client)' was disposed without first being removed with the input manager!
+10-31 20:38:59.739   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb7ee10
+10-31 20:38:59.739   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb80430
+10-31 20:38:59.744   485   496 I system_server: NativeAlloc concurrent copying GC freed 526678(19MB) AllocSpace objects, 13(388KB) LOS objects, 49% free, 21MB/42MB, paused 58us,65us total 988.304ms
+10-31 20:38:59.846  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@feb1bc0 in: PAUSED
+10-31 20:38:59.846  4657  4657 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=androidx.activity.ComponentActivity@feb1bc0
+10-31 20:38:59.852   759   805 D SplashScreenView: Build android.window.SplashScreenView{4e0c34d V.E...... ......ID 0,0-0,0}
+10-31 20:38:59.852   759   805 D SplashScreenView: Icon: view: null drawable: null size: 0
+10-31 20:38:59.852   759   805 D SplashScreenView: Branding: view: android.view.View{9c2ce02 G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+10-31 20:38:59.857   759   814 W Parcel  : Expecting binder but got null!
+10-31 20:38:59.938  5451  5471 W Parcel  : Expecting binder but got null!
+10-31 20:39:00.014   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb7eb70
+10-31 20:39:00.014   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb846f0
+10-31 20:39:00.055   759   814 D EGL_emulation: app_time_stats: avg=684.87ms min=418.16ms max=951.59ms count=2
+10-31 20:39:00.120  6502  6502 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.feedback.internal.IFeedbackService dat=chimera-action:/... cmp=com.google.android.gms/.chimera.GmsBoundBrokerService }
+10-31 20:39:00.183  1012  1022 I s.nexuslauncher: NativeAlloc concurrent copying GC freed 18585(1032KB) AllocSpace objects, 0(0B) LOS objects, 49% free, 5251KB/10MB, paused 94us,39us total 140.558ms
+10-31 20:39:00.207   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb83370
+10-31 20:39:00.209  1012  1024 W System  : A resource failed to call release.
+10-31 20:39:00.209  1012  1024 W System  : A resource failed to call release.
+10-31 20:39:00.209  1012  1024 W System  : A resource failed to call release.
+10-31 20:39:00.234  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@feb1bc0 in: STOPPED
+10-31 20:39:00.234  4657  4657 V ActivityScenario: Update currentActivityStage to STOPPED, currentActivity=androidx.activity.ComponentActivity@feb1bc0
+10-31 20:39:00.236  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@feb1bc0 in: DESTROYED
+10-31 20:39:00.236  4657  4657 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
+10-31 20:39:00.237   485  1477 W InputManager-JNI: Input channel object '27e256b com.quartz.notes/androidx.activity.ComponentActivity (client)' was disposed without first being removed with the input manager!
+10-31 20:39:00.245  4657  4747 D IdlingRegistry: Unregistering idling resources: [androidx.compose.ui.test.EspressoLink@84463bc]
+10-31 20:39:00.245  4657  4747 I TestRunner: finished: undoAndRedoItemChanges(com.quartz.notes.ui.notebook.FreeformToolsTest)

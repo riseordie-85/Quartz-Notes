@@ -1,0 +1,93 @@
+10-31 20:37:01.655  4657  4747 I TestRunner: started: aNoteTravelsBothWays(com.quartz.notes.data.sync.SyncEngineTest)
+10-31 20:37:01.659  4657  4747 D TrafficStats: tagSocket(95) with statsTag=0xffffffff, statsUid=-1
+10-31 20:37:01.705  2518  3388 D TrafficStats: tagSocket(109) with statsTag=0x1809, statsUid=-1
+10-31 20:37:01.707  2518  3388 D TrafficStats: tagSocket(109) with statsTag=0x1809, statsUid=-1
+10-31 20:37:01.709  2518  3388 D TrafficStats: tagSocket(109) with statsTag=0x1809, statsUid=-1
+10-31 20:37:01.761  1049  5309 I GCoreUlr: WorldUpdater:init: Ensuring that reporting is stopped because of reasons: (no Google accounts)
+10-31 20:37:01.764  1049  5309 I GCoreUlr: Unbound from all signal providers.
+10-31 20:37:01.784  1049  1049 I GCoreUlr: Unbound from all signal providers.
+10-31 20:37:01.784  1049  1049 I GCoreUlr: Stopping handler for UlrDispSvcFast
+10-31 20:37:01.808  1049  5308 I SemanticLocation: [MDD] ModelBundleMetadata: File not found [CONTEXT service_id=173 ]
+10-31 20:37:01.808  1049  5308 I SemanticLocation: java.io.FileNotFoundException: /data/user/0/com.google.android.gms/files/model_bundle_metadata.pb: open failed: ENOENT (No such file or directory)
+10-31 20:37:01.808  1049  5308 I SemanticLocation: 	at libcore.io.IoBridge.open(IoBridge.java:574)
+10-31 20:37:01.808  1049  5308 I SemanticLocation: 	at java.io.FileInputStream.<init>(FileInputStream.java:160)
+10-31 20:37:01.808  1049  5308 I SemanticLocation: 	at android.app.ContextImpl.openFileInput(ContextImpl.java:714)
+10-31 20:37:01.808  1049  5308 I SemanticLocation: 	at android.content.ContextWrapper.openFileInput(ContextWrapper.java:245)
+10-31 20:37:01.808  1049  5308 I SemanticLocation: 	at android.content.ContextWrapper.openFileInput(ContextWrapper.java:245)
+10-31 20:37:01.808  1049  5308 I SemanticLocation: 	at android.content.ContextWrapper.openFileInput(ContextWrapper.java:245)
+10-31 20:37:01.808  1049  5308 I SemanticLocation: 	at bzxt.h(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+10-31 20:37:01.808  1049  5308 I SemanticLocation: 	at bzxd.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):9)
+10-31 20:37:01.808  1049  5308 I SemanticLocation: 	at bzxd.<init>(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+10-31 20:37:01.808  1049  5308 I SemanticLocation: 	at cadn.j(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+10-31 20:37:01.808  1049  5308 I SemanticLocation: 	at cadn.h(:com.google.android.gms@231818047@23.18.18 (190800-535401451):36)
+10-31 20:37:01.808  1049  5308 I SemanticLocation: 	at cadn.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+10-31 20:37:01.808  1049  5308 I SemanticLocation: 	at com.google.android.gms.semanticlocation.service.SemanticLocationChimeraService.k(:com.google.android.gms@231818047@23.18.18 (190800-535401451):9)
+10-31 20:37:01.808  1049  5308 I SemanticLocation: 	at com.google.android.gms.semanticlocation.service.SemanticLocationChimeraService.h(:com.google.android.gms@231818047@23.18.18 (190800-535401451):17)
+10-31 20:37:01.808  1049  5308 I SemanticLocation: 	at cacs.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):68)
+10-31 20:37:01.808  1049  5308 I SemanticLocation: 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:463)
+10-31 20:37:01.808  1049  5308 I SemanticLocation: 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+10-31 20:37:01.808  1049  5308 I SemanticLocation: 	at aced.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+10-31 20:37:01.808  1049  5308 I SemanticLocation: 	at aced.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):7)
+10-31 20:37:01.808  1049  5308 I SemanticLocation: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+10-31 20:37:01.808  1049  5308 I SemanticLocation: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+10-31 20:37:01.808  1049  5308 I SemanticLocation: 	at acjn.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+10-31 20:37:01.808  1049  5308 I SemanticLocation: 	at java.lang.Thread.run(Thread.java:1012)
+10-31 20:37:01.808  1049  5308 I SemanticLocation: Caused by: android.system.ErrnoException: open failed: ENOENT (No such file or directory)
+10-31 20:37:01.808  1049  5308 I SemanticLocation: 	at libcore.io.Linux.open(Native Method)
+10-31 20:37:01.808  1049  5308 I SemanticLocation: 	at libcore.io.ForwardingOs.open(ForwardingOs.java:563)
+10-31 20:37:01.808  1049  5308 I SemanticLocation: 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:274)
+10-31 20:37:01.808  1049  5308 I SemanticLocation: 	at libcore.io.ForwardingOs.open(ForwardingOs.java:563)
+10-31 20:37:01.808  1049  5308 I SemanticLocation: 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7810)
+10-31 20:37:01.808  1049  5308 I SemanticLocation: 	at libcore.io.IoBridge.open(IoBridge.java:560)
+10-31 20:37:01.808  1049  5308 I SemanticLocation: 	... 22 more
+10-31 20:37:01.823  1049  5308 I SemanticLocation: [MDD] ModelBundleMetadata: File not found [CONTEXT service_id=173 ]
+10-31 20:37:01.823  1049  5308 I SemanticLocation: java.io.FileNotFoundException: /data/user/0/com.google.android.gms/files/model_bundle_metadata.pb: open failed: ENOENT (No such file or directory)
+10-31 20:37:01.823  1049  5308 I SemanticLocation: 	at libcore.io.IoBridge.open(IoBridge.java:574)
+10-31 20:37:01.823  1049  5308 I SemanticLocation: 	at java.io.FileInputStream.<init>(FileInputStream.java:160)
+10-31 20:37:01.823  1049  5308 I SemanticLocation: 	at android.app.ContextImpl.openFileInput(ContextImpl.java:714)
+10-31 20:37:01.823  1049  5308 I SemanticLocation: 	at android.content.ContextWrapper.openFileInput(ContextWrapper.java:245)
+10-31 20:37:01.823  1049  5308 I SemanticLocation: 	at android.content.ContextWrapper.openFileInput(ContextWrapper.java:245)
+10-31 20:37:01.823  1049  5308 I SemanticLocation: 	at android.content.ContextWrapper.openFileInput(ContextWrapper.java:245)
+10-31 20:37:01.823  1049  5308 I SemanticLocation: 	at bzxt.h(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+10-31 20:37:01.823  1049  5308 I SemanticLocation: 	at bzxd.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):9)
+10-31 20:37:01.823  1049  5308 I SemanticLocation: 	at cadb.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+10-31 20:37:01.823  1049  5308 I SemanticLocation: 	at aced.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+10-31 20:37:01.823  1049  5308 I SemanticLocation: 	at aced.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):8)
+10-31 20:37:01.823  1049  5308 I SemanticLocation: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+10-31 20:37:01.823  1049  5308 I SemanticLocation: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+10-31 20:37:01.823  1049  5308 I SemanticLocation: 	at acjn.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+10-31 20:37:01.823  1049  5308 I SemanticLocation: 	at java.lang.Thread.run(Thread.java:1012)
+10-31 20:37:01.823  1049  5308 I SemanticLocation: Caused by: android.system.ErrnoException: open failed: ENOENT (No such file or directory)
+10-31 20:37:01.823  1049  5308 I SemanticLocation: 	at libcore.io.Linux.open(Native Method)
+10-31 20:37:01.823  1049  5308 I SemanticLocation: 	at libcore.io.ForwardingOs.open(ForwardingOs.java:563)
+10-31 20:37:01.823  1049  5308 I SemanticLocation: 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:274)
+10-31 20:37:01.823  1049  5308 I SemanticLocation: 	at libcore.io.ForwardingOs.open(ForwardingOs.java:563)
+10-31 20:37:01.823  1049  5308 I SemanticLocation: 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7810)
+10-31 20:37:01.823  1049  5308 I SemanticLocation: 	at libcore.io.IoBridge.open(IoBridge.java:560)
+10-31 20:37:01.823  1049  5308 I SemanticLocation: 	... 14 more
+10-31 20:37:01.836  1049  2718 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.gass.chimera.SchedulePeriodicTasksService started execution. cause:5 exec_start_elapsed_seconds: 149 [CONTEXT service_id=218 ]
+10-31 20:37:01.843  4904  5127 I PermissionControllerServiceImpl: Updating user sensitive for uid 10120
+10-31 20:37:01.847   485   590 I InputReader: Reconfiguring input devices, changes=KEYBOARD_LAYOUTS |
+10-31 20:37:01.848   950   950 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+10-31 20:37:01.848   950   950 D MediaPlayerList: Name of package changed: com.google.android.gms
+10-31 20:37:01.849   950   950 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+10-31 20:37:01.849   950   950 D MediaPlayerList: Name of package changed: com.google.android.gms
+10-31 20:37:01.851   759   759 D ControlsListingControllerImpl: ServiceConfig reloaded, count: 0
+10-31 20:37:01.855  1277  3589 I PeopleGalProvider: Gal directories started.
+10-31 20:37:01.856  1277  3589 I PeopleGalProvider: Method 1 completed.
+10-31 20:37:01.857  1277  3589 I PeopleGalProvider: Method 1 finished successfully.
+10-31 20:37:01.859  2896  3137 I Bugle   : BroadcastReceiverAsyncWorkTracker: Acknowledging broadcast of atsi@eca0e6a
+10-31 20:37:01.862   980   980 D CarrierSvcBindHelper: onPackageModified: com.google.android.gms
+10-31 20:37:01.862   980   980 D CarrierSvcBindHelper: No carrier app for: 0
+10-31 20:37:01.862   980   980 D ImsResolver: maybeAddedImsService, packageName: com.google.android.gms
+10-31 20:37:01.876   485   580 I RoleService: Granting default roles...
+10-31 20:37:01.883  4904  4965 W Role    : Default holder doesn't have required signing certificate: com.google.android.apps.work.clouddpc:23962F4B43B9857638EA66F4D419518EAE282491ACDA4B94707BD59003C45E58
+10-31 20:37:01.889  3751  5329 I ProvidersCache: Provider returned no roots. Possibly naughty: com.google.android.apps.docs.storage
+10-31 20:37:01.898  1049  5207 I Fitness : OnPackageChangedOperation got intent: Intent { act=android.intent.action.PACKAGE_CHANGED dat=package: flg=0x45000010 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.PersistentIntentOperationService (has extras) } [CONTEXT service_id=17 ]
+10-31 20:37:01.901  1049  5209 I Fitness : FitCleanupIntentOperation received Intent android.intent.action.PACKAGE_CHANGED [CONTEXT service_id=17 ]
+10-31 20:37:01.971  1707  1761 I ogle.android.as: Background young concurrent copying GC freed 88278(5217KB) AllocSpace objects, 1(16KB) LOS objects, 11% free, 44MB/50MB, paused 23us,18us total 179.824ms
+10-31 20:37:02.049  1049  2718 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.gass.chimera.SchedulePeriodicTasksService finished executing. cause:5 result: 1 elapsed_millis: 51 uptime_millis: 51 exec_start_elapsed_seconds: 149 [CONTEXT service_id=218 ]
+10-31 20:37:02.116  2518  3388 D EGL_emulation: eglCreateContext: 0x7a1b2c556450: maj 3 min 0 rcv 3
+10-31 20:37:02.157  1049  2718 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.gass.chimera.SchedulePeriodicTasksService started execution. cause:5 exec_start_elapsed_seconds: 150 [CONTEXT service_id=218 ]
+10-31 20:37:02.160  1049  2718 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.gass.chimera.SchedulePeriodicTasksService finished executing. cause:5 result: 1 elapsed_millis: 36 uptime_millis: 36 exec_start_elapsed_seconds: 150 [CONTEXT service_id=218 ]
+10-31 20:37:02.253  4657  4747 I TestRunner: finished: aNoteTravelsBothWays(com.quartz.notes.data.sync.SyncEngineTest)

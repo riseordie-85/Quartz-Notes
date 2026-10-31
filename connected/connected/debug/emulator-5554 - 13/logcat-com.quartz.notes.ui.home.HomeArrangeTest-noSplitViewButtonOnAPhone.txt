@@ -1,0 +1,277 @@
+10-31 20:37:48.745  4657  4747 I TestRunner: started: noSplitViewButtonOnAPhone(com.quartz.notes.ui.home.HomeArrangeTest)
+10-31 20:37:48.760   427  5962 I hw-BpHwBinder: onLastStrongRef automatically unlinking death recipients
+10-31 20:37:48.760   438   438 I hw-BpHwBinder: onLastStrongRef automatically unlinking death recipients
+10-31 20:37:48.761   438   438 V C2Store : in ~ComponentModule
+10-31 20:37:48.761   438   438 V C2Store : unloading dll
+10-31 20:37:48.761   438   438 D BufferPoolAccessor2.0: Destruction - bufferpool2 0x7442eefa90c8 cached: 0/0M, 0/0% in use; allocs: 0, 0% recycled; transfers: 0, 0% unfetched
+10-31 20:37:48.771   427  5961 D MediaCodec: flushMediametrics
+10-31 20:37:48.784   287   287 D Zygote  : Forked child process 5980
+10-31 20:37:48.792   427  5881 D NuPlayerDriver: notifyResetComplete(0x75c8a9854d70)
+10-31 20:37:48.793   427   427 W AMessage: failed to post message as target looper for handler 0 is gone.
+10-31 20:37:48.797  4657  4747 D IdlingRegistry: Registering idling resources: [androidx.compose.ui.test.EspressoLink@cfdd957]
+10-31 20:37:48.798   485  1825 W AppSearchIcing: icing-search-engine.cc:217: Error: 5, Message: Document (com.google.android.googlequicksearchbox$OneSearchZeroStateGoogleSuggestions/default, zp) not found.
+10-31 20:37:48.814  1012  2299 D OneSearchSuggestProvider: Created the binder channel successfully for end point service =com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService , mChannel=Q0{delegate=L0{logId=21, target=directaddress:///AndroidComponentAddress%5BIntent%20%7B%20act=grpc.io.action.BIND%20cmp=com.google.android.googlequicksearchbox/com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService%20%7D%5D}} , mOneSearchConnection=y1.J@2a43e0b
+10-31 20:37:48.815   485   687 I MediaFocusControl: abandonAudioFocus() from uid/pid 10157/759 clientId=android.media.AudioManager@b34374a
+10-31 20:37:48.831  1277  5877 I ChimeraConfigurator: Starting update, reason: 4 urgentFeatures: maps_core:-1
+10-31 20:37:48.834  4657  4747 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+10-31 20:37:48.869  5980  5980 I ecovery_process: Using CollectorTypeCC GC.
+10-31 20:37:48.873  5980  5980 W ecovery_process: Unexpected CPU variant for x86: x86_64.
+10-31 20:37:48.873  5980  5980 W ecovery_process: Known variants: atom, sandybridge, silvermont, kabylake, default
+10-31 20:37:48.905  1490  1490 I SP      : ====> Starting job {m:b:u:l, fg}
+10-31 20:37:48.936   375   407 I adbd    : jdwp connection from 5980
+10-31 20:37:48.942  1490  1490 I AppBase : AppBase.onTrimMemory():497 onTrimMemory(): 10
+10-31 20:37:48.943  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.onTrimMemory():4406 onTrimMemory(): 10
+10-31 20:37:48.951  1490  1490 I SpBackgroundTask: SuperpacksBackgroundJobService.onStartJob():23 onStartJob: android.app.job.JobParameters@7259f6f
+10-31 20:37:48.952  1490  1490 I SP      : ====> Starting job {m:b:u:l, bg}
+10-31 20:37:48.967   759   805 D SplashScreenView: Build android.window.SplashScreenView{d334e28 V.E...... ......ID 0,0-0,0}
+10-31 20:37:48.967   759   805 D SplashScreenView: Icon: view: null drawable: null size: 0
+10-31 20:37:48.967   759   805 D SplashScreenView: Branding: view: android.view.View{b98a741 G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+10-31 20:37:48.969   759   814 W Parcel  : Expecting binder but got null!
+10-31 20:37:48.983  1894  1894 I A       : Created gRPC endpoint to "search" for service class com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService
+10-31 20:37:49.040  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@358ae6b in: PRE_ON_CREATE
+10-31 20:37:49.040  4657  4657 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+10-31 20:37:49.051  1012  2299 D OneSearchSuggestProvider: Shut down the binder channel
+10-31 20:37:49.055  1277  5639 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+10-31 20:37:49.064  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@358ae6b in: CREATED
+10-31 20:37:49.064  4657  4657 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=androidx.activity.ComponentActivity@358ae6b
+10-31 20:37:49.068  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@358ae6b in: STARTED
+10-31 20:37:49.068  4657  4657 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=androidx.activity.ComponentActivity@358ae6b
+10-31 20:37:49.083  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@358ae6b in: RESUMED
+10-31 20:37:49.083  4657  4657 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=androidx.activity.ComponentActivity@358ae6b
+10-31 20:37:49.098  5980  5980 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10141; state: ENABLED
+10-31 20:37:49.138  4657  5427 W Parcel  : Expecting binder but got null!
+10-31 20:37:49.173  1894  2465 I A       : Using proto config with mendel
+10-31 20:37:49.174  1894  2465 W A       : Queue length for executor EventBus is now 11. Perhaps some tasks are too long, or the pool is too small.
+10-31 20:37:49.193  1894  2465 I A       : Using proto config with mendel
+10-31 20:37:49.230  5980  5980 D nativeloader: Configuring classloader-namespace for other apk /system/framework/org.apache.http.legacy.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps
+10-31 20:37:49.235  5980  5980 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.extensions.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps
+10-31 20:37:49.244  5980  5980 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.sidecar.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps
+10-31 20:37:49.257  5980  5980 D nativeloader: Configuring vendor-classloader-namespace for unbundled product apk /product/app/Maps/Maps.apk. target_sdk_version=35, uses_libraries=, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64:/product/lib64:/system/product/lib64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps:/product/lib64:/system/product/lib64
+10-31 20:37:49.264  5980  5980 V GraphicsEnvironment: ANGLE Developer option for 'com.google.android.apps.maps' set to: 'default'
+10-31 20:37:49.268  5980  5980 V GraphicsEnvironment: ANGLE GameManagerService for com.google.android.apps.maps: false
+10-31 20:37:49.268  5980  5980 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+10-31 20:37:49.276  1277  5639 I Icing   : Indexing done com.google.android.gms-apps
+10-31 20:37:49.278  1490  1991 I SP      : Scheduling job with delay of 0s for {m:b:u:l, bg}, 7 candidates
+10-31 20:37:49.292  1277  5639 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+10-31 20:37:49.293  5980  5980 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+10-31 20:37:49.294  5980  5980 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+10-31 20:37:49.294  1277  5639 I Icing   : Indexing done com.google.android.gms-apps
+10-31 20:37:49.312   485   516 W system_server: Long monitor contention with owner binder:485_1D (1809) at void com.android.server.am.ActivityManagerService.serviceDoneExecuting(android.os.IBinder, int, int, int)(ActivityManagerService.java:12817) waiters=3 in void com.android.server.am.ActivityManagerService.idleUids() for 178ms
+10-31 20:37:49.343  1277  5877 I ChimeraConfigurator: Detected pending changes for urgent request: [maps_core]. Pending module sets: container:2318189190800+maps_core
+10-31 20:37:49.360  1277  5877 I GmsDebugLogger: [73] 1801
+10-31 20:37:49.398  5980  5980 I ecovery_process: System.exit called, status: 0
+10-31 20:37:49.398  5980  5980 I AndroidRuntime: VM exiting with result code 0, cleanup skipped.
+10-31 20:37:49.416   485   505 W ziparchive: Unable to open '/data/app/~~NaCDcvl8pEfH3jUii6w5KA==/com.quartz.notes-5rFpeCYkV8uU0I8d8yBjEA==/base.dm': No such file or directory
+10-31 20:37:49.419   287   287 I Zygote  : Process 5980 exited cleanly (0)
+10-31 20:37:49.442   485   518 I libprocessgroup: Successfully killed process cgroup uid 10141 pid 5980 in 0ms
+10-31 20:37:49.450  1894  2492 I PBSessionCacheImpl: Deleted sessionId[8331693570961097] from persistence.
+10-31 20:37:49.485   485   505 I ActivityTaskManager: Displayed com.quartz.notes/androidx.activity.ComponentActivity: +507ms
+10-31 20:37:49.498   759   814 D EGL_emulation: app_time_stats: avg=660.89ms min=372.33ms max=949.46ms count=2
+10-31 20:37:49.506  1490  1991 I SP      : Scheduling: job start ({m:b:u:l, fg}), 1 started, 0 paused, 7 scheduled, 8 pending: next-word-predictor:tflite-nwp-be541314788c7304827a9710c3ac4edb * {m:b:u:l, bg}, expressive_concepts_triggering:2022011819_en * {m:b:u:l, bg}, transformer_concept:2023011913_en * {m:b:u:l, bg}, transformer_expression:2023012316_en * {m:b:u:l, bg}, kc_tflite_model:tflite-kc-en_us_secagg-20220805_235142 @ * {m:b:u:l, fg}, content_cache:e9a5a2de48a4f8b9a658b411bcfb375d * {m:b:u:l, bg}, content_cache:8722425f4121ffdea802b1066df73991 * {m:b:u:l, bg}, content_cache:fa1da98da1212aad6fb9a8efaff48148 * {m:b:u:l, bg}
+10-31 20:37:49.508  1277  5639 I Icing   : Indexing com.google.android.gms-internal.3p:MobileApplication from com.google.android.gms
+10-31 20:37:49.512  1894  2465 W SearchServiceCore: Abort, client detached.
+10-31 20:37:49.517  1707  2075 I AiAiEcho: Predicting[0]:
+10-31 20:37:49.518  1707  2075 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:
+10-31 20:37:49.519  1894  2345 I A       : Creating in-process transport to InProcessServerAddress[com.google.android.googlequicksearchbox/OnDeviceServer[Hash:244741731]]
+10-31 20:37:49.525  1707  2075 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0
+10-31 20:37:49.527  1707  2075 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0
+10-31 20:37:49.538   485  1809 W system_server: Long monitor contention with owner binder:485_B (1336) at void com.android.server.am.ActivityManagerService$AppDeathRecipient.binderDied()(ActivityManagerService.java:1479) waiters=1 in void com.android.server.am.ActivityManagerService.serviceDoneExecuting(android.os.IBinder, int, int, int) for 111ms
+10-31 20:37:49.582   485  5474 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_multi_configs ANDROID_EMU_hwc_color_transform GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0
+10-31 20:37:49.592   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb82110
+10-31 20:37:49.608  1894  2344 I A       : group apa_head_suggest not present without account in *
+10-31 20:37:49.610  1894  2344 I A       : incrementApaDataDownloadStoreStatus(latency = PT0.01S, appVersion = 13.17.16.23, status = NOT_FOUND, locale = *, fileGroupnames = apa_head_suggest, accountScoped = false, localGroupsAvailable = false, timeSinceSearchBoot = Optional[PT2M25.452S] (ONE_TO_FIVE_MINUTES), timeSinceDataDownloadInit = PT0.001S (ZERO_TO_TWO_SECONDS))
+10-31 20:37:49.611  1894  2344 I A       : incrementApaDataDownloadStoreStatusNotFound(appVersion = 13.17.16.23, locale = *, groupName = apa_head_suggest, accountScoped = false, foundGroups = 0, status = 0, localGroupsAvailable = false)
+10-31 20:37:49.615  1277  5877 W ZappDownloader: No successful module downloads for requested features [maps_core].
+10-31 20:37:49.615  1277  5877 I GmsDebugLogger: [30] [MapsCoreDynamite.integ:231112103100800]
+10-31 20:37:49.688  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+10-31 20:37:49.689  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+10-31 20:37:49.689  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=null}, false)
+10-31 20:37:49.689  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+10-31 20:37:49.690  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+10-31 20:37:49.793  1012  1038 I s.nexuslauncher: oneway function results for code 2 on binder at 0x7a1abc583ad0 will be dropped but finished with status UNKNOWN_TRANSACTION
+10-31 20:37:49.842  1277  5502 D SharedPreferencesImpl: Time required to fsync /data/user/0/com.google.android.gms/shared_prefs/proxy-apps-corpus.xml: [<1: 0, <2: 3, <4: 3, <8: 2, <16: 5, <32: 2, <64: 6, <128: 5, <256: 3, <512: 2, <1024: 0, <2048: 0, <4096: 0, <8192: 0, <16384: 0, >=16384: 0]
+10-31 20:37:49.853   485   501 W system_server: Long monitor contention with owner binder:485_D (1477) at int com.android.server.wm.WindowManagerService.relayoutWindow(com.android.server.wm.Session, android.view.IWindow, android.view.WindowManager$LayoutParams, int, int, int, int, int, int, android.window.ClientWindowFrames, android.util.MergedConfiguration, android.view.SurfaceControl, android.view.InsetsState, android.view.InsetsSourceControl[], android.os.Bundle)(WindowManagerService.java:2630) waiters=3 in void com.android.server.wm.WindowManagerService.reportSystemGestureExclusionChanged(com.android.server.wm.Session, android.view.IWindow, java.util.List) for 226ms
+10-31 20:37:49.870   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb81030
+10-31 20:37:49.872   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb82350
+10-31 20:37:49.873   485  1790 W InputManager-JNI: Input channel object '30de66e com.quartz.notes.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity (client)' was disposed without first being removed with the input manager!
+10-31 20:37:49.881  4657  4657 D AutofillManager: Fill dialog is enabled:false, hints=[]
+10-31 20:37:49.887   485  1806 W InputManager-JNI: Input channel object '248bb24 Splash Screen com.quartz.notes (client)' was disposed without first being removed with the input manager!
+10-31 20:37:49.904   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb824d0
+10-31 20:37:49.906   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb818d0
+10-31 20:37:49.920   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb80130
+10-31 20:37:49.921   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb7e810
+10-31 20:37:49.953  1277  5639 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+10-31 20:37:49.956  1277  5877 W ChimeraConfigService: Retry attempt was throttled. [CONTEXT service_id=264 ]
+10-31 20:37:49.957  1277  5877 I GmsDebugLogger: [83] 1 [maps_core]
+10-31 20:37:49.975  1277  5877 I ChimeraConfigurator: Starting update, reason: 4 urgentFeatures: mlkit.barcode.ui:0
+10-31 20:37:50.047  1049  5699 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+10-31 20:37:50.048  1490  1991 I SP      : Scheduling: job start ({m:b:u:l, bg}), 7 started, 0 paused, 0 scheduled, 8 pending: next-word-predictor:tflite-nwp-be541314788c7304827a9710c3ac4edb @ * {m:b:u:l, bg}, expressive_concepts_triggering:2022011819_en @ * {m:b:u:l, bg}, transformer_concept:2023011913_en @ * {m:b:u:l, bg}, transformer_expression:2023012316_en @ * {m:b:u:l, bg}, kc_tflite_model:tflite-kc-en_us_secagg-20220805_235142 @ {m:b:u:l, fg}, content_cache:e9a5a2de48a4f8b9a658b411bcfb375d @ * {m:b:u:l, bg}, content_cache:8722425f4121ffdea802b1066df73991 @ * {m:b:u:l, bg}, content_cache:fa1da98da1212aad6fb9a8efaff48148 @ * {m:b:u:l, bg}
+10-31 20:37:50.049  1490  1991 I SP      : Requesting download of URL https://www.gstatic.com/android/keyboard/kc_triggering_model/tflite-kc-en_us_secagg-20220805_235142.zip to tflite-kc-en_us_secagg-20220805_235142.zip.fetched (constraints: m:b:u:l)
+10-31 20:37:50.052   485  5474 W OpenGLRenderer: Failed to initialize 101010-2 format, error = EGL_SUCCESS
+10-31 20:37:50.055   485  5474 D EGL_emulation: eglCreateContext: 0x7a1b2c57f0d0: maj 3 min 0 rcv 3
+10-31 20:37:50.058   485  5474 D EGL_emulation: eglMakeCurrent: 0x7a1b2c57f0d0: ver 3 0 (tinfo 0x7a1d40cfb100) (first time)
+10-31 20:37:50.064  1490  1991 I SP      : Requesting download of URL https://www.gstatic.com/android/keyboard/next_word_predictor/prod/tflite-nwp-20230309_154225.zip to tflite-nwp-be541314788c7304827a9710c3ac4edb.zip.fetched (constraints: m:b:u:l)
+10-31 20:37:50.085   287   287 D Zygote  : Forked child process 6009
+10-31 20:37:50.094  6009  6009 I ecovery_process: Using CollectorTypeCC GC.
+10-31 20:37:50.095  6009  6009 W ecovery_process: Unexpected CPU variant for x86: x86_64.
+10-31 20:37:50.095  6009  6009 W ecovery_process: Known variants: atom, sandybridge, silvermont, kabylake, default
+10-31 20:37:50.138   375   407 I adbd    : jdwp connection from 6009
+10-31 20:37:50.155  1277  5877 I ChimeraConfigurator: Detected pending changes for urgent request: [mlkit.barcode.ui]. Pending module sets: container:2318189190800+mlkit.barcode.ui+vision.barcode,tflite_dynamite:2640104055100800+tflite_dynamite
+10-31 20:37:50.180  1490  1991 I SP      : Requesting download of URL https://www.gstatic.com/android/keyboard/modelpack/expressive_concepts_triggering/2022011819/en.zip to 2022011819_en.zip.fetched (constraints: m:b:u:l)
+10-31 20:37:50.182  1490  1991 I SP      : Requesting download of URL https://www.gstatic.com/android/keyboard/modelpack/transformer_concept/2023011913/en.zip to 2023011913_en.zip.fetched (constraints: m:b:u:l)
+10-31 20:37:50.182  1490  1991 I SP      : Requesting download of URL https://www.gstatic.com/android/keyboard/modelpack/transformer_expression/2023012316/en.zip to 2023012316_en.zip.fetched (constraints: m:b:u:l)
+10-31 20:37:50.183  1490  1991 I SP      : Requesting download of URL https://www.gstatic.com/android/keyboard/modelpack/contentcache/202211221443/emoji2expr.pb to e9a5a2de48a4f8b9a658b411bcfb375d.fetched (constraints: m:b:u:l)
+10-31 20:37:50.184  1490  1991 I SP      : Requesting download of URL https://www.gstatic.com/android/keyboard/modelpack/contentcache/202211221443/text2expr.pb to 8722425f4121ffdea802b1066df73991.fetched (constraints: m:b:u:l)
+10-31 20:37:50.184  1490  1991 I SP      : Requesting download of URL https://www.gstatic.com/android/keyboard/modelpack/contentcache/202211221443/contextual_ek.pb to fa1da98da1212aad6fb9a8efaff48148.fetched (constraints: m:b:u:l)
+10-31 20:37:50.331  1490  1613 I SuperDelight: SuperDelightUnpacker$UnpackCancellableTask.execute():102 UnpackCancellableTask#execute(): fst-decompress /data/user/0/com.google.android.inputmethod.latin/files/superpacks/delight/main_en_840_2022102600_1.staged
+10-31 20:37:50.331  6009  6009 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10141; state: ENABLED
+10-31 20:37:50.339  4657  4664 I om.quartz.notes: Background young concurrent copying GC freed 107749(4586KB) AllocSpace objects, 2(68KB) LOS objects, 30% free, 10MB/14MB, paused 20us,16us total 159.549ms
+10-31 20:37:50.340  1277  5877 I GmsDebugLogger: [73] 1801
+10-31 20:37:50.348  1049  5699 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+10-31 20:37:50.349  1277  5877 W ZappDownloader: No successful module downloads for requested features [mlkit.barcode.ui].
+10-31 20:37:50.349  1277  5877 I GmsDebugLogger: [30] [VisionBarcode.optional:231818100800],[TfliteDynamiteDynamite.integ:264010405100800],[MlkitBarcodeUi.optional:231818100000]
+10-31 20:37:50.352  1277  5877 W ChimeraConfigService: Retry attempt was throttled. [CONTEXT service_id=264 ]
+10-31 20:37:50.352  1277  5877 I GmsDebugLogger: [83] 1 [mlkit.barcode.ui]
+10-31 20:37:50.355   283  6023 I resolv  : GetAddrInfoHandler::run: {100 100 100 983140 10133 0}
+10-31 20:37:50.357   283  6025 I resolv  : res_nmkquery: (QUERY, IN, A)
+10-31 20:37:50.357   283  6025 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x7ebfca5d19d0
+10-31 20:37:50.357   283  6025 I resolv  : doQuery: rcode=0, ancount=1, return value=49
+10-31 20:37:50.364  1277  5639 I Icing   : Indexing done com.google.android.gms-internal.3p:MobileApplication
+10-31 20:37:50.365  1277  5639 I Icing   : Indexing done com.google.android.gms-apps
+10-31 20:37:50.365   283  6024 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+10-31 20:37:50.365   283  6024 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x7ebfca5d34d0
+10-31 20:37:50.365   283  6024 I resolv  : doQuery: rcode=0, ancount=1, return value=61
+10-31 20:37:50.366  1490  6007 D TrafficStats: tagSocket(147) with statsTag=0xffffffff, statsUid=-1
+10-31 20:37:50.371  1490  6007 W putmethod.latin: Accessing hidden method Lcom/android/org/conscrypt/ConscryptEngineSocket;->setUseSessionTickets(Z)V (max-target-q,core-platform-api, reflection, denied)
+10-31 20:37:50.371  1490  6007 W putmethod.latin: Accessing hidden method Lcom/android/org/conscrypt/OpenSSLSocketImpl;->setUseSessionTickets(Z)V (max-target-q,core-platform-api, reflection, denied)
+10-31 20:37:50.371  1490  6007 W putmethod.latin: Accessing hidden method Lcom/android/org/conscrypt/AbstractConscryptSocket;->setUseSessionTickets(Z)V (max-target-q, reflection, denied)
+10-31 20:37:50.371  1490  6007 W putmethod.latin: Accessing hidden method Lcom/android/org/conscrypt/ConscryptEngineSocket;->setHostname(Ljava/lang/String;)V (max-target-q,core-platform-api, reflection, denied)
+10-31 20:37:50.371  1490  6007 W putmethod.latin: Accessing hidden method Lcom/android/org/conscrypt/OpenSSLSocketImpl;->setHostname(Ljava/lang/String;)V (max-target-q,core-platform-api, reflection, denied)
+10-31 20:37:50.371  1490  6007 W putmethod.latin: Accessing hidden method Lcom/android/org/conscrypt/AbstractConscryptSocket;->setHostname(Ljava/lang/String;)V (max-target-q, reflection, denied)
+10-31 20:37:50.372  1490  6007 W putmethod.latin: Accessing hidden method Lcom/android/org/conscrypt/OpenSSLSocketImpl;->setAlpnProtocols([B)V (max-target-q,core-platform-api, reflection, denied)
+10-31 20:37:50.372  1490  6007 W putmethod.latin: Accessing hidden method Lcom/android/org/conscrypt/AbstractConscryptSocket;->setAlpnProtocols([B)V (max-target-q, reflection, denied)
+10-31 20:37:50.372  1490  6007 W putmethod.latin: Reached maximum number of hidden api access warnings.
+10-31 20:37:50.377  1277  5876 I ChimeraConfigurator: Starting update, reason: 4 urgentFeatures: tflite_dynamite:-1
+10-31 20:37:50.396  6009  6009 D nativeloader: Configuring classloader-namespace for other apk /system/framework/org.apache.http.legacy.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps
+10-31 20:37:50.404  6009  6009 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.extensions.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps
+10-31 20:37:50.409  1277  5876 I ChimeraConfigurator: Detected pending changes for urgent request: [tflite_dynamite]. Pending module sets: container:2318189190800,tflite_dynamite:2640104055100800+tflite_dynamite
+10-31 20:37:50.415  6009  6009 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.sidecar.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps
+10-31 20:37:50.426  6009  6009 D nativeloader: Configuring vendor-classloader-namespace for unbundled product apk /product/app/Maps/Maps.apk. target_sdk_version=35, uses_libraries=, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64:/product/lib64:/system/product/lib64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps:/product/lib64:/system/product/lib64
+10-31 20:37:50.445  6009  6009 V GraphicsEnvironment: ANGLE Developer option for 'com.google.android.apps.maps' set to: 'default'
+10-31 20:37:50.448  6009  6009 V GraphicsEnvironment: ANGLE GameManagerService for com.google.android.apps.maps: false
+10-31 20:37:50.448  6009  6009 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+10-31 20:37:50.449  6009  6009 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+10-31 20:37:50.449  6009  6009 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+10-31 20:37:50.458  1277  5876 I GmsDebugLogger: [73] 1801
+10-31 20:37:50.460  1277  5876 W ZappDownloader: No successful module downloads for requested features [tflite_dynamite].
+10-31 20:37:50.460  1277  5876 I GmsDebugLogger: [30] [TfliteDynamiteDynamite.integ:264010405100800]
+10-31 20:37:50.468  6009  6009 I ecovery_process: System.exit called, status: 0
+10-31 20:37:50.468  6009  6009 I AndroidRuntime: VM exiting with result code 0, cleanup skipped.
+10-31 20:37:50.482  1277  5876 W ChimeraConfigService: Retry attempt was throttled. [CONTEXT service_id=264 ]
+10-31 20:37:50.482  1277  5876 I GmsDebugLogger: [83] 1 [tflite_dynamite]
+10-31 20:37:50.492   287   287 I Zygote  : Process 6009 exited cleanly (0)
+10-31 20:37:50.507  1707  1707 I AiAi    : onTrimMemory() with level 15
+10-31 20:37:50.515   485   518 I libprocessgroup: Successfully killed process cgroup uid 10141 pid 6009 in 0ms
+10-31 20:37:50.519  1277  5639 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+10-31 20:37:50.521  1490  1490 I AppBase : AppBase.onTrimMemory():497 onTrimMemory(): 15
+10-31 20:37:50.522  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.onTrimMemory():4406 onTrimMemory(): 15
+10-31 20:37:50.533  1490  1991 I SP      : <==== Finishing job {m:b:u:l, fg}, 1629 ms. elapsed since start
+10-31 20:37:50.533  1490  1991 I SuperpacksForegroundTaskService: SuperpacksForegroundTaskService.finishJob():54 SuperpacksForegroundTaskService.finishJob()
+10-31 20:37:50.536  1490  1991 I SP      : Download stopped: kc_tflite_model:tflite-kc-en_us_secagg-20220805_235142, succeeded foreground, size: 38169
+10-31 20:37:50.537   287   287 D Zygote  : Forked child process 6030
+10-31 20:37:50.538  1490  1609 W LatinCommonCountersMetricsProcessor: LatinCommonCountersMetricsProcessor.processSuperpacksForegroundDownload():1082 processSuperpacksForegroundDownload(): undesired kc_tflite_model
+10-31 20:37:50.538  1490  6031 D TrafficStats: tagSocket(158) with statsTag=0xffffffff, statsUid=-1
+10-31 20:37:50.539   950  1243 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+10-31 20:37:50.539   950  1243 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+10-31 20:37:50.553  6030  6030 I ecovery_process: Using CollectorTypeCC GC.
+10-31 20:37:50.554  6030  6030 W ecovery_process: Unexpected CPU variant for x86: x86_64.
+10-31 20:37:50.554  6030  6030 W ecovery_process: Known variants: atom, sandybridge, silvermont, kabylake, default
+10-31 20:37:50.556   375   407 I adbd    : jdwp connection from 6030
+10-31 20:37:50.564  1277  5639 I Icing   : Indexing done com.google.android.gms-apps
+10-31 20:37:50.615  1490  1991 I SP      : Scheduling: download stopped, 0 started, 0 paused, 0 scheduled, 7 pending: next-word-predictor:tflite-nwp-be541314788c7304827a9710c3ac4edb @ {m:b:u:l, bg}, expressive_concepts_triggering:2022011819_en @ {m:b:u:l, bg}, transformer_concept:2023011913_en @ {m:b:u:l, bg}, transformer_expression:2023012316_en @ {m:b:u:l, bg}, content_cache:e9a5a2de48a4f8b9a658b411bcfb375d @ {m:b:u:l, bg}, content_cache:8722425f4121ffdea802b1066df73991 @ {m:b:u:l, bg}, content_cache:fa1da98da1212aad6fb9a8efaff48148 @ {m:b:u:l, bg}
+10-31 20:37:50.645  1049  1324 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+10-31 20:37:50.654  6030  6030 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10141; state: ENABLED
+10-31 20:37:50.659  6030  6030 D nativeloader: Configuring classloader-namespace for other apk /system/framework/org.apache.http.legacy.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps
+10-31 20:37:50.661  1049  1324 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+10-31 20:37:50.663  1049  1324 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+10-31 20:37:50.686  6030  6030 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.extensions.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps
+10-31 20:37:50.688  6030  6030 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.sidecar.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps
+10-31 20:37:50.690  6030  6030 D nativeloader: Configuring vendor-classloader-namespace for unbundled product apk /product/app/Maps/Maps.apk. target_sdk_version=35, uses_libraries=, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64:/product/lib64:/system/product/lib64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps:/product/lib64:/system/product/lib64
+10-31 20:37:50.701  6030  6030 V GraphicsEnvironment: ANGLE Developer option for 'com.google.android.apps.maps' set to: 'default'
+10-31 20:37:50.701  6030  6030 V GraphicsEnvironment: ANGLE GameManagerService for com.google.android.apps.maps: false
+10-31 20:37:50.701  6030  6030 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+10-31 20:37:50.726  6030  6030 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+10-31 20:37:50.726  6030  6030 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+10-31 20:37:50.742  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@358ae6b in: PAUSED
+10-31 20:37:50.742  4657  4657 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=androidx.activity.ComponentActivity@358ae6b
+10-31 20:37:50.791   759   805 D SplashScreenView: Build android.window.SplashScreenView{b06c63b V.E...... ......ID 0,0-0,0}
+10-31 20:37:50.791   759   805 D SplashScreenView: Icon: view: null drawable: null size: 0
+10-31 20:37:50.791   759   805 D SplashScreenView: Branding: view: android.view.View{eea9158 G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+10-31 20:37:50.797  2080  5903 D DownloadManager: [3] Finished with status SUCCESS
+10-31 20:37:50.806   759   814 W Parcel  : Expecting binder but got null!
+10-31 20:37:50.865  5451  5471 W Parcel  : Expecting binder but got null!
+10-31 20:37:50.911  6030  6030 I ecovery_process: System.exit called, status: 0
+10-31 20:37:50.911  6030  6030 I AndroidRuntime: VM exiting with result code 0, cleanup skipped.
+10-31 20:37:50.969   287   287 I Zygote  : Process 6030 exited cleanly (0)
+10-31 20:37:50.991   485   518 I libprocessgroup: Successfully killed process cgroup uid 10141 pid 6030 in 0ms
+10-31 20:37:51.043  1049  5651 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+10-31 20:37:51.112   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb7ffb0
+10-31 20:37:51.112   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb82350
+10-31 20:37:51.112   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb82350
+10-31 20:37:51.112   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb7ffb0
+10-31 20:37:51.112   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb7ffb0
+10-31 20:37:51.112   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb82350
+10-31 20:37:51.135   485   501 W system_server: Long monitor contention with owner android.anim (509) at void com.android.server.wm.WindowSurfacePlacer$Traverser.run()(WindowSurfacePlacer.java:58) waiters=1 in void com.android.server.wm.WindowProcessController.setThread(android.app.IApplicationThread) for 131ms
+10-31 20:37:51.151   485  5474 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_multi_configs ANDROID_EMU_hwc_color_transform GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0
+10-31 20:37:51.161   485  5474 W OpenGLRenderer: Failed to initialize 101010-2 format, error = EGL_SUCCESS
+10-31 20:37:51.161   485  5474 D EGL_emulation: eglCreateContext: 0x7a1b2c583690: maj 3 min 0 rcv 3
+10-31 20:37:51.193   485  5474 D EGL_emulation: eglMakeCurrent: 0x7a1b2c583690: ver 3 0 (tinfo 0x7a1d40cfb100) (first time)
+10-31 20:37:51.199   759   814 D EGL_emulation: app_time_stats: avg=850.10ms min=233.38ms max=1466.82ms count=2
+10-31 20:37:51.242  1490  1991 I SP      : Download stopped: next-word-predictor:tflite-nwp-be541314788c7304827a9710c3ac4edb, succeeded, size: 1950106
+10-31 20:37:51.258   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb82650
+10-31 20:37:51.258   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb82650
+10-31 20:37:51.260   485   505 W ziparchive: Unable to open '/data/app/~~BPl_iNDFX_qPwuS9T-BajQ==/com.quartz.notes.test-xXym9jFRo8KwCE2SORhmmw==/base.dm': No such file or directory
+10-31 20:37:51.269   485   505 I ActivityTaskManager: Displayed com.quartz.notes.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity: +523ms
+10-31 20:37:51.301   485  1477 W InputManager-JNI: Input channel object '411555 Splash Screen com.quartz.notes.test (client)' was disposed without first being removed with the input manager!
+10-31 20:37:51.458  1707  1707 I AiAi    : onTrimMemory() with level 15
+10-31 20:37:51.491  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@358ae6b in: STOPPED
+10-31 20:37:51.493  4657  4657 V ActivityScenario: Update currentActivityStage to STOPPED, currentActivity=androidx.activity.ComponentActivity@358ae6b
+10-31 20:37:51.501   485  1336 W system_server: Long monitor contention with owner binder:485_2 (501) at void com.android.server.am.ActivityManagerService$AppDeathRecipient.binderDied()(ActivityManagerService.java:1479) waiters=2 in android.content.ComponentName com.android.server.am.ActivityManagerService.startService(android.app.IApplicationThread, android.content.Intent, java.lang.String, boolean, java.lang.String, java.lang.String, int) for 512ms
+10-31 20:37:51.518  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+10-31 20:37:51.587   950  1243 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+10-31 20:37:51.587   950  1243 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+10-31 20:37:51.588   485  1825 W AppSearchIcing: icing-search-engine.cc:217: Error: 5, Message: Document (com.google.android.googlequicksearchbox$OneSearchZeroStateGoogleSuggestions/default, zp) not found.
+10-31 20:37:51.589  1012  2299 D OneSearchSuggestProvider: Created the binder channel successfully for end point service =com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService , mChannel=Q0{delegate=L0{logId=25, target=directaddress:///AndroidComponentAddress%5BIntent%20%7B%20act=grpc.io.action.BIND%20cmp=com.google.android.googlequicksearchbox/com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService%20%7D%5D}} , mOneSearchConnection=y1.J@381df63
+10-31 20:37:51.599  1707  2075 I AiAiEcho: Predicting[0]:
+10-31 20:37:51.600  1707  2075 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:
+10-31 20:37:51.605  1012  1024 W System  : A resource failed to call release.
+10-31 20:37:51.605  1012  1024 W System  : A resource failed to call release.
+10-31 20:37:51.605  1012  1024 W System  : A resource failed to call release.
+10-31 20:37:51.617  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+10-31 20:37:51.617  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes.test fieldId=-1 fieldName=null extras=null}, false)
+10-31 20:37:51.617  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+10-31 20:37:51.622   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb76ef0
+10-31 20:37:51.622   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb81a50
+10-31 20:37:51.622   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb81ff0
+10-31 20:37:51.622   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb81ff0
+10-31 20:37:51.637  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+10-31 20:37:51.638  1490  1490 I AppBase : AppBase.onTrimMemory():497 onTrimMemory(): 15
+10-31 20:37:51.638  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.onTrimMemory():4406 onTrimMemory(): 15
+10-31 20:37:51.689  1049  5651 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+10-31 20:37:51.690  1277  5639 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+10-31 20:37:51.696  1049  5651 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+10-31 20:37:51.709   283   283 I netd    : tetherGetStats() -> {[]} <0.39ms>
+10-31 20:37:51.740  1894  1894 I A       : Created gRPC endpoint to "search" for service class com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService
+10-31 20:37:51.755   287   287 D Zygote  : Forked child process 6057
+10-31 20:37:51.760  1894  2345 I A       : group apa_head_suggest not present without account in *
+10-31 20:37:51.765  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@358ae6b in: DESTROYED
+10-31 20:37:51.765  4657  4657 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
+10-31 20:37:51.768  1894  2345 I A       : incrementApaDataDownloadStoreStatus(latency = PT0.001S, appVersion = 13.17.16.23, status = NOT_FOUND, locale = *, fileGroupnames = apa_head_suggest, accountScoped = false, localGroupsAvailable = false, timeSinceSearchBoot = Optional[PT2M27.612S] (ONE_TO_FIVE_MINUTES), timeSinceDataDownloadInit = PT2.161S (TWO_TO_FIVE_SECONDS))
+10-31 20:37:51.784   283   283 I netd    : bandwidthSetGlobalAlert(2097152) <0.12ms>
+10-31 20:37:51.793  1894  2345 I A       : incrementApaDataDownloadStoreStatusNotFound(appVersion = 13.17.16.23, locale = *, groupName = apa_head_suggest, accountScoped = false, foundGroups = 0, status = 0, localGroupsAvailable = false)
+10-31 20:37:51.795   283   283 I netd    : bandwidthRemoveInterfaceQuota(eth0) <0.57ms>
+10-31 20:37:51.800   283   283 I netd    : bandwidthSetInterfaceQuota(eth0, 9223372036854775807) <0.43ms>
+10-31 20:37:51.960   485  1334 W InputManager-JNI: Input channel object 'd2b4a45 com.quartz.notes/androidx.activity.ComponentActivity (client)' was disposed without first being removed with the input manager!
+10-31 20:37:51.989  4657  4657 I Choreographer: Skipped 41 frames!  The application may be doing too much work on its main thread.
+10-31 20:37:51.992  4657  4747 D IdlingRegistry: Unregistering idling resources: [androidx.compose.ui.test.EspressoLink@cfdd957]
+10-31 20:37:51.997  4657  4747 I TestRunner: finished: noSplitViewButtonOnAPhone(com.quartz.notes.ui.home.HomeArrangeTest)

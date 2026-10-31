@@ -1,0 +1,31 @@
+finger tap right of line 1: selection=TextRange(11, 11) expected 11
+mouse click in left margin of line 4: selection=TextRange(83, 83) expected start of line 4 = 83
+bare compose mouse click right of line 2: selection=TextRange(29, 29) expected 29
+bare compose mouse click in line 1: selection=TextRange(3, 3)
+bare compose mouse drag select lines 1-4: selection=TextRange(1, 95)
+bare finger double tap: selection=TextRange(12, 19)
+bare finger hold: selection=TextRange(12, 19)
+bare finger hold then drag: selection=TextRange(12, 89)
+bare pen hold: selection=TextRange(12, 19)
+bare pen double tap: selection=TextRange(12, 19)
+bare mouse double click: selection=TextRange(12, 19)
+bare mouse triple click: selection=TextRange(12, 29)
+bare expected word "Another" = TextRange(12, 19), line 2 = TextRange(12, 29)
+page finger double tap: selection=TextRange(12, 19)
+page finger hold: selection=TextRange(12, 19)
+page finger hold then drag: selection=TextRange(12, 89)
+page pen hold: selection=TextRange(12, 19)
+page pen double tap: selection=TextRange(12, 19)
+page mouse double click: selection=TextRange(12, 19)
+page mouse triple click: selection=TextRange(15, 15)
+page expected word "Another" = TextRange(12, 19), line 2 = TextRange(12, 29)
+after wheel on heading: sheet open=true
+page compose mouse click right of line 2: selection=TextRange(29, 29) expected 29
+page compose mouse click in line 1: selection=TextRange(3, 3)
+page compose mouse drag select lines 1-4: selection=TextRange(1, 89)
+page finger long press on line 2: selection=TextRange(12, 19)
+page finger drag end handle down 2 lines: selection=TextRange(12, 89) (was TextRange(12, 19))
+bare finger long press on line 2: selection=TextRange(12, 19)
+bare finger drag end handle down 2 lines: selection=TextRange(12, 95) (was TextRange(12, 19))
+page pen long press on line 2: selection=TextRange(12, 19)
+page pen drag end handle down 2 lines: selection=TextRange(12, 89) (was TextRange(12, 19))

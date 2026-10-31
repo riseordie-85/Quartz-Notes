@@ -1,0 +1,113 @@
+INFO: Constructing runner from config.
+INFO: Configuring Android Instrumentation driver: android_instrumentation_runtime {
+  instrumentation_info {
+    app_package: "com.quartz.notes"
+    test_package: "com.quartz.notes.test"
+    test_runner_class: "androidx.test.runner.AndroidJUnitRunner"
+  }
+  instrumentation_args {
+    args_map {
+      key: "additionalTestOutputDir"
+      value: "/sdcard/Android/media/com.quartz.notes/additional_test_output"
+    }
+  }
+}
+am_instrument_timeout: 31536000
+
+INFO: Configuring AndroidTestApkInstallerPlugin: apks_to_install {
+  apk_paths: "/home/runner/work/Quartz-Notes/Quartz-Notes/app/build/outputs/apk/debug/app-debug.apk"
+  install_options {
+  }
+}
+apks_to_install {
+  apk_paths: "/home/runner/work/Quartz-Notes/Quartz-Notes/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk"
+  install_options {
+  }
+}
+
+INFO: No installables found in test fixture. Nothing to install.
+INFO: Installing [/home/runner/work/Quartz-Notes/Quartz-Notes/app/build/outputs/apk/debug/app-debug.apk] on device emulator-5554.
+INFO: Installing [/home/runner/work/Quartz-Notes/Quartz-Notes/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk] on device emulator-5554.
+INFO: Start logcat streaming.
+INFO: Running Android Instrumentation driver.
+INFO: Copying files from device to host: /sdcard/Android/media/com.quartz.notes/additional_test_output to /home/runner/work/Quartz-Notes/Quartz-Notes/app/build/outputs/connected_android_test_additional_output/debugAndroidTest/connected/emulator-5554 - 13
+INFO: Stop logcat streaming.
+INFO: Execute com.quartz.notes.data.SyncGroundworkTest.deletingSomethingSyncedLeavesAHiddenMarker: PASSED
+INFO: Execute com.quartz.notes.data.SyncGroundworkTest.newDatabaseStartsWithATrackedShelf: PASSED
+INFO: Execute com.quartz.notes.data.SyncGroundworkTest.copiesGetTheirOwnIds: PASSED
+INFO: Execute com.quartz.notes.data.SyncGroundworkTest.wholeRowSavesAreTracked: PASSED
+INFO: Execute com.quartz.notes.data.SyncGroundworkTest.anOldCopyCantBringBackADeletedRow: PASSED
+INFO: Execute com.quartz.notes.data.SyncGroundworkTest.editsMarkRowsForUploadButSyncWritesDoNot: PASSED
+INFO: Execute com.quartz.notes.data.SyncGroundworkTest.migration4To5GivesEveryRowAnIdAndMarksItForUpload: PASSED
+INFO: Execute com.quartz.notes.data.SyncGroundworkTest.deletingANotebookDeletesItsPagesAndItems: PASSED
+INFO: Execute com.quartz.notes.data.SyncGroundworkTest.restoringABackupKeepsIdsAndAddingAlongsideMakesNewOnes: PASSED
+INFO: Execute com.quartz.notes.data.SyncGroundworkTest.deletingSomethingNeverSyncedErasesIt: PASSED
+INFO: Execute com.quartz.notes.data.TemplatesTest.startersLoadAndMakePagesAndNotes: PASSED
+INFO: Execute com.quartz.notes.data.TemplatesTest.pagesAddedInTheTemplatesNotebookAreTemplates: PASSED
+INFO: Execute com.quartz.notes.data.TemplatesTest.aPageSavedAsATemplateMakesNewPagesWithEverythingOnIt: PASSED
+INFO: Execute com.quartz.notes.data.TemplatesTest.migration5To6AddsTemplateAndBackgroundFields: PASSED
+INFO: Execute com.quartz.notes.data.TemplatesTest.aNoteSavedAsATemplateStaysOutOfTheListAndMakesNewNotes: PASSED
+INFO: Execute com.quartz.notes.data.sync.SyncEngineTest.notebooksWithPagesItemsAndAttachments: PASSED
+INFO: Execute com.quartz.notes.data.sync.SyncEngineTest.accentAndBackgroundAreShared: PASSED
+INFO: Execute com.quartz.notes.data.sync.SyncEngineTest.deletingReachesTheOtherDevice: PASSED
+INFO: Execute com.quartz.notes.data.sync.SyncEngineTest.templatesAndBackgroundPicturesSync: PASSED
+INFO: Execute com.quartz.notes.data.sync.SyncEngineTest.picturesRecordingsAndFontsTravel: PASSED
+INFO: Execute com.quartz.notes.data.sync.SyncEngineTest.conflictingNoteEditsKeepBothVersions: PASSED
+INFO: Execute com.quartz.notes.data.sync.SyncEngineTest.remoteChangesAreReported: PASSED
+INFO: Execute com.quartz.notes.data.sync.SyncEngineTest.aNoteTravelsBothWays: PASSED
+INFO: Execute com.quartz.notes.data.sync.SyncEngineTest.offlineIsReportedAndNothingIsLost: PASSED
+INFO: Execute com.quartz.notes.data.sync.SyncEngineTest.theLaterEditWinsWhicheverDeviceSyncsFirst: PASSED
+INFO: Execute com.quartz.notes.data.sync.SyncEngineTest.firstSyncMergesWhatBothDevicesHad: PASSED
+INFO: Execute com.quartz.notes.data.sync.SyncEngineTest.liveNotesStayHiddenWhileDeletedOnesArriveLater: PASSED
+INFO: Execute com.quartz.notes.data.sync.SyncEngineTest.conflictingPageEditsKeepBothVersions: PASSED
+INFO: Execute com.quartz.notes.data.sync.SyncEngineTest.liveChangesArriveWithinSeconds: PASSED
+INFO: Execute com.quartz.notes.data.sync.SyncEngineTest.signingOutMarksEverythingForTheNextServer: PASSED
+INFO: Execute com.quartz.notes.ui.LiveEditTest.openNoteShowsChangesOrKeepsThemAsACopy: PASSED
+INFO: Execute com.quartz.notes.ui.LiveEditTest.openPageShowsChanges: PASSED
+INFO: Execute com.quartz.notes.ui.editor.EditorScreenshotTest.typingEnterAndLists: PASSED
+INFO: Execute com.quartz.notes.ui.editor.EditorScreenshotTest.selectAcrossParagraphs: PASSED
+INFO: Execute com.quartz.notes.ui.editor.EditorScreenshotTest.layout: PASSED
+INFO: Execute com.quartz.notes.ui.editor.EditorScreenshotTest.picturesInLine: PASSED
+INFO: Execute com.quartz.notes.ui.editor.EditorScreenshotTest.dividers: PASSED
+INFO: Execute com.quartz.notes.ui.home.HomeArrangeTest.holdAndDragANotebookToMoveIt: PASSED
+INFO: Execute com.quartz.notes.ui.home.HomeArrangeTest.splitViewCanBeTurnedOffOnWideScreens: PASSED
+INFO: Execute com.quartz.notes.ui.home.HomeArrangeTest.noSplitViewButtonOnAPhone: PASSED
+INFO: Execute com.quartz.notes.ui.notebook.BrushTest.brushesSizesAndTwoFingerUndo: PASSED
+INFO: Execute com.quartz.notes.ui.notebook.FreeformTest.aNewNotebookIsSetUpStepByStep: PASSED
+INFO: Execute com.quartz.notes.ui.notebook.FreeformTest.picturesOnATextPageGoInLine: PASSED
+INFO: Execute com.quartz.notes.ui.notebook.FreeformTest.aSmallPageIsCenteredAndPinchingAPictureResizesIt: PASSED
+INFO: Execute com.quartz.notes.ui.notebook.FreeformTest.freeformNotebooksMakePagesOfTheirSize: PASSED
+INFO: Execute com.quartz.notes.ui.notebook.FreeformTest.aFreeformPageZoomsAndFitsAgain: PASSED
+INFO: Execute com.quartz.notes.ui.notebook.FreeformTest.drawingToolsOnATextPageOfferAFreeformPage: PASSED
+INFO: Execute com.quartz.notes.ui.notebook.FreeformToolsTest.groupsMoveCopyAndPaste: PASSED
+INFO: Execute com.quartz.notes.ui.notebook.FreeformToolsTest.lassoPicksItemsAndUndoBringsThemBack: PASSED
+INFO: Execute com.quartz.notes.ui.notebook.FreeformToolsTest.undoAndRedoItemChanges: PASSED
+INFO: Execute com.quartz.notes.ui.notebook.PageBackgroundTest.pictureWindowFitsAndTurnsThePicture: PASSED
+INFO: Execute com.quartz.notes.ui.notebook.PageInputTest.pageButtonsAndTimeline: PASSED
+INFO: Execute com.quartz.notes.ui.notebook.PageInputTest.clickAnywhereOnALine: PASSED
+INFO: Execute com.quartz.notes.ui.notebook.PageInputTest.composeMouseOnBareEditor: PASSED
+INFO: Execute com.quartz.notes.ui.notebook.PageInputTest.selectingTextOnBareEditor: PASSED
+SEVERE: Execute com.quartz.notes.ui.notebook.PageInputTest.selectingTextOnPage: FAILED
+java.lang.AssertionError: java.lang.AssertionError: mouse triple click selects the paragraph expected:<TextRange(12, 29)> but was:<TextRange(15, 15)>
+at org.junit.Assert.fail(Assert.java:89)
+at org.junit.Assert.failNotEquals(Assert.java:835)
+at org.junit.Assert.assertEquals(Assert.java:120)
+at com.quartz.notes.ui.notebook.PageInputTest.selectionGestures(PageInputTest.kt:331)
+at com.quartz.notes.ui.notebook.PageInputTest.selectingTextOnPage(PageInputTest.kt:337)
+
+java.lang.AssertionError: mouse triple click selects the paragraph expected:<TextRange(12, 29)> but was:<TextRange(15, 15)>
+at org.junit.Assert.fail(Assert.java:89)
+at org.junit.Assert.failNotEquals(Assert.java:835)
+at org.junit.Assert.assertEquals(Assert.java:120)
+at com.quartz.notes.ui.notebook.PageInputTest.selectionGestures(PageInputTest.kt:331)
+at com.quartz.notes.ui.notebook.PageInputTest.selectingTextOnPage(PageInputTest.kt:337)
+INFO: Execute com.quartz.notes.ui.notebook.PageInputTest.mouseWheelInTimeline: PASSED
+INFO: Execute com.quartz.notes.ui.notebook.PageInputTest.composeMouseOnPage: PASSED
+INFO: Execute com.quartz.notes.ui.notebook.PageInputTest.handlesOnPage: PASSED
+INFO: Execute com.quartz.notes.ui.notebook.PageInputTest.handlesOnBareEditor: PASSED
+INFO: Execute com.quartz.notes.ui.notebook.PageInputTest.toolbarOnTop: PASSED
+INFO: Execute com.quartz.notes.ui.notebook.PageInputTest.rightClickThumbnailToDelete: PASSED
+INFO: Execute com.quartz.notes.ui.notebook.PageInputTest.penHandlesOnPage: PASSED
+INFO: Execute com.quartz.notes.ui.notebook.TimelineDragTest.dragAPageAlongTheTimeline: PASSED
+INFO: Execute com.quartz.notes.ui.templates.TemplatesUiTest.templatesAndBackgroundPictures: PASSED
+INFO: Execute com.quartz.notes.ui.templates.TemplatesUiTest.settingsListsTemplates: PASSED

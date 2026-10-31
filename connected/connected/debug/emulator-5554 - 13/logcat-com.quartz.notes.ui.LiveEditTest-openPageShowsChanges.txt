@@ -1,0 +1,7 @@
+10-31 20:37:07.714  4657  4747 I TestRunner: started: openPageShowsChanges(com.quartz.notes.ui.LiveEditTest)
+10-31 20:37:07.733  4657  4657 W om.quartz.notes: Method java.lang.Object androidx.compose.runtime.snapshots.SnapshotStateMap.mutate(kotlin.jvm.functions.Function1) failed lock verification and will run slower.
+10-31 20:37:07.734  4657  4657 W om.quartz.notes: Method void androidx.compose.runtime.snapshots.SnapshotStateMap.update(kotlin.jvm.functions.Function1) failed lock verification and will run slower.
+10-31 20:37:07.735  4657  4657 W om.quartz.notes: Method boolean androidx.compose.runtime.snapshots.SnapshotStateMap.removeIf$runtime_release(kotlin.jvm.functions.Function1) failed lock verification and will run slower.
+10-31 20:37:07.745  1049  1056 W .gms.persistent: Suspending all threads took: 11.800ms
+10-31 20:37:07.754  1049  1056 I .gms.persistent: Background young concurrent copying GC freed 25735(1115KB) AllocSpace objects, 0(0B) LOS objects, 0% free, 35MB/35MB, paused 54us,12.759ms total 132.525ms
+10-31 20:37:07.798  4657  4747 I TestRunner: finished: openPageShowsChanges(com.quartz.notes.ui.LiveEditTest)

@@ -1,0 +1,37 @@
+10-31 20:37:02.255  4657  4747 I TestRunner: started: offlineIsReportedAndNothingIsLost(com.quartz.notes.data.sync.SyncEngineTest)
+10-31 20:37:02.259  4657  4747 D TrafficStats: tagSocket(96) with statsTag=0xffffffff, statsUid=-1
+10-31 20:37:02.271  1049  1056 I .gms.persistent: Background young concurrent copying GC freed 202771(10MB) AllocSpace objects, 16(832KB) LOS objects, 34% free, 21MB/32MB, paused 35us,26us total 133.316ms
+10-31 20:37:02.313  1049  5309 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.icing.proxy.IcingInternalCorporaUpdateService started execution. cause:5 exec_start_elapsed_seconds: 150 [CONTEXT service_id=218 ]
+10-31 20:37:02.315  1049  2718 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.icing.proxy.IcingInternalCorporaUpdateService finished executing. cause:5 result: 1 elapsed_millis: 52 uptime_millis: 52 exec_start_elapsed_seconds: 150 [CONTEXT service_id=218 ]
+10-31 20:37:02.321  1680  1849 W MediaProvider: getVolumePath for unknown volume: internal
+10-31 20:37:02.326  2518  3388 W libc    : Access denied finding property "persist.adb.tls_server.enable"
+10-31 20:37:02.327  2518  3388 W libc    : Access denied finding property "service.adb.tls.port"
+10-31 20:37:02.316  2518  2518 W binder:2518_5: type=1400 audit(0.0:50): avc: denied { read } for name="u:object_r:system_adbd_prop:s0" dev="tmpfs" ino=269 scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:object_r:system_adbd_prop:s0 tclass=file permissive=0 app=com.google.android.gms
+10-31 20:37:02.324  2518  2518 W binder:2518_5: type=1400 audit(0.0:51): avc: denied { read } for name="u:object_r:adbd_prop:s0" dev="tmpfs" ino=61 scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:object_r:adbd_prop:s0 tclass=file permissive=0 app=com.google.android.gms
+10-31 20:37:02.394  1049  5309 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService started execution. cause:5 exec_start_elapsed_seconds: 150 [CONTEXT service_id=218 ]
+10-31 20:37:02.425  1049  2718 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService finished executing. cause:5 result: 1 elapsed_millis: 50 uptime_millis: 50 exec_start_elapsed_seconds: 150 [CONTEXT service_id=218 ]
+10-31 20:37:02.446  1049  2486 E GmsTaskScheduler: sendWakeUpEvent called on SchedulerClientBroadcastStrategy
+10-31 20:37:02.458  1049  1326 I TapAndPay: Disabling TapAndPay HCE service [CONTEXT service_id=79 ]
+10-31 20:37:02.460  1049  5309 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService started execution. cause:5 exec_start_elapsed_seconds: 150 [CONTEXT service_id=218 ]
+10-31 20:37:02.461  1277  5147 W Pay     : Active account was null, notification task will be cancelled. [CONTEXT service_id=198 ]
+10-31 20:37:02.462  1277  5147 W Pay     : No account found on the task or the device. Notification task will not be rescheduled. [CONTEXT service_id=198 ]
+10-31 20:37:02.467  1049  2718 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService finished executing. cause:5 result: 2 elapsed_millis: 22 uptime_millis: 22 exec_start_elapsed_seconds: 150 [CONTEXT service_id=218 ]
+10-31 20:37:02.488  1049  5309 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService started execution. cause:5 exec_start_elapsed_seconds: 150 [CONTEXT service_id=218 ]
+10-31 20:37:02.490  1049  1326 I TapAndPay: Disabling TapAndPay HCE service [CONTEXT service_id=79 ]
+10-31 20:37:02.491  1277  4605 W Pay     : Active account was null, notification task will be cancelled. [CONTEXT service_id=198 ]
+10-31 20:37:02.492  1277  4605 E Pay     : [Migration operation] Active tapandpay account not found! [CONTEXT service_id=198 ]
+10-31 20:37:02.522  1277  4605 I Pay     : Migration flag not enabled. [CONTEXT service_id=198 ]
+10-31 20:37:02.530  1277  4605 I Pay     : Attempting migration; GP2 not installed. [CONTEXT service_id=198 ]
+10-31 20:37:02.575  1277  4605 I Pay     : Attempting migration; GP2 not installed. [CONTEXT service_id=198 ]
+10-31 20:37:02.587  1277  4605 I Pay     : Migration flag not enabled. [CONTEXT service_id=198 ]
+10-31 20:37:02.588  1277  4605 I Pay     : Migration flag not enabled. [CONTEXT service_id=198 ]
+10-31 20:37:02.588  1277  4605 I Pay     : Migration flag not enabled. [CONTEXT service_id=198 ]
+10-31 20:37:02.588  1277  4605 I Pay     : Migration flag not enabled. [CONTEXT service_id=198 ]
+10-31 20:37:02.588  1277  4605 I Pay     : [SeTosMigration] walletJpEligibility is not enabled [CONTEXT service_id=198 ]
+10-31 20:37:02.590  1277  4605 I Pay     : Wallet install state NOT_INSTALLED [CONTEXT service_id=198 ]
+10-31 20:37:02.592  1277  4605 I Pay     : Migration flag not enabled. [CONTEXT service_id=198 ]
+10-31 20:37:02.636  1049  5309 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService finished executing. cause:5 result: 1 elapsed_millis: 146 uptime_millis: 146 exec_start_elapsed_seconds: 150 [CONTEXT service_id=218 ]
+10-31 20:37:02.652  4657  4771 D TrafficStats: tagSocket(97) with statsTag=0xffffffff, statsUid=-1
+10-31 20:37:02.686  1049  5312 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService started execution. cause:5 exec_start_elapsed_seconds: 150 [CONTEXT service_id=218 ]
+10-31 20:37:02.692  1049  5312 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService finished executing. cause:5 result: 1 elapsed_millis: 14 uptime_millis: 14 exec_start_elapsed_seconds: 150 [CONTEXT service_id=218 ]
+10-31 20:37:02.697  4657  4747 I TestRunner: finished: offlineIsReportedAndNothingIsLost(com.quartz.notes.data.sync.SyncEngineTest)

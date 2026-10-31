@@ -1,0 +1,64 @@
+10-31 20:36:48.716  4657  4747 I TestRunner: started: aNoteSavedAsATemplateStaysOutOfTheListAndMakesNewNotes(com.quartz.notes.data.TemplatesTest)
+10-31 20:36:48.810   485   515 E system_server: No package ID 7f found for ID 0x7f0802b0.
+10-31 20:36:48.828  2537  2800 I CarrierServices: [41] RcsStateSaver.saveRcsState:57 Saving RCS State
+10-31 20:36:48.831  2537  2800 I CarrierServices: [41] RcsStateSaver.saveRcsState:66 Old operation mode: 2
+10-31 20:36:48.837  2537  2800 I CarrierServices: [41] RcsStateSaver.saveRcsState:71 New operation mode: 2
+10-31 20:36:48.840  2537  2537 I CarrierServices: [2] RcsStateFetcher$1.onPostExecute:189 Finalizing migration for RCS state: Operation mode FULL STACK
+10-31 20:36:48.845  2896  4764 I BugleRcsEngine: [172] RcsStateProvider.onMigrationComplete: Migration complete.
+10-31 20:36:48.873  2537  2537 I CarrierServices: [2] RcsStateFetcher$GetRcsStateConnection.onFinish:162 Unbinding RcsMigrationService
+10-31 20:36:48.919  2896  3064 I BugleRcsEngine: [42] RcsStateProvider.lambda$onMigrationComplete$0$com-google-android-apps-messaging-rcsmigration-RcsStateProvider: Rcs Engine should be running in cs.apk. Stopping JibeService.
+10-31 20:36:48.919  2896  3064 I RcsClientLib: Disconnecting ChatSessionService
+10-31 20:36:48.941  2896  3076 W Bugle   : TextClassifierLibManagerImpl: Reclaiming memory at level: 40
+10-31 20:36:48.942   760   760 D CompatibilityChangeReporter: Compat change id reported: 194532703; UID 10160; state: ENABLED
+10-31 20:36:48.951  2537  4673 I CarrierServices: [67] EventHubProxy.unsubscribe: Removing event listener 148159262 for category 2 for hub UI
+10-31 20:36:48.952  2537  4673 I CarrierServices: [67] EventHubProxy.unsubscribe: Removing event listener 34909088 for category 3 for hub UI
+10-31 20:36:48.953  2537  4673 I CarrierServices: [67] EventHubProxy.unsubscribe: Removing event listener 215483225 for category 5 for hub UI
+10-31 20:36:48.953  2896  3064 I RcsClientLib: Disconnecting EventService
+10-31 20:36:48.955  2896  3064 I RcsClientLib: Disconnecting ContactsService
+10-31 20:36:48.956  2896  3064 I RcsClientLib: Disconnecting FileTransferService
+10-31 20:36:48.956  2896  3064 I RcsClientLib: Disconnecting LocationSharingService
+10-31 20:36:48.957  2896  3064 I RcsClientLib: Disconnecting ImsConnectionTrackerService
+10-31 20:36:48.958  2896  3064 I RcsClientLib: Disconnecting RcsProfileService
+10-31 20:36:48.960  2896  3064 I RcsClientLib: Disconnecting BusinessInfoService
+10-31 20:36:48.961  2896  3064 I RcsClientLib: Disconnecting RcsMessagingService
+10-31 20:36:48.962  2896  3064 I RcsClientLib: Disconnecting TransportControlService
+10-31 20:36:48.963  2896  3064 W BugleRcs: disconnecting from all Rcs Services
+10-31 20:36:48.963  2896  3064 I BugleRcsEngine: [42] RcsStateProvider.lambda$onMigrationComplete$0$com-google-android-apps-messaging-rcsmigration-RcsStateProvider: JibeService stopped: false
+10-31 20:36:48.965  2896  3064 I RcsClientLib: Connecting ChatSessionService
+10-31 20:36:48.966  2896  3064 I RcsClientLib: shouldUseCarrierServicesJibeService: true, CarrierServices rcs service found: true
+10-31 20:36:48.968  2896  3064 I RcsClientLib: Connecting EventService
+10-31 20:36:48.968  2896  3082 I RcsClientLib: com.google.android.rcs.client.chatsession.ChatSessionService connected
+10-31 20:36:48.968  2896  3082 I BugleRcs: com.google.android.rcs.client.chatsession.ChatSessionService RCS service connected
+10-31 20:36:48.969  2896  3064 I RcsClientLib: shouldUseCarrierServicesJibeService: true, CarrierServices rcs service found: true
+10-31 20:36:48.980  2896  3082 I RcsClientLib: com.google.android.rcs.client.events.EventService connected
+10-31 20:36:48.980  2896  3082 I BugleRcs: com.google.android.rcs.client.events.EventService RCS service connected
+10-31 20:36:48.981  2896  3064 I RcsClientLib: Connecting ContactsService
+10-31 20:36:48.996  2896  3064 I RcsClientLib: shouldUseCarrierServicesJibeService: true, CarrierServices rcs service found: true
+10-31 20:36:49.002   760   760 I HibernationPolicy: scheduleHibernationJob with frequency 1296000000ms and threshold 7776000000ms
+10-31 20:36:49.006   485   515 E system_server: No package ID 7f found for ID 0x7f150a40.
+10-31 20:36:49.006   485   515 E system_server: No package ID 7f found for ID 0x7f150a40.
+10-31 20:36:49.006   485   515 E system_server: No package ID 7f found for ID 0x7f150a3f.
+10-31 20:36:49.009  2896  3082 I RcsClientLib: com.google.android.rcs.client.contacts.ContactsService connected
+10-31 20:36:49.009  2896  3082 I BugleRcs: com.google.android.rcs.client.contacts.ContactsService RCS service connected
+10-31 20:36:49.009  2896  3064 I RcsClientLib: Connecting FileTransferService
+10-31 20:36:49.014  2896  3064 I RcsClientLib: shouldUseCarrierServicesJibeService: true, CarrierServices rcs service found: true
+10-31 20:36:49.021  2896  3082 I RcsClientLib: com.google.android.rcs.client.filetransfer.FileTransferService connected
+10-31 20:36:49.021  2896  3082 I BugleRcs: com.google.android.rcs.client.filetransfer.FileTransferService RCS service connected
+10-31 20:36:49.025  2896  3064 I RcsClientLib: Connecting LocationSharingService
+10-31 20:36:49.026  2896  3064 I RcsClientLib: shouldUseCarrierServicesJibeService: true, CarrierServices rcs service found: true
+10-31 20:36:49.030  2896  3082 I RcsClientLib: com.google.android.rcs.client.locationsharing.LocationSharingService connected
+10-31 20:36:49.030  2896  3082 I BugleRcs: com.google.android.rcs.client.locationsharing.LocationSharingService RCS service connected
+10-31 20:36:49.030  2896  3064 I RcsClientLib: Connecting ImsConnectionTrackerService
+10-31 20:36:49.033  2896  3064 I RcsClientLib: shouldUseCarrierServicesJibeService: true, CarrierServices rcs service found: true
+10-31 20:36:49.057  2896  3082 I RcsClientLib: com.google.android.rcs.client.ims.ImsConnectionTrackerService connected
+10-31 20:36:49.057  2896  3082 I BugleRcs: com.google.android.rcs.client.ims.ImsConnectionTrackerService RCS service connected
+10-31 20:36:49.058  2896  3064 I RcsClientLib: Connecting RcsProfileService
+10-31 20:36:49.066  2896  3082 I BugleRcs: subscribing to global rcs listener
+10-31 20:36:49.067  2537  2572 I CarrierServices: [37] EventHubProxy.subscribe: Adding event listener com.google.android.ims.rcsservice.events.IEventObserver$Stub$Proxy@a8e1cc for category 3 with key 11067852 for hub UI
+10-31 20:36:49.068  2537  2572 I CarrierServices: [37] EventHubProxy.subscribe: Adding event listener com.google.android.ims.rcsservice.events.IEventObserver$Stub$Proxy@c7c7c15 for category 5 with key 209484821 for hub UI
+10-31 20:36:49.068  2537  2572 I CarrierServices: [37] EventHubProxy.subscribe: Adding event listener com.google.android.ims.rcsservice.events.IEventObserver$Stub$Proxy@c0d6b2a for category 2 with key 202205994 for hub UI
+10-31 20:36:49.082   760   760 I HibernationPolicy: user 0 is a profileowner. Running hibernation job.
+10-31 20:36:49.083   760   760 I HibernationPolicy: No existing job, scheduling a new one
+10-31 20:36:49.128   485   515 E system_server: No package ID 7f found for ID 0x7f0805a7.
+10-31 20:36:49.128   485   515 E system_server: No package ID 7f found for ID 0x7f150421.
+10-31 20:36:49.184  4657  4747 I TestRunner: finished: aNoteSavedAsATemplateStaysOutOfTheListAndMakesNewNotes(com.quartz.notes.data.TemplatesTest)

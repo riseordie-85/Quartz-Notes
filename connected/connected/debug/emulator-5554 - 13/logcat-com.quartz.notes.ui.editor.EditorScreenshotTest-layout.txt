@@ -1,0 +1,244 @@
+10-31 20:37:22.118  4657  4747 I TestRunner: started: layout(com.quartz.notes.ui.editor.EditorScreenshotTest)
+10-31 20:37:22.133   485  1825 W AppSearchIcing: icing-search-engine.cc:217: Error: 5, Message: Document (com.google.android.googlequicksearchbox$OneSearchZeroStateGoogleSuggestions/default, zp) not found.
+10-31 20:37:22.153   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb7f5f0
+10-31 20:37:22.153   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb813f0
+10-31 20:37:22.153   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb81090
+10-31 20:37:22.164  1490  1992 I EmojiShortcutsLoader: EmojiShortcutsLoader.call():72 Finished loading emoji shortcuts
+10-31 20:37:22.164  4657  4747 D IdlingRegistry: Registering idling resources: [androidx.compose.ui.test.EspressoLink@d61a12a]
+10-31 20:37:22.184  4657  4747 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+10-31 20:37:22.217   759   805 D SplashScreenView: Build android.window.SplashScreenView{dc286a9 V.E...... ......ID 0,0-0,0}
+10-31 20:37:22.217   759   805 D SplashScreenView: Icon: view: null drawable: null size: 0
+10-31 20:37:22.217   759   805 D SplashScreenView: Branding: view: android.view.View{91042e G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+10-31 20:37:22.232  1894  1894 I BgTaskExecutorImpl: Starting EXCLUSIVE background task UPLOAD_ASSISTANT_DEVICE_SETTINGS.
+10-31 20:37:22.233   759   814 W Parcel  : Expecting binder but got null!
+10-31 20:37:22.335  1277  5151 E WorkSourceUtil: Could not find package: com.google.android.gms.westworld
+10-31 20:37:22.413  1012  2044 D EGL_emulation: app_time_stats: avg=136.50ms min=35.87ms max=470.17ms count=7
+10-31 20:37:22.435  1277  5305 W gle.android.gms: Long monitor contention with owner [com.google.android.gms.chimera.container.intentoperation.GmsIntentOperationChimeraService-Executor] idle (5151) at void hjm.run()(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3) waiters=0 in void hjm.run() for 17.959s
+10-31 20:37:22.437  1012  2299 D OneSearchSuggestProvider: Created the binder channel successfully for end point service =com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService , mChannel=Q0{delegate=L0{logId=5, target=directaddress:///AndroidComponentAddress%5BIntent%20%7B%20act=grpc.io.action.BIND%20cmp=com.google.android.googlequicksearchbox/com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService%20%7D%5D}} , mOneSearchConnection=y1.J@410f3ac
+10-31 20:37:22.458  1894  2178 E BgTaskExecutorImpl: EXCLUSIVE background task SEND_GSA_HOME_REQUEST was cancelled.
+10-31 20:37:22.458  1894  2178 E BgTaskExecutorImpl: java.util.concurrent.CancellationException: Task was cancelled.
+10-31 20:37:22.458  1894  2178 E BgTaskExecutorImpl: 	at com.google.common.util.concurrent.d.s(PG:3)
+10-31 20:37:22.458  1894  2178 E BgTaskExecutorImpl: 	at com.google.common.util.concurrent.d.get(PG:4)
+10-31 20:37:22.458  1894  2178 E BgTaskExecutorImpl: 	at com.google.common.util.concurrent.eb.a(PG:1)
+10-31 20:37:22.458  1894  2178 E BgTaskExecutorImpl: 	at com.google.common.util.concurrent.ci.r(PG:2)
+10-31 20:37:22.458  1894  2178 E BgTaskExecutorImpl: 	at com.google.common.util.concurrent.cb.run(PG:4)
+10-31 20:37:22.458  1894  2178 E BgTaskExecutorImpl: 	at com.google.android.apps.gsa.shared.util.c.a.cf.b(PG:1)
+10-31 20:37:22.458  1894  2178 E BgTaskExecutorImpl: 	at com.google.android.apps.gsa.shared.util.c.a.ci.run(PG:1)
+10-31 20:37:22.458  1894  2178 E BgTaskExecutorImpl: 	at com.google.android.libraries.i.ae.run(PG:1)
+10-31 20:37:22.458  1894  2178 E BgTaskExecutorImpl: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+10-31 20:37:22.458  1894  2178 E BgTaskExecutorImpl: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+10-31 20:37:22.458  1894  2178 E BgTaskExecutorImpl: 	at com.google.android.libraries.i.i.run(PG:2)
+10-31 20:37:22.458  1894  2178 E BgTaskExecutorImpl: 	at com.google.android.libraries.i.p.run(PG:4)
+10-31 20:37:22.458  1894  2178 E BgTaskExecutorImpl: 	at java.lang.Thread.run(Thread.java:1012)
+10-31 20:37:22.479  1012  1012 W FrameTracker: Missed App frame:UNKNOWN: 74, 8093, 0, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+10-31 20:37:22.480  1012  1012 W FrameTracker: Missed SF frame:UNKNOWN: 74, 8093, 0, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+10-31 20:37:22.480  1012  1012 W FrameTracker: Missing HWUI jank callback for vsyncId: 8093, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+10-31 20:37:22.481  1012  1012 W FrameTracker: Missed SF frame:UNKNOWN: 66, 8108, 0, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+10-31 20:37:22.481  1012  1012 W FrameTracker: Missing HWUI jank callback for vsyncId: 8108, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+10-31 20:37:22.502  1277  4684 E WakeLock: IntentOp:.chimera.container.InitConfigOperation ** IS FORCE-RELEASED ON TIMEOUT **
+10-31 20:37:22.531  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@2f27dce in: PRE_ON_CREATE
+10-31 20:37:22.535  4657  4657 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+10-31 20:37:22.577  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@2f27dce in: CREATED
+10-31 20:37:22.577  4657  4657 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=androidx.activity.ComponentActivity@2f27dce
+10-31 20:37:22.578  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@2f27dce in: STARTED
+10-31 20:37:22.578  4657  4657 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=androidx.activity.ComponentActivity@2f27dce
+10-31 20:37:22.588  1049  1049 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.gmscompliance.service.START dat=chimera-action:/... cmp=com.google.android.gms/.chimera.PersistentBoundBrokerService }
+10-31 20:37:22.683  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@2f27dce in: RESUMED
+10-31 20:37:22.683  4657  4657 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=androidx.activity.ComponentActivity@2f27dce
+10-31 20:37:22.689  1894  1894 I A       : Created gRPC endpoint to "search" for service class com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService
+10-31 20:37:22.698  4657  5427 W Parcel  : Expecting binder but got null!
+10-31 20:37:22.766   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb81570
+10-31 20:37:22.766   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb831f0
+10-31 20:37:22.766   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb831f0
+10-31 20:37:22.766   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb81570
+10-31 20:37:22.871   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb820b0
+10-31 20:37:22.951   127   127 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.allocator@4.0::IAllocator/default in either framework or device VINTF manifest.
+10-31 20:37:22.952   126   126 I servicemanager: Could not find android.hardware.graphics.allocator.IAllocator/default in the VINTF manifest.
+10-31 20:37:22.952   485   501 W Gralloc4: allocator 4.x is not supported
+10-31 20:37:22.959   485   485 W system_server: Long monitor contention with owner android.bg (515) at boolean android.os.MessageQueue.enqueueMessage(android.os.Message, long)(MessageQueue.java:600) waiters=0 in android.os.Message android.os.MessageQueue.next() for 163ms
+10-31 20:37:23.019   759   814 D EGL_emulation: app_time_stats: avg=1086.66ms min=726.05ms max=1447.28ms count=2
+10-31 20:37:23.055   485   505 W ziparchive: Unable to open '/data/app/~~NaCDcvl8pEfH3jUii6w5KA==/com.quartz.notes-5rFpeCYkV8uU0I8d8yBjEA==/base.dm': No such file or directory
+10-31 20:37:23.058   485   505 I ActivityTaskManager: Displayed com.quartz.notes/androidx.activity.ComponentActivity: +848ms
+10-31 20:37:23.080   950  1243 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+10-31 20:37:23.083   950  1243 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+10-31 20:37:23.085  4657  4657 D AutofillManager: Fill dialog is enabled:false, hints=[]
+10-31 20:37:23.103   485  1773 W InputManager-JNI: Input channel object '1d77652 Splash Screen com.quartz.notes (client)' was disposed without first being removed with the input manager!
+10-31 20:37:23.116  1012  2299 D OneSearchSuggestProvider: Shut down the binder channel
+10-31 20:37:23.142   485  5544 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_multi_configs ANDROID_EMU_hwc_color_transform GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0
+10-31 20:37:23.146   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb815d0
+10-31 20:37:23.152   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb7eb70
+10-31 20:37:23.152   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb80af0
+10-31 20:37:23.153   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb80af0
+10-31 20:37:23.153   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb815d0
+10-31 20:37:23.153   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb815d0
+10-31 20:37:23.153   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb7eb70
+10-31 20:37:23.243   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb81db0
+10-31 20:37:23.267   485  5544 W OpenGLRenderer: Failed to initialize 101010-2 format, error = EGL_SUCCESS
+10-31 20:37:23.282  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+10-31 20:37:23.282  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+10-31 20:37:23.282  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=null}, false)
+10-31 20:37:23.282  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+10-31 20:37:23.283  1490  1490 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+10-31 20:37:23.303   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb80f70
+10-31 20:37:23.392  1894  2465 W A       : Task o[ServiceTransaction[SessionController#handleGenericClientEvent]] was queued for 1483ms before starting on executor EventBus
+10-31 20:37:23.460  1894  2493 I PBSessionCacheImpl: Deleted sessionId[8331693570961068] from persistence.
+10-31 20:37:23.477  1894  2493 W LocationOracle: getBestLocation(): no location is available
+10-31 20:37:23.483  1894  2178 I NetworkRecognitionRnr: Using pair HTTP connection
+10-31 20:37:23.493  1894  2465 W SearchServiceCore: Abort, client detached.
+10-31 20:37:23.493  1894  2465 W SearchServiceCore: Abort, client detached.
+10-31 20:37:23.493  1894  2465 W SearchServiceCore: Abort, client detached.
+10-31 20:37:23.493  1894  2465 W SearchServiceCore: Abort, client detached.
+10-31 20:37:23.493  1894  2465 W SearchServiceCore: Abort, client detached.
+10-31 20:37:23.493  1894  2465 W SearchServiceCore: Abort, client detached.
+10-31 20:37:23.493  1894  2465 W SearchServiceCore: Abort, client detached.
+10-31 20:37:23.494   485  5544 D EGL_emulation: eglCreateContext: 0x7a1b2c57f6d0: maj 3 min 0 rcv 3
+10-31 20:37:23.496  1894  2465 W SearchServiceCore: Abort, client detached.
+10-31 20:37:23.497  1894  2465 W SearchServiceCore: Abort, client detached.
+10-31 20:37:23.497  1894  2465 W SearchServiceCore: Abort, client detached.
+10-31 20:37:23.497  1894  2465 W SearchServiceCore: Abort, client detached.
+10-31 20:37:23.497  1894  2465 W SearchServiceCore: Abort, client detached.
+10-31 20:37:23.498  1894  2465 W SearchServiceCore: Abort, client detached.
+10-31 20:37:23.499   485  5544 D EGL_emulation: eglMakeCurrent: 0x7a1b2c57f6d0: ver 3 0 (tinfo 0x7a1d40cfb180) (first time)
+10-31 20:37:23.517   485   501 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_multi_configs ANDROID_EMU_hwc_color_transform GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0
+10-31 20:37:23.560  1894  2794 I A       : [Upload] Connected
+10-31 20:37:23.568  1894  2205 W CronetNetworkRqstWrppr: Upload request without a content type.
+10-31 20:37:23.638  1894  2345 I A       : GMSCore Auth returned 0 accounts.
+10-31 20:37:23.641  1894  2345 I A       : GoogleOwnersProvider returned 0 accounts.
+10-31 20:37:23.688  1894  2209 W LocationOracle: No location returned by GMS core getLastLocation()
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: Exception in upload method
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: com.google.android.apps.gsa.shared.r.d: Error code: 262182
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.android.apps.gsa.shared.ab.bk.d(PG:5)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.android.libraries.gsa.c.a.ar.d(PG:1)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.android.libraries.gsa.c.a.bo.b(PG:5)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.android.libraries.gsa.c.a.e.a(PG:2)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.android.libraries.gsa.c.a.a.run(PG:2)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.bf.execute(PG:1)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.d.i(PG:1)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.d.l(PG:12)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.d.cancel(PG:8)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.d.m(PG:2)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.j.a(PG:1)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.d.l(PG:3)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.d.cancel(PG:8)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.d.m(PG:2)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.j.a(PG:1)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.d.l(PG:3)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.d.cancel(PG:8)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.d.m(PG:2)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.j.a(PG:1)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.d.l(PG:3)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.d.cancel(PG:8)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.d.m(PG:2)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.j.a(PG:1)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.d.l(PG:3)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.d.cancel(PG:8)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.d.m(PG:2)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.c.a(PG:1)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.d.l(PG:3)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.d.cancel(PG:8)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.bu.cancel(PG:1)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.d.cancel(PG:17)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.android.apps.gsa.staticplugins.bk.b.h.run(PG:2)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.bf.execute(PG:1)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.d.i(PG:1)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.d.l(PG:12)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.d.cancel(PG:8)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.d.m(PG:2)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.j.a(PG:1)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.d.l(PG:3)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.d.cancel(PG:8)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.android.apps.gsa.shared.util.c.aj.a(PG:2)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.d.l(PG:3)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.d.cancel(PG:8)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.d.m(PG:2)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.c.a(PG:1)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.d.l(PG:3)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.common.util.concurrent.d.cancel(PG:8)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.android.apps.gsa.s3.o.c(PG:2)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.android.apps.gsa.s3.r.a(PG:1)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.android.apps.gsa.staticplugins.dc.a.c.e(PG:2)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.android.apps.gsa.staticplugins.dc.a.c.c(PG:3)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.android.apps.gsa.staticplugins.dc.a.e.a(PG:5)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.android.apps.gsa.s3.n.hh(PG:1)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.cd.g.a.f.e(PG:2)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.android.apps.gsa.speech.k.a.g.d(PG:22)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.android.apps.gsa.speech.k.a.g.ks(PG:6)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.android.apps.gsa.s3.o.e(PG:14)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.android.apps.gsa.s3.p.run(PG:1)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:463)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.android.apps.gsa.shared.util.c.a.e.run(PG:2)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.android.apps.gsa.shared.util.c.a.bi.run(PG:1)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.android.apps.gsa.shared.util.c.a.bi.run(PG:1)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at java.lang.Thread.run(Thread.java:1012)
+10-31 20:37:23.698  1894  2345 E cr_CronetUrlRequestContext: 	at com.google.android.apps.gsa.shared.util.c.a.l.run(PG:5)
+10-31 20:37:23.700  1894  1894 E A       : onError
+10-31 20:37:23.700  1894  1894 E A       : com.google.android.apps.gsa.shared.speech.a.m: errorCode: 65561, engine: 2
+10-31 20:37:23.700  1894  1894 E A       : 	at com.google.android.apps.gsa.staticplugins.dc.a.e.a(PG:3)
+10-31 20:37:23.700  1894  1894 E A       : 	at com.google.android.apps.gsa.s3.n.hh(PG:1)
+10-31 20:37:23.700  1894  1894 E A       : 	at com.google.cd.g.a.f.e(PG:2)
+10-31 20:37:23.700  1894  1894 E A       : 	at com.google.android.apps.gsa.speech.k.a.g.d(PG:22)
+10-31 20:37:23.700  1894  1894 E A       : 	at com.google.android.apps.gsa.speech.k.a.g.ks(PG:6)
+10-31 20:37:23.700  1894  1894 E A       : 	at com.google.android.apps.gsa.s3.o.e(PG:14)
+10-31 20:37:23.700  1894  1894 E A       : 	at com.google.android.apps.gsa.s3.p.run(PG:1)
+10-31 20:37:23.700  1894  1894 E A       : 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:463)
+10-31 20:37:23.700  1894  1894 E A       : 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+10-31 20:37:23.700  1894  1894 E A       : 	at com.google.android.apps.gsa.shared.util.c.a.e.run(PG:2)
+10-31 20:37:23.700  1894  1894 E A       : 	at com.google.android.apps.gsa.shared.util.c.a.bi.run(PG:1)
+10-31 20:37:23.700  1894  1894 E A       : 	at com.google.android.apps.gsa.shared.util.c.a.bi.run(PG:1)
+10-31 20:37:23.700  1894  1894 E A       : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+10-31 20:37:23.700  1894  1894 E A       : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+10-31 20:37:23.700  1894  1894 E A       : 	at java.lang.Thread.run(Thread.java:1012)
+10-31 20:37:23.700  1894  1894 E A       : 	at com.google.android.apps.gsa.shared.util.c.a.l.run(PG:5)
+10-31 20:37:23.700  1894  1894 E A       : Caused by: com.google.android.apps.gsa.shared.speech.a.o: errorCode: 65586, engine: 2
+10-31 20:37:23.700  1894  1894 E A       : 	... 15 more
+10-31 20:37:23.700  1894  1894 E A       : Caused by: com.google.android.apps.gsa.shared.speech.a.k: errorCode: 401, engine: 2
+10-31 20:37:23.700  1894  1894 E A       : 	at com.google.android.apps.gsa.assistant.shared.n.h.a(PG:5)
+10-31 20:37:23.700  1894  1894 E A       : 	at com.google.android.apps.gsa.s3.producers.j.hE(PG:2)
+10-31 20:37:23.700  1894  1894 E A       : 	at com.google.android.apps.gsa.speech.k.a.g.d(PG:16)
+10-31 20:37:23.700  1894  1894 E A       : 	... 12 more
+10-31 20:37:23.701  1894  2794 I NetworkRecognitionRnr: Using pair HTTP connection
+10-31 20:37:23.702  1894  2493 I A       : [Upload] Connected
+10-31 20:37:23.709  1894  1894 W A       : Failed to sync device settings.
+10-31 20:37:23.709  1894  1894 I A       : Retrying to sync device settings.
+10-31 20:37:23.710  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@2f27dce in: PAUSED
+10-31 20:37:23.710  4657  4657 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=androidx.activity.ComponentActivity@2f27dce
+10-31 20:37:23.713   759   805 D SplashScreenView: Build android.window.SplashScreenView{e68c763 V.E...... ......ID 0,0-0,0}
+10-31 20:37:23.713   759   805 D SplashScreenView: Icon: view: null drawable: null size: 0
+10-31 20:37:23.713   759   805 D SplashScreenView: Branding: view: android.view.View{8ef3f60 G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+10-31 20:37:23.724   759   814 W Parcel  : Expecting binder but got null!
+10-31 20:37:23.763  1049  1056 I .gms.persistent: Background young concurrent copying GC freed 329125(19MB) AllocSpace objects, 0(0B) LOS objects, 40% free, 28MB/48MB, paused 114us,30us total 200.390ms
+10-31 20:37:23.803  1894  2465 W SearchServiceCore: Abort, client detached.
+10-31 20:37:23.803  1894  2465 W SearchServiceCore: Abort, client detached.
+10-31 20:37:23.803  1894  2465 W SearchServiceCore: Abort, client detached.
+10-31 20:37:23.803  1894  2465 W SearchServiceCore: Abort, client detached.
+10-31 20:37:23.803  1894  2465 W SearchServiceCore: Abort, client detached.
+10-31 20:37:23.870   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb81e70
+10-31 20:37:23.870   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb831f0
+10-31 20:37:23.870   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb81e70
+10-31 20:37:23.870   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb81e70
+10-31 20:37:23.870   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb831f0
+10-31 20:37:23.870   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb831f0
+10-31 20:37:23.893  5451  5471 W Parcel  : Expecting binder but got null!
+10-31 20:37:23.969  1433  1433 I DialerTaskExecutor: com.android.voicemail.impl.scheduling.TaskExecutor.lambda$new$0:152 Stopping service [CONTEXT enable_persistent_logger=true ]
+10-31 20:37:23.969  1433  1433 I DialerTaskExecutor: com.android.voicemail.impl.scheduling.TaskExecutor.finishJobAsync:461 finishing Job [CONTEXT enable_persistent_logger=true ]
+10-31 20:37:23.970  1433  1433 I DialerTaskSchedulerJobService: com.android.voicemail.impl.scheduling.TaskSchedulerJobService.finishAsync:195 finishing job [CONTEXT enable_persistent_logger=true ]
+10-31 20:37:24.006  1433  1433 I DialerTaskExecutor: com.android.voicemail.impl.scheduling.TaskExecutor$JobFinishedPoller.run:189 JobFinishedPoller.run Job finished [CONTEXT enable_persistent_logger=true ]
+10-31 20:37:24.008  1433  1433 I DialerTaskExecutor: com.android.voicemail.impl.scheduling.TaskExecutor.terminate:287 terminated [CONTEXT enable_persistent_logger=true ]
+10-31 20:37:24.056  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@2f27dce in: STOPPED
+10-31 20:37:24.096  4657  4657 V ActivityScenario: Update currentActivityStage to STOPPED, currentActivity=androidx.activity.ComponentActivity@2f27dce
+10-31 20:37:24.106   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb819f0
+10-31 20:37:24.169  4657  4657 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@2f27dce in: DESTROYED
+10-31 20:37:24.169  4657  4657 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
+10-31 20:37:24.171   485   501 W InputManager-JNI: Input channel object '56b2881 com.quartz.notes/androidx.activity.ComponentActivity (client)' was disposed without first being removed with the input manager!
+10-31 20:37:24.179  4657  4747 D IdlingRegistry: Unregistering idling resources: [androidx.compose.ui.test.EspressoLink@d61a12a]
+10-31 20:37:24.184   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb825f0
+10-31 20:37:24.184   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb817b0
+10-31 20:37:24.184   358   373 W TransactionTracing: Could not find layer handle 0x7a193cb820b0
+10-31 20:37:24.185   950  1243 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+10-31 20:37:24.185   950  1243 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+10-31 20:37:24.186   485  1825 W AppSearchIcing: icing-search-engine.cc:217: Error: 5, Message: Document (com.google.android.googlequicksearchbox$OneSearchZeroStateGoogleSuggestions/default, zp) not found.
+10-31 20:37:24.187  1012  2299 D OneSearchSuggestProvider: Created the binder channel successfully for end point service =com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService , mChannel=Q0{delegate=L0{logId=9, target=directaddress:///AndroidComponentAddress%5BIntent%20%7B%20act=grpc.io.action.BIND%20cmp=com.google.android.googlequicksearchbox/com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService%20%7D%5D}} , mOneSearchConnection=y1.J@63dffba
+10-31 20:37:24.213  4657  4747 I TestRunner: finished: layout(com.quartz.notes.ui.editor.EditorScreenshotTest)
