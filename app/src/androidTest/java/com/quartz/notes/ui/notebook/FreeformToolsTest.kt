@@ -219,9 +219,10 @@ class FreeformToolsTest {
             val t = height * 0.26f
             val b = height * 0.78f
             down(Offset(l, t))
+            var from = Offset(l, t)
             listOf(Offset(r, t), Offset(r, b), Offset(l, b), Offset(l, t + 10f)).forEach { corner ->
-                val from = currentPosition
                 for (i in 1..8) moveTo(from + (corner - from) * (i / 8f))
+                from = corner
             }
             up()
         }
