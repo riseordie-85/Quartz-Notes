@@ -63,6 +63,8 @@ import androidx.compose.ui.input.key.type
 import androidx.compose.ui.input.pointer.PointerEventPass
 import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.input.pointer.PointerType
+import androidx.compose.ui.input.pointer.isPrimaryPressed
+import androidx.compose.ui.input.pointer.PointerInputChange
 import androidx.compose.ui.input.pointer.isSecondaryPressed
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalClipboardManager
@@ -238,6 +240,11 @@ fun RichTextEditor(
                 .pointerInput(state) {
                     // Right-click (mouse) opens the edit menu where it was clicked. Every press is also
                     // noted (without taking it), so a tap past the end of a line can stay on that line.
+                    // Mouse double-click selects a word and triple-click a paragraph (dragging after
+                    // either goes word by word or paragraph by paragraph); the text field does the
+                    // same for touch and pen itself, but not reliably for a mouse.
+                    val clicks = ClickCounter()
+                    var multi = 0
                     awaitPointerEventScope {
                         while (true) {
                             val event = awaitPointerEvent(PointerEventPass.Initial)
@@ -247,6 +254,25 @@ fun RichTextEditor(
                                 val mouse = change.type == PointerType.Mouse
                                 if ((mouse && event.type == PointerEventType.Press) || (!mouse && event.type == PointerEventType.Release)) {
                                     holder.noteTap(change.position)
+                                }
+                                if (mouse && enabled) {
+                                    when (event.type) {
+                                        PointerEventType.Press -> if (event.buttons.isPrimaryPressed) {
+                                            multi = clicks.press(change, viewConfiguration.doubleTapTimeoutMillis, viewConfiguration.touchSlop * 2)
+                                            if (multi >= 2) {
+                                                change.consume()
+                                                holder.selectAt(state, change.position, paragraph = multi >= 3)
+                                            }
+                                        }
+                                        PointerEventType.Move -> if (multi >= 2 && change.pressed) {
+                                            change.consume()
+                                            holder.extendTo(state, change.position, paragraph = multi >= 3)
+                                        }
+                                        PointerEventType.Release -> {
+                                            if (multi >= 2) change.consume()
+                                            clicks.release(change)
+                                        }
+                                    }
                                 }
                             }
                             if (event.type == PointerEventType.Press && event.buttons.isSecondaryPressed) {
@@ -462,9 +488,62 @@ private fun EditMenu(
 }
 
 /** Last text layout and field position, without triggering recomposition. */
+/** Counts quick mouse clicks in the same spot: 1, 2 (double), 3 (triple)… */
+private class ClickCounter {
+    private var count = 0
+    private var lastUp = 0L
+    private var lastAt = Offset.Zero
+
+    fun press(change: PointerInputChange, timeout: Long, slop: Float): Int {
+        val quick = change.uptimeMillis - lastUp <= timeout && (change.position - lastAt).getDistance() <= slop
+        count = if (quick && count > 0) count + 1 else 1
+        return count
+    }
+
+    fun release(change: PointerInputChange) {
+        lastUp = change.uptimeMillis
+        lastAt = change.position
+    }
+}
+
 private class LayoutHolder {
     var layout: TextLayoutResult? = null
     var coords: LayoutCoordinates? = null
+
+    private var anchor: TextRange? = null
+
+    /** Selects the word at [position] (in the field), or its whole paragraph, and remembers it for dragging. */
+    fun selectAt(state: RichEditorState, position: Offset, paragraph: Boolean) {
+        val range = rangeAt(state, position, paragraph) ?: return
+        anchor = range
+        state.onValueChange(state.value.copy(selection = range))
+    }
+
+    /** Grows the selection from the double / triple-clicked word or paragraph to the one at [position]. */
+    fun extendTo(state: RichEditorState, position: Offset, paragraph: Boolean) {
+        val from = anchor ?: return
+        val to = rangeAt(state, position, paragraph) ?: return
+        val range = if (to.min < from.min) TextRange(from.max, to.min) else TextRange(from.min, maxOf(from.max, to.max))
+        if (range != state.value.selection) state.onValueChange(state.value.copy(selection = range))
+    }
+
+    /** The word (or paragraph) at [position], in the field's offsets. */
+    private fun rangeAt(state: RichEditorState, position: Offset, paragraph: Boolean): TextRange? {
+        val l = layout ?: return null
+        val visible = l.getOffsetForPosition(position).coerceIn(0, l.layoutInput.text.length)
+        val t = state.value.text
+        val range = if (paragraph) {
+            val o = (visible + MARK.length).coerceIn(MARK.length, t.length)
+            val start = t.lastIndexOf('\n', o - 1) + 1
+            val end = t.indexOf('\n', o).let { if (it < 0) t.length else it }
+            TextRange(start.coerceAtLeast(MARK.length), end)
+        } else {
+            val w = l.getWordBoundary(visible)
+            TextRange(w.start + MARK.length, w.end + MARK.length)
+        }
+        if (range.collapsed) return null
+        return TextRange(range.start.coerceIn(0, t.length), range.end.coerceIn(0, t.length))
+    }
     var revealPending = false
     private var tapAt: Offset? = null
     private var tapTime = 0L
@@ -482,9 +561,12 @@ private class LayoutHolder {
      */
     fun fixTapPastLineEnd(state: RichEditorState, incoming: TextFieldValue): TextFieldValue {
         val at = tapAt ?: return incoming
-        // Only the cursor move that comes straight from the tap (not later ones from the keyboard).
-        tapAt = null
-        if (System.currentTimeMillis() - tapTime > 400) return incoming
+        // Only cursor moves that come straight from the tap (the field may send more than one), not
+        // later ones from the keyboard.
+        if (System.currentTimeMillis() - tapTime > 400) {
+            tapAt = null
+            return incoming
+        }
         val l = layout ?: return incoming
         if (!incoming.selection.collapsed || incoming.text != state.value.text) return incoming
         val doc = incoming.selection.start - MARK.length
