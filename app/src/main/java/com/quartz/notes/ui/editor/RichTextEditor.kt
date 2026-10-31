@@ -63,6 +63,10 @@ import androidx.compose.ui.input.key.type
 import androidx.compose.ui.input.pointer.PointerEventPass
 import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.input.pointer.PointerType
+import androidx.compose.runtime.snapshotFlow
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.platform.TextToolbar
+import androidx.compose.ui.platform.LocalTextToolbar
 import androidx.compose.ui.input.pointer.isPrimaryPressed
 import androidx.compose.ui.input.pointer.PointerInputChange
 import androidx.compose.ui.input.pointer.isSecondaryPressed
@@ -195,6 +199,26 @@ fun RichTextEditor(
         val focusManager = LocalFocusManager.current
         val clipboard = LocalClipboardManager.current
         var contextMenuAt by remember { mutableStateOf<Offset?>(null) }
+        // The phone's selection bar, made sure to offer Cut and Copy whenever text is selected.
+        val baseToolbar = LocalTextToolbar.current
+        val toolbar = remember(baseToolbar) { SelectionToolbar(baseToolbar) }
+        toolbar.state = state
+        toolbar.clipboard = clipboard
+        toolbar.editable = enabled && !readOnly
+        toolbar.selectionRect = {
+            val l = holder.layout
+            val c = holder.coords
+            if (l == null || c == null || !c.isAttached || !state.hasSelection) {
+                null
+            } else {
+                val len = l.layoutInput.text.length
+                val box = l.getPathForRange(state.selStart.coerceIn(0, len), state.selEnd.coerceIn(0, len)).getBounds()
+                androidx.compose.ui.geometry.Rect(c.localToRoot(box.topLeft), box.size)
+            }
+        }
+        LaunchedEffect(toolbar) {
+            snapshotFlow { state.value.selection }.collect { toolbar.selectionChanged() }
+        }
 
         LaunchedEffect(state.focusRequest) {
             if (state.focusRequest > 0) runCatching { state.focusRequester.requestFocus() }
@@ -220,6 +244,7 @@ fun RichTextEditor(
             }
         }
 
+        CompositionLocalProvider(LocalTextToolbar provides toolbar) {
         BasicTextField(
             value = state.value,
             onValueChange = {
@@ -322,6 +347,7 @@ fun RichTextEditor(
                 }
             },
         )
+        }
 
         // Checkboxes and in-line pictures, placed on their lines.
         val l = textLayout
@@ -802,5 +828,78 @@ private class DocTransformation(
             InlineStyle.UNDERLINE,
             InlineStyle.STRIKE,
         )
+    }
+}
+
+/**
+ * The phone's selection bar, passed through as the text field asks, except that when text is
+ * selected it always offers Cut and Copy over the selection. (The text field can leave up the bar
+ * meant for a bare cursor, with only Paste and Select all, after a double-tap selects a word.)
+ */
+private class SelectionToolbar(private val base: TextToolbar) : TextToolbar {
+    var state: RichEditorState? = null
+    var clipboard: androidx.compose.ui.platform.ClipboardManager? = null
+    var editable = true
+    var selectionRect: () -> androidx.compose.ui.geometry.Rect? = { null }
+
+    private class Shown(
+        val rect: androidx.compose.ui.geometry.Rect,
+        val onPaste: (() -> Unit)?,
+        val onSelectAll: (() -> Unit)?,
+        val onAutofill: (() -> Unit)?,
+    )
+    private var shown: Shown? = null
+
+    override val status get() = base.status
+
+    override fun hide() {
+        shown = null
+        base.hide()
+    }
+
+    override fun showMenu(
+        rect: androidx.compose.ui.geometry.Rect,
+        onCopyRequested: (() -> Unit)?,
+        onPasteRequested: (() -> Unit)?,
+        onCutRequested: (() -> Unit)?,
+        onSelectAllRequested: (() -> Unit)?,
+    ) = showMenu(rect, onCopyRequested, onPasteRequested, onCutRequested, onSelectAllRequested, null)
+
+    override fun showMenu(
+        rect: androidx.compose.ui.geometry.Rect,
+        onCopyRequested: (() -> Unit)?,
+        onPasteRequested: (() -> Unit)?,
+        onCutRequested: (() -> Unit)?,
+        onSelectAllRequested: (() -> Unit)?,
+        onAutofillRequested: (() -> Unit)?,
+    ) {
+        shown = Shown(rect, onPasteRequested, onSelectAllRequested, onAutofillRequested)
+        val s = state
+        if (s != null && s.hasSelection && onCopyRequested == null) {
+            base.showMenu(selectionRect() ?: rect, copy(), onPasteRequested, if (editable) cut() else null, onSelectAllRequested, onAutofillRequested)
+        } else {
+            base.showMenu(rect, onCopyRequested, onPasteRequested, onCutRequested, onSelectAllRequested, onAutofillRequested)
+        }
+    }
+
+    /** Text just got selected while the bar is up: make sure it offers Cut and Copy. */
+    fun selectionChanged() {
+        val s = state ?: return
+        val last = shown ?: return
+        if (base.status != androidx.compose.ui.platform.TextToolbarStatus.Shown || !s.hasSelection) return
+        base.showMenu(selectionRect() ?: last.rect, copy(), last.onPaste, if (editable) cut() else null, last.onSelectAll, last.onAutofill)
+    }
+
+    private fun copy(): () -> Unit = {
+        state?.let { s -> clipboard?.setText(AnnotatedString(s.selectedText())) }
+        hide()
+    }
+
+    private fun cut(): () -> Unit = {
+        state?.let { s ->
+            clipboard?.setText(AnnotatedString(s.selectedText()))
+            s.insertText("")
+        }
+        hide()
     }
 }

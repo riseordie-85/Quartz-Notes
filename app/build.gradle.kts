@@ -8,7 +8,7 @@ plugins {
 
 android {
     namespace = "com.quartz.notes"
-    compileSdk = 36
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.quartz.notes"
@@ -57,7 +57,7 @@ ksp {
 }
 
 dependencies {
-    val composeBom = platform("androidx.compose:compose-bom:2026.09.00")
+    val composeBom = platform("androidx.compose:compose-bom:2026.03.01")
     implementation(composeBom)
 
     implementation("androidx.core:core-ktx:1.15.0")
