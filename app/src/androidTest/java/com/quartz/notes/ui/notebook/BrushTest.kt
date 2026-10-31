@@ -151,6 +151,7 @@ class BrushTest {
         val saved = runBlocking { SystemClock.sleep(1200); container.settings.settings.first() }
         assertEquals(12f, saved.brushSizes[BrushType.HIGHLIGHTER]!!, 0.001f)
         assertTrue(saved.brushSizes[BrushType.PENCIL] == null || saved.brushSizes[BrushType.PENCIL] == BrushType.defaultSize(BrushType.PENCIL))
-        tap("Done")
+        rule.onNode(androidx.compose.ui.test.hasText("Done")).performSemanticsAction(SemanticsActions.OnClick)
+        settle()
     }
 }
