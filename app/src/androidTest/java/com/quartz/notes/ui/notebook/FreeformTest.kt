@@ -175,7 +175,7 @@ class FreeformTest {
             }
         }
         settle()
-        rule.onNodeWithText("New").performClick()
+        rule.onNodeWithText("New").performSemanticsAction(SemanticsActions.OnClick) // may be past the edge of the shelf
         settle()
         rule.onNodeWithText("What should your notebook be called?").assertExists()
         rule.onNode(SemanticsMatcher("title field") { it.config.getOrNull(SemanticsActions.SetText) != null }).performTextInput("Wizard test")
