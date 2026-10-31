@@ -216,7 +216,7 @@ class FreeformToolsTest {
         rule.onRoot().performTouchInput {
             val l = width * 0.06f
             val r = width * 0.94f
-            val t = height * 0.2f
+            val t = height * 0.26f
             val b = height * 0.78f
             down(Offset(l, t))
             listOf(Offset(r, t), Offset(r, b), Offset(l, b), Offset(l, t + 10f)).forEach { corner ->
