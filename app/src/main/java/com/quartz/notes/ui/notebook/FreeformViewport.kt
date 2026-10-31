@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.geometry.isSpecified
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.painter.Painter
@@ -151,7 +152,16 @@ internal fun PaperPicture(
     when (mode) {
         BackgroundFit.REPEAT, BackgroundFit.WIDTH -> {
             // As wide as the page: once, or over and over down it.
-            val painter = rememberAsyncImagePainter(model)
+            // Loaded at a set size: drawn on a canvas, the painter is never told one, and would wait forever.
+            val context = androidx.compose.ui.platform.LocalContext.current
+            val request = remember(model) {
+                coil.request.ImageRequest.Builder(context)
+                    .data(model)
+                    .size(2048)
+                    .precision(coil.size.Precision.INEXACT)
+                    .build()
+            }
+            val painter = rememberAsyncImagePainter(request)
             val intrinsic = painter.intrinsicSize
             // Unknown until the picture loads (reading an unknown size throws).
             val valid = intrinsic.isSpecified && intrinsic.width > 0f && intrinsic.height > 0f

@@ -9,7 +9,10 @@ import android.os.SystemClock
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.getOrNull
+import androidx.compose.ui.graphics.asAndroidBitmap
+import androidx.compose.ui.test.captureToImage
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.longClick
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onFirst
@@ -101,6 +104,10 @@ class TemplatesUiTest {
         }
         settle()
         screen("t1_page_background_picture")
+        // The picture is really drawn: the middle of the page is tinted, not plain white.
+        val shot = rule.onRoot().captureToImage().asAndroidBitmap()
+        val middle = shot.getPixel(shot.width / 2, shot.height / 2)
+        assertTrue("background picture shows (pixel ${Integer.toHexString(middle)})", (middle and 0xFF) < 245)
 
         // Hold + : blank page, section, saved templates and starters.
         rule.onNodeWithContentDescription("Add page (hold for sections and templates)").performTouchInput { longClick() }
