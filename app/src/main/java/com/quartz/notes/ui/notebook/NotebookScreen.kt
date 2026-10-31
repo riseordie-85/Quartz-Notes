@@ -1021,13 +1021,6 @@ fun NotebookScreen(
             sizes = settings?.pageSizes ?: com.quartz.notes.data.model.PageSize.PAPER,
             onLayoutMode = { scrapbook -> vm.setLayoutMode(activePage, scrapbook) },
             onSize = { size -> vm.setLayoutMode(activePage, scrapbook = true, size = size) },
-            onAdjustPicture = {
-                showStyle = false
-                val session = vm.session(activePage)
-                session.zoom = 1f
-                session.pan = androidx.compose.ui.geometry.Offset.Zero
-                session.adjustingBackground = true
-            },
             onChange = vm::updateStyle,
             onApplyToAll = {
                 vm.applyStyleToAll(it)

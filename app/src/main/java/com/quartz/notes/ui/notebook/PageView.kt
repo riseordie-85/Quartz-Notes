@@ -604,8 +604,6 @@ internal fun PageView(
             session.scrollUnits = ((canvasPx.height / 2 - session.pan.y / s - viewportPx.height / (2 * s)) / widthPx).coerceAtLeast(0f)
         }
         val pictureMode = BackgroundFit.mode(page.backgroundFit, freeform)
-        var adjusting by remember(page.backgroundFit) { mutableStateOf(BackgroundFit.manual(page.backgroundFit) ?: BackgroundFit.Manual(0f, 0f, 1f)) }
-        val adjustingPicture = freeform && session.adjustingBackground && page.backgroundImage != null
         // Inside a Freeform page, text ignores the phone's font size setting so every device lays it out alike.
         val pageDensity = if (freeform) Density(density.density, 1f) else density
 
@@ -758,8 +756,9 @@ internal fun PageView(
                 if (page.backgroundImage != null) {
                     PaperPicture(
                         model = backgroundModel,
-                        mode = if (adjustingPicture) BackgroundFit.MANUAL else pictureMode,
-                        manual = if (adjustingPicture) adjusting else BackgroundFit.manual(page.backgroundFit),
+                        mode = pictureMode,
+                        manual = BackgroundFit.manual(page.backgroundFit),
+                        rotation = BackgroundFit.rotation(page.backgroundFit),
                         pageWidthPx = widthPx,
                         onAspect = { backgroundAspect = it },
                         modifier = Modifier.matchParentSize(),
@@ -1054,14 +1053,10 @@ internal fun PageView(
                             },
                     )
                 }
-                if (adjustingPicture) {
-                    // Page style → Adjust: drag and pinch the background picture into place.
-                    Box(Modifier.matchParentSize().adjustPicture(widthPx, { adjusting }) { adjusting = it })
-                }
             }
         }
         }
-            if (freeform && session.zoomedIn && !adjustingPicture) {
+            if (freeform && session.zoomedIn) {
                 FloatingPill(
                     "Fit page",
                     Modifier.align(Alignment.BottomCenter).padding(bottom = 14.dp),
@@ -1069,19 +1064,6 @@ internal fun PageView(
                     session.zoom = 1f
                     session.pan = Offset.Zero
                 }
-            }
-            if (adjustingPicture) {
-                Row(
-                    Modifier.align(Alignment.BottomCenter).padding(bottom = 14.dp),
-                    horizontalArrangement = Arrangement.spacedBy(10.dp),
-                ) {
-                    FloatingPill("Reset") { adjusting = BackgroundFit.Manual(0f, 0f, 1f) }
-                    FloatingPill("Done", primary = true) {
-                        session.adjustingBackground = false
-                        vm.updateStyle(page.copy(backgroundFit = adjusting.encode()))
-                    }
-                }
-                ToolHint("Drag and pinch the picture into place", Modifier.align(Alignment.TopCenter))
             }
         }
 

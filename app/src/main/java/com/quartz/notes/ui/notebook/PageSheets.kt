@@ -28,6 +28,7 @@ import androidx.compose.material.icons.rounded.Block
 import androidx.compose.material.icons.rounded.Bookmark
 import androidx.compose.material.icons.rounded.BookmarkAdd
 import androidx.compose.material.icons.rounded.Colorize
+import androidx.compose.material.icons.rounded.Wallpaper
 import androidx.compose.material.icons.rounded.MoreVert
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -85,18 +86,24 @@ fun PageStyleSheet(
     sizes: List<com.quartz.notes.data.model.PageSize>,
     onLayoutMode: (scrapbook: Boolean) -> Unit,
     onSize: (com.quartz.notes.data.model.PageSize) -> Unit,
-    onAdjustPicture: () -> Unit,
     onChange: (PageEntity) -> Unit,
     onApplyToAll: (PageEntity) -> Unit,
     onSaveTemplate: () -> Unit,
     onDismiss: () -> Unit,
 ) {
     var custom by remember { mutableStateOf(false) }
+    // The picture being laid out in the preview window (a new pick opens it straight away).
+    var arranging by remember { mutableStateOf<String?>(null) }
+    var freshPick by remember { mutableStateOf(false) }
     val container = com.quartz.notes.LocalAppContainer.current
     val usedBackgrounds by container.repository.observeBackgroundImages().collectAsStateWithLifecycle(initialValue = emptyList())
     // Picking a picture switches to plain paper (no lines over it) the first time.
     fun useBackground(path: String?) {
         onChange(page.copy(backgroundImage = path, pageType = if (path != null && page.backgroundImage == null) PageType.PLAIN.name else page.pageType))
+        if (path != null && path != page.backgroundImage) {
+            freshPick = true
+            arranging = path
+        }
     }
     val backgroundAdder = com.quartz.notes.ui.media.rememberImageAdder { image -> useBackground(image.path) }
     val defaultPage = LocalQuartzColors.current.card
@@ -197,7 +204,7 @@ fun PageStyleSheet(
 
             Label("Background picture")
             Text(
-                "Use any picture as the paper, like a planner or a printed template. It fills the page's width.",
+                "Use any picture as the paper, like a planner or a printed template, then choose how it fits and which way up it goes.",
                 fontSize = 13.sp,
                 color = LocalQuartzColors.current.textSecondary,
                 modifier = Modifier.padding(bottom = 10.dp),
@@ -227,25 +234,14 @@ fun PageStyleSheet(
                 }
             }
 
-            if (page.backgroundImage != null) {
-                val freeform = page.layoutMode == "SCRAPBOOK"
-                val mode = com.quartz.notes.data.model.BackgroundFit.mode(page.backgroundFit, freeform)
-                val choices = if (freeform) {
-                    listOf("FIT" to "Fit", "FILL" to "Fill", "STRETCH" to "Stretch")
-                } else {
-                    listOf("WIDTH" to "Fit width", "REPEAT" to "Repeat down the page")
-                }
-                FlowRow(
-                    Modifier.padding(top = 12.dp),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                ) {
-                    choices.forEach { (value, label) ->
-                        FilterChip(selected = mode == value, onClick = { onChange(page.copy(backgroundFit = value)) }, label = { Text(label) })
-                    }
-                    if (freeform) {
-                        FilterChip(selected = mode == "MANUAL", onClick = onAdjustPicture, label = { Text("Adjust…") })
-                    }
+            page.backgroundImage?.let { path ->
+                OutlinedButton(onClick = {
+                    freshPick = false
+                    arranging = path
+                }, modifier = Modifier.padding(top = 12.dp)) {
+                    Icon(Icons.Rounded.Wallpaper, contentDescription = null, modifier = Modifier.size(18.dp))
+                    Spacer(Modifier.width(8.dp))
+                    Text("Fit, position and turn…")
                 }
             }
 
@@ -257,6 +253,23 @@ fun PageStyleSheet(
                 Text("Save page as template")
             }
         }
+    }
+
+    arranging?.let { path ->
+        val freeform = page.layoutMode == "SCRAPBOOK"
+        PageBackgroundDialog(
+            picture = container.media.model(path),
+            // A new picture starts plainly fitted.
+            fit = if (freshPick) null else page.backgroundFit,
+            freeform = freeform,
+            pageAspect = if (freeform) (page.canvasHeight ?: 842f) / (page.canvasWidth ?: 595f) else 1.4f,
+            paperColor = bg,
+            onSave = { fit ->
+                arranging = null
+                onChange(page.copy(backgroundImage = path, backgroundFit = fit))
+            },
+            onDismiss = { arranging = null },
+        )
     }
 
     if (custom) {

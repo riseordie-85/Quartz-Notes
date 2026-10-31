@@ -60,13 +60,56 @@
   /** How far down the page the lowest item reaches (px). */
   const paperUrl = $derived(live.backgroundImage ? store.mediaUrl(live.backgroundImage) : null)
   let paperAspect = $state(0)
+  /** How far the picture is turned ("FIT@90"): 0, 90, 180 or 270. */
+  const paperTurn = $derived.by(() => {
+    const r = Number((live.backgroundFit || "").split("@")[1]) || 0
+    return ((Math.round(r / 90) * 90) % 360 + 360) % 360
+  })
+  /** The picture turned, drawn once into a new image (so every fit works as it does upright). */
+  let turnedUrl = $state<string | null>(null)
+  $effect(() => {
+    const url = paperUrl
+    const turn = paperTurn
+    turnedUrl = null
+    if (!url || turn === 0) return
+    let cancelled = false
+    let made: string | null = null
+    const img = new Image()
+    img.crossOrigin = "anonymous"
+    img.onload = () => {
+      if (cancelled) return
+      const shrink = Math.min(1, 4096 / Math.max(img.naturalWidth, img.naturalHeight))
+      const w = Math.round(img.naturalWidth * shrink)
+      const h = Math.round(img.naturalHeight * shrink)
+      const sideways = turn === 90 || turn === 270
+      const canvas = document.createElement("canvas")
+      canvas.width = sideways ? h : w
+      canvas.height = sideways ? w : h
+      const ctx = canvas.getContext("2d")
+      if (!ctx) return
+      ctx.translate(canvas.width / 2, canvas.height / 2)
+      ctx.rotate((turn * Math.PI) / 180)
+      ctx.drawImage(img, -w / 2, -h / 2, w, h)
+      canvas.toBlob((blob) => {
+        if (cancelled || !blob) return
+        made = URL.createObjectURL(blob)
+        turnedUrl = made
+      })
+    }
+    img.src = url
+    return () => {
+      cancelled = true
+      if (made) URL.revokeObjectURL(made)
+    }
+  })
+  const shownPaper = $derived(paperTurn === 0 ? paperUrl : turnedUrl)
   const fitMode = $derived.by(() => {
-    const m = (live.backgroundFit || "").split(":")[0]
+    const m = (live.backgroundFit || "").split("@")[0].split(":")[0]
     if (scrapbook) return ["FIT", "FILL", "STRETCH", "MANUAL"].includes(m) ? m : "FIT"
     return m === "REPEAT" ? "REPEAT" : "WIDTH"
   })
   const manual = $derived.by(() => {
-    const [, x, y, sc] = (live.backgroundFit || "").split(":")
+    const [, x, y, sc] = (live.backgroundFit || "").split("@")[0].split(":")
     return { x: Number(x) || 0, y: Number(y) || 0, s: Number(sc) || 1 }
   })
   const elementsBottom = $derived.by(() => {
@@ -172,19 +215,19 @@
   style:transform={scrapbook ? `scale(${scale})` : undefined}
   style:min-height={scrapbook ? undefined : `${Math.max(elementsBottom + 48, W * 1.3, fitMode === "WIDTH" ? W * paperAspect : 0)}px`}
 >
-  {#if paperUrl && !live.isSection}
+  {#if shownPaper && !live.isSection}
     <!-- A picture as the paper, laid out by its fit. -->
     {#if fitMode === "REPEAT"}
-      <div class="paper-image repeat" style:background-image="url({paperUrl})"></div>
+      <div class="paper-image repeat" style:background-image="url({shownPaper})"></div>
     {:else if fitMode === "WIDTH"}
-      <img class="paper-image" src={paperUrl} alt="" onload={(e) => {
+      <img class="paper-image" src={shownPaper} alt="" onload={(e) => {
           const img = e.currentTarget as HTMLImageElement
           paperAspect = img.naturalHeight / Math.max(1, img.naturalWidth)
         }} />
     {:else}
       <img
         class="paper-image whole"
-        src={paperUrl}
+        src={shownPaper}
         alt=""
         style:object-fit={fitMode === "FILL" ? "cover" : fitMode === "STRETCH" ? "fill" : "contain"}
         style:transform={fitMode === "MANUAL" ? `translate(${manual.x * W}px, ${manual.y * W}px) scale(${manual.s})` : undefined}

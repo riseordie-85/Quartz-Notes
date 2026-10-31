@@ -112,6 +112,14 @@
 
 <div class="layer" style:--ink={ink}>
   <svg class="lines" aria-hidden="true">
+    <defs>
+      <!-- Speckle that keeps only some of a pencil line, like graphite on paper tooth. -->
+      <filter id="pencil-grain" x="-5%" y="-5%" width="110%" height="110%" filterUnits="objectBoundingBox">
+        <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="11" result="noise" />
+        <feColorMatrix in="noise" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 2.6 -0.75" result="grain" />
+        <feComposite in="SourceGraphic" in2="grain" operator="in" />
+      </filter>
+    </defs>
     {#each lines as e (e.id)}
       {@const d = payload(e)}
       {#if e.kind === "STROKE"}
@@ -119,10 +127,9 @@
         {@const sw = typeof d.size === "number" ? d.size : brushWidth(d.level ?? 2, W)}
         {@const sc = inkOr(d.color, ink)}
         {#if d.tool === "PENCIL"}
-          <!-- Soft graphite: a light body with a grainy layer on top. -->
-          <path d={sp} fill="none" stroke={sc} stroke-opacity="0.45" stroke-width={sw} stroke-linecap="round" stroke-linejoin="round" />
-          <path d={sp} fill="none" stroke={sc} stroke-opacity="0.7" stroke-width={sw * 0.85} stroke-linejoin="round"
-            stroke-dasharray="{Math.max(0.6, sw * 0.35)} {Math.max(0.6, sw * 0.35) * 0.7}" />
+          <!-- Graphite: a faint body, then speckled grain inside the line. -->
+          <path d={sp} fill="none" stroke={sc} stroke-opacity="0.28" stroke-width={sw} stroke-linecap="round" stroke-linejoin="round" />
+          <path d={sp} fill="none" stroke={sc} stroke-opacity="0.9" stroke-width={sw} stroke-linecap="round" stroke-linejoin="round" filter="url(#pencil-grain)" />
         {:else}
           <path
             d={sp}

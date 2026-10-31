@@ -58,8 +58,6 @@ class PageSession(page: PageEntity) {
     /** Zoomed in, so a swipe moves around the page instead of turning it. */
     val zoomedIn: Boolean get() = freeform && zoom > 1.02f
 
-    /** Moving and zooming the background picture by hand (page style → Adjust). */
-    var adjustingBackground by mutableStateOf(false)
 
     /** Selection, drawing and item layout on the page (kept here so keyboard shortcuts can reach it). */
     val canvas = PageCanvasState()

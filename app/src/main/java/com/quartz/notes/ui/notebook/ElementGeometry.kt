@@ -4,8 +4,14 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.graphics.TileMode
+import androidx.compose.ui.graphics.ShaderBrush
+import androidx.compose.ui.graphics.ImageShader
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.drawscope.DrawScope
@@ -165,18 +171,15 @@ fun DrawScope.drawInkStroke(points: List<Offset>, color: Color, width: Float, to
     val path = strokePath(points)
     when (tool) {
         BrushType.PENCIL -> {
-            // Soft graphite: a light body with a grainy layer on top.
-            drawPath(path, color.copy(alpha = color.alpha * 0.45f), style = Stroke(width = width, cap = StrokeCap.Round, join = StrokeJoin.Round))
-            val grain = maxOf(0.6f, width * 0.35f)
+            // Graphite: a faint body, then speckled grain inside the line (it catches the "paper").
+            val stroke = Stroke(width = width, cap = StrokeCap.Round, join = StrokeJoin.Round)
+            drawPath(path, color.copy(alpha = color.alpha * 0.28f), style = stroke)
             drawPath(
                 path,
-                color.copy(alpha = color.alpha * 0.7f),
-                style = Stroke(
-                    width = width * 0.85f,
-                    cap = StrokeCap.Butt,
-                    join = StrokeJoin.Round,
-                    pathEffect = PathEffect.dashPathEffect(floatArrayOf(grain, grain * 0.7f)),
-                ),
+                brush = PencilGrain.brush,
+                alpha = color.alpha * 0.9f,
+                style = stroke,
+                colorFilter = ColorFilter.tint(color.copy(alpha = 1f), BlendMode.SrcIn),
             )
         }
         // Felt tip: bold and a touch see-through, so crossings show.
@@ -242,4 +245,25 @@ fun lineHit(
         }
     }
     return null
+}
+
+/** A tile of paper-tooth speckle: most spots take graphite, some stay pale. Tiled under pencil lines. */
+private object PencilGrain {
+    private val tile: ImageBitmap by lazy {
+        // Each speck is 2×2 px, so the grain still shows on sharp screens.
+        val n = 128
+        val half = n / 2
+        val random = java.util.Random(11)
+        val specks = IntArray(half * half) {
+            val v = random.nextFloat()
+            when {
+                v < 0.22f -> (random.nextFloat() * 40).toInt()
+                v < 0.5f -> 110 + (random.nextFloat() * 70).toInt()
+                else -> 190 + (random.nextFloat() * 65).toInt()
+            }
+        }
+        val pixels = IntArray(n * n) { i -> (specks[(i / n / 2) * half + (i % n) / 2] shl 24) or 0xFFFFFF }
+        android.graphics.Bitmap.createBitmap(pixels, n, n, android.graphics.Bitmap.Config.ARGB_8888).asImageBitmap()
+    }
+    val brush: ShaderBrush by lazy { ShaderBrush(ImageShader(tile, TileMode.Repeated, TileMode.Repeated)) }
 }

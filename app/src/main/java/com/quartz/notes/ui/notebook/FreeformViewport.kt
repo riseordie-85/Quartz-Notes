@@ -11,9 +11,17 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.geometry.isSpecified
+import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.drawscope.withTransform
+import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.unit.Constraints
+import androidx.compose.ui.layout.layout
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.PointerEventPass
 import androidx.compose.ui.input.pointer.PointerEventType
@@ -127,53 +135,40 @@ internal fun Modifier.freeformTransform(session: PageSession, fit: Float): Modif
 
 /**
  * A page's background picture, laid out by its fit: as wide as the page or repeated (text pages);
- * whole, covering, stretched or placed by hand (Freeform pages).
+ * whole, covering, stretched or placed by hand (Freeform pages). [rotation] turns it 0/90/180/270°.
  */
 @Composable
 internal fun PaperPicture(
     model: Any?,
     mode: String,
     manual: BackgroundFit.Manual?,
+    rotation: Int,
     pageWidthPx: Float,
     onAspect: (Float) -> Unit,
     modifier: Modifier,
 ) {
+    val turned = rotation == 90 || rotation == 270
     when (mode) {
-        BackgroundFit.REPEAT -> {
+        BackgroundFit.REPEAT, BackgroundFit.WIDTH -> {
+            // As wide as the page: once, or over and over down it.
             val painter = rememberAsyncImagePainter(model)
+            val intrinsic = painter.intrinsicSize
+            val valid = intrinsic.width > 0f && intrinsic.height > 0f && intrinsic.isSpecified
+            val tileRatio = if (!valid) 0f else if (turned) intrinsic.width / intrinsic.height else intrinsic.height / intrinsic.width
+            LaunchedEffect(tileRatio) { if (tileRatio > 0f) onAspect(tileRatio) }
             Canvas(modifier) {
-                val intrinsic = painter.intrinsicSize
-                if (intrinsic.width <= 0f || intrinsic.height <= 0f || size.width <= 0f) return@Canvas
-                val tileH = size.width * intrinsic.height / intrinsic.width
+                if (tileRatio <= 0f || size.width <= 0f) return@Canvas
+                val tileH = size.width * tileRatio
                 var y = 0f
-                while (y < size.height) {
-                    translate(top = y) { with(painter) { draw(Size(size.width, tileH)) } }
+                do {
+                    drawTurned(painter, Rect(0f, y, size.width, y + tileH), rotation)
                     y += tileH
-                }
+                } while (mode == BackgroundFit.REPEAT && y < size.height)
             }
         }
-        BackgroundFit.WIDTH -> AsyncImage(
-            model = model,
-            contentDescription = null,
-            contentScale = ContentScale.FillWidth,
-            alignment = Alignment.TopCenter,
-            onSuccess = { state ->
-                val size = state.painter.intrinsicSize
-                if (size.width > 0f && size.height > 0f) onAspect(size.height / size.width)
-            },
-            modifier = modifier,
-        )
-        else -> Box(modifier) {
-            AsyncImage(
-                model = model,
-                contentDescription = null,
-                contentScale = when (mode) {
-                    BackgroundFit.FILL -> ContentScale.Crop
-                    BackgroundFit.STRETCH -> ContentScale.FillBounds
-                    else -> ContentScale.Fit
-                },
-                alignment = Alignment.Center,
-                modifier = Modifier
+        else -> Box(modifier.clipToBounds()) {
+            Box(
+                Modifier
                     .matchParentSize()
                     .then(
                         if (mode == BackgroundFit.MANUAL && manual != null) {
@@ -187,8 +182,47 @@ internal fun PaperPicture(
                             Modifier
                         },
                     ),
-            )
+            ) {
+                AsyncImage(
+                    model = model,
+                    contentDescription = null,
+                    contentScale = when (mode) {
+                        BackgroundFit.FILL -> ContentScale.Crop
+                        BackgroundFit.STRETCH -> ContentScale.FillBounds
+                        else -> ContentScale.Fit
+                    },
+                    alignment = Alignment.Center,
+                    modifier = Modifier.turned(rotation),
+                )
+            }
         }
+    }
+}
+
+/** Lays a child out in the parent's box turned [rotation] degrees (sideways turns swap its width and height). */
+private fun Modifier.turned(rotation: Int): Modifier = layout { measurable, constraints ->
+    val w = constraints.maxWidth
+    val h = constraints.maxHeight
+    val sideways = rotation == 90 || rotation == 270
+    val cw = if (sideways) h else w
+    val ch = if (sideways) w else h
+    val placeable = measurable.measure(Constraints.fixed(cw, ch))
+    layout(w, h) {
+        placeable.placeWithLayer((w - cw) / 2, (h - ch) / 2) { rotationZ = rotation.toFloat() }
+    }
+}
+
+/** Draws [painter] filling [rect], turned [rotation] degrees about the rect's middle. */
+private fun DrawScope.drawTurned(painter: Painter, rect: Rect, rotation: Int) {
+    val sideways = rotation == 90 || rotation == 270
+    val w = if (sideways) rect.height else rect.width
+    val h = if (sideways) rect.width else rect.height
+    withTransform({
+        translate(rect.center.x, rect.center.y)
+        rotate(rotation.toFloat(), pivot = Offset.Zero)
+        translate(-w / 2, -h / 2)
+    }) {
+        with(painter) { draw(Size(w, h)) }
     }
 }
 
