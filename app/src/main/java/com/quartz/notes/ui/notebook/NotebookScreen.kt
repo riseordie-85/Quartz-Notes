@@ -660,6 +660,27 @@ fun NotebookScreen(
             }
         }
 
+        addSheetAfter?.let { after ->
+            com.quartz.notes.ui.templates.AddPageSheet(
+                onBlank = {
+                    addSheetAfter = null
+                    vm.addPage(after) { newId -> scrollTarget = newId }
+                },
+                onSection = {
+                    addSheetAfter = null
+                    vm.addSection(after + 1) { newId -> scrollTarget = newId }
+                },
+                onTemplate = { t ->
+                    addSheetAfter = null
+                    vm.addPageFromTemplate(after, t.id) { newId -> scrollTarget = newId }
+                },
+                onStarter = { st ->
+                    addSheetAfter = null
+                    vm.addPageFromStarter(after, st) { newId -> scrollTarget = newId }
+                },
+                onDismiss = { addSheetAfter = null },
+            )
+        }
         if (showTimeline) {
             PageTimelineSheet(
                 pages = displayPages,
@@ -860,27 +881,6 @@ fun NotebookScreen(
                 templateFrom = activePage
             },
             onDismiss = { showStyle = false },
-        )
-    }
-    addSheetAfter?.let { after ->
-        com.quartz.notes.ui.templates.AddPageSheet(
-            onBlank = {
-                addSheetAfter = null
-                vm.addPage(after) { newId -> scrollTarget = newId }
-            },
-            onSection = {
-                addSheetAfter = null
-                vm.addSection(after + 1) { newId -> scrollTarget = newId }
-            },
-            onTemplate = { t ->
-                addSheetAfter = null
-                vm.addPageFromTemplate(after, t.id) { newId -> scrollTarget = newId }
-            },
-            onStarter = { st ->
-                addSheetAfter = null
-                vm.addPageFromStarter(after, st) { newId -> scrollTarget = newId }
-            },
-            onDismiss = { addSheetAfter = null },
         )
     }
     templateFrom?.let { page ->
