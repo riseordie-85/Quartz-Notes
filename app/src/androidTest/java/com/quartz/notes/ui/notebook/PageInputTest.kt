@@ -197,6 +197,129 @@ class PageInputTest {
         rule.waitForIdle()
     }
 
+    /**
+     * How selecting behaves with real (injected) input, like a person's finger, pen or mouse:
+     * double tap, long hold (with the small wobble a real finger has), hold then drag, and double /
+     * triple click. Records what got selected; checks the basics every app has.
+     */
+    private fun selectionGestures(field: SemanticsNodeInteraction, label: String) {
+        val l = layout(field)
+        fun lineY(i: Int) = (l.getLineTop(i) + l.getLineBottom(i)) / 2
+        // Middle of "Another" (line 2) and of "Fourth" (line 4), in the field's own coordinates.
+        val anotherStart = paragraphEnd(0) + 2
+        val another = Offset((l.getHorizontalPosition(anotherStart - 1, true) + l.getHorizontalPosition(anotherStart - 1 + "Another".length, true)) / 2, lineY(1))
+        val fourthStart = paragraphEnd(2) + 2
+        val fourthLine = l.getLineForOffset(fourthStart - 1)
+        val fourth = Offset(l.getHorizontalPosition(fourthStart - 1 + 3, true), lineY(fourthLine))
+        val rest = onScreen(field, Offset(10f, lineY(l.lineCount - 1)))
+        val anotherWord = TextRange(anotherStart, anotherStart + "Another".length)
+        val results = LinkedHashMap<String, TextRange?>()
+        fun reset() {
+            fingerTap(rest)
+            SystemClock.sleep(400)
+        }
+        fun hold(at: Offset, millis: Long, source: Int, stylus: Boolean, dragTo: Offset? = null) {
+            val down = SystemClock.uptimeMillis()
+            injectTool(MotionEvent.ACTION_DOWN, at, source, down, stylus)
+            var t = 0L
+            var i = 0
+            while (t < millis) {
+                SystemClock.sleep(40)
+                t += 40
+                i++
+                // A real finger wobbles a little while held.
+                injectTool(MotionEvent.ACTION_MOVE, at + Offset(if (i % 2 == 0) 1f else -1f, 0f), source, down, stylus)
+            }
+            var last = at
+            if (dragTo != null) {
+                for (k in 1..15) {
+                    SystemClock.sleep(20)
+                    last = at + (dragTo - at) * (k / 15f)
+                    injectTool(MotionEvent.ACTION_MOVE, last, source, down, stylus)
+                }
+            }
+            injectTool(MotionEvent.ACTION_UP, last, source, down, stylus)
+            rule.waitForIdle()
+        }
+        val touch = InputDevice.SOURCE_TOUCHSCREEN
+        val pen = InputDevice.SOURCE_STYLUS or InputDevice.SOURCE_TOUCHSCREEN
+
+        reset()
+        fingerTap(onScreen(field, another))
+        SystemClock.sleep(90)
+        fingerTap(onScreen(field, another))
+        SystemClock.sleep(300)
+        rule.waitForIdle()
+        results["finger double tap"] = selection(field)
+        screen("30_${label}_double_tap")
+
+        reset()
+        hold(onScreen(field, another), 800, touch, stylus = false)
+        results["finger hold"] = selection(field)
+        screen("31_${label}_hold")
+
+        reset()
+        hold(onScreen(field, another), 800, touch, stylus = false, dragTo = onScreen(field, fourth))
+        results["finger hold then drag"] = selection(field)
+        screen("32_${label}_hold_drag")
+
+        reset()
+        hold(onScreen(field, another), 800, pen, stylus = true)
+        results["pen hold"] = selection(field)
+
+        reset()
+        mouseClick(onScreen(field, another))
+        SystemClock.sleep(60)
+        mouseClick(onScreen(field, another))
+        rule.waitForIdle()
+        results["mouse double click"] = selection(field)
+
+        reset()
+        repeat(3) {
+            mouseClick(onScreen(field, another))
+            SystemClock.sleep(60)
+        }
+        rule.waitForIdle()
+        results["mouse triple click"] = selection(field)
+        screen("33_${label}_triple_click")
+
+        results.forEach { (k, v) -> note("$label $k: selection=$v") }
+        note("$label expected word \"Another\" = $anotherWord, line 2 = ${TextRange(anotherStart, paragraphEnd(1) + 1)}")
+        assertEquals("finger double tap selects the word", anotherWord, results["finger double tap"])
+        assertEquals("finger hold selects the word", anotherWord, results["finger hold"])
+        assertTrue("finger hold then drag selects down to line 4", (results["finger hold then drag"]?.max ?: 0) > paragraphEnd(2))
+        assertEquals("pen hold selects the word", anotherWord, results["pen hold"])
+        assertEquals("mouse double click selects the word", anotherWord, results["mouse double click"])
+        assertEquals("mouse triple click selects the paragraph", TextRange(anotherStart, paragraphEnd(1) + 1), results["mouse triple click"])
+    }
+
+    @Test
+    fun selectingTextOnPage() {
+        openPage()
+        selectionGestures(editor(), "page")
+    }
+
+    @Test
+    fun selectingTextOnBareEditor() {
+        val state = com.quartz.notes.ui.editor.RichEditorState(RichDoc(paragraphs.map { Block(type = BlockType.BODY, text = it) }))
+        rule.setContent {
+            androidx.compose.material3.MaterialTheme {
+                androidx.compose.foundation.layout.Box(
+                    androidx.compose.ui.Modifier.fillMaxSize().background(androidx.compose.ui.graphics.Color.White),
+                ) {
+                    com.quartz.notes.ui.editor.RichTextEditor(
+                        state = state,
+                        styles = com.quartz.notes.ui.editor.editorStyles(),
+                        contentColor = androidx.compose.ui.graphics.Color.Black,
+                        modifier = androidx.compose.ui.Modifier.padding(top = 80.dp, start = 20.dp, end = 20.dp),
+                    )
+                }
+            }
+        }
+        rule.waitForIdle()
+        selectionGestures(editor(), "bare")
+    }
+
     @Test
     fun clickAnywhereOnALine() {
         openPage()
