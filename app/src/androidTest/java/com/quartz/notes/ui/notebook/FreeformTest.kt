@@ -163,11 +163,12 @@ class FreeformTest {
             id
         }
         show(nb)
+        screen("f7_pocket_centered")
         val root = rule.onRoot().fetchSemanticsNode().boundsInRoot
         val title = rule.onNodeWithText("Plan").fetchSemanticsNode().boundsInRoot
-        assertTrue("page is centered (title at ${title.center.x}, screen middle ${root.center.x})", kotlin.math.abs(title.center.x - root.center.x) < root.width * 0.05f)
+        // The title field leaves room for the lock button on its right, so it sits a little left of the middle.
+        assertTrue("page is centered (title at ${title.center.x}, screen middle ${root.center.x})", kotlin.math.abs(title.center.x - root.center.x) < root.width * 0.1f)
         assertTrue("page is on screen", title.left > 0f)
-        screen("f7_pocket_centered")
 
         // Select the picture, then pinch on it: the picture grows, the page doesn't zoom.
         rule.onRoot().performTouchInput { click(center) }
