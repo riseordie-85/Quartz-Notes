@@ -14,8 +14,8 @@ android {
         applicationId = "com.quartz.notes"
         minSdk = 33
         targetSdk = 35
-        versionCode = 21
-        versionName = "0.10.0"
+        versionCode = 22
+        versionName = "0.11.0"
         vectorDrawables { useSupportLibrary = true }
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
