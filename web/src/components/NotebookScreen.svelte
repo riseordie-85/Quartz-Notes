@@ -7,6 +7,7 @@
   import Icon from "./Icon.svelte"
   import PageSheet from "./PageSheet.svelte"
   import NotebookDialog from "./NotebookDialog.svelte"
+  import TemplatePicker from "./TemplatePicker.svelte"
   import type { Page } from "../lib/types"
   import { preparePicture } from "../lib/pictures"
   import PictureDrop from "./PictureDrop.svelte"
@@ -23,6 +24,7 @@
   let picker: HTMLInputElement | undefined = $state()
   let adding = $state(false)
   let editing = $state(false)
+  let picking = $state(false)
 
   // Dragging pages in the list to rearrange them. `held` is set at once, the rest a moment later
   // (changing the page during dragstart makes the browser cancel the drag).
@@ -163,6 +165,7 @@
             {#if page}
               <p class="label">This page</p>
               <button onclick={() => act(addPageAfter)}><Icon name="addPage" size={20} />Add a page after it</button>
+              <button onclick={() => ((more = false), (picking = true))}><Icon name="newNotebook" size={20} />Add a page from a template</button>
               <button disabled={index <= 0} onclick={() => act(() => store.movePage(page, index - 1))}><Icon name="arrowBack" size={20} />Move earlier</button>
               <button disabled={index >= pages.length - 1} onclick={() => act(() => store.movePage(page, index + 1))}><Icon name="arrowForward" size={20} />Move later</button>
               <button onclick={() => act(() => store.save("pages", page.id, { locked: !page.locked }))}>
@@ -257,6 +260,21 @@
           : null}
     onFiles={addPictures}
     onRejected={(m) => (error = m)}
+  />
+{/if}
+{#if picking}
+  <TemplatePicker
+    mode="page"
+    onCancel={() => (picking = false)}
+    onPick={(c) => {
+      picking = false
+      if (c.kind !== "page") return
+      act(async () => {
+        await sheet?.save()
+        const p = await store.addPageFrom(id, page ?? null, c.source)
+        router.go({ name: "notebook", id, page: p.id })
+      })
+    }}
   />
 {/if}
 {#if editing && notebook}

@@ -31,6 +31,8 @@ export interface Notebook extends SyncedRecord {
   showIndex: boolean
   sectionTabs: boolean
   attachAtBottom: boolean
+  /** "TEMPLATES" for the hidden notebook of page templates ("" or "NOTEBOOK" otherwise). */
+  kind: string
 }
 
 export interface Page extends SyncedRecord {
@@ -50,6 +52,10 @@ export interface Page extends SyncedRecord {
   isSection: boolean
   sectionIcon: string
   sectionImage: string
+  /** Set on saved page templates. */
+  templateName: string
+  /** Media path of a picture used as the page's paper. */
+  backgroundImage: string
 }
 
 export interface PageElement extends SyncedRecord {
@@ -74,6 +80,8 @@ export interface QuickNote extends SyncedRecord {
   createdAt: number
   updatedAt: number
   archived: boolean
+  /** Set on saved quick-note templates (hidden from the lists). */
+  templateName: string
 }
 
 export interface Attachment extends SyncedRecord {

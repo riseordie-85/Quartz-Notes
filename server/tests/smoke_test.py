@@ -114,6 +114,14 @@ for name, rec in [
     status, body = call("POST", f"/api/collections/{name}/records", rec, tim)
     check(status == 200, f"create in {name} ({status} {body})")
 
+# Template fields.
+status, rec = call("POST", "/api/collections/notebooks/records", {"id": str(uuid.uuid4()), "shelf": hex_uid, "title": "Templates", "kind": "TEMPLATES"}, tim)
+check(status == 200 and rec["kind"] == "TEMPLATES", "a notebook can be the templates notebook")
+status, rec = call("POST", "/api/collections/pages/records", {"id": str(uuid.uuid4()), "notebook": rec["id"], "templateName": "Weekly", "backgroundImage": "media/planner.png"}, tim)
+check(status == 200 and rec["templateName"] == "Weekly" and rec["backgroundImage"] == "media/planner.png", "pages keep a template name and background picture")
+status, rec = call("POST", "/api/collections/quick_notes/records", {"id": str(uuid.uuid4()), "title": "Groceries", "templateName": "Groceries"}, tim)
+check(status == 200 and rec["templateName"] == "Groceries", "quick notes keep a template name")
+
 # ---- Media files ----
 
 

@@ -137,6 +137,7 @@ fun HomeRoute(
     var selectedNote by rememberSaveable { mutableStateOf<Long?>(null) }
     var notebookSheet by remember { mutableStateOf<NotebookSheet?>(null) }
     var newShelfDialog by remember { mutableStateOf(false) }
+    var noteTemplates by remember { mutableStateOf(false) }
     val previousNote = remember { mutableStateOf<Long?>(null) }
     var pendingDelete by remember { mutableStateOf<NoteUi?>(null) }
     val snackbar = remember { SnackbarHostState() }
@@ -169,6 +170,19 @@ fun HomeRoute(
 
         val openNote: (Long) -> Unit = { id -> if (twoPane) selectedNote = id else onOpenNote(id) }
 
+        if (noteTemplates) {
+            val openNew: (Long) -> Unit = { id ->
+                noteTemplates = false
+                openNote(id)
+            }
+            com.quartz.notes.ui.templates.NewNoteSheet(
+                onBlank = { vm.createNote(openNew) },
+                onTemplate = { vm.createNoteFromTemplate(it.id, openNew) },
+                onStarter = { vm.createNoteFromStarter(it, openNew) },
+                onDismiss = { noteTemplates = false },
+            )
+        }
+
         // What the buttons behind a swiped quick note do.
         val noteActions = NoteActions(
             onTogglePin = { note -> vm.setPinned(note.id, !note.pinned) },
@@ -193,6 +207,7 @@ fun HomeRoute(
                 noteActions = noteActions,
                 snackbar = snackbar,
                 onNewNote = { vm.createNote(openNote) },
+                onNewNoteFromTemplate = { noteTemplates = true },
                 onOpenNotebook = onOpenNotebook,
                 onEditNotebook = { notebookSheet = NotebookSheet(it) },
                 onReorderNotebooks = { ids -> state.selectedShelf?.let { vm.reorderNotebooks(it.id, ids) } },
@@ -304,6 +319,7 @@ private fun HomeContent(
     noteActions: NoteActions,
     snackbar: SnackbarHostState,
     onNewNote: () -> Unit,
+    onNewNoteFromTemplate: () -> Unit,
     onOpenNotebook: (Long) -> Unit,
     onEditNotebook: (NotebookEntity) -> Unit,
     onReorderNotebooks: (List<Long>) -> Unit,
@@ -416,8 +432,8 @@ private fun HomeContent(
                 )
             }
             Spacer(Modifier.width(14.dp))
-            RoundActionButton(onClick = onNewNote, size = 60.dp) {
-                Icon(Icons.Rounded.Add, contentDescription = "New quick note", modifier = Modifier.size(34.dp), tint = MaterialTheme.colorScheme.onSurface)
+            RoundActionButton(onClick = onNewNote, size = 60.dp, onLongClick = onNewNoteFromTemplate, onLongClickLabel = "New note from a template") {
+                Icon(Icons.Rounded.Add, contentDescription = "New quick note (hold for templates)", modifier = Modifier.size(34.dp), tint = MaterialTheme.colorScheme.onSurface)
             }
         }
         // Sits just above the search bar.

@@ -223,6 +223,9 @@ fun NotebookScreen(
     var showFormat by remember { mutableStateOf(false) }
     var formatTarget by remember { mutableStateOf<RichEditorState?>(null) }
     var showStyle by remember { mutableStateOf(false) }
+    // Long-pressing + offers templates; saving one asks for its name.
+    var addSheetAfter by remember { mutableStateOf<Int?>(null) }
+    var templateFrom by remember { mutableStateOf<PageEntity?>(null) }
     var showPages by remember { mutableStateOf(false) }
     var showTimeline by remember { mutableStateOf(false) }
     var showEdit by remember { mutableStateOf(false) }
@@ -490,7 +493,7 @@ fun NotebookScreen(
                     onNext = { scope.launch { pagerState.animateScrollToPage((pagerState.currentPage + 1).coerceAtMost(spreads.lastIndex)) } },
                 )
                 Spacer(Modifier.width(12.dp))
-                // Tap: new page after this one. Long-press: new section.
+                // Tap: new page after this one. Long-press: a section, or a page from a template.
                 val haptics = LocalHapticFeedback.current
                 val insertAfter = if (onIndex) -1 else activeIndex
                 Box(
@@ -501,17 +504,16 @@ fun NotebookScreen(
                         .background(LocalQuartzColors.current.pill)
                         .combinedClickable(
                             onClickLabel = "Add page",
-                            onLongClickLabel = "Add section",
+                            onLongClickLabel = "Add a section or a page from a template",
                             onClick = { vm.addPage(insertAfter) { newId -> scrollTarget = newId } },
                             onLongClick = {
                                 haptics.performHapticFeedback(HapticFeedbackType.LongPress)
-                                vm.addSection(insertAfter + 1) { newId -> scrollTarget = newId }
-                                Toast.makeText(context, "New section added", Toast.LENGTH_SHORT).show()
+                                addSheetAfter = insertAfter
                             },
                         ),
                     contentAlignment = Alignment.Center,
                 ) {
-                    Icon(Icons.Rounded.Add, contentDescription = "Add page (hold for a new section)", modifier = Modifier.size(32.dp), tint = MaterialTheme.colorScheme.onSurface)
+                    Icon(Icons.Rounded.Add, contentDescription = "Add page (hold for sections and templates)", modifier = Modifier.size(32.dp), tint = MaterialTheme.colorScheme.onSurface)
                 }
             }
         }
@@ -689,6 +691,10 @@ fun NotebookScreen(
                     val at = pages.indexOfFirst { it.id == page.id }
                     if (at >= 0) vm.addSection(at) { newId -> scrollTarget = newId }
                 },
+                onSaveTemplate = { page ->
+                    showTimeline = false
+                    templateFrom = page
+                },
                 onDelete = { page -> vm.deletePage(page, isOnlyPage = pages.size <= 1) },
                 onDismiss = { showTimeline = false },
             )
@@ -849,7 +855,48 @@ fun NotebookScreen(
                 vm.applyStyleToAll(it)
                 showStyle = false
             },
+            onSaveTemplate = {
+                showStyle = false
+                templateFrom = activePage
+            },
             onDismiss = { showStyle = false },
+        )
+    }
+    addSheetAfter?.let { after ->
+        com.quartz.notes.ui.templates.AddPageSheet(
+            onBlank = {
+                addSheetAfter = null
+                vm.addPage(after) { newId -> scrollTarget = newId }
+            },
+            onSection = {
+                addSheetAfter = null
+                vm.addSection(after + 1) { newId -> scrollTarget = newId }
+            },
+            onTemplate = { t ->
+                addSheetAfter = null
+                vm.addPageFromTemplate(after, t.id) { newId -> scrollTarget = newId }
+            },
+            onStarter = { st ->
+                addSheetAfter = null
+                vm.addPageFromStarter(after, st) { newId -> scrollTarget = newId }
+            },
+            onDismiss = { addSheetAfter = null },
+        )
+    }
+    templateFrom?.let { page ->
+        com.quartz.notes.ui.components.TextInputDialog(
+            title = "Save as template",
+            initial = page.templateName ?: page.title,
+            label = "Template name",
+            onDismiss = { templateFrom = null },
+            onConfirm = { name ->
+                templateFrom = null
+                if (name.isNotBlank()) {
+                    vm.saveAsTemplate(page.id, name) {
+                        Toast.makeText(context, "Saved as a template. Hold + to use it.", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            },
         )
     }
     if (recording) {

@@ -113,6 +113,14 @@ class HomeViewModel(
         onCreated(repo.createNote())
     }
 
+    fun createNoteFromTemplate(templateId: Long, onCreated: (Long) -> Unit) = viewModelScope.launch {
+        onCreated(repo.createNoteFromTemplate(templateId))
+    }
+
+    fun createNoteFromStarter(starter: com.quartz.notes.data.templates.StarterNote, onCreated: (Long) -> Unit) = viewModelScope.launch {
+        onCreated(repo.createNoteFromStarter(starter))
+    }
+
     fun discardIfBlank(noteId: Long) = repo.discardIfBlank(noteId)
 
     fun sweepBlankNotes(except: Long?) = repo.sweepBlankNotes(except)

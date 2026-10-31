@@ -16,7 +16,12 @@ import {
   type Shelf,
   type SyncedRecord,
 } from "./types"
-import { compactDoc, decodeDoc, emptyDoc, newId, registerFont } from "./richdoc"
+import { compactDoc, decodeDoc, emptyDoc, newId, plainText, registerFont } from "./richdoc"
+import type { StarterNote, StarterPage } from "./starters"
+
+function isTemplatesNotebook(n: Notebook): boolean {
+  return n.kind === "TEMPLATES"
+}
 
 /** True when two versions of a note or page say the same thing. */
 export function sameText(a: QuickNote | Page, b: QuickNote | Page): boolean {
@@ -147,14 +152,14 @@ class Store {
 
   notebooksOn(shelfId: string): Notebook[] {
     return this.lists.notebooks
-      .filter((n) => n.shelf === shelfId)
+      .filter((n) => n.shelf === shelfId && !isTemplatesNotebook(n))
       .sort((a, b) => a.position - b.position || a.created.localeCompare(b.created))
   }
 
   /** Notebooks whose shelf isn't here (shown under the first shelf). */
   get strayNotebooks(): Notebook[] {
     const shelfIds = new Set(this.lists.shelves.map((s) => s.id))
-    return this.lists.notebooks.filter((n) => !shelfIds.has(n.shelf))
+    return this.lists.notebooks.filter((n) => !shelfIds.has(n.shelf) && !isTemplatesNotebook(n))
   }
 
   notebook(id: string): Notebook | undefined {
@@ -177,11 +182,31 @@ class Store {
 
   /** Quick notes: pinned first, then newest. */
   get notes(): QuickNote[] {
-    return this.lists.quick_notes.filter((n) => !n.archived).sort((a, b) => Number(b.pinned) - Number(a.pinned) || b.createdAt - a.createdAt)
+    return this.lists.quick_notes.filter((n) => !n.archived && !n.templateName).sort((a, b) => Number(b.pinned) - Number(a.pinned) || b.createdAt - a.createdAt)
   }
 
   get archived(): QuickNote[] {
-    return this.lists.quick_notes.filter((n) => n.archived).sort((a, b) => b.updatedAt - a.updatedAt)
+    return this.lists.quick_notes.filter((n) => n.archived && !n.templateName).sort((a, b) => b.updatedAt - a.updatedAt)
+  }
+
+  /** Saved page templates (pages in the hidden templates notebook), by name. */
+  get pageTemplates(): Page[] {
+    const holders = new Set(this.lists.notebooks.filter(isTemplatesNotebook).map((n) => n.id))
+    return this.lists.pages.filter((p) => holders.has(p.notebook) && p.templateName).sort((a, b) => a.templateName.localeCompare(b.templateName))
+  }
+
+  /** Saved quick-note templates, by name. */
+  get noteTemplates(): QuickNote[] {
+    return this.lists.quick_notes.filter((n) => n.templateName).sort((a, b) => a.templateName.localeCompare(b.templateName))
+  }
+
+  /** True for pages and notes that are templates (left out of search). */
+  isTemplate(r: Page | QuickNote): boolean {
+    if ("notebook" in r) {
+      const nb = this.notebook(r.notebook)
+      return !!nb && isTemplatesNotebook(nb)
+    }
+    return !!r.templateName
   }
 
   note(id: string): QuickNote | undefined {
@@ -283,6 +308,32 @@ class Store {
   }
 
   // ---- Notes and pages ----
+
+  /** A new quick note made from a template (saved or starter), with a saved one's pictures. */
+  async newNoteFrom(source: QuickNote | StarterNote): Promise<QuickNote> {
+    const saved = "id" in source ? source : null
+    const doc = decodeDoc(source.content)
+    const now = Date.now()
+    const note = await this.create("quick_notes", {
+      title: source.title,
+      content: compactDoc(doc),
+      plainText: saved ? saved.plainText : plainText(doc),
+      colorKey: source.colorKey,
+      pinned: false,
+      archived: false,
+      templateName: "",
+      updatedAt: now,
+    })
+    if (saved) {
+      for (const a of this.attachmentsOf("NOTE", saved.id)) {
+        await this.create("attachments", {
+          ownerType: "NOTE", ownerUid: note.id, kind: a.kind, path: a.path, mimeType: a.mimeType,
+          durationMs: a.durationMs, width: a.width, height: a.height, createdAt: now,
+        })
+      }
+    }
+    return note
+  }
 
   async newNote(): Promise<QuickNote> {
     const now = Date.now()
@@ -425,7 +476,39 @@ class Store {
     await this.remove("notebooks", nb.id)
   }
 
-  async addPage(notebookId: string, after: Page | null): Promise<Page> {
+  /** Adds a page made from a template (saved or starter) after [after]. */
+  async addPageFrom(notebookId: string, after: Page | null, source: Page | StarterPage): Promise<Page> {
+    const saved = "id" in source ? source : null
+    const fields = saved ?? { ...source, content: source.content }
+    const page = await this.addPage(notebookId, after, {
+      title: fields.title ?? "",
+      pageType: fields.pageType ?? "LINES",
+      backgroundArgb: fields.backgroundArgb ?? null,
+      texture: fields.texture ?? "NONE",
+      layoutMode: fields.layoutMode ?? "INLINE",
+      content: fields.content,
+      plainText: saved ? saved.plainText : plainText(decodeDoc(fields.content)),
+      isSection: saved?.isSection ?? false,
+      sectionIcon: saved?.sectionIcon ?? "",
+      sectionImage: saved?.sectionImage ?? "",
+      backgroundImage: saved?.backgroundImage ?? "",
+    })
+    if (saved) {
+      // Everything placed on the template comes too; connectors point at the copies.
+      const ids = new Map<string, string>()
+      const elements = this.elementsOf(saved.id)
+      for (const e of elements) ids.set(e.id, newId())
+      for (const e of elements) {
+        let data = e.data as Record<string, unknown>
+        if (e.kind === "CONNECTOR" && data) data = { ...data, from: ids.get(String(data.from)) ?? data.from, to: ids.get(String(data.to)) ?? data.to }
+        const { id: _i, owner: _o, rev: _r, created: _c, updated: _u, collectionName: _n, editedAt: _e, device: _d, ...rest } = e as PageElement & Record<string, unknown>
+        await this.create("page_elements", { ...(rest as Partial<PageElement>), id: ids.get(e.id), page: page.id, data } as Partial<PageElement>)
+      }
+    }
+    return page
+  }
+
+  async addPage(notebookId: string, after: Page | null, from?: Partial<Page>): Promise<Page> {
     const pages = this.pagesOf(notebookId)
     const index = after ? pages.findIndex((p) => p.id === after.id) : pages.length - 1
     const template = pages.slice(0, index + 1).reverse().find((p) => !p.isSection) ?? pages.find((p) => !p.isSection)
@@ -449,6 +532,9 @@ class Store {
       isSection: false,
       sectionIcon: "",
       sectionImage: "",
+      templateName: "",
+      backgroundImage: template?.backgroundImage ?? "",
+      ...from,
     })
   }
 

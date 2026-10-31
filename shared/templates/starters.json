@@ -1,0 +1,391 @@
+{
+ "about": "Starter templates offered in the app and the web app (they're never stored; picking one makes a page or note from it). Content is RichDoc JSON (see docs/note-format.md). Keys must never change.",
+ "pages": [
+  {
+   "key": "todo",
+   "name": "To-do list",
+   "page": {
+    "title": "To-do",
+    "pageType": "LINES",
+    "layoutMode": "INLINE",
+    "content": {
+     "blocks": [
+      {
+       "type": "SUBHEADING",
+       "text": "Today"
+      },
+      {
+       "type": "TASK"
+      },
+      {
+       "type": "TASK"
+      },
+      {
+       "type": "TASK"
+      },
+      {
+       "type": "TASK"
+      },
+      {
+       "type": "TASK"
+      },
+      {
+       "type": "SUBHEADING",
+       "text": "Later"
+      },
+      {
+       "type": "TASK"
+      },
+      {
+       "type": "TASK"
+      },
+      {
+       "type": "TASK"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "key": "meeting",
+   "name": "Meeting notes",
+   "page": {
+    "title": "Meeting",
+    "pageType": "LINES",
+    "layoutMode": "INLINE",
+    "content": {
+     "blocks": [
+      {
+       "type": "SUBHEADING",
+       "text": "Date & people"
+      },
+      {},
+      {
+       "type": "SUBHEADING",
+       "text": "Agenda"
+      },
+      {
+       "type": "BULLET"
+      },
+      {
+       "type": "BULLET"
+      },
+      {
+       "type": "SUBHEADING",
+       "text": "Notes"
+      },
+      {},
+      {
+       "type": "SUBHEADING",
+       "text": "Decisions"
+      },
+      {
+       "type": "BULLET"
+      },
+      {
+       "type": "SUBHEADING",
+       "text": "Action items"
+      },
+      {
+       "type": "TASK"
+      },
+      {
+       "type": "TASK"
+      },
+      {
+       "type": "TASK"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "key": "journal",
+   "name": "Daily journal",
+   "page": {
+    "title": "Journal",
+    "pageType": "DOTTED",
+    "backgroundArgb": -1817,
+    "texture": "PAPER",
+    "layoutMode": "INLINE",
+    "content": {
+     "blocks": [
+      {
+       "type": "SUBHEADING",
+       "text": "Grateful for"
+      },
+      {
+       "type": "BULLET"
+      },
+      {
+       "type": "BULLET"
+      },
+      {
+       "type": "BULLET"
+      },
+      {
+       "type": "SUBHEADING",
+       "text": "Today"
+      },
+      {},
+      {
+       "type": "SUBHEADING",
+       "text": "On my mind"
+      },
+      {},
+      {
+       "type": "SUBHEADING",
+       "text": "Tomorrow"
+      },
+      {
+       "type": "TASK"
+      },
+      {
+       "type": "TASK"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "key": "weekly",
+   "name": "Weekly planner",
+   "page": {
+    "title": "Week of",
+    "pageType": "LINES",
+    "layoutMode": "INLINE",
+    "content": {
+     "blocks": [
+      {
+       "type": "SUBHEADING",
+       "text": "Monday"
+      },
+      {
+       "type": "TASK"
+      },
+      {
+       "type": "TASK"
+      },
+      {
+       "type": "SUBHEADING",
+       "text": "Tuesday"
+      },
+      {
+       "type": "TASK"
+      },
+      {
+       "type": "TASK"
+      },
+      {
+       "type": "SUBHEADING",
+       "text": "Wednesday"
+      },
+      {
+       "type": "TASK"
+      },
+      {
+       "type": "TASK"
+      },
+      {
+       "type": "SUBHEADING",
+       "text": "Thursday"
+      },
+      {
+       "type": "TASK"
+      },
+      {
+       "type": "TASK"
+      },
+      {
+       "type": "SUBHEADING",
+       "text": "Friday"
+      },
+      {
+       "type": "TASK"
+      },
+      {
+       "type": "TASK"
+      },
+      {
+       "type": "SUBHEADING",
+       "text": "Saturday"
+      },
+      {
+       "type": "TASK"
+      },
+      {
+       "type": "TASK"
+      },
+      {
+       "type": "SUBHEADING",
+       "text": "Sunday"
+      },
+      {
+       "type": "TASK"
+      },
+      {
+       "type": "TASK"
+      },
+      {
+       "type": "DIVIDER"
+      },
+      {
+       "type": "SUBHEADING",
+       "text": "Notes"
+      },
+      {}
+     ]
+    }
+   }
+  },
+  {
+   "key": "sketch",
+   "name": "Grid sketch",
+   "page": {
+    "title": "Sketch",
+    "pageType": "GRID",
+    "layoutMode": "SCRAPBOOK",
+    "content": {
+     "blocks": [
+      {}
+     ]
+    }
+   }
+  }
+ ],
+ "notes": [
+  {
+   "key": "todo",
+   "name": "To-do",
+   "note": {
+    "title": "To-do",
+    "colorKey": "yellow",
+    "content": {
+     "blocks": [
+      {
+       "type": "TASK"
+      },
+      {
+       "type": "TASK"
+      },
+      {
+       "type": "TASK"
+      },
+      {
+       "type": "TASK"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "key": "groceries",
+   "name": "Grocery list",
+   "note": {
+    "title": "Groceries",
+    "colorKey": "green",
+    "content": {
+     "blocks": [
+      {
+       "type": "SUBHEADING",
+       "text": "Produce"
+      },
+      {
+       "type": "TASK"
+      },
+      {
+       "type": "SUBHEADING",
+       "text": "Dairy & eggs"
+      },
+      {
+       "type": "TASK"
+      },
+      {
+       "type": "SUBHEADING",
+       "text": "Pantry"
+      },
+      {
+       "type": "TASK"
+      },
+      {
+       "type": "SUBHEADING",
+       "text": "Household"
+      },
+      {
+       "type": "TASK"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "key": "idea",
+   "name": "Idea",
+   "note": {
+    "title": "Idea",
+    "colorKey": "purple",
+    "content": {
+     "blocks": [
+      {
+       "type": "SUBHEADING",
+       "text": "What"
+      },
+      {},
+      {
+       "type": "SUBHEADING",
+       "text": "Why"
+      },
+      {},
+      {
+       "type": "SUBHEADING",
+       "text": "Next step"
+      },
+      {
+       "type": "TASK"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "key": "packing",
+   "name": "Packing list",
+   "note": {
+    "title": "Packing",
+    "colorKey": "blue",
+    "content": {
+     "blocks": [
+      {
+       "type": "SUBHEADING",
+       "text": "Clothes"
+      },
+      {
+       "type": "TASK"
+      },
+      {
+       "type": "SUBHEADING",
+       "text": "Toiletries"
+      },
+      {
+       "type": "TASK"
+      },
+      {
+       "type": "SUBHEADING",
+       "text": "Tech"
+      },
+      {
+       "type": "TASK"
+      },
+      {
+       "type": "SUBHEADING",
+       "text": "Documents"
+      },
+      {
+       "type": "TASK"
+      }
+     ]
+    }
+   }
+  }
+ ]
+}

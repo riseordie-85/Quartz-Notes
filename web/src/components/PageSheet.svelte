@@ -53,6 +53,8 @@
   )
 
   /** How far down the page the lowest item reaches (px). */
+  const paperUrl = $derived(live.backgroundImage ? store.mediaUrl(live.backgroundImage) : null)
+  let paperAspect = $state(0)
   const elementsBottom = $derived.by(() => {
     let bottom = 0
     for (const e of elements) {
@@ -149,8 +151,15 @@
   style:background={bg}
   style:color={ink}
   style:--ink={ink}
-  style:min-height="{Math.max(elementsBottom + 48, W * 1.3)}px"
+  style:min-height="{Math.max(elementsBottom + 48, W * 1.3, W * paperAspect)}px"
 >
+  {#if paperUrl && !live.isSection}
+    <!-- A picture as the paper: as wide as the page, from the top (the page is at least as tall). -->
+    <img class="paper-image" src={paperUrl} alt="" onload={(e) => {
+        const img = e.currentTarget as HTMLImageElement
+        paperAspect = img.naturalHeight / Math.max(1, img.naturalWidth)
+      }} />
+  {/if}
   {#if live.isSection}
     <div class="section-body">
       <input class="section-title" placeholder="Section title" bind:value={title} oninput={changed} readonly={locked} aria-label="Section title" />
@@ -227,11 +236,22 @@
   }
   .sheet {
     position: relative;
+    isolation: isolate;
     border-radius: 24px;
     box-shadow: 0 1px 3px rgb(0 0 0 / 0.12), 0 2px 8px rgb(0 0 0 / 0.06);
     overflow: hidden;
     display: flex;
     flex-direction: column;
+  }
+  .paper-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: auto;
+    pointer-events: none;
+    user-select: none;
   }
   .title-row {
     display: flex;

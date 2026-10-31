@@ -3,6 +3,7 @@ package com.quartz.notes.data
 import androidx.room.withTransaction
 import com.quartz.notes.data.db.AttachmentEntity
 import com.quartz.notes.data.db.NotebookEntity
+import com.quartz.notes.data.db.NotebookKind
 import com.quartz.notes.data.db.PageElementEntity
 import com.quartz.notes.data.db.PageEntity
 import com.quartz.notes.data.db.PageHit
@@ -21,6 +22,8 @@ import com.quartz.notes.data.model.decodePayload
 import com.quartz.notes.data.model.encodePayload
 import com.quartz.notes.data.model.elementMediaPath
 import com.quartz.notes.data.model.encode
+import com.quartz.notes.data.templates.StarterNote
+import com.quartz.notes.data.templates.StarterPage
 import com.quartz.notes.data.rich.RichDoc
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
@@ -235,7 +238,7 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
 
     /** Puts a shelf's notebooks in the order of [ids] (any not listed keep their order, after them). */
     suspend fun reorderNotebooks(shelfId: Long, ids: List<Long>) = db.withTransaction {
-        val onShelf = notebooks.getAll().filter { it.shelfId == shelfId }.sortedWith(compareBy({ it.position }, { it.id }))
+        val onShelf = notebooks.getAll().filter { it.shelfId == shelfId && it.kind == NotebookKind.NOTEBOOK }.sortedWith(compareBy({ it.position }, { it.id }))
         val byId = onShelf.associateBy { it.id }
         val ordered = ids.mapNotNull { byId[it] } + onShelf.filter { it.id !in ids }
         ordered.forEachIndexed { i, nb -> if (nb.position != i) notebooks.update(nb.copy(position = i)) }
@@ -267,7 +270,10 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
             backgroundArgb = template?.backgroundArgb,
             texture = template?.texture ?: "NONE",
             layoutMode = template?.layoutMode ?: "INLINE",
+            backgroundImage = template?.backgroundImage,
             position = insertAt,
+            // A page added to the templates notebook is a new template.
+            templateName = if (notebooks.get(notebookId)?.kind == NotebookKind.TEMPLATES) "New template" else null,
         )
         val id = pages.insert(newPage)
         list.add(insertAt, newPage.copy(id = id))
@@ -333,6 +339,7 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
                 backgroundArgb = page.backgroundArgb,
                 texture = page.texture,
                 layoutMode = page.layoutMode,
+                backgroundImage = page.backgroundImage,
                 // Only scrapbook pages can span both sides.
                 spread = current.spread && page.layoutMode == "SCRAPBOOK",
                 updatedAt = now(),
@@ -350,6 +357,7 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
                         pageType = source.pageType,
                         backgroundArgb = source.backgroundArgb,
                         texture = source.texture,
+                        backgroundImage = source.backgroundImage,
                     )
                 },
             )
@@ -406,6 +414,7 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
     /** Deletes the note if it has no title and no text (checked after all earlier saves land). */
     fun discardIfBlank(id: Long) = enqueue {
         val note = notes.get(id) ?: return@enqueue
+        if (note.templateName != null) return@enqueue // templates can be bare checklists
         val hasAttachments = attachments.getFor(OwnerType.NOTE.name, id).isNotEmpty()
         if (note.title.isBlank() && note.plainText.isBlank() && !hasAttachments) db.withTransaction { removeNotes(listOf(id)) }
     }
@@ -557,32 +566,147 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
      * Returns the new page id.
      */
     suspend fun copyPageToNotebook(pageId: Long, notebookId: Long): Long = inOrder {
+        db.withTransaction { copyPageNow(pageId, notebookId, insertAt = null) { it } }
+    }
+
+    /**
+     * Copies a page with everything on it into [notebookId] at [insertAt] (null = at the end), with
+     * [adjust] applied to the new page row. Call in a transaction.
+     */
+    private suspend fun copyPageNow(pageId: Long, notebookId: Long, insertAt: Int?, adjust: (PageEntity) -> PageEntity): Long {
+        val page = pages.get(pageId) ?: error("Page not found")
+        val list = pages.getByNotebook(notebookId).toMutableList()
+        val position = (insertAt ?: list.size).coerceIn(0, list.size)
+        val stamp = now()
+        val copy = adjust(
+            page.copy(
+                id = 0, uid = newUid(), notebookId = notebookId, position = position, locked = false,
+                createdAt = stamp, updatedAt = stamp,
+            ),
+        )
+        val newId = pages.insert(copy)
+        list.add(position, copy.copy(id = newId))
+        renumber(list)
+        val idMap = HashMap<Long, Long>()
+        val connectors = ArrayList<PageElementEntity>()
+        elements.getForPage(pageId).forEach { e ->
+            if (e.kind == ElementKind.CONNECTOR) connectors += e else idMap[e.id] = elements.insert(e.copy(id = 0, uid = newUid(), pageId = newId))
+        }
+        // Connectors point at items by id, which are new on the copy.
+        connectors.forEach { c ->
+            val cd = decodePayload<ConnectorData>(c.data) ?: return@forEach
+            val from = idMap[cd.from] ?: return@forEach
+            val to = idMap[cd.to] ?: return@forEach
+            elements.insert(c.copy(id = 0, uid = newUid(), pageId = newId, data = cd.copy(from = from, to = to).encodePayload()))
+        }
+        notebooks.touch(notebookId, stamp)
+        return newId
+    }
+
+    // ---- Templates ----
+    // Saved page templates are pages in a hidden notebook (kind TEMPLATES) with a template name;
+    // saved quick-note templates are quick notes with a template name. Both sync like everything
+    // else. Starter templates come with the app and are never stored.
+
+    fun observePageTemplates(): Flow<List<PageEntity>> = pages.observeTemplates()
+
+    fun observeNoteTemplates(): Flow<List<QuickNoteEntity>> = notes.observeTemplates()
+
+    /** The hidden notebook page templates live in (made on first use). */
+    suspend fun templatesNotebookId(): Long = inOrder { db.withTransaction { templatesNotebookNow() } }
+
+    private suspend fun templatesNotebookNow(): Long {
+        notebooks.templatesNotebook()?.let { return it.id }
+        val shelf = shelves.getAll().firstOrNull()?.id ?: shelves.insert(ShelfEntity(name = "Notebooks", position = 0))
+        return notebooks.insert(
+            NotebookEntity(
+                shelfId = shelf, title = "Templates", colorArgb = 0xFF455A64.toInt(), kind = NotebookKind.TEMPLATES,
+                twoPage = false, sectionTabs = false,
+            ),
+        )
+    }
+
+    /** Saves a copy of a page, with everything on it, as a template called [name]. Returns its id. */
+    suspend fun savePageAsTemplate(pageId: Long, name: String): Long = inOrder {
         db.withTransaction {
-            val page = pages.get(pageId) ?: error("Page not found")
-            val position = pages.getByNotebook(notebookId).size
-            val stamp = now()
-            val newId = pages.insert(
-                page.copy(
-                    id = 0, uid = newUid(), notebookId = notebookId, position = position, locked = false,
-                    createdAt = stamp, updatedAt = stamp,
-                ),
-            )
-            val idMap = HashMap<Long, Long>()
-            val connectors = ArrayList<PageElementEntity>()
-            elements.getForPage(pageId).forEach { e ->
-                if (e.kind == ElementKind.CONNECTOR) connectors += e else idMap[e.id] = elements.insert(e.copy(id = 0, uid = newUid(), pageId = newId))
-            }
-            // Connectors point at items by id, which are new on the copy.
-            connectors.forEach { c ->
-                val cd = decodePayload<ConnectorData>(c.data) ?: return@forEach
-                val from = idMap[cd.from] ?: return@forEach
-                val to = idMap[cd.to] ?: return@forEach
-                elements.insert(c.copy(id = 0, uid = newUid(), pageId = newId, data = cd.copy(from = from, to = to).encodePayload()))
-            }
-            notebooks.touch(notebookId, stamp)
-            newId
+            copyPageNow(pageId, templatesNotebookNow(), insertAt = null) { it.copy(templateName = name.trim()) }
         }
     }
+
+    /** Adds a page made from a saved template after position [afterIndex]. Returns the new page's id. */
+    suspend fun insertPageFromTemplate(notebookId: Long, afterIndex: Int, templateId: Long): Long = inOrder {
+        db.withTransaction { copyPageNow(templateId, notebookId, insertAt = afterIndex + 1) { it.copy(templateName = null) } }
+    }
+
+    /** Adds a page made from a starter template after position [afterIndex]. */
+    suspend fun insertPageFromStarter(notebookId: Long, afterIndex: Int, starter: StarterPage): Long = inOrder {
+        db.withTransaction {
+            val list = pages.getByNotebook(notebookId).toMutableList()
+            val at = (afterIndex + 1).coerceIn(0, list.size)
+            val page = PageEntity(
+                notebookId = notebookId,
+                title = starter.title,
+                position = at,
+                pageType = starter.pageType,
+                backgroundArgb = starter.backgroundArgb,
+                texture = starter.texture,
+                layoutMode = starter.layoutMode,
+                content = starter.content.encode(),
+                plainText = starter.content.plainText(),
+            )
+            val id = pages.insert(page)
+            list.add(at, page.copy(id = id))
+            renumber(list)
+            notebooks.touch(notebookId, now())
+            id
+        }
+    }
+
+    fun renamePageTemplate(pageId: Long, name: String) = enqueue { pages.setTemplateName(pageId, name.trim(), now()) }
+
+    /** Deletes a saved page template (the templates notebook may end up empty). */
+    fun deletePageTemplate(pageId: Long) = enqueue { db.withTransaction { removePages(listOf(pageId)) } }
+
+    /** Saves a copy of a quick note, with its pictures and recordings, as a template called [name]. */
+    suspend fun saveNoteAsTemplate(noteId: Long, name: String): Long = inOrder {
+        db.withTransaction { copyNoteNow(noteId) { it.copy(templateName = name.trim()) } }
+    }
+
+    /** A new quick note made from a saved template. Returns its id. */
+    suspend fun createNoteFromTemplate(templateId: Long): Long = inOrder {
+        db.withTransaction { copyNoteNow(templateId) { it.copy(templateName = null) } }
+    }
+
+    /** A new quick note made from a starter template. */
+    suspend fun createNoteFromStarter(starter: StarterNote): Long = inOrder {
+        notes.insert(
+            QuickNoteEntity(
+                title = starter.title, content = starter.content.encode(), plainText = starter.content.plainText(),
+                colorKey = starter.colorKey,
+            ),
+        )
+    }
+
+    fun renameNoteTemplate(noteId: Long, name: String) = enqueue { notes.setTemplateName(noteId, name.trim(), now()) }
+
+    private suspend fun copyNoteNow(noteId: Long, adjust: (QuickNoteEntity) -> QuickNoteEntity): Long {
+        val note = notes.get(noteId) ?: error("Note not found")
+        val stamp = now()
+        val id = notes.insert(
+            adjust(note.copy(id = 0, uid = newUid(), pinned = false, archived = false, createdAt = stamp, updatedAt = stamp)),
+        )
+        attachments.getFor(OwnerType.NOTE.name, noteId).forEach { a ->
+            attachments.insert(a.copy(id = 0, uid = newUid(), ownerId = id, createdAt = stamp))
+        }
+        return id
+    }
+
+    // ---- Page backgrounds ----
+
+    /** Pictures already used as page backgrounds (offered again in the background picker). */
+    fun observeBackgroundImages(): Flow<List<String>> = pages.observeBackgroundImages()
+
+    fun setPageBackgroundImage(pageId: Long, path: String?) = enqueue { pages.setBackgroundImage(pageId, path, now()) }
 
     // ---- Media bookkeeping ----
 
@@ -742,7 +866,7 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
     companion object {
         /** Media files a page itself uses: in-line pictures and a section page's photo. */
         fun pageMediaPaths(page: PageEntity): List<String> =
-            RichDoc.decode(page.content).mediaPaths() + listOfNotNull(page.sectionImage)
+            RichDoc.decode(page.content).mediaPaths() + listOfNotNull(page.sectionImage, page.backgroundImage)
 
         /** Media files an element uses: its picture or recording, or pictures in line inside a text box. */
 

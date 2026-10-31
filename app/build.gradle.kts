@@ -47,6 +47,8 @@ android {
     // Exported database schemas, for the migration tests.
     sourceSets {
         getByName("androidTest").assets.srcDir("$projectDir/schemas")
+        // Starter templates, shared with the web app.
+        getByName("main").assets.srcDir("$rootDir/shared/templates")
     }
 }
 

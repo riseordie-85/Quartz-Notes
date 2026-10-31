@@ -8,11 +8,13 @@
   import TopBar from "./TopBar.svelte"
   import Icon from "./Icon.svelte"
   import type { QuickNote } from "../lib/types"
+  import TemplatePicker from "./TemplatePicker.svelte"
 
   let { archive, onMenu }: { archive: boolean; onMenu: () => void } = $props()
   const dark = $derived(theme.dark)
   const notes = $derived(archive ? store.archived : store.notes)
   let error = $state<string | null>(null)
+  let picking = $state(false)
 
   async function newNote() {
     try {
@@ -41,12 +43,27 @@
 <TopBar title={archive ? "Archive" : "Quick notes"} {onMenu}>
   {#snippet actions()}
     {#if !archive}
+      <button class="pill-btn quiet" onclick={() => (picking = true)} title="New note from a template"><Icon name="newNotebook" size={20} />From template</button>
       <button class="pill-btn" onclick={newNote}><Icon name="add" size={20} />New note</button>
     {/if}
   {/snippet}
 </TopBar>
 
 {#if error}<p class="error" role="alert">{error}</p>{/if}
+{#if picking}
+  <TemplatePicker
+    mode="note"
+    onCancel={() => (picking = false)}
+    onPick={(c) => {
+      picking = false
+      if (c.kind !== "note") return
+      act(async () => {
+        const n = await store.newNoteFrom(c.source)
+        router.go({ name: "note", id: n.id })
+      })
+    }}
+  />
+{/if}
 
 {#if notes.length === 0}
   <p class="empty-state">{archive ? "Nothing archived. Archived notes show up here." : "No quick notes yet."}</p>

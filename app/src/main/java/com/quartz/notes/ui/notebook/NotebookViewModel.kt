@@ -387,6 +387,21 @@ class NotebookViewModel(
         onCreated(repo.insertPage(notebookId, afterIndex))
     }
 
+    /** Saves a page (with any unsaved typing) as a template called [name]. */
+    fun saveAsTemplate(pageId: Long, name: String, onSaved: () -> Unit) = viewModelScope.launch {
+        saveIfChanged(pageId)
+        knownTextBoxes.values.filter { it.pageId == pageId }.forEach(::saveTextBox)
+        repo.savePageAsTemplate(pageId, name)
+        onSaved()
+    }
+
+    fun addPageFromTemplate(afterIndex: Int, templateId: Long, onCreated: (Long) -> Unit) = viewModelScope.launch {
+        onCreated(repo.insertPageFromTemplate(notebookId, afterIndex, templateId))
+    }
+
+    fun addPageFromStarter(afterIndex: Int, starter: com.quartz.notes.data.templates.StarterPage, onCreated: (Long) -> Unit) =
+        viewModelScope.launch { onCreated(repo.insertPageFromStarter(notebookId, afterIndex, starter)) }
+
     /** Deletes a page; on a notebook's only page, clears it instead. */
     fun deletePage(page: PageEntity, isOnlyPage: Boolean) {
         if (isOnlyPage) {

@@ -55,7 +55,7 @@ interface NotebookDao {
     @Query("SELECT uid FROM notebooks WHERE id = :id")
     suspend fun uidOf(id: Long): String?
 
-    @Query("SELECT * FROM notebooks WHERE shelfId = :shelfId AND deleted = 0 ORDER BY position, id")
+    @Query("SELECT * FROM notebooks WHERE shelfId = :shelfId AND deleted = 0 AND kind = 'NOTEBOOK' ORDER BY position, id")
     fun observeByShelf(shelfId: Long): Flow<List<NotebookEntity>>
 
     @Query("SELECT * FROM notebooks WHERE id = :id AND deleted = 0")
@@ -70,13 +70,18 @@ interface NotebookDao {
     @Update
     suspend fun update(notebook: NotebookEntity)
 
-    @Query("SELECT * FROM notebooks WHERE deleted = 0 ORDER BY shelfId, position, id")
+    /** Every notebook on the shelves (not the hidden templates notebook). */
+    @Query("SELECT * FROM notebooks WHERE deleted = 0 AND kind = 'NOTEBOOK' ORDER BY shelfId, position, id")
     fun observeAll(): Flow<List<NotebookEntity>>
+
+    /** The hidden notebook that holds saved page templates (the oldest, if two devices each made one). */
+    @Query("SELECT * FROM notebooks WHERE deleted = 0 AND kind = 'TEMPLATES' ORDER BY id LIMIT 1")
+    suspend fun templatesNotebook(): NotebookEntity?
 
     @Query("SELECT * FROM notebooks WHERE deleted = 0")
     suspend fun getAll(): List<NotebookEntity>
 
-    @Query("SELECT COALESCE(MAX(position), -1) FROM notebooks WHERE shelfId = :shelfId AND deleted = 0")
+    @Query("SELECT COALESCE(MAX(position), -1) FROM notebooks WHERE shelfId = :shelfId AND deleted = 0 AND kind = 'NOTEBOOK'")
     suspend fun maxPosition(shelfId: Long): Int
 
     @Query("UPDATE notebooks SET updatedAt = :updatedAt WHERE id = :id")
@@ -156,7 +161,7 @@ interface PageDao {
         SELECT p.id AS pageId, p.notebookId AS notebookId, p.title AS title, p.plainText AS plainText,
                p.updatedAt AS updatedAt, n.title AS notebookTitle, n.colorArgb AS notebookColor
         FROM pages p INNER JOIN notebooks n ON n.id = p.notebookId
-        WHERE p.deleted = 0 AND n.deleted = 0
+        WHERE p.deleted = 0 AND n.deleted = 0 AND n.kind = 'NOTEBOOK'
           AND (p.title LIKE :pattern ESCAPE '\' OR p.plainText LIKE :pattern ESCAPE '\')
           AND (:notebookId IS NULL OR p.notebookId = :notebookId)
         ORDER BY p.updatedAt DESC
@@ -170,12 +175,37 @@ interface PageDao {
         SELECT p.id AS pageId, p.notebookId AS notebookId, p.title AS title, p.plainText AS plainText,
                p.updatedAt AS updatedAt, n.title AS notebookTitle, n.colorArgb AS notebookColor
         FROM pages p INNER JOIN notebooks n ON n.id = p.notebookId
-        WHERE p.deleted = 0 AND n.deleted = 0
+        WHERE p.deleted = 0 AND n.deleted = 0 AND n.kind = 'NOTEBOOK'
         ORDER BY p.updatedAt DESC
         LIMIT :limit
         """,
     )
     fun observeRecent(limit: Int): Flow<List<PageHit>>
+
+    /** Saved page templates, by name. */
+    @Query(
+        """
+        SELECT p.* FROM pages p INNER JOIN notebooks n ON n.id = p.notebookId
+        WHERE p.deleted = 0 AND n.deleted = 0 AND n.kind = 'TEMPLATES' AND p.templateName IS NOT NULL
+        ORDER BY p.templateName COLLATE NOCASE, p.id
+        """,
+    )
+    fun observeTemplates(): Flow<List<PageEntity>>
+
+    @Query("UPDATE pages SET templateName = :name, updatedAt = :updatedAt WHERE id = :id")
+    suspend fun setTemplateName(id: Long, name: String, updatedAt: Long)
+
+    @Query("UPDATE pages SET backgroundImage = :path, updatedAt = :updatedAt WHERE id = :id")
+    suspend fun setBackgroundImage(id: Long, path: String?, updatedAt: Long)
+
+    /** Pictures used as page backgrounds, newest first (offered again in the background picker). */
+    @Query(
+        """
+        SELECT backgroundImage FROM pages WHERE deleted = 0 AND backgroundImage IS NOT NULL
+        GROUP BY backgroundImage ORDER BY MAX(updatedAt) DESC LIMIT 40
+        """,
+    )
+    fun observeBackgroundImages(): Flow<List<String>>
 
     @Query("SELECT * FROM pages WHERE uid = :uid")
     suspend fun byUid(uid: String): PageEntity?
@@ -196,11 +226,18 @@ interface QuickNoteDao {
     suspend fun uidOf(id: Long): String?
 
     /** Notes in the quick notes list: pinned ones first, archived ones left out. */
-    @Query("SELECT * FROM quick_notes WHERE archived = 0 AND deleted = 0 ORDER BY pinned DESC, createdAt DESC")
+    @Query("SELECT * FROM quick_notes WHERE archived = 0 AND deleted = 0 AND templateName IS NULL ORDER BY pinned DESC, createdAt DESC")
     fun observeAll(): Flow<List<QuickNoteEntity>>
 
-    @Query("SELECT * FROM quick_notes WHERE archived = 1 AND deleted = 0 ORDER BY updatedAt DESC")
+    @Query("SELECT * FROM quick_notes WHERE archived = 1 AND deleted = 0 AND templateName IS NULL ORDER BY updatedAt DESC")
     fun observeArchived(): Flow<List<QuickNoteEntity>>
+
+    /** Saved quick-note templates, by name. */
+    @Query("SELECT * FROM quick_notes WHERE deleted = 0 AND templateName IS NOT NULL ORDER BY templateName COLLATE NOCASE, id")
+    fun observeTemplates(): Flow<List<QuickNoteEntity>>
+
+    @Query("UPDATE quick_notes SET templateName = :name, updatedAt = :updatedAt WHERE id = :id")
+    suspend fun setTemplateName(id: Long, name: String, updatedAt: Long)
 
     @Query("UPDATE quick_notes SET pinned = :pinned WHERE id = :id")
     suspend fun setPinned(id: Long, pinned: Boolean)
@@ -236,7 +273,7 @@ interface QuickNoteDao {
     @Query(
         """
         SELECT id FROM quick_notes
-        WHERE deleted = 0 AND id != :except AND TRIM(title) = '' AND TRIM(plainText, ' ' || char(9) || char(10) || char(13)) = ''
+        WHERE deleted = 0 AND templateName IS NULL AND id != :except AND TRIM(title) = '' AND TRIM(plainText, ' ' || char(9) || char(10) || char(13)) = ''
           AND id NOT IN (SELECT ownerId FROM attachments WHERE ownerType = 'NOTE' AND deleted = 0)
         """,
     )
@@ -245,7 +282,7 @@ interface QuickNoteDao {
     @Query(
         """
         SELECT * FROM quick_notes
-        WHERE archived = 0 AND deleted = 0 AND (title LIKE :pattern ESCAPE '\' OR plainText LIKE :pattern ESCAPE '\')
+        WHERE archived = 0 AND deleted = 0 AND templateName IS NULL AND (title LIKE :pattern ESCAPE '\' OR plainText LIKE :pattern ESCAPE '\')
         ORDER BY createdAt DESC
         LIMIT 200
         """,

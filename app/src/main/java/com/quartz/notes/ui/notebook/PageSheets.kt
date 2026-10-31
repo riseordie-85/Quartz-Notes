@@ -23,7 +23,10 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.AddPhotoAlternate
+import androidx.compose.material.icons.rounded.Block
 import androidx.compose.material.icons.rounded.Bookmark
+import androidx.compose.material.icons.rounded.BookmarkAdd
 import androidx.compose.material.icons.rounded.Colorize
 import androidx.compose.material.icons.rounded.MoreVert
 import androidx.compose.material3.DropdownMenu
@@ -67,7 +70,9 @@ import com.quartz.notes.ui.components.ConfirmDialog
 import com.quartz.notes.ui.components.DefaultSwatch
 import com.quartz.notes.ui.components.PageTypePreview
 import com.quartz.notes.ui.components.Swatch
+import com.quartz.notes.ui.media.model
 import com.quartz.notes.ui.theme.LocalQuartzColors
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.quartz.notes.ui.theme.PageColorPresets
 import com.quartz.notes.ui.theme.contentColorFor
 
@@ -79,9 +84,17 @@ fun PageStyleSheet(
     onLayoutMode: (scrapbook: Boolean) -> Unit,
     onChange: (PageEntity) -> Unit,
     onApplyToAll: (PageEntity) -> Unit,
+    onSaveTemplate: () -> Unit,
     onDismiss: () -> Unit,
 ) {
     var custom by remember { mutableStateOf(false) }
+    val container = com.quartz.notes.LocalAppContainer.current
+    val usedBackgrounds by container.repository.observeBackgroundImages().collectAsStateWithLifecycle(initialValue = emptyList())
+    // Picking a picture switches to plain paper (no lines over it) the first time.
+    fun useBackground(path: String?) {
+        onChange(page.copy(backgroundImage = path, pageType = if (path != null && page.backgroundImage == null) PageType.PLAIN.name else page.pageType))
+    }
+    val backgroundAdder = com.quartz.notes.ui.media.rememberImageAdder { image -> useBackground(image.path) }
     val defaultPage = LocalQuartzColors.current.card
     val bg = page.backgroundArgb?.let { Color(it) } ?: defaultPage
     val lines = contentColorFor(bg).copy(alpha = 0.3f)
@@ -171,8 +184,45 @@ fun PageStyleSheet(
                 }
             }
 
+            Label("Background picture")
+            Text(
+                "Use any picture as the paper, like a planner or a printed template. It fills the page's width.",
+                fontSize = 13.sp,
+                color = LocalQuartzColors.current.textSecondary,
+                modifier = Modifier.padding(bottom = 10.dp),
+            )
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(10.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                val tile = Modifier.size(width = 64.dp, height = 86.dp)
+                val tileShape = RoundedCornerShape(10.dp)
+                BackgroundTile(selected = page.backgroundImage == null, modifier = tile, shape = tileShape, onClick = { useBackground(null) }) {
+                    Icon(Icons.Rounded.Block, contentDescription = "No picture", tint = LocalQuartzColors.current.textSecondary)
+                }
+                (listOfNotNull(page.backgroundImage) + usedBackgrounds).distinct().forEach { path ->
+                    BackgroundTile(selected = page.backgroundImage == path, modifier = tile, shape = tileShape, onClick = { useBackground(path) }) {
+                        coil.compose.AsyncImage(
+                            model = container.media.model(path),
+                            contentDescription = "Background picture",
+                            contentScale = androidx.compose.ui.layout.ContentScale.Crop,
+                            alignment = Alignment.TopCenter,
+                            modifier = Modifier.matchParentSize(),
+                        )
+                    }
+                }
+                BackgroundTile(selected = false, modifier = tile, shape = tileShape, onClick = { backgroundAdder.pickFromGallery() }) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Rounded.AddPhotoAlternate, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+                        Text("Import", fontSize = 11.sp, color = MaterialTheme.colorScheme.primary)
+                    }
+                }
+            }
+
             Spacer(Modifier.height(20.dp))
             OutlinedButton(onClick = { onApplyToAll(page) }) { Text("Use this style on every page") }
+            OutlinedButton(onClick = onSaveTemplate, modifier = Modifier.padding(top = 8.dp)) {
+                Icon(Icons.Rounded.BookmarkAdd, contentDescription = null, modifier = Modifier.size(18.dp))
+                Spacer(Modifier.width(8.dp))
+                Text("Save page as template")
+            }
         }
     }
 
@@ -189,6 +239,29 @@ fun PageStyleSheet(
             },
         )
     }
+}
+
+@Composable
+private fun BackgroundTile(
+    selected: Boolean,
+    modifier: Modifier,
+    shape: androidx.compose.ui.graphics.Shape,
+    onClick: () -> Unit,
+    content: @Composable androidx.compose.foundation.layout.BoxScope.() -> Unit,
+) {
+    Box(
+        modifier
+            .clip(shape)
+            .background(MaterialTheme.colorScheme.surfaceContainerHigh)
+            .border(
+                if (selected) 2.5.dp else 1.dp,
+                if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outlineVariant,
+                shape,
+            )
+            .clickable(onClick = onClick),
+        contentAlignment = Alignment.Center,
+        content = content,
+    )
 }
 
 /** List of pages in the notebook: jump, reorder, delete. */

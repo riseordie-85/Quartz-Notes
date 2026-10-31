@@ -108,6 +108,19 @@ class NoteViewModel(
 
     private val session: NoteSession? get() = (_load.value as? NoteLoad.Ready)?.session
 
+    /** Saves the note (with any unsaved typing) as a template called [name]. */
+    fun saveAsTemplate(name: String, onSaved: () -> Unit) {
+        val s = session ?: return
+        if (!finished && s.isDirty) {
+            repo.saveNote(s.id, s.title, s.editor.toDoc(), s.colorKey)
+            s.markSaved()
+        }
+        viewModelScope.launch {
+            repo.saveNoteAsTemplate(noteId, name)
+            onSaved()
+        }
+    }
+
     /** Saves if anything changed since the last save. Safe to call often. */
     fun saveIfChanged() {
         val s = session ?: return

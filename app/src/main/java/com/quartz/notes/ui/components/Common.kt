@@ -1,5 +1,7 @@
 package com.quartz.notes.ui.components
 
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -62,21 +64,27 @@ fun QuartzPill(
 }
 
 /** Big round button (the "+" next to search and the toolbar). */
+@OptIn(androidx.compose.foundation.ExperimentalFoundationApi::class)
 @Composable
 fun RoundActionButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     size: Dp = 56.dp,
+    onLongClick: (() -> Unit)? = null,
+    onLongClickLabel: String? = null,
     content: @Composable BoxScope.() -> Unit,
 ) {
     Surface(
-        onClick = onClick,
         modifier = modifier.size(size),
         shape = CircleShape,
         color = LocalQuartzColors.current.pill,
         shadowElevation = 3.dp,
     ) {
-        Box(contentAlignment = Alignment.Center, content = content)
+        Box(
+            Modifier.fillMaxSize().combinedClickable(onClick = onClick, onLongClick = onLongClick, onLongClickLabel = onLongClickLabel),
+            contentAlignment = Alignment.Center,
+            content = content,
+        )
     }
 }
 

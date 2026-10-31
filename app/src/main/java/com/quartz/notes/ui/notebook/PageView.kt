@@ -108,6 +108,7 @@ import com.quartz.notes.ui.editor.RichTextEditor
 import com.quartz.notes.ui.editor.editorStyles
 import com.quartz.notes.ui.editor.inlineImageSlotHeight
 import com.quartz.notes.ui.media.DecorateSheet
+import com.quartz.notes.ui.media.model
 import com.quartz.notes.ui.media.DecoratedImage
 import com.quartz.notes.ui.media.ImageViewer
 import com.quartz.notes.ui.theme.LocalQuartzColors
@@ -140,6 +141,9 @@ internal fun PageView(
     val editor = session.editor
     val title = session.title
     val audio = LocalAppContainer.current.audio
+    val mediaFiles = LocalAppContainer.current.media
+    val backgroundModel = page.backgroundImage?.let { mediaFiles.model(it) }
+    var backgroundAspect by remember(page.backgroundImage) { mutableStateOf(0f) }
     val focusManager = LocalFocusManager.current
     val keyboard = LocalSoftwareKeyboardController.current
 
@@ -477,7 +481,7 @@ internal fun PageView(
             Box(
                 Modifier
                     .fillMaxWidth()
-                    .heightIn(min = maxOf(elementsBottom + 48.dp, viewport))
+                    .heightIn(min = maxOf(elementsBottom + 48.dp, viewport, pageWidth * backgroundAspect))
                     .onPlaced { canvas.contentCoords = it }
                     // "Share as image" records the whole page, on its paper color and texture.
                     .then(capture.modifier(background = { bg }, texture = { texture }))
@@ -555,6 +559,20 @@ internal fun PageView(
                         }
                     },
             ) {
+                // A picture as the paper: as wide as the page, from the top; the page is at least as tall.
+                page.backgroundImage?.let { path ->
+                    coil.compose.AsyncImage(
+                        model = backgroundModel,
+                        contentDescription = null,
+                        contentScale = androidx.compose.ui.layout.ContentScale.FillWidth,
+                        alignment = Alignment.TopCenter,
+                        onSuccess = { state ->
+                            val size = state.painter.intrinsicSize
+                            if (size.width > 0f && size.height > 0f) backgroundAspect = size.height / size.width
+                        },
+                        modifier = Modifier.matchParentSize(),
+                    )
+                }
                 Column(Modifier.fillMaxWidth()) {
                     Row(
                         Modifier.fillMaxWidth().padding(start = padH, end = padH - 10.dp, top = 14.dp, bottom = 4.dp),

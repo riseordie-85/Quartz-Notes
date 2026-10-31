@@ -134,12 +134,16 @@ private sealed interface SettingsDialog {
 }
 
 /** The tabs along the top of the settings screen. */
-private val SettingsTabs = listOf("Settings", "Archive")
+private val SettingsTabs = listOf("Settings", "Templates", "Archive")
 
 /** @param onOpenNote opens a quick note in the editor (used by the Archive tab). */
 @OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun SettingsScreen(onBack: () -> Unit, onOpenNote: (Long) -> Unit) {
+fun SettingsScreen(
+    onBack: () -> Unit,
+    onOpenNote: (Long) -> Unit,
+    onOpenPage: (notebookId: Long, pageId: Long) -> Unit = { _, _ -> },
+) {
     val vm = quartzViewModel { SettingsViewModel(it.repository, it.settings, it.fonts) }
     val settings by vm.settings.collectAsStateWithLifecycle()
     val shelves by vm.shelves.collectAsStateWithLifecycle()
@@ -197,6 +201,12 @@ fun SettingsScreen(onBack: () -> Unit, onOpenNote: (Long) -> Unit) {
             }
 
             if (tab == 1) {
+                com.quartz.notes.ui.templates.TemplatesTab(
+                    onOpenNote = onOpenNote,
+                    onOpenPage = onOpenPage,
+                    modifier = Modifier.widthIn(max = 720.dp).align(Alignment.CenterHorizontally),
+                )
+            } else if (tab == 2) {
                 ArchiveTab(
                     snackbar = snackbar,
                     onOpenNote = onOpenNote,

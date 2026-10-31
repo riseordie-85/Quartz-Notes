@@ -7,8 +7,8 @@
 
   const needle = $derived(q.trim().toLowerCase())
   const match = (s: string) => s.toLowerCase().includes(needle)
-  const notes = $derived(needle ? store.lists.quick_notes.filter((n) => match(n.title) || match(n.plainText)) : [])
-  const pages = $derived(needle ? store.lists.pages.filter((p) => match(p.title) || match(p.plainText)) : [])
+  const notes = $derived(needle ? store.lists.quick_notes.filter((n) => !store.isTemplate(n) && (match(n.title) || match(n.plainText))) : [])
+  const pages = $derived(needle ? store.lists.pages.filter((p) => !store.isTemplate(p) && (match(p.title) || match(p.plainText))) : [])
 
   function snippet(text: string): string {
     const i = text.toLowerCase().indexOf(needle)

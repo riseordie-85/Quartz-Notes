@@ -26,6 +26,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Delete
+import androidx.compose.material.icons.rounded.BookmarkAdd
 import androidx.compose.material.icons.rounded.MoreVert
 import androidx.compose.material.icons.rounded.Palette
 import androidx.compose.material3.CircularProgressIndicator
@@ -136,6 +137,7 @@ private fun NoteEditorContent(load: NoteLoad.Ready, vm: NoteViewModel, onClose: 
     var showColors by remember { mutableStateOf(false) }
     var menu by remember { mutableStateOf(false) }
     var confirmDelete by remember { mutableStateOf(false) }
+    var savingTemplate by remember { mutableStateOf(false) }
     var attachMenu by remember { mutableStateOf(false) }
     var recording by remember { mutableStateOf(false) }
     var showShare by remember { mutableStateOf(false) }
@@ -241,6 +243,14 @@ private fun NoteEditorContent(load: NoteLoad.Ready, vm: NoteViewModel, onClose: 
                 Box {
                     IconButton(onClick = { menu = true }) { Icon(Icons.Rounded.MoreVert, contentDescription = "More", tint = ink) }
                     DropdownMenu(expanded = menu, onDismissRequest = { menu = false }) {
+                        DropdownMenuItem(
+                            text = { Text("Save as template") },
+                            leadingIcon = { Icon(Icons.Rounded.BookmarkAdd, null) },
+                            onClick = {
+                                menu = false
+                                savingTemplate = true
+                            },
+                        )
                         DropdownMenuItem(
                             text = { Text("Delete note") },
                             leadingIcon = { Icon(Icons.Rounded.Delete, null) },
@@ -397,6 +407,20 @@ private fun NoteEditorContent(load: NoteLoad.Ready, vm: NoteViewModel, onClose: 
 
     if (showFormat) {
         FormatSheet(state = editor, fonts = fonts, onDismiss = { showFormat = false })
+    }
+    if (savingTemplate) {
+        com.quartz.notes.ui.components.TextInputDialog(
+            title = "Save as template",
+            initial = session.title,
+            label = "Template name",
+            onDismiss = { savingTemplate = false },
+            onConfirm = { name ->
+                savingTemplate = false
+                if (name.isNotBlank()) {
+                    vm.saveAsTemplate(name) { Toast.makeText(context, "Saved as a template. Hold + on the home screen to use it.", Toast.LENGTH_SHORT).show() }
+                }
+            },
+        )
     }
     if (confirmDelete) {
         ConfirmDialog(

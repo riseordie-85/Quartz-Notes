@@ -56,6 +56,8 @@ data class NotebookEntity(
     val sectionTabs: Boolean = true,
     /** New pictures and recordings go in a strip at the bottom of the page instead of anywhere on it. */
     val attachAtBottom: Boolean = false,
+    /** "NOTEBOOK", or "TEMPLATES" for the hidden notebook that holds saved page templates. */
+    val kind: String = NotebookKind.NOTEBOOK,
     val uid: String = newUid(),
     val deleted: Boolean = false,
 )
@@ -105,6 +107,10 @@ data class PageEntity(
     val sectionIcon: String? = null,
     /** Media path of a section page's photo (used instead of the icon). */
     val sectionImage: String? = null,
+    /** Set on pages in the templates notebook: the name the template is listed under. */
+    val templateName: String? = null,
+    /** Media path of a picture shown as the page's paper (fit to the page's width), or null. */
+    val backgroundImage: String? = null,
     val uid: String = newUid(),
     val deleted: Boolean = false,
 )
@@ -158,6 +164,8 @@ data class QuickNoteEntity(
     val updatedAt: Long = System.currentTimeMillis(),
     /** Put away: hidden from the quick notes list, found under Settings → Archive. */
     val archived: Boolean = false,
+    /** Set on saved quick-note templates (hidden from the notes list): the template's name. */
+    val templateName: String? = null,
     val uid: String = newUid(),
     val deleted: Boolean = false,
 )
@@ -221,3 +229,10 @@ data class PageHit(
     val notebookTitle: String,
     val notebookColor: Int,
 )
+
+object NotebookKind {
+    const val NOTEBOOK = "NOTEBOOK"
+
+    /** Holds saved page templates; never shown as a notebook. */
+    const val TEMPLATES = "TEMPLATES"
+}

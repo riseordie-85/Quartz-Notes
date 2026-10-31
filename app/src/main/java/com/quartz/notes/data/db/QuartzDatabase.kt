@@ -17,7 +17,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
         SyncStateEntity::class,
         SyncFlagsEntity::class,
     ],
-    version = 5,
+    version = 6,
     exportSchema = true,
 )
 abstract class QuartzDatabase : RoomDatabase() {
@@ -49,7 +49,7 @@ abstract class QuartzDatabase : RoomDatabase() {
                 .addMigrations(*ALL_MIGRATIONS)
                 .build()
 
-        val ALL_MIGRATIONS get() = arrayOf(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5)
+        val ALL_MIGRATIONS get() = arrayOf(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6)
 
         /** Adds page lock and two-page (spread) flags. */
         private val MIGRATION_1_2 = object : androidx.room.migration.Migration(1, 2) {
@@ -102,6 +102,16 @@ abstract class QuartzDatabase : RoomDatabase() {
                     )
                 }
                 SyncTriggers.install(db)
+            }
+        }
+
+        /** Page and quick-note templates (in a hidden notebook / as hidden notes) and page background pictures. */
+        val MIGRATION_5_6 = object : androidx.room.migration.Migration(5, 6) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE notebooks ADD COLUMN kind TEXT NOT NULL DEFAULT 'NOTEBOOK'")
+                db.execSQL("ALTER TABLE pages ADD COLUMN templateName TEXT")
+                db.execSQL("ALTER TABLE pages ADD COLUMN backgroundImage TEXT")
+                db.execSQL("ALTER TABLE quick_notes ADD COLUMN templateName TEXT")
             }
         }
     }

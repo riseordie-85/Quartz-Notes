@@ -23,6 +23,7 @@ import androidx.compose.material.icons.automirrored.rounded.KeyboardArrowLeft
 import androidx.compose.material.icons.automirrored.rounded.KeyboardArrowRight
 import androidx.compose.material.icons.automirrored.rounded.OpenInNew
 import androidx.compose.material.icons.rounded.Bookmark
+import androidx.compose.material.icons.rounded.BookmarkAdd
 import androidx.compose.material.icons.rounded.DeleteOutline
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -119,6 +120,7 @@ internal fun PageTimelineSheet(
     /** Moves a page to a position among the real pages (0 = first page after the index). */
     onMoveTo: (PageEntity, Int) -> Unit,
     onStartSection: (PageEntity) -> Unit,
+    onSaveTemplate: (PageEntity) -> Unit = {},
     onDelete: (PageEntity) -> Unit,
     onDismiss: () -> Unit,
 ) {
@@ -376,6 +378,14 @@ internal fun PageTimelineSheet(
                             )
                         }
                         DropdownMenuItem(
+                            text = { Text("Save as template") },
+                            leadingIcon = { Icon(Icons.Rounded.BookmarkAdd, null) },
+                            onClick = {
+                                menu = false
+                                onSaveTemplate(page)
+                            },
+                        )
+                        DropdownMenuItem(
                             text = { Text("Delete", color = MaterialTheme.colorScheme.error) },
                             leadingIcon = { Icon(Icons.Rounded.DeleteOutline, null, tint = MaterialTheme.colorScheme.error) },
                             onClick = {
@@ -408,7 +418,7 @@ internal fun PageTimelineSheet(
 
 /** A miniature page: its paper, title, first lines and first picture (or a section's look). */
 @Composable
-private fun PageThumbnail(page: PageEntity, elements: List<PageElementEntity>, highlighted: Boolean) {
+internal fun PageThumbnail(page: PageEntity, elements: List<PageElementEntity>, highlighted: Boolean) {
     val quartz = LocalQuartzColors.current
     val accent = MaterialTheme.colorScheme.primary
     val files = LocalAppContainer.current.media
@@ -452,6 +462,15 @@ private fun PageThumbnail(page: PageEntity, elements: List<PageElementEntity>, h
             }
             .then(if (highlighted) Modifier.border(2.5.dp, accent, shape) else Modifier),
     ) {
+        if (page.backgroundImage != null && !page.isSection) {
+            AsyncImage(
+                model = files.model(page.backgroundImage),
+                contentDescription = null,
+                contentScale = ContentScale.FillWidth,
+                alignment = Alignment.TopCenter,
+                modifier = Modifier.matchParentSize(),
+            )
+        }
         when {
             isIndex -> Column(Modifier.padding(8.dp)) {
                 Text("Index", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = ink)

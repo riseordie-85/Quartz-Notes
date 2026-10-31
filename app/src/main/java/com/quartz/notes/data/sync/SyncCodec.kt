@@ -2,6 +2,7 @@ package com.quartz.notes.data.sync
 
 import com.quartz.notes.data.db.AttachmentEntity
 import com.quartz.notes.data.db.NotebookEntity
+import com.quartz.notes.data.db.NotebookKind
 import com.quartz.notes.data.db.PageElementEntity
 import com.quartz.notes.data.db.PageEntity
 import com.quartz.notes.data.db.QuickNoteEntity
@@ -62,6 +63,7 @@ object SyncCodec {
         put("showIndex", n.showIndex)
         put("sectionTabs", n.sectionTabs)
         put("attachAtBottom", n.attachAtBottom)
+        put("kind", n.kind)
     }
 
     fun page(p: PageEntity, notebookUid: String) = buildJsonObject {
@@ -81,6 +83,8 @@ object SyncCodec {
         put("isSection", p.isSection)
         put("sectionIcon", p.sectionIcon.orEmpty())
         put("sectionImage", p.sectionImage.orEmpty())
+        put("templateName", p.templateName.orEmpty())
+        put("backgroundImage", p.backgroundImage.orEmpty())
     }
 
     /** [uidOfElement] turns a connector's local element ids into uids. */
@@ -106,6 +110,7 @@ object SyncCodec {
         put("createdAt", n.createdAt)
         put("updatedAt", n.updatedAt)
         put("archived", n.archived)
+        put("templateName", n.templateName.orEmpty())
     }
 
     fun attachment(a: AttachmentEntity, ownerUid: String) = buildJsonObject {
@@ -148,6 +153,7 @@ object SyncCodec {
         showIndex = r.bool("showIndex"),
         sectionTabs = r.bool("sectionTabs"),
         attachAtBottom = r.bool("attachAtBottom"),
+        kind = r.str("kind").ifEmpty { NotebookKind.NOTEBOOK },
     )
 
     fun page(r: JsonObject, id: Long, notebookId: Long) = PageEntity(
@@ -170,6 +176,8 @@ object SyncCodec {
         isSection = r.bool("isSection"),
         sectionIcon = r.str("sectionIcon").ifEmpty { null },
         sectionImage = r.str("sectionImage").ifEmpty { null },
+        templateName = r.str("templateName").ifEmpty { null },
+        backgroundImage = r.str("backgroundImage").ifEmpty { null },
     )
 
     /** [idOfElement] turns a connector's element uids back into local ids. */
@@ -201,6 +209,7 @@ object SyncCodec {
         createdAt = r.long("createdAt"),
         updatedAt = r.long("updatedAt"),
         archived = r.bool("archived"),
+        templateName = r.str("templateName").ifEmpty { null },
     )
 
     fun attachment(r: JsonObject, id: Long, ownerId: Long) = AttachmentEntity(
