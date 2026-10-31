@@ -24,7 +24,7 @@ jobs:
         run: |
           chmod +x gradlew
           set +e
-          ./gradlew assembleDebug --stacktrace 2>&1 | tee build.log
+          ./gradlew assembleDebug assembleRelease lintDebug --stacktrace 2>&1 | tee build.log
           status=${PIPESTATUS[0]}
           if [ "$status" -ne 0 ]; then
             # Surface compiler errors as annotations so they're visible without the full log.
