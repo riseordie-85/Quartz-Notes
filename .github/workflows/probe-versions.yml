@@ -1,0 +1,26 @@
+name: Probe versions
+on:
+  push:
+    branches: [probe-versions]
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: List library versions
+        run: |
+          g() { curl -s "https://dl.google.com/dl/android/maven2/$1/maven-metadata.xml" | grep -o '<version>[^<]*</version>' | sed 's/<[^>]*>//g' | grep -v -i 'alpha\|beta\|rc\|dev' | tail -${2:-6} | tr '\n' ' '; }
+          c() { curl -s "https://repo1.maven.org/maven2/$1/maven-metadata.xml" | grep -o '<version>[^<]*</version>' | sed 's/<[^>]*>//g' | grep -v -i 'alpha\|beta\|rc\|dev\|M[0-9]' | tail -${2:-6} | tr '\n' ' '; }
+          echo "::warning title=bom::$(g androidx/compose/compose-bom 8)"
+          echo "::warning title=foundation::$(g androidx/compose/foundation/foundation 8)"
+          echo "::warning title=agp::$(g com/android/tools/build/gradle 8)"
+          echo "::warning title=kotlin::$(c org/jetbrains/kotlin/kotlin-gradle-plugin 8)"
+          echo "::warning title=ksp::$(c com/google/devtools/ksp/com.google.devtools.ksp.gradle.plugin 8)"
+          echo "::warning title=room::$(g androidx/room/room-runtime 6)"
+          echo "::warning title=activity::$(g androidx/activity/activity-compose 4)"
+          echo "::warning title=lifecycle::$(g androidx/lifecycle/lifecycle-runtime-compose 4)"
+          echo "::warning title=navigation::$(g androidx/navigation/navigation-compose 4)"
+          echo "::warning title=core::$(g androidx/core/core-ktx 4)"
+          echo "::warning title=serialization::$(c org/jetbrains/kotlinx/kotlinx-serialization-json 4)"
+          echo "::warning title=gradle::$(curl -s https://services.gradle.org/versions/current | grep -o '"version" *: *"[^"]*"')"
+          curl -s "https://dl.google.com/dl/android/maven2/androidx/compose/foundation/foundation/1.12.1/foundation-1.12.1.pom" | grep -A2 -i "kotlin-stdlib" | head -6 | tr '\n' ' ' | sed 's/^/::warning title=foundation-stdlib::/'; echo
+          curl -s "https://dl.google.com/dl/android/maven2/androidx/compose/foundation/foundation/1.12.1/foundation-1.12.1.module" | grep -o '"minCompileSdk": *"[0-9]*"\|"aarMetadata[^}]*' | head -3 | tr '\n' ' ' | sed 's/^/::warning title=minsdk::/'; echo
