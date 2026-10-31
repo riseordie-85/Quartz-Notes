@@ -118,7 +118,7 @@ class PageBackgroundTest {
         settle()
         rule.onNode(hasText("Fit, position and turn…")).performSemanticsAction(SemanticsActions.OnClick)
         settle()
-        rule.onNodeWithText("Background picture", useUnmergedTree = true).assertExists()
+        rule.onNodeWithContentDescription("Turn left").assertExists()
         rule.onNodeWithText("Fill").performClick()
         rule.onNodeWithContentDescription("Turn right").performClick()
         settle()

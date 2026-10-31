@@ -153,7 +153,8 @@ internal fun PaperPicture(
             // As wide as the page: once, or over and over down it.
             val painter = rememberAsyncImagePainter(model)
             val intrinsic = painter.intrinsicSize
-            val valid = intrinsic.width > 0f && intrinsic.height > 0f && intrinsic.isSpecified
+            // Unknown until the picture loads (reading an unknown size throws).
+            val valid = intrinsic.isSpecified && intrinsic.width > 0f && intrinsic.height > 0f
             val tileRatio = if (!valid) 0f else if (turned) intrinsic.width / intrinsic.height else intrinsic.height / intrinsic.width
             LaunchedEffect(tileRatio) { if (tileRatio > 0f) onAspect(tileRatio) }
             Canvas(modifier) {
