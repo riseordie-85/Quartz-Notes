@@ -351,18 +351,18 @@ class NotebookViewModel(
 
     private var shapeCount = 0
 
-    fun addShape(pageId: Long, type: ShapeType) {
+    /** Adds a shape and returns its id (so it can be typed in straight away). */
+    suspend fun addShape(pageId: Long, type: ShapeType): Long {
         val fills = listOf(0xFF00A8D6.toInt(), 0xFFD6004C.toInt(), 0xFFFFD600.toInt(), 0xFF2E9E5B.toInt())
         val w = if (type == ShapeType.RECTANGLE || type == ShapeType.ROUNDED) 0.36f else 0.3f
         val h = if (type == ShapeType.RECTANGLE || type == ShapeType.ROUNDED) 0.24f else 0.3f
-        repo.addElement(
+        return repo.insertElement(
             PageElementEntity(
                 pageId = pageId, kind = ElementKind.SHAPE, x = (1f - w) / 2 + ((shapeCount % 3) - 1) * 0.05f,
                 y = placementY(pageId), width = w, height = h,
                 data = ShapeData(shape = type, fill = fills[shapeCount % fills.size]).encodePayload(),
             ),
-        )
-        shapeCount++
+        ).also { shapeCount++ }
     }
 
     fun addArrow(pageId: Long) {

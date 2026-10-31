@@ -225,6 +225,10 @@ fun NotebookScreen(
     var showStyle by remember { mutableStateOf(false) }
     // Long-pressing + offers templates; saving one asks for its name.
     var addSheetAfter by remember { mutableStateOf<Int?>(null) }
+    // Drawing tools on a text page offer a Freeform page.
+    var askFreeform by remember { mutableStateOf(false) }
+    val activeFreeform = activePage.layoutMode == "SCRAPBOOK"
+    fun onFreeform(action: () -> Unit): () -> Unit = { if (activeFreeform) action() else askFreeform = true }
     var templateFrom by remember { mutableStateOf<PageEntity?>(null) }
     var showPages by remember { mutableStateOf(false) }
     var showTimeline by remember { mutableStateOf(false) }
@@ -408,7 +412,7 @@ fun NotebookScreen(
                             Icon(Icons.Rounded.Mic, null)
                         }
                         ToolButton(
-                            onClick = {
+                            onClick = onFreeform {
                                 tool = PageTool.NONE
                                 unlockForNewItem()
                                 scope.launch {
@@ -421,7 +425,7 @@ fun NotebookScreen(
                         ) { Icon(TextBoxIcon, null) }
                         ToolButton(
                             selected = tool == PageTool.BRUSH || tool == PageTool.ERASER,
-                            onClick = {
+                            onClick = onFreeform {
                                 if (tool == PageTool.BRUSH || tool == PageTool.ERASER) {
                                     tool = PageTool.NONE
                                 } else {
@@ -432,7 +436,7 @@ fun NotebookScreen(
                             description = "Brush",
                         ) { Icon(Icons.Rounded.Brush, null) }
                         Box {
-                            ToolButton(onClick = { shapeMenu = true }, description = "Add shape") { Icon(Icons.Rounded.Category, null) }
+                            ToolButton(onClick = onFreeform { shapeMenu = true }, description = "Add shape") { Icon(Icons.Rounded.Category, null) }
                             DropdownMenu(expanded = shapeMenu, onDismissRequest = { shapeMenu = false }) {
                                 ShapeType.entries.forEach { t ->
                                     DropdownMenuItem(
@@ -447,14 +451,18 @@ fun NotebookScreen(
                                             shapeMenu = false
                                             tool = PageTool.NONE
                                             unlockForNewItem()
-                                            vm.addShape(activePage.id, t)
+                                            // A new shape is ready to type in.
+                                            scope.launch {
+                                                val id = vm.addShape(activePage.id, t)
+                                                pendingTextFocus = activePage.id to id
+                                            }
                                         },
                                     )
                                 }
                             }
                         }
                         ToolButton(
-                            onClick = {
+                            onClick = onFreeform {
                                 tool = PageTool.NONE
                                 unlockForNewItem()
                                 vm.addArrow(activePage.id)
@@ -463,7 +471,7 @@ fun NotebookScreen(
                         ) { Icon(Icons.AutoMirrored.Rounded.ArrowRightAlt, null) }
                         ToolButton(
                             selected = tool == PageTool.CONNECT,
-                            onClick = {
+                            onClick = onFreeform {
                                 if (tool == PageTool.CONNECT) {
                                     tool = PageTool.NONE
                                 } else {
@@ -572,7 +580,8 @@ fun NotebookScreen(
                 HorizontalPager(
                     state = pagerState,
                     key = { index -> spreads.getOrNull(index)?.firstOrNull()?.id ?: (Long.MIN_VALUE + index) },
-                    userScrollEnabled = !WindowInsets.isImeVisible,
+                    // Zoomed in on a Freeform page, a swipe moves around it instead of turning the page.
+                    userScrollEnabled = !WindowInsets.isImeVisible && shownAll.none { it.id != INDEX_PAGE_ID && !it.isSection && vm.session(it).zoomedIn },
                     beyondViewportPageCount = 0,
                     modifier = Modifier
                         .fillMaxSize()
@@ -660,6 +669,31 @@ fun NotebookScreen(
             }
         }
 
+        if (askFreeform) {
+            val size = vm.defaultPageSize
+            AlertDialog(
+                onDismissRequest = { askFreeform = false },
+                title = { Text("Shapes and drawing go on Freeform pages") },
+                text = {
+                    Text(
+                        "Text pages keep words, in-line pictures and attachments. Freeform pages have shapes, connectors, " +
+                            "arrows, text boxes and drawing, at a set page size (${size.label}).",
+                    )
+                },
+                confirmButton = {
+                    TextButton(onClick = {
+                        askFreeform = false
+                        vm.addPageOfType(activeIndex, freeform = true, size = size) { newId -> scrollTarget = newId }
+                    }) { Text("Add a Freeform page") }
+                },
+                dismissButton = {
+                    TextButton(onClick = {
+                        askFreeform = false
+                        vm.setLayoutMode(activePage, scrapbook = true, size = size)
+                    }) { Text("Make this page Freeform") }
+                },
+            )
+        }
         addSheetAfter?.let { after ->
             com.quartz.notes.ui.templates.AddPageSheet(
                 onBlank = {

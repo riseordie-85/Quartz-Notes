@@ -233,11 +233,20 @@ internal fun PageView(
         canvas.erased.keys.retainAll(ids)
         canvas.bounds.keys.retainAll(ids)
     }
-    // A text box added from the toolbar gets the cursor.
+    // A text box (or shape) added from the toolbar gets the cursor.
     LaunchedEffect(focusTextBox) {
         if (focusTextBox != null) {
             canvas.pendingFocusTextBox = focusTextBox
             onFocusTextBoxHandled()
+        }
+    }
+    // A new shape is ready to type in once it's on the page.
+    LaunchedEffect(elements, canvas.pendingFocusTextBox) {
+        val id = canvas.pendingFocusTextBox ?: return@LaunchedEffect
+        if (elements.any { it.id == id && it.kind == ElementKind.SHAPE }) {
+            canvas.pendingFocusTextBox = null
+            canvas.selectedId = id
+            canvas.editingShapeId = id
         }
     }
     // Locking freezes the page: anything picked up or being typed in is put away.
