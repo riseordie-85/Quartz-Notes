@@ -14,6 +14,7 @@
   import Toolbar from "./Toolbar.svelte"
   import Attachments from "./Attachments.svelte"
   import { preparePicture } from "../lib/pictures"
+  import PictureDrop from "./PictureDrop.svelte"
   import { lightbox, notePictures } from "../lib/lightbox.svelte"
 
   let { id, onMenu }: { id: string; onMenu: () => void } = $props()
@@ -33,11 +34,13 @@
   let seen: QuickNote | undefined = initial
   let colorMenu = $state(false)
   let error = $state<string | null>(null)
+  let notice = $state<string | null>(null)
   let saving = $state(false)
   let picker: HTMLInputElement | undefined = $state()
   let adding = $state(false)
 
-  async function addPictures(files: FileList | null) {
+  async function addPictures(files: FileList | File[] | null) {
+    notice = null
     if (!files?.length) return
     adding = true
     error = null
@@ -183,6 +186,7 @@
 {:else}
   <div class="wrap">
     {#if error}<p class="error" role="alert">Couldn't save: {error}</p>{/if}
+    {#if notice}<p class="error" role="status">{notice}</p>{/if}
     <div class="toolbar-row"><Toolbar {editor} /></div>
     <article class="note" style:background={bg} style:--ink={inkOn(bg)} style:color={inkOn(bg)}>
       <input class="title" placeholder="Title" bind:value={title} oninput={changed} aria-label="Title" />
@@ -192,6 +196,9 @@
   </div>
 {/if}
 {#if colorMenu}<button class="scrim" aria-label="Close" onclick={() => (colorMenu = false)}></button>{/if}
+{#if note}
+  <PictureDrop target="this note" disabledReason={adding ? "Still adding the last pictures…" : null} onFiles={addPictures} onRejected={(m) => (notice = m)} />
+{/if}
 
 <style>
   .wrap {

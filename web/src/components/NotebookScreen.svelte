@@ -9,6 +9,7 @@
   import NotebookDialog from "./NotebookDialog.svelte"
   import type { Page } from "../lib/types"
   import { preparePicture } from "../lib/pictures"
+  import PictureDrop from "./PictureDrop.svelte"
 
   let { id, pageId, onMenu }: { id: string; pageId?: string; onMenu: () => void } = $props()
 
@@ -78,7 +79,7 @@
     })
   }
 
-  async function addPictures(files: FileList | null) {
+  async function addPictures(files: FileList | File[] | null) {
     if (!files?.length || !page) return
     adding = true
     error = null
@@ -244,6 +245,20 @@
   </div>
 {/if}
 {#if more}<button class="scrim" aria-label="Close" onclick={() => (more = false)}></button>{/if}
+{#if notebook && page}
+  <PictureDrop
+    target="this page"
+    disabledReason={adding
+      ? "Still adding the last pictures…"
+      : page.locked
+        ? "This page is locked"
+        : page.isSection
+          ? "Pictures can't go on a section page"
+          : null}
+    onFiles={addPictures}
+    onRejected={(m) => (error = m)}
+  />
+{/if}
 {#if editing && notebook}
   <NotebookDialog {notebook} onCancel={() => (editing = false)} onDone={() => (editing = false)} />
 {/if}

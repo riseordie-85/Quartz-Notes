@@ -47,6 +47,32 @@ def wait_for(fn, what, timeout=8):
     raise AssertionError(f"timed out waiting for: {what}")
 
 
+DROP_JS = """async ([phase, name, withText]) => {
+  if (phase === "over") {
+    const c = document.createElement("canvas")
+    c.width = 240; c.height = 160
+    const g = c.getContext("2d"); g.fillStyle = "#2e9e5b"; g.fillRect(0, 0, 240, 160)
+    const blob = await new Promise((r) => c.toBlob(r, "image/png"))
+    const dt = new DataTransfer()
+    dt.items.add(new File([blob], name, { type: "image/png" }))
+    if (withText) dt.items.add(new File(["hello"], "notes.txt", { type: "text/plain" }))
+    window.__drop = dt
+  }
+  const target = document.querySelector(".ProseMirror") ?? document.body
+  target.dispatchEvent(new DragEvent(phase === "over" ? "dragover" : "drop", { dataTransfer: window.__drop, bubbles: true, cancelable: true }))
+}"""
+
+
+async def drop_files(page, name, shot=None, with_text=False):
+    """Drags a picture (and maybe a text file) from the computer over the window, then drops it."""
+    await page.evaluate(DROP_JS, ["over", name, with_text])
+    await expect(page.locator(".overlay .zone")).to_be_visible()
+    if shot:
+        await page.screenshot(path=shot)
+    await page.evaluate(DROP_JS, ["drop", name, with_text])
+    await expect(page.locator(".overlay")).to_have_count(0)
+
+
 def ok(msg):
     print("ok:", msg)
 
@@ -178,6 +204,14 @@ async def main():
         await expect(viewer).to_have_count(0)
         ok("pictures open in a viewer with arrows, keys and an open-in-new-tab button")
 
+        # Drag picture files from the computer onto the note (a text file alongside is left out).
+        await drop_files(page, "dropped.png", shot=f"{OUT}/w03c_drop_note.png", with_text=True)
+        await expect(page.locator(".attachments .thumb")).to_have_count(3, timeout=10000)
+        await expect(page.get_by_text("Only the pictures were added.")).to_be_visible()
+        atts = find("attachments", f'ownerUid="{gift["id"]}"')
+        assert len(atts) == 3 and any(a["width"] == 240 and a["height"] == 160 for a in atts), atts
+        ok("pictures dropped onto a note are added to it")
+
         # A new note.
         await page.goto(f"{BASE}/#/")
         await page.get_by_role("button", name="New note", exact=True).click()
@@ -229,6 +263,10 @@ async def main():
         imgs = find("page_elements", f'page="{budget["id"]}" && kind="IMAGE"')
         assert len(imgs) == 1 and imgs[0]["data"]["frame"] == "WHITE" and abs(imgs[0]["data"]["aspect"] - 200 / 300) < 0.01, imgs
         ok("a picture added to a page becomes a framed picture item")
+        await drop_files(page, "dropped-page.png", shot=f"{OUT}/w07b2_drop_page.png")
+        await expect(page.locator(".layer .photo img")).to_have_count(2, timeout=10000)
+        assert len(find("page_elements", f'page="{budget["id"]}" && kind="IMAGE"')) == 2
+        ok("pictures dropped onto a page are added to it")
         await page.screenshot(path=f"{OUT}/w07b_page_with_picture.png")
 
         # Add a page after the current one.
