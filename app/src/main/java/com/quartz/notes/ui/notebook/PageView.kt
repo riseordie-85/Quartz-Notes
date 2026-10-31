@@ -20,6 +20,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.DpSize
 import com.quartz.notes.data.model.BackgroundFit
+import com.quartz.notes.data.model.LineRoute
 import com.quartz.notes.data.model.PageSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -605,7 +606,14 @@ internal fun PageView(
                                             canvas.arrowDrag?.takeIf { it.first == line }?.let { (_, el, d) -> accentActions.onArrowEdit(el, d) }
                                         } else if (!c.isConsumed) {
                                             c.consume()
-                                            accentActions.onSelect(line.id)
+                                            val connector = if (line.kind == ElementKind.CONNECTOR) decodePayload<ConnectorData>(line.data) else null
+                                            if (connector != null && canvas.selectedId == line.id && !pageLocked) {
+                                                // Tapping a selected connector switches between square corners and a flowing curve.
+                                                val next = if (connector.route == LineRoute.CURVE) LineRoute.ELBOW else LineRoute.CURVE
+                                                vm.updateElementData(line, connector.copy(route = next).encodePayload())
+                                            } else {
+                                                accentActions.onSelect(line.id)
+                                            }
                                         }
                                         break
                                     }
