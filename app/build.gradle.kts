@@ -8,7 +8,7 @@ plugins {
 
 android {
     namespace = "com.quartz.notes"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.quartz.notes"
