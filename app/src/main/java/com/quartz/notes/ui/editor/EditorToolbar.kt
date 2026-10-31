@@ -31,6 +31,13 @@ import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.input.pointer.PointerId
+import androidx.compose.ui.input.pointer.PointerType
+import androidx.compose.ui.input.pointer.PointerEventPass
+import androidx.compose.foundation.gestures.awaitFirstDown
+import androidx.compose.foundation.gestures.awaitEachGesture
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -260,5 +267,56 @@ fun UndoRedoButtons(canUndo: Boolean, canRedo: Boolean, onUndo: () -> Unit, onRe
             contentDescription = null,
             tint = if (canRedo) on else on.copy(alpha = 0.3f),
         )
+    }
+}
+
+/** Undo and redo in their own small pill, floating in a corner of the page. */
+@Composable
+fun UndoPill(canUndo: Boolean, canRedo: Boolean, onUndo: () -> Unit, onRedo: () -> Unit, modifier: Modifier = Modifier) {
+    Surface(
+        modifier = modifier,
+        shape = CircleShape,
+        color = LocalQuartzColors.current.pill,
+        shadowElevation = 3.dp,
+    ) {
+        Row(Modifier.padding(horizontal = 4.dp, vertical = 2.dp), verticalAlignment = Alignment.CenterVertically) {
+            UndoRedoButtons(canUndo, canRedo, onUndo, onRedo)
+        }
+    }
+}
+
+/**
+ * Quick taps with several fingers: two fingers undo, three redo. Only watches (never takes the
+ * touch), so pinching, scrolling and typing work as usual; a tap that moves or lingers doesn't count.
+ */
+fun Modifier.fingerTaps(onTwo: () -> Unit, onThree: () -> Unit): Modifier = pointerInput(Unit) {
+    awaitEachGesture {
+        val first = awaitFirstDown(requireUnconsumed = false, pass = PointerEventPass.Initial)
+        if (first.type != PointerType.Touch) return@awaitEachGesture
+        val start = first.uptimeMillis
+        val origins = HashMap<PointerId, Offset>()
+        origins[first.id] = first.position
+        var most = 1
+        var spoiled = false
+        val slop = viewConfiguration.touchSlop
+        while (true) {
+            val event = awaitPointerEvent(PointerEventPass.Initial)
+            for (c in event.changes) {
+                if (c.type != PointerType.Touch) spoiled = true
+                if (c.pressed) {
+                    val o = origins.getOrPut(c.id) { c.position }
+                    if ((c.position - o).getDistance() > slop) spoiled = true
+                }
+                if (c.uptimeMillis - start > 350) spoiled = true
+            }
+            most = maxOf(most, event.changes.count { it.pressed })
+            if (event.changes.none { it.pressed }) break
+        }
+        if (!spoiled) {
+            when (most) {
+                2 -> onTwo()
+                3 -> onThree()
+            }
+        }
     }
 }

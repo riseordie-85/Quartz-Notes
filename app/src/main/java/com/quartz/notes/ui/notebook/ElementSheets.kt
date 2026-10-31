@@ -30,6 +30,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.BorderColor
+import androidx.compose.material.icons.rounded.Draw
+import androidx.compose.material.icons.rounded.Edit
+import androidx.compose.material.icons.rounded.Highlight
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
+import com.quartz.notes.data.model.BrushType
 import androidx.compose.material.icons.rounded.AutoFixNormal
 import androidx.compose.material.icons.rounded.TouchApp
 import androidx.compose.ui.Alignment
@@ -257,13 +267,19 @@ private fun SheetLabel(text: String) {
     )
 }
 
-/** Brush options shown above the toolbar while drawing: five sizes, eraser, done. */
+/**
+ * Brush options shown with the toolbar while drawing: the kind of brush (pen, pencil, marker,
+ * highlighter), its size (quick picks and a slider), the eraser, whether fingers draw, and done.
+ */
 @Composable
 fun BrushBar(
-    level: Int,
+    type: String,
+    size: Float,
     eraser: Boolean,
     color: Color,
-    onLevel: (Int) -> Unit,
+    highlight: Color,
+    onType: (String) -> Unit,
+    onSize: (Float) -> Unit,
     onEraser: () -> Unit,
     onDone: () -> Unit,
     modifier: Modifier = Modifier,
@@ -272,63 +288,106 @@ fun BrushBar(
     onFingerDraw: ((Boolean) -> Unit)? = null,
 ) {
     val accent = MaterialTheme.colorScheme.primary
+    val muted = LocalQuartzColors.current.textSecondary
+    val ink = if (type == BrushType.HIGHLIGHTER) highlight else color
     androidx.compose.material3.Surface(
         modifier = modifier,
-        shape = CircleShape,
+        shape = RoundedCornerShape(26.dp),
         color = LocalQuartzColors.current.pill,
         shadowElevation = 3.dp,
     ) {
-        Row(Modifier.padding(horizontal = 10.dp, vertical = 6.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-            for (l in 1..5) {
-                val selected = !eraser && l == level
-                Box(
-                    Modifier
-                        .size(42.dp)
-                        .clip(CircleShape)
-                        .background(if (selected) accent.copy(alpha = 0.16f) else Color.Transparent)
-                        .clickable { onLevel(l) },
-                    contentAlignment = Alignment.Center,
-                ) {
-                    val dot = listOf(4, 7, 11, 16, 22)[l - 1].dp
-                    Box(Modifier.size(dot).background(color, CircleShape))
-                }
-            }
-            Box(
-                Modifier
-                    .size(42.dp)
-                    .clip(CircleShape)
-                    .background(if (eraser) accent.copy(alpha = 0.16f) else Color.Transparent)
-                    .clickable(onClick = onEraser),
-                contentAlignment = Alignment.Center,
+        Column(Modifier.padding(horizontal = 10.dp, vertical = 6.dp)) {
+            Row(
+                Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(4.dp),
             ) {
-                androidx.compose.material3.Icon(
-                    androidx.compose.material.icons.Icons.Rounded.AutoFixNormal,
-                    contentDescription = "Eraser",
-                )
-            }
-            if (onFingerDraw != null) {
-                Box(
+                BrushType.ALL.forEach { t ->
+                    val on = !eraser && t == type
+                    Column(
+                        Modifier
+                            .clip(RoundedCornerShape(14.dp))
+                            .background(if (on) accent.copy(alpha = 0.16f) else Color.Transparent)
+                            .clickable(onClickLabel = BrushType.label(t)) { onType(t) }
+                            .padding(horizontal = 8.dp, vertical = 4.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                    ) {
+                        androidx.compose.material3.Icon(brushIcon(t), contentDescription = null, tint = if (on) accent else MaterialTheme.colorScheme.onSurface)
+                        Text(BrushType.label(t), fontSize = 11.sp, color = if (on) accent else muted)
+                    }
+                }
+                Box(Modifier.padding(horizontal = 4.dp).size(width = 1.dp, height = 32.dp).background(muted.copy(alpha = 0.3f)))
+                Column(
                     Modifier
-                        .size(42.dp)
-                        .clip(CircleShape)
-                        .background(if (fingerDraw) accent.copy(alpha = 0.16f) else Color.Transparent)
-                        .clickable(onClickLabel = if (fingerDraw) "Draw with a pen only" else "Draw with fingers too") { onFingerDraw(!fingerDraw) },
-                    contentAlignment = Alignment.Center,
+                        .clip(RoundedCornerShape(14.dp))
+                        .background(if (eraser) accent.copy(alpha = 0.16f) else Color.Transparent)
+                        .clickable(onClickLabel = "Eraser", onClick = onEraser)
+                        .padding(horizontal = 8.dp, vertical = 4.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
-                    androidx.compose.material3.Icon(
-                        androidx.compose.material.icons.Icons.Rounded.TouchApp,
-                        contentDescription = if (fingerDraw) "Fingers draw" else "Pen only",
-                        tint = if (fingerDraw) accent else LocalQuartzColors.current.textSecondary,
+                    androidx.compose.material3.Icon(Icons.Rounded.AutoFixNormal, contentDescription = null, tint = if (eraser) accent else MaterialTheme.colorScheme.onSurface)
+                    Text("Eraser", fontSize = 11.sp, color = if (eraser) accent else muted)
+                }
+                if (onFingerDraw != null) {
+                    Column(
+                        Modifier
+                            .clip(RoundedCornerShape(14.dp))
+                            .background(if (fingerDraw) accent.copy(alpha = 0.16f) else Color.Transparent)
+                            .clickable(onClickLabel = if (fingerDraw) "Draw with a pen only" else "Draw with fingers too") { onFingerDraw(!fingerDraw) }
+                            .padding(horizontal = 8.dp, vertical = 4.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                    ) {
+                        androidx.compose.material3.Icon(
+                            Icons.Rounded.TouchApp,
+                            contentDescription = null,
+                            tint = if (fingerDraw) accent else muted,
+                        )
+                        Text(if (fingerDraw) "Fingers draw" else "Pen only", fontSize = 11.sp, color = if (fingerDraw) accent else muted)
+                    }
+                }
+                androidx.compose.material3.TextButton(onClick = onDone) { Text("Done") }
+            }
+            if (!eraser) {
+                Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
+                    // Quick sizes, each drawn at (a hint of) its width.
+                    Row(
+                        Modifier.weight(1f, fill = false).horizontalScroll(rememberScrollState()),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        BrushType.SIZES.forEach { s ->
+                            val on = kotlin.math.abs(s - size) < 0.01f
+                            Box(
+                                Modifier
+                                    .size(34.dp)
+                                    .clip(CircleShape)
+                                    .background(if (on) accent.copy(alpha = 0.16f) else Color.Transparent)
+                                    .clickable(onClickLabel = "Size ${formatSize(s)}") { onSize(s) },
+                                contentAlignment = Alignment.Center,
+                            ) {
+                                Box(Modifier.size((2f + s * 0.75f).coerceAtMost(24f).dp).background(ink, CircleShape))
+                            }
+                        }
+                    }
+                    // Any size in between: the slider runs on a log scale so small sizes get room.
+                    val lo = kotlin.math.ln(BrushType.MIN_SIZE)
+                    val hi = kotlin.math.ln(BrushType.MAX_SIZE)
+                    androidx.compose.material3.Slider(
+                        value = ((kotlin.math.ln(size.coerceIn(BrushType.MIN_SIZE, BrushType.MAX_SIZE)) - lo) / (hi - lo)),
+                        onValueChange = { v -> onSize((kotlin.math.round(kotlin.math.exp(lo + v * (hi - lo)) * 10f) / 10f).coerceIn(BrushType.MIN_SIZE, BrushType.MAX_SIZE)) },
+                        modifier = Modifier.width(150.dp).padding(start = 8.dp).semantics { contentDescription = "Brush size" },
                     )
+                    Text(formatSize(size), fontSize = 12.sp, color = muted, modifier = Modifier.width(36.dp).padding(start = 6.dp))
                 }
             }
-            androidx.compose.material3.TextButton(onClick = onDone) { Text("Done") }
-            Text(
-                if (fingerDraw) "Two fingers to move" else "Pen draws · fingers move",
-                fontSize = 12.sp,
-                color = LocalQuartzColors.current.textSecondary,
-                modifier = Modifier.padding(end = 6.dp),
-            )
         }
     }
+}
+
+private fun formatSize(s: Float): String = if (s < 10f && s != s.toInt().toFloat()) "%.1f".format(s) else s.toInt().toString()
+
+private fun brushIcon(type: String) = when (type) {
+    BrushType.PENCIL -> Icons.Rounded.Edit
+    BrushType.MARKER -> Icons.Rounded.BorderColor
+    BrushType.HIGHLIGHTER -> Icons.Rounded.Highlight
+    else -> Icons.Rounded.Draw
 }

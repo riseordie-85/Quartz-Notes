@@ -85,7 +85,7 @@ fun withJoiningLines(all: List<PageElementEntity>, ids: Set<Long>): List<PageEle
         }
 
 /** Box around a group of items on screen, in px (laid-out boxes where there are some). */
-fun groupBoundsPx(items: List<PageElementEntity>, bounds: Map<Long, Rect>, widthPx: Float, inkWidthPx: (Int) -> Float): Rect? {
+fun groupBoundsPx(items: List<PageElementEntity>, bounds: Map<Long, Rect>, widthPx: Float, inkWidthPx: (StrokeData) -> Float): Rect? {
     var out: Rect? = null
     for (e in items) {
         val r = when (e.kind) {
@@ -93,7 +93,7 @@ fun groupBoundsPx(items: List<PageElementEntity>, bounds: Map<Long, Rect>, width
                 val d = decodePayload<StrokeData>(e.data) ?: continue
                 val pts = strokePoints(d, widthPx)
                 if (pts.isEmpty()) continue
-                val pad = inkWidthPx(d.level) / 2
+                val pad = inkWidthPx(d) / 2
                 Rect(pts.minOf { it.x } - pad, pts.minOf { it.y } - pad, pts.maxOf { it.x } + pad, pts.maxOf { it.y } + pad)
             }
             ElementKind.CONNECTOR -> continue

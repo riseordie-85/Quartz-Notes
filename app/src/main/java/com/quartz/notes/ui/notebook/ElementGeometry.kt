@@ -5,12 +5,14 @@ import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import com.quartz.notes.data.db.PageElementEntity
 import com.quartz.notes.data.model.ArrowData
+import com.quartz.notes.data.model.BrushType
 import com.quartz.notes.data.model.ConnectorData
 import com.quartz.notes.data.model.ElementKind
 import com.quartz.notes.data.model.LineRoute
@@ -159,9 +161,35 @@ fun strokePath(points: List<Offset>): Path = Path().apply {
     lineTo(last.x, last.y)
 }
 
-fun DrawScope.drawInkStroke(points: List<Offset>, color: Color, width: Float) {
-    drawPath(strokePath(points), color, style = Stroke(width = width, cap = StrokeCap.Round, join = StrokeJoin.Round))
+fun DrawScope.drawInkStroke(points: List<Offset>, color: Color, width: Float, tool: String = BrushType.PEN) {
+    val path = strokePath(points)
+    when (tool) {
+        BrushType.PENCIL -> {
+            // Soft graphite: a light body with a grainy layer on top.
+            drawPath(path, color.copy(alpha = color.alpha * 0.45f), style = Stroke(width = width, cap = StrokeCap.Round, join = StrokeJoin.Round))
+            val grain = maxOf(0.6f, width * 0.35f)
+            drawPath(
+                path,
+                color.copy(alpha = color.alpha * 0.7f),
+                style = Stroke(
+                    width = width * 0.85f,
+                    cap = StrokeCap.Butt,
+                    join = StrokeJoin.Round,
+                    pathEffect = PathEffect.dashPathEffect(floatArrayOf(grain, grain * 0.7f)),
+                ),
+            )
+        }
+        // Felt tip: bold and a touch see-through, so crossings show.
+        BrushType.MARKER -> drawPath(path, color.copy(alpha = color.alpha * 0.88f), style = Stroke(width = width, cap = StrokeCap.Round, join = StrokeJoin.Round))
+        // See-through with a flat tip.
+        BrushType.HIGHLIGHTER -> drawPath(path, color.copy(alpha = color.alpha * 0.38f), style = Stroke(width = width, cap = StrokeCap.Square, join = StrokeJoin.Round))
+        else -> drawPath(path, color, style = Stroke(width = width, cap = StrokeCap.Round, join = StrokeJoin.Round))
+    }
 }
+
+/** A stroke's width in px: its size in page units ([unitPx] each), or its old 1–5 level. */
+fun strokeWidthPx(d: StrokeData, pageWidthPx: Float, unitPx: Float): Float =
+    d.size?.let { it * unitPx } ?: brushWidthPx(d.level, pageWidthPx)
 
 /** Distance from [p] to the segment [a]–[b]. */
 fun distanceToSegment(p: Offset, a: Offset, b: Offset): Float {

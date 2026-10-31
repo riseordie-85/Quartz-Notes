@@ -118,6 +118,8 @@ import androidx.compose.ui.graphics.vector.path
 import androidx.compose.runtime.mutableIntStateOf
 import com.quartz.notes.data.model.ShapeType
 import com.quartz.notes.data.model.ElementKind
+import com.quartz.notes.data.model.BrushType
+import kotlinx.coroutines.delay
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -153,7 +155,7 @@ import com.quartz.notes.ui.editor.FormatSheet
 import com.quartz.notes.ui.editor.RichEditorState
 import com.quartz.notes.ui.editor.RichTextEditor
 import com.quartz.notes.ui.editor.ToolButton
-import com.quartz.notes.ui.editor.UndoRedoButtons
+import com.quartz.notes.ui.editor.UndoPill
 import com.quartz.notes.ui.editor.editorStyles
 import com.quartz.notes.ui.home.TwoPaneMinWidth
 import com.quartz.notes.ui.quartzViewModel
@@ -220,7 +222,17 @@ fun NotebookScreen(
     var tool by remember { mutableStateOf(PageTool.NONE) }
     // Drawing and connecting only work on ordinary pages.
     LaunchedEffect(activeIsPlain) { if (!activeIsPlain) tool = PageTool.NONE }
-    var brushLevel by rememberSaveable { mutableIntStateOf(2) }
+    // The brush: its kind and size, remembered between visits (each kind keeps its own size).
+    var chosenBrush by rememberSaveable { mutableStateOf<String?>(null) }
+    val brushType = chosenBrush ?: settings?.brushType ?: BrushType.PEN
+    val draggedSizes = remember { mutableStateMapOf<String, Float>() }
+    val brushSize = draggedSizes[brushType] ?: settings?.brushSizes?.get(brushType) ?: BrushType.defaultSize(brushType)
+    LaunchedEffect(brushType, brushSize, settings == null) {
+        val saved = settings ?: return@LaunchedEffect
+        delay(400) // a slider being dragged saves once it settles
+        if (saved.brushType != brushType) container.settings.setBrushType(brushType)
+        if (saved.brushSizes[brushType] != brushSize) container.settings.setBrushSize(brushType, brushSize)
+    }
     var shapeMenu by remember { mutableStateOf(false) }
     // A text box added from the toolbar gets the cursor once it exists.
     var pendingTextFocus by remember { mutableStateOf<Pair<Long, Long>?>(null) }
@@ -349,12 +361,18 @@ fun NotebookScreen(
         val brushBar: @Composable () -> Unit = {
             if (tool == PageTool.BRUSH || tool == PageTool.ERASER) {
                 BrushBar(
-                    level = brushLevel,
+                    type = brushType,
+                    size = brushSize,
                     eraser = tool == PageTool.ERASER,
                     color = settings?.inkArgb?.takeIf { it != 0 }?.let { Color(it) }
                         ?: contentColorFor(activePage.backgroundArgb?.let { Color(it) } ?: LocalQuartzColors.current.card),
-                    onLevel = {
-                        brushLevel = it
+                    highlight = Color(settings?.highlightArgb ?: 0xFFFFE14D.toInt()),
+                    onType = {
+                        chosenBrush = it
+                        tool = PageTool.BRUSH
+                    },
+                    onSize = {
+                        draggedSizes[brushType] = it
                         tool = PageTool.BRUSH
                     },
                     onEraser = { tool = if (tool == PageTool.ERASER) PageTool.BRUSH else PageTool.ERASER },
@@ -386,16 +404,6 @@ fun NotebookScreen(
                         }
                     },
                     modifier = Modifier.weight(1f),
-                    leading = {
-                        if (activeIsPlain) {
-                            UndoRedoButtons(
-                                canUndo = vm.canUndo(activeSession),
-                                canRedo = vm.canRedo(activeSession),
-                                onUndo = { vm.undo(activePage) },
-                                onRedo = { vm.redo(activePage) },
-                            )
-                        }
-                    },
                 ) {
                     // Items, text boxes and drawing only make sense on ordinary pages.
                     if (activeIsPlain) {
@@ -693,7 +701,9 @@ fun NotebookScreen(
                                         side = side,
                                         canSpread = twoUp,
                                         tool = tool,
-                                        brushLevel = brushLevel,
+                                        brushType = brushType,
+                                        brushSize = brushSize,
+                                        highlightArgb = settings?.highlightArgb ?: 0xFFFFE14D.toInt(),
                                         inkArgb = settings?.inkArgb ?: 0,
                                         fingerDraw = settings?.fingerDraw != false,
                                         onPenFound = {
@@ -743,6 +753,16 @@ fun NotebookScreen(
                     height = maxHeight,
                     onOpen = { scrollTarget = it },
                 )
+                // Undo and redo, in the bottom-left corner (two-finger tap undoes, three-finger tap redoes).
+                if (activeIsPlain) {
+                    UndoPill(
+                        canUndo = vm.canUndo(activeSession),
+                        canRedo = vm.canRedo(activeSession),
+                        onUndo = { vm.undo(activePage) },
+                        onRedo = { vm.redo(activePage) },
+                        modifier = Modifier.align(Alignment.BottomStart).padding(start = 16.dp, bottom = 12.dp),
+                    )
+                }
             }
 
             if (!toolsOnTop) {

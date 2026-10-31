@@ -147,7 +147,7 @@ class FreeformToolsTest {
         flush()
         val (a, b) = items(pageId)
         onMain { vm.addConnector(pageId, a.id, b.id) }
-        onMain { vm.addStroke(pageId, listOf(0.2f, 0.8f, 0.3f, 0.9f), 0, 2) }
+        onMain { vm.addStroke(pageId, listOf(0.2f, 0.8f, 0.3f, 0.9f), 0, com.quartz.notes.data.model.BrushType.PEN, 2f) }
         flush()
         val all = items(pageId)
         assertEquals(4, all.size)

@@ -123,13 +123,47 @@ data class ConnectorData(
     val endHead: Boolean = false,
 )
 
-/** A brush stroke: x0, y0, x1, y1 ... in page widths. Color 0 = page ink. [level] is 1–5. */
+/**
+ * A brush stroke: x0, y0, x1, y1 ... in page widths. Color 0 = page ink. [tool] is a [BrushType]
+ * name; [size] is the line's width in page units (1 unit = 1 dp in the app, 1 px on the web).
+ * Older strokes have no size and use [level] (1–5) instead.
+ */
 @Serializable
 data class StrokeData(
     val points: List<Float>,
     val color: Int = 0,
     val level: Int = 2,
+    val tool: String = BrushType.PEN,
+    val size: Float? = null,
 )
+
+/** Kinds of brush and how big each starts. */
+object BrushType {
+    const val PEN = "PEN"
+    const val PENCIL = "PENCIL"
+    const val MARKER = "MARKER"
+    const val HIGHLIGHTER = "HIGHLIGHTER"
+    val ALL = listOf(PEN, PENCIL, MARKER, HIGHLIGHTER)
+
+    fun defaultSize(type: String): Float = when (type) {
+        PENCIL -> 1.5f
+        MARKER -> 6f
+        HIGHLIGHTER -> 14f
+        else -> 2f
+    }
+
+    fun label(type: String): String = when (type) {
+        PENCIL -> "Pencil"
+        MARKER -> "Marker"
+        HIGHLIGHTER -> "Highlighter"
+        else -> "Pen"
+    }
+
+    /** Sizes offered as quick picks, in page units. */
+    val SIZES = listOf(0.5f, 1f, 1.5f, 2f, 3f, 5f, 8f, 12f, 18f, 26f)
+    const val MIN_SIZE = 0.3f
+    const val MAX_SIZE = 40f
+}
 
 @PublishedApi
 internal val ElementJson = Json {

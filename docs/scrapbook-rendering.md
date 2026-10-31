@@ -234,7 +234,7 @@ Colors are signed 32-bit ARGB ints (`0xAARRGGBB`); convert with `argb >>> 0`.
 - Stroke width `lineWidthPx(level, W)`, color `inkOr(color, ink)`, **butt cap**, round join, no fill.
 - `endHead` → `drawArrowHead(pts[n-2], pts[n-1])` (for CURVE that's the chord direction start→end, not the curve tangent). No start head.
 
-### 3.4 STROKE — `StrokeData(points = [x0,y0,x1,y1,…], color = 0, level = 2)`
+### 3.4 STROKE — `StrokeData(points = [x0,y0,x1,y1,…], color = 0, level = 2, tool = "PEN", size = null)`
 - Points in page-width units, absolute; px = `p * W`. Odd trailing value ignored. Single taps are stored as the point twice.
 - Width `brushWidthPx(level, W)` (level 1..5), color `inkOr(color, ink)` (the user's ink setting is baked into `color` at draw time; 0 = page ink),
   `cap = Round, join = Round`, no fill.
@@ -246,6 +246,12 @@ Colors are signed 32-bit ARGB ints (`0xAARRGGBB`); convert with `argb >>> 0`.
   L p[n-1]
   ```
   (Zero-length paths render as a round dot.)
+
+- `size` (when present) is the width in page units (1 unit = 1 dp in the app = 1 CSS px on the web)
+  and replaces `level`.
+- `tool`: `PEN` solid, round caps; `PENCIL` a 45%-opacity body plus an 85%-wide 70%-opacity dashed
+  layer (dash `max(0.6, w·0.35)`, gap 70% of that) for grain; `MARKER` 88% opacity, round caps;
+  `HIGHLIGHTER` 38% opacity, square caps (its color is the highlighter color picked in the app).
 
 ### 3.5 TEXT box — `TextBoxData(doc = <encoded RichDoc JSON>)`
 - Box at `(x*W, y*W)`, width `W*width`, `minHeight = W*height` (usually 0 → height = content). Rotates (§1.6).

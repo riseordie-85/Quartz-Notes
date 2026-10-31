@@ -57,7 +57,8 @@ import androidx.compose.ui.platform.LocalContext
 import com.quartz.notes.data.db.AttachmentEntity
 import com.quartz.notes.data.model.AttachmentKind
 import com.quartz.notes.ui.editor.ToolButton
-import com.quartz.notes.ui.editor.UndoRedoButtons
+import com.quartz.notes.ui.editor.UndoPill
+import com.quartz.notes.ui.editor.fingerTaps
 import com.quartz.notes.ui.media.ImageViewer
 import com.quartz.notes.ui.media.VoiceRecorderSheet
 import com.quartz.notes.ui.media.rememberImageAdder
@@ -190,7 +191,6 @@ private fun NoteEditorContent(load: NoteLoad.Ready, vm: NoteViewModel, onClose: 
             onHighlightChange = { c -> scope.launch { container.settings.setHighlight(c.toArgb()) } },
             onFormat = { showFormat = true },
             modifier = Modifier.fillMaxWidth(),
-            leading = { UndoRedoButtons(editor.canUndo, editor.canRedo, editor::undo, editor::redo) },
         ) {
             Box {
                 ToolButton(onClick = { attachMenu = true }, description = "Attach") {
@@ -230,7 +230,8 @@ private fun NoteEditorContent(load: NoteLoad.Ready, vm: NoteViewModel, onClose: 
             toolbar()
             Spacer(Modifier.height(12.dp))
         }
-        QuartzCard(Modifier.weight(1f).fillMaxWidth(), color = cardColor) {
+        Box(Modifier.weight(1f).fillMaxWidth().fingerTaps(onTwo = editor::undo, onThree = editor::redo)) {
+        QuartzCard(Modifier.fillMaxSize(), color = cardColor) {
             Row(Modifier.fillMaxWidth().padding(start = 6.dp, end = 6.dp, top = 6.dp), verticalAlignment = Alignment.CenterVertically) {
                 if (showBack) {
                     IconButton(onClick = closeNote) { Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = "Back", tint = ink) }
@@ -334,6 +335,14 @@ private fun NoteEditorContent(load: NoteLoad.Ready, vm: NoteViewModel, onClose: 
                         },
                 )
             }
+        }
+        UndoPill(
+            canUndo = editor.canUndo,
+            canRedo = editor.canRedo,
+            onUndo = editor::undo,
+            onRedo = editor::redo,
+            modifier = Modifier.align(Alignment.BottomStart).padding(start = 12.dp, bottom = 12.dp),
+        )
         }
         if (!toolsOnTop) {
             Spacer(Modifier.height(12.dp))

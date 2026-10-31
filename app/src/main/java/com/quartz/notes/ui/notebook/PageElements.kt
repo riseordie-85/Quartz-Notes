@@ -149,6 +149,7 @@ class PageCanvasState {
     val liveStroke = mutableStateListOf<Offset>()
     var liveColor by mutableStateOf<Color?>(null)
     var liveWidth by mutableStateOf(6f)
+    var liveTool by mutableStateOf(com.quartz.notes.data.model.BrushType.PEN)
 
     /** Strokes the eraser has removed but the database hasn't confirmed yet. */
     val erased = mutableStateMapOf<Long, Boolean>()
@@ -279,8 +280,9 @@ fun BoxScope.PageElementLayer(
                     val d = decodePayload<StrokeData>(e.data) ?: continue
                     val shift = if (e.id in group) groupDrag else Offset.Zero
                     translate(shift.x, shift.y) {
-                        if (e.id in group) drawInkStroke(strokePoints(d, widthPx), accent.copy(alpha = 0.25f), brushWidthPx(d.level, widthPx) + 8.dp.toPx())
-                        drawInkStroke(strokePoints(d, widthPx), inkOr(d.color, ink), brushWidthPx(d.level, widthPx))
+                        val w = strokeWidthPx(d, widthPx, 1.dp.toPx())
+                        if (e.id in group) drawInkStroke(strokePoints(d, widthPx), accent.copy(alpha = 0.25f), w + 8.dp.toPx())
+                        drawInkStroke(strokePoints(d, widthPx), inkOr(d.color, ink), w, d.tool)
                     }
                 }
                 ElementKind.ARROW -> {
@@ -310,7 +312,7 @@ fun BoxScope.PageElementLayer(
             }
         }
         if (canvas.liveStroke.isNotEmpty()) {
-            drawInkStroke(canvas.liveStroke.toList(), canvas.liveColor ?: ink, canvas.liveWidth)
+            drawInkStroke(canvas.liveStroke.toList(), canvas.liveColor ?: ink, canvas.liveWidth, canvas.liveTool)
         }
         // The lasso loop being drawn.
         if (canvas.lasso.size > 1) {

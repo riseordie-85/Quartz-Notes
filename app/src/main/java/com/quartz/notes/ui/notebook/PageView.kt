@@ -118,6 +118,7 @@ import com.quartz.notes.ui.editor.EditorLayoutHooks
 import com.quartz.notes.ui.editor.EditorStyles
 import com.quartz.notes.ui.editor.RichEditorState
 import com.quartz.notes.ui.editor.RichTextEditor
+import com.quartz.notes.ui.editor.fingerTaps
 import com.quartz.notes.ui.editor.editorStyles
 import com.quartz.notes.ui.editor.inlineImageSlotHeight
 import com.quartz.notes.ui.media.DecorateSheet
@@ -145,7 +146,11 @@ internal fun PageView(
     /** The screen is wide enough for a scrapbook page to spread across both sides. */
     canSpread: Boolean,
     tool: PageTool,
-    brushLevel: Int,
+    /** The brush: a [com.quartz.notes.data.model.BrushType] and its size in page units. */
+    brushType: String,
+    brushSize: Float,
+    /** The highlighter's color. */
+    highlightArgb: Int,
     inkArgb: Int,
     /** Fingers draw with the brush (off: only a pen draws, fingers move the page). */
     fingerDraw: Boolean,
@@ -305,10 +310,13 @@ internal fun PageView(
     val padH = if (side == PageSide.SINGLE) 22.dp else 24.dp
     val seamShade = if (quartz.isDark) 0.45f else 0.13f
 
+    val pageNow by rememberUpdatedState(page)
     BoxWithConstraints(
         Modifier
             .fillMaxSize()
             .padding(start = side.outerStart, end = side.outerEnd, top = 6.dp, bottom = 6.dp)
+            // Tap with two fingers to undo, three to redo.
+            .fingerTaps(onTwo = { vm.undo(pageNow) }, onThree = { vm.redo(pageNow) })
             .onFocusChanged { if (it.hasFocus) onActivate() }
             .then(
                 if (freeform) {
@@ -548,7 +556,9 @@ internal fun PageView(
             onDispose { if (session.exporter === exporter) session.exporter = null }
         }
         val latestTool by rememberUpdatedState(tool)
-        val latestBrush by rememberUpdatedState(brushLevel)
+        val latestBrushType by rememberUpdatedState(brushType)
+        val latestBrushSize by rememberUpdatedState(brushSize)
+        val latestHighlight by rememberUpdatedState(highlightArgb)
         val latestInk by rememberUpdatedState(inkArgbResolved)
         val inkColor by rememberUpdatedState(ink)
         val tapHandler by rememberUpdatedState(::backgroundTap)
@@ -893,7 +903,7 @@ internal fun PageView(
                     val groupItems = elements.filter { it.id in group }
                     val drag = canvas.groupDrag
                     val restBounds = canvas.bounds.mapValues { (id, r) -> if (id in group) r.translate(-drag) else r }
-                    val box = groupBoundsPx(groupItems, restBounds, widthPx) { brushWidthPx(it, widthPx) }
+                    val box = groupBoundsPx(groupItems, restBounds, widthPx) { strokeWidthPx(it, widthPx, with(density) { 1.dp.toPx() }) }
                     if (box != null) {
                         GroupBox(
                             box = box.inflate(with(density) { 8.dp.toPx() }).translate(drag),
@@ -949,7 +959,7 @@ internal fun PageView(
                                     fun eraseAt(p: Offset) {
                                         latestElements.filter { it.kind == ElementKind.STROKE && !canvas.erased.containsKey(it.id) }.forEach { e ->
                                             val d = decodePayload<StrokeData>(e.data) ?: return@forEach
-                                            if (distanceToPolyline(p, strokePoints(d, widthPx)) <= radius + brushWidthPx(d.level, widthPx) / 2) {
+                                            if (distanceToPolyline(p, strokePoints(d, widthPx)) <= radius + strokeWidthPx(d, widthPx, 1.dp.toPx()) / 2) {
                                                 canvas.erased[e.id] = true
                                                 vm.deleteElement(e, key = "erase")
                                             }
@@ -967,8 +977,12 @@ internal fun PageView(
                                 latestTool == PageTool.BRUSH -> {
                                     down.consume()
                                     canvas.drawing = true
-                                    canvas.liveColor = inkOr(latestInk, inkColor)
-                                    canvas.liveWidth = brushWidthPx(latestBrush, widthPx)
+                                    val type = latestBrushType
+                                    val highlighter = type == com.quartz.notes.data.model.BrushType.HIGHLIGHTER
+                                    val strokeColor = if (highlighter) latestHighlight else latestInk
+                                    canvas.liveColor = inkOr(strokeColor, inkColor)
+                                    canvas.liveWidth = latestBrushSize * 1.dp.toPx()
+                                    canvas.liveTool = type
                                     canvas.liveStroke.clear()
                                     canvas.liveStroke.add(down.position)
                                     var twoFinger = false
@@ -989,7 +1003,7 @@ internal fun PageView(
                                     canvas.drawing = false
                                     if (!twoFinger && canvas.liveStroke.isNotEmpty()) {
                                         val pts = canvas.liveStroke.flatMap { listOf(it.x / widthPx, it.y / widthPx) }
-                                        vm.addStroke(page.id, if (pts.size == 2) pts + pts else pts, latestInk, latestBrush)
+                                        vm.addStroke(page.id, if (pts.size == 2) pts + pts else pts, strokeColor, type, latestBrushSize)
                                     } else {
                                         canvas.liveStroke.clear()
                                     }

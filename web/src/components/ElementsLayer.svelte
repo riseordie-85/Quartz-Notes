@@ -115,14 +115,25 @@
     {#each lines as e (e.id)}
       {@const d = payload(e)}
       {#if e.kind === "STROKE"}
-        <path
-          d={strokePath(Array.isArray(d.points) ? d.points : [], W)}
-          fill="none"
-          stroke={inkOr(d.color, ink)}
-          stroke-width={brushWidth(d.level ?? 2, W)}
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
+        {@const sp = strokePath(Array.isArray(d.points) ? d.points : [], W)}
+        {@const sw = typeof d.size === "number" ? d.size : brushWidth(d.level ?? 2, W)}
+        {@const sc = inkOr(d.color, ink)}
+        {#if d.tool === "PENCIL"}
+          <!-- Soft graphite: a light body with a grainy layer on top. -->
+          <path d={sp} fill="none" stroke={sc} stroke-opacity="0.45" stroke-width={sw} stroke-linecap="round" stroke-linejoin="round" />
+          <path d={sp} fill="none" stroke={sc} stroke-opacity="0.7" stroke-width={sw * 0.85} stroke-linejoin="round"
+            stroke-dasharray="{Math.max(0.6, sw * 0.35)} {Math.max(0.6, sw * 0.35) * 0.7}" />
+        {:else}
+          <path
+            d={sp}
+            fill="none"
+            stroke={sc}
+            stroke-opacity={d.tool === "HIGHLIGHTER" ? 0.38 : d.tool === "MARKER" ? 0.88 : 1}
+            stroke-width={sw}
+            stroke-linecap={d.tool === "HIGHLIGHTER" ? "square" : "round"}
+            stroke-linejoin="round"
+          />
+        {/if}
       {:else if e.kind === "ARROW"}
         {@const sx = e.x * W}
         {@const sy = e.y * W}

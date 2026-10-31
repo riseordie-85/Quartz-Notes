@@ -393,7 +393,7 @@ class NotebookViewModel(
         )
     }
 
-    fun addStroke(pageId: Long, pointsUnits: List<Float>, color: Int, level: Int) {
+    fun addStroke(pageId: Long, pointsUnits: List<Float>, color: Int, tool: String, size: Float) {
         if (pointsUnits.size < 2) return
         val xs = pointsUnits.filterIndexed { i, _ -> i % 2 == 0 }
         val ys = pointsUnits.filterIndexed { i, _ -> i % 2 == 1 }
@@ -402,7 +402,7 @@ class NotebookViewModel(
             PageElementEntity(
                 pageId = pageId, kind = ElementKind.STROKE, x = xs.min(), y = ys.min(),
                 width = xs.max() - xs.min(), height = ys.max() - ys.min(),
-                data = StrokeData(points = pointsUnits, color = color, level = level).encodePayload(),
+                data = StrokeData(points = pointsUnits, color = color, tool = tool, size = size).encodePayload(),
             ),
         )
     }

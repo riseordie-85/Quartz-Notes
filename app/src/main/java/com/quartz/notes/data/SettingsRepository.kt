@@ -48,6 +48,9 @@ data class AppSettings(
     val splitView: Boolean = true,
     /** Fingers draw with the brush (turned off automatically the first time a pen is used). */
     val fingerDraw: Boolean = true,
+    /** The brush last used (a BrushType name) and each brush's size, in page units. */
+    val brushType: String = "PEN",
+    val brushSizes: Map<String, Float> = emptyMap(),
     /** The space a page gets on this device's narrow (phone / cover) and wide (unfolded / tablet) screens, "WxH" in dp. */
     val screenNarrow: String? = null,
     val screenWide: String? = null,
@@ -93,6 +96,8 @@ class SettingsRepository(context: Context) {
         val toolbarOnTop = booleanPreferencesKey("toolbar_on_top")
         val splitView = booleanPreferencesKey("split_view")
         val fingerDraw = booleanPreferencesKey("finger_draw")
+        val brushType = stringPreferencesKey("brush_type")
+        val brushSizes = stringPreferencesKey("brush_sizes")
         val appearanceChangedAt = longPreferencesKey("appearance_changed_at")
         val screenNarrow = stringPreferencesKey("screen_narrow")
         val screenWide = stringPreferencesKey("screen_wide")
@@ -119,6 +124,8 @@ class SettingsRepository(context: Context) {
             toolbarOnTop = p[Keys.toolbarOnTop] ?: false,
             splitView = p[Keys.splitView] ?: true,
             fingerDraw = p[Keys.fingerDraw] ?: true,
+            brushType = p[Keys.brushType] ?: "PEN",
+            brushSizes = decodeSizes(p[Keys.brushSizes]),
             screenNarrow = p[Keys.screenNarrow],
             screenWide = p[Keys.screenWide],
         )
@@ -170,6 +177,19 @@ class SettingsRepository(context: Context) {
     suspend fun setToolbarOnTop(onTop: Boolean) = set(Keys.toolbarOnTop, onTop)
     suspend fun setSplitView(enabled: Boolean) = set(Keys.splitView, enabled)
     suspend fun setFingerDraw(enabled: Boolean) = set(Keys.fingerDraw, enabled)
+    suspend fun setBrushType(type: String) = set(Keys.brushType, type)
+
+    /** Remembers one brush's size (each brush keeps its own). */
+    suspend fun setBrushSize(type: String, size: Float) {
+        val sizes = settings.first().brushSizes + (type to size)
+        set(Keys.brushSizes, sizes.entries.joinToString(";") { "${it.key}=${it.value}" })
+    }
+
+    private fun decodeSizes(raw: String?): Map<String, Float> =
+        raw.orEmpty().split(';').mapNotNull { part ->
+            val (k, v) = part.split('=').takeIf { it.size == 2 } ?: return@mapNotNull null
+            v.toFloatOrNull()?.let { k to it }
+        }.toMap()
 
     /**
      * Remembers the space a page gets (in dp): a narrow portrait one (phone, cover screen) or a
