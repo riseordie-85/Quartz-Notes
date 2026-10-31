@@ -205,18 +205,44 @@ class PageInputTest {
     private fun selectionGestures(field: SemanticsNodeInteraction, label: String) {
         val l = layout(field)
         fun lineY(i: Int) = (l.getLineTop(i) + l.getLineBottom(i)) / 2
-        // Middle of "Another" (line 2) and of "Fourth" (line 4), in the field's own coordinates.
+        // Middle of "Another" (line 2) and part way into "Fourth" (line 4), in the field's own coordinates.
         val anotherStart = paragraphEnd(0) + 2
-        val another = Offset((l.getHorizontalPosition(anotherStart - 1, true) + l.getHorizontalPosition(anotherStart - 1 + "Another".length, true)) / 2, lineY(1))
+        val another = onScreen(field, Offset((l.getHorizontalPosition(anotherStart - 1, true) + l.getHorizontalPosition(anotherStart - 1 + "Another".length, true)) / 2, lineY(1)))
         val fourthStart = paragraphEnd(2) + 2
-        val fourthLine = l.getLineForOffset(fourthStart - 1)
-        val fourth = Offset(l.getHorizontalPosition(fourthStart - 1 + 3, true), lineY(fourthLine))
+        val fourth = onScreen(field, Offset(l.getHorizontalPosition(fourthStart - 1 + 3, true), lineY(l.getLineForOffset(fourthStart - 1))))
         val rest = onScreen(field, Offset(10f, lineY(l.lineCount - 1)))
         val anotherWord = TextRange(anotherStart, anotherStart + "Another".length)
         val results = LinkedHashMap<String, TextRange?>()
-        fun reset() {
-            fingerTap(rest)
-            SystemClock.sleep(400)
+        val touch = InputDevice.SOURCE_TOUCHSCREEN
+        val pen = InputDevice.SOURCE_STYLUS or InputDevice.SOURCE_TOUCHSCREEN
+
+        // The app's clock runs with real time, as on a device (the test clock would otherwise jump
+        // ahead whenever the app is idle, so holds never last and taps never pair up).
+        rule.mainClock.autoAdvance = false
+        fun pause(ms: Long) {
+            var left = ms
+            while (left > 0) {
+                val step = minOf(16L, left)
+                SystemClock.sleep(step)
+                rule.mainClock.advanceTimeBy(step)
+                left -= step
+            }
+        }
+        fun tap(at: Offset, source: Int = touch, stylus: Boolean = false) {
+            val down = SystemClock.uptimeMillis()
+            injectTool(MotionEvent.ACTION_DOWN, at, source, down, stylus)
+            pause(50)
+            injectTool(MotionEvent.ACTION_UP, at, source, down, stylus)
+            pause(16)
+        }
+        fun click(at: Offset) {
+            val down = SystemClock.uptimeMillis()
+            inject(MotionEvent.ACTION_DOWN, at, InputDevice.SOURCE_MOUSE, down, MotionEvent.BUTTON_PRIMARY)
+            inject(MotionEvent.ACTION_BUTTON_PRESS, at, InputDevice.SOURCE_MOUSE, down, MotionEvent.BUTTON_PRIMARY)
+            pause(50)
+            inject(MotionEvent.ACTION_BUTTON_RELEASE, at, InputDevice.SOURCE_MOUSE, down, 0)
+            inject(MotionEvent.ACTION_UP, at, InputDevice.SOURCE_MOUSE, down, 0)
+            pause(16)
         }
         fun hold(at: Offset, millis: Long, source: Int, stylus: Boolean, dragTo: Offset? = null) {
             val down = SystemClock.uptimeMillis()
@@ -224,7 +250,7 @@ class PageInputTest {
             var t = 0L
             var i = 0
             while (t < millis) {
-                SystemClock.sleep(40)
+                pause(40)
                 t += 40
                 i++
                 // A real finger wobbles a little while held.
@@ -233,55 +259,67 @@ class PageInputTest {
             var last = at
             if (dragTo != null) {
                 for (k in 1..15) {
-                    SystemClock.sleep(20)
+                    pause(20)
                     last = at + (dragTo - at) * (k / 15f)
                     injectTool(MotionEvent.ACTION_MOVE, last, source, down, stylus)
                 }
             }
             injectTool(MotionEvent.ACTION_UP, last, source, down, stylus)
-            rule.waitForIdle()
+            pause(16)
         }
-        val touch = InputDevice.SOURCE_TOUCHSCREEN
-        val pen = InputDevice.SOURCE_STYLUS or InputDevice.SOURCE_TOUCHSCREEN
-
-        reset()
-        fingerTap(onScreen(field, another))
-        SystemClock.sleep(90)
-        fingerTap(onScreen(field, another))
-        SystemClock.sleep(300)
-        rule.waitForIdle()
-        results["finger double tap"] = selection(field)
-        screen("30_${label}_double_tap")
-
-        reset()
-        hold(onScreen(field, another), 800, touch, stylus = false)
-        results["finger hold"] = selection(field)
-        screen("31_${label}_hold")
-
-        reset()
-        hold(onScreen(field, another), 800, touch, stylus = false, dragTo = onScreen(field, fourth))
-        results["finger hold then drag"] = selection(field)
-        screen("32_${label}_hold_drag")
-
-        reset()
-        hold(onScreen(field, another), 800, pen, stylus = true)
-        results["pen hold"] = selection(field)
-
-        reset()
-        mouseClick(onScreen(field, another))
-        SystemClock.sleep(60)
-        mouseClick(onScreen(field, another))
-        rule.waitForIdle()
-        results["mouse double click"] = selection(field)
-
-        reset()
-        repeat(3) {
-            mouseClick(onScreen(field, another))
-            SystemClock.sleep(60)
+        fun reset() {
+            tap(rest)
+            pause(600)
         }
-        rule.waitForIdle()
-        results["mouse triple click"] = selection(field)
-        screen("33_${label}_triple_click")
+        fun read(): TextRange? {
+            pause(300)
+            return selection(field)
+        }
+
+        try {
+            reset()
+            tap(another)
+            pause(90)
+            tap(another)
+            results["finger double tap"] = read()
+            screen("30_${label}_double_tap")
+
+            reset()
+            hold(another, 800, touch, stylus = false)
+            results["finger hold"] = read()
+            screen("31_${label}_hold")
+
+            reset()
+            hold(another, 800, touch, stylus = false, dragTo = fourth)
+            results["finger hold then drag"] = read()
+            screen("32_${label}_hold_drag")
+
+            reset()
+            hold(another, 800, pen, stylus = true)
+            results["pen hold"] = read()
+
+            reset()
+            tap(another, pen, stylus = true)
+            pause(90)
+            tap(another, pen, stylus = true)
+            results["pen double tap"] = read()
+
+            reset()
+            click(another)
+            pause(60)
+            click(another)
+            results["mouse double click"] = read()
+
+            reset()
+            repeat(3) {
+                click(another)
+                pause(60)
+            }
+            results["mouse triple click"] = read()
+            screen("33_${label}_triple_click")
+        } finally {
+            rule.mainClock.autoAdvance = true
+        }
 
         results.forEach { (k, v) -> note("$label $k: selection=$v") }
         note("$label expected word \"Another\" = $anotherWord, line 2 = ${TextRange(anotherStart, paragraphEnd(1) + 1)}")
