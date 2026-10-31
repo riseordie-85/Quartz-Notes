@@ -28,6 +28,11 @@
   const live = $derived(store.page(pageId) ?? page)
   const elements: PageElement[] = $derived(store.elementsOf(pageId))
   const scrapbook = $derived(live.layoutMode === "SCRAPBOOK")
+  // Freeform pages have a set size: laid out at it, then scaled to the width there is (like the app).
+  const canvasW = $derived(scrapbook ? live.canvasWidth || 595 : 0)
+  const canvasH = $derived(scrapbook ? live.canvasHeight || 842 : 0)
+  let avail = $state(0)
+  const scale = $derived(scrapbook && avail > 0 ? avail / canvasW : 1)
   const locked = $derived(live.locked)
 
   const bgArgb = $derived(live.isSection ? (live.backgroundArgb ?? (0xfff9c78a | 0)) : (live.backgroundArgb ?? DEFAULT_PAGE))
@@ -55,6 +60,15 @@
   /** How far down the page the lowest item reaches (px). */
   const paperUrl = $derived(live.backgroundImage ? store.mediaUrl(live.backgroundImage) : null)
   let paperAspect = $state(0)
+  const fitMode = $derived.by(() => {
+    const m = (live.backgroundFit || "").split(":")[0]
+    if (scrapbook) return ["FIT", "FILL", "STRETCH", "MANUAL"].includes(m) ? m : "FIT"
+    return m === "REPEAT" ? "REPEAT" : "WIDTH"
+  })
+  const manual = $derived.by(() => {
+    const [, x, y, sc] = (live.backgroundFit || "").split(":")
+    return { x: Number(x) || 0, y: Number(y) || 0, s: Number(sc) || 1 }
+  })
   const elementsBottom = $derived.by(() => {
     let bottom = 0
     for (const e of elements) {
@@ -144,21 +158,38 @@
   <div class="toolbar-row"><Toolbar {editor} /></div>
 {/if}
 
+<div class="frame" bind:clientWidth={avail} style:height={scrapbook ? `${canvasH * scale}px` : undefined}>
 <div
   class="sheet"
   class:section={live.isSection}
+  class:freeform={scrapbook}
   bind:clientWidth={W}
   style:background={bg}
   style:color={ink}
   style:--ink={ink}
-  style:min-height="{Math.max(elementsBottom + 48, W * 1.3, W * paperAspect)}px"
+  style:width={scrapbook ? `${canvasW}px` : undefined}
+  style:height={scrapbook ? `${canvasH}px` : undefined}
+  style:transform={scrapbook ? `scale(${scale})` : undefined}
+  style:min-height={scrapbook ? undefined : `${Math.max(elementsBottom + 48, W * 1.3, fitMode === "WIDTH" ? W * paperAspect : 0)}px`}
 >
   {#if paperUrl && !live.isSection}
-    <!-- A picture as the paper: as wide as the page, from the top (the page is at least as tall). -->
-    <img class="paper-image" src={paperUrl} alt="" onload={(e) => {
-        const img = e.currentTarget as HTMLImageElement
-        paperAspect = img.naturalHeight / Math.max(1, img.naturalWidth)
-      }} />
+    <!-- A picture as the paper, laid out by its fit. -->
+    {#if fitMode === "REPEAT"}
+      <div class="paper-image repeat" style:background-image="url({paperUrl})"></div>
+    {:else if fitMode === "WIDTH"}
+      <img class="paper-image" src={paperUrl} alt="" onload={(e) => {
+          const img = e.currentTarget as HTMLImageElement
+          paperAspect = img.naturalHeight / Math.max(1, img.naturalWidth)
+        }} />
+    {:else}
+      <img
+        class="paper-image whole"
+        src={paperUrl}
+        alt=""
+        style:object-fit={fitMode === "FILL" ? "cover" : fitMode === "STRETCH" ? "fill" : "contain"}
+        style:transform={fitMode === "MANUAL" ? `translate(${manual.x * W}px, ${manual.y * W}px) scale(${manual.s})` : undefined}
+      />
+    {/if}
   {/if}
   {#if live.isSection}
     <div class="section-body">
@@ -224,6 +255,7 @@
     {#if W > 0}<ElementsLayer {elements} {W} {ink} onpicture={openPicture} />{/if}
   {/if}
 </div>
+</div>
 
 <style>
   .toolbar-row {
@@ -252,6 +284,21 @@
     height: auto;
     pointer-events: none;
     user-select: none;
+  }
+  .paper-image.whole {
+    height: 100%;
+  }
+  .paper-image.repeat {
+    height: 100%;
+    background-repeat: repeat-y;
+    background-size: 100% auto;
+  }
+  .frame {
+    position: relative;
+  }
+  .sheet.freeform {
+    transform-origin: top left;
+    border-radius: 6px;
   }
   .title-row {
     display: flex;

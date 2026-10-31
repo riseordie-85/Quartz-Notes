@@ -23,6 +23,15 @@ function isTemplatesNotebook(n: Notebook): boolean {
   return n.kind === "TEMPLATES"
 }
 
+/** The type and size of new pages in a notebook (like the app: A4 when no size was chosen). */
+function pageTypeOf(nb: Notebook | undefined): Partial<Page> {
+  if (nb?.pageLayout !== "SCRAPBOOK") return { layoutMode: "INLINE", canvasWidth: null, canvasHeight: null, sizeName: "" }
+  const [key, w, h] = (nb.pageSize || "A4|595|842").split("|")
+  const width = Number(w) || 595
+  const height = Number(h) || 842
+  return { layoutMode: "SCRAPBOOK", canvasWidth: width, canvasHeight: height, sizeName: key, spread: key === "UNFOLDED" || width > height }
+}
+
 /** True when two versions of a note or page say the same thing. */
 export function sameText(a: QuickNote | Page, b: QuickNote | Page): boolean {
   return (
@@ -534,6 +543,8 @@ class Store {
       sectionImage: "",
       templateName: "",
       backgroundImage: template?.backgroundImage ?? "",
+      backgroundFit: template?.backgroundFit ?? "",
+      ...pageTypeOf(this.notebook(notebookId)),
       ...from,
     })
   }

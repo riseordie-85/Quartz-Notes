@@ -33,6 +33,9 @@ export interface Notebook extends SyncedRecord {
   attachAtBottom: boolean
   /** "TEMPLATES" for the hidden notebook of page templates ("" or "NOTEBOOK" otherwise). */
   kind: string
+  /** New pages: "INLINE" (text) or "SCRAPBOOK" (Freeform), and the Freeform size ("A4|595|842"). */
+  pageLayout: string
+  pageSize: string
 }
 
 export interface Page extends SyncedRecord {
@@ -56,6 +59,12 @@ export interface Page extends SyncedRecord {
   templateName: string
   /** Media path of a picture used as the page's paper. */
   backgroundImage: string
+  /** How the picture is laid out: "WIDTH", "REPEAT", "FIT", "FILL", "STRETCH" or "MANUAL:x:y:scale". */
+  backgroundFit: string
+  /** Freeform pages: a fixed size in page units (CSS px here), scaled to fit. Null on text pages. */
+  canvasWidth: number | null
+  canvasHeight: number | null
+  sizeName: string
 }
 
 export interface PageElement extends SyncedRecord {
