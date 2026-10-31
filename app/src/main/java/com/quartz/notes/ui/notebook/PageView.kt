@@ -77,6 +77,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.input.pointer.PointerEventPass
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.onPlaced
 import androidx.compose.ui.platform.LocalDensity
@@ -535,12 +536,25 @@ internal fun PageView(
         // Inside a Freeform page, text ignores the phone's font size setting so every device lays it out alike.
         val pageDensity = if (freeform) Density(density.density, 1f) else density
 
+        // The Freeform page sits in the middle of the space; pinching a selected item resizes the item.
+        var zoomCoords by remember { mutableStateOf<LayoutCoordinates?>(null) }
+        val itemReachPx = with(density) { 24.dp.toPx() }
         Box(
             if (freeform && canvasPx != null) {
-                Modifier.fillMaxSize().freeformZoom(session, fit, canvasPx, viewportPx)
+                Modifier
+                    .fillMaxSize()
+                    .onPlaced { zoomCoords = it }
+                    .freeformZoom(session, fit, canvasPx, viewportPx) { p ->
+                        val id = canvas.selectedId ?: return@freeformZoom false
+                        val rect = canvas.bounds[id] ?: return@freeformZoom false
+                        val from = zoomCoords ?: return@freeformZoom false
+                        val content = canvas.contentCoords?.takeIf { it.isAttached } ?: return@freeformZoom false
+                        rect.inflate(itemReachPx).contains(content.localPositionOf(from, p))
+                    }
             } else {
                 Modifier.fillMaxSize()
             },
+            contentAlignment = Alignment.Center,
         ) {
         CompositionLocalProvider(LocalDensity provides pageDensity) {
         Column(

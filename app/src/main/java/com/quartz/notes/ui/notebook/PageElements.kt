@@ -434,6 +434,21 @@ private fun ElementItem(
                 Box(outline.padding(if (selected || connecting) 2.dp else 0.dp)) {
                     DecoratedImage(imageData, pageWidth * live.width)
                 }
+                if (selected && !locked) {
+                    // Corner handle: drag to resize (keeps the picture's shape). Two fingers work too.
+                    ResizeHandle(
+                        Modifier.align(Alignment.BottomEnd),
+                        onStart = { gesturing = true },
+                        onEnd = {
+                            gesturing = false
+                            commit()
+                        },
+                    ) { drag ->
+                        val ratio = if (live.width > 0f) live.height / live.width else 1f
+                        val w = (live.width + (drag.x + drag.y * (if (ratio > 0f) 1f / ratio else 1f)) / 2f / widthPx).coerceIn(0.08f, 1.5f)
+                        live = live.copy(width = w, height = w * ratio)
+                    }
+                }
             }
             ElementKind.VOICE -> if (voiceData != null) {
                 val w = pageWidth * live.width

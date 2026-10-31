@@ -14,6 +14,7 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.test.click
 import androidx.compose.ui.test.pinch
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -22,6 +23,9 @@ import com.quartz.notes.LocalAppContainer
 import com.quartz.notes.QuartzApp
 import com.quartz.notes.data.BuiltInFonts
 import com.quartz.notes.data.StoredImage
+import com.quartz.notes.data.db.PageElementEntity
+import com.quartz.notes.data.model.ElementKind
+import com.quartz.notes.data.model.ImageData
 import com.quartz.notes.data.model.PageSize
 import com.quartz.notes.data.rich.BlockType
 import com.quartz.notes.data.rich.RichDoc
@@ -131,6 +135,50 @@ class FreeformTest {
         rule.onNodeWithText("Fit page").performClick()
         settle()
         rule.onNodeWithText("Fit page").assertDoesNotExist()
+    }
+
+    /** A page smaller than the screen sits in the middle (it used to stick to the top-left corner). */
+    @Test
+    fun aSmallPageIsCenteredAndPinchingAPictureResizesIt() {
+        val pocket = PageSize.PAPER.first { it.key == PageSize.POCKET }
+        val path = "media/freeform-pic.png"
+        container.media.file(path).apply { parentFile?.mkdirs() }.outputStream().use {
+            Bitmap.createBitmap(200, 240, Bitmap.Config.ARGB_8888).apply { eraseColor(0xFF4A90D9.toInt()) }
+                .compress(Bitmap.CompressFormat.PNG, 100, it)
+        }
+        var pageId = 0L
+        val nb = runBlocking {
+            val id = repo.createNotebook(shelf(), "Pocket test", 0xFF8A5A00.toInt(), "GLOSS", "none", pageLayout = "SCRAPBOOK", pageSize = pocket)
+            val page = repo.observePages(id).first().single()
+            pageId = page.id
+            repo.savePageTitle(page.id, "Plan")
+            repo.addElement(
+                PageElementEntity(
+                    pageId = page.id, kind = ElementKind.IMAGE, x = 0.1f, y = 0.2f, width = 0.8f, height = 0.96f,
+                    data = ImageData(path = path, aspect = 1.2f).encode(),
+                ),
+            )
+            repo.getPage(-1)
+            id
+        }
+        show(nb)
+        val root = rule.onRoot().fetchSemanticsNode().boundsInRoot
+        val title = rule.onNodeWithText("Plan").fetchSemanticsNode().boundsInRoot
+        assertTrue("page is centered (title at ${title.center.x}, screen middle ${root.center.x})", kotlin.math.abs(title.center.x - root.center.x) < root.width * 0.05f)
+        assertTrue("page is on screen", title.left > 0f)
+        screen("f7_pocket_centered")
+
+        // Select the picture, then pinch on it: the picture grows, the page doesn't zoom.
+        rule.onRoot().performTouchInput { click(center) }
+        settle()
+        rule.onRoot().performTouchInput {
+            pinch(center - Offset(40f, 0f), center + Offset(40f, 0f), center - Offset(160f, 0f), center + Offset(160f, 0f), durationMillis = 500)
+        }
+        settle()
+        rule.onNodeWithText("Fit page").assertDoesNotExist()
+        val width = runBlocking { repo.getPage(-1); repo.observeElements(pageId).first().single().width }
+        assertTrue("picture grew (width $width)", width > 0.85f)
+        screen("f8_picture_resized")
     }
 
     @Test

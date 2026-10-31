@@ -38,13 +38,21 @@ private fun clampPan(pan: Offset, s: Float, canvas: Size, viewport: Size): Offse
 /**
  * Zooming and moving around a Freeform page: two fingers pinch and drag; once zoomed in, one finger
  * on empty space drags too; Ctrl + mouse wheel zooms and the wheel scrolls. Items, text and tools
- * keep their own one-finger touches.
+ * keep their own one-finger touches, and a pinch that starts on the selected item resizes it.
  */
-internal fun Modifier.freeformZoom(session: PageSession, fit: Float, canvas: Size, viewport: Size): Modifier =
+internal fun Modifier.freeformZoom(
+    session: PageSession,
+    fit: Float,
+    canvas: Size,
+    viewport: Size,
+    /** True when a touch at this spot (in this box's px) belongs to the selected item, which then gets the pinch. */
+    onSelectedItem: (Offset) -> Boolean,
+): Modifier =
     this
         .pointerInput(fit, canvas, viewport) {
             awaitEachGesture {
-                awaitFirstDown(requireUnconsumed = false, pass = PointerEventPass.Initial)
+                val down = awaitFirstDown(requireUnconsumed = false, pass = PointerEventPass.Initial)
+                if (onSelectedItem(down.position)) return@awaitEachGesture
                 do {
                     val event = awaitPointerEvent(PointerEventPass.Initial)
                     if (event.changes.count { it.pressed } >= 2) {
