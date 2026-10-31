@@ -8,6 +8,7 @@ import android.graphics.Shader
 import android.os.SystemClock
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.semantics.SemanticsActions
+import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.longClick
 import androidx.compose.ui.test.onAllNodesWithText
@@ -117,7 +118,11 @@ class TemplatesUiTest {
         screen("t3_page_from_starter")
 
         // The page style sheet: background pictures and saving as a template.
-        rule.onNodeWithContentDescription("Page style").performClick()
+        rule.onNode(
+            androidx.compose.ui.test.SemanticsMatcher("click label is Page style") {
+                it.config.getOrNull(SemanticsActions.OnClick)?.label == "Page style"
+            },
+        ).performClick()
         settle()
         rule.onAllNodesWithText("Background picture").onFirst().assertExists()
         rule.onNodeWithText("Save page as template").performSemanticsAction(SemanticsActions.OnClick)
