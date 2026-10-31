@@ -53,8 +53,8 @@ PocketBase's own `updated` time, which devices use to ask for changes since thei
 | Collection | Fields |
 |---|---|
 | shelves | name, position |
-| notebooks | shelf (uid), title, color, texture, icon, position, twoPage, showIndex, sectionTabs, attachAtBottom |
-| pages | notebook (uid), title, position, pageType, background, texture, layoutMode, content (RichDoc JSON), plainText, locked, spread, isSection, sectionIcon, sectionImage |
+| notebooks | shelf (uid), title, color, texture, icon, position, twoPage, showIndex, sectionTabs, attachAtBottom, kind, pageLayout (INLINE or SCRAPBOOK: the type new pages get), pageSize (`KEY|width|height`) |
+| pages | notebook (uid), title, position, pageType, background, texture, layoutMode, content (RichDoc JSON), plainText, locked, spread, isSection, sectionIcon, sectionImage, templateName, backgroundImage, backgroundFit, canvasWidth, canvasHeight, sizeName |
 | elements | page (uid), kind, x, y, width, height, rotation, z, data (JSON) |
 | quick_notes | title, content (RichDoc JSON), plainText, colorKey, pinned, archived |
 | attachments | ownerType, owner record (uid), kind, path, mimeType, durationMs, width, height |
@@ -93,7 +93,7 @@ wins, and for notes and pages the losing version is kept as a new note or page t
 - TipTap editor mapped to RichDoc: headings, lists, checklists, alignment, indents, bold, italic,
   underline, strikethrough, highlight, ink color, imported fonts, pictures in line, dividers.
 - Live updates both ways while a tab is open.
-- Scrapbook pages show every item in place (view only).
+- Freeform pages show every item in place at the page's set size, scaled to fit (view only for now).
 - Installable from the browser. Online-only to start; offline reading later.
 
 ## Status
@@ -114,6 +114,11 @@ wins, and for notes and pages the losing version is kept as a new note or page t
 - Appearance: the accent and background colours picked in the app are kept in the server's
   `prefs` collection (one record per account; the newest change wins) and used by every device and
   the web app. The web app also has its own Light / Dark / System switch.
+- Freeform pages (stored as `layoutMode = SCRAPBOOK`) have a fixed size: `canvasWidth` ×
+  `canvasHeight` in page units (1 unit = 1 dp in the app = 1 pt = 1 CSS px), and `sizeName`
+  (COVER, UNFOLDED, SCREEN, A3, A4, A5, LETTER, POCKET, LARGE). Each device scales the page to fit
+  and can zoom in. Items keep their positions as fractions of the page width. `backgroundFit` is
+  WIDTH or REPEAT (text pages), FIT, FILL, STRETCH or `MANUAL:x:y:scale` (Freeform pages).
 
 ## Phases
 
@@ -125,7 +130,7 @@ wins, and for notes and pages the losing version is kept as a new note or page t
 | 3 | Web app: login, browsing, search, editing quick notes and page text, live updates | Tested in CI; NUC to use |
 | 4 | Pictures, voice notes and fonts on all three, including adding pictures from the web | Tested in CI; NUC to use |
 | 5 | Live updates in the app, conflict copies, first-sync merge, sync status | Tested in CI; NUC to use |
-| 6 | Scrapbook editing on the web (later) | — |
+| 6 | Freeform editing on the web (later) | — |
 
 ## Testing
 
