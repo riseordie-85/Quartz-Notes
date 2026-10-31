@@ -69,6 +69,8 @@ fun EditorToolbar(
     onHighlightChange: (Color) -> Unit,
     onFormat: () -> Unit,
     modifier: Modifier = Modifier,
+    /** Buttons before the text tools (undo and redo). */
+    leading: @Composable RowScope.() -> Unit = {},
     trailing: @Composable RowScope.() -> Unit = {},
 ) {
     Surface(
@@ -84,6 +86,7 @@ fun EditorToolbar(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(4.dp),
         ) {
+            leading()
             ToolButton(onClick = onFormat, description = "Text style") {
                 Text("Aa", fontSize = 21.sp, fontWeight = FontWeight.Black, color = MaterialTheme.colorScheme.onSurface)
             }
@@ -235,5 +238,25 @@ private fun HighlightButton(state: RichEditorState?, highlight: Color, onHighlig
                 }
             }
         }
+    }
+}
+
+/** Undo and redo; dimmed when there's nothing to undo or redo. */
+@Composable
+fun UndoRedoButtons(canUndo: Boolean, canRedo: Boolean, onUndo: () -> Unit, onRedo: () -> Unit) {
+    val on = MaterialTheme.colorScheme.onSurface
+    ToolButton(onClick = { if (canUndo) onUndo() }, description = "Undo") {
+        androidx.compose.material3.Icon(
+            androidx.compose.material.icons.Icons.AutoMirrored.Rounded.Undo,
+            contentDescription = null,
+            tint = if (canUndo) on else on.copy(alpha = 0.3f),
+        )
+    }
+    ToolButton(onClick = { if (canRedo) onRedo() }, description = "Redo") {
+        androidx.compose.material3.Icon(
+            androidx.compose.material.icons.Icons.AutoMirrored.Rounded.Redo,
+            contentDescription = null,
+            tint = if (canRedo) on else on.copy(alpha = 0.3f),
+        )
     }
 }

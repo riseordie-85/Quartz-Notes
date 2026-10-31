@@ -79,6 +79,7 @@ import com.quartz.notes.ui.media.rememberMicPermission
 import androidx.compose.material.icons.rounded.AccountTree
 import androidx.compose.material.icons.automirrored.rounded.ArrowRightAlt
 import androidx.compose.material.icons.rounded.Brush
+import androidx.compose.material.icons.rounded.HighlightAlt
 import androidx.compose.material.icons.rounded.Category
 import android.widget.Toast
 import androidx.compose.foundation.focusable
@@ -89,6 +90,8 @@ import androidx.compose.ui.input.key.KeyEventType
 import androidx.compose.ui.input.key.isAltPressed
 import androidx.compose.ui.input.key.isCtrlPressed
 import androidx.compose.ui.input.key.isMetaPressed
+import androidx.compose.ui.input.key.isShiftPressed
+import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onPreviewKeyEvent
 import androidx.compose.ui.input.key.type
@@ -114,6 +117,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.path
 import androidx.compose.runtime.mutableIntStateOf
 import com.quartz.notes.data.model.ShapeType
+import com.quartz.notes.data.model.ElementKind
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -149,6 +153,7 @@ import com.quartz.notes.ui.editor.FormatSheet
 import com.quartz.notes.ui.editor.RichEditorState
 import com.quartz.notes.ui.editor.RichTextEditor
 import com.quartz.notes.ui.editor.ToolButton
+import com.quartz.notes.ui.editor.UndoRedoButtons
 import com.quartz.notes.ui.editor.editorStyles
 import com.quartz.notes.ui.home.TwoPaneMinWidth
 import com.quartz.notes.ui.quartzViewModel
@@ -355,6 +360,8 @@ fun NotebookScreen(
                     onEraser = { tool = if (tool == PageTool.ERASER) PageTool.BRUSH else PageTool.ERASER },
                     onDone = { tool = PageTool.NONE },
                     modifier = Modifier.padding(horizontal = 16.dp).padding(top = 6.dp),
+                    fingerDraw = settings?.fingerDraw != false,
+                    onFingerDraw = { on -> scope.launch { container.settings.setFingerDraw(on) } },
                 )
             }
         }
@@ -379,6 +386,16 @@ fun NotebookScreen(
                         }
                     },
                     modifier = Modifier.weight(1f),
+                    leading = {
+                        if (activeIsPlain) {
+                            UndoRedoButtons(
+                                canUndo = vm.canUndo(activeSession),
+                                canRedo = vm.canRedo(activeSession),
+                                onUndo = { vm.undo(activePage) },
+                                onRedo = { vm.redo(activePage) },
+                            )
+                        }
+                    },
                 ) {
                     // Items, text boxes and drawing only make sense on ordinary pages.
                     if (activeIsPlain) {
@@ -435,6 +452,11 @@ fun NotebookScreen(
                             },
                             description = "Brush",
                         ) { Icon(Icons.Rounded.Brush, null) }
+                        ToolButton(
+                            selected = tool == PageTool.LASSO,
+                            onClick = onFreeform { tool = if (tool == PageTool.LASSO) PageTool.NONE else PageTool.LASSO },
+                            description = "Lasso: draw around items to pick them",
+                        ) { Icon(Icons.Rounded.HighlightAlt, null) }
                         Box {
                             ToolButton(onClick = onFreeform { shapeMenu = true }, description = "Add shape") { Icon(Icons.Rounded.Category, null) }
                             DropdownMenu(expanded = shapeMenu, onDismissRequest = { shapeMenu = false }) {
@@ -526,6 +548,59 @@ fun NotebookScreen(
             }
         }
 
+        /**
+         * Shortcuts for the page's items (when no text has the keyboard): Ctrl+Z / Ctrl+Shift+Z / Ctrl+Y,
+         * Ctrl+A, Ctrl+C / X / V / D, Delete, Escape, arrows to nudge (Shift: further), Ctrl+] / Ctrl+[
+         * to bring forward / send back, Ctrl+= / Ctrl+- / Ctrl+0 to zoom.
+         */
+        fun pageItemKeys(e: androidx.compose.ui.input.key.KeyEvent): Boolean {
+            if (e.type != KeyEventType.KeyDown || !activeIsPlain) return false
+            val page = activePage
+            val s = activeSession
+            val c = s.canvas
+            val cmd = e.isCtrlPressed || e.isMetaPressed
+            val shift = e.isShiftPressed
+            if (cmd && !shift && e.key == Key.Z) return true.also { vm.undo(page) }
+            if (cmd && ((shift && e.key == Key.Z) || (!shift && e.key == Key.Y))) return true.also { vm.redo(page) }
+            if (!activeFreeform) return false
+            val all = s.elements
+            val picked = c.selection()
+            val items = all.filter { it.id in picked }
+            val step = if (shift) 0.02f else 0.002f
+            return when {
+                cmd && e.key == Key.A -> true.also { c.select(all.filter { it.kind != ElementKind.CONNECTOR }.map { it.id }, all) }
+                cmd && e.key == Key.C && items.isNotEmpty() -> true.also { vm.copyItems(page.id, all, picked) }
+                cmd && e.key == Key.X && items.isNotEmpty() -> true.also {
+                    vm.copyItems(page.id, all, picked)
+                    c.clearSelection()
+                    vm.deleteItems(page.id, items)
+                }
+                cmd && e.key == Key.V -> true.also { scope.launch { c.pendingSelect = vm.pasteItems(page.id) } }
+                cmd && e.key == Key.D && items.isNotEmpty() -> true.also { scope.launch { c.pendingSelect = vm.duplicateItems(page.id, all, picked) } }
+                cmd && e.key == Key.RightBracket && items.isNotEmpty() -> true.also { vm.itemsToFront(page.id, items) }
+                cmd && e.key == Key.LeftBracket && items.isNotEmpty() -> true.also { vm.itemsToBack(page.id, items) }
+                (e.key == Key.Delete || e.key == Key.Backspace) && items.isNotEmpty() -> true.also {
+                    c.clearSelection()
+                    vm.deleteItems(page.id, items)
+                }
+                e.key == Key.Escape && picked.isNotEmpty() -> true.also { c.clearSelection() }
+                !cmd && items.isNotEmpty() && e.key == Key.DirectionLeft -> true.also { vm.moveItems(page.id, items, -step, 0f) }
+                !cmd && items.isNotEmpty() && e.key == Key.DirectionRight -> true.also { vm.moveItems(page.id, items, step, 0f) }
+                !cmd && items.isNotEmpty() && e.key == Key.DirectionUp -> true.also { vm.moveItems(page.id, items, 0f, -step) }
+                !cmd && items.isNotEmpty() && e.key == Key.DirectionDown -> true.also { vm.moveItems(page.id, items, 0f, step) }
+                cmd && (e.key == Key.Equals || e.key == Key.Plus || e.key == Key.NumPadAdd) -> true.also { s.zoom = (s.zoom * 1.25f).coerceAtMost(8f) }
+                cmd && (e.key == Key.Minus || e.key == Key.NumPadSubtract) -> true.also {
+                    s.zoom = (s.zoom / 1.25f).coerceAtLeast(1f)
+                    if (s.zoom <= 1.01f) s.pan = androidx.compose.ui.geometry.Offset.Zero
+                }
+                cmd && (e.key == Key.Zero || e.key == Key.NumPad0) -> true.also {
+                    s.zoom = 1f
+                    s.pan = androidx.compose.ui.geometry.Offset.Zero
+                }
+                else -> false
+            }
+        }
+
         // The notebook itself takes focus whenever nothing inside it has it, so page keys work even
         // when nobody is typing.
         val pageKeys = remember { FocusRequester() }
@@ -536,6 +611,8 @@ fun NotebookScreen(
                 .focusRequester(pageKeys)
                 .onFocusChanged { if (!it.hasFocus) scope.launch { runCatching { pageKeys.requestFocus() } } }
                 .focusable()
+                // Keys the text didn't use: undo, and working with the page's items.
+                .onKeyEvent { e -> pageItemKeys(e) }
                 .onPreviewKeyEvent { e ->
                     if (e.type != KeyEventType.KeyDown) return@onPreviewKeyEvent false
                     val cmd = e.isCtrlPressed || e.isMetaPressed
@@ -618,6 +695,11 @@ fun NotebookScreen(
                                         tool = tool,
                                         brushLevel = brushLevel,
                                         inkArgb = settings?.inkArgb ?: 0,
+                                        fingerDraw = settings?.fingerDraw != false,
+                                        onPenFound = {
+                                            scope.launch { container.settings.setFingerDraw(false) }
+                                            Toast.makeText(context, "Pen found: it draws, fingers move the page. The hand button turns finger drawing back on.", Toast.LENGTH_LONG).show()
+                                        },
                                         onToolDone = { tool = PageTool.NONE },
                                         focusTextBox = pendingTextFocus?.takeIf { it.first == page.id }?.second,
                                         onFocusTextBoxHandled = { pendingTextFocus = null },

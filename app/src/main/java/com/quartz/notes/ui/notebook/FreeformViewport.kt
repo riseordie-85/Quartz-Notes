@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.PointerEventPass
 import androidx.compose.ui.input.pointer.PointerEventType
+import androidx.compose.ui.input.pointer.PointerType
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.input.pointer.isCtrlPressed
 import androidx.compose.ui.input.pointer.positionChange
@@ -29,7 +30,7 @@ import kotlin.math.abs
 import kotlin.math.max
 
 /** Keeps a Freeform page from being moved further than its edges allow at scale [s]. */
-private fun clampPan(pan: Offset, s: Float, canvas: Size, viewport: Size): Offset {
+internal fun clampPan(pan: Offset, s: Float, canvas: Size, viewport: Size): Offset {
     val maxX = max(0f, (canvas.width * s - viewport.width) / 2)
     val maxY = max(0f, (canvas.height * s - viewport.height) / 2)
     return Offset(pan.x.coerceIn(-maxX, maxX), pan.y.coerceIn(-maxY, maxY))
@@ -55,7 +56,9 @@ internal fun Modifier.freeformZoom(
                 if (onSelectedItem(down.position)) return@awaitEachGesture
                 do {
                     val event = awaitPointerEvent(PointerEventPass.Initial)
-                    if (event.changes.count { it.pressed } >= 2) {
+                    // A pen with a palm resting beside it is drawing, not pinching.
+                    val penDown = event.changes.any { it.pressed && (it.type == PointerType.Stylus || it.type == PointerType.Eraser) }
+                    if (!penDown && event.changes.count { it.pressed } >= 2) {
                         val old = session.zoom
                         val new = (old * event.calculateZoom()).coerceIn(1f, 8f)
                         val centroid = event.calculateCentroid(useCurrent = true)

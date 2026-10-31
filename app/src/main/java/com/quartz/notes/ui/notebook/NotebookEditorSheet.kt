@@ -36,7 +36,12 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import com.quartz.notes.ui.components.QuartzSheet
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
@@ -118,6 +123,7 @@ fun NotebookEditorSheet(
     }
     // A new notebook is set up step by step: name, color, cover, icon, pages.
     val guided = existing == null
+    val focusManager = LocalFocusManager.current
     var step by remember { mutableIntStateOf(0) }
     val steps = 5
     fun draft() = NotebookDraft(
@@ -178,6 +184,15 @@ fun NotebookEditorSheet(
                         onValueChange = { title = it.take(40) },
                         label = { Text("Title") },
                         singleLine = true,
+                        // Enter (or the keyboard's Next) goes on to the next step.
+                        keyboardOptions = KeyboardOptions(
+                            capitalization = KeyboardCapitalization.Words,
+                            imeAction = if (guided) ImeAction.Next else ImeAction.Done,
+                        ),
+                        keyboardActions = KeyboardActions(
+                            onNext = { if (title.isNotBlank()) step++ },
+                            onDone = { focusManager.clearFocus() },
+                        ),
                         modifier = Modifier.weight(1f),
                     )
                 } else {

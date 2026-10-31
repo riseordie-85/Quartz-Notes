@@ -377,6 +377,13 @@ interface PageElementDao {
     @Query("SELECT COALESCE(MAX(z), 0) FROM page_elements WHERE pageId = :pageId AND deleted = 0")
     suspend fun maxZ(pageId: Long): Int
 
+    @Query("SELECT COALESCE(MIN(z), 0) FROM page_elements WHERE pageId = :pageId AND deleted = 0")
+    suspend fun minZ(pageId: Long): Int
+
+    /** A row whether or not it's been deleted (for undo). */
+    @Query("SELECT * FROM page_elements WHERE id = :id")
+    suspend fun getAny(id: Long): PageElementEntity?
+
     @Insert
     suspend fun insert(element: PageElementEntity): Long
 

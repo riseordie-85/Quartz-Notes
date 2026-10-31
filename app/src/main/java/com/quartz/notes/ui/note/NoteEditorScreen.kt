@@ -57,6 +57,7 @@ import androidx.compose.ui.platform.LocalContext
 import com.quartz.notes.data.db.AttachmentEntity
 import com.quartz.notes.data.model.AttachmentKind
 import com.quartz.notes.ui.editor.ToolButton
+import com.quartz.notes.ui.editor.UndoRedoButtons
 import com.quartz.notes.ui.media.ImageViewer
 import com.quartz.notes.ui.media.VoiceRecorderSheet
 import com.quartz.notes.ui.media.rememberImageAdder
@@ -189,6 +190,7 @@ private fun NoteEditorContent(load: NoteLoad.Ready, vm: NoteViewModel, onClose: 
             onHighlightChange = { c -> scope.launch { container.settings.setHighlight(c.toArgb()) } },
             onFormat = { showFormat = true },
             modifier = Modifier.fillMaxWidth(),
+            leading = { UndoRedoButtons(editor.canUndo, editor.canRedo, editor::undo, editor::redo) },
         ) {
             Box {
                 ToolButton(onClick = { attachMenu = true }, description = "Attach") {

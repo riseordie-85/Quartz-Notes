@@ -61,6 +61,15 @@ class PageSession(page: PageEntity) {
     /** Moving and zooming the background picture by hand (page style → Adjust). */
     var adjustingBackground by mutableStateOf(false)
 
+    /** Selection, drawing and item layout on the page (kept here so keyboard shortcuts can reach it). */
+    val canvas = PageCanvasState()
+
+    /** The page's items as last shown (for shortcuts and copying). */
+    var elements: List<PageElementEntity> = emptyList()
+
+    /** Undo / redo for the page's items. */
+    val history = ItemHistory()
+
     /** Editors for this page's text boxes, by element id. */
     val textBoxes = HashMap<Long, RichEditorState>()
 
@@ -222,6 +231,7 @@ class NotebookViewModel(
     /** Moves a picture or recording from the bottom strip onto the page itself. */
     fun placeAttachment(e: PageElementEntity) {
         val y = placementY(e.pageId)
+        record(e.pageId)
         when (e.kind) {
             ElementKind.IMAGE -> {
                 val d = decodeImageData(e.data) ?: return
@@ -258,6 +268,7 @@ class NotebookViewModel(
             return
         }
         val freeform = session?.freeform == true
+        record(pageId)
         val width = 0.6f
         val x = (1f - width) / 2 + ((stagger % 5) - 2) * 0.03f
         repo.addElement(
@@ -276,6 +287,7 @@ class NotebookViewModel(
 
     /** Places an existing picture at a given spot (used when an in-line picture is set to float). */
     fun addImageAt(pageId: Long, data: ImageData, x: Float, y: Float, width: Float) {
+        record(pageId)
         repo.addElement(
             PageElementEntity(
                 pageId = pageId, kind = ElementKind.IMAGE, x = x, y = y, width = width,
@@ -311,6 +323,7 @@ class NotebookViewModel(
     }
 
     fun addVoice(pageId: Long, path: String, durationMs: Long) {
+        record(pageId)
         repo.addElement(
             PageElementEntity(
                 pageId = pageId, kind = ElementKind.VOICE, x = 0.1f, y = placementY(pageId), width = 0.7f,
@@ -323,13 +336,15 @@ class NotebookViewModel(
     // ---- Text boxes, shapes, arrows, connectors, drawings ----
 
     /** Adds a text box at (x, y) in page widths and returns its id. */
-    suspend fun addTextBox(pageId: Long, x: Float, y: Float, width: Float, doc: RichDoc = RichDoc()): Long =
-        repo.insertElement(
+    suspend fun addTextBox(pageId: Long, x: Float, y: Float, width: Float, doc: RichDoc = RichDoc()): Long {
+        record(pageId)
+        return repo.insertElement(
             PageElementEntity(
                 pageId = pageId, kind = ElementKind.TEXT, x = x, y = y, width = width,
                 data = TextBoxData(doc.encode()).encodePayload(),
             ),
         )
+    }
 
     fun textEditor(element: PageElementEntity): RichEditorState {
         knownTextBoxes[element.id] = element
@@ -345,6 +360,8 @@ class NotebookViewModel(
         val session = sessions[element.pageId] ?: return
         val state = session.textBoxes[element.id] ?: return
         if (session.textBoxSaved[element.id] == state.version) return
+        // A run of typing is one step.
+        record(element.pageId, key = "text:${element.id}")
         repo.updateElementData(element, TextBoxData(state.toDoc().encode()).encodePayload())
         session.textBoxSaved[element.id] = state.version
     }
@@ -356,6 +373,7 @@ class NotebookViewModel(
         val fills = listOf(0xFF00A8D6.toInt(), 0xFFD6004C.toInt(), 0xFFFFD600.toInt(), 0xFF2E9E5B.toInt())
         val w = if (type == ShapeType.RECTANGLE || type == ShapeType.ROUNDED) 0.36f else 0.3f
         val h = if (type == ShapeType.RECTANGLE || type == ShapeType.ROUNDED) 0.24f else 0.3f
+        record(pageId)
         return repo.insertElement(
             PageElementEntity(
                 pageId = pageId, kind = ElementKind.SHAPE, x = (1f - w) / 2 + ((shapeCount % 3) - 1) * 0.05f,
@@ -366,6 +384,7 @@ class NotebookViewModel(
     }
 
     fun addArrow(pageId: Long) {
+        record(pageId)
         repo.addElement(
             PageElementEntity(
                 pageId = pageId, kind = ElementKind.ARROW, x = 0.3f, y = placementY(pageId) + 0.1f, width = 0f,
@@ -378,6 +397,7 @@ class NotebookViewModel(
         if (pointsUnits.size < 2) return
         val xs = pointsUnits.filterIndexed { i, _ -> i % 2 == 0 }
         val ys = pointsUnits.filterIndexed { i, _ -> i % 2 == 1 }
+        record(pageId)
         repo.addElement(
             PageElementEntity(
                 pageId = pageId, kind = ElementKind.STROKE, x = xs.min(), y = ys.min(),
@@ -389,17 +409,198 @@ class NotebookViewModel(
 
     fun addConnector(pageId: Long, from: Long, to: Long) {
         if (from == to) return
+        record(pageId)
         repo.addElement(
             PageElementEntity(pageId = pageId, kind = ElementKind.CONNECTOR, data = ConnectorData(from = from, to = to).encodePayload()),
         )
     }
 
-    fun replaceElement(element: PageElementEntity) = repo.replaceElement(element)
+    fun replaceElement(element: PageElementEntity) {
+        record(element.pageId)
+        repo.replaceElement(element)
+    }
 
-    fun moveElement(element: PageElementEntity) = repo.moveElement(element)
-    fun updateElementData(element: PageElementEntity, data: String) = repo.updateElementData(element, data)
-    fun bringToFront(element: PageElementEntity) = repo.bringToFront(element)
-    fun deleteElement(element: PageElementEntity) = repo.deleteElement(element)
+    fun moveElement(element: PageElementEntity) {
+        record(element.pageId)
+        repo.moveElement(element)
+    }
+
+    /** Changes an item's look or words; quick runs of changes to one item (picking colors) are one step. */
+    fun updateElementData(element: PageElementEntity, data: String, undoable: Boolean = true) {
+        if (undoable) record(element.pageId, key = "data:${element.id}")
+        repo.updateElementData(element, data)
+    }
+
+    fun bringToFront(element: PageElementEntity) {
+        record(element.pageId)
+        repo.bringToFront(element)
+    }
+
+    fun sendToBack(element: PageElementEntity) {
+        record(element.pageId)
+        repo.sendToBack(element)
+    }
+
+    /** Removes an item. [undoable] is false for tidying up (an empty text box nobody typed in). */
+    fun deleteElement(element: PageElementEntity, undoable: Boolean = true, key: String? = null) {
+        if (undoable) record(element.pageId, key)
+        repo.deleteElement(element)
+    }
+
+    /** A pen has been used on this screen: from now on fingers move the page instead of drawing (palm rejection). */
+    var penSeen by mutableStateOf(false)
+
+    // ---- Undo / redo ----
+
+    private fun history(pageId: Long): ItemHistory = sessions[pageId]?.history ?: orphanHistory.getOrPut(pageId) { ItemHistory() }
+    private val orphanHistory = HashMap<Long, ItemHistory>()
+
+    /**
+     * Remembers how a page's items are before a change, so it can be undone. Changes with the same
+     * [key] close together (a run of typing, dragging a color) make one step.
+     */
+    private fun record(pageId: Long, key: String? = null) {
+        val h = history(pageId)
+        val now = System.currentTimeMillis()
+        synchronized(h) {
+            val sameRun = key != null && key == h.lastKey && now - h.lastAt < 1500
+            h.lastKey = key
+            h.lastAt = now
+            if (sameRun) return
+            h.redo.clear()
+            h.update()
+        }
+        repo.snapshotElements(pageId) { items ->
+            synchronized(h) {
+                h.push(h.undo, items)
+                h.update()
+            }
+        }
+    }
+
+    fun undoItems(pageId: Long) = step(pageId, undo = true)
+    fun redoItems(pageId: Long) = step(pageId, undo = false)
+
+    private fun step(pageId: Long, undo: Boolean) {
+        val h = history(pageId)
+        val target = synchronized(h) {
+            h.lastKey = null
+            (if (undo) h.undo else h.redo).removeLastOrNull().also { h.update() }
+        } ?: return
+        sessions[pageId]?.canvas?.clearSelection()
+        repo.restoreElements(
+            pageId,
+            target,
+            onBefore = { current ->
+                synchronized(h) {
+                    h.push(if (undo) h.redo else h.undo, current)
+                    h.update()
+                }
+            },
+            onDone = { items -> viewModelScope.launch { showTextBoxes(pageId, items) } },
+        )
+    }
+
+    /** Text boxes being shown take the words they were put back to. */
+    private fun showTextBoxes(pageId: Long, items: List<PageElementEntity>) {
+        val session = sessions[pageId] ?: return
+        items.filter { it.kind == ElementKind.TEXT }.forEach { e ->
+            val state = session.textBoxes[e.id] ?: return@forEach
+            val doc = RichDoc.decode(decodePayload<TextBoxData>(e.data)?.doc)
+            if (doc != state.toDoc()) state.replaceFromRemote(doc)
+            session.textBoxSaved[e.id] = state.version
+        }
+    }
+
+    /** Undo: the text being typed, the page's text (text pages), or the last change to its items. */
+    fun undo(page: PageEntity) {
+        val s = session(page)
+        val editor = s.activeEditor ?: s.editor.takeIf { !s.freeform }
+        if (editor != null && editor.canUndo) editor.undo() else undoItems(page.id)
+    }
+
+    fun redo(page: PageEntity) {
+        val s = session(page)
+        val editor = s.activeEditor ?: s.editor.takeIf { !s.freeform }
+        if (editor != null && editor.canRedo) editor.redo() else redoItems(page.id)
+    }
+
+    fun canUndo(s: PageSession): Boolean = (s.activeEditor ?: s.editor.takeIf { !s.freeform })?.canUndo == true || s.history.canUndo
+    fun canRedo(s: PageSession): Boolean = (s.activeEditor ?: s.editor.takeIf { !s.freeform })?.canRedo == true || s.history.canRedo
+
+    // ---- Several items at once: groups, copy and paste ----
+
+    /** The current words of any text boxes among [items] (typing may not be saved yet). */
+    private fun withCurrentText(pageId: Long, items: List<PageElementEntity>): List<PageElementEntity> {
+        val session = sessions[pageId] ?: return items
+        return items.map { e ->
+            val state = if (e.kind == ElementKind.TEXT) session.textBoxes[e.id] else null
+            if (state != null) e.copy(data = TextBoxData(state.toDoc().encode()).encodePayload()) else e
+        }
+    }
+
+    /** Moves items by (dx, dy) page widths, as one step. */
+    fun moveItems(pageId: Long, items: List<PageElementEntity>, dx: Float, dy: Float) {
+        val moved = items.filter { it.kind != ElementKind.CONNECTOR }.map { it.shiftedBy(dx, dy) }
+        if (moved.isEmpty() || (dx == 0f && dy == 0f)) return
+        record(pageId, key = if (moved.size == 1 && kotlin.math.abs(dx) < 0.05f && kotlin.math.abs(dy) < 0.05f) "nudge:${moved.first().id}" else null)
+        repo.replaceElements(withCurrentText(pageId, moved))
+    }
+
+    fun deleteItems(pageId: Long, items: List<PageElementEntity>) {
+        if (items.isEmpty()) return
+        record(pageId)
+        sessions[pageId]?.let { s -> items.forEach { e -> s.textBoxes.remove(e.id)?.let { if (s.activeEditor === it) s.activeEditor = null } } }
+        repo.deleteElements(items)
+    }
+
+    fun itemsToFront(pageId: Long, items: List<PageElementEntity>) {
+        if (items.isEmpty()) return
+        record(pageId)
+        items.sortedBy { it.z }.forEach(repo::bringToFront)
+    }
+
+    fun itemsToBack(pageId: Long, items: List<PageElementEntity>) {
+        if (items.isEmpty()) return
+        record(pageId)
+        items.sortedByDescending { it.z }.forEach(repo::sendToBack)
+    }
+
+    /** Copies items (and lines joining them) for pasting. */
+    fun copyItems(pageId: Long, all: List<PageElementEntity>, ids: Set<Long>) {
+        val items = withJoiningLines(all, ids)
+        if (items.isNotEmpty()) ItemClipboard.items = withCurrentText(pageId, items)
+    }
+
+    private var pasteCount = 0
+
+    /**
+     * Pastes the copied items onto a page and returns their new ids. With [at] (page widths) they go
+     * there; otherwise a little below and to the right of where they came from.
+     */
+    suspend fun pasteItems(pageId: Long, at: androidx.compose.ui.geometry.Offset? = null, items: List<PageElementEntity> = ItemClipboard.items): List<Long> {
+        if (items.isEmpty()) return emptyList()
+        val box = items.mapNotNull { it.unitBounds() }
+        val left = box.minOfOrNull { it.left } ?: 0f
+        val top = box.minOfOrNull { it.top } ?: 0f
+        val (dx, dy) = if (at != null) {
+            pasteCount = 0
+            at.x - left to at.y - top
+        } else {
+            pasteCount++
+            0.04f * pasteCount to 0.04f * pasteCount
+        }
+        record(pageId)
+        return repo.insertCopies(pageId, items.map { it.shiftedBy(dx, dy) })
+    }
+
+    /** Copies items straight onto the same page, a little offset. */
+    suspend fun duplicateItems(pageId: Long, all: List<PageElementEntity>, ids: Set<Long>): List<Long> {
+        val items = withCurrentText(pageId, withJoiningLines(all, ids))
+        if (items.isEmpty()) return emptyList()
+        record(pageId)
+        return repo.insertCopies(pageId, items.map { it.shiftedBy(0.04f, 0.04f) })
+    }
 
     fun updateStyle(page: PageEntity) = repo.updatePageStyle(page)
 

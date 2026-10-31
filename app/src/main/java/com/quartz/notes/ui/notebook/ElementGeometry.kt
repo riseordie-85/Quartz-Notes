@@ -26,7 +26,7 @@ import kotlin.math.min
 import kotlin.math.sin
 
 /** What a touch on the page does. */
-enum class PageTool { NONE, BRUSH, ERASER, CONNECT }
+enum class PageTool { NONE, BRUSH, ERASER, CONNECT, LASSO }
 
 /**
  * Sizes scale with the page so drawings look the same on a phone, a tablet or half of a spread.

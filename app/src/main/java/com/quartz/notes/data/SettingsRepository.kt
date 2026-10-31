@@ -46,6 +46,8 @@ data class AppSettings(
     val toolbarOnTop: Boolean = false,
     /** On wide screens (tablet, unfolded phone), quick notes open beside the list. */
     val splitView: Boolean = true,
+    /** Fingers draw with the brush (turned off automatically the first time a pen is used). */
+    val fingerDraw: Boolean = true,
     /** The space a page gets on this device's narrow (phone / cover) and wide (unfolded / tablet) screens, "WxH" in dp. */
     val screenNarrow: String? = null,
     val screenWide: String? = null,
@@ -90,6 +92,7 @@ class SettingsRepository(context: Context) {
         val lastBackupFingerprint = stringPreferencesKey("last_backup_fingerprint")
         val toolbarOnTop = booleanPreferencesKey("toolbar_on_top")
         val splitView = booleanPreferencesKey("split_view")
+        val fingerDraw = booleanPreferencesKey("finger_draw")
         val appearanceChangedAt = longPreferencesKey("appearance_changed_at")
         val screenNarrow = stringPreferencesKey("screen_narrow")
         val screenWide = stringPreferencesKey("screen_wide")
@@ -115,6 +118,7 @@ class SettingsRepository(context: Context) {
             lastBackupFingerprint = p[Keys.lastBackupFingerprint],
             toolbarOnTop = p[Keys.toolbarOnTop] ?: false,
             splitView = p[Keys.splitView] ?: true,
+            fingerDraw = p[Keys.fingerDraw] ?: true,
             screenNarrow = p[Keys.screenNarrow],
             screenWide = p[Keys.screenWide],
         )
@@ -165,6 +169,7 @@ class SettingsRepository(context: Context) {
     suspend fun setCompressImages(enabled: Boolean) = set(Keys.compress, enabled)
     suspend fun setToolbarOnTop(onTop: Boolean) = set(Keys.toolbarOnTop, onTop)
     suspend fun setSplitView(enabled: Boolean) = set(Keys.splitView, enabled)
+    suspend fun setFingerDraw(enabled: Boolean) = set(Keys.fingerDraw, enabled)
 
     /**
      * Remembers the space a page gets (in dp): a narrow portrait one (phone, cover screen) or a

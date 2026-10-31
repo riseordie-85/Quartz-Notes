@@ -31,7 +31,10 @@ import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.DeleteOutline
 import androidx.compose.material.icons.rounded.DragIndicator
 import androidx.compose.material.icons.rounded.Edit
+import androidx.compose.material.icons.rounded.ContentCopy
+import androidx.compose.material.icons.rounded.FlipToBack
 import androidx.compose.material.icons.rounded.FlipToFront
+import androidx.compose.material.icons.rounded.LibraryAdd
 import androidx.compose.material.icons.rounded.OpenInFull
 import androidx.compose.material.icons.rounded.Palette
 import androidx.compose.material.icons.rounded.ViewQuilt
@@ -64,6 +67,7 @@ import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.input.pointer.positionChange
@@ -160,12 +164,50 @@ class PageCanvasState {
     /** Where the selected item's toolbar is, so taps on it are never mistaken for taps on a line. */
     var toolbarRect: Rect? = null
 
+    /** Several items picked with the lasso (or Ctrl+A); moved, copied and removed together. */
+    var groupIds by mutableStateOf<Set<Long>>(emptySet())
+
+    /** How far the group is being dragged, in px (applied on release). */
+    var groupDrag by mutableStateOf(Offset.Zero)
+
+    /** The loop being drawn with the lasso, in px. */
+    val lasso = mutableStateListOf<Offset>()
+
+    /** Alignment guides shown while an item snaps into line: x positions and y positions, in px. */
+    var guidesX by mutableStateOf<List<Float>>(emptyList())
+    var guidesY by mutableStateOf<List<Float>>(emptyList())
+
+    /** The page's size in px (Freeform pages), for snapping to its middle. */
+    var pageSizePx: androidx.compose.ui.geometry.Size? = null
+
+    /** Items just pasted or duplicated, to select once they appear. */
+    var pendingSelect by mutableStateOf<List<Long>?>(null)
+
+    /** A group move was saved; the drag offset is dropped once the moved rows arrive. */
+    var groupSettling = false
+
+    /** What's selected: the group, or the one selected item. */
+    fun selection(): Set<Long> = groupIds.ifEmpty { setOfNotNull(selectedId) }
+
+    /** Selects [ids]: one movable item gets its own handles; anything else becomes a group. */
+    fun select(ids: Collection<Long>, elements: List<PageElementEntity>) {
+        clearSelection()
+        val single = ids.singleOrNull()?.let { id -> elements.firstOrNull { it.id == id } }
+        if (single != null && single.kind != ElementKind.STROKE && single.kind != ElementKind.CONNECTOR) {
+            selectedId = single.id
+        } else {
+            groupIds = ids.toSet()
+        }
+    }
+
     fun clearSelection() {
         toolbarRect = null
         selectedId = null
         editingShapeId = null
         editingTextId = null
         selectedInlineBlock = null
+        groupIds = emptySet()
+        groupDrag = Offset.Zero
     }
 }
 
@@ -178,6 +220,9 @@ class ElementActions(
     val onDecorate: (PageElementEntity, ImageData) -> Unit,
     val onPictureLayout: (PageElementEntity, ImageData, PictureLayout) -> Unit,
     val onFront: (PageElementEntity) -> Unit,
+    val onBack: (PageElementEntity) -> Unit,
+    val onCopy: (PageElementEntity) -> Unit,
+    val onDuplicate: (PageElementEntity) -> Unit,
     val onDelete: (PageElementEntity) -> Unit,
     val onShapeStyle: (PageElementEntity) -> Unit,
     val onLineStyle: (PageElementEntity) -> Unit,
@@ -225,16 +270,22 @@ fun BoxScope.PageElementLayer(
     // Drawings, arrows and connectors share one canvas below the other items.
     Canvas(Modifier.matchParentSize()) {
         val selected = canvas.selectedId
+        val group = canvas.groupIds
+        val groupDrag = canvas.groupDrag
         for (e in elements.sortedBy { it.z }) {
             when (e.kind) {
                 ElementKind.STROKE -> {
                     if (canvas.erased.containsKey(e.id)) continue
                     val d = decodePayload<StrokeData>(e.data) ?: continue
-                    drawInkStroke(strokePoints(d, widthPx), inkOr(d.color, ink), brushWidthPx(d.level, widthPx))
+                    val shift = if (e.id in group) groupDrag else Offset.Zero
+                    translate(shift.x, shift.y) {
+                        if (e.id in group) drawInkStroke(strokePoints(d, widthPx), accent.copy(alpha = 0.25f), brushWidthPx(d.level, widthPx) + 8.dp.toPx())
+                        drawInkStroke(strokePoints(d, widthPx), inkOr(d.color, ink), brushWidthPx(d.level, widthPx))
+                    }
                 }
                 ElementKind.ARROW -> {
                     val drag = canvas.arrowDrag?.takeIf { it.first == e }
-                    val el = drag?.second ?: e
+                    val el = (drag?.second ?: e).let { if (it.id in group && groupDrag != Offset.Zero) it.shiftedBy(groupDrag.x / widthPx, groupDrag.y / widthPx) else it }
                     val d = drag?.third ?: decodePayload<ArrowData>(e.data) ?: continue
                     val (s, t) = arrowEnds(el, d, widthPx)
                     val w = lineWidthPx(d.level, widthPx)
@@ -261,6 +312,19 @@ fun BoxScope.PageElementLayer(
         if (canvas.liveStroke.isNotEmpty()) {
             drawInkStroke(canvas.liveStroke.toList(), canvas.liveColor ?: ink, canvas.liveWidth)
         }
+        // The lasso loop being drawn.
+        if (canvas.lasso.size > 1) {
+            val loop = androidx.compose.ui.graphics.Path().apply {
+                moveTo(canvas.lasso.first().x, canvas.lasso.first().y)
+                canvas.lasso.drop(1).forEach { lineTo(it.x, it.y) }
+                close()
+            }
+            drawPath(loop, accent.copy(alpha = 0.08f))
+            drawPath(loop, accent, style = Stroke(2.dp.toPx(), pathEffect = androidx.compose.ui.graphics.PathEffect.dashPathEffect(floatArrayOf(10.dp.toPx(), 6.dp.toPx()))))
+        }
+        // Alignment guides while an item snaps into line.
+        canvas.guidesX.forEach { x -> drawLine(accent, Offset(x, 0f), Offset(x, size.height), strokeWidth = 1.dp.toPx()) }
+        canvas.guidesY.forEach { y -> drawLine(accent, Offset(0f, y), Offset(size.width, y), strokeWidth = 1.dp.toPx()) }
     }
 
     for (element in elements.sortedBy { it.z }) {
@@ -348,7 +412,10 @@ private fun ElementItem(
 
     Box(
         Modifier
-            .offset { IntOffset((live.x * widthPx).roundToInt(), (live.y * widthPx).roundToInt()) }
+            .offset {
+                val shift = if (element.id in canvas.groupIds) canvas.groupDrag else Offset.Zero
+                IntOffset((live.x * widthPx + shift.x).roundToInt(), (live.y * widthPx + shift.y).roundToInt())
+            }
             // Turned first, so touches and the reported bounds match what's on screen.
             .graphicsLayer { rotationZ = if (rotates) live.rotation else 0f }
             .onGloballyPositioned { c ->
@@ -386,10 +453,13 @@ private fun ElementItem(
             .then(
                 if (selected && !locked && tool == PageTool.NONE && canvas.editingShapeId != element.id) {
                     Modifier.pointerInput(element.id, widthPx) {
-                        // Move / pinch / twist. Saves once, when the last finger lifts.
+                        // Move / pinch / twist. Saves once, when the last finger lifts. A plain move snaps
+                        // into line with the page's middle and other items, showing guides.
                         awaitEachGesture {
                             awaitFirstDown(requireUnconsumed = true)
                             gesturing = true
+                            var free = live
+                            val reach = 6.dp.toPx()
                             try {
                                 do {
                                     val event = awaitPointerEvent()
@@ -398,12 +468,27 @@ private fun ElementItem(
                                     val rotation = event.calculateRotation()
                                     val pan = event.calculatePan()
                                     if (zoom != 1f || rotation != 0f || pan != Offset.Zero) {
-                                        live = transformed(live, kind, zoom, rotation, pan, widthPx, heightFactor)
+                                        free = transformed(free, kind, zoom, rotation, pan, widthPx, heightFactor)
+                                        val plainMove = zoom == 1f && rotation == 0f && free.rotation == 0f && event.changes.count { it.pressed } == 1
+                                        live = if (plainMove && sizePx != IntSize.Zero) {
+                                            val box = Rect(Offset(free.x * widthPx, free.y * widthPx), androidx.compose.ui.geometry.Size(sizePx.width.toFloat(), sizePx.height.toFloat()))
+                                            val others = canvas.bounds.filterKeys { it != element.id }.values
+                                            val (nudge, gx, gy) = snapBox(box, others, canvas.pageSizePx, widthPx, reach)
+                                            canvas.guidesX = gx
+                                            canvas.guidesY = gy
+                                            free.copy(x = free.x + nudge.x / widthPx, y = free.y + nudge.y / widthPx)
+                                        } else {
+                                            canvas.guidesX = emptyList()
+                                            canvas.guidesY = emptyList()
+                                            free
+                                        }
                                         event.changes.forEach { if (it.positionChanged()) it.consume() }
                                     }
                                 } while (event.changes.any { it.pressed })
                             } finally {
                                 gesturing = false
+                                canvas.guidesX = emptyList()
+                                canvas.guidesY = emptyList()
                                 commit()
                             }
                         }
@@ -444,8 +529,8 @@ private fun ElementItem(
                             commit()
                         },
                     ) { drag ->
-                        val ratio = if (live.width > 0f) live.height / live.width else 1f
-                        val w = (live.width + (drag.x + drag.y * (if (ratio > 0f) 1f / ratio else 1f)) / 2f / widthPx).coerceIn(0.08f, 1.5f)
+                        val ratio = heightFactor ?: 1f
+                        val w = (live.width + (drag.x + drag.y / ratio.coerceAtLeast(0.1f)) / 2f / widthPx).coerceIn(0.08f, 1f)
                         live = live.copy(width = w, height = w * ratio)
                     }
                 }
@@ -984,7 +1069,7 @@ private fun ElementToolbar(
         else -> canvas.bounds[element.id] ?: return
     }
     val barHeightPx = with(density) { 58.dp.toPx() }
-    val barWidthPx = with(density) { 300.dp.toPx() }
+    val barWidthPx = with(density) { 440.dp.toPx() }
     val y = when {
         // A text box's rotate handle sits above it, so its toolbar goes underneath.
         element.kind == ElementKind.TEXT -> rect.bottom + with(density) { 22.dp.toPx() }
@@ -1047,6 +1132,9 @@ private fun ElementToolbar(
             }
             if (element.kind != ElementKind.CONNECTOR) {
                 IconButton(onClick = { actions.onFront(element) }) { Icon(Icons.Rounded.FlipToFront, contentDescription = "Bring to front") }
+                IconButton(onClick = { actions.onBack(element) }) { Icon(Icons.Rounded.FlipToBack, contentDescription = "Send to back") }
+                IconButton(onClick = { actions.onCopy(element) }) { Icon(Icons.Rounded.ContentCopy, contentDescription = "Copy") }
+                IconButton(onClick = { actions.onDuplicate(element) }) { Icon(Icons.Rounded.LibraryAdd, contentDescription = "Duplicate") }
             }
             IconButton(onClick = { actions.onSelect(null) }) { Icon(Icons.Rounded.Check, contentDescription = "Done", tint = MaterialTheme.colorScheme.primary) }
             IconButton(onClick = { actions.onDelete(element) }) {

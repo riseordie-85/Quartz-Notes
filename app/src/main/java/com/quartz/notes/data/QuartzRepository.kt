@@ -540,6 +540,99 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
         }
     }
 
+    fun sendToBack(element: PageElementEntity) = enqueue {
+        elements.updateZ(element.id, elements.minZ(element.pageId) - 1)
+        pages.touch(element.pageId, now())
+    }
+
+    /** Writes several whole rows at once (a group move: drawings move their points too). */
+    fun replaceElements(changed: List<PageElementEntity>) = enqueue {
+        if (changed.isEmpty()) return@enqueue
+        db.withTransaction {
+            changed.forEach { elements.update(it) }
+            pages.touch(changed.first().pageId, now())
+        }
+    }
+
+    /** Removes several items (and lines attached to them) at once. */
+    fun deleteElements(gone: List<PageElementEntity>) = enqueue {
+        if (gone.isEmpty()) return@enqueue
+        db.withTransaction {
+            val ids = gone.map { it.id }.toSet()
+            val attached = elements.getKind(gone.first().pageId, ElementKind.CONNECTOR).filter { c ->
+                val data = decodePayload<ConnectorData>(c.data)
+                data != null && (data.from in ids || data.to in ids)
+            }
+            removeElements((ids + attached.map { it.id }).toList())
+            pages.touch(gone.first().pageId, now())
+        }
+    }
+
+    /**
+     * Adds copies of items (pasting): each gets a new id, stacked on top in the same order. Lines
+     * between copied items join the copies. Returns the new ids.
+     */
+    suspend fun insertCopies(pageId: Long, items: List<PageElementEntity>): List<Long> = inOrder {
+        db.withTransaction {
+            var z = elements.maxZ(pageId)
+            val newIds = HashMap<Long, Long>()
+            val out = ArrayList<Long>()
+            items.filter { it.kind != ElementKind.CONNECTOR }.forEach { e ->
+                val id = elements.insert(e.copy(id = 0, pageId = pageId, uid = newUid(), z = ++z, createdAt = System.currentTimeMillis(), deleted = false))
+                newIds[e.id] = id
+                out += id
+            }
+            items.filter { it.kind == ElementKind.CONNECTOR }.forEach { c ->
+                val d = decodePayload<ConnectorData>(c.data) ?: return@forEach
+                val from = newIds[d.from] ?: return@forEach
+                val to = newIds[d.to] ?: return@forEach
+                out += elements.insert(
+                    c.copy(id = 0, pageId = pageId, uid = newUid(), z = ++z, createdAt = System.currentTimeMillis(), deleted = false, data = d.copy(from = from, to = to).encodePayload()),
+                )
+            }
+            pages.touch(pageId, now())
+            out
+        }
+    }
+
+    /** Hands [onSnapshot] the page's items as they'll be once every change queued so far is saved (for undo). */
+    fun snapshotElements(pageId: Long, onSnapshot: (List<PageElementEntity>) -> Unit) = enqueue {
+        onSnapshot(elements.getForPage(pageId))
+    }
+
+    /**
+     * Puts a page's items back the way [snapshot] had them (undo / redo). [onBefore] gets how they
+     * were, for the opposite step; [onDone] runs once it's saved.
+     */
+    fun restoreElements(
+        pageId: Long,
+        snapshot: List<PageElementEntity>,
+        onBefore: (List<PageElementEntity>) -> Unit,
+        onDone: (List<PageElementEntity>) -> Unit,
+    ) = enqueue {
+        db.withTransaction {
+            val current = elements.getForPage(pageId)
+            onBefore(current)
+            val keep = snapshot.map { it.id }.toSet()
+            removeElements(current.filter { it.id !in keep }.map { it.id })
+            val currentById = current.associateBy { it.id }
+            snapshot.forEach { e ->
+                val now = currentById[e.id]
+                when {
+                    now == e -> Unit
+                    now != null -> elements.update(e.copy(uid = now.uid, deleted = false))
+                    else -> {
+                        // Brought back: the deleted row if it's still kept, otherwise a fresh copy with the same id.
+                        val row = elements.getAny(e.id)
+                        if (row != null) elements.update(e.copy(uid = row.uid, deleted = false)) else elements.insert(e.copy(uid = newUid(), deleted = false))
+                    }
+                }
+            }
+            pages.touch(pageId, now())
+        }
+        onDone(snapshot)
+    }
+
     /** Adds an element on top and returns its id (used when the new item must get focus). */
     suspend fun insertElement(element: PageElementEntity): Long = inOrder {
         val id = elements.insert(element.copy(z = elements.maxZ(element.pageId) + 1))

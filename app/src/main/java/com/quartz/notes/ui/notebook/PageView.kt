@@ -127,6 +127,10 @@ import com.quartz.notes.ui.media.ImageViewer
 import com.quartz.notes.ui.theme.LocalQuartzColors
 import com.quartz.notes.ui.theme.contentColorFor
 import kotlinx.coroutines.FlowPreview
+import androidx.compose.ui.input.pointer.PointerType
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import androidx.compose.runtime.rememberCoroutineScope
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.drop
 
@@ -143,6 +147,10 @@ internal fun PageView(
     tool: PageTool,
     brushLevel: Int,
     inkArgb: Int,
+    /** Fingers draw with the brush (off: only a pen draws, fingers move the page). */
+    fingerDraw: Boolean,
+    /** A pen touched the page for the first time while fingers could draw. */
+    onPenFound: () -> Unit,
     onToolDone: () -> Unit,
     focusTextBox: Long?,
     onFocusTextBoxHandled: () -> Unit,
@@ -159,13 +167,15 @@ internal fun PageView(
     var backgroundAspect by remember(page.backgroundImage) { mutableStateOf(0f) }
     val focusManager = LocalFocusManager.current
     val keyboard = LocalSoftwareKeyboardController.current
+    val scope = rememberCoroutineScope()
 
     val elementsFlow = remember(page.id) { vm.elements(page.id) }
     val allElements by elementsFlow.collectAsStateWithLifecycle(initialValue = emptyList())
     // Pictures and recordings in the bottom strip aren't placed on the page itself.
     val elements = remember(allElements) { allElements.filterNot { isAttachedElement(it.kind, it.data) } }
     val attachedItems = remember(allElements) { allElements.filter { isAttachedElement(it.kind, it.data) } }
-    val canvas = remember(page.id) { PageCanvasState() }
+    val canvas = session.canvas
+    SideEffect { session.elements = elements }
     val scrapbook = page.layoutMode == LayoutMode.SCRAPBOOK.name
     // Freeform pages have a fixed size: laid out at it, then scaled to fit the screen (and zoomed).
     val freeform = scrapbook
@@ -190,7 +200,7 @@ internal fun PageView(
                 canvas.editingTextId != e.id
             ) {
                 session.textBoxes.remove(e.id)
-                vm.deleteElement(e)
+                vm.deleteElement(e, undoable = false)
             }
         }
     }
@@ -226,14 +236,27 @@ internal fun PageView(
         elements.forEach { e ->
             if (e.kind == ElementKind.IMAGE) {
                 val d = decodeImageData(e.data)
-                if (d != null && d.wraps) vm.updateElementData(e, d.copy(placement = ImagePlacement.FLOAT).encode())
+                if (d != null && d.wraps) vm.updateElementData(e, d.copy(placement = ImagePlacement.FLOAT).encode(), undoable = false)
             }
+        }
+        // Pasted or duplicated items are selected once they're on the page.
+        canvas.pendingSelect?.let { ids ->
+            if (ids.all { id -> elements.any { it.id == id } }) {
+                canvas.pendingSelect = null
+                canvas.select(ids, elements)
+            }
+        }
+        // A group move is saved: the items are where they were dragged to.
+        if (canvas.groupSettling) {
+            canvas.groupSettling = false
+            canvas.groupDrag = Offset.Zero
         }
         // A dragged arrow's live copy is dropped once its saved row has changed.
         canvas.arrowDrag?.let { drag -> if (elements.none { it == drag.first }) canvas.arrowDrag = null }
         val ids = elements.map { it.id }.toSet()
         canvas.erased.keys.retainAll(ids)
         canvas.bounds.keys.retainAll(ids)
+        if (canvas.groupIds.any { it !in ids }) canvas.groupIds = canvas.groupIds.intersect(ids)
     }
     // A text box (or shape) added from the toolbar gets the cursor.
     LaunchedEffect(focusTextBox) {
@@ -367,6 +390,7 @@ internal fun PageView(
         val actions = remember(page.id, widthPx, textWidthPx) {
             ElementActions(
                 onSelect = { id ->
+                    canvas.groupIds = emptySet()
                     canvas.selectedId = id
                     canvas.editingShapeId = null
                     canvas.selectedInlineBlock = null
@@ -382,6 +406,11 @@ internal fun PageView(
                     }
                 },
                 onFront = vm::bringToFront,
+                onBack = vm::sendToBack,
+                onCopy = { e -> vm.copyItems(page.id, session.elements, setOf(e.id)) },
+                onDuplicate = { e ->
+                    scope.launch { canvas.pendingSelect = vm.duplicateItems(page.id, session.elements, setOf(e.id)) }
+                },
                 onDelete = { e ->
                     canvas.clearSelection()
                     elementMediaPath(e.kind, e.data)?.let(audio::stop)
@@ -412,7 +441,11 @@ internal fun PageView(
             )
         }
 
+        // Where "Paste" is offered after holding on empty paper.
+        var pasteAt by remember { mutableStateOf<Offset?>(null) }
+
         fun backgroundTap(p: Offset) {
+            pasteAt = null
             // Tapping empty space finishes typing in a text box.
             val typingInBox = canvas.editingTextId != null || session.activeEditor != null
             if (canvas.selectedId != null || canvas.editingShapeId != null || canvas.selectedInlineBlock != null || typingInBox) {
@@ -520,12 +553,42 @@ internal fun PageView(
         val inkColor by rememberUpdatedState(ink)
         val tapHandler by rememberUpdatedState(::backgroundTap)
         val latestToolDone by rememberUpdatedState(onToolDone)
+        val latestFingerDraw by rememberUpdatedState(fingerDraw)
+        val latestPenFound by rememberUpdatedState(onPenFound)
+        val latestFreeform by rememberUpdatedState(freeform)
         val accentActions by rememberUpdatedState(actions)
         val latestLocked by rememberUpdatedState(locked)
 
         val canvasPx = canvasSize?.let { with(density) { Size(it.width.toPx(), it.height.toPx()) } }
         val fit = canvasPx?.let { minOf(viewportPx.width / it.width, viewportPx.height / it.height) } ?: 1f
+        canvas.pageSizePx = canvasPx
         if (freeform && canvasPx != null) {
+            // Typing in a text box or shape on a page shown small: zoom in so the words are readable,
+            // with the box near the top (clear of the keyboard).
+            val latestFit by rememberUpdatedState(fit)
+            val latestViewport by rememberUpdatedState(viewportPx)
+            LaunchedEffect(canvas.editingTextId, canvas.editingShapeId) {
+                val id = canvas.editingTextId ?: canvas.editingShapeId ?: return@LaunchedEffect
+                delay(350) // the keyboard comes up and the page re-fits
+                val r = canvas.bounds[id] ?: return@LaunchedEffect
+                val f = latestFit
+                val vp = latestViewport
+                if (f * session.zoom >= 0.9f) return@LaunchedEffect
+                val target = minOf(1f, vp.width * 0.92f / r.width.coerceAtLeast(1f)).coerceAtLeast(f * session.zoom)
+                val zoom = (target / f).coerceIn(1f, 8f)
+                val sNew = f * zoom
+                val pan = Offset(
+                    -(r.center.x - canvasPx.width / 2) * sNew,
+                    vp.height * 0.15f - vp.height / 2 - (r.top - canvasPx.height / 2) * sNew,
+                )
+                val goal = clampPan(pan, sNew, canvasPx, vp)
+                val fromZoom = session.zoom
+                val fromPan = session.pan
+                androidx.compose.animation.core.animate(0f, 1f, animationSpec = androidx.compose.animation.core.tween(280)) { t, _ ->
+                    session.zoom = fromZoom + (zoom - fromZoom) * t
+                    session.pan = fromPan + (goal - fromPan) * t
+                }
+            }
             // Where new items land: the middle of what's in view.
             val s = fit * session.zoom
             session.scrollUnits = ((canvasPx.height / 2 - session.pan.y / s - viewportPx.height / (2 * s)) / widthPx).coerceAtLeast(0f)
@@ -650,16 +713,31 @@ internal fun PageView(
                                 }
                             } else {
                                 // Not ours: let the items and text have it, then see if anyone used the tap.
+                                // Holding still on empty paper (Freeform pages) offers Paste.
+                                pasteAt = null
                                 var upAt: Offset? = null
-                                while (true) {
-                                    val event = awaitPointerEvent(PointerEventPass.Final)
-                                    val c = event.changes.firstOrNull { it.id == down.id } ?: break
-                                    if (c.isConsumed) break
-                                    if (!c.pressed) {
-                                        upAt = c.position
-                                        break
+                                val ended = withTimeoutOrNull(viewConfiguration.longPressTimeoutMillis) {
+                                    while (true) {
+                                        val event = awaitPointerEvent(PointerEventPass.Final)
+                                        val c = event.changes.firstOrNull { it.id == down.id } ?: break
+                                        if (c.isConsumed) break
+                                        if (!c.pressed) {
+                                            upAt = c.position
+                                            break
+                                        }
+                                        if ((c.position - p).getDistance() > slop) break
                                     }
-                                    if ((c.position - p).getDistance() > slop) break
+                                    true
+                                }
+                                if (ended == null && latestFreeform && !onItem && !pageLocked && ItemClipboard.items.isNotEmpty()) {
+                                    pasteAt = p
+                                    // The finger lifting is part of the hold, not a tap.
+                                    while (true) {
+                                        val event = awaitPointerEvent(PointerEventPass.Final)
+                                        val c = event.changes.firstOrNull { it.id == down.id } ?: break
+                                        c.consume()
+                                        if (!c.pressed) break
+                                    }
                                 }
                                 upAt?.let { tapHandler(it) }
                             }
@@ -809,6 +887,42 @@ internal fun PageView(
                     textEditor = vm::textEditor,
                     actions = actions,
                 )
+                // Several items picked with the lasso: a box to drag them by, and their toolbar.
+                if (canvas.groupIds.isNotEmpty() && tool == PageTool.NONE) {
+                    val group = canvas.groupIds
+                    val groupItems = elements.filter { it.id in group }
+                    val drag = canvas.groupDrag
+                    val restBounds = canvas.bounds.mapValues { (id, r) -> if (id in group) r.translate(-drag) else r }
+                    val box = groupBoundsPx(groupItems, restBounds, widthPx) { brushWidthPx(it, widthPx) }
+                    if (box != null) {
+                        GroupBox(
+                            box = box.inflate(with(density) { 8.dp.toPx() }).translate(drag),
+                            pageWidthPx = widthPx,
+                            canvas = canvas,
+                            locked = locked,
+                            onMoved = { moved ->
+                                canvas.groupSettling = true
+                                vm.moveItems(page.id, groupItems, moved.x / widthPx, moved.y / widthPx)
+                            },
+                            onCopy = { vm.copyItems(page.id, elements, group) },
+                            onDuplicate = { scope.launch { canvas.pendingSelect = vm.duplicateItems(page.id, elements, group) } },
+                            onFront = { vm.itemsToFront(page.id, groupItems) },
+                            onBack = { vm.itemsToBack(page.id, groupItems) },
+                            onDelete = {
+                                canvas.clearSelection()
+                                vm.deleteItems(page.id, groupItems)
+                            },
+                            onDone = { canvas.clearSelection() },
+                        )
+                    }
+                }
+                // Hold on empty paper (Freeform pages): paste what was copied, right there.
+                pasteAt?.let { at ->
+                    PastePill(at) {
+                        pasteAt = null
+                        scope.launch { canvas.pendingSelect = vm.pasteItems(page.id, Offset(at.x / widthPx, at.y / widthPx)) }
+                    }
+                }
                 if (tool != PageTool.NONE) {
                     // While a tool is on, this layer takes every touch so text and items underneath stay put.
                     Box(
@@ -817,8 +931,40 @@ internal fun PageView(
                             .pointerInput(widthPx, tool) {
                                 awaitEachGesture {
                                     val down = awaitFirstDown(requireUnconsumed = false)
-                                    when (latestTool) {
-                                PageTool.BRUSH -> {
+                                    val pen = down.type == PointerType.Stylus || down.type == PointerType.Eraser
+                                    // The first time a pen touches the page, fingers stop drawing (palm rejection);
+                                    // the brush bar's finger switch turns finger drawing back on.
+                                    if (pen && !vm.penSeen) {
+                                        vm.penSeen = true
+                                        if (latestFingerDraw) latestPenFound()
+                                    }
+                                    val penOnly = !latestFingerDraw
+                                    val drawingTool = latestTool == PageTool.BRUSH || latestTool == PageTool.ERASER
+                                    if (drawingTool && !pen && penOnly) return@awaitEachGesture
+                                    val erasing = latestTool == PageTool.ERASER || (latestTool == PageTool.BRUSH && down.type == PointerType.Eraser)
+                                    when {
+                                erasing -> {
+                                    down.consume()
+                                    val radius = brushWidthPx(5, widthPx) / 2 + 10.dp.toPx()
+                                    fun eraseAt(p: Offset) {
+                                        latestElements.filter { it.kind == ElementKind.STROKE && !canvas.erased.containsKey(it.id) }.forEach { e ->
+                                            val d = decodePayload<StrokeData>(e.data) ?: return@forEach
+                                            if (distanceToPolyline(p, strokePoints(d, widthPx)) <= radius + brushWidthPx(d.level, widthPx) / 2) {
+                                                canvas.erased[e.id] = true
+                                                vm.deleteElement(e, key = "erase")
+                                            }
+                                        }
+                                    }
+                                    eraseAt(down.position)
+                                    do {
+                                        val event = awaitPointerEvent()
+                                        event.changes.forEach { c ->
+                                            if (c.pressed && (c.id == down.id || !pen)) eraseAt(c.position)
+                                            c.consume()
+                                        }
+                                    } while (event.changes.any { it.id == down.id && it.pressed })
+                                }
+                                latestTool == PageTool.BRUSH -> {
                                     down.consume()
                                     canvas.drawing = true
                                     canvas.liveColor = inkOr(latestInk, inkColor)
@@ -829,16 +975,17 @@ internal fun PageView(
                                     do {
                                         val event = awaitPointerEvent()
                                         val pressed = event.changes.count { it.pressed }
-                                        if (pressed > 1) {
-                                            // Two fingers scroll the page instead of drawing.
+                                        if (!pen && pressed > 1) {
+                                            // Two fingers scroll or zoom the page instead of drawing.
                                             twoFinger = true
                                             canvas.liveStroke.clear()
-                                            scroll.dispatchRawDelta(-event.calculatePan().y)
+                                            if (!freeform) scroll.dispatchRawDelta(-event.calculatePan().y)
                                         } else if (!twoFinger) {
+                                            // A pen draws on, whatever a resting palm does.
                                             event.changes.firstOrNull { it.id == down.id && it.pressed }?.let { canvas.liveStroke.add(it.position) }
                                         }
                                         event.changes.forEach { it.consume() }
-                                    } while (event.changes.any { it.pressed })
+                                    } while (event.changes.any { it.id == down.id && it.pressed })
                                     canvas.drawing = false
                                     if (!twoFinger && canvas.liveStroke.isNotEmpty()) {
                                         val pts = canvas.liveStroke.flatMap { listOf(it.x / widthPx, it.y / widthPx) }
@@ -847,28 +994,28 @@ internal fun PageView(
                                         canvas.liveStroke.clear()
                                     }
                                 }
-                                PageTool.ERASER -> {
+                                latestTool == PageTool.LASSO -> {
+                                    // Draw a loop around items to pick them all.
                                     down.consume()
-                                    val radius = brushWidthPx(5, widthPx) / 2 + 10.dp.toPx()
-                                    fun eraseAt(p: Offset) {
-                                        latestElements.filter { it.kind == ElementKind.STROKE && !canvas.erased.containsKey(it.id) }.forEach { e ->
-                                            val d = decodePayload<StrokeData>(e.data) ?: return@forEach
-                                            if (distanceToPolyline(p, strokePoints(d, widthPx)) <= radius + brushWidthPx(d.level, widthPx) / 2) {
-                                                canvas.erased[e.id] = true
-                                                vm.deleteElement(e)
-                                            }
-                                        }
-                                    }
-                                    eraseAt(down.position)
+                                    canvas.lasso.clear()
+                                    canvas.lasso.add(down.position)
                                     do {
                                         val event = awaitPointerEvent()
-                                        event.changes.forEach { c ->
-                                            if (c.pressed) eraseAt(c.position)
-                                            c.consume()
+                                        if (event.changes.count { it.pressed } > 1) {
+                                            canvas.lasso.clear()
+                                            return@awaitEachGesture
                                         }
+                                        event.changes.firstOrNull { it.id == down.id && it.pressed }?.let { canvas.lasso.add(it.position) }
+                                        event.changes.forEach { it.consume() }
                                     } while (event.changes.any { it.pressed })
+                                    val picked = itemsInLoop(canvas.lasso.toList(), latestElements, canvas.bounds, widthPx)
+                                    canvas.lasso.clear()
+                                    if (picked.isNotEmpty()) {
+                                        latestToolDone()
+                                        canvas.select(picked, latestElements)
+                                    }
                                 }
-                                PageTool.CONNECT -> {
+                                latestTool == PageTool.CONNECT -> {
                                     down.consume()
                                     val up = waitForUpOrCancellation()
                                     up?.consume()
@@ -887,7 +1034,7 @@ internal fun PageView(
                                         latestToolDone()
                                     }
                                 }
-                                        PageTool.NONE -> Unit
+                                        else -> Unit
                                     }
                                 }
                             },

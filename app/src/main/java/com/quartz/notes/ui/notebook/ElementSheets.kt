@@ -31,6 +31,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.material.icons.rounded.AutoFixNormal
+import androidx.compose.material.icons.rounded.TouchApp
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -266,6 +267,9 @@ fun BrushBar(
     onEraser: () -> Unit,
     onDone: () -> Unit,
     modifier: Modifier = Modifier,
+    /** Fingers draw (off: only a pen draws; fingers move the page). */
+    fingerDraw: Boolean = true,
+    onFingerDraw: ((Boolean) -> Unit)? = null,
 ) {
     val accent = MaterialTheme.colorScheme.primary
     androidx.compose.material3.Surface(
@@ -302,9 +306,25 @@ fun BrushBar(
                     contentDescription = "Eraser",
                 )
             }
+            if (onFingerDraw != null) {
+                Box(
+                    Modifier
+                        .size(42.dp)
+                        .clip(CircleShape)
+                        .background(if (fingerDraw) accent.copy(alpha = 0.16f) else Color.Transparent)
+                        .clickable(onClickLabel = if (fingerDraw) "Draw with a pen only" else "Draw with fingers too") { onFingerDraw(!fingerDraw) },
+                    contentAlignment = Alignment.Center,
+                ) {
+                    androidx.compose.material3.Icon(
+                        androidx.compose.material.icons.Icons.Rounded.TouchApp,
+                        contentDescription = if (fingerDraw) "Fingers draw" else "Pen only",
+                        tint = if (fingerDraw) accent else LocalQuartzColors.current.textSecondary,
+                    )
+                }
+            }
             androidx.compose.material3.TextButton(onClick = onDone) { Text("Done") }
             Text(
-                "Two fingers to scroll",
+                if (fingerDraw) "Two fingers to move" else "Pen draws · fingers move",
                 fontSize = 12.sp,
                 color = LocalQuartzColors.current.textSecondary,
                 modifier = Modifier.padding(end = 6.dp),
