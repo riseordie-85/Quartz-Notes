@@ -129,6 +129,10 @@ class TemplatesUiTest {
         settle()
         rule.onNodeWithText("Save as template").assertExists()
         screen("t4_save_as_template")
+        // Close the dialog and its keyboard so the next test starts on a clear screen.
+        rule.onNodeWithText("Cancel").performClick()
+        instrumentation.uiAutomation.performGlobalAction(android.accessibilityservice.AccessibilityService.GLOBAL_ACTION_BACK)
+        settle()
     }
 
     @Test
