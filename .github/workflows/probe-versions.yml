@@ -8,19 +8,17 @@ jobs:
     steps:
       - name: List library versions
         run: |
-          g() { curl -s "https://dl.google.com/dl/android/maven2/$1/maven-metadata.xml" | grep -o '<version>[^<]*</version>' | sed 's/<[^>]*>//g' | grep -v -i 'alpha\|beta\|rc\|dev' | tail -${2:-6} | tr '\n' ' '; }
-          c() { curl -s "https://repo1.maven.org/maven2/$1/maven-metadata.xml" | grep -o '<version>[^<]*</version>' | sed 's/<[^>]*>//g' | grep -v -i 'alpha\|beta\|rc\|dev\|M[0-9]' | tail -${2:-6} | tr '\n' ' '; }
-          echo "::warning title=bom::$(g androidx/compose/compose-bom 8)"
-          echo "::warning title=foundation::$(g androidx/compose/foundation/foundation 8)"
-          echo "::warning title=agp::$(g com/android/tools/build/gradle 8)"
-          echo "::warning title=kotlin::$(c org/jetbrains/kotlin/kotlin-gradle-plugin 8)"
-          echo "::warning title=ksp::$(c com/google/devtools/ksp/com.google.devtools.ksp.gradle.plugin 8)"
-          echo "::warning title=room::$(g androidx/room/room-runtime 6)"
-          echo "::warning title=activity::$(g androidx/activity/activity-compose 4)"
-          echo "::warning title=lifecycle::$(g androidx/lifecycle/lifecycle-runtime-compose 4)"
-          echo "::warning title=navigation::$(g androidx/navigation/navigation-compose 4)"
-          echo "::warning title=core::$(g androidx/core/core-ktx 4)"
-          echo "::warning title=serialization::$(c org/jetbrains/kotlinx/kotlinx-serialization-json 4)"
-          echo "::warning title=gradle::$(curl -s https://services.gradle.org/versions/current | grep -o '"version" *: *"[^"]*"')"
-          curl -s "https://dl.google.com/dl/android/maven2/androidx/compose/foundation/foundation/1.12.1/foundation-1.12.1.pom" | grep -A2 -i "kotlin-stdlib" | head -6 | tr '\n' ' ' | sed 's/^/::warning title=foundation-stdlib::/'; echo
-          curl -s "https://dl.google.com/dl/android/maven2/androidx/compose/foundation/foundation/1.12.1/foundation-1.12.1.module" | grep -o '"minCompileSdk": *"[0-9]*"\|"aarMetadata[^}]*' | head -3 | tr '\n' ' ' | sed 's/^/::warning title=minsdk::/'; echo
+          G=https://dl.google.com/dl/android/maven2
+          for b in 2025.12.00 2025.12.01 2026.01.00 2026.01.01 2026.02.00 2026.02.01 2026.03.00 2026.03.01; do
+            f=$(curl -s "$G/androidx/compose/compose-bom/$b/compose-bom-$b.pom" | grep -A1 "<artifactId>foundation</artifactId>" | grep -o '<version>[^<]*' | sed 's/<version>//' | head -1)
+            [ -n "$f" ] && echo "::warning title=bom $b::foundation $f"
+          done
+          for v in 1.10.0 1.10.6; do
+            m=$(curl -s "$G/androidx/compose/foundation/foundation-android/$v/foundation-android-$v.module")
+            echo "::warning title=foundation $v::stdlib $(echo "$m" | grep -A3 '"module": "kotlin-stdlib"' | grep -o '"requires": "[^"]*"' | head -1) minCompileSdk $(echo "$m" | grep -o '"minCompileSdk": *"[0-9]*"' | head -1) agp $(echo "$m" | grep -o '"minAndroidGradlePluginVersion": *"[^"]*"' | head -1)"
+          done
+          c() { curl -s "https://repo1.maven.org/maven2/$1/maven-metadata.xml" | grep -o '<version>[^<]*</version>' | sed 's/<[^>]*>//g' | grep -v -i 'alpha\|beta\|rc\|dev\|M[0-9]'; }
+          echo "::warning title=kotlin 2.1/2.2::$(c org/jetbrains/kotlin/kotlin-gradle-plugin | grep '^2\.[12]\.' | tr '\n' ' ')"
+          echo "::warning title=ksp 2.1/2.2::$(c com/google/devtools/ksp/com.google.devtools.ksp.gradle.plugin | grep '^2\.[12]\.' | tail -12 | tr '\n' ' ')"
+          echo "::warning title=agp 8::$(curl -s "$G/com/android/tools/build/gradle/maven-metadata.xml" | grep -o '<version>8\.[0-9.]*</version>' | sed 's/<[^>]*>//g' | tail -10 | tr '\n' ' ')"
+          echo "::warning title=ui-test::$(curl -s "$G/androidx/compose/ui/ui-test-junit4-android/1.10.6/ui-test-junit4-android-1.10.6.module" | grep -o '"minCompileSdk": *"[0-9]*"' | head -1)"
