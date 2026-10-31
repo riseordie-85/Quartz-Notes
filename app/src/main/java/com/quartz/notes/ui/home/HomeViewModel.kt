@@ -95,10 +95,12 @@ class HomeViewModel(
         texture: String,
         icon: String,
         twoPage: Boolean = true,
+        pageLayout: String = "INLINE",
+        pageSize: com.quartz.notes.data.model.PageSize? = null,
         onCreated: (Long) -> Unit = {},
     ) =
         viewModelScope.launch {
-            onCreated(repo.createNotebook(shelfId, title, color, texture, icon, twoPage))
+            onCreated(repo.createNotebook(shelfId, title, color, texture, icon, twoPage, pageLayout, pageSize))
         }
 
     fun updateNotebook(notebook: NotebookEntity) = viewModelScope.launch { repo.updateNotebook(notebook) }

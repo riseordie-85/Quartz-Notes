@@ -258,15 +258,20 @@ fun HomeRoute(
 
     notebookSheet?.let { sheet ->
         val defaultShelf = state.selectedShelf?.id ?: state.shelves.firstOrNull()?.id ?: return@let
+        val appSettings by com.quartz.notes.LocalAppContainer.current.settings.settings.collectAsStateWithLifecycle(initialValue = null)
         NotebookEditorSheet(
             existing = sheet.notebook,
             shelves = state.shelves,
             defaultShelfId = defaultShelf,
+            sizes = appSettings?.pageSizes ?: com.quartz.notes.data.model.PageSize.PAPER,
             onDismiss = { notebookSheet = null },
             onSave = { draft ->
                 val existing = sheet.notebook
                 if (existing == null) {
-                    vm.createNotebook(draft.shelfId, draft.title, draft.colorArgb, draft.texture.name, draft.icon, draft.twoPage)
+                    vm.createNotebook(
+                        draft.shelfId, draft.title, draft.colorArgb, draft.texture.name, draft.icon, draft.twoPage,
+                        pageLayout = draft.pageLayout, pageSize = draft.pageSize,
+                    )
                 } else {
                     vm.updateNotebook(existing.applyDraft(draft))
                 }

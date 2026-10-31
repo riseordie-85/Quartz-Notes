@@ -698,7 +698,13 @@ fun NotebookScreen(
             com.quartz.notes.ui.templates.AddPageSheet(
                 onBlank = {
                     addSheetAfter = null
-                    vm.addPage(after) { newId -> scrollTarget = newId }
+                    vm.addPageOfType(after, freeform = false, size = null) { newId -> scrollTarget = newId }
+                },
+                sizes = settings?.pageSizes ?: com.quartz.notes.data.model.PageSize.PAPER,
+                defaultSize = vm.defaultPageSize,
+                onFreeform = { size ->
+                    addSheetAfter = null
+                    vm.addPageOfType(after, freeform = true, size = size) { newId -> scrollTarget = newId }
                 },
                 onSection = {
                     addSheetAfter = null
@@ -904,7 +910,16 @@ fun NotebookScreen(
     if (showStyle) {
         PageStyleSheet(
             page = activePage,
+            sizes = settings?.pageSizes ?: com.quartz.notes.data.model.PageSize.PAPER,
             onLayoutMode = { scrapbook -> vm.setLayoutMode(activePage, scrapbook) },
+            onSize = { size -> vm.setLayoutMode(activePage, scrapbook = true, size = size) },
+            onAdjustPicture = {
+                showStyle = false
+                val session = vm.session(activePage)
+                session.zoom = 1f
+                session.pan = androidx.compose.ui.geometry.Offset.Zero
+                session.adjustingBackground = true
+            },
             onChange = vm::updateStyle,
             onApplyToAll = {
                 vm.applyStyleToAll(it)
@@ -949,6 +964,7 @@ fun NotebookScreen(
             existing = nb,
             shelves = shelves,
             defaultShelfId = nb.shelfId,
+            sizes = settings?.pageSizes ?: com.quartz.notes.data.model.PageSize.PAPER,
             onDismiss = { showEdit = false },
             onSave = { draft ->
                 vm.updateNotebook(nb.applyDraft(draft))

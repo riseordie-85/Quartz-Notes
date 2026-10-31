@@ -79,15 +79,23 @@ data class NotebookDraft(
     val showIndex: Boolean = false,
     val sectionTabs: Boolean = true,
     val attachAtBottom: Boolean = false,
+    /** New pages: "INLINE" (text) or "SCRAPBOOK" (Freeform), and the Freeform size. */
+    val pageLayout: String = "INLINE",
+    val pageSize: com.quartz.notes.data.model.PageSize? = null,
 )
 
-/** Create or edit a notebook's title, color, cover texture, icon and shelf. */
+/**
+ * Create or edit a notebook's title, color, cover, icon, shelf and what kind of pages it starts
+ * with. A new notebook is set up one question at a time; editing shows everything at once.
+ */
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 fun NotebookEditorSheet(
     existing: NotebookEntity?,
     shelves: List<ShelfEntity>,
     defaultShelfId: Long,
+    /** Freeform page sizes this device offers. */
+    sizes: List<com.quartz.notes.data.model.PageSize>,
     onDismiss: () -> Unit,
     onSave: (NotebookDraft) -> Unit,
     onDelete: (() -> Unit)? = null,
@@ -104,6 +112,18 @@ fun NotebookEditorSheet(
     var showIndex by remember { mutableStateOf(existing?.showIndex ?: false) }
     var sectionTabs by remember { mutableStateOf(existing?.sectionTabs ?: true) }
     var attachAtBottom by remember { mutableStateOf(existing?.attachAtBottom ?: false) }
+    var pageLayout by remember { mutableStateOf(existing?.pageLayout ?: "INLINE") }
+    var pageSize by remember {
+        mutableStateOf(com.quartz.notes.data.model.PageSize.decode(existing?.pageSize) ?: sizes.firstOrNull() ?: com.quartz.notes.data.model.PageSize.DEFAULT)
+    }
+    // A new notebook is set up step by step: name, color, cover, icon, pages.
+    val guided = existing == null
+    var step by remember { mutableIntStateOf(0) }
+    val steps = 5
+    fun draft() = NotebookDraft(
+        title.trim(), color, texture, icon, shelfId, twoPage, showIndex, sectionTabs, attachAtBottom, pageLayout,
+        if (pageLayout == "SCRAPBOOK") pageSize else null,
+    )
 
     QuartzSheet(
         onDismissRequest = onDismiss,
@@ -118,10 +138,30 @@ fun NotebookEditorSheet(
                 .navigationBarsPadding(),
         ) {
             Text(
-                if (existing == null) "New notebook" else "Notebook settings",
+                when {
+                    !guided -> "Notebook settings"
+                    step == 0 -> "What should your notebook be called?"
+                    step == 1 -> "Pick a color"
+                    step == 2 -> "Choose a cover"
+                    step == 3 -> "Add an icon"
+                    else -> "What kind of pages?"
+                },
                 fontSize = 22.sp,
                 fontWeight = FontWeight.Medium,
             )
+            if (guided) {
+                // Where you are in the setup.
+                Row(Modifier.padding(top = 10.dp), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                    repeat(steps) { i ->
+                        Box(
+                            Modifier
+                                .size(width = if (i == step) 22.dp else 8.dp, height = 8.dp)
+                                .clip(CircleShape)
+                                .background(if (i <= step) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceContainerHigh),
+                        )
+                    }
+                }
+            }
             Spacer(Modifier.height(16.dp))
             Row(verticalAlignment = Alignment.CenterVertically) {
                 NotebookCover(
@@ -132,70 +172,80 @@ fun NotebookEditorSheet(
                     modifier = Modifier.width(112.dp),
                 )
                 Spacer(Modifier.width(18.dp))
-                OutlinedTextField(
-                    value = title,
-                    onValueChange = { title = it.take(40) },
-                    label = { Text("Title") },
-                    singleLine = true,
-                    modifier = Modifier.weight(1f),
-                )
+                if (!guided || step == 0) {
+                    OutlinedTextField(
+                        value = title,
+                        onValueChange = { title = it.take(40) },
+                        label = { Text("Title") },
+                        singleLine = true,
+                        modifier = Modifier.weight(1f),
+                    )
+                } else {
+                    Text(title, fontSize = 20.sp, fontWeight = FontWeight.Medium, modifier = Modifier.weight(1f))
+                }
             }
 
-            SheetLabel("Color")
-            LazyRow(horizontalArrangement = Arrangement.spacedBy(10.dp), contentPadding = PaddingValues(vertical = 2.dp)) {
-                items(NotebookColorPresets) { c ->
-                    Swatch(c, selected = c.toArgb() == color, onClick = { color = c.toArgb() }, size = 40.dp)
-                }
-                item {
-                    Box(
-                        Modifier
-                            .size(40.dp)
-                            .clip(CircleShape)
-                            .background(Brush.sweepGradient(listOf(Color.Red, Color.Yellow, Color.Green, Color.Cyan, Color.Blue, Color.Magenta, Color.Red)))
-                            .clickable { customColor = true },
-                        contentAlignment = Alignment.Center,
-                    ) {
-                        Icon(Icons.Rounded.Colorize, contentDescription = "Custom color", tint = Color.White, modifier = Modifier.size(20.dp))
+            if (!guided || step == 1) {
+                if (!guided) SheetLabel("Color") else Spacer(Modifier.height(18.dp))
+                LazyRow(horizontalArrangement = Arrangement.spacedBy(10.dp), contentPadding = PaddingValues(vertical = 2.dp)) {
+                    items(NotebookColorPresets) { c ->
+                        Swatch(c, selected = c.toArgb() == color, onClick = { color = c.toArgb() }, size = 40.dp)
                     }
-                }
-            }
-
-            SheetLabel("Cover")
-            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                Texture.coverOptions.forEach { t ->
-                    FilterChip(
-                        selected = texture == t,
-                        onClick = { texture = t },
-                        label = { Text(if (t == Texture.NONE) "Matte" else t.label) },
-                    )
-                }
-            }
-
-            SheetLabel("Icon")
-            FlowRow(
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-            ) {
-                IconChoice(selected = icon == "none", onClick = { icon = "none" }) {
-                    Icon(Icons.Rounded.Block, contentDescription = "No icon", modifier = Modifier.size(22.dp))
-                }
-                NotebookIcons.groups.forEach { (title, icons) ->
-                    // A full-width heading starts each group on its own line.
-                    Text(
-                        title,
-                        fontSize = 12.sp,
-                        color = LocalQuartzColors.current.textSecondary,
-                        modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
-                    )
-                    icons.forEach { (key, vector) ->
-                        IconChoice(selected = icon == key, onClick = { icon = key }) {
-                            Icon(vector, contentDescription = key, modifier = Modifier.size(22.dp))
+                    item {
+                        Box(
+                            Modifier
+                                .size(40.dp)
+                                .clip(CircleShape)
+                                .background(Brush.sweepGradient(listOf(Color.Red, Color.Yellow, Color.Green, Color.Cyan, Color.Blue, Color.Magenta, Color.Red)))
+                                .clickable { customColor = true },
+                            contentAlignment = Alignment.Center,
+                        ) {
+                            Icon(Icons.Rounded.Colorize, contentDescription = "Custom color", tint = Color.White, modifier = Modifier.size(20.dp))
                         }
                     }
                 }
             }
 
-            if (shelves.size > 1) {
+            if (!guided || step == 2) {
+                if (!guided) SheetLabel("Cover") else Spacer(Modifier.height(18.dp))
+                FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Texture.coverOptions.forEach { t ->
+                        FilterChip(
+                            selected = texture == t,
+                            onClick = { texture = t },
+                            label = { Text(if (t == Texture.NONE) "Matte" else t.label) },
+                        )
+                    }
+                }
+            }
+
+            if (!guided || step == 3) {
+                if (!guided) SheetLabel("Icon") else Spacer(Modifier.height(18.dp))
+                FlowRow(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    IconChoice(selected = icon == "none", onClick = { icon = "none" }) {
+                        Icon(Icons.Rounded.Block, contentDescription = "No icon", modifier = Modifier.size(22.dp))
+                    }
+                    NotebookIcons.groups.forEach { (groupTitle, icons) ->
+                        // A full-width heading starts each group on its own line.
+                        Text(
+                            groupTitle,
+                            fontSize = 12.sp,
+                            color = LocalQuartzColors.current.textSecondary,
+                            modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
+                        )
+                        icons.forEach { (key, vector) ->
+                            IconChoice(selected = icon == key, onClick = { icon = key }) {
+                                Icon(vector, contentDescription = key, modifier = Modifier.size(22.dp))
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (shelves.size > 1 && (!guided || step == 0)) {
                 SheetLabel("Shelf")
                 Box {
                     OutlinedButton(onClick = { shelfMenu = true }) {
@@ -212,14 +262,35 @@ fun NotebookEditorSheet(
                 }
             }
 
-            SheetLabel("Pages")
-            SwitchRow(
-                title = "Two-page view",
-                subtitle = "When unfolded or on a tablet, show two pages side by side like an open notebook",
-                checked = twoPage,
-                onChange = { twoPage = it },
-            )
-            if (existing != null) {
+            if (!guided || step == 4) {
+                SheetLabel(if (guided) "Default page type" else "New pages")
+                if (guided) {
+                    Text(
+                        "Don't worry, you can add other kinds of pages any time. This is just what + adds.",
+                        fontSize = 13.sp,
+                        color = LocalQuartzColors.current.textSecondary,
+                        modifier = Modifier.padding(bottom = 10.dp),
+                    )
+                }
+                Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                    PageTypeChoice("Text", "Words, pictures in line, attachments", pageLayout == "INLINE", Modifier.weight(1f)) { pageLayout = "INLINE" }
+                    PageTypeChoice("Freeform", "Shapes, connectors, drawing; a set page size", pageLayout == "SCRAPBOOK", Modifier.weight(1f)) {
+                        pageLayout = "SCRAPBOOK"
+                    }
+                }
+                if (pageLayout == "SCRAPBOOK") {
+                    SheetLabel("Page size")
+                    PageSizePicker(sizes = sizes, selected = pageSize, onPick = { pageSize = it })
+                }
+                Spacer(Modifier.height(10.dp))
+                SwitchRow(
+                    title = "Two-page view",
+                    subtitle = "When unfolded or on a tablet, show two pages side by side like an open notebook",
+                    checked = twoPage,
+                    onChange = { twoPage = it },
+                )
+            }
+            if (!guided) {
                 SwitchRow(
                     title = "Index page",
                     subtitle = "A page at the front listing every page, then every picture and recording",
@@ -234,7 +305,7 @@ fun NotebookEditorSheet(
                 )
                 SwitchRow(
                     title = "Attachments at the bottom",
-                    subtitle = "New pictures and recordings go in a strip under the text instead of anywhere on the page",
+                    subtitle = "New pictures and recordings on text pages go in a strip under the text",
                     checked = attachAtBottom,
                     onChange = { attachAtBottom = it },
                 )
@@ -248,11 +319,18 @@ fun NotebookEditorSheet(
                         border = BorderStroke(1.dp, MaterialTheme.colorScheme.error.copy(alpha = 0.6f)),
                     ) { Text("Delete", color = MaterialTheme.colorScheme.error) }
                 }
+                if (guided && step > 0) {
+                    OutlinedButton(onClick = { step-- }) { Text("Back") }
+                }
                 Spacer(Modifier.weight(1f))
-                Button(
-                    enabled = title.isNotBlank(),
-                    onClick = { onSave(NotebookDraft(title.trim(), color, texture, icon, shelfId, twoPage, showIndex, sectionTabs, attachAtBottom)) },
-                ) { Text(if (existing == null) "Create" else "Save") }
+                if (guided && step < steps - 1) {
+                    Button(enabled = title.isNotBlank(), onClick = { step++ }) { Text("Next") }
+                } else {
+                    Button(
+                        enabled = title.isNotBlank(),
+                        onClick = { onSave(draft()) },
+                    ) { Text(if (existing == null) "Create" else "Save") }
+                }
             }
         }
     }
@@ -319,7 +397,27 @@ fun NotebookEntity.applyDraft(d: NotebookDraft) = copy(
     showIndex = d.showIndex,
     sectionTabs = d.sectionTabs,
     attachAtBottom = d.attachAtBottom,
+    pageLayout = d.pageLayout,
+    pageSize = d.pageSize?.encode() ?: pageSize,
 )
+
+/** One of the two page types, as a card to pick. */
+@Composable
+private fun PageTypeChoice(title: String, subtitle: String, selected: Boolean, modifier: Modifier, onClick: () -> Unit) {
+    val accent = MaterialTheme.colorScheme.primary
+    val shape = RoundedCornerShape(16.dp)
+    Column(
+        modifier
+            .clip(shape)
+            .background(if (selected) accent.copy(alpha = 0.12f) else MaterialTheme.colorScheme.surfaceContainerHigh)
+            .border(if (selected) 2.dp else 0.dp, if (selected) accent else Color.Transparent, shape)
+            .clickable(onClick = onClick)
+            .padding(14.dp),
+    ) {
+        Text(title, fontSize = 16.sp, fontWeight = FontWeight.Medium)
+        Text(subtitle, fontSize = 12.sp, color = LocalQuartzColors.current.textSecondary)
+    }
+}
 
 /** A setting with a title, a short explanation and a switch; the whole row toggles it. */
 @Composable

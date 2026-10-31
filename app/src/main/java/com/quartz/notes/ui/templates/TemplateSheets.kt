@@ -21,6 +21,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Bookmark
+import androidx.compose.material.icons.rounded.Gesture
 import androidx.compose.material.icons.rounded.NoteAdd
 import androidx.compose.material.icons.automirrored.rounded.Notes
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -31,6 +32,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -75,6 +77,10 @@ internal fun StarterPage.asPage(index: Int) = PageEntity(
 @Composable
 fun AddPageSheet(
     onBlank: () -> Unit,
+    /** Freeform sizes this device offers, and the notebook's own. */
+    sizes: List<com.quartz.notes.data.model.PageSize>,
+    defaultSize: com.quartz.notes.data.model.PageSize,
+    onFreeform: (com.quartz.notes.data.model.PageSize) -> Unit,
     onSection: () -> Unit,
     onTemplate: (PageEntity) -> Unit,
     onStarter: (StarterPage) -> Unit,
@@ -85,6 +91,8 @@ fun AddPageSheet(
     val saved by container.repository.observePageTemplates().collectAsStateWithLifecycle(initialValue = emptyList())
     val starters = remember { Starters.get(context).pages }
     val starterPages = remember(starters) { starters.mapIndexed { i, s -> s.asPage(i) } }
+    var pickingSize by androidx.compose.runtime.saveable.rememberSaveable { androidx.compose.runtime.mutableStateOf(false) }
+    var size by androidx.compose.runtime.remember { androidx.compose.runtime.mutableStateOf(defaultSize) }
 
     QuartzSheet(
         onDismissRequest = onDismiss,
@@ -100,7 +108,17 @@ fun AddPageSheet(
         ) {
             Text("Add a page", fontSize = 22.sp, fontWeight = FontWeight.Medium)
             Row(Modifier.fillMaxWidth().padding(top = 16.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                ChoiceCard(Icons.Rounded.NoteAdd, "Blank page", "Looks like the page before it", Modifier.weight(1f), onBlank)
+                ChoiceCard(Icons.Rounded.NoteAdd, "Text page", "Words, pictures in line", Modifier.weight(1f), onBlank)
+                ChoiceCard(Icons.Rounded.Gesture, "Freeform page", "Shapes, drawing; a set size", Modifier.weight(1f)) { pickingSize = !pickingSize }
+            }
+            if (pickingSize) {
+                SheetLabel("Freeform page size")
+                com.quartz.notes.ui.notebook.PageSizePicker(sizes = sizes, selected = size, onPick = { size = it })
+                androidx.compose.material3.Button(onClick = { onFreeform(size) }, modifier = Modifier.padding(top = 14.dp)) {
+                    Text("Add ${size.label} page")
+                }
+            }
+            Row(Modifier.fillMaxWidth().padding(top = 12.dp)) {
                 ChoiceCard(Icons.Rounded.Bookmark, "New section", "A divider page with a tab", Modifier.weight(1f), onSection)
             }
 

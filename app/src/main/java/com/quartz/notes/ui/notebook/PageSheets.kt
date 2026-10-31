@@ -81,7 +81,11 @@ import com.quartz.notes.ui.theme.contentColorFor
 @Composable
 fun PageStyleSheet(
     page: PageEntity,
+    /** Freeform sizes this device offers. */
+    sizes: List<com.quartz.notes.data.model.PageSize>,
     onLayoutMode: (scrapbook: Boolean) -> Unit,
+    onSize: (com.quartz.notes.data.model.PageSize) -> Unit,
+    onAdjustPicture: () -> Unit,
     onChange: (PageEntity) -> Unit,
     onApplyToAll: (PageEntity) -> Unit,
     onSaveTemplate: () -> Unit,
@@ -115,27 +119,34 @@ fun PageStyleSheet(
         ) {
             Text("Page style", fontSize = 22.sp, fontWeight = FontWeight.Medium)
 
-            Label("Layout")
+            Label("Page type")
             val scrapbook = page.layoutMode == "SCRAPBOOK"
             SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
                 SegmentedButton(
                     selected = !scrapbook,
                     onClick = { if (scrapbook) onLayoutMode(false) },
                     shape = SegmentedButtonDefaults.itemShape(0, 2),
-                ) { Text("Flowing text") }
+                ) { Text("Text") }
                 SegmentedButton(
                     selected = scrapbook,
                     onClick = { if (!scrapbook) onLayoutMode(true) },
                     shape = SegmentedButtonDefaults.itemShape(1, 2),
-                ) { Text("Scrapbook") }
+                ) { Text("Freeform") }
             }
             Text(
-                if (scrapbook) "Add text boxes with the T button. Everything can be moved, resized and turned."
-                else "Text flows down the page. Pictures, shapes and drawings can still go anywhere.",
+                if (scrapbook) "A set page size, shown the same on every screen. Shapes, connectors, text boxes and drawing go anywhere; pinch to zoom."
+                else "Text flows down the page, with pictures in line or attachments at the bottom.",
                 fontSize = 13.sp,
                 color = LocalQuartzColors.current.textSecondary,
                 modifier = Modifier.padding(top = 8.dp),
             )
+            if (scrapbook) {
+                Label("Page size")
+                val current = page.canvasWidth?.let { w ->
+                    com.quartz.notes.data.model.PageSize(page.sizeName ?: "CUSTOM", w, page.canvasHeight ?: w)
+                }
+                PageSizePicker(sizes = sizes, selected = current, onPick = onSize)
+            }
 
             Label("Paper")
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -212,6 +223,28 @@ fun PageStyleSheet(
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         Icon(Icons.Rounded.AddPhotoAlternate, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
                         Text("Import", fontSize = 11.sp, color = MaterialTheme.colorScheme.primary)
+                    }
+                }
+            }
+
+            if (page.backgroundImage != null) {
+                val freeform = page.layoutMode == "SCRAPBOOK"
+                val mode = com.quartz.notes.data.model.BackgroundFit.mode(page.backgroundFit, freeform)
+                val choices = if (freeform) {
+                    listOf("FIT" to "Fit", "FILL" to "Fill", "STRETCH" to "Stretch")
+                } else {
+                    listOf("WIDTH" to "Fit width", "REPEAT" to "Repeat down the page")
+                }
+                FlowRow(
+                    Modifier.padding(top = 12.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    choices.forEach { (value, label) ->
+                        FilterChip(selected = mode == value, onClick = { onChange(page.copy(backgroundFit = value)) }, label = { Text(label) })
+                    }
+                    if (freeform) {
+                        FilterChip(selected = mode == "MANUAL", onClick = onAdjustPicture, label = { Text("Adjust…") })
                     }
                 }
             }
