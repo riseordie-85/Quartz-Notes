@@ -26,6 +26,7 @@ import com.quartz.notes.data.StoredImage
 import com.quartz.notes.data.db.PageElementEntity
 import com.quartz.notes.data.model.ElementKind
 import com.quartz.notes.data.model.ImageData
+import com.quartz.notes.data.model.encode
 import com.quartz.notes.data.model.PageSize
 import com.quartz.notes.data.rich.BlockType
 import com.quartz.notes.data.rich.RichDoc
