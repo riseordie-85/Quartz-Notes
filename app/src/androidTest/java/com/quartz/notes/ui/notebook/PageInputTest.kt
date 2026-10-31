@@ -281,6 +281,13 @@ class PageInputTest {
             tap(another)
             pause(90)
             tap(another)
+            // How the selection develops (the keyboard may change it afterwards).
+            val timeline = StringBuilder()
+            for (t in listOf(0L, 50L, 150L, 300L, 600L, 1000L)) {
+                if (t > 0) pause(if (t == 50L) 50 else t - listOf(0L, 50L, 150L, 300L, 600L, 1000L).let { it[it.indexOf(t) - 1] })
+                timeline.append("${t}ms=${selection(field)} ")
+            }
+            note("$label finger double tap timeline: $timeline")
             results["finger double tap"] = read()
             screen("30_${label}_double_tap")
 
