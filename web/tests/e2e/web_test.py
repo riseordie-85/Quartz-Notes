@@ -8,6 +8,7 @@ screenshots at desktop and phone sizes.
 """
 import asyncio
 import json
+import uuid
 import os
 import sys
 import time
@@ -408,6 +409,54 @@ async def main():
         await page.screenshot(path=f"{OUT}/w07i_app_colours.png")
         ok("the accent and background picked in the app show on the web")
         await page.get_by_role("radio", name="Match this computer").click()
+
+        # Templates made in the app: a page template (with an item on it and a background picture)
+        # and a quick-note template. They stay out of the lists and are offered as templates.
+        shelf_id = find("shelves", 'name="Notebooks"')[0]["id"]
+        holder = api("POST", "/api/collections/notebooks/records", {"id": str(uuid.uuid4()), "shelf": shelf_id, "title": "Templates", "kind": "TEMPLATES", "editedAt": 1}, TOKEN)
+        tpage = api("POST", "/api/collections/pages/records", {
+            "id": str(uuid.uuid4()), "notebook": holder["id"], "title": "Week review", "templateName": "Weekly review", "position": 0,
+            "pageType": "PLAIN", "layoutMode": "INLINE", "backgroundImage": "media/sunset.png",
+            "content": {"blocks": [{"type": "HEADING", "text": "Wins"}, {"type": "TASK", "text": ""}]}, "plainText": "Wins\n", "editedAt": 1,
+        }, TOKEN)
+        api("POST", "/api/collections/page_elements/records", {"id": str(uuid.uuid4()), "page": tpage["id"], "kind": "SHAPE", "x": 0.6, "y": 0.4, "width": 0.25, "height": 0.25, "z": 1, "data": {"shape": "STAR", "fill": 0xFFD6004C - 2**32}, "editedAt": 1}, TOKEN)
+        api("POST", "/api/collections/quick_notes/records", {"id": str(uuid.uuid4()), "title": "Standup", "templateName": "Standup", "colorKey": "blue", "content": {"blocks": [{"type": "SUBHEADING", "text": "Yesterday"}]}, "plainText": "Yesterday", "editedAt": 1}, TOKEN)
+        await page.goto(f"{BASE}/#/")
+        await expect(page.locator("article.note")).to_have_count(6)
+        await expect(page.locator("article.note", has_text="Standup")).to_have_count(0)
+        await expect(page.locator("aside nav a", has_text="Templates")).to_have_count(0)
+        ok("templates stay out of the notes list and the notebooks")
+
+        await page.get_by_role("button", name="New note from a template").click()
+        await page.screenshot(path=f"{OUT}/w11_note_templates.png")
+        await page.locator("dialog[open]").get_by_role("button", name="Grocery list").click()
+        await expect(page.locator("input.title")).to_have_value("Groceries")
+        await expect(page.locator(".ProseMirror")).to_contain_text("Produce")
+        await page.goto(f"{BASE}/#/")
+        await page.get_by_role("button", name="New note from a template").click()
+        await page.locator("dialog[open]").get_by_role("button", name="Standup").click()
+        await expect(page.locator("input.title")).to_have_value("Standup")
+        made = wait_for(lambda: [n for n in find("quick_notes", 'title="Standup"') if not n["templateName"]], "the note from the template on the server")
+        assert made[0]["colorKey"] == "blue", made
+        ok("new notes can start from a starter or a saved template")
+
+        await page.locator("aside nav a", has_text="Travel 2026").click()
+        await page.get_by_role("button", name="More").click()
+        await page.get_by_role("button", name="Add a page from a template").click()
+        await page.screenshot(path=f"{OUT}/w12_page_templates.png")
+        await page.locator("dialog[open]").get_by_role("button", name="Weekly review").click()
+        await expect(page.locator("input.title").last).to_have_value("Week review")
+        await expect(page.locator(".paper-image")).to_be_visible()
+        new_page = wait_for(lambda: [p for p in find("pages", 'title="Week review"') if p["notebook"] != holder["id"]], "the page from the template on the server")[0]
+        assert new_page["backgroundImage"] == "media/sunset.png" and not new_page["templateName"], new_page
+        assert len(find("page_elements", f'page="{new_page["id"]}"')) == 1
+        await page.screenshot(path=f"{OUT}/w13_page_from_template.png")
+        ok("a page from a saved template brings its text, items and background picture")
+        await page.get_by_role("button", name="More").click()
+        await page.get_by_role("button", name="Add a page from a template").click()
+        await page.locator("dialog[open]").get_by_role("button", name="Meeting notes").click()
+        await expect(page.locator(".ProseMirror")).to_contain_text("Action items")
+        ok("a page can start from a starter template")
 
         # Search.
         await page.fill("input[type=search]", "ramen")

@@ -451,6 +451,38 @@ class SyncEngineTest {
         assertEquals(0xFF2E9E5B.toInt(), c.looks.value.accentArgb)
     }
 
+    @Test
+    fun templatesAndBackgroundPicturesSync() {
+        val a = Device()
+        val b = Device()
+        val paper = ByteArray(2048) { (it * 7).toByte() }
+        val name = "paper-${UUID.randomUUID()}.png"
+        File(a.files, "media").mkdirs()
+        File(a.files, "media/$name").writeBytes(paper)
+        val shelf = runBlocking { a.db.shelfDao().getAll().single().id }
+        val nb = runBlocking { a.repo.createNotebook(shelf, "Planner", 0, "GLOSS", "none") }
+        val page = runBlocking { a.db.pageDao().getByNotebook(nb).single() }
+        a.repo.updatePageStyle(page.copy(pageType = "PLAIN", backgroundImage = "media/$name"))
+        a.repo.savePageContent(page.id, RichDoc.fromPlainText("Goals"))
+        a.settle()
+        runBlocking { a.repo.savePageAsTemplate(page.id, "Planner page") }
+        val noteId = runBlocking { a.repo.createNote() }
+        a.repo.saveNote(noteId, "Standup", RichDoc.fromPlainText("Yesterday"), "blue")
+        a.settle()
+        runBlocking { a.repo.saveNoteAsTemplate(noteId, "Standup") }
+        a.sync()
+        b.sync()
+
+        runBlocking {
+            assertEquals(listOf("Planner page"), b.repo.observePageTemplates().first().map { it.templateName })
+            assertEquals(listOf("Standup"), b.repo.observeNoteTemplates().first().map { it.templateName })
+            assertEquals(listOf("Planner"), b.repo.observeAllNotebooks().first().map { it.title })
+            assertEquals(listOf("Standup"), b.repo.observeNotes().first().map { it.title })
+            assertEquals("media/$name", b.db.pageDao().getAll().first { it.title.isEmpty() && it.templateName == null }.backgroundImage)
+        }
+        assertTrue("the background picture arrived", paper.contentEquals(File(b.files, "media/$name").readBytes()))
+    }
+
     // ---- Test server ----
 
     private fun createUser(): String {

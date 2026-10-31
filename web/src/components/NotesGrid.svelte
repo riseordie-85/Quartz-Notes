@@ -43,7 +43,7 @@
 <TopBar title={archive ? "Archive" : "Quick notes"} {onMenu}>
   {#snippet actions()}
     {#if !archive}
-      <button class="pill-btn quiet" onclick={() => (picking = true)} title="New note from a template"><Icon name="newNotebook" size={20} />From template</button>
+      <button class="pill-btn quiet from-template" onclick={() => (picking = true)} title="New note from a template" aria-label="New note from a template"><Icon name="newNotebook" size={20} /><span class="label">From template</span></button>
       <button class="pill-btn" onclick={newNote}><Icon name="add" size={20} />New note</button>
     {/if}
   {/snippet}
@@ -154,5 +154,13 @@
   .error {
     margin: 0 16px;
     color: #e53935;
+  }
+  @media (max-width: 640px) {
+    .from-template {
+      padding: 0 10px;
+    }
+    .from-template .label {
+      display: none;
+    }
   }
 </style>
