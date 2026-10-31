@@ -28,7 +28,7 @@ jobs:
           status=${PIPESTATUS[0]}
           if [ "$status" -ne 0 ]; then
             # Surface compiler errors as annotations so they're visible without the full log.
-            grep -E "^e: |error:|What went wrong" -A2 build.log | head -60 | while IFS= read -r line; do
+            grep -E "^e: |error:|What went wrong|requires|Dependency '|minCompileSdk|recommended action" -A2 build.log | head -60 | while IFS= read -r line; do
               echo "::error::${line}"
             done
           fi
