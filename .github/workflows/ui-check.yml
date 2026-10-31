@@ -57,6 +57,7 @@ jobs:
           profile: pixel_6
           disable-animations: true
           script: |
+            adb shell settings put global hide_error_dialogs 1 || true
             ./gradlew connectedDebugAndroidTest -Pandroid.injected.androidTest.leaveApksInstalledAfterRun=true --stacktrace > connected.log 2>&1 || echo "connected tests failed"
             mkdir -p out/shots && adb pull /sdcard/Android/data/com.quartz.notes/files/shots out/ || true
 
