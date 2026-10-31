@@ -122,7 +122,7 @@ class TemplatesUiTest {
             androidx.compose.ui.test.SemanticsMatcher("click label is Page style") {
                 it.config.getOrNull(SemanticsActions.OnClick)?.label == "Page style"
             },
-        ).performClick()
+        ).performSemanticsAction(SemanticsActions.OnClick) // may be scrolled out of the toolbar on a phone
         settle()
         rule.onAllNodesWithText("Background picture").onFirst().assertExists()
         rule.onNodeWithText("Save page as template").performSemanticsAction(SemanticsActions.OnClick)
