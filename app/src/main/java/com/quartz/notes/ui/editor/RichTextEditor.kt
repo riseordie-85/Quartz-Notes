@@ -227,7 +227,12 @@ fun RichTextEditor(
             value = state.value,
             onValueChange = {
                 if (it.text != state.value.text) holder.revealPending = true
-                state.onValueChange(holder.fixTapPastLineEnd(state, it))
+                val kept = holder.keepSelectedWord(state, holder.fixTapPastLineEnd(state, it))
+                state.onValueChange(kept)
+                if (holder.toolbarDue) {
+                    holder.toolbarDue = false
+                    holder.showToolbar(textToolbar, state, clipboard, readOnly)
+                }
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -266,18 +271,22 @@ fun RichTextEditor(
                                                 // Ours: the field would otherwise just move the cursor here.
                                                 change.consume()
                                                 if (mouse) {
-                                                    holder.selectAt(state, change.position, paragraph = multi >= 3)
+                                                    holder.selectAt(state, change.position, paragraph = multi >= 3, anchor = true)
                                                 }
                                             }
                                         }
                                         PointerEventType.Move -> {
-                                            if (multi >= 2) change.consume()
+                                            if (multi >= 2) {
+                                                change.consume()
+                                                // Double-click and drag selects word by word (triple: paragraph by paragraph).
+                                                if (mouse && change.pressed) holder.extendTo(state, change.position, paragraph = multi >= 3)
+                                            }
                                             taps.moved(change, viewConfiguration.touchSlop)
                                         }
                                         PointerEventType.Release -> {
                                             if (multi >= 2) {
                                                 change.consume()
-                                                if (!mouse && holder.selectAt(state, change.position, paragraph = false)) {
+                                                if (!mouse && holder.selectAt(state, change.position, paragraph = false, keep = true)) {
                                                     holder.showToolbar(textToolbar, state, clipboard, readOnly)
                                                 }
                                             }
@@ -537,8 +546,47 @@ private class LayoutHolder {
      * Selects the word at [position] (in the field), or its whole paragraph. Returns false when
      * there's nothing there to select.
      */
-    fun selectAt(state: RichEditorState, position: Offset, paragraph: Boolean): Boolean {
-        val l = layout ?: return false
+    fun selectAt(state: RichEditorState, position: Offset, paragraph: Boolean, anchor: Boolean = false, keep: Boolean = false): Boolean {
+        val range = rangeAt(state, position, paragraph) ?: return false
+        if (anchor) this.anchor = range
+        if (keep) {
+            // The field handles the same tap after this and puts the cursor back; keep the word.
+            kept = range
+            keptAt = System.currentTimeMillis()
+        }
+        state.onValueChange(state.value.copy(selection = range))
+        return true
+    }
+
+    /** Grows the selection from the double / triple-clicked word or paragraph to the one at [position]. */
+    fun extendTo(state: RichEditorState, position: Offset, paragraph: Boolean) {
+        val from = anchor ?: return
+        val to = rangeAt(state, position, paragraph) ?: return
+        val range = if (to.min < from.min) TextRange(from.max, to.min) else TextRange(from.min, maxOf(from.max, to.max))
+        if (range != state.value.selection) state.onValueChange(state.value.copy(selection = range))
+    }
+
+    private var anchor: TextRange? = null
+    private var kept: TextRange? = null
+    private var keptAt = 0L
+    var toolbarDue = false
+
+    /** Right after a double-tap, a cursor move from the same tap keeps the word selected instead. */
+    fun keepSelectedWord(state: RichEditorState, incoming: TextFieldValue): TextFieldValue {
+        val word = kept ?: return incoming
+        if (System.currentTimeMillis() - keptAt > 500) {
+            kept = null
+            return incoming
+        }
+        if (!incoming.selection.collapsed || incoming.text != state.value.text) return incoming
+        kept = null
+        toolbarDue = true
+        return incoming.copy(selection = word)
+    }
+
+    /** The word (or paragraph) at [position], in the field's offsets. */
+    private fun rangeAt(state: RichEditorState, position: Offset, paragraph: Boolean): TextRange? {
+        val l = layout ?: return null
         val visible = l.getOffsetForPosition(position).coerceIn(0, l.layoutInput.text.length)
         val t = state.value.text
         val range = if (paragraph) {
@@ -550,9 +598,8 @@ private class LayoutHolder {
             val w = l.getWordBoundary(visible)
             TextRange(w.start + MARK.length, w.end + MARK.length)
         }
-        if (range.collapsed) return false
-        state.onValueChange(state.value.copy(selection = TextRange(range.start.coerceIn(0, t.length), range.end.coerceIn(0, t.length))))
-        return true
+        if (range.collapsed) return null
+        return TextRange(range.start.coerceIn(0, t.length), range.end.coerceIn(0, t.length))
     }
 
     /** The phone's own Cut / Copy / Paste bar over the selection. */
