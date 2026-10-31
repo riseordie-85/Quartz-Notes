@@ -63,6 +63,10 @@ import androidx.compose.ui.input.key.type
 import androidx.compose.ui.input.pointer.PointerEventPass
 import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.input.pointer.PointerType
+import androidx.compose.ui.input.pointer.isPrimaryPressed
+import androidx.compose.ui.input.pointer.PointerInputChange
+import androidx.compose.ui.platform.TextToolbar
+import androidx.compose.ui.platform.LocalTextToolbar
 import androidx.compose.ui.input.pointer.isSecondaryPressed
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalClipboardManager
@@ -193,6 +197,7 @@ fun RichTextEditor(
         val focusManager = LocalFocusManager.current
         val clipboard = LocalClipboardManager.current
         var contextMenuAt by remember { mutableStateOf<Offset?>(null) }
+        val textToolbar = LocalTextToolbar.current
 
         LaunchedEffect(state.focusRequest) {
             if (state.focusRequest > 0) runCatching { state.focusRequester.requestFocus() }
@@ -238,6 +243,10 @@ fun RichTextEditor(
                 .pointerInput(state) {
                     // Right-click (mouse) opens the edit menu where it was clicked. Every press is also
                     // noted (without taking it), so a tap past the end of a line can stay on that line.
+                    // Double-tap / double-click selects a word, and triple-click a paragraph, as in
+                    // any other app (the text field itself only does that with a long press).
+                    val taps = TapCounter()
+                    var multi = 0
                     awaitPointerEventScope {
                         while (true) {
                             val event = awaitPointerEvent(PointerEventPass.Initial)
@@ -247,6 +256,34 @@ fun RichTextEditor(
                                 val mouse = change.type == PointerType.Mouse
                                 if ((mouse && event.type == PointerEventType.Press) || (!mouse && event.type == PointerEventType.Release)) {
                                     holder.noteTap(change.position)
+                                }
+                                val primary = !mouse || event.buttons.isPrimaryPressed || event.type != PointerEventType.Press
+                                if (enabled && primary && event.changes.size == 1) {
+                                    when (event.type) {
+                                        PointerEventType.Press -> {
+                                            multi = taps.press(change, viewConfiguration.doubleTapTimeoutMillis, 48.dp.toPx())
+                                            if (multi >= 2) {
+                                                // Ours: the field would otherwise just move the cursor here.
+                                                change.consume()
+                                                if (mouse) {
+                                                    holder.selectAt(state, change.position, paragraph = multi >= 3)
+                                                }
+                                            }
+                                        }
+                                        PointerEventType.Move -> {
+                                            if (multi >= 2) change.consume()
+                                            taps.moved(change, viewConfiguration.touchSlop)
+                                        }
+                                        PointerEventType.Release -> {
+                                            if (multi >= 2) {
+                                                change.consume()
+                                                if (!mouse && holder.selectAt(state, change.position, paragraph = false)) {
+                                                    holder.showToolbar(textToolbar, state, clipboard, readOnly)
+                                                }
+                                            }
+                                            taps.release(change, viewConfiguration.longPressTimeoutMillis)
+                                        }
+                                    }
                                 }
                             }
                             if (event.type == PointerEventType.Press && event.buttons.isSecondaryPressed) {
@@ -462,9 +499,94 @@ private fun EditMenu(
 }
 
 /** Last text layout and field position, without triggering recomposition. */
+/** Counts quick taps or clicks in the same spot: 1, 2 (double), 3 (triple)… */
+private class TapCounter {
+    private var count = 0
+    private var lastUp = 0L
+    private var lastAt = Offset.Zero
+    private var downAt = Offset.Zero
+    private var downTime = 0L
+    private var spoiled = false
+
+    fun press(change: PointerInputChange, timeout: Long, slop: Float): Int {
+        val quick = change.uptimeMillis - lastUp <= timeout && (change.position - lastAt).getDistance() <= slop
+        count = if (quick && count > 0) count + 1 else 1
+        downAt = change.position
+        downTime = change.uptimeMillis
+        spoiled = false
+        return count
+    }
+
+    fun moved(change: PointerInputChange, slop: Float) {
+        if ((change.position - downAt).getDistance() > slop) spoiled = true
+    }
+
+    fun release(change: PointerInputChange, longPress: Long) {
+        // A drag or a long press isn't a tap, so it starts the count again.
+        if (spoiled || change.uptimeMillis - downTime >= longPress) count = 0
+        lastUp = change.uptimeMillis
+        lastAt = change.position
+    }
+}
+
 private class LayoutHolder {
     var layout: TextLayoutResult? = null
     var coords: LayoutCoordinates? = null
+
+    /**
+     * Selects the word at [position] (in the field), or its whole paragraph. Returns false when
+     * there's nothing there to select.
+     */
+    fun selectAt(state: RichEditorState, position: Offset, paragraph: Boolean): Boolean {
+        val l = layout ?: return false
+        val visible = l.getOffsetForPosition(position).coerceIn(0, l.layoutInput.text.length)
+        val t = state.value.text
+        val range = if (paragraph) {
+            val o = (visible + MARK.length).coerceIn(MARK.length, t.length)
+            val start = t.lastIndexOf('\n', o - 1) + 1
+            val end = t.indexOf('\n', o).let { if (it < 0) t.length else it }
+            TextRange(start.coerceAtLeast(MARK.length), end)
+        } else {
+            val w = l.getWordBoundary(visible)
+            TextRange(w.start + MARK.length, w.end + MARK.length)
+        }
+        if (range.collapsed) return false
+        state.onValueChange(state.value.copy(selection = TextRange(range.start.coerceIn(0, t.length), range.end.coerceIn(0, t.length))))
+        return true
+    }
+
+    /** The phone's own Cut / Copy / Paste bar over the selection. */
+    fun showToolbar(toolbar: TextToolbar, state: RichEditorState, clipboard: androidx.compose.ui.platform.ClipboardManager, readOnly: Boolean) {
+        val l = layout ?: return
+        val c = coords ?: return
+        if (!c.isAttached) return
+        val len = l.layoutInput.text.length
+        // Selection offsets in the document match the shown text's offsets.
+        val a = state.selStart.coerceIn(0, len)
+        val b = state.selEnd.coerceIn(0, len)
+        val box = l.getPathForRange(a, b).getBounds()
+        val topLeft = c.localToRoot(box.topLeft)
+        toolbar.showMenu(
+            rect = androidx.compose.ui.geometry.Rect(topLeft, box.size),
+            onCopyRequested = {
+                clipboard.setText(AnnotatedString(state.selectedText()))
+                toolbar.hide()
+            },
+            onPasteRequested = if (readOnly) null else ({
+                clipboard.getText()?.text?.let { state.insertText(it) }
+                toolbar.hide()
+            }),
+            onCutRequested = if (readOnly) null else ({
+                clipboard.setText(AnnotatedString(state.selectedText()))
+                state.insertText("")
+                toolbar.hide()
+            }),
+            onSelectAllRequested = {
+                state.selectAll()
+                toolbar.hide()
+            },
+        )
+    }
     var revealPending = false
     private var tapAt: Offset? = null
     private var tapTime = 0L
