@@ -1,5 +1,7 @@
 package com.quartz.notes
 
+import androidx.compose.foundation.ComposeFoundationFlags
+import androidx.compose.foundation.ExperimentalFoundationApi
 import android.app.Application
 import android.content.Context
 import androidx.compose.runtime.staticCompositionLocalOf
@@ -23,8 +25,13 @@ class QuartzApp : Application() {
     lateinit var container: AppContainer
         private set
 
+    @OptIn(ExperimentalFoundationApi::class)
     override fun onCreate() {
         super.onCreate()
+        // Text fields use the phone's selection bar through LocalTextToolbar, where the editor makes
+        // sure it offers Cut and Copy for selected text (the newer menu can keep showing the bar for
+        // a bare cursor after a double-tap selects a word).
+        ComposeFoundationFlags.isNewContextMenuEnabled = false
         container = AppContainer(this)
         container.startBackgroundTasks(this)
     }
