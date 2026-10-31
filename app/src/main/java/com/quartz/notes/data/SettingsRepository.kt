@@ -8,6 +8,7 @@ import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.quartz.notes.data.model.PageSize
 import com.quartz.notes.data.model.enumOrDefault
 import com.quartz.notes.data.sync.Appearance
 import com.quartz.notes.data.sync.AppearanceStore
@@ -45,7 +46,25 @@ data class AppSettings(
     val toolbarOnTop: Boolean = false,
     /** On wide screens (tablet, unfolded phone), quick notes open beside the list. */
     val splitView: Boolean = true,
-)
+    /** The space a page gets on this device's narrow (phone / cover) and wide (unfolded / tablet) screens, "WxH" in dp. */
+    val screenNarrow: String? = null,
+    val screenWide: String? = null,
+) {
+    /** Freeform page sizes to offer: this device's screens first, then paper sizes. */
+    val pageSizes: List<PageSize>
+        get() {
+            fun parse(key: String, raw: String?): PageSize? {
+                val (w, h) = raw?.split('x')?.mapNotNull { it.toFloatOrNull() }?.takeIf { it.size == 2 } ?: return null
+                return PageSize(key, w, h)
+            }
+            val both = screenNarrow != null && screenWide != null
+            val screens = listOfNotNull(
+                parse(if (both) PageSize.COVER else PageSize.SCREEN, screenNarrow),
+                parse(if (both) PageSize.UNFOLDED else PageSize.SCREEN, screenWide),
+            )
+            return screens + PageSize.PAPER
+        }
+}
 
 private val Context.dataStore by preferencesDataStore(name = "quartz_settings")
 
@@ -72,6 +91,8 @@ class SettingsRepository(context: Context) {
         val toolbarOnTop = booleanPreferencesKey("toolbar_on_top")
         val splitView = booleanPreferencesKey("split_view")
         val appearanceChangedAt = longPreferencesKey("appearance_changed_at")
+        val screenNarrow = stringPreferencesKey("screen_narrow")
+        val screenWide = stringPreferencesKey("screen_wide")
     }
 
     val settings: Flow<AppSettings> = store.data.map { p ->
@@ -94,6 +115,8 @@ class SettingsRepository(context: Context) {
             lastBackupFingerprint = p[Keys.lastBackupFingerprint],
             toolbarOnTop = p[Keys.toolbarOnTop] ?: false,
             splitView = p[Keys.splitView] ?: true,
+            screenNarrow = p[Keys.screenNarrow],
+            screenWide = p[Keys.screenWide],
         )
     }
 
@@ -142,6 +165,20 @@ class SettingsRepository(context: Context) {
     suspend fun setCompressImages(enabled: Boolean) = set(Keys.compress, enabled)
     suspend fun setToolbarOnTop(onTop: Boolean) = set(Keys.toolbarOnTop, onTop)
     suspend fun setSplitView(enabled: Boolean) = set(Keys.splitView, enabled)
+
+    /**
+     * Remembers the space a page gets (in dp): a narrow portrait one (phone, cover screen) or a
+     * wide one (unfolded, tablet). Phones turned sideways are too short to count as wide.
+     */
+    suspend fun rememberScreen(width: Float, height: Float) {
+        val key = when {
+            width < 600f && height > width -> Keys.screenNarrow
+            width >= 600f && height >= 480f -> Keys.screenWide
+            else -> return
+        }
+        val value = "${kotlin.math.round(width).toInt()}x${kotlin.math.round(height).toInt()}"
+        store.edit { if (it[key] != value) it[key] = value }
+    }
     suspend fun setInk(argb: Int) = set(Keys.ink, argb)
     suspend fun setHighlight(argb: Int) = set(Keys.highlight, argb)
     suspend fun setAutoBackup(enabled: Boolean) = set(Keys.autoBackup, enabled)

@@ -317,6 +317,10 @@ class RichEditorState(doc: RichDoc) {
 
     // ---- In-line pictures ----
 
+    /** Inserts a picture after the paragraph with the cursor, or at the end if the text isn't being edited. */
+    fun insertImageAtCursor(data: ImageData, width: Float): String =
+        insertImage(if (focused) currentIndex + 1 else blocks.size, data, width)
+
     /** Inserts a picture paragraph before paragraph [index] (or at the end), with a line after it if needed. */
     fun insertImage(index: Int, data: ImageData, width: Float, align: Align = Align.CENTER): String {
         record()

@@ -12,6 +12,7 @@ import com.quartz.notes.data.db.QuickNoteEntity
 import com.quartz.notes.data.db.ShelfEntity
 import com.quartz.notes.data.db.newUid
 import com.quartz.notes.data.model.AttachmentKind
+import com.quartz.notes.data.model.PageSize
 import com.quartz.notes.data.model.ElementKind
 import com.quartz.notes.data.model.ImageData
 import com.quartz.notes.data.model.OwnerType
@@ -213,6 +214,8 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
         texture: String,
         icon: String,
         twoPage: Boolean = true,
+        pageLayout: String = "INLINE",
+        pageSize: PageSize? = null,
     ): Long = db.withTransaction {
         val id = notebooks.insert(
             NotebookEntity(
@@ -223,10 +226,43 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
                 icon = icon,
                 twoPage = twoPage,
                 position = notebooks.maxPosition(shelfId) + 1,
+                pageLayout = pageLayout,
+                pageSize = pageSize?.encode(),
             ),
         )
-        pages.insert(PageEntity(notebookId = id, position = 0))
+        pages.insert(withPageType(PageEntity(notebookId = id, position = 0), pageLayout, pageSize))
         id
+    }
+
+    /**
+     * Makes [page] a text page ("INLINE") or a Freeform page ("SCRAPBOOK") of [size] (A4 if null).
+     * Freeform pages sized for an unfolded screen spread across both sides of an open notebook.
+     */
+    private fun withPageType(page: PageEntity, layout: String, size: PageSize?): PageEntity =
+        if (layout == "SCRAPBOOK") {
+            val s = size ?: PageSize.DEFAULT
+            page.copy(
+                layoutMode = "SCRAPBOOK", canvasWidth = s.width, canvasHeight = s.height, sizeName = s.key,
+                spread = s.key == PageSize.UNFOLDED || s.landscape,
+            )
+        } else {
+            page.copy(layoutMode = "INLINE", canvasWidth = null, canvasHeight = null, sizeName = null)
+        }
+
+    /** Adds a page of a given type (and size, for Freeform) after position [afterIndex]. */
+    suspend fun insertPageOfType(notebookId: Long, afterIndex: Int, layout: String, size: PageSize?): Long = inOrder {
+        db.withTransaction {
+            val id = insertPageNow(notebookId, afterIndex)
+            val page = pages.get(id) ?: return@withTransaction id
+            pages.update(withPageType(page, layout, size))
+            id
+        }
+    }
+
+    /** Changes a page between text and Freeform, or a Freeform page's size. Items keep their places. */
+    fun setPageType(pageId: Long, layout: String, size: PageSize?) = enqueue {
+        val page = pages.get(pageId) ?: return@enqueue
+        pages.update(withPageType(page, layout, size).copy(updatedAt = now()))
     }
 
     suspend fun updateNotebook(notebook: NotebookEntity) {
@@ -264,16 +300,22 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
             ?: list.take((afterIndex + 1).coerceAtLeast(0)).lastOrNull { !it.isSection }
             ?: list.firstOrNull { !it.isSection }
         val insertAt = (afterIndex + 1).coerceIn(0, list.size)
-        val newPage = PageEntity(
-            notebookId = notebookId,
-            pageType = template?.pageType ?: "LINES",
-            backgroundArgb = template?.backgroundArgb,
-            texture = template?.texture ?: "NONE",
-            layoutMode = template?.layoutMode ?: "INLINE",
-            backgroundImage = template?.backgroundImage,
-            position = insertAt,
-            // A page added to the templates notebook is a new template.
-            templateName = if (notebooks.get(notebookId)?.kind == NotebookKind.TEMPLATES) "New template" else null,
+        val notebook = notebooks.get(notebookId)
+        // The look (paper, color, picture) follows the page before it; the type and size are the notebook's.
+        val newPage = withPageType(
+            PageEntity(
+                notebookId = notebookId,
+                pageType = template?.pageType ?: "LINES",
+                backgroundArgb = template?.backgroundArgb,
+                texture = template?.texture ?: "NONE",
+                backgroundImage = template?.backgroundImage,
+                backgroundFit = template?.backgroundFit,
+                position = insertAt,
+                // A page added to the templates notebook is a new template.
+                templateName = if (notebook?.kind == NotebookKind.TEMPLATES) "New template" else null,
+            ),
+            notebook?.pageLayout ?: "INLINE",
+            PageSize.decode(notebook?.pageSize),
         )
         val id = pages.insert(newPage)
         list.add(insertAt, newPage.copy(id = id))
@@ -338,10 +380,9 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
                 pageType = page.pageType,
                 backgroundArgb = page.backgroundArgb,
                 texture = page.texture,
-                layoutMode = page.layoutMode,
+                // The type and size change through setPageType.
                 backgroundImage = page.backgroundImage,
-                // Only scrapbook pages can span both sides.
-                spread = current.spread && page.layoutMode == "SCRAPBOOK",
+                backgroundFit = page.backgroundFit,
                 updatedAt = now(),
             ),
         )
@@ -358,6 +399,7 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
                         backgroundArgb = source.backgroundArgb,
                         texture = source.texture,
                         backgroundImage = source.backgroundImage,
+                        backgroundFit = source.backgroundFit,
                     )
                 },
             )
@@ -643,16 +685,19 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
         db.withTransaction {
             val list = pages.getByNotebook(notebookId).toMutableList()
             val at = (afterIndex + 1).coerceIn(0, list.size)
-            val page = PageEntity(
-                notebookId = notebookId,
-                title = starter.title,
-                position = at,
-                pageType = starter.pageType,
-                backgroundArgb = starter.backgroundArgb,
-                texture = starter.texture,
-                layoutMode = starter.layoutMode,
-                content = starter.content.encode(),
-                plainText = starter.content.plainText(),
+            val page = withPageType(
+                PageEntity(
+                    notebookId = notebookId,
+                    title = starter.title,
+                    position = at,
+                    pageType = starter.pageType,
+                    backgroundArgb = starter.backgroundArgb,
+                    texture = starter.texture,
+                    content = starter.content.encode(),
+                    plainText = starter.content.plainText(),
+                ),
+                starter.layoutMode,
+                PageSize.decode(notebooks.get(notebookId)?.pageSize),
             )
             val id = pages.insert(page)
             list.add(at, page.copy(id = id))

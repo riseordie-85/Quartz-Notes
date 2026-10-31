@@ -64,6 +64,8 @@ object SyncCodec {
         put("sectionTabs", n.sectionTabs)
         put("attachAtBottom", n.attachAtBottom)
         put("kind", n.kind)
+        put("pageLayout", n.pageLayout)
+        put("pageSize", n.pageSize.orEmpty())
     }
 
     fun page(p: PageEntity, notebookUid: String) = buildJsonObject {
@@ -85,6 +87,10 @@ object SyncCodec {
         put("sectionImage", p.sectionImage.orEmpty())
         put("templateName", p.templateName.orEmpty())
         put("backgroundImage", p.backgroundImage.orEmpty())
+        put("backgroundFit", p.backgroundFit.orEmpty())
+        p.canvasWidth?.let { put("canvasWidth", it) } ?: put("canvasWidth", JsonNull)
+        p.canvasHeight?.let { put("canvasHeight", it) } ?: put("canvasHeight", JsonNull)
+        put("sizeName", p.sizeName.orEmpty())
     }
 
     /** [uidOfElement] turns a connector's local element ids into uids. */
@@ -154,6 +160,8 @@ object SyncCodec {
         sectionTabs = r.bool("sectionTabs"),
         attachAtBottom = r.bool("attachAtBottom"),
         kind = r.str("kind").ifEmpty { NotebookKind.NOTEBOOK },
+        pageLayout = r.str("pageLayout").ifEmpty { "INLINE" },
+        pageSize = r.str("pageSize").ifEmpty { null },
     )
 
     fun page(r: JsonObject, id: Long, notebookId: Long) = PageEntity(
@@ -178,6 +186,10 @@ object SyncCodec {
         sectionImage = r.str("sectionImage").ifEmpty { null },
         templateName = r.str("templateName").ifEmpty { null },
         backgroundImage = r.str("backgroundImage").ifEmpty { null },
+        backgroundFit = r.str("backgroundFit").ifEmpty { null },
+        canvasWidth = r.double("canvasWidth").toFloat().takeIf { it > 0f },
+        canvasHeight = r.double("canvasHeight").toFloat().takeIf { it > 0f },
+        sizeName = r.str("sizeName").ifEmpty { null },
     )
 
     /** [idOfElement] turns a connector's element uids back into local ids. */

@@ -17,7 +17,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
         SyncStateEntity::class,
         SyncFlagsEntity::class,
     ],
-    version = 6,
+    version = 7,
     exportSchema = true,
 )
 abstract class QuartzDatabase : RoomDatabase() {
@@ -49,7 +49,7 @@ abstract class QuartzDatabase : RoomDatabase() {
                 .addMigrations(*ALL_MIGRATIONS)
                 .build()
 
-        val ALL_MIGRATIONS get() = arrayOf(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6)
+        val ALL_MIGRATIONS get() = arrayOf(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7)
 
         /** Adds page lock and two-page (spread) flags. */
         private val MIGRATION_1_2 = object : androidx.room.migration.Migration(1, 2) {
@@ -112,6 +112,18 @@ abstract class QuartzDatabase : RoomDatabase() {
                 db.execSQL("ALTER TABLE pages ADD COLUMN templateName TEXT")
                 db.execSQL("ALTER TABLE pages ADD COLUMN backgroundImage TEXT")
                 db.execSQL("ALTER TABLE quick_notes ADD COLUMN templateName TEXT")
+            }
+        }
+
+        /** Freeform pages (a fixed page size), notebooks' default page type and size, background picture fitting. */
+        val MIGRATION_6_7 = object : androidx.room.migration.Migration(6, 7) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE pages ADD COLUMN backgroundFit TEXT")
+                db.execSQL("ALTER TABLE pages ADD COLUMN canvasWidth REAL")
+                db.execSQL("ALTER TABLE pages ADD COLUMN canvasHeight REAL")
+                db.execSQL("ALTER TABLE pages ADD COLUMN sizeName TEXT")
+                db.execSQL("ALTER TABLE notebooks ADD COLUMN pageLayout TEXT NOT NULL DEFAULT 'INLINE'")
+                db.execSQL("ALTER TABLE notebooks ADD COLUMN pageSize TEXT")
             }
         }
     }

@@ -122,6 +122,12 @@ check(status == 200 and rec["templateName"] == "Weekly" and rec["backgroundImage
 status, rec = call("POST", "/api/collections/quick_notes/records", {"id": str(uuid.uuid4()), "title": "Groceries", "templateName": "Groceries"}, tim)
 check(status == 200 and rec["templateName"] == "Groceries", "quick notes keep a template name")
 
+# Freeform page fields.
+status, rec = call("POST", "/api/collections/pages/records", {"id": str(uuid.uuid4()), "notebook": hex_uid, "layoutMode": "SCRAPBOOK", "canvasWidth": 595, "canvasHeight": 842, "sizeName": "A4", "backgroundFit": "MANUAL:0.1:0:1.2"}, tim)
+check(status == 200 and rec["canvasWidth"] == 595 and rec["sizeName"] == "A4" and rec["backgroundFit"].startswith("MANUAL"), "Freeform pages keep their size and background fit")
+status, rec = call("POST", "/api/collections/notebooks/records", {"id": str(uuid.uuid4()), "shelf": hex_uid, "title": "Sketches", "pageLayout": "SCRAPBOOK", "pageSize": "A5|420.0|595.0"}, tim)
+check(status == 200 and rec["pageLayout"] == "SCRAPBOOK" and rec["pageSize"] == "A5|420.0|595.0", "notebooks keep their default page type and size")
+
 # ---- Media files ----
 
 

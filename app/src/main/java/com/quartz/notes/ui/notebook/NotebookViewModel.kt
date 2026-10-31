@@ -2,6 +2,7 @@ package com.quartz.notes.ui.notebook
 
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
@@ -11,6 +12,7 @@ import com.quartz.notes.data.StoredImage
 import com.quartz.notes.data.db.NotebookEntity
 import com.quartz.notes.data.db.PageElementEntity
 import com.quartz.notes.data.model.ElementKind
+import com.quartz.notes.data.model.PageSize
 import com.quartz.notes.data.model.ImageData
 import com.quartz.notes.data.model.VoiceData
 import com.quartz.notes.data.model.ArrowData
@@ -45,6 +47,19 @@ class PageSession(page: PageEntity) {
 
     /** How far the page is scrolled, in page widths; new pictures land in view. */
     var scrollUnits = 0f
+
+    /** A Freeform page (fixed size, scaled to fit), kept in step by the page view. */
+    var freeform by mutableStateOf(page.layoutMode == "SCRAPBOOK")
+
+    /** Freeform pages: zoom on top of "fit to the screen" (1 = fit) and how far it's moved, in screen pixels. */
+    var zoom by mutableFloatStateOf(1f)
+    var pan by mutableStateOf(androidx.compose.ui.geometry.Offset.Zero)
+
+    /** Zoomed in, so a swipe moves around the page instead of turning it. */
+    val zoomedIn: Boolean get() = freeform && zoom > 1.02f
+
+    /** Moving and zooming the background picture by hand (page style → Adjust). */
+    var adjustingBackground by mutableStateOf(false)
 
     /** Editors for this page's text boxes, by element id. */
     val textBoxes = HashMap<Long, RichEditorState>()
@@ -235,17 +250,25 @@ class NotebookViewModel(
     }
 
     fun addImage(pageId: Long, image: StoredImage) {
+        // Text pages: pictures go in line with the text (or in the strip at the bottom).
+        val session = sessions[pageId]
+        if (session != null && !session.freeform && !attachAtBottom) {
+            session.editor.insertImageAtCursor(ImageData(path = image.path, aspect = image.aspect), 0.8f)
+            saveIfChanged(pageId)
+            return
+        }
+        val freeform = session?.freeform == true
         val width = 0.6f
         val x = (1f - width) / 2 + ((stagger % 5) - 2) * 0.03f
         repo.addElement(
             PageElementEntity(
                 pageId = pageId, kind = ElementKind.IMAGE, x = x, y = placementY(pageId), width = width,
                 height = width * image.aspect,
-                rotation = if (attachAtBottom) 0f else listOf(-3f, 2f, -1.5f, 3f, 0f)[stagger % 5],
+                rotation = if (attachAtBottom && !freeform) 0f else listOf(-3f, 2f, -1.5f, 3f, 0f)[stagger % 5],
                 data = ImageData(
                     path = image.path,
                     aspect = image.aspect,
-                    placement = if (attachAtBottom) ImagePlacement.ATTACHED else ImagePlacement.FLOAT,
+                    placement = if (attachAtBottom && !freeform) ImagePlacement.ATTACHED else ImagePlacement.FLOAT,
                 ).encode(),
             ),
         )
@@ -265,24 +288,34 @@ class NotebookViewModel(
      * Switches a page between flowing text and scrapbook. Going to scrapbook, the page's text moves
      * into a text box so nothing is lost.
      */
-    fun setLayoutMode(page: PageEntity, scrapbook: Boolean) {
+    /** The size new Freeform pages get in this notebook. */
+    val defaultPageSize: PageSize get() = PageSize.decode(notebook.value?.pageSize) ?: PageSize.DEFAULT
+
+    /** Makes a page a text page, or a Freeform page of [size] (its text moves into a text box). */
+    fun setLayoutMode(page: PageEntity, scrapbook: Boolean, size: PageSize? = null) {
         val session = session(page)
         viewModelScope.launch {
-            if (scrapbook && !session.editor.isBlank()) {
+            if (scrapbook && page.layoutMode != "SCRAPBOOK" && !session.editor.isBlank()) {
                 val doc = session.editor.toDoc()
                 addTextBox(page.id, 0.05f, 0.24f, 0.9f, doc)
                 session.editor.reset()
                 saveIfChanged(page.id)
             }
-            repo.updatePageStyle(page.copy(layoutMode = if (scrapbook) "SCRAPBOOK" else "INLINE"))
+            repo.setPageType(page.id, if (scrapbook) "SCRAPBOOK" else "INLINE", size ?: defaultPageSize)
         }
+    }
+
+    /** Adds a text page or a Freeform page (of [size]) after position [afterIndex]. */
+    fun addPageOfType(afterIndex: Int, freeform: Boolean, size: PageSize?, onCreated: (Long) -> Unit) = viewModelScope.launch {
+        onCreated(repo.insertPageOfType(notebookId, afterIndex, if (freeform) "SCRAPBOOK" else "INLINE", size ?: defaultPageSize))
     }
 
     fun addVoice(pageId: Long, path: String, durationMs: Long) {
         repo.addElement(
             PageElementEntity(
                 pageId = pageId, kind = ElementKind.VOICE, x = 0.1f, y = placementY(pageId), width = 0.7f,
-                data = VoiceData(path = path, durationMs = durationMs, attached = attachAtBottom).encode(),
+                // Text pages keep recordings in the strip under the text; Freeform pages place them.
+                data = VoiceData(path = path, durationMs = durationMs, attached = sessions[pageId]?.freeform != true).encode(),
             ),
         )
     }

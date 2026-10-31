@@ -58,6 +58,10 @@ data class NotebookEntity(
     val attachAtBottom: Boolean = false,
     /** "NOTEBOOK", or "TEMPLATES" for the hidden notebook that holds saved page templates. */
     val kind: String = NotebookKind.NOTEBOOK,
+    /** New pages: "INLINE" (text pages) or "SCRAPBOOK" (Freeform pages). */
+    val pageLayout: String = "INLINE",
+    /** New Freeform pages' size ([com.quartz.notes.data.model.PageSize.encode]), or null for A4. */
+    val pageSize: String? = null,
     val uid: String = newUid(),
     val deleted: Boolean = false,
 )
@@ -109,8 +113,15 @@ data class PageEntity(
     val sectionImage: String? = null,
     /** Set on pages in the templates notebook: the name the template is listed under. */
     val templateName: String? = null,
-    /** Media path of a picture shown as the page's paper (fit to the page's width), or null. */
+    /** Media path of a picture shown as the page's paper, or null. */
     val backgroundImage: String? = null,
+    /** How the background picture is laid out ([com.quartz.notes.data.model.BackgroundFit]); null = the default. */
+    val backgroundFit: String? = null,
+    /** Freeform pages: the page's size in page units ([com.quartz.notes.data.model.PageSize]); null on text pages. */
+    val canvasWidth: Float? = null,
+    val canvasHeight: Float? = null,
+    /** Which size it is ([com.quartz.notes.data.model.PageSize] key), for labels. */
+    val sizeName: String? = null,
     val uid: String = newUid(),
     val deleted: Boolean = false,
 )

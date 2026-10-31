@@ -10,6 +10,17 @@ import androidx.compose.foundation.gestures.waitForUpOrCancellation
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.requiredSize
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.DpSize
+import com.quartz.notes.data.model.BackgroundFit
+import com.quartz.notes.data.model.PageSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -154,6 +165,14 @@ internal fun PageView(
     val attachedItems = remember(allElements) { allElements.filter { isAttachedElement(it.kind, it.data) } }
     val canvas = remember(page.id) { PageCanvasState() }
     val scrapbook = page.layoutMode == LayoutMode.SCRAPBOOK.name
+    // Freeform pages have a fixed size: laid out at it, then scaled to fit the screen (and zoomed).
+    val freeform = scrapbook
+    SideEffect { session.freeform = freeform }
+    val canvasSize = if (freeform) {
+        DpSize((page.canvasWidth ?: PageSize.DEFAULT.width).dp, (page.canvasHeight ?: PageSize.DEFAULT.height).dp)
+    } else {
+        null
+    }
 
     var viewing by remember { mutableStateOf<String?>(null) }
     var decorating by remember { mutableStateOf<Pair<PageElementEntity, ImageData>?>(null) }
@@ -257,20 +276,36 @@ internal fun PageView(
             .fillMaxSize()
             .padding(start = side.outerStart, end = side.outerEnd, top = 6.dp, bottom = 6.dp)
             .onFocusChanged { if (it.hasFocus) onActivate() }
-            .shadow(2.dp, shape)
-            .clip(shape)
-            .background(bg)
-            .drawBehind {
-                texture?.let { drawRect(it) }
-                when (side) {
-                    PageSide.LEFT, PageSide.RIGHT -> drawSeam(atRightEdge = side == PageSide.LEFT, strength = seamShade)
-                    PageSide.SPREAD -> drawCenterSeam(seamShade)
-                    PageSide.SINGLE -> Unit
-                }
-            },
+            .then(
+                if (freeform) {
+                    // The paper is drawn on the page itself, which is scaled; around it is the desk.
+                    Modifier.clipToBounds()
+                } else {
+                    Modifier
+                        .shadow(2.dp, shape)
+                        .clip(shape)
+                        .background(bg)
+                        .drawBehind {
+                            texture?.let { drawRect(it) }
+                            when (side) {
+                                PageSide.LEFT, PageSide.RIGHT -> drawSeam(atRightEdge = side == PageSide.LEFT, strength = seamShade)
+                                PageSide.SPREAD -> drawCenterSeam(seamShade)
+                                PageSide.SINGLE -> Unit
+                            }
+                        }
+                },
+            ),
     ) {
-        val viewport = maxHeight
-        val pageWidth = maxWidth
+        // The space a page gets on this screen: offered as a Freeform page size ("Cover screen" …).
+        if (side == PageSide.SINGLE || side == PageSide.SPREAD) {
+            val w = maxWidth.value
+            val h = maxHeight.value
+            val settingsRepo = LocalAppContainer.current.settings
+            LaunchedEffect(w, h) { settingsRepo.rememberScreen(w, h) }
+        }
+        val viewportPx = with(density) { Size(maxWidth.toPx(), maxHeight.toPx()) }
+        val viewport = canvasSize?.height ?: maxHeight
+        val pageWidth = canvasSize?.width ?: maxWidth
         val widthPx = with(density) { pageWidth.toPx() }
         val padHPx = with(density) { padH.toPx() }
         val textWidthPx = widthPx - 2 * padHPx
@@ -477,11 +512,52 @@ internal fun PageView(
         val accentActions by rememberUpdatedState(actions)
         val latestLocked by rememberUpdatedState(locked)
 
-        Column(Modifier.fillMaxSize().verticalScroll(scroll)) {
+        val canvasPx = canvasSize?.let { with(density) { Size(it.width.toPx(), it.height.toPx()) } }
+        val fit = canvasPx?.let { minOf(viewportPx.width / it.width, viewportPx.height / it.height) } ?: 1f
+        if (freeform && canvasPx != null) {
+            // Where new items land: the middle of what's in view.
+            val s = fit * session.zoom
+            session.scrollUnits = ((canvasPx.height / 2 - session.pan.y / s - viewportPx.height / (2 * s)) / widthPx).coerceAtLeast(0f)
+        }
+        val pictureMode = BackgroundFit.mode(page.backgroundFit, freeform)
+        var adjusting by remember(page.backgroundFit) { mutableStateOf(BackgroundFit.manual(page.backgroundFit) ?: BackgroundFit.Manual(0f, 0f, 1f)) }
+        val adjustingPicture = freeform && session.adjustingBackground && page.backgroundImage != null
+        // Inside a Freeform page, text ignores the phone's font size setting so every device lays it out alike.
+        val pageDensity = if (freeform) Density(density.density, 1f) else density
+
+        Box(
+            if (freeform && canvasPx != null) {
+                Modifier.fillMaxSize().freeformZoom(session, fit, canvasPx, viewportPx)
+            } else {
+                Modifier.fillMaxSize()
+            },
+        ) {
+        CompositionLocalProvider(LocalDensity provides pageDensity) {
+        Column(
+            if (freeform && canvasSize != null) {
+                Modifier
+                    .requiredSize(canvasSize)
+                    .freeformTransform(session, fit)
+                    .shadow(3.dp, RoundedCornerShape(6.dp))
+                    .clip(RoundedCornerShape(6.dp))
+                    .background(bg)
+                    .drawBehind { texture?.let { drawRect(it) } }
+            } else {
+                Modifier.fillMaxSize().verticalScroll(scroll)
+            },
+        ) {
             Box(
                 Modifier
                     .fillMaxWidth()
-                    .heightIn(min = maxOf(elementsBottom + 48.dp, viewport, pageWidth * backgroundAspect))
+                    .then(
+                        if (freeform) {
+                            Modifier.fillMaxHeight()
+                        } else {
+                            Modifier.heightIn(
+                                min = maxOf(elementsBottom + 48.dp, viewport, if (pictureMode == BackgroundFit.WIDTH) pageWidth * backgroundAspect else 0.dp),
+                            )
+                        },
+                    )
                     .onPlaced { canvas.contentCoords = it }
                     // "Share as image" records the whole page, on its paper color and texture.
                     .then(capture.modifier(background = { bg }, texture = { texture }))
@@ -559,17 +635,14 @@ internal fun PageView(
                         }
                     },
             ) {
-                // A picture as the paper: as wide as the page, from the top; the page is at least as tall.
-                page.backgroundImage?.let { path ->
-                    coil.compose.AsyncImage(
+                // A picture as the paper.
+                if (page.backgroundImage != null) {
+                    PaperPicture(
                         model = backgroundModel,
-                        contentDescription = null,
-                        contentScale = androidx.compose.ui.layout.ContentScale.FillWidth,
-                        alignment = Alignment.TopCenter,
-                        onSuccess = { state ->
-                            val size = state.painter.intrinsicSize
-                            if (size.width > 0f && size.height > 0f) backgroundAspect = size.height / size.width
-                        },
+                        mode = if (adjustingPicture) BackgroundFit.MANUAL else pictureMode,
+                        manual = if (adjustingPicture) adjusting else BackgroundFit.manual(page.backgroundFit),
+                        pageWidthPx = widthPx,
+                        onAspect = { backgroundAspect = it },
                         modifier = Modifier.matchParentSize(),
                     )
                 }
@@ -674,7 +747,7 @@ internal fun PageView(
                             }
                         } else if (elements.none { it.kind == ElementKind.TEXT } && !exporting) {
                             Text(
-                                "Scrapbook page: add text with the T button below",
+                                "Freeform page: add text with the T button below",
                                 color = ink.copy(alpha = 0.35f),
                                 fontSize = 15.sp,
                                 modifier = Modifier.padding(start = padH, top = 16.dp),
@@ -789,6 +862,34 @@ internal fun PageView(
                             },
                     )
                 }
+                if (adjustingPicture) {
+                    // Page style → Adjust: drag and pinch the background picture into place.
+                    Box(Modifier.matchParentSize().adjustPicture(widthPx, { adjusting }) { adjusting = it })
+                }
+            }
+        }
+        }
+            if (freeform && session.zoomedIn && !adjustingPicture) {
+                FloatingPill(
+                    "Fit page",
+                    Modifier.align(Alignment.BottomCenter).padding(bottom = 14.dp),
+                ) {
+                    session.zoom = 1f
+                    session.pan = Offset.Zero
+                }
+            }
+            if (adjustingPicture) {
+                Row(
+                    Modifier.align(Alignment.BottomCenter).padding(bottom = 14.dp),
+                    horizontalArrangement = Arrangement.spacedBy(10.dp),
+                ) {
+                    FloatingPill("Reset") { adjusting = BackgroundFit.Manual(0f, 0f, 1f) }
+                    FloatingPill("Done", primary = true) {
+                        session.adjustingBackground = false
+                        vm.updateStyle(page.copy(backgroundFit = adjusting.encode()))
+                    }
+                }
+                ToolHint("Drag and pinch the picture into place", Modifier.align(Alignment.TopCenter))
             }
         }
 
@@ -964,5 +1065,20 @@ private fun InlineImageSlot(
                 }
             }
         }
+    }
+}
+
+/** A small floating button over the page ("Fit page", "Done" …). */
+@Composable
+private fun FloatingPill(label: String, modifier: Modifier = Modifier, primary: Boolean = false, onClick: () -> Unit) {
+    androidx.compose.material3.Surface(
+        onClick = onClick,
+        modifier = modifier,
+        shape = androidx.compose.foundation.shape.CircleShape,
+        color = if (primary) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface,
+        contentColor = if (primary) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurface,
+        shadowElevation = 4.dp,
+    ) {
+        Text(label, fontSize = 15.sp, fontWeight = FontWeight.Medium, modifier = Modifier.padding(horizontal = 18.dp, vertical = 10.dp))
     }
 }
