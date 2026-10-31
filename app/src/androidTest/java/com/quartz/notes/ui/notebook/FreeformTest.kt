@@ -11,6 +11,7 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performImeAction
 import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.performTouchInput
@@ -237,7 +238,11 @@ class FreeformTest {
         rule.onNodeWithText("What should your notebook be called?").assertExists()
         rule.onNode(SemanticsMatcher("title field") { it.config.getOrNull(SemanticsActions.SetText) != null }).performTextInput("Wizard test")
         screen("f5_setup_name")
-        for (question in listOf("Pick a color", "Choose a cover", "Add an icon", "What kind of pages?")) {
+        // Enter (the keyboard's Next) moves on from the name.
+        rule.onNode(SemanticsMatcher("title field") { it.config.getOrNull(SemanticsActions.SetText) != null }).performImeAction()
+        settle()
+        rule.onNodeWithText("Pick a color").assertExists()
+        for (question in listOf("Choose a cover", "Add an icon", "What kind of pages?")) {
             rule.onNodeWithText("Next").performSemanticsAction(SemanticsActions.OnClick)
             settle()
             rule.onNodeWithText(question).assertExists()
