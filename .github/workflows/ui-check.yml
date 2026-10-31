@@ -77,3 +77,11 @@ jobs:
           git add -A
           git commit -q -m "UI check ${GITHUB_RUN_ID} for ${GITHUB_SHA}"
           git push -q -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" ci-shots
+
+      # Results are published either way; then the check fails if any test did.
+      - name: Fail if any test failed
+        if: always()
+        shell: bash
+        run: |
+          if [ "${UNIT_FAILED:-0}" = "1" ]; then echo "Unit tests failed (see unit.log)"; exit 1; fi
+          if ! grep -q "BUILD SUCCESSFUL" connected.log; then echo "Emulator tests failed (see connected.log)"; grep -E "FAILED|failure" connected.log | head -20; exit 1; fi
