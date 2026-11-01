@@ -258,7 +258,7 @@ async def main():
         await page.screenshot(path=f"{OUT}/w07_grid_dark_page.png")
 
         # Add a picture to the (dark) page.
-        await page.locator("input[type=file]").set_input_files(pic)
+        await page.locator("input[type=file][accept='image/*']").set_input_files(pic)
         await expect(page.locator(".layer .photo img")).to_have_count(1, timeout=10000)
         budget = find("pages", 'title="Budget"')[0]
         imgs = find("page_elements", f'page="{budget["id"]}" && kind="IMAGE"')
