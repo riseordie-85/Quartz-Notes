@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { emptySheet } from "../lib/sheet"
   import { store } from "../lib/store.svelte"
   import { router } from "../lib/router.svelte"
   import { argbToCss } from "../lib/richdoc"
@@ -67,6 +68,12 @@
   async function addPageAfter() {
     await sheet?.save()
     const p = await store.addPage(id, page ?? null)
+    router.go({ name: "notebook", id, page: p.id })
+  }
+
+  async function addSheetAfter() {
+    await sheet?.save()
+    const p = await store.addPage(id, page ?? null, { layoutMode: "SHEET", canvasWidth: null, canvasHeight: null, sizeName: "", spread: false, sheet: emptySheet() })
     router.go({ name: "notebook", id, page: p.id })
   }
 
@@ -165,6 +172,7 @@
             {#if page}
               <p class="label">This page</p>
               <button onclick={() => act(addPageAfter)}><Icon name="addPage" size={20} />Add a page after it</button>
+              <button onclick={() => ((more = false), act(addSheetAfter))}><Icon name="table" size={20} />Add a sheet after it</button>
               <button onclick={() => ((more = false), (picking = true))}><Icon name="newNotebook" size={20} />Add a page from a template</button>
               <button disabled={index <= 0} onclick={() => act(() => store.movePage(page, index - 1))}><Icon name="arrowBack" size={20} />Move earlier</button>
               <button disabled={index >= pages.length - 1} onclick={() => act(() => store.movePage(page, index + 1))}><Icon name="arrowForward" size={20} />Move later</button>
@@ -229,6 +237,7 @@
           <span class="num">{i + 1}</span>
           <span class="name">{pageLabel(i)}</span>
           {#if p.layoutMode === "SCRAPBOOK"}<span class="tag" title="Scrapbook page"><Icon name="scrapbook" size={17} /></span>{/if}
+          {#if p.layoutMode === "SHEET"}<span class="tag" title="Sheet"><Icon name="table" size={17} /></span>{/if}
           {#if p.locked}<span class="tag" title="Locked"><Icon name="lock" size={17} /></span>{/if}
         </a>
       {/each}

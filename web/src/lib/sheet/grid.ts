@@ -202,3 +202,238 @@ export function plainText(sheet: SheetData, options: CalcOptions = {}): string {
   while (lines.length && lines[lines.length - 1] === "") lines.pop()
   return lines.join("\n")
 }
+
+// ---- Working on a selected area ----
+
+/** A rectangle of cells, 0-based and inclusive, corners in order. */
+export interface Area {
+  r1: number
+  c1: number
+  r2: number
+  c2: number
+}
+
+export function areaOf(a: [number, number], b: [number, number]): Area {
+  return { r1: Math.min(a[0], b[0]), c1: Math.min(a[1], b[1]), r2: Math.max(a[0], b[0]), c2: Math.max(a[1], b[1]) }
+}
+
+/** "B2" or "B2:D9". */
+export function areaLabel(a: Area): string {
+  const one = addr(a.r1, a.c1)
+  return a.r1 === a.r2 && a.c1 === a.c2 ? one : one + ":" + addr(a.r2, a.c2)
+}
+
+/** A style with its unset parts left out. */
+export function cleanStyle(s: SheetStyle): SheetStyle | undefined {
+  const out: SheetStyle = {}
+  for (const [k, v] of Object.entries(s) as [keyof SheetStyle, unknown][]) {
+    if (v === undefined || v === null || v === false || v === "") continue
+    ;(out as Record<string, unknown>)[k] = v
+  }
+  return Object.keys(out).length ? out : undefined
+}
+
+/** The sheet with [change] applied to the style of every cell in [area]. */
+export function updateStyles(sheet: SheetData, area: Area, change: (s: SheetStyle) => SheetStyle): SheetData {
+  const out = clone(sheet)
+  for (let r = area.r1; r <= area.r2; r++) {
+    for (let c = area.c1; c <= area.c2; c++) {
+      const key = addr(r, c)
+      const old = out.cells[key] ?? {}
+      const s = cleanStyle(change({ ...(old.s ?? {}) }))
+      const cell: SheetCell = { ...old }
+      if (s) cell.s = s
+      else delete cell.s
+      putCell(out.cells, key, cell)
+    }
+  }
+  return out
+}
+
+/** Clears what's typed in [area] (styles stay unless [styles]). */
+export function clearArea(sheet: SheetData, area: Area, styles = false): SheetData {
+  const out = clone(sheet)
+  for (let r = area.r1; r <= area.r2; r++) {
+    for (let c = area.c1; c <= area.c2; c++) {
+      const key = addr(r, c)
+      const old = out.cells[key]
+      if (!old) continue
+      if (styles) delete out.cells[key]
+      else {
+        const cell = { ...old }
+        delete cell.v
+        putCell(out.cells, key, cell)
+      }
+    }
+  }
+  return out
+}
+
+export type Borders = "all" | "outline" | "top" | "bottom" | "left" | "right" | "none"
+
+export function setBorders(sheet: SheetData, area: Area, b: Borders): SheetData {
+  const out = clone(sheet)
+  for (let r = area.r1; r <= area.r2; r++) {
+    for (let c = area.c1; c <= area.c2; c++) {
+      const key = addr(r, c)
+      const old = out.cells[key] ?? {}
+      const sides = new Set((old.s?.border ?? "").split(""))
+      if (b === "all") "trbl".split("").forEach((x) => sides.add(x))
+      else if (b === "none") sides.clear()
+      else {
+        if ((b === "outline" || b === "top") && r === area.r1) sides.add("t")
+        if ((b === "outline" || b === "bottom") && r === area.r2) sides.add("b")
+        if ((b === "outline" || b === "left") && c === area.c1) sides.add("l")
+        if ((b === "outline" || b === "right") && c === area.c2) sides.add("r")
+      }
+      const border = "trbl".split("").filter((x) => sides.has(x)).join("")
+      const s = cleanStyle({ ...(old.s ?? {}), border })
+      const cell: SheetCell = { ...old }
+      if (s) cell.s = s
+      else delete cell.s
+      putCell(out.cells, key, cell)
+    }
+  }
+  return out
+}
+
+/** Cells copied from a sheet: their typed values and styles, and where they came from. */
+export interface Block {
+  r0: number
+  c0: number
+  rows: number
+  cols: number
+  cells: (SheetCell | undefined)[]
+}
+
+export function copyBlock(sheet: SheetData, area: Area): Block {
+  const cells: (SheetCell | undefined)[] = []
+  for (let r = area.r1; r <= area.r2; r++) for (let c = area.c1; c <= area.c2; c++) cells.push(sheet.cells[addr(r, c)])
+  return { r0: area.r1, c0: area.c1, rows: area.r2 - area.r1 + 1, cols: area.c2 - area.c1 + 1, cells: JSON.parse(JSON.stringify(cells.map((x) => x ?? null))).map((x: SheetCell | null) => x ?? undefined) }
+}
+
+/** The area's shown values as tab-separated text, for other apps. */
+export function blockText(sheet: SheetData, area: Area, calc: SheetCalc = new SheetCalc(sheet)): string {
+  const lines: string[] = []
+  for (let r = area.r1; r <= area.r2; r++) {
+    const row: string[] = []
+    for (let c = area.c1; c <= area.c2; c++) row.push(calc.display(r, c))
+    lines.push(row.join("\t"))
+  }
+  return lines.join("\n")
+}
+
+/** Pastes [block] with its top-left at 0-based r, c; formulas move with it. */
+export function pasteBlock(sheet: SheetData, block: Block, r: number, c: number): SheetData {
+  const out = clone(sheet)
+  const dr = r - block.r0
+  const dc = c - block.c0
+  for (let i = 0; i < block.rows; i++) {
+    for (let j = 0; j < block.cols; j++) {
+      const cell = block.cells[i * block.cols + j]
+      let moved = cell ? { ...cell } : undefined
+      if (moved?.v !== undefined && moved.s?.fmt !== "text") moved.v = shiftFormula(moved.v, dr, dc)
+      putCell(out.cells, addr(r + i, c + j), moved)
+    }
+  }
+  return grow(out, r + block.rows - 1, c + block.cols - 1)
+}
+
+/** Pastes text from another app: lines are rows, tabs split cells; each is typed in. */
+export function pasteText(sheet: SheetData, text: string, r: number, c: number): SheetData {
+  let out = sheet
+  const lines = text.replace(/\r\n?/g, "\n").replace(/\n+$/, "").split("\n")
+  lines.forEach((line, i) => line.split("\t").forEach((cell, j) => (out = typeInto(out, r + i, c + j, cell))))
+  return out
+}
+
+export function fillDown(sheet: SheetData, area: Area): SheetData {
+  if (area.r2 <= area.r1) return sheet
+  const top = copyBlock(sheet, { ...area, r2: area.r1 })
+  let out = sheet
+  for (let r = area.r1 + 1; r <= area.r2; r++) out = pasteBlock(out, top, r, area.c1)
+  return out
+}
+
+export function fillRight(sheet: SheetData, area: Area): SheetData {
+  if (area.c2 <= area.c1) return sheet
+  const left = copyBlock(sheet, { ...area, c2: area.c1 })
+  let out = sheet
+  for (let c = area.c1 + 1; c <= area.c2; c++) out = pasteBlock(out, left, area.r1, c)
+  return out
+}
+
+/**
+ * AutoSum. One cell: a total of the numbers just above it (or else just left of it). Several
+ * cells: a total under each column, in the row below. Returns the sheet and the cell to select.
+ */
+export function autoSum(sheet: SheetData, area: Area, calc: SheetCalc = new SheetCalc(sheet)): [SheetData, [number, number]] {
+  const isNum = (r: number, c: number) => r >= 0 && c >= 0 && calc.value(r, c).k === "num"
+  if (area.r1 === area.r2 && area.c1 === area.c2) {
+    const { r1: r, c1: c } = area
+    let top = r
+    while (isNum(top - 1, c)) top--
+    if (top < r) return [typeInto(sheet, r, c, `=SUM(${addr(top, c)}:${addr(r - 1, c)})`), [r, c]]
+    let left = c
+    while (isNum(r, left - 1)) left--
+    if (left < c) return [typeInto(sheet, r, c, `=SUM(${addr(r, left)}:${addr(r, c - 1)})`), [r, c]]
+    return [typeInto(sheet, r, c, "=SUM()"), [r, c]]
+  }
+  let out = sheet
+  const below = area.r2 + 1
+  for (let c = area.c1; c <= area.c2; c++) out = typeInto(out, below, c, `=SUM(${addr(area.r1, c)}:${addr(area.r2, c)})`)
+  return [out, [below, area.c1]]
+}
+
+/** Sum, average and count of the numbers in [area], or null when it holds none. */
+export function areaStats(sheet: SheetData, calc: SheetCalc, area: Area): { sum: number; average: number; count: number } | null {
+  const [rows, cols] = usedSize(sheet)
+  let sum = 0
+  let count = 0
+  for (let r = area.r1; r <= Math.min(area.r2, rows - 1); r++) {
+    for (let c = area.c1; c <= Math.min(area.c2, cols - 1); c++) {
+      const v = calc.value(r, c)
+      if (v.k === "num") {
+        sum += v.n
+        count++
+      }
+    }
+  }
+  return count ? { sum, average: sum / count, count } : null
+}
+
+/** Shown values in a column's data rows (row 2 down), for the filter's list. */
+export function columnValues(sheet: SheetData, col: number, calc: SheetCalc = new SheetCalc(sheet)): string[] {
+  const seen = new Set<string>()
+  const [rows] = usedSize(sheet)
+  for (let r = 1; r < rows; r++) seen.add(calc.display(r, col))
+  return [...seen].sort((a, b) => (a === "" ? 1 : 0) - (b === "" ? 1 : 0) || (a.toLowerCase() < b.toLowerCase() ? -1 : a.toLowerCase() > b.toLowerCase() ? 1 : 0))
+}
+
+/** A formula with its unclosed brackets closed, as people often leave them. */
+export function closeParens(text: string): string {
+  if (!text.startsWith("=")) return text
+  let depth = 0
+  let quoted = false
+  for (const ch of text) {
+    if (ch === '"') quoted = !quoted
+    else if (!quoted && ch === "(") depth++
+    else if (!quoted && ch === ")") depth--
+  }
+  return depth > 0 && !quoted ? text + ")".repeat(depth) : text
+}
+
+/** The sheet as stored: cells and settings only (no empty parts). */
+export function sheetJson(sheet: SheetData): SheetData {
+  const out: SheetData = { v: 1, rows: sheet.rows, cols: sheet.cols, widths: { ...sheet.widths }, cells: {} }
+  for (const [k, cell] of Object.entries(sheet.cells)) {
+    const c: SheetCell = {}
+    if (cell.v !== undefined && cell.v !== "") c.v = cell.v
+    const s = cell.s ? cleanStyle(cell.s) : undefined
+    if (s) c.s = s
+    if (c.v !== undefined || c.s) out.cells[k] = c
+  }
+  if (sheet.table) out.table = { style: sheet.table.style }
+  if (sheet.hide && Object.keys(sheet.hide).length) out.hide = { ...sheet.hide }
+  return out
+}

@@ -34,8 +34,8 @@ show it the same way; `shared/fixtures/sheets/*.json` are cases both must pass.
     - `align`: `left`, `center` or `right` (default: numbers right, everything else left).
     - `wrap`: long text wraps onto more lines (otherwise it's cut off at the cell's edge).
     - `border`: which sides have a line, any of the letters `t`, `r`, `b`, `l` (e.g. `"tb"`).
-- `table`: banded table look over the used area (row 1 to the last filled row, column A to the last
-  filled column): `style` is `blue`, `green`, `orange`, `red`, `purple` or `gray`. Row 1 is the
+- `table`: banded table look over the filled area (row 1 to the last row with a value, column A to the
+  last column with one): `style` is `blue`, `green`, `orange`, `red`, `purple` or `gray`. Row 1 is the
   header: the style's color with white bold text; below it rows alternate white (row 2) and a light
   tint (row 3).
   | style | header | band |

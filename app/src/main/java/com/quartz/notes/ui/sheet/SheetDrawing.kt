@@ -86,7 +86,7 @@ internal class CellLook(val fill: Color?, val text: Color, val bold: Boolean)
 
 internal fun cellLook(data: SheetData, r: Int, c: Int, s: SheetStyle, look: SheetLook): CellLook {
     val table = data.table?.let { TABLE_STYLES[it] }
-    val used = data.usedSize
+    val used = data.valuedSize
     val inTable = table != null && r < used.first && c < used.second
     val header = inTable && r == 0
     val tableFill = when {

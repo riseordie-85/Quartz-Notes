@@ -66,6 +66,19 @@ data class SheetData(
         r to c
     }
 
+    /** One past the last row and column holding a value (not just a style): the table look's extent. */
+    val valuedSize: Pair<Int, Int> by lazy {
+        var r = 0
+        var c = 0
+        for ((key, cell) in cells) {
+            if (cell.v.isNullOrEmpty()) continue
+            val at = parseAddr(key) ?: continue
+            r = maxOf(r, at.first + 1)
+            c = maxOf(c, at.second + 1)
+        }
+        r to c
+    }
+
     fun encode(): String = Json.encodeToString(JsonElement.serializer(), toJson())
 
     fun toJson(): JsonObject = buildJsonObject {

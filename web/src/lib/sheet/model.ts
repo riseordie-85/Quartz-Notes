@@ -158,3 +158,17 @@ export function usedSize(sheet: SheetData): [number, number] {
   }
   return [r, c]
 }
+
+/** One past the last row and column holding a value (not just a style): the table look's extent. */
+export function valuedSize(sheet: SheetData): [number, number] {
+  let r = 0
+  let c = 0
+  for (const [key, cell] of Object.entries(sheet.cells)) {
+    if (cell.v === undefined || cell.v === "") continue
+    const at = parseAddr(key)
+    if (!at) continue
+    r = Math.max(r, at[0] + 1)
+    c = Math.max(c, at[1] + 1)
+  }
+  return [r, c]
+}

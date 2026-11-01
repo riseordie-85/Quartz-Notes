@@ -16,6 +16,8 @@
   import Toolbar from "./Toolbar.svelte"
   import ElementsLayer from "./ElementsLayer.svelte"
   import VoicePlayer from "./VoicePlayer.svelte"
+  import SheetEditor from "./SheetEditor.svelte"
+  import { plainText as sheetPlainText, readSheet, sheetJson, type SheetData } from "../lib/sheet"
   import { lightbox, pagePictures } from "../lib/lightbox.svelte"
 
   let { page, onError }: { page: Page; onError: (msg: string | null) => void } = $props()
@@ -28,6 +30,7 @@
   const live = $derived(store.page(pageId) ?? page)
   const elements: PageElement[] = $derived(store.elementsOf(pageId))
   const scrapbook = $derived(live.layoutMode === "SCRAPBOOK")
+  const isSheet = $derived(live.layoutMode === "SHEET" && !live.isSection)
   // Freeform pages have a set size: laid out at it, then scaled to the width there is (like the app).
   const canvasW = $derived(scrapbook ? live.canvasWidth || 595 : 0)
   const canvasH = $derived(scrapbook ? live.canvasHeight || 842 : 0)
@@ -137,6 +140,8 @@
   let description = $state(page.plainText)
   let editor = $state<TipTap | null>(null)
   let editorView: Editor | undefined = $state()
+  let grid: SheetData = $state.raw(readSheet(page.sheet))
+  let sheetView: SheetEditor | undefined = $state()
   let dirty = false
   // The version last shown or saved here (see NoteScreen).
   let seenRev = page.rev
@@ -156,7 +161,9 @@
     try {
       const fields = live.isSection
         ? { title, content: compactDoc(fromPlainText(description)), plainText: description, updatedAt: Date.now() }
-        : { title, content: compactDoc(doc), plainText: plainText(doc), updatedAt: Date.now() }
+        : isSheet
+          ? { title, sheet: sheetJson(grid), plainText: sheetPlainText(grid), updatedAt: Date.now() }
+          : { title, content: compactDoc(doc), plainText: plainText(doc), updatedAt: Date.now() }
       const saved = await store.save("pages", pageId, fields, seenRev)
       if (saved) (seenRev = saved.rev), (seen = saved)
       onError(null)
@@ -182,6 +189,11 @@
     description = p.plainText
     doc = decodeDoc(p.content)
     editorView?.load(doc)
+    const nextGrid = readSheet(p.sheet)
+    if (JSON.stringify(sheetJson(nextGrid)) !== JSON.stringify(sheetJson(grid))) {
+      grid = nextGrid
+      sheetView?.load(nextGrid)
+    }
   })
 
   onDestroy(() => {
@@ -197,6 +209,14 @@
 
 <svelte:window onbeforeunload={() => save()} />
 
+{#if isSheet}
+  <SheetEditor bind:this={sheetView} sheet={grid} {ink} paper={bg} {locked} onchange={(g) => ((grid = g), changed())}>
+    <div class="title-row" style:padding="14px {padH - 10}px 4px {padH}px">
+      <input class="title" placeholder="Sheet title" bind:value={title} oninput={changed} readonly={locked} aria-label="Page title" />
+      {#if locked}<span class="lock" title="This page is locked"><Icon name="lock" size={21} /></span>{/if}
+    </div>
+  </SheetEditor>
+{:else}
 {#if !live.isSection && !scrapbook && !locked}
   <div class="toolbar-row"><Toolbar {editor} /></div>
 {/if}
@@ -299,6 +319,7 @@
   {/if}
 </div>
 </div>
+{/if}
 
 <style>
   .toolbar-row {

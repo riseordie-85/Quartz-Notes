@@ -18,6 +18,7 @@ import {
 } from "./types"
 import { compactDoc, decodeDoc, emptyDoc, newId, plainText, registerFont } from "./richdoc"
 import type { StarterNote, StarterPage } from "./starters"
+import { emptySheet } from "./sheet"
 
 function isTemplatesNotebook(n: Notebook): boolean {
   return n.kind === "TEMPLATES"
@@ -25,6 +26,7 @@ function isTemplatesNotebook(n: Notebook): boolean {
 
 /** The type and size of new pages in a notebook (like the app: A4 when no size was chosen). */
 function pageTypeOf(nb: Notebook | undefined): Partial<Page> {
+  if (nb?.pageLayout === "SHEET") return { layoutMode: "SHEET", canvasWidth: null, canvasHeight: null, sizeName: "", sheet: emptySheet() }
   if (nb?.pageLayout !== "SCRAPBOOK") return { layoutMode: "INLINE", canvasWidth: null, canvasHeight: null, sizeName: "" }
   const [key, w, h] = (nb.pageSize || "A4|595|842").split("|")
   const width = Number(w) || 595
@@ -37,6 +39,7 @@ export function sameText(a: QuickNote | Page, b: QuickNote | Page): boolean {
   return (
     a.title === b.title &&
     a.plainText === b.plainText &&
+    JSON.stringify((a as Page).sheet ?? null) === JSON.stringify((b as Page).sheet ?? null) &&
     JSON.stringify(compactDoc(decodeDoc(a.content))) === JSON.stringify(compactDoc(decodeDoc(b.content)))
   )
 }

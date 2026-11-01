@@ -188,7 +188,7 @@ object SheetGrid {
         area.forEach { r, c ->
             val key = addr(r, c)
             val old = cells[key] ?: SheetCell()
-            val sides = old.s.border.orEmpty().toMutableSet()
+            val sides = old.s.border.orEmpty().toHashSet()
             when (borders) {
                 Borders.ALL -> sides.addAll(listOf('t', 'r', 'b', 'l'))
                 Borders.NONE -> sides.clear()

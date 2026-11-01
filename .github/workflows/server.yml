@@ -48,6 +48,7 @@ jobs:
           python3 -m playwright install --with-deps chromium > /dev/null
           python3 web/tests/e2e/seed.py http://127.0.0.1:8090 admin@test.local adminpass123
           python3 web/tests/e2e/web_test.py http://127.0.0.1:8090 web-shots
+          python3 web/tests/e2e/sheet_test.py http://127.0.0.1:8090 web-shots
       - name: Server log
         if: failure()
         run: tail -50 pb.log
