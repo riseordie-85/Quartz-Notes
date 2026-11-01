@@ -91,7 +91,7 @@ object SyncCodec {
         p.canvasWidth?.let { put("canvasWidth", it) } ?: put("canvasWidth", JsonNull)
         p.canvasHeight?.let { put("canvasHeight", it) } ?: put("canvasHeight", JsonNull)
         put("sizeName", p.sizeName.orEmpty())
-        put("sheet", parseOrNull(p.sheet.orEmpty()))
+        put("sheet", parseOrNull(com.quartz.notes.data.sheet.SheetStore.unpack(p.sheet).orEmpty()))
     }
 
     /** [uidOfElement] turns a connector's local element ids into uids. */
@@ -177,7 +177,7 @@ object SyncCodec {
         texture = r.str("texture").ifEmpty { "NONE" },
         layoutMode = r.str("layoutMode").ifEmpty { "INLINE" },
         content = stringify(r["content"]),
-        plainText = r.str("plainText"),
+        plainText = r.str("plainText").take(com.quartz.notes.data.sheet.SheetStore.MAX_SEARCH_TEXT),
         createdAt = r.long("createdAt"),
         updatedAt = r.long("updatedAt"),
         locked = r.bool("locked"),
@@ -191,7 +191,7 @@ object SyncCodec {
         canvasWidth = r.double("canvasWidth").toFloat().takeIf { it > 0f },
         canvasHeight = r.double("canvasHeight").toFloat().takeIf { it > 0f },
         sizeName = r.str("sizeName").ifEmpty { null },
-        sheet = stringify(r["sheet"]).ifEmpty { null },
+        sheet = com.quartz.notes.data.sheet.SheetStore.pack(stringify(r["sheet"]).ifEmpty { null }),
     )
 
     /** [idOfElement] turns a connector's element uids back into local ids. */

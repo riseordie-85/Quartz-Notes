@@ -17,7 +17,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
         SyncStateEntity::class,
         SyncFlagsEntity::class,
     ],
-    version = 8,
+    version = 9,
     exportSchema = true,
 )
 abstract class QuartzDatabase : RoomDatabase() {
@@ -49,7 +49,7 @@ abstract class QuartzDatabase : RoomDatabase() {
                 .addMigrations(*ALL_MIGRATIONS)
                 .build()
 
-        val ALL_MIGRATIONS get() = arrayOf(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8)
+        val ALL_MIGRATIONS get() = arrayOf(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8, MIGRATION_8_9)
 
         /** Adds page lock and two-page (spread) flags. */
         private val MIGRATION_1_2 = object : androidx.room.migration.Migration(1, 2) {
@@ -120,6 +120,34 @@ abstract class QuartzDatabase : RoomDatabase() {
         val MIGRATION_7_8 = object : androidx.room.migration.Migration(7, 8) {
             override fun migrate(db: SupportSQLiteDatabase) {
                 db.execSQL("ALTER TABLE pages ADD COLUMN sheet TEXT")
+            }
+        }
+
+        /**
+         * Big sheets are kept compressed (SheetStore): Android reads a row through a 2 MB window, and a
+         * page past that couldn't be read at all, so its notebook wouldn't open. Each oversized sheet is
+         * read in pieces (only small columns go through the window), compressed and written back.
+         */
+        val MIGRATION_8_9 = object : androidx.room.migration.Migration(8, 9) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                val big = ArrayList<Pair<Long, Long>>()
+                db.query("SELECT id, length(sheet) FROM pages WHERE length(sheet) > ${com.quartz.notes.data.sheet.SheetStore.COMPRESS_OVER}").use { c ->
+                    while (c.moveToNext()) big += c.getLong(0) to c.getLong(1)
+                }
+                val piece = 250_000
+                for ((id, len) in big) {
+                    val sb = StringBuilder(len.toInt())
+                    var from = 1L
+                    while (from <= len) {
+                        db.query("SELECT substr(sheet, ?, ?) FROM pages WHERE id = ?", arrayOf<Any>(from, piece, id)).use { c ->
+                            if (c.moveToFirst()) sb.append(c.getString(0) ?: "")
+                        }
+                        from += piece
+                    }
+                    db.execSQL("UPDATE pages SET sheet = ? WHERE id = ?", arrayOf<Any?>(com.quartz.notes.data.sheet.SheetStore.pack(sb.toString()), id))
+                }
+                val max = com.quartz.notes.data.sheet.SheetStore.MAX_SEARCH_TEXT
+                db.execSQL("UPDATE pages SET plainText = substr(plainText, 1, $max) WHERE length(plainText) > $max")
             }
         }
 

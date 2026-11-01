@@ -118,7 +118,8 @@ data class SheetData(
         /** Reads stored sheet JSON, dropping anything malformed. */
         fun decode(text: String?): SheetData {
             if (text.isNullOrBlank()) return SheetData()
-            val el = runCatching { Json.parseToJsonElement(text) }.getOrNull() ?: return SheetData()
+            val json = SheetStore.unpack(text) ?: return SheetData()
+            val el = runCatching { Json.parseToJsonElement(json) }.getOrNull() ?: return SheetData()
             return fromJson(el)
         }
 

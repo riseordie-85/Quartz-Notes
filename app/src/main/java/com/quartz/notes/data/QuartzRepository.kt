@@ -2,6 +2,7 @@ package com.quartz.notes.data
 
 import com.quartz.notes.data.sheet.SheetData
 import com.quartz.notes.data.sheet.SheetGrid
+import com.quartz.notes.data.sheet.SheetStore
 import androidx.room.withTransaction
 import com.quartz.notes.data.db.AttachmentEntity
 import com.quartz.notes.data.db.NotebookEntity
@@ -254,7 +255,7 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
             val sheet = SheetData.decode(page.sheet)
             page.copy(
                 layoutMode = "SHEET", canvasWidth = null, canvasHeight = null, sizeName = null, spread = false,
-                sheet = sheet.encode(), plainText = SheetGrid.plainText(sheet),
+                sheet = SheetStore.store(sheet), plainText = SheetStore.searchText(sheet),
             )
         }
         else -> page.copy(
@@ -283,7 +284,7 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
             val id = insertPageNow(notebookId, afterIndex)
             val page = pages.get(id) ?: return@withTransaction id
             pages.update(
-                withPageType(page.copy(sheet = sheet.encode()), "SHEET", null).copy(title = title.trim(), updatedAt = now()),
+                withPageType(page.copy(sheet = SheetStore.store(sheet)), "SHEET", null).copy(title = title.trim(), updatedAt = now()),
             )
             id
         }
@@ -396,7 +397,7 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
 
     /** Saves a sheet page's grid (and its shown values, for search). */
     fun savePageSheet(pageId: Long, sheet: SheetData) = enqueue {
-        pages.updateSheet(pageId, sheet.encode(), SheetGrid.plainText(sheet), now())
+        pages.updateSheet(pageId, SheetStore.store(sheet), SheetStore.searchText(sheet), now())
     }
 
     fun setPageLocked(pageId: Long, locked: Boolean) = enqueue { pages.setLocked(pageId, locked) }
