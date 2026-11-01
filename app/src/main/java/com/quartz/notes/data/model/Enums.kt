@@ -27,6 +27,8 @@ enum class Texture(val label: String) {
 enum class LayoutMode {
     INLINE,
     SCRAPBOOK,
+    /** A spreadsheet: the grid lives in pages.sheet. */
+    SHEET,
 }
 
 /** Owner of an attachment row. */

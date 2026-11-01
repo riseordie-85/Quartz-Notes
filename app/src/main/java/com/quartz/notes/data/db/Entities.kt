@@ -122,6 +122,8 @@ data class PageEntity(
     val canvasHeight: Float? = null,
     /** Which size it is ([com.quartz.notes.data.model.PageSize] key), for labels. */
     val sizeName: String? = null,
+    /** Sheet pages ([com.quartz.notes.data.model.LayoutMode.SHEET]): the grid, as sheet JSON (see docs/sheet-format.md). */
+    val sheet: String? = null,
     val uid: String = newUid(),
     val deleted: Boolean = false,
 )

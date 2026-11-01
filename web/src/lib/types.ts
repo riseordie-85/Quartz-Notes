@@ -65,6 +65,8 @@ export interface Page extends SyncedRecord {
   canvasWidth: number | null
   canvasHeight: number | null
   sizeName: string
+  /** Sheet pages (layoutMode "SHEET"): the grid (see docs/sheet-format.md); null otherwise. */
+  sheet?: unknown
 }
 
 export interface PageElement extends SyncedRecord {

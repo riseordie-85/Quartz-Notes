@@ -17,7 +17,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
         SyncStateEntity::class,
         SyncFlagsEntity::class,
     ],
-    version = 7,
+    version = 8,
     exportSchema = true,
 )
 abstract class QuartzDatabase : RoomDatabase() {
@@ -49,7 +49,7 @@ abstract class QuartzDatabase : RoomDatabase() {
                 .addMigrations(*ALL_MIGRATIONS)
                 .build()
 
-        val ALL_MIGRATIONS get() = arrayOf(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7)
+        val ALL_MIGRATIONS get() = arrayOf(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8)
 
         /** Adds page lock and two-page (spread) flags. */
         private val MIGRATION_1_2 = object : androidx.room.migration.Migration(1, 2) {
@@ -116,6 +116,13 @@ abstract class QuartzDatabase : RoomDatabase() {
         }
 
         /** Freeform pages (a fixed page size), notebooks' default page type and size, background picture fitting. */
+        /** Sheet (spreadsheet) pages keep their grid in pages.sheet. */
+        val MIGRATION_7_8 = object : androidx.room.migration.Migration(7, 8) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE pages ADD COLUMN sheet TEXT")
+            }
+        }
+
         val MIGRATION_6_7 = object : androidx.room.migration.Migration(6, 7) {
             override fun migrate(db: SupportSQLiteDatabase) {
                 db.execSQL("ALTER TABLE pages ADD COLUMN backgroundFit TEXT")

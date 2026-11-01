@@ -91,6 +91,7 @@ object SyncCodec {
         p.canvasWidth?.let { put("canvasWidth", it) } ?: put("canvasWidth", JsonNull)
         p.canvasHeight?.let { put("canvasHeight", it) } ?: put("canvasHeight", JsonNull)
         put("sizeName", p.sizeName.orEmpty())
+        put("sheet", parseOrNull(p.sheet.orEmpty()))
     }
 
     /** [uidOfElement] turns a connector's local element ids into uids. */
@@ -190,6 +191,7 @@ object SyncCodec {
         canvasWidth = r.double("canvasWidth").toFloat().takeIf { it > 0f },
         canvasHeight = r.double("canvasHeight").toFloat().takeIf { it > 0f },
         sizeName = r.str("sizeName").ifEmpty { null },
+        sheet = stringify(r["sheet"]).ifEmpty { null },
     )
 
     /** [idOfElement] turns a connector's element uids back into local ids. */

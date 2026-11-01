@@ -1,0 +1,176 @@
+{
+  "about": "Cases the app's and the web's sheet code must both pass (docs/sheet-format.md).",
+  "input": [
+    { "typed": "", "clear": true },
+    { "typed": "=SUM(A1:A2)", "v": "=SUM(A1:A2)" },
+    { "typed": "'00123", "v": "00123", "fmt": "text" },
+    { "typed": "1,234.5", "v": "1234.5" },
+    { "typed": "-12", "v": "-12" },
+    { "typed": ".5", "v": "0.5" },
+    { "typed": "1e3", "v": "1000" },
+    { "typed": "  42  ", "v": "42" },
+    { "typed": "$1,200.50", "v": "1200.5", "fmt": "currency" },
+    { "typed": "-$5", "v": "-5", "fmt": "currency" },
+    { "typed": "45%", "v": "0.45", "fmt": "percent" },
+    { "typed": "12.5%", "v": "0.125", "fmt": "percent" },
+    { "typed": "10/31/2026", "v": "46326", "fmt": "date" },
+    { "typed": "10/31/26", "v": "46326", "fmt": "date" },
+    { "typed": "2026-10-31", "v": "46326", "fmt": "date" },
+    { "typed": "2/29/2024", "v": "45351", "fmt": "date" },
+    { "typed": "3:30 PM", "v": "0.645833333333333", "fmt": "time" },
+    { "typed": "15:30", "v": "0.645833333333333", "fmt": "time" },
+    { "typed": "12:00 AM", "v": "0", "fmt": "time" },
+    { "typed": "10/31/2026 3:30 PM", "v": "46326.6458333333", "fmt": "datetime" },
+    { "typed": "Hello there", "v": "Hello there" },
+    { "typed": "13/40/2026", "v": "13/40/2026" },
+    { "typed": "1.2.3", "v": "1.2.3" }
+  ],
+  "format": [
+    { "value": 10, "out": "10" },
+    { "value": 2.5, "out": "2.5" },
+    { "value": 0.3333333333333333, "out": "0.3333333333" },
+    { "value": 0.6666666666666666, "out": "0.6666666667" },
+    { "value": 123456.789, "out": "123456.789" },
+    { "value": 1e20, "out": "1E+20" },
+    { "value": 1.23456789e20, "out": "1.23457E+20" },
+    { "value": 0.30000000000000004, "out": "0.3" },
+    { "value": -0.5, "out": "-0.5" },
+    { "value": 1234567890123, "out": "1234567890123" },
+    { "value": 0.000001234, "out": "0.000001234" },
+    { "value": 1e-10, "out": "1E-10" },
+    { "value": 0, "out": "0" },
+    { "value": 1234.5, "fmt": "number", "out": "1,234.50" },
+    { "value": -1234.567, "fmt": "number", "out": "-1,234.57" },
+    { "value": 0, "fmt": "number", "out": "0.00" },
+    { "value": 2.5, "fmt": "number", "dp": 0, "out": "3" },
+    { "value": -0.001, "fmt": "number", "out": "0.00" },
+    { "value": 1234567.891, "fmt": "number", "dp": 1, "out": "1,234,567.9" },
+    { "value": 1234.5, "fmt": "currency", "out": "$1,234.50" },
+    { "value": -5, "fmt": "currency", "out": "-$5.00" },
+    { "value": 0.45, "fmt": "percent", "out": "45%" },
+    { "value": 0.125, "fmt": "percent", "dp": 1, "out": "12.5%" },
+    { "value": 0.07, "fmt": "percent", "out": "7%" },
+    { "value": 46326, "fmt": "date", "out": "10/31/2026" },
+    { "value": 46023, "fmt": "date", "out": "1/1/2026" },
+    { "value": 45351, "fmt": "date", "out": "2/29/2024" },
+    { "value": 0.645833333333333, "fmt": "time", "out": "3:30 PM" },
+    { "value": 0, "fmt": "time", "out": "12:00 AM" },
+    { "value": 0.5, "fmt": "time", "out": "12:00 PM" },
+    { "value": 0.25, "fmt": "time", "out": "6:00 AM" },
+    { "value": 0.999, "fmt": "time", "out": "11:59 PM" },
+    { "value": 46326.6458333333, "fmt": "datetime", "out": "10/31/2026 3:30 PM" }
+  ],
+  "sheets": [
+    {
+      "name": "arithmetic and operators",
+      "cells": {
+        "A1": "5", "A2": "3",
+        "A3": "=A1+A2*2", "A4": "=(A1+A2)*2", "A5": "=A1/A2", "A6": "=-2^2", "A7": "=2^3^2",
+        "A8": "=10%", "A9": "=A1&\"x\"", "A10": "=A1>A2", "A11": "=\"a\"=\"A\"", "A12": "=A1/0",
+        "A13": "=\"x\"+1", "A14": "=\"3\"+1", "A15": "=A99+1", "A16": "=A99", "A17": "=1+",
+        "A18": "=FOO(1)", "A19": "=A1:A2", "A20": "=1/3*3", "A21": "=0.1+0.2",
+        "A22": "=\"say \"\"hi\"\"\"", "A23": "=$A$1+A$2", "A24": "=a1*2", "A25": "= 2 * ( 3 + 4 ) "
+      },
+      "expect": {
+        "A3": "11", "A4": "16", "A5": "1.666666667", "A6": "4", "A7": "64", "A8": "0.1", "A9": "5x",
+        "A10": "TRUE", "A11": "TRUE", "A12": "#DIV/0!", "A13": "#VALUE!", "A14": "4", "A15": "1",
+        "A16": "0", "A17": "#ERROR!", "A18": "#NAME?", "A19": "#VALUE!", "A20": "1", "A21": "0.3",
+        "A22": "say \"hi\"", "A23": "8", "A24": "10", "A25": "14"
+      }
+    },
+    {
+      "name": "functions",
+      "cells": {
+        "B1": "10", "B2": "20", "B3": "x", "B5": "30",
+        "C1": "=SUM(B1:B5)", "C2": "=AVERAGE(B1:B5)", "C3": "=COUNT(B1:B5)", "C4": "=COUNTA(B1:B5)",
+        "C5": "=MIN(B1:B5)", "C6": "=MAX(B1:B5,100)", "C7": "=SUM(B1:B2,5,\"5\")", "C8": "=SUM(B3)",
+        "C9": "=AVERAGE(B3:B4)", "C10": "=COUNTIF(B1:B5,\">15\")", "C11": "=SUMIF(B1:B5,\">=20\")",
+        "C12": "=COUNTIF(B1:B5,\"X\")", "C13": "=IF(B1>5,\"big\",\"small\")", "C14": "=IF(B1>50,\"big\")",
+        "C15": "=IFERROR(1/0,\"oops\")", "C16": "=AND(TRUE,B1>5)", "C17": "=OR(B1>50,FALSE)",
+        "C18": "=NOT(0)", "C19": "=ROUND(2.5,0)", "C20": "=ROUND(-2.5,0)", "C21": "=ROUND(1234.567,-2)",
+        "C22": "=ROUND(1.005,2)", "C23": "=ABS(-3)", "C24": "=SQRT(-1)", "C25": "=MOD(-7,3)",
+        "C26": "=INT(-2.5)", "C27": "=POWER(2,10)", "C28": "=MOD(5,0)", "C29": "=sum(b1,b2)",
+        "C30": "=SUMIF(B1:B5,\"<25\",B1:B5)", "C31": "=COUNTIF(B1:B5,\"<>x\")", "C32": "=MIN(B3:B4)",
+        "C33": "=ROUND(2.345,2)", "C34": "=IF(\"TRUE\",1,2)", "C35": "=IF(\"maybe\",1,2)"
+      },
+      "expect": {
+        "C1": "60", "C2": "20", "C3": "3", "C4": "4", "C5": "10", "C6": "100", "C7": "40", "C8": "0",
+        "C9": "#DIV/0!", "C10": "2", "C11": "50", "C12": "1", "C13": "big", "C14": "FALSE", "C15": "oops",
+        "C16": "TRUE", "C17": "FALSE", "C18": "TRUE", "C19": "3", "C20": "-3", "C21": "1200", "C22": "1.01",
+        "C23": "3", "C24": "#NUM!", "C25": "2", "C26": "-3", "C27": "1024", "C28": "#DIV/0!", "C29": "30",
+        "C30": "30", "C31": "4", "C32": "0", "C33": "2.35", "C34": "1", "C35": "#VALUE!"
+      }
+    },
+    {
+      "name": "dates and text",
+      "now": 46326.75,
+      "cells": {
+        "D1": "=DATE(2026,10,31)", "D2": "=DATE(2026,13,1)", "D3": "=YEAR(46326)", "D4": "=MONTH(46326)",
+        "D5": "=DAY(46326)", "D6": "=DATE(2026,2,31)", "D7": "=TODAY()", "D8": "=NOW()", "D9": "=DATE(2026,10,31)",
+        "E1": "  Hello   World  ", "E2": "=TRIM(E1)", "E3": "=LEN(E2)", "E4": "=UPPER(E2)", "E5": "=LEFT(E2,5)",
+        "E6": "=RIGHT(E2,5)", "E7": "=MID(E2,7,3)", "E8": "=CONCAT(\"a\",B1:B2,TRUE)", "E9": "=CONCATENATE(E5,\" \",3.5)",
+        "E10": "=LEFT(E2)", "E11": "=LOWER(\"ABC\")", "B1": "10", "B2": "20"
+      },
+      "styles": { "D8": { "fmt": "datetime" }, "D9": { "fmt": "date" } },
+      "expect": {
+        "D1": "46326", "D2": "46388", "D3": "2026", "D4": "10", "D5": "31", "D6": "46084", "D7": "46326",
+        "D8": "10/31/2026 6:00 PM", "D9": "10/31/2026", "E2": "Hello World", "E3": "11", "E4": "HELLO WORLD",
+        "E5": "Hello", "E6": "World", "E7": "Wor", "E8": "a1020TRUE", "E9": "Hello 3.5", "E10": "H", "E11": "abc"
+      }
+    },
+    {
+      "name": "circular references and errors",
+      "cells": {
+        "F1": "=F2+1", "F2": "=F1+1", "F3": "=F1*2", "F4": "=5", "F5": "=F5",
+        "G1": "=1/0", "G2": "=G1+1", "G3": "=SUM(G1,1)", "G4": "=COUNT(G1,1)", "G5": "=COUNTA(G1)", "G6": "=IFERROR(G2,0)",
+        "H1": "=1<\"a\"", "H2": "=\"a\"<TRUE", "H3": "=A99=0", "H4": "=A99=\"\""
+      },
+      "expect": {
+        "F1": "#CIRC!", "F2": "#CIRC!", "F3": "#CIRC!", "F4": "5", "F5": "#CIRC!",
+        "G1": "#DIV/0!", "G2": "#DIV/0!", "G3": "#DIV/0!", "G4": "1", "G5": "1", "G6": "0",
+        "H1": "TRUE", "H2": "TRUE", "H3": "TRUE", "H4": "TRUE"
+      }
+    },
+    {
+      "name": "formats on cells",
+      "cells": { "I1": "123", "I2": "=I1+1", "I3": "=SUM(I1)", "J1": "=0.25", "J2": "1234.5", "J3": "hello" },
+      "styles": { "I1": { "fmt": "text" }, "J1": { "fmt": "percent" }, "J2": { "fmt": "currency", "dp": 0 }, "J3": { "fmt": "currency" } },
+      "expect": { "I1": "123", "I2": "124", "I3": "0", "J1": "25%", "J2": "$1,235", "J3": "hello" }
+    }
+  ],
+  "adjust": [
+    { "formula": "=SUM(A1:A5)", "op": "insertRows", "at": 3, "n": 2, "out": "=SUM(A1:A7)" },
+    { "formula": "=A2+A3", "op": "insertRows", "at": 3, "n": 2, "out": "=A2+A5" },
+    { "formula": "=$A$4*2", "op": "insertRows", "at": 3, "n": 2, "out": "=$A$6*2" },
+    { "formula": "=\"A3\"&A3", "op": "insertRows", "at": 3, "n": 2, "out": "=\"A3\"&A5" },
+    { "formula": "=A2+A5", "op": "deleteRows", "at": 3, "n": 2, "out": "=A2+A3" },
+    { "formula": "=A3", "op": "deleteRows", "at": 3, "n": 2, "out": "=#REF!" },
+    { "formula": "=SUM(A1:A5)", "op": "deleteRows", "at": 3, "n": 2, "out": "=SUM(A1:A3)" },
+    { "formula": "=SUM(A3:A4)", "op": "deleteRows", "at": 3, "n": 2, "out": "=SUM(#REF!)" },
+    { "formula": "=SUM(A4:A6)", "op": "deleteRows", "at": 3, "n": 2, "out": "=SUM(A3:A4)" },
+    { "formula": "=A1+B1+C1", "op": "insertCols", "at": 2, "n": 1, "out": "=A1+C1+D1" },
+    { "formula": "=SUM(A1:C1)", "op": "insertCols", "at": 2, "n": 1, "out": "=SUM(A1:D1)" },
+    { "formula": "=A1+B1+C1", "op": "deleteCols", "at": 2, "n": 1, "out": "=A1+#REF!+B1" },
+    { "formula": "=SUM(A1:C1)", "op": "deleteCols", "at": 2, "n": 1, "out": "=SUM(A1:B1)" },
+    { "formula": "=A1+$B$1+B$1+$B1", "op": "shift", "dr": 1, "dc": 1, "out": "=B2+$B$1+C$1+$B2" },
+    { "formula": "=A1", "op": "shift", "dr": -1, "dc": 0, "out": "=#REF!" },
+    { "formula": "=SUM(A1:A3)*2", "op": "shift", "dr": 0, "dc": 2, "out": "=SUM(C1:C3)*2" }
+  ],
+  "sort": {
+    "cells": {
+      "A1": "Name", "B1": "Score",
+      "A2": "Bea", "B2": "5", "A3": "al", "B3": "x", "A4": "Cy", "B4": "10", "A5": "Dee", "A6": "Ed", "B6": "5"
+    },
+    "hide": { "B": ["5"] },
+    "hidden": [2, 6],
+    "cases": [
+      { "col": "B", "desc": false, "from": 2, "to": 6, "order": ["Bea", "Ed", "Cy", "al", "Dee"] },
+      { "col": "B", "desc": true, "from": 2, "to": 6, "order": ["Cy", "Bea", "Ed", "al", "Dee"] },
+      { "col": "A", "desc": false, "from": 2, "to": 6, "order": ["al", "Bea", "Cy", "Dee", "Ed"] }
+    ]
+  },
+  "plainText": {
+    "cells": { "A1": "a", "C1": "c", "B2": "=1+1" },
+    "out": "a\t\tc\n\t2"
+  }
+}
