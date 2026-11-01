@@ -9,6 +9,7 @@ import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.click
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
@@ -81,10 +82,21 @@ class SheetEditorTest {
         return Offset((44f + 100f * c + 50f) * d, (26f + 30f * r + 15f) * d)
     }
 
-    private fun saved(pageId: Long): SheetData = runBlocking {
-        SystemClock.sleep(900) // the page saves a moment after a change
+    private fun read(pageId: Long): SheetData = runBlocking {
         repo.getPage(-1)
         SheetData.decode(repo.getPage(pageId)!!.sheet)
+    }
+
+    /** The saved sheet, once [ok] holds for it (the page saves a moment after a change). */
+    private fun saved(pageId: Long, ok: (SheetData) -> Boolean = { true }): SheetData {
+        val end = SystemClock.uptimeMillis() + 6000
+        var s = read(pageId)
+        while (!ok(s) && SystemClock.uptimeMillis() < end) {
+            SystemClock.sleep(250)
+            rule.waitForIdle()
+            s = read(pageId)
+        }
+        return s
     }
 
     @Test
@@ -136,7 +148,11 @@ class SheetEditorTest {
         screen("s2_typing_formula")
         rule.onNodeWithTag("sheet-formula").performImeAction()
         settle()
-        assertEquals("=AVERAGE(B2:B4)", saved(pageId).cells["B6"]?.v)
+        // In the cell (the bar shows it when it's selected again), then saved.
+        grid.performTouchInput { click(cell(5, 1)) }
+        settle()
+        rule.onNodeWithTag("sheet-formula").assertTextEquals("=AVERAGE(B2:B4)")
+        assertEquals("=AVERAGE(B2:B4)", saved(pageId) { it.cells["B6"]?.v != null }.cells["B6"]?.v)
         screen("s3_formula_in")
 
         // Select costs with a mouse drag: the bar shows their total.
@@ -152,7 +168,7 @@ class SheetEditorTest {
         screen("s4_selection_sum")
         tool("Bold")
         settle()
-        assertTrue(saved(pageId).cells["B3"]?.s?.b == true)
+        assertTrue(saved(pageId) { it.cells["B3"]?.s?.b == true }.cells["B3"]?.s?.b == true)
 
         // Keys: type into a cell from the keyboard.
         grid.performTouchInput { click(cell(7, 0)) }
@@ -163,14 +179,14 @@ class SheetEditorTest {
         settle()
         rule.onNodeWithTag("sheet-formula").performImeAction()
         settle()
-        assertEquals("42", saved(pageId).cells["A8"]?.v)
+        assertEquals("42", saved(pageId) { it.cells["A8"] != null }.cells["A8"]?.v)
 
         // A table look and a filter.
         tool("Table look")
         settle()
         rule.onNodeWithText("Green").performClick()
         settle()
-        assertEquals("green", saved(pageId).table)
+        assertEquals("green", saved(pageId) { it.table == "green" }.table)
         screen("s5_green_table")
 
         grid.performTouchInput { click(cell(1, 0)) }
@@ -181,7 +197,7 @@ class SheetEditorTest {
         rule.onNodeWithText("Power").performClick()
         rule.onNodeWithText("Apply").performClick()
         settle()
-        assertEquals(listOf("Power"), saved(pageId).hide["A"])
+        assertEquals(listOf("Power"), saved(pageId) { it.hide.isNotEmpty() }.hide["A"])
         screen("s7_filtered")
 
         // Sort by cost, largest first (the header row stays).
@@ -200,7 +216,7 @@ class SheetEditorTest {
         settle()
         rule.onNodeWithText("Z → A", substring = true).performClick()
         settle()
-        val sorted = saved(pageId)
+        val sorted = saved(pageId) { it.cells["A3"]?.v == "Power" && it.cells["A2"]?.v == "Rent" }
         assertEquals("Item", sorted.cells["A1"]?.v)
         assertEquals(listOf("Rent", "Power", "Internet", "Total"), (2..5).map { sorted.cells["A$it"]?.v })
         screen("s8_sorted")
@@ -213,6 +229,6 @@ class SheetEditorTest {
         screen("s9_formats_menu")
         rule.onNodeWithText("Plain text").performClick()
         settle()
-        assertEquals(SheetStyle(fmt = "text"), saved(pageId).cells["C3"]?.s?.copy(b = false))
+        assertEquals(SheetStyle(fmt = "text"), saved(pageId) { it.cells["C3"]?.s?.fmt == "text" }.cells["C3"]?.s?.copy(b = false))
     }
 }
