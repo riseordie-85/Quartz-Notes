@@ -70,8 +70,8 @@ data class ExportChoice(
  * Choosing how to export: the format, one document or a file per page (for several pages), whether
  * attached pictures go along, then Share or Save.
  */
-@OptIn(ExperimentalLayoutApi::class)
-@androidx.compose.runtime.Composable
+@OptIn(ExperimentalLayoutApi::class, androidx.compose.material3.ExperimentalMaterial3Api::class)
+@Composable
 fun ExportSheet(
     title: String,
     formats: List<ExportFormat>,
