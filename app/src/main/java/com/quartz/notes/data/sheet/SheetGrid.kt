@@ -155,4 +155,163 @@ object SheetGrid {
         while (lines.isNotEmpty() && lines.last().isEmpty()) lines.removeAt(lines.size - 1)
         return lines.joinToString("\n")
     }
+
+    // ---- Working on a selected area ----
+
+    /** The sheet with [change] applied to the style of every cell in [area]. */
+    fun updateStyles(sheet: SheetData, area: SheetArea, change: (SheetStyle) -> SheetStyle): SheetData {
+        val cells = LinkedHashMap(sheet.cells)
+        area.forEach { r, c ->
+            val key = addr(r, c)
+            val old = cells[key] ?: SheetCell()
+            cells.putCell(key, old.copy(s = change(old.s)))
+        }
+        return sheet.copy(cells = cells)
+    }
+
+    /** Clears what's typed in [area] (styles stay unless [styles]). */
+    fun clear(sheet: SheetData, area: SheetArea, styles: Boolean = false): SheetData {
+        val cells = LinkedHashMap(sheet.cells)
+        area.forEach { r, c ->
+            val key = addr(r, c)
+            val old = cells[key] ?: return@forEach
+            cells.putCell(key, if (styles) null else old.copy(v = null))
+        }
+        return sheet.copy(cells = cells)
+    }
+
+    /** Borders for an area: every side of every cell, the outside edge, one side, or none. */
+    enum class Borders { ALL, OUTLINE, TOP, BOTTOM, LEFT, RIGHT, NONE }
+
+    fun setBorders(sheet: SheetData, area: SheetArea, borders: Borders): SheetData {
+        val cells = LinkedHashMap(sheet.cells)
+        area.forEach { r, c ->
+            val key = addr(r, c)
+            val old = cells[key] ?: SheetCell()
+            val sides = old.s.border.orEmpty().toMutableSet()
+            when (borders) {
+                Borders.ALL -> sides.addAll(listOf('t', 'r', 'b', 'l'))
+                Borders.NONE -> sides.clear()
+                Borders.OUTLINE -> {
+                    if (r == area.r1) sides += 't'
+                    if (r == area.r2) sides += 'b'
+                    if (c == area.c1) sides += 'l'
+                    if (c == area.c2) sides += 'r'
+                }
+                Borders.TOP -> if (r == area.r1) sides += 't'
+                Borders.BOTTOM -> if (r == area.r2) sides += 'b'
+                Borders.LEFT -> if (c == area.c1) sides += 'l'
+                Borders.RIGHT -> if (c == area.c2) sides += 'r'
+            }
+            val text = "trbl".filter { it in sides }.ifEmpty { null }
+            cells.putCell(key, old.copy(s = old.s.copy(border = text)))
+        }
+        return sheet.copy(cells = cells)
+    }
+
+    /** Cells copied from a sheet: their typed values and styles, and where they came from. */
+    data class Block(val r0: Int, val c0: Int, val rows: Int, val cols: Int, val cells: List<SheetCell?>) {
+        fun at(dr: Int, dc: Int): SheetCell? = cells[dr * cols + dc]
+    }
+
+    fun copy(sheet: SheetData, area: SheetArea): Block {
+        val cells = ArrayList<SheetCell?>()
+        for (r in area.r1..area.r2) for (c in area.c1..area.c2) cells += sheet.cells[addr(r, c)]
+        return Block(area.r1, area.c1, area.rows, area.cols, cells)
+    }
+
+    /** The block's shown values as tab-separated text, for other apps. */
+    fun blockText(sheet: SheetData, area: SheetArea, calc: SheetCalc = SheetCalc(sheet)): String =
+        (area.r1..area.r2).joinToString("\n") { r -> (area.c1..area.c2).joinToString("\t") { c -> calc.display(r, c) } }
+
+    /** Pastes [block] with its top-left at 0-based [r], [c]; formulas move with it. */
+    fun paste(sheet: SheetData, block: Block, r: Int, c: Int): SheetData {
+        val cells = LinkedHashMap(sheet.cells)
+        val dr = r - block.r0
+        val dc = c - block.c0
+        for (i in 0 until block.rows) for (j in 0 until block.cols) {
+            val cell = block.at(i, j)
+            val moved = cell?.v?.let { v -> if (cell.s.fmt == "text") cell else cell.copy(v = shiftFormula(v, dr, dc)) } ?: cell
+            cells.putCell(addr(r + i, c + j), moved)
+        }
+        return grow(sheet.copy(cells = cells), r + block.rows - 1, c + block.cols - 1)
+    }
+
+    /** Pastes text from another app: lines are rows, tabs split cells; each is typed in. */
+    fun pasteText(sheet: SheetData, text: String, r: Int, c: Int): SheetData {
+        var out = sheet
+        val lines = text.replace("\r\n", "\n").replace('\r', '\n').trimEnd('\n').split('\n')
+        lines.forEachIndexed { i, line ->
+            line.split('\t').forEachIndexed { j, cell -> out = typeInto(out, r + i, c + j, cell) }
+        }
+        return out
+    }
+
+    /** Copies the top row of [area] down through it (formulas move with each row). */
+    fun fillDown(sheet: SheetData, area: SheetArea): SheetData {
+        if (area.rows < 2) return sheet
+        val top = copy(sheet, SheetArea(area.r1, area.c1, area.r1, area.c2))
+        var out = sheet
+        for (r in area.r1 + 1..area.r2) out = paste(out, top, r, area.c1)
+        return out
+    }
+
+    /** Copies the left column of [area] across it. */
+    fun fillRight(sheet: SheetData, area: SheetArea): SheetData {
+        if (area.cols < 2) return sheet
+        val left = copy(sheet, SheetArea(area.r1, area.c1, area.r2, area.c1))
+        var out = sheet
+        for (c in area.c1 + 1..area.c2) out = paste(out, left, area.r1, c)
+        return out
+    }
+
+    /**
+     * AutoSum. One cell: a total of the numbers just above it (or else just left of it). Several
+     * cells: a total under each column, in the row below. Returns the sheet and the cell to select.
+     */
+    fun autoSum(sheet: SheetData, area: SheetArea, calc: SheetCalc = SheetCalc(sheet)): Pair<SheetData, Pair<Int, Int>> {
+        fun isNum(r: Int, c: Int) = r >= 0 && c >= 0 && calc.value(r, c) is SheetValue.Num
+        if (area.rows == 1 && area.cols == 1) {
+            val r = area.r1
+            val c = area.c1
+            var top = r
+            while (isNum(top - 1, c)) top--
+            if (top < r) return typeInto(sheet, r, c, "=SUM(${addr(top, c)}:${addr(r - 1, c)})") to (r to c)
+            var left = c
+            while (isNum(r, left - 1)) left--
+            if (left < c) return typeInto(sheet, r, c, "=SUM(${addr(r, left)}:${addr(r, c - 1)})") to (r to c)
+            return typeInto(sheet, r, c, "=SUM()") to (r to c)
+        }
+        var out = sheet
+        val below = area.r2 + 1
+        for (c in area.c1..area.c2) {
+            out = typeInto(out, below, c, "=SUM(${addr(area.r1, c)}:${addr(area.r2, c)})")
+        }
+        return out to (below to area.c1)
+    }
+
+    /** Sum, average and count of the numbers in [area], or null when it holds none. */
+    data class Stats(val sum: Double, val average: Double, val count: Int)
+
+    fun stats(calc: SheetCalc, area: SheetArea, used: Pair<Int, Int>): Stats? {
+        var sum = 0.0
+        var count = 0
+        val rEnd = minOf(area.r2, used.first - 1)
+        val cEnd = minOf(area.c2, used.second - 1)
+        for (r in area.r1..rEnd) for (c in area.c1..cEnd) {
+            val v = calc.value(r, c)
+            if (v is SheetValue.Num) {
+                sum += v.n
+                count++
+            }
+        }
+        return if (count == 0) null else Stats(sum, sum / count, count)
+    }
+
+    /** Shown values in a column's data rows (row 2 down), for the filter's list. */
+    fun columnValues(sheet: SheetData, col: Int, calc: SheetCalc = SheetCalc(sheet)): List<String> {
+        val seen = LinkedHashSet<String>()
+        for (r in 1 until sheet.usedSize.first) seen += calc.display(r, col)
+        return seen.sortedWith(compareBy<String> { it.isEmpty() }.thenBy { it.lowercase() })
+    }
 }

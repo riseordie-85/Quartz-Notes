@@ -251,6 +251,9 @@ fun NotebookScreen(
     // Drawing tools on a text page offer a Freeform page.
     var askFreeform by remember { mutableStateOf(false) }
     val activeFreeform = activePage.layoutMode == "SCRAPBOOK"
+    // A sheet page has its own tools, undo and keys.
+    val activeSheet = if (activeIsPlain && activePage.layoutMode == "SHEET") activeSession.sheet else null
+    val clipboard = androidx.compose.ui.platform.LocalClipboardManager.current
     fun onFreeform(action: () -> Unit): () -> Unit = { if (activeFreeform) action() else askFreeform = true }
     var templateFrom by remember { mutableStateOf<PageEntity?>(null) }
     var showPages by remember { mutableStateOf(false) }
@@ -396,7 +399,17 @@ fun NotebookScreen(
             ) {
                 val s = settings
                 val pageBg = activePage.backgroundArgb?.let { Color(it) } ?: LocalQuartzColors.current.card
-                EditorToolbar(
+                if (activeSheet != null) {
+                    com.quartz.notes.ui.sheet.SheetToolbar(
+                        state = activeSheet,
+                        locked = activePage.locked,
+                        modifier = Modifier.weight(1f),
+                    ) {
+                        ToolButton(onClick = { showStyle = true }, description = "Page style") {
+                            Icon(Icons.Rounded.Texture, null)
+                        }
+                    }
+                } else EditorToolbar(
                     state = currentEditor,
                     ink = s?.inkArgb?.takeIf { it != 0 }?.let { Color(it) },
                     autoInk = contentColorFor(pageBg),
@@ -569,6 +582,7 @@ fun NotebookScreen(
          */
         fun pageItemKeys(e: androidx.compose.ui.input.key.KeyEvent): Boolean {
             if (e.type != KeyEventType.KeyDown || !activeIsPlain) return false
+            activeSheet?.let { return com.quartz.notes.ui.sheet.sheetKey(it, e, activePage.locked, clipboard) }
             val page = activePage
             val s = activeSession
             val c = s.canvas
@@ -700,6 +714,10 @@ fun NotebookScreen(
                             )
                             return
                         }
+                        if (page.layoutMode == "SHEET") {
+                            SheetPage(page = page, session = vm.session(page), vm = vm, side = side, onActivate = { activePageId = page.id })
+                            return
+                        }
                                     PageView(
                                         page = page,
                                         session = vm.session(page),
@@ -760,7 +778,15 @@ fun NotebookScreen(
                     onOpen = { scrollTarget = it },
                 )
                 // Undo and redo, in the bottom-left corner (two-finger tap undoes, three-finger tap redoes).
-                if (activeIsPlain) {
+                if (activeSheet != null) {
+                    UndoPill(
+                        canUndo = activeSheet.canUndo && !activePage.locked,
+                        canRedo = activeSheet.canRedo && !activePage.locked,
+                        onUndo = { activeSheet.undo() },
+                        onRedo = { activeSheet.redo() },
+                        modifier = Modifier.align(Alignment.BottomStart).padding(start = 16.dp, bottom = 12.dp),
+                    )
+                } else if (activeIsPlain) {
                     UndoPill(
                         canUndo = vm.canUndo(activeSession),
                         canRedo = vm.canRedo(activeSession),
@@ -813,6 +839,10 @@ fun NotebookScreen(
                 onFreeform = { size ->
                     addSheetAfter = null
                     vm.addPageOfType(after, freeform = true, size = size) { newId -> scrollTarget = newId }
+                },
+                onSheet = {
+                    addSheetAfter = null
+                    vm.addSheetPage(after) { newId -> scrollTarget = newId }
                 },
                 onSection = {
                     addSheetAfter = null
@@ -1020,6 +1050,7 @@ fun NotebookScreen(
             page = activePage,
             sizes = settings?.pageSizes ?: com.quartz.notes.data.model.PageSize.PAPER,
             onLayoutMode = { scrapbook -> vm.setLayoutMode(activePage, scrapbook) },
+            onSheet = { vm.makeSheet(activePage) },
             onSize = { size -> vm.setLayoutMode(activePage, scrapbook = true, size = size) },
             onChange = vm::updateStyle,
             onApplyToAll = {
@@ -1356,5 +1387,40 @@ internal fun androidx.compose.ui.graphics.drawscope.DrawScope.drawSeam(atRightEd
         start = androidx.compose.ui.geometry.Offset(edgeX, 0f),
         end = androidx.compose.ui.geometry.Offset(edgeX, size.height),
         strokeWidth = 1.dp.toPx(),
+    )
+}
+
+/** A sheet page in the notebook: saving, locking, and sharing as text or a picture. */
+@Composable
+private fun SheetPage(page: PageEntity, session: PageSession, vm: NotebookViewModel, side: PageSide, onActivate: () -> Unit) {
+    val quartz = LocalQuartzColors.current
+    val paper = page.backgroundArgb?.let { Color(it) } ?: quartz.card
+    val ink = contentColorFor(paper)
+    val context = LocalContext.current
+    val fonts = androidx.compose.ui.platform.LocalFontFamilyResolver.current
+    val latestPaper by rememberUpdatedState(paper)
+    DisposableEffect(session) {
+        val exporter = PageExporter(
+            text = { com.quartz.notes.ui.sheet.sheetAsText(session.title, session.sheet) },
+            image = {
+                kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.Default) {
+                    com.quartz.notes.ui.sheet.sheetPng(context, session.sheet.data, session.title, latestPaper, contentColorFor(latestPaper), fonts)
+                }
+            },
+        )
+        session.exporter = exporter
+        onDispose { if (session.exporter === exporter) session.exporter = null }
+    }
+    com.quartz.notes.ui.sheet.SheetPageView(
+        state = session.sheet,
+        title = session.title,
+        onTitle = { session.title = it },
+        locked = page.locked,
+        onLock = { vm.setPageLocked(page, !page.locked) },
+        side = side,
+        paper = paper,
+        ink = ink,
+        onActivate = onActivate,
+        onSave = { vm.saveIfChanged(page.id) },
     )
 }

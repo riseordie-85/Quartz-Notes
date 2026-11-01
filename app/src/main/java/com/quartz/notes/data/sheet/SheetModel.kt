@@ -223,3 +223,24 @@ fun parseAddr(a: String): Pair<Int, Int>? {
     if (row < 1) return null
     return (row - 1) to colIndex(m.groupValues[1])
 }
+
+/** A rectangle of cells, 0-based and inclusive, corners in order. */
+data class SheetArea(val r1: Int, val c1: Int, val r2: Int, val c2: Int) {
+    val rows: Int get() = r2 - r1 + 1
+    val cols: Int get() = c2 - c1 + 1
+    val single: Boolean get() = r1 == r2 && c1 == c2
+
+    operator fun contains(cell: Pair<Int, Int>): Boolean = cell.first in r1..r2 && cell.second in c1..c2
+
+    inline fun forEach(block: (Int, Int) -> Unit) {
+        for (r in r1..r2) for (c in c1..c2) block(r, c)
+    }
+
+    /** "B2" or "B2:D9". */
+    fun label(): String = if (single) addr(r1, c1) else addr(r1, c1) + ":" + addr(r2, c2)
+
+    companion object {
+        fun of(a: Pair<Int, Int>, b: Pair<Int, Int>) =
+            SheetArea(minOf(a.first, b.first), minOf(a.second, b.second), maxOf(a.first, b.first), maxOf(a.second, b.second))
+    }
+}

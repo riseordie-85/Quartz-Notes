@@ -84,7 +84,7 @@ data class NotebookDraft(
     val showIndex: Boolean = false,
     val sectionTabs: Boolean = true,
     val attachAtBottom: Boolean = false,
-    /** New pages: "INLINE" (text) or "SCRAPBOOK" (Freeform), and the Freeform size. */
+    /** New pages: "INLINE" (text), "SCRAPBOOK" (Freeform) or "SHEET", and the Freeform size. */
     val pageLayout: String = "INLINE",
     val pageSize: com.quartz.notes.data.model.PageSize? = null,
 )
@@ -291,6 +291,9 @@ fun NotebookEditorSheet(
                     PageTypeChoice("Text", "Words, pictures in line, attachments", pageLayout == "INLINE", Modifier.weight(1f)) { pageLayout = "INLINE" }
                     PageTypeChoice("Freeform", "Shapes, connectors, drawing; a set page size", pageLayout == "SCRAPBOOK", Modifier.weight(1f)) {
                         pageLayout = "SCRAPBOOK"
+                    }
+                    PageTypeChoice("Sheet", "Rows and columns, sums and formulas", pageLayout == "SHEET", Modifier.weight(1f)) {
+                        pageLayout = "SHEET"
                     }
                 }
                 if (pageLayout == "SCRAPBOOK") {

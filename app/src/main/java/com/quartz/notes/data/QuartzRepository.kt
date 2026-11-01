@@ -1,5 +1,7 @@
 package com.quartz.notes.data
 
+import com.quartz.notes.data.sheet.SheetData
+import com.quartz.notes.data.sheet.SheetGrid
 import androidx.room.withTransaction
 import com.quartz.notes.data.db.AttachmentEntity
 import com.quartz.notes.data.db.NotebookEntity
@@ -235,19 +237,35 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
     }
 
     /**
-     * Makes [page] a text page ("INLINE") or a Freeform page ("SCRAPBOOK") of [size] (A4 if null).
-     * Freeform pages sized for an unfolded screen spread across both sides of an open notebook.
+     * Makes [page] a text page ("INLINE"), a Freeform page ("SCRAPBOOK") of [size] (A4 if null) or a
+     * sheet ("SHEET"). Freeform pages sized for an unfolded screen spread across both sides of an
+     * open notebook. Each type keeps its own content, so changing back finds it again; search uses
+     * the words of the type showing.
      */
-    private fun withPageType(page: PageEntity, layout: String, size: PageSize?): PageEntity =
-        if (layout == "SCRAPBOOK") {
+    private fun withPageType(page: PageEntity, layout: String, size: PageSize?): PageEntity = when (layout) {
+        "SCRAPBOOK" -> {
             val s = size ?: PageSize.DEFAULT
             page.copy(
                 layoutMode = "SCRAPBOOK", canvasWidth = s.width, canvasHeight = s.height, sizeName = s.key,
-                spread = s.key == PageSize.UNFOLDED || s.landscape,
+                spread = s.key == PageSize.UNFOLDED || s.landscape, plainText = textWords(page),
             )
-        } else {
-            page.copy(layoutMode = "INLINE", canvasWidth = null, canvasHeight = null, sizeName = null)
         }
+        "SHEET" -> {
+            val sheet = SheetData.decode(page.sheet)
+            page.copy(
+                layoutMode = "SHEET", canvasWidth = null, canvasHeight = null, sizeName = null, spread = false,
+                sheet = sheet.encode(), plainText = SheetGrid.plainText(sheet),
+            )
+        }
+        else -> page.copy(
+            layoutMode = "INLINE", canvasWidth = null, canvasHeight = null, sizeName = null,
+            plainText = textWords(page),
+        )
+    }
+
+    /** A page's search words for its text: unchanged, unless it was a sheet until now. */
+    private fun textWords(page: PageEntity): String =
+        if (page.layoutMode == "SHEET") RichDoc.decode(page.content).plainText() else page.plainText
 
     /** Adds a page of a given type (and size, for Freeform) after position [afterIndex]. */
     suspend fun insertPageOfType(notebookId: Long, afterIndex: Int, layout: String, size: PageSize?): Long = inOrder {
@@ -362,6 +380,11 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
 
     fun savePageContent(pageId: Long, doc: RichDoc) = enqueue {
         pages.updateContent(pageId, doc.encode(), doc.plainText(), now())
+    }
+
+    /** Saves a sheet page's grid (and its shown values, for search). */
+    fun savePageSheet(pageId: Long, sheet: SheetData) = enqueue {
+        pages.updateSheet(pageId, sheet.encode(), SheetGrid.plainText(sheet), now())
     }
 
     fun setPageLocked(pageId: Long, locked: Boolean) = enqueue { pages.setLocked(pageId, locked) }

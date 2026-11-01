@@ -80,6 +80,15 @@ class PageSession(page: PageEntity) {
     /** Set while the page is on screen: its words and a picture of it, for sharing. */
     var exporter: PageExporter? = null
 
+    /** A sheet page's grid, selection and undo. */
+    val sheet = com.quartz.notes.ui.sheet.SheetState(com.quartz.notes.data.sheet.SheetData.decode(page.sheet))
+    private var savedSheetVersion = sheet.version
+    val sheetDirty: Boolean get() = sheet.version != savedSheetVersion
+
+    internal fun markSheetSaved() {
+        savedSheetVersion = sheet.version
+    }
+
     /** A section page's description (sections keep it as plain text). */
     var description by mutableStateOf(if (page.isSection) page.plainText else "")
 
@@ -105,20 +114,23 @@ class PageSession(page: PageEntity) {
         savedTitle = title
     }
 
-    val anyDirty: Boolean get() = contentDirty || titleDirty || sectionDirty
+    val anyDirty: Boolean get() = contentDirty || titleDirty || sectionDirty || sheetDirty
 
     /** True when [page] says the same as what's showing. */
     fun matches(page: PageEntity): Boolean =
         page.title == title && RichDoc.decode(page.content) == editor.toDoc() &&
-            (!page.isSection || page.plainText == description)
+            (!page.isSection || page.plainText == description) &&
+            (page.layoutMode != "SHEET" || com.quartz.notes.data.sheet.SheetData.decode(page.sheet) == sheet.data)
 
     /** Shows another device's newer version (only when nothing here is unsaved). */
     fun adopt(page: PageEntity) {
         editor.replaceFromRemote(RichDoc.decode(page.content))
         title = page.title
         if (page.isSection) description = page.plainText
+        if (page.layoutMode == "SHEET") sheet.replaceFromRemote(com.quartz.notes.data.sheet.SheetData.decode(page.sheet))
         markContentSaved()
         markSectionSaved()
+        markSheetSaved()
     }
 }
 
@@ -188,6 +200,10 @@ class NotebookViewModel(
         if (s.titleDirty) {
             repo.savePageTitle(pageId, s.title)
             s.markTitleSaved()
+        }
+        if (s.sheetDirty) {
+            repo.savePageSheet(pageId, s.sheet.data)
+            s.markSheetSaved()
         }
     }
 
@@ -313,6 +329,14 @@ class NotebookViewModel(
             }
             repo.setPageType(page.id, if (scrapbook) "SCRAPBOOK" else "INLINE", size ?: defaultPageSize)
         }
+    }
+
+    /** Makes a page a sheet. Its text (or items) stay with it, for if it's changed back. */
+    fun makeSheet(page: PageEntity) = repo.setPageType(page.id, "SHEET", null)
+
+    /** Adds a sheet page after position [afterIndex]. */
+    fun addSheetPage(afterIndex: Int, onCreated: (Long) -> Unit) = viewModelScope.launch {
+        onCreated(repo.insertPageOfType(notebookId, afterIndex, "SHEET", null))
     }
 
     /** Adds a text page or a Freeform page (of [size]) after position [afterIndex]. */

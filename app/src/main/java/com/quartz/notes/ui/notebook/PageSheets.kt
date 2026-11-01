@@ -85,6 +85,7 @@ fun PageStyleSheet(
     /** Freeform sizes this device offers. */
     sizes: List<com.quartz.notes.data.model.PageSize>,
     onLayoutMode: (scrapbook: Boolean) -> Unit,
+    onSheet: () -> Unit,
     onSize: (com.quartz.notes.data.model.PageSize) -> Unit,
     onChange: (PageEntity) -> Unit,
     onApplyToAll: (PageEntity) -> Unit,
@@ -128,21 +129,30 @@ fun PageStyleSheet(
 
             Label("Page type")
             val scrapbook = page.layoutMode == "SCRAPBOOK"
+            val sheet = page.layoutMode == "SHEET"
             SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
                 SegmentedButton(
-                    selected = !scrapbook,
-                    onClick = { if (scrapbook) onLayoutMode(false) },
-                    shape = SegmentedButtonDefaults.itemShape(0, 2),
+                    selected = !scrapbook && !sheet,
+                    onClick = { if (scrapbook || sheet) onLayoutMode(false) },
+                    shape = SegmentedButtonDefaults.itemShape(0, 3),
                 ) { Text("Text") }
                 SegmentedButton(
                     selected = scrapbook,
                     onClick = { if (!scrapbook) onLayoutMode(true) },
-                    shape = SegmentedButtonDefaults.itemShape(1, 2),
+                    shape = SegmentedButtonDefaults.itemShape(1, 3),
                 ) { Text("Freeform") }
+                SegmentedButton(
+                    selected = sheet,
+                    onClick = { if (!sheet) onSheet() },
+                    shape = SegmentedButtonDefaults.itemShape(2, 3),
+                ) { Text("Sheet") }
             }
             Text(
-                if (scrapbook) "A set page size, shown the same on every screen. Shapes, connectors, text boxes and drawing go anywhere; pinch to zoom."
-                else "Text flows down the page, with pictures in line or attachments at the bottom.",
+                when {
+                    scrapbook -> "A set page size, shown the same on every screen. Shapes, connectors, text boxes and drawing go anywhere; pinch to zoom."
+                    sheet -> "Rows and columns, with formulas, formats, sorting and filters. Changing the type back finds the page's text again."
+                    else -> "Text flows down the page, with pictures in line or attachments at the bottom."
+                },
                 fontSize = 13.sp,
                 color = LocalQuartzColors.current.textSecondary,
                 modifier = Modifier.padding(top = 8.dp),

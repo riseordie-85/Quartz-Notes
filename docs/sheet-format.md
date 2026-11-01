@@ -36,7 +36,8 @@ show it the same way; `shared/fixtures/sheets/*.json` are cases both must pass.
     - `border`: which sides have a line, any of the letters `t`, `r`, `b`, `l` (e.g. `"tb"`).
 - `table`: banded table look over the used area (row 1 to the last filled row, column A to the last
   filled column): `style` is `blue`, `green`, `orange`, `red`, `purple` or `gray`. Row 1 is the
-  header: the style's color with white bold text; the other rows alternate white and a light tint.
+  header: the style's color with white bold text; below it rows alternate white (row 2) and a light
+  tint (row 3).
   | style | header | band |
   |---|---|---|
   | blue | `#2F6FDE` | `#EAF1FD` |

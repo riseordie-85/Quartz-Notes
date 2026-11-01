@@ -132,6 +132,9 @@ interface PageDao {
     @Query("UPDATE pages SET content = :content, plainText = :plainText, updatedAt = :updatedAt WHERE id = :id")
     suspend fun updateContent(id: Long, content: String, plainText: String, updatedAt: Long)
 
+    @Query("UPDATE pages SET sheet = :sheet, plainText = :plainText, updatedAt = :updatedAt WHERE id = :id")
+    suspend fun updateSheet(id: Long, sheet: String, plainText: String, updatedAt: Long)
+
     @Query("UPDATE pages SET title = :title, updatedAt = :updatedAt WHERE id = :id")
     suspend fun updateTitle(id: Long, title: String, updatedAt: Long)
 
