@@ -21,6 +21,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.LibraryBooks
 import androidx.compose.material.icons.rounded.Close
+import androidx.compose.material.icons.rounded.FileDownload
+import androidx.compose.material.icons.rounded.FolderZip
 import androidx.compose.material.icons.rounded.Image
 import androidx.compose.material.icons.rounded.SaveAlt
 import androidx.compose.material.icons.rounded.TextFields
@@ -108,6 +110,10 @@ fun ShareNoteSheet(
     onDismiss: () -> Unit,
     /** What's being shared, for the wording ("note" or "page"). */
     noun: String = "note",
+    /** Export as a file (text, Word, PDF, pictures…). */
+    onExport: (() -> Unit)? = null,
+    /** Export the whole notebook. */
+    onExportAll: (() -> Unit)? = null,
 ) {
     QuartzSheet(onDismissRequest = onDismiss, containerColor = MaterialTheme.colorScheme.surface) {
         Column(Modifier.navigationBarsPadding().padding(bottom = 16.dp)) {
@@ -136,6 +142,22 @@ fun ShareNoteSheet(
                 onClick = onNotebook,
                 leading = { Icon(Icons.AutoMirrored.Rounded.LibraryBooks, null, tint = MaterialTheme.colorScheme.primary) },
             )
+            if (onExport != null) {
+                ListRow(
+                    title = "Export $noun",
+                    subtitle = "As a text, Word, PDF, PNG or JPG file, to share or save",
+                    onClick = onExport,
+                    leading = { Icon(Icons.Rounded.FileDownload, null, tint = MaterialTheme.colorScheme.primary) },
+                )
+            }
+            if (onExportAll != null) {
+                ListRow(
+                    title = "Export the whole notebook",
+                    subtitle = "One document, or a file for each page",
+                    onClick = onExportAll,
+                    leading = { Icon(Icons.Rounded.FolderZip, null, tint = MaterialTheme.colorScheme.primary) },
+                )
+            }
         }
     }
 }

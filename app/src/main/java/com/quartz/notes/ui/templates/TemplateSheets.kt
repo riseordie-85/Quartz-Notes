@@ -22,6 +22,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Bookmark
 import androidx.compose.material.icons.rounded.TableChart
+import androidx.compose.material.icons.rounded.UploadFile
 import androidx.compose.material.icons.rounded.Gesture
 import androidx.compose.material.icons.rounded.NoteAdd
 import androidx.compose.material.icons.automirrored.rounded.Notes
@@ -83,6 +84,8 @@ fun AddPageSheet(
     defaultSize: com.quartz.notes.data.model.PageSize,
     onFreeform: (com.quartz.notes.data.model.PageSize) -> Unit,
     onSheet: () -> Unit,
+    /** Sheet pages from an Excel or CSV file. */
+    onImportSheet: () -> Unit,
     onSection: () -> Unit,
     onTemplate: (PageEntity) -> Unit,
     onStarter: (StarterPage) -> Unit,
@@ -123,6 +126,9 @@ fun AddPageSheet(
             Row(Modifier.fillMaxWidth().padding(top = 12.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                 ChoiceCard(Icons.Rounded.TableChart, "Sheet", "Rows, columns, sums", Modifier.weight(1f), onSheet)
                 ChoiceCard(Icons.Rounded.Bookmark, "New section", "A divider page with a tab", Modifier.weight(1f), onSection)
+            }
+            Row(Modifier.fillMaxWidth().padding(top = 12.dp)) {
+                ChoiceCard(Icons.Rounded.UploadFile, "Import a spreadsheet", "Excel (.xlsx) or CSV, as sheet pages", Modifier.weight(1f), onImportSheet)
             }
 
             SheetLabel("Your templates")

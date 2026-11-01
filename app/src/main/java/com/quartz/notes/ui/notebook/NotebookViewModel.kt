@@ -334,6 +334,29 @@ class NotebookViewModel(
     /** Makes a page a sheet. Its text (or items) stay with it, for if it's changed back. */
     fun makeSheet(page: PageEntity) = repo.setPageType(page.id, "SHEET", null)
 
+    /**
+     * Adds sheet pages from an Excel (.xlsx) or CSV file after position [afterIndex]: one page per
+     * worksheet. Reports the first new page, or throws when the file can't be read.
+     */
+    suspend fun importSheets(afterIndex: Int, fileName: String, bytes: ByteArray): Long {
+        val base = fileName.substringBeforeLast('.').trim()
+        val sheets = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.Default) {
+            if (fileName.endsWith(".csv", ignoreCase = true) || fileName.endsWith(".tsv", ignoreCase = true) || fileName.endsWith(".txt", ignoreCase = true)) {
+                listOf(com.quartz.notes.data.sheet.ImportedSheet(base, com.quartz.notes.data.sheet.SheetCsv.read(bytes.toString(Charsets.UTF_8))))
+            } else {
+                com.quartz.notes.data.sheet.SheetXlsx.read(bytes)
+            }
+        }
+        if (sheets.isEmpty()) throw IllegalArgumentException("There are no worksheets in that file")
+        var first = -1L
+        sheets.forEachIndexed { i, s ->
+            val title = if (sheets.size == 1) base.ifEmpty { s.name } else s.name
+            val id = repo.insertSheetPage(notebookId, afterIndex + i, title, s.sheet)
+            if (first < 0) first = id
+        }
+        return first
+    }
+
     /** Adds a sheet page after position [afterIndex]. */
     fun addSheetPage(afterIndex: Int, onCreated: (Long) -> Unit) = viewModelScope.launch {
         onCreated(repo.insertPageOfType(notebookId, afterIndex, "SHEET", null))

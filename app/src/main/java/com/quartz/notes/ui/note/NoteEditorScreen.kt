@@ -143,6 +143,10 @@ private fun NoteEditorContent(load: NoteLoad.Ready, vm: NoteViewModel, onClose: 
     var attachMenu by remember { mutableStateOf(false) }
     var recording by remember { mutableStateOf(false) }
     var showShare by remember { mutableStateOf(false) }
+    var showExport by remember { mutableStateOf(false) }
+    var exportMessage by remember { mutableStateOf<String?>(null) }
+    var exportJob by remember { mutableStateOf<kotlinx.coroutines.Job?>(null) }
+    val saver = com.quartz.notes.ui.export.rememberFileSaver()
     var pickNotebook by remember { mutableStateOf(false) }
     var viewing by remember { mutableStateOf<AttachmentEntity?>(null) }
     val attachments by vm.attachments.collectAsStateWithLifecycle()
@@ -400,7 +404,69 @@ private fun NoteEditorContent(load: NoteLoad.Ready, vm: NoteViewModel, onClose: 
                 pickNotebook = true
             },
             onDismiss = { showShare = false },
+            onExport = {
+                showShare = false
+                showExport = true
+            },
         )
+    }
+    if (showExport) {
+        val pictures = attachments.filter { it.kind == AttachmentKind.IMAGE.name }
+        com.quartz.notes.ui.export.ExportSheet(
+            title = "Export note",
+            formats = com.quartz.notes.data.export.ExportFormat.entries.filter {
+                it != com.quartz.notes.data.export.ExportFormat.EXCEL && it != com.quartz.notes.data.export.ExportFormat.CSV
+            },
+            pages = false,
+            hasAttachments = pictures.isNotEmpty(),
+            onExport = { choice ->
+                showExport = false
+                exportJob = scope.launch {
+                    exportMessage = "Making the file…"
+                    try {
+                        val files = pictures.map { container.media.file(it.path) }
+                        val doc = editor.toDoc()
+                        val title = session.title.trim()
+                        val format = choice.format
+                        val picture = if (format.pictures) renderNoteImage(context, session.title, doc, session.colorKey, files) else null
+                        val parts = buildList {
+                            if (title.isNotEmpty()) add(com.quartz.notes.data.export.DocPart.Title(title))
+                            add(com.quartz.notes.data.export.DocPart.Rich(doc))
+                        }
+                        val page = com.quartz.notes.data.export.ExportPage(
+                            title = title,
+                            fallback = "Note",
+                            text = noteAsText(session.title, doc),
+                            parts = parts,
+                            picture = picture,
+                            sheet = null,
+                            attachments = files,
+                        )
+                        val dir = com.quartz.notes.ui.export.exportFolder(context)
+                        val (file, mime) = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
+                            com.quartz.notes.data.export.ExportBuilder.build(dir, title.ifEmpty { "Note" }, listOf(page), format, false, choice.attachments) { path ->
+                                com.quartz.notes.data.export.docPicture(container.media.file(path))
+                            }
+                        }
+                        exportMessage = null
+                        if (choice.save) saver.save(file, file.name, mime) else com.quartz.notes.ui.export.shareExport(context, file, mime)
+                    } catch (e: kotlinx.coroutines.CancellationException) {
+                        throw e
+                    } catch (t: Throwable) {
+                        Toast.makeText(context, "Couldn't export: ${t.message ?: "something went wrong"}", Toast.LENGTH_LONG).show()
+                    } finally {
+                        exportMessage = null
+                    }
+                }
+            },
+            onDismiss = { showExport = false },
+        )
+    }
+    exportMessage?.let { message ->
+        com.quartz.notes.ui.export.ExportProgressDialog(message) {
+            exportJob?.cancel()
+            exportMessage = null
+        }
     }
     if (pickNotebook) {
         NotebookPickerSheet(

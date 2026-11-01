@@ -265,11 +265,38 @@ fun NotebookScreen(
     // Sharing: the pages to choose between (two showing), the page being shared, and one being copied.
     var shareChoices by remember { mutableStateOf<List<PageEntity>>(emptyList()) }
     var sharingId by remember { mutableStateOf<Long?>(null) }
+    val context = LocalContext.current
     var copyingId by remember { mutableStateOf<Long?>(null) }
+    // Exporting: the pages chosen (shows the export sheet), progress, and the work itself.
+    var exportTargets by remember { mutableStateOf<List<PageEntity>?>(null) }
+    var exportMessage by remember { mutableStateOf<String?>(null) }
+    var exportJob by remember { mutableStateOf<kotlinx.coroutines.Job?>(null) }
+    // Importing a spreadsheet: where the new pages go, and the file picker.
+    var importAfter by remember { mutableStateOf(-1) }
+    var importedId by remember { mutableStateOf(-1L) }
+    val sheetPicker = androidx.activity.compose.rememberLauncherForActivityResult(androidx.activity.result.contract.ActivityResultContracts.OpenDocument()) { uri ->
+        if (uri == null) return@rememberLauncherForActivityResult
+        scope.launch {
+            val result = runCatching {
+                val name = context.contentResolver.query(uri, arrayOf(android.provider.OpenableColumns.DISPLAY_NAME), null, null, null)?.use { c ->
+                    if (c.moveToFirst()) c.getString(0) else null
+                } ?: "Sheet.xlsx"
+                val bytes = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
+                    context.contentResolver.openInputStream(uri)?.use { it.readBytes() } ?: error("Couldn't open the file")
+                }
+                vm.importSheets(importAfter, name, bytes)
+            }
+            result.onSuccess { importedId = it }
+                .onFailure { Toast.makeText(context, "Couldn't import: ${it.message ?: "not a spreadsheet"}", Toast.LENGTH_LONG).show() }
+        }
+    }
+    var pendingExport by remember { mutableStateOf<Triple<List<PageEntity>, com.quartz.notes.ui.export.ExportChoice, String>?>(null) }
+    val saver = com.quartz.notes.ui.export.rememberFileSaver()
+    val quartzCard = LocalQuartzColors.current.card
+    val fontResolver = androidx.compose.ui.platform.LocalFontFamilyResolver.current
     var recording by remember { mutableStateOf(false) }
     // Pictures and recordings go onto the active page; remember which one in case it changes meanwhile.
     val targetPage by rememberUpdatedState(activePage.id)
-    val context = LocalContext.current
     val latestPageList by rememberUpdatedState(pages)
 
     /** New items need placing, so adding one to a locked page unlocks it. */
@@ -357,6 +384,93 @@ fun NotebookScreen(
             shown.isEmpty() -> "Index"
             shown.size == 2 -> "$firstShown–${firstShown + 1}/${pages.size}"
             else -> "$firstShown/${pages.size}"
+        }
+
+        // ---- Export ----
+
+        /** A PNG of a page as it shows: turns to it, waits for it to be drawn, and takes its picture. */
+        suspend fun capturePage(page: PageEntity): java.io.File? {
+            if (page.layoutMode == "SHEET") {
+                val paper = page.backgroundArgb?.let { Color(it) } ?: quartzCard
+                val data = vm.session(page).sheet.data
+                return kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.Default) {
+                    com.quartz.notes.ui.sheet.sheetPng(context, data, page.title, paper, contentColorFor(paper), fontResolver)
+                }
+            }
+            val session = vm.session(page)
+            scrollTarget = page.id
+            val ready = kotlinx.coroutines.withTimeoutOrNull(10_000) {
+                snapshotFlow { session.exporter != null && pagerState.settledPage == spreadOf(page.id) && !pagerState.isScrollInProgress }.first { it }
+            }
+            if (ready == null) return null
+            // Pictures on the page finish loading.
+            kotlinx.coroutines.delay(700)
+            return session.exporter?.image()
+        }
+
+        fun runExport(targets: List<PageEntity>, choice: com.quartz.notes.ui.export.ExportChoice, name: String) {
+            exportJob = scope.launch {
+                val startPage = activePageId
+                val repo = container.repository
+                val format = choice.format
+                try {
+                    exportMessage = "Getting ready…"
+                    targets.forEach { vm.saveIfChanged(it.id) }
+                    repo.getPage(-1)
+                    val fresh = targets.mapNotNull { repo.getPage(it.id) }
+                    val dir = com.quartz.notes.ui.export.exportFolder(context)
+                    val out = ArrayList<com.quartz.notes.data.export.ExportPage>()
+                    fresh.forEachIndexed { i, p ->
+                        exportMessage = if (fresh.size > 1) "Page ${i + 1} of ${fresh.size}…" else "Making the file…"
+                        val elements = repo.pageElementsNow(p.id)
+                        val needsPicture = format.pictures ||
+                            (format == com.quartz.notes.data.export.ExportFormat.WORD && p.layoutMode == "SCRAPBOOK" && !p.isSection)
+                        val picture = if (needsPicture) capturePage(p) else null
+                        val docPic = if (format == com.quartz.notes.data.export.ExportFormat.WORD && picture != null) {
+                            kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) { com.quartz.notes.data.export.docPicture(picture) }
+                        } else {
+                            null
+                        }
+                        out += com.quartz.notes.data.export.ExportPage(
+                            title = p.title.trim(),
+                            fallback = "Page ${pages.indexOfFirst { it.id == p.id } + 1}",
+                            text = com.quartz.notes.data.export.PageContent.text(p, elements),
+                            parts = com.quartz.notes.data.export.PageContent.docParts(p, elements, docPic),
+                            picture = picture,
+                            sheet = if (p.layoutMode == "SHEET") vm.session(p).sheet.data else null,
+                            attachments = com.quartz.notes.data.export.PageContent.attachedPictures(elements).map { container.media.file(it) },
+                        )
+                    }
+                    exportMessage = "Making the file…"
+                    val (file, mime) = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
+                        com.quartz.notes.data.export.ExportBuilder.build(dir, name, out, format, choice.perPage, choice.attachments) { path ->
+                            com.quartz.notes.data.export.docPicture(container.media.file(path))
+                        }
+                    }
+                    exportMessage = null
+                    if (choice.save) saver.save(file, file.name, mime) else com.quartz.notes.ui.export.shareExport(context, file, mime)
+                } catch (e: kotlinx.coroutines.CancellationException) {
+                    throw e
+                } catch (t: Throwable) {
+                    Toast.makeText(context, "Couldn't export: ${t.message ?: "something went wrong"}", Toast.LENGTH_LONG).show()
+                } finally {
+                    exportMessage = null
+                    if (activePageId != startPage) scrollTarget = startPage
+                }
+            }
+        }
+
+        // Turns to the first page made from an imported spreadsheet.
+        LaunchedEffect(importedId) {
+            if (importedId >= 0) {
+                scrollTarget = importedId
+                importedId = -1L
+            }
+        }
+        LaunchedEffect(pendingExport) {
+            val (targets, choice, name) = pendingExport ?: return@LaunchedEffect
+            pendingExport = null
+            runExport(targets, choice, name)
         }
 
         // Alt+Right / Alt+Left (or Ctrl+Page Down / Ctrl+Page Up) turn the page; Ctrl+Alt+Home / End go to
@@ -844,6 +958,16 @@ fun NotebookScreen(
                     addSheetAfter = null
                     vm.addSheetPage(after) { newId -> scrollTarget = newId }
                 },
+                onImportSheet = {
+                    addSheetAfter = null
+                    importAfter = after
+                    sheetPicker.launch(
+                        arrayOf(
+                            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                            "text/csv", "text/comma-separated-values", "text/tab-separated-values", "text/plain", "application/csv",
+                        ),
+                    )
+                },
                 onSection = {
                     addSheetAfter = null
                     vm.addSection(after + 1) { newId -> scrollTarget = newId }
@@ -963,6 +1087,35 @@ fun NotebookScreen(
             dismissButton = { TextButton(onClick = { shareChoices = emptyList() }) { Text("Cancel") } },
         )
     }
+    // ---- Export: notes as text, Word, PDF or pictures (and sheets as Excel or CSV) ----
+    exportTargets?.let { targets ->
+        var hasAttached by remember(targets) { mutableStateOf(false) }
+        LaunchedEffect(targets) {
+            hasAttached = targets.any { p -> com.quartz.notes.data.export.PageContent.attachedPictures(container.repository.pageElementsNow(p.id)).isNotEmpty() }
+        }
+        val anySheet = targets.any { it.layoutMode == "SHEET" }
+        val formats = com.quartz.notes.data.export.ExportFormat.entries.filter {
+            anySheet || (it != com.quartz.notes.data.export.ExportFormat.EXCEL && it != com.quartz.notes.data.export.ExportFormat.CSV)
+        }
+        com.quartz.notes.ui.export.ExportSheet(
+            title = if (targets.size > 1) "Export ${nb.title.ifBlank { "notebook" }}" else "Export page",
+            formats = formats,
+            pages = targets.size > 1,
+            hasAttachments = hasAttached,
+            onExport = { choice ->
+                exportTargets = null
+                val name = if (targets.size > 1) nb.title.ifBlank { "Notebook" } else targets.single().let { p -> p.title.ifBlank { "Page ${pages.indexOfFirst { it.id == p.id } + 1}" } }
+                pendingExport = Triple(targets, choice, name)
+            },
+            onDismiss = { exportTargets = null },
+        )
+    }
+    exportMessage?.let { message ->
+        com.quartz.notes.ui.export.ExportProgressDialog(message) {
+            exportJob?.cancel()
+            exportMessage = null
+        }
+    }
     sharingId?.let { id ->
         val page = pages.firstOrNull { it.id == id }
         if (page == null) {
@@ -1008,6 +1161,14 @@ fun NotebookScreen(
                     copyingId = page.id
                 },
                 onDismiss = { sharingId = null },
+                onExport = {
+                    sharingId = null
+                    exportTargets = listOf(page)
+                },
+                onExportAll = {
+                    sharingId = null
+                    exportTargets = pages.toList()
+                },
             )
         }
     }

@@ -277,6 +277,18 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
         }
     }
 
+    /** Adds a sheet page holding [sheet] after position [afterIndex]. */
+    suspend fun insertSheetPage(notebookId: Long, afterIndex: Int, title: String, sheet: SheetData): Long = inOrder {
+        db.withTransaction {
+            val id = insertPageNow(notebookId, afterIndex)
+            val page = pages.get(id) ?: return@withTransaction id
+            pages.update(
+                withPageType(page.copy(sheet = sheet.encode()), "SHEET", null).copy(title = title.trim(), updatedAt = now()),
+            )
+            id
+        }
+    }
+
     /** Changes a page between text and Freeform, or a Freeform page's size. Items keep their places. */
     fun setPageType(pageId: Long, layout: String, size: PageSize?) = enqueue {
         val page = pages.get(pageId) ?: return@enqueue
@@ -521,6 +533,9 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
     // ---- Page elements (pictures and voice notes placed on pages) ----
 
     fun observeElements(pageId: Long): Flow<List<PageElementEntity>> = elements.observeFor(pageId)
+
+    /** A page's items as saved now (after any waiting changes). */
+    suspend fun pageElementsNow(pageId: Long): List<PageElementEntity> = inOrder { elements.getForPage(pageId).filter { !it.deleted } }
 
     /** Adds an element on top of everything else on the page. */
     fun addElement(element: PageElementEntity) = enqueue {
