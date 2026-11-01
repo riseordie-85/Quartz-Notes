@@ -164,3 +164,19 @@ as `TRUE`/`FALSE`, errors as their code, empty as nothing.
 
 A sheet page's `plainText` is its shown values, row by row: cells joined by a tab, rows by a line
 break, empty trailing cells and rows left out.
+
+## Excel and CSV files
+
+Both apps write and read `.xlsx` the same way (`data/sheet/SheetFiles.kt`, `web/src/lib/sheet/xlsx.ts`),
+checked on `shared/fixtures/sheets/sample-*.xlsx` (made by `make_samples.py` with openpyxl and
+LibreOffice) against `xlsx-expected.json`.
+
+- Writing: one worksheet named after the page; values, formulas (with their worked-out results, and
+  Excel's `_xlfn.` mark on `CONCAT`), number formats (as above, with places), bold/italic/underline,
+  colors, fills, borders, alignment, wrapping, column widths (page units ÷ 7 = Excel's character
+  widths); the table look is written as plain fills; filtered rows are hidden.
+- Reading: every worksheet becomes a sheet (shared or inline text, shared formulas, number formats
+  turned into ours, styles as above; theme colors are left out). Formulas are kept as written; ones
+  using functions sheets don't know show `#NAME?`.
+- CSV out: the shown values, quoted where needed. CSV in: each value typed into its cell (so numbers,
+  dates and formulas work); commas, semicolons or tabs.
