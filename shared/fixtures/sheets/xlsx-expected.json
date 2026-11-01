@@ -1,0 +1,35 @@
+{
+  "about": "What sample-openpyxl.xlsx and sample-libreoffice.xlsx (make_samples.py) read as. For each cell: v, the style parts listed (fmt must match; other style parts aren't checked), and what it shows.",
+  "files": ["sample-openpyxl.xlsx", "sample-libreoffice.xlsx"],
+  "sheets": [
+    {
+      "name": "Bills",
+      "widths": { "A": 140 },
+      "cells": {
+        "A1": { "v": "Item", "s": { "b": true, "color": "#FFFFFF", "fill": "#2F6FDE" } },
+        "D1": { "v": "Paid", "s": { "b": true, "fill": "#2F6FDE" } },
+        "A2": { "v": "Rent" },
+        "B2": { "v": "1450", "s": { "fmt": "currency" }, "shows": "$1,450.00" },
+        "C2": { "v": "46327", "s": { "fmt": "date" }, "shows": "11/1/2026" },
+        "D2": { "v": "1", "s": { "fmt": "percent" }, "shows": "100%" },
+        "B3": { "v": "92.18", "s": { "fmt": "currency" } },
+        "D3": { "v": "0.5", "s": { "fmt": "percent" }, "shows": "50%" },
+        "A4": { "v": "Internet" },
+        "A5": { "v": "Total", "s": { "b": true, "i": true } },
+        "B5": { "v": "=SUM(B2:B4)", "s": { "fmt": "currency", "border": "t" }, "shows": "$1,602.18" },
+        "C5": { "v": "0.645833333333333", "s": { "fmt": "time" }, "shows": "3:30 PM" },
+        "A7": { "v": "A long note that wraps inside its cell", "s": { "wrap": true, "align": "center" } },
+        "B7": { "v": "00123", "s": { "fmt": "text" }, "shows": "00123" },
+        "C7": { "v": "3.14159", "s": { "fmt": "number", "dp": 3 }, "shows": "3.142" },
+        "D7": { "v": "=IF(B5>1000,\"big\",\"small\")", "shows": "big" }
+      }
+    },
+    {
+      "name": "Notes",
+      "cells": {
+        "A1": { "v": "Second sheet" },
+        "B2": { "v": "42", "shows": "42" }
+      }
+    }
+  ]
+}
