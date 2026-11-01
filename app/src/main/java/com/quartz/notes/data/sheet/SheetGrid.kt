@@ -44,7 +44,7 @@ object SheetGrid {
     fun insertRows(sheet: SheetData, at: Int, n: Int): SheetData {
         val change = SheetFormula.insertChange(true, at, n)
         val out = remap(sheet, { r, c -> (if (r >= at) r + n else r) to c }) { SheetFormula.rewriteRefs(it, change) }
-        return out.copy(rows = out.rows + n)
+        return out.copy(rows = out.rows + n, hiddenRows = sheet.hiddenRows.map { if (it >= at) it + n else it }.toSet())
     }
 
     /** Deletes [n] rows from 0-based row [at]. */
@@ -53,7 +53,10 @@ object SheetGrid {
         val out = remap(sheet, { r, c -> if (r < at) r to c else if (r >= at + n) (r - n) to c else null }) {
             SheetFormula.rewriteRefs(it, change)
         }
-        return out.copy(rows = maxOf(1, out.rows - n))
+        return out.copy(
+            rows = maxOf(1, out.rows - n),
+            hiddenRows = sheet.hiddenRows.mapNotNull { if (it < at) it else if (it >= at + n) it - n else null }.toSet(),
+        )
     }
 
     private fun <T> moveColumnKeys(rec: Map<String, T>, move: (Int) -> Int?): Map<String, T> {
@@ -74,6 +77,7 @@ object SheetGrid {
             cols = out.cols + n,
             widths = moveColumnKeys(sheet.widths, move),
             hide = moveColumnKeys(sheet.hide, move),
+            hiddenCols = moveColumnKeys(sheet.hiddenCols.associateWith { true }, move).keys,
         )
     }
 
@@ -86,6 +90,7 @@ object SheetGrid {
             cols = maxOf(1, out.cols - n),
             widths = moveColumnKeys(sheet.widths, move),
             hide = moveColumnKeys(sheet.hide, move),
+            hiddenCols = moveColumnKeys(sheet.hiddenCols.associateWith { true }, move).keys,
         )
     }
 
@@ -132,10 +137,10 @@ object SheetGrid {
         return sheet.copy(cells = cells)
     }
 
-    /** 0-based rows the filter hides (never row 0, the header). */
+    /** 0-based rows hidden: by hand, and by the filter (which never hides row 0, the header). */
     fun hiddenRows(sheet: SheetData, calc: SheetCalc = SheetCalc(sheet)): Set<Int> {
-        if (sheet.hide.isEmpty()) return emptySet()
-        val hidden = HashSet<Int>()
+        if (sheet.hide.isEmpty()) return sheet.hiddenRows
+        val hidden = HashSet<Int>(sheet.hiddenRows)
         val filters = sheet.hide.map { (letters, values) -> colIndex(letters) to values.toSet() }
         for (r in 1 until sheet.usedSize.first) {
             if (filters.any { (c, values) -> calc.display(r, c) in values }) hidden += r
@@ -314,4 +319,16 @@ object SheetGrid {
         for (r in 1 until sheet.usedSize.first) seen += calc.display(r, col)
         return seen.sortedWith(compareBy<String> { it.isEmpty() }.thenBy { it.lowercase() })
     }
+
+    // ---- Hiding rows and columns ----
+
+    fun hideCols(sheet: SheetData, c1: Int, c2: Int): SheetData = sheet.copy(hiddenCols = sheet.hiddenCols + (c1..c2).map(::colName))
+
+    /** Shows the hidden columns from [c1] to [c2]. */
+    fun unhideCols(sheet: SheetData, c1: Int, c2: Int): SheetData = sheet.copy(hiddenCols = sheet.hiddenCols.filter { colIndex(it) !in c1..c2 }.toSet())
+
+    fun hideRows(sheet: SheetData, r1: Int, r2: Int): SheetData = sheet.copy(hiddenRows = sheet.hiddenRows + (r1..r2))
+
+    /** Shows the hidden rows from [r1] to [r2]. */
+    fun unhideRows(sheet: SheetData, r1: Int, r2: Int): SheetData = sheet.copy(hiddenRows = sheet.hiddenRows.filter { it !in r1..r2 }.toSet())
 }

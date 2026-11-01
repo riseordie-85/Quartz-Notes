@@ -48,6 +48,10 @@ ws["C7"] = 3.14159
 ws["C7"].number_format = "#,##0.000"
 ws["D7"] = '=IF(B5>1000,"big","small")'
 ws.column_dimensions["A"].width = 20
+ws["E2"] = "secret"
+ws.column_dimensions["E"].hidden = True
+ws["A6"] = "a hidden row"
+ws.row_dimensions[6].hidden = True
 ws2 = wb.create_sheet("Notes")
 ws2["A1"] = "Second sheet"
 ws2["B2"] = 42

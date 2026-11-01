@@ -161,10 +161,15 @@ object SheetXlsx {
                 rowXml.append("<row r=\"${r + 1}\"" + (if (r in hidden) " hidden=\"1\"" else "") + ">").append(cellsXml).append("</row>")
             }
         }
-        val colXml = sheet.widths.entries
-            .map { (letters, w) -> colIndex(letters) + 1 to w }
-            .sortedBy { it.first }
-            .joinToString("") { (i, w) -> "<col min=\"$i\" max=\"$i\" width=\"${String.format(Locale.ROOT, "%.2f", w / 7f)}\" customWidth=\"1\"/>" }
+        val colXml = (sheet.widths.keys + sheet.hiddenCols)
+            .map { colIndex(it) + 1 }
+            .sorted()
+            .joinToString("") { i ->
+                val letters = colName(i - 1)
+                val w = sheet.widths[letters] ?: DEFAULT_WIDTH
+                "<col min=\"$i\" max=\"$i\" width=\"${String.format(Locale.ROOT, "%.2f", w / 7f)}\"" +
+                    (if (letters in sheet.widths) " customWidth=\"1\"" else "") + (if (letters in sheet.hiddenCols) " hidden=\"1\"" else "") + "/>"
+            }
 
         val head = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
         val main = "http://schemas.openxmlformats.org/spreadsheetml/2006/main"
@@ -373,7 +378,10 @@ object SheetXlsx {
             val cells = LinkedHashMap<String, SheetCell>()
             data class Shared(val formula: String, val r: Int, val c: Int)
             val shared = HashMap<String, Shared>()
+            val hiddenRows = HashSet<Int>()
             for (row in doc.all("row")) {
+                val hiddenAttr = row.attr("hidden")
+                if (hiddenAttr == "1" || hiddenAttr == "true") row.attr("r")?.toIntOrNull()?.let { if (it >= 1) hiddenRows += it - 1 }
                 for (c in row.kids("c")) {
                     val (r, col) = parseAddr(c.getAttribute("r")) ?: continue
                     val style = styles.getOrNull(c.attr("s")?.toIntOrNull() ?: 0) ?: SheetStyle.NONE
@@ -409,14 +417,20 @@ object SheetXlsx {
                 }
             }
             val widths = LinkedHashMap<String, Float>()
+            val hiddenCols = HashSet<String>()
             for (col in doc.all("col")) {
                 val min = col.attr("min")?.toIntOrNull() ?: continue
+                if (min < 1) continue
+                val hiddenAttr = col.attr("hidden")
+                if (hiddenAttr == "1" || hiddenAttr == "true") {
+                    for (i in min..minOf(col.attr("max")?.toIntOrNull() ?: min, min + 200)) hiddenCols += colName(i - 1)
+                }
                 val max = minOf(col.attr("max")?.toIntOrNull() ?: min, min + 60)
                 val width = col.attr("width")?.toDoubleOrNull() ?: continue
-                if (min < 1 || width <= 0 || col.attr("customWidth") == "0" || col.attr("customWidth") == "false") continue
+                if (width <= 0 || col.attr("customWidth") == "0" || col.attr("customWidth") == "false") continue
                 for (i in min..max) widths[colName(i - 1)] = Math.round(width * 7).toFloat()
             }
-            val data = SheetData(cells = cells, widths = widths)
+            val data = SheetData(cells = cells, widths = widths, hiddenCols = hiddenCols, hiddenRows = hiddenRows)
             val (rows, cols) = data.usedSize
             out += ImportedSheet(sh.getAttribute("name").ifEmpty { "Sheet" }, data.copy(rows = maxOf(DEFAULT_ROWS, rows + 1), cols = maxOf(DEFAULT_COLS, cols + 1)))
         }

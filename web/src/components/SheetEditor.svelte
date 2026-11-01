@@ -40,6 +40,13 @@
     updateStyles,
     usedSize,
     valuedSize,
+    colHidden,
+    handHiddenRows,
+    hideCols,
+    hideRows,
+    unhideCols,
+    unhideRows,
+    unhideAll,
     toXlsx,
     toCsv,
   } from "../lib/sheet"
@@ -79,7 +86,9 @@
   const rows = $derived(Math.max(data.rows, used[0] + 10, focus[0] + 10) + extraRows)
   const cols = $derived(Math.max(data.cols, used[1] + 3, focus[1] + 3) + extraCols)
   const rowList = $derived(Array.from({ length: rows }, (_, i) => i))
-  const colList = $derived(Array.from({ length: cols }, (_, i) => i))
+  // Hidden columns aren't drawn at all; a double line marks where they are.
+  const colList = $derived(Array.from({ length: cols }, (_, i) => i).filter((c) => !colHidden(data, c)))
+  const handHidden = $derived(handHiddenRows(data))
 
   // ---- Undo, and changes from elsewhere ----
 
@@ -145,7 +154,14 @@
       while (hidden.has(next)) next += step
       if (next >= 0) r = next
     }
-    select(r, focus[1] + dc, extend)
+    let c = focus[1]
+    const cstep = dc > 0 ? 1 : -1
+    for (let i = 0; i < Math.abs(dc); i++) {
+      let next = c + cstep
+      while (next >= 0 && colHidden(data, next)) next += cstep
+      if (next >= 0) c = next
+    }
+    select(r, c, extend)
   }
   const inArea = (r: number, c: number) => r >= area.r1 && r <= area.r2 && c >= area.c1 && c <= area.c2
 
@@ -313,6 +329,26 @@
     change(deleteRows(data, area.r1, area.r2 - area.r1 + 1))
     select(area.r1, area.c1)
   }
+  /** Hidden columns in the selection, or else right beside it (as they can't be selected). */
+  function hiddenColsNear(): [number, number] | null {
+    const a = area
+    for (let c = a.c1; c <= a.c2; c++) if (colHidden(data, c)) return [a.c1, a.c2]
+    let lo = a.c1
+    while (lo > 0 && colHidden(data, lo - 1)) lo--
+    let hi = a.c2
+    while (colHidden(data, hi + 1)) hi++
+    return lo < a.c1 || hi > a.c2 ? [lo, hi] : null
+  }
+  function hiddenRowsNear(): [number, number] | null {
+    const a = area
+    for (let r = a.r1; r <= a.r2; r++) if (handHidden.has(r)) return [a.r1, a.r2]
+    let lo = a.r1
+    while (lo > 0 && handHidden.has(lo - 1)) lo--
+    let hi = a.r2
+    while (handHidden.has(hi + 1)) hi++
+    return lo < a.r1 || hi > a.r2 ? [lo, hi] : null
+  }
+
   function removeCols() {
     change(deleteCols(data, area.c1, area.c2 - area.c1 + 1))
     select(area.r1, area.c1)
@@ -795,14 +831,27 @@
   <button role="menuitem" onclick={() => (close(), change(clearArea(data, area)))}>Clear</button>
   {#if nr > 1}<button role="menuitem" onclick={() => (close(), change(fillDown(data, area)))}>Fill down</button>{/if}
   {#if nc > 1}<button role="menuitem" onclick={() => (close(), change(fillRight(data, area)))}>Fill right</button>{/if}
-  <hr />
-  <button role="menuitem" onclick={() => (close(), insertRowsAt(false))}>Insert {nr > 1 ? `${nr} rows` : "row"} above</button>
-  <button role="menuitem" onclick={() => (close(), insertRowsAt(true))}>Insert {nr > 1 ? `${nr} rows` : "row"} below</button>
-  <button role="menuitem" onclick={() => (close(), removeRows())}>Delete {nr > 1 ? `${nr} rows` : "row"}</button>
-  <hr />
-  <button role="menuitem" onclick={() => (close(), insertColsAt(false))}>Insert {nc > 1 ? `${nc} columns` : "column"} left</button>
-  <button role="menuitem" onclick={() => (close(), insertColsAt(true))}>Insert {nc > 1 ? `${nc} columns` : "column"} right</button>
-  <button role="menuitem" onclick={() => (close(), removeCols())}>Delete {nc > 1 ? `${nc} columns` : "column"}</button>
+  {@const wholeCols = area.r1 === 0 && area.r2 >= rows - 1}
+  {@const wholeRows = area.c1 === 0 && area.c2 >= cols - 1}
+  {@const rowsNear = hiddenRowsNear()}
+  {@const colsNear = hiddenColsNear()}
+  {#if !wholeCols}
+    <hr />
+    <button role="menuitem" onclick={() => (close(), insertRowsAt(false))}>Insert {nr > 1 ? `${nr} rows` : "row"} above</button>
+    <button role="menuitem" onclick={() => (close(), insertRowsAt(true))}>Insert {nr > 1 ? `${nr} rows` : "row"} below</button>
+    <button role="menuitem" onclick={() => (close(), removeRows())}>Delete {nr > 1 ? `${nr} rows` : "row"}</button>
+    <button role="menuitem" onclick={() => (close(), change(hideRows(data, area.r1, area.r2)))}>Hide {nr > 1 ? `${nr} rows` : "row"}</button>
+  {/if}
+  {#if rowsNear}<button role="menuitem" onclick={() => (close(), change(unhideRows(data, rowsNear[0], rowsNear[1])))}>Unhide rows</button>{/if}
+  {#if !wholeRows}
+    <hr />
+    <button role="menuitem" onclick={() => (close(), insertColsAt(false))}>Insert {nc > 1 ? `${nc} columns` : "column"} left</button>
+    <button role="menuitem" onclick={() => (close(), insertColsAt(true))}>Insert {nc > 1 ? `${nc} columns` : "column"} right</button>
+    <button role="menuitem" onclick={() => (close(), removeCols())}>Delete {nc > 1 ? `${nc} columns` : "column"}</button>
+    <button role="menuitem" onclick={() => (close(), change(hideCols(data, area.c1, area.c2)))}>Hide {nc > 1 ? `${nc} columns` : "column"}</button>
+  {/if}
+  {#if colsNear}<button role="menuitem" onclick={() => (close(), change(unhideCols(data, colsNear[0], colsNear[1])))}>Unhide columns</button>{/if}
+  {#if data.hidden}<button role="menuitem" onclick={() => (close(), change(unhideAll(data)))}>Show all hidden rows and columns</button>{/if}
 {/snippet}
 
 <div class="paper" style:background={paper} style:color={ink} style:--ink={ink} style:--paper={paper}>
@@ -864,7 +913,13 @@
       <tr>
         <th class="corner" aria-label="Select all"></th>
         {#each colList as c (c)}
-          <th data-col={c} class:on={c >= area.c1 && c <= area.c2} class:filtered={!!data.hide?.[colName(c)]}>
+          <th
+            data-col={c}
+            class:on={c >= area.c1 && c <= area.c2}
+            class:filtered={!!data.hide?.[colName(c)]}
+            class:after-hidden={c > 0 && colHidden(data, c - 1)}
+            title={c > 0 && colHidden(data, c - 1) ? "Hidden columns before this one" : undefined}
+          >
             {colName(c)}{#if data.hide?.[colName(c)]}<span class="funnel">▾</span>{/if}
             <span class="resize" role="separator" aria-label="Column {colName(c)} width" onpointerdown={(e) => startWiden(e, c)}></span>
           </th>
@@ -874,7 +929,7 @@
     <tbody>
       {#each rowList as r (r)}
         <tr class:hidden={hidden.has(r)}>
-          <th data-row={r} class:on={r >= area.r1 && r <= area.r2}>{r + 1}</th>
+          <th data-row={r} class:on={r >= area.r1 && r <= area.r2} class:after-hidden={r > 0 && handHidden.has(r - 1)}>{r + 1}</th>
           {#each colList as c (c)}
             {@const isEdit = editing !== null && editCell[0] === r && editCell[1] === c}
             <td
@@ -1133,13 +1188,38 @@
 
   .grid {
     position: relative;
-    overflow: auto;
+    overflow: scroll;
+    scrollbar-width: auto;
+    scrollbar-color: color-mix(in srgb, var(--ink) 35%, transparent) transparent;
     height: min(70vh, 720px);
     outline: none;
     font-size: 14px;
     touch-action: pan-x pan-y;
     user-select: none;
     -webkit-user-select: none;
+  }
+  /* Scrollbars always showing (some systems hide them until you scroll). */
+  .grid::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+  .grid::-webkit-scrollbar-thumb {
+    border: 3px solid transparent;
+    border-radius: 8px;
+    background-clip: padding-box;
+    background-color: color-mix(in srgb, var(--ink) 35%, transparent);
+  }
+  .grid::-webkit-scrollbar-thumb:hover {
+    background-color: color-mix(in srgb, var(--ink) 55%, transparent);
+  }
+  .grid::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+  thead th.after-hidden {
+    border-left: 3px double color-mix(in srgb, var(--ink) 55%, transparent);
+  }
+  tbody th.after-hidden {
+    border-top: 3px double color-mix(in srgb, var(--ink) 55%, transparent);
   }
   table {
     border-collapse: separate;

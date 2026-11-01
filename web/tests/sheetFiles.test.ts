@@ -5,7 +5,7 @@ import { describe, expect, it } from "vitest"
 import { readFileSync } from "node:fs"
 import { fileURLToPath } from "node:url"
 import { dirname, join } from "node:path"
-import { SheetCalc, excelFormula, plainFormula, emptySheet, formatFromCode, fromCsv, fromXlsx, parseAddr, toCsv, toXlsx, typeInto, updateStyles, setBorders, type SheetData } from "../src/lib/sheet"
+import { SheetCalc, hideCols, hideRows, excelFormula, plainFormula, emptySheet, formatFromCode, fromCsv, fromXlsx, parseAddr, toCsv, toXlsx, typeInto, updateStyles, setBorders, type SheetData } from "../src/lib/sheet"
 
 const dir = join(dirname(fileURLToPath(import.meta.url)), "../../shared/fixtures/sheets")
 const expected = JSON.parse(readFileSync(join(dir, "xlsx-expected.json"), "utf8"))
@@ -26,6 +26,8 @@ describe("reading Excel files", () => {
           if (cell.shows !== undefined) expect(calc.display(...parseAddr(a)!), `${want.name}!${a} shows`).toBe(cell.shows)
         }
         for (const [k, w] of Object.entries(want.widths ?? {})) expect(got.widths[k]).toBe(w)
+        expect(got.hidden?.cols ?? [], `${want.name} hidden columns`).toEqual(want.hiddenCols)
+        expect(got.hidden?.rows ?? [], `${want.name} hidden rows`).toEqual(want.hiddenRows)
       }
     })
   }
@@ -78,6 +80,12 @@ describe("writing Excel files", () => {
     }
     expect(Object.keys(back.sheet.cells).sort()).toEqual(Object.keys(s.cells).sort())
     expect(back.sheet.widths.A).toBe(154)
+  })
+
+  it("keeps hidden columns and rows", async () => {
+    const s = hideRows(hideCols(sample(), 2, 2), 1, 1)
+    const [back] = await fromXlsx(await toXlsx(s))
+    expect(back.sheet.hidden).toEqual({ cols: ["C"], rows: [2] })
   })
 
   it("bakes in the table look", async () => {

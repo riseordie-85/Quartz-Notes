@@ -159,7 +159,15 @@ class SheetState(initial: SheetData) {
                 if (next >= 0) r = next
             }
         }
-        val c = (focus.second + dc).coerceAtLeast(0)
+        var c = focus.second
+        if (dc != 0) {
+            val step = if (dc > 0) 1 else -1
+            repeat(kotlin.math.abs(dc)) {
+                var next = c + step
+                while (next >= 0 && data.colHidden(next)) next += step
+                if (next >= 0) c = next
+            }
+        }
         select(r.coerceAtLeast(0), c, extend)
     }
 
@@ -310,6 +318,45 @@ class SheetState(initial: SheetData) {
         change(SheetGrid.deleteCols(data, a.c1, a.cols))
         select(a.r1, a.c1)
     }
+
+    // ---- Hiding rows and columns ----
+
+    fun hideCols() = change(SheetGrid.hideCols(data, area.c1, minOf(area.c2, shownCols - 1)))
+
+    fun hideRows() = change(SheetGrid.hideRows(data, area.r1, minOf(area.r2, shownRows - 1)))
+
+    /** Hidden columns in the selection, or else right beside it (as they can't be selected). */
+    fun hiddenColsNear(): IntRange? {
+        val a = area
+        if ((a.c1..a.c2).any { data.colHidden(it) }) return a.c1..a.c2
+        var lo = a.c1
+        while (lo > 0 && data.colHidden(lo - 1)) lo--
+        var hi = a.c2
+        while (data.colHidden(hi + 1)) hi++
+        return if (lo < a.c1 || hi > a.c2) lo..hi else null
+    }
+
+    fun hiddenRowsNear(): IntRange? {
+        val a = area
+        if ((a.r1..a.r2).any { it in data.hiddenRows }) return a.r1..a.r2
+        var lo = a.r1
+        while (lo > 0 && (lo - 1) in data.hiddenRows) lo--
+        var hi = a.r2
+        while ((hi + 1) in data.hiddenRows) hi++
+        return if (lo < a.r1 || hi > a.r2) lo..hi else null
+    }
+
+    fun unhideCols() {
+        val range = hiddenColsNear() ?: return
+        change(SheetGrid.unhideCols(data, range.first, range.last))
+    }
+
+    fun unhideRows() {
+        val range = hiddenRowsNear() ?: return
+        change(SheetGrid.unhideRows(data, range.first, range.last))
+    }
+
+    fun unhideAll() = change(data.copy(hiddenCols = emptySet(), hiddenRows = emptySet()))
 
     fun setWidth(c: Int, width: Float) {
         val w = width.coerceIn(36f, 600f)

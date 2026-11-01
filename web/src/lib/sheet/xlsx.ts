@@ -140,10 +140,15 @@ export async function toXlsx(sheet: SheetData, title = ""): Promise<Uint8Array> 
     }
     if (cellsXml.length || hidden.has(r)) rowXml.push(`<row r="${r + 1}"${hidden.has(r) ? ' hidden="1"' : ""}>${cellsXml.join("")}</row>`)
   }
-  const colXml = Object.entries(sheet.widths)
-    .map(([letters, w]) => [colIndex(letters) + 1, w] as [number, number])
-    .sort((a, b) => a[0] - b[0])
-    .map(([i, w]) => `<col min="${i}" max="${i}" width="${(w / 7).toFixed(2)}" customWidth="1"/>`)
+  const hiddenCols = sheet.hidden?.cols ?? []
+  const colXml = [...new Set([...Object.keys(sheet.widths), ...hiddenCols])]
+    .map((letters) => colIndex(letters) + 1)
+    .sort((a, b) => a - b)
+    .map((i) => {
+      const letters = colName(i - 1)
+      const w = sheet.widths[letters] ?? 100
+      return `<col min="${i}" max="${i}" width="${(w / 7).toFixed(2)}"${letters in sheet.widths ? ' customWidth="1"' : ""}${hiddenCols.includes(letters) ? ' hidden="1"' : ""}/>`
+    })
     .join("")
 
   const worksheet =
@@ -338,7 +343,10 @@ export async function fromXlsx(bytes: Uint8Array): Promise<ImportedSheet[]> {
     if (!doc) continue
     const sheet = emptySheet()
     const shared = new Map<string, { formula: string; r: number; c: number }>()
+    const hiddenRows: number[] = []
     for (const row of Array.from(doc.getElementsByTagNameNS("*", "row"))) {
+      const h = row.getAttribute("hidden")
+      if ((h === "1" || h === "true") && Number(row.getAttribute("r")) >= 1) hiddenRows.push(Number(row.getAttribute("r")))
       for (const c of children(row, "c")) {
         const at = parseAddr(c.getAttribute("r") ?? "")
         if (!at) continue
@@ -373,12 +381,22 @@ export async function fromXlsx(bytes: Uint8Array): Promise<ImportedSheet[]> {
         if (cell.v !== undefined || cell.s) sheet.cells[addr(r, col)] = cell
       }
     }
+    const hiddenCols: string[] = []
     for (const col of Array.from(doc.getElementsByTagNameNS("*", "col"))) {
       const min = Number(col.getAttribute("min"))
-      const max = Math.min(Number(col.getAttribute("max")), min + 60)
+      if (!min || min < 1) continue
+      const h = col.getAttribute("hidden")
+      if (h === "1" || h === "true") {
+        const last = Math.min(Number(col.getAttribute("max")) || min, min + 200)
+        for (let i = min; i <= last; i++) hiddenCols.push(colName(i - 1))
+      }
+      const max = Math.min(Number(col.getAttribute("max")) || min, min + 60)
       const width = Number(col.getAttribute("width"))
-      if (!min || !width || col.getAttribute("customWidth") === "0") continue
+      if (!width || col.getAttribute("customWidth") === "0" || col.getAttribute("customWidth") === "false") continue
       for (let i = min; i <= max; i++) sheet.widths[colName(i - 1)] = Math.round(width * 7)
+    }
+    if (hiddenCols.length || hiddenRows.length) {
+      sheet.hidden = { ...(hiddenCols.length ? { cols: [...new Set(hiddenCols)] } : {}), ...(hiddenRows.length ? { rows: hiddenRows } : {}) }
     }
     const [rows, cols] = usedSize(sheet)
     sheet.rows = Math.max(DEFAULT_ROWS, rows + 1)

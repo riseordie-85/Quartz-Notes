@@ -200,6 +200,27 @@ async def main():
         ok("inserting a row moves cells and grows the total's range")
         await page.screenshot(path=f"{OUT}/s07_after_insert.png")
 
+        # Scrollbars show; hiding a column and a row, then showing them again.
+        # (Headless browsers draw no scrollbars, so this checks they're asked for.)
+        bars = await page.evaluate("() => { const st = getComputedStyle(document.querySelector('.grid')); return [st.overflowX, st.overflowY] }")
+        assert bars == ["scroll", "scroll"], bars
+        await page.click(td(1, 2), button="right")
+        await page.get_by_role("menuitem", name="Hide column", exact=True).click()
+        await expect(page.locator('td[data-c="2"]')).to_have_count(0)
+        wait_for(lambda: (get_page(pid)["sheet"].get("hidden") or {}).get("cols") == ["C"], "hidden column on the server")
+        await page.click(td(2, 0), button="right")
+        await page.get_by_role("menuitem", name="Hide row", exact=True).click()
+        await expect(page.locator(td(2, 0))).to_be_hidden()
+        await page.screenshot(path=f"{OUT}/s07c_hidden.png")
+        await page.click(td(1, 1), button="right")
+        await page.get_by_role("menuitem", name="Unhide columns").click()
+        await expect(page.locator(td(1, 2))).to_be_visible()
+        await page.click(td(1, 0), button="right")
+        await page.get_by_role("menuitem", name="Unhide rows").click()
+        await expect(page.locator(td(2, 0))).to_be_visible()
+        wait_for(lambda: "hidden" not in get_page(pid)["sheet"], "nothing hidden on the server")
+        ok("scrollbars; hiding and showing columns and rows")
+
         # Download as Excel; it opens with the same cells.
         await page.click("button[title='More: rows, columns and downloads']")
         async with page.expect_download() as dl:

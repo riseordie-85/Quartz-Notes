@@ -48,6 +48,8 @@ show it the same way; `shared/fixtures/sheets/*.json` are cases both must pass.
   | gray | `#5F6368` | `#F1F3F4` |
 
   A cell's own `fill` and `color` win over the table's.
+- `hidden`: columns (`"cols": ["C"]`) and rows (`"rows": [6]`, 1-based) hidden by hand. They move
+  with their cells when rows or columns are inserted or deleted, and come in and go out with Excel files.
 - `hide` (filter): by column, the shown values whose rows are hidden. Row 1 is the header row and is
   never hidden. A row is hidden when any filtered column's shown value is in that column's list.
 

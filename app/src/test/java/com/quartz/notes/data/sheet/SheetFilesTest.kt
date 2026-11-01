@@ -64,6 +64,8 @@ class SheetFilesTest {
                     }
                 }
                 (want["widths"] as? JsonObject)?.forEach { (k, w) -> assertEquals("$file width $k", w.jsonPrimitive.int.toFloat(), got.widths[k]) }
+                assertEquals("$file hidden columns", want["hiddenCols"]!!.jsonArray.map { it.jsonPrimitive.content }.toSet(), got.hiddenCols)
+                assertEquals("$file hidden rows", want["hiddenRows"]!!.jsonArray.map { it.jsonPrimitive.int - 1 }.toSet(), got.hiddenRows)
             }
         }
     }
@@ -118,6 +120,22 @@ class SheetFilesTest {
         assertEquals("My  sheet", back.name)
         assertEquals(s.cells, back.sheet.cells)
         assertEquals(154f, back.sheet.widths["A"])
+    }
+
+    @Test
+    fun keepsHiddenColumnsAndRows() {
+        val s = SheetGrid.hideRows(SheetGrid.hideCols(sample(), 2, 2), 1, 1)
+        val back = SheetXlsx.read(SheetXlsx.write(s)).single().sheet
+        assertEquals(setOf("C"), back.hiddenCols)
+        assertEquals(setOf(1), back.hiddenRows)
+        // Saved and read back in the app's own format too.
+        val again = SheetData.decode(back.encode())
+        assertEquals(setOf("C"), again.hiddenCols)
+        assertEquals(setOf(1), again.hiddenRows)
+        // They move with inserted columns and rows.
+        val moved = SheetGrid.insertCols(SheetGrid.insertRows(again, 0, 2), 0, 1)
+        assertEquals(setOf("D"), moved.hiddenCols)
+        assertEquals(setOf(3), moved.hiddenRows)
     }
 
     @Test

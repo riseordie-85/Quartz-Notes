@@ -60,7 +60,7 @@ import kotlin.math.hypot
 import kotlin.math.roundToInt
 
 /** What a press on the grid is doing as it moves. */
-private enum class Drag { NONE, SELECT, ROWS, COLS, WIDTH, REFERENCE }
+private enum class Drag { NONE, SELECT, ROWS, COLS, WIDTH, REFERENCE, VBAR, HBAR }
 
 /**
  * The cells, with column letters along the top and row numbers down the side (both stay put while
@@ -166,12 +166,37 @@ internal fun SheetGridView(
             val gg = geometry
             val c = gg.colAt(x)
             val slop = 10f * density.density
-            return when {
+            val found = when {
                 abs(gg.colX[c + 1] - x) < slop -> c
                 c > 0 && abs(gg.colX[c] - x) < slop -> c - 1
                 else -> null
-            }
+            } ?: return null
+            // A hidden column's edge belongs to the shown column before it.
+            var shown = found
+            while (shown >= 0 && gg.colX[shown + 1] - gg.colX[shown] <= 0f) shown--
+            return shown.takeIf { it >= 0 }
         }
+
+        /** The scrollbars: where each thumb is (start, length) along its track, or null when everything fits. */
+        val barTouch = 18f * density.density
+        fun vThumb(): Pair<Float, Float>? {
+            val track = vh - hh - barTouch
+            val content = geometry.height + 40f
+            val view = vh - hh
+            if (latestMaxY <= 0f || track <= 0f) return null
+            val len = (track * view / content).coerceIn(28f * density.density, track)
+            return (hh + (track - len) * (sy / latestMaxY)) to len
+        }
+        fun hThumb(): Pair<Float, Float>? {
+            val track = vw - hw - barTouch
+            val content = geometry.width + 40f
+            val view = vw - hw
+            if (latestMaxX <= 0f || track <= 0f) return null
+            val len = (track * view / content).coerceIn(28f * density.density, track)
+            return (hw + (track - len) * (sx / latestMaxX)) to len
+        }
+        fun vBarAt(p: Offset) = vThumb() != null && p.x > vw - barTouch && p.y > hh && p.y < vh - barTouch
+        fun hBarAt(p: Offset) = hThumb() != null && p.y > vh - barTouch && p.x > hw && p.x < vw - barTouch
 
         fun handleAt(p: Offset): Boolean {
             val a = state.area
@@ -205,6 +230,7 @@ internal fun SheetGridView(
         }
 
         var lastTap by remember { mutableStateOf(0L to (-1 to -1)) }
+        var barDragging by remember { mutableStateOf(false) }
 
         Canvas(
             Modifier
@@ -233,7 +259,29 @@ internal fun SheetGridView(
                         var mode = Drag.NONE
                         var startWidth = 0f
                         val now = down.uptimeMillis
+                        var barStart = 0f
                         when {
+                            vBarAt(p0) -> {
+                                // Tapping the track jumps there; then the thumb follows the finger.
+                                val (start, len) = vThumb()!!
+                                if (p0.y < start || p0.y > start + len) {
+                                    val track = vh - hh - barTouch
+                                    sy = ((p0.y - hh - len / 2) / (track - len).coerceAtLeast(1f) * latestMaxY).coerceIn(0f, latestMaxY)
+                                }
+                                barStart = sy
+                                mode = Drag.VBAR
+                                down.consume()
+                            }
+                            hBarAt(p0) -> {
+                                val (start, len) = hThumb()!!
+                                if (p0.x < start || p0.x > start + len) {
+                                    val track = vw - hw - barTouch
+                                    sx = ((p0.x - hw - len / 2) / (track - len).coerceAtLeast(1f) * latestMaxX).coerceIn(0f, latestMaxX)
+                                }
+                                barStart = sx
+                                mode = Drag.HBAR
+                                down.consume()
+                            }
                             corner -> {
                                 if (state.editing != null) state.commitEdit(0, 0)
                                 state.selectAll()
@@ -383,6 +431,20 @@ internal fun SheetGridView(
                             if (ch.positionChange() == Offset.Zero) continue
                             val p = ch.position
                             val at = cellAt(p)
+                            if (mode == Drag.VBAR || mode == Drag.HBAR) {
+                                barDragging = true
+                                if (mode == Drag.VBAR) {
+                                    val (_, len) = vThumb() ?: (0f to 0f)
+                                    val track = (vh - hh - barTouch - len).coerceAtLeast(1f)
+                                    sy = (barStart + (p.y - p0.y) / track * latestMaxY).coerceIn(0f, latestMaxY)
+                                } else {
+                                    val (_, len) = hThumb() ?: (0f to 0f)
+                                    val track = (vw - hw - barTouch - len).coerceAtLeast(1f)
+                                    sx = (barStart + (p.x - p0.x) / track * latestMaxX).coerceIn(0f, latestMaxX)
+                                }
+                                ch.consume()
+                                continue
+                            }
                             when (mode) {
                                 Drag.WIDTH -> resizing = resizing?.let { (c, _) ->
                                     c to (startWidth + (p.x - p0.x) / unitNow).coerceIn(36f, 600f)
@@ -405,6 +467,7 @@ internal fun SheetGridView(
                             resizing?.let { (c, w) -> if (abs(w - startWidth) > 0.5f) state.setWidth(c, w) }
                             resizing = null
                         }
+                        barDragging = false
                     }
                 },
         ) {
@@ -458,6 +521,12 @@ internal fun SheetGridView(
                 for (c in c0..c1) {
                     val l = gg.colX[c] - sx + headerW
                     val w = gg.colX[c + 1] - gg.colX[c]
+                    if (w <= 0f) {
+                        // Hidden columns: a double line where they are.
+                        drawLine(look.headerText, Offset(l - 2f, 4f), Offset(l - 2f, headerH - 4f), 1.5f)
+                        drawLine(look.headerText, Offset(l + 2f, 4f), Offset(l + 2f, headerH - 4f), 1.5f)
+                        continue
+                    }
                     val on = c in a.c1..a.c2
                     if (on) drawRect(accent.copy(alpha = 0.14f), Offset(l, 0f), Size(w, headerH))
                     val filtered = data.hide.containsKey(colName(c))
@@ -474,7 +543,13 @@ internal fun SheetGridView(
                 for (r in r0..r1) {
                     val t = gg.rowY[r] - sy + headerH
                     val h = gg.rowY[r + 1] - gg.rowY[r]
-                    if (h <= 0f) continue
+                    if (h <= 0f) {
+                        if (r in data.hiddenRows) {
+                            drawLine(look.headerText, Offset(4f, t - 2f), Offset(headerW - 4f, t - 2f), 1.5f)
+                            drawLine(look.headerText, Offset(4f, t + 2f), Offset(headerW - 4f, t + 2f), 1.5f)
+                        }
+                        continue
+                    }
                     val on = r in a.r1..a.r2
                     if (on) drawRect(accent.copy(alpha = 0.14f), Offset(0f, t), Size(headerW, h))
                     val layout = measurer.measure(AnnotatedString((r + 1).toString()), if (on) headerOn else headerStyle)
@@ -487,6 +562,17 @@ internal fun SheetGridView(
             drawRect(look.headerFill, Offset.Zero, Size(headerW, headerH))
             drawLine(look.gridLine, Offset(0f, headerH), Offset(size.width, headerH), 1f)
             drawLine(look.gridLine, Offset(headerW, 0f), Offset(headerW, size.height), 1f)
+
+            // Scrollbars: always there when the sheet is bigger than the space, thicker while dragged.
+            val thick = (if (barDragging) 8f else 5f) * density.density
+            val inset = 3f * density.density
+            val barColor = ink.copy(alpha = if (barDragging) 0.55f else 0.32f)
+            vThumb()?.let { (start, len) ->
+                drawRoundRect(barColor, Offset(size.width - thick - inset, start), Size(thick, len), androidx.compose.ui.geometry.CornerRadius(thick / 2))
+            }
+            hThumb()?.let { (start, len) ->
+                drawRoundRect(barColor, Offset(start, size.height - thick - inset), Size(len, thick), androidx.compose.ui.geometry.CornerRadius(thick / 2))
+            }
         }
 
         // Hold or right-click: what can be done with the selection.
@@ -529,16 +615,28 @@ internal fun SheetMenuItems(
     Item("Clear") { state.clearValues() }
     if (a.rows > 1) Item("Fill down") { state.fillDown() }
     if (a.cols > 1) Item("Fill right") { state.fillRight() }
-    HorizontalDivider()
+    // A whole column selected is every row: row commands would act on all of them (and the same for columns).
+    val wholeCols = a.r1 == 0 && a.r2 >= state.shownRows - 1
+    val wholeRows = a.c1 == 0 && a.c2 >= state.shownCols - 1
     val rows = if (a.rows > 1) "${a.rows} rows" else "row"
     val cols = if (a.cols > 1) "${a.cols} columns" else "column"
-    Item("Insert $rows above") { state.insertRows(below = false) }
-    Item("Insert $rows below") { state.insertRows(below = true) }
-    Item("Delete $rows") { state.deleteRows() }
-    HorizontalDivider()
-    Item("Insert $cols left") { state.insertCols(right = false) }
-    Item("Insert $cols right") { state.insertCols(right = true) }
-    Item("Delete $cols") { state.deleteCols() }
+    if (!wholeCols) {
+        HorizontalDivider()
+        Item("Insert $rows above") { state.insertRows(below = false) }
+        Item("Insert $rows below") { state.insertRows(below = true) }
+        Item("Delete $rows") { state.deleteRows() }
+        Item("Hide $rows") { state.hideRows() }
+    }
+    if (state.hiddenRowsNear() != null) Item("Unhide rows") { state.unhideRows() }
+    if (!wholeRows) {
+        HorizontalDivider()
+        Item("Insert $cols left") { state.insertCols(right = false) }
+        Item("Insert $cols right") { state.insertCols(right = true) }
+        Item("Delete $cols") { state.deleteCols() }
+        Item("Hide $cols") { state.hideCols() }
+    }
+    if (state.hiddenColsNear() != null) Item("Unhide columns") { state.unhideCols() }
+    if (state.data.hiddenCols.isNotEmpty() || state.data.hiddenRows.isNotEmpty()) Item("Show all hidden rows and columns") { state.unhideAll() }
     HorizontalDivider()
     Item("Sort A → Z") { state.sort(desc = false) }
     Item("Sort Z → A") { state.sort(desc = true) }

@@ -2,7 +2,7 @@
 // sorting, the filter's hidden rows, and the text used for search. Kept in step with the app's
 // data/sheet/SheetGrid.kt; see docs/sheet-format.md.
 
-import { addr, colIndex, colName, parseAddr, type SheetCell, type SheetData, type SheetStyle, usedSize } from "./model"
+import { addr, colIndex, colName, handHiddenRows, parseAddr, type SheetCell, type SheetData, type SheetStyle, usedSize } from "./model"
 import { deleteChange, insertChange, rewriteRefs, shiftChange } from "./formula"
 import { SheetCalc, type CalcOptions, type Value } from "./calc"
 import { parseInput } from "./numbers"
@@ -65,12 +65,22 @@ function remap(
   return out
 }
 
+/** [sheet] with these hand-hidden columns and rows (0-based rows), leaving out what's empty. */
+function withHidden(sheet: SheetData, cols: string[], rows: number[]): SheetData {
+  const out = { ...sheet }
+  const c = [...new Set(cols)].sort((a, b) => colIndex(a) - colIndex(b))
+  const r = [...new Set(rows)].filter((x) => x >= 0).sort((a, b) => a - b).map((x) => x + 1)
+  if (c.length || r.length) out.hidden = { ...(c.length ? { cols: c } : {}), ...(r.length ? { rows: r } : {}) }
+  else delete out.hidden
+  return out
+}
+
 /** Inserts `n` empty rows before 0-based row `at`. */
 export function insertRows(sheet: SheetData, at: number, n: number): SheetData {
   const change = insertChange("r", at, n)
   const out = remap(sheet, (r, c) => [r >= at ? r + n : r, c], (f) => rewriteRefs(f, change))
   out.rows += n
-  return out
+  return withHidden(out, out.hidden?.cols ?? [], [...handHiddenRows(sheet)].map((r) => (r >= at ? r + n : r)))
 }
 
 /** Deletes `n` rows from 0-based row `at`. */
@@ -82,7 +92,8 @@ export function deleteRows(sheet: SheetData, at: number, n: number): SheetData {
     (f) => rewriteRefs(f, change),
   )
   out.rows = Math.max(1, out.rows - n)
-  return out
+  const rows = [...handHiddenRows(sheet)].flatMap((r) => (r < at ? [r] : r >= at + n ? [r - n] : []))
+  return withHidden(out, out.hidden?.cols ?? [], rows)
 }
 
 function moveColumnKeys<T>(rec: Record<string, T> | undefined, move: (c: number) => number | null): Record<string, T> {
@@ -102,7 +113,7 @@ export function insertCols(sheet: SheetData, at: number, n: number): SheetData {
   out.cols += n
   out.widths = moveColumnKeys(sheet.widths, move)
   if (sheet.hide) out.hide = moveColumnKeys(sheet.hide, move)
-  return out
+  return withHidden(out, Object.keys(moveColumnKeys(Object.fromEntries((sheet.hidden?.cols ?? []).map((k) => [k, true])), move)), [...handHiddenRows(sheet)])
 }
 
 /** Deletes `n` columns from 0-based column `at`. */
@@ -119,7 +130,7 @@ export function deleteCols(sheet: SheetData, at: number, n: number): SheetData {
     out.hide = moveColumnKeys(sheet.hide, move)
     if (Object.keys(out.hide).length === 0) delete out.hide
   }
-  return out
+  return withHidden(out, Object.keys(moveColumnKeys(Object.fromEntries((sheet.hidden?.cols ?? []).map((k) => [k, true])), move)), [...handHiddenRows(sheet)])
 }
 
 /** What a cell's typed value becomes when copied `dr` rows down and `dc` columns across. */
@@ -171,9 +182,9 @@ export function sortRows(sheet: SheetData, col: number, desc: boolean, from: num
   return out
 }
 
-/** 0-based rows the filter hides (never row 0, the header). */
+/** 0-based rows hidden: by hand, and by the filter (which never hides row 0, the header). */
 export function hiddenRows(sheet: SheetData, calc: SheetCalc = new SheetCalc(sheet)): Set<number> {
-  const hidden = new Set<number>()
+  const hidden = handHiddenRows(sheet)
   const filters = Object.entries(sheet.hide ?? {})
   if (!filters.length) return hidden
   const [usedRows] = usedSize(sheet)
@@ -435,5 +446,33 @@ export function sheetJson(sheet: SheetData): SheetData {
   }
   if (sheet.table) out.table = { style: sheet.table.style }
   if (sheet.hide && Object.keys(sheet.hide).length) out.hide = { ...sheet.hide }
+  if (sheet.hidden && (sheet.hidden.cols?.length || sheet.hidden.rows?.length)) out.hidden = JSON.parse(JSON.stringify(sheet.hidden))
   return out
+}
+
+// ---- Hiding rows and columns ----
+
+export function hideCols(sheet: SheetData, c1: number, c2: number): SheetData {
+  const cols = [...(sheet.hidden?.cols ?? [])]
+  for (let c = c1; c <= c2; c++) cols.push(colName(c))
+  return withHidden(sheet, cols, [...handHiddenRows(sheet)])
+}
+
+export function unhideCols(sheet: SheetData, c1: number, c2: number): SheetData {
+  const cols = (sheet.hidden?.cols ?? []).filter((k) => colIndex(k) < c1 || colIndex(k) > c2)
+  return withHidden(sheet, cols, [...handHiddenRows(sheet)])
+}
+
+export function hideRows(sheet: SheetData, r1: number, r2: number): SheetData {
+  const rows = [...handHiddenRows(sheet)]
+  for (let r = r1; r <= r2; r++) rows.push(r)
+  return withHidden(sheet, sheet.hidden?.cols ?? [], rows)
+}
+
+export function unhideRows(sheet: SheetData, r1: number, r2: number): SheetData {
+  return withHidden(sheet, sheet.hidden?.cols ?? [], [...handHiddenRows(sheet)].filter((r) => r < r1 || r > r2))
+}
+
+export function unhideAll(sheet: SheetData): SheetData {
+  return withHidden(sheet, [], [])
 }

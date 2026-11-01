@@ -49,7 +49,13 @@ data class SheetData(
     val table: String? = null,
     /** Filter: by column letters, the shown values whose rows are hidden. */
     val hide: Map<String, List<String>> = emptyMap(),
+    /** Columns hidden by hand (letters). */
+    val hiddenCols: Set<String> = emptySet(),
+    /** Rows hidden by hand (0-based). */
+    val hiddenRows: Set<Int> = emptySet(),
 ) {
+    fun colHidden(c: Int): Boolean = hiddenCols.isNotEmpty() && colName(c) in hiddenCols
+
     fun cell(r: Int, c: Int): SheetCell? = cells[addr(r, c)]
 
     fun width(c: Int): Float = widths[colName(c)] ?: DEFAULT_WIDTH
@@ -98,6 +104,12 @@ data class SheetData(
         if (hide.isNotEmpty()) {
             putJsonObject("hide") { hide.forEach { (k, list) -> put(k, JsonArray(list.map(::JsonPrimitive))) } }
         }
+        if (hiddenCols.isNotEmpty() || hiddenRows.isNotEmpty()) {
+            putJsonObject("hidden") {
+                if (hiddenCols.isNotEmpty()) put("cols", JsonArray(hiddenCols.sortedBy { colIndex(it) }.map(::JsonPrimitive)))
+                if (hiddenRows.isNotEmpty()) put("rows", JsonArray(hiddenRows.sorted().map { JsonPrimitive(it + 1) }))
+            }
+        }
     }
 
     companion object {
@@ -135,6 +147,7 @@ data class SheetData(
                 if (LETTERS.matches(k) && n != null && n.isFinite() && n > 0) widths[k] = n.toFloat()
             }
             val table = ((x["table"] as? JsonObject)?.get("style") as? JsonPrimitive)?.content?.takeIf { it in TABLE_STYLES }
+            val hiddenObj = x["hidden"] as? JsonObject
             val hide = LinkedHashMap<String, List<String>>()
             (x["hide"] as? JsonObject)?.forEach { (k, list) ->
                 val values = (list as? JsonArray)?.mapNotNull { (it as? JsonPrimitive)?.takeIf { p -> p.isString }?.content }
@@ -147,6 +160,10 @@ data class SheetData(
                 cells = cells,
                 table = table,
                 hide = hide,
+                hiddenCols = hiddenObj?.get("cols")?.let { it as? JsonArray }
+                    ?.mapNotNull { (it as? JsonPrimitive)?.takeIf { p -> p.isString }?.content?.takeIf { l -> LETTERS.matches(l) } }?.toSet().orEmpty(),
+                hiddenRows = hiddenObj?.get("rows")?.let { it as? JsonArray }
+                    ?.mapNotNull { (it as? JsonPrimitive)?.doubleOrNull?.takeIf { n -> n >= 1 && n < 1_100_000 }?.toInt()?.minus(1) }?.toSet().orEmpty(),
             )
         }
 

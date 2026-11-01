@@ -26,6 +26,17 @@ export interface SheetData {
   cells: Record<string, SheetCell>
   table?: { style: string }
   hide?: Record<string, string[]>
+  /** Columns (letters) and rows (1-based) hidden by hand. */
+  hidden?: { cols?: string[]; rows?: number[] }
+}
+
+export function colHidden(sheet: SheetData, c: number): boolean {
+  return !!sheet.hidden?.cols?.length && sheet.hidden.cols.includes(colName(c))
+}
+
+/** 0-based rows hidden by hand. */
+export function handHiddenRows(sheet: SheetData): Set<number> {
+  return new Set((sheet.hidden?.rows ?? []).map((r) => r - 1))
 }
 
 export const DEFAULT_ROWS = 50
@@ -142,6 +153,13 @@ export function readSheet(raw: unknown): SheetData {
       }
     }
     if (Object.keys(hide).length) sheet.hide = hide
+  }
+  if (isRecord(x.hidden)) {
+    const cols = Array.isArray(x.hidden.cols) ? x.hidden.cols.filter((c): c is string => typeof c === "string" && /^[A-Z]{1,3}$/.test(c)) : []
+    const rows = Array.isArray(x.hidden.rows)
+      ? x.hidden.rows.filter((r): r is number => typeof r === "number" && Number.isInteger(r) && r >= 1)
+      : []
+    if (cols.length || rows.length) sheet.hidden = { ...(cols.length ? { cols } : {}), ...(rows.length ? { rows } : {}) }
   }
   return sheet
 }

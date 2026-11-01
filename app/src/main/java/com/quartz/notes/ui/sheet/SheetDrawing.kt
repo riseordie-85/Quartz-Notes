@@ -133,7 +133,11 @@ internal fun sheetGeometry(
     val unit = look.unit
     val colX = FloatArray(cols + 1)
     for (c in 0 until cols) {
-        val w = if (widthOverride?.first == c) widthOverride.second else data.width(c)
+        val w = when {
+            data.colHidden(c) -> 0f
+            widthOverride?.first == c -> widthOverride.second
+            else -> data.width(c)
+        }
         colX[c + 1] = colX[c] + w * unit
     }
     val heights = FloatArray(rows) { SheetSizes.ROW * unit }
@@ -211,6 +215,7 @@ internal fun DrawScope.drawCells(
             val style = textStyleFor(s, cl, look)
             val cellLeft = x(c)
             val cellW = g.colX[c + 1] - g.colX[c]
+            if (cellW <= 0f) continue
             if (s.wrap) {
                 val layout = measurer.measure(text, style, constraints = Constraints(maxWidth = (cellW - 2 * pad).coerceAtLeast(1f).toInt()))
                 val tx = alignedX(alignOf(s, v), cellLeft, cellW, layout, pad)
@@ -241,6 +246,7 @@ internal fun DrawScope.drawCells(
     for (r in r0..r1) {
         if (g.rowY[r + 1] == g.rowY[r]) continue
         for (c in c0..c1) {
+            if (g.colX[c + 1] == g.colX[c]) continue
             val sides = data.cell(r, c)?.s?.border ?: continue
             val l = x(c)
             val t = y(r)

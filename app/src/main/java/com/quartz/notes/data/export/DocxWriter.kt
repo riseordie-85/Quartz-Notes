@@ -201,23 +201,26 @@ object DocxWriter {
             val calc = SheetCalc(sheet)
             val valued = sheet.valuedSize
             // Columns as wide as on the page (100 units ≈ 75pt), shrunk to fit the page if need be.
-            val widthsPt = (0 until cols).map { sheet.width(it) * 0.75f }
+            val shown = (0 until cols).filter { !sheet.colHidden(it) }
+            if (shown.isEmpty()) return
+            val widthsPt = shown.map { sheet.width(it) * 0.75f }
             val scale = minOf(1f, CONTENT_W / widthsPt.sum())
-            val twips = widthsPt.map { (it * scale * 20).toInt() }
-            body.append("<w:tbl><w:tblPr><w:tblW w:w=\"${twips.sum()}\" w:type=\"dxa\"/>")
+            val twipsList = widthsPt.map { (it * scale * 20).toInt() }
+            val twips = HashMap<Int, Int>().apply { shown.forEachIndexed { i, c -> put(c, twipsList[i]) } }
+            body.append("<w:tbl><w:tblPr><w:tblW w:w=\"${twipsList.sum()}\" w:type=\"dxa\"/>")
             body.append("<w:tblBorders>")
             listOf("top", "left", "bottom", "right", "insideH", "insideV").forEach { body.append("<w:$it w:val=\"single\" w:sz=\"4\" w:space=\"0\" w:color=\"D0D0D6\"/>") }
             body.append("</w:tblBorders><w:tblLayout w:type=\"fixed\"/><w:tblCellMar><w:left w:w=\"80\" w:type=\"dxa\"/><w:right w:w=\"80\" w:type=\"dxa\"/></w:tblCellMar></w:tblPr><w:tblGrid>")
-            twips.forEach { body.append("<w:gridCol w:w=\"$it\"/>") }
+            twipsList.forEach { body.append("<w:gridCol w:w=\"$it\"/>") }
             body.append("</w:tblGrid>")
             val hidden = com.quartz.notes.data.sheet.SheetGrid.hiddenRows(sheet, calc)
             for (r in 0 until rows) {
                 if (r in hidden) continue
                 body.append("<w:tr>")
-                for (c in 0 until cols) {
+                for (c in shown) {
                     val s = SheetXlsx.lookOf(sheet, r, c, valued)
                     val value = calc.value(r, c)
-                    body.append("<w:tc><w:tcPr><w:tcW w:w=\"${twips[c]}\" w:type=\"dxa\"/>")
+                    body.append("<w:tc><w:tcPr><w:tcW w:w=\"${twips[c] ?: 0}\" w:type=\"dxa\"/>")
                     val borders = s.border.orEmpty()
                     if (borders.isNotEmpty()) {
                         body.append("<w:tcBorders>")

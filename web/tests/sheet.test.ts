@@ -18,7 +18,11 @@ import {
   type SheetData,
   typeInto,
   insertRows,
+  insertCols,
   deleteCols,
+  hideCols,
+  hideRows,
+  unhideRows,
 } from "../src/lib/sheet"
 
 const cases = JSON.parse(
@@ -113,6 +117,21 @@ describe("sorting and filtering", () => {
 describe("search text", () => {
   it("joins shown values", () => {
     expect(plainText(sheetOf(cases.plainText.cells))).toBe(cases.plainText.out)
+  })
+})
+
+describe("hidden rows and columns", () => {
+  it("stay with their cells as rows and columns come and go", () => {
+    let s = hideRows(hideCols(sheetOf({ A1: "a", C3: "c" }), 1, 1), 2, 2)
+    expect(s.hidden).toEqual({ cols: ["B"], rows: [3] })
+    s = insertRows(s, 0, 1)
+    s = insertCols(s, 0, 2)
+    expect(s.hidden).toEqual({ cols: ["D"], rows: [4] })
+    expect([...hiddenRows(s)]).toEqual([3])
+    s = deleteCols(s, 3, 1)
+    expect(s.hidden).toEqual({ rows: [4] })
+    s = unhideRows(s, 0, 10)
+    expect(s.hidden).toBeUndefined()
   })
 })
 
