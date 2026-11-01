@@ -89,10 +89,14 @@ class SheetEditorTest {
 
     /** The saved sheet, once [ok] holds for it (the page saves a moment after a change). */
     private fun saved(pageId: Long, ok: (SheetData) -> Boolean = { true }): SheetData {
+        // The page saves a moment after a change; the test clock has to get there.
+        rule.mainClock.advanceTimeBy(1000)
+        rule.waitForIdle()
         val end = SystemClock.uptimeMillis() + 6000
         var s = read(pageId)
         while (!ok(s) && SystemClock.uptimeMillis() < end) {
             SystemClock.sleep(250)
+            rule.mainClock.advanceTimeBy(500)
             rule.waitForIdle()
             s = read(pageId)
         }
