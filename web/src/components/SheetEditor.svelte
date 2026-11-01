@@ -78,7 +78,15 @@
   const valued = $derived(valuedSize(data))
   let anchor = $state<[number, number]>([0, 0])
   let focus = $state<[number, number]>([0, 0])
-  const area = $derived(areaOf(anchor, focus))
+  // Whole columns (or rows) picked from a header: the corners stay in the first row (column), so
+  // nothing scrolls along them, and the area stretches to the end however far that grows.
+  let whole = $state<"cols" | "rows" | null>(null)
+  const area = $derived.by(() => {
+    const a = areaOf(anchor, focus)
+    if (whole === "cols") return { ...a, r1: 0, r2: rows - 1 }
+    if (whole === "rows") return { ...a, c1: 0, c2: cols - 1 }
+    return a
+  })
   let editing = $state<string | null>(null)
   let editCell = $state<[number, number]>([0, 0])
   let extraRows = $state(0)
@@ -139,12 +147,24 @@
 
   function select(r: number, c: number, extend = false) {
     const cell: [number, number] = [Math.max(0, r), Math.max(0, c)]
+    whole = null
     if (!extend) anchor = cell
     focus = cell
   }
   function selectArea(a: Area) {
+    whole = null
     anchor = [a.r1, a.c1]
     focus = [a.r2, a.c2]
+  }
+  function selectCols(c1: number, c2: number) {
+    whole = "cols"
+    anchor = [0, c1]
+    focus = [0, c2]
+  }
+  function selectRows(r1: number, r2: number) {
+    whole = "rows"
+    anchor = [r1, 0]
+    focus = [r2, 0]
   }
   function moveBy(dr: number, dc: number, extend = false) {
     let r = focus[0]
@@ -188,6 +208,7 @@
 
   async function startEdit(text?: string, into: "cell" | "bar" = "cell") {
     if (locked) return
+    whole = null
     focus = anchor
     editCell = anchor
     editing = text ?? editText(anchor[0], anchor[1])
@@ -443,14 +464,12 @@
     if (colHead) {
       if (editing !== null) commitEdit(0, 0)
       const c = Number(colHead.dataset.col)
-      if (e.shiftKey) select(rows - 1, c, true)
-      else (anchor = [0, c]), (focus = [rows - 1, c])
+      selectCols(e.shiftKey ? anchor[1] : c, c)
       press = { kind: "cols", start: [0, c], touch, x: e.clientX, y: e.clientY, moved: false }
     } else if (rowHead) {
       if (editing !== null) commitEdit(0, 0)
       const r = Number(rowHead.dataset.row)
-      if (e.shiftKey) select(r, cols - 1, true)
-      else (anchor = [r, 0]), (focus = [r, cols - 1])
+      selectRows(e.shiftKey ? anchor[0] : r, r)
       press = { kind: "rows", start: [r, 0], touch, x: e.clientX, y: e.clientY, moved: false }
     } else {
       const cell = cellFrom(target)
@@ -474,14 +493,14 @@
       const head = under?.closest("[data-col]") as HTMLElement | null
       const cell = cellFrom(under)
       const c = head ? Number(head.dataset.col) : cell?.[1]
-      if (c !== undefined) focus = [rows - 1, c]
+      if (c !== undefined) selectCols(anchor[1], c)
       return
     }
     if (p.kind === "rows") {
       const head = under?.closest("[data-row]") as HTMLElement | null
       const cell = cellFrom(under)
       const r = head ? Number(head.dataset.row) : cell?.[0]
-      if (r !== undefined) focus = [r, cols - 1]
+      if (r !== undefined) selectRows(anchor[0], r)
       return
     }
     const cell = cellFrom(under)
@@ -560,7 +579,14 @@
   $effect(() => {
     const [r, c] = focus
     const el = gridEl?.querySelector(`[data-r="${r}"][data-c="${c}"]`) as HTMLElement | null
-    el?.scrollIntoView({ block: "nearest", inline: "nearest" })
+    // A whole column selection doesn't move up or down (nor a whole row one sideways).
+    const w = untrack(() => whole)
+    if (!el || !gridEl) return
+    const top = gridEl.scrollTop
+    const left = gridEl.scrollLeft
+    el.scrollIntoView({ block: "nearest", inline: "nearest" })
+    if (w === "cols") gridEl.scrollTop = top
+    if (w === "rows") gridEl.scrollLeft = left
   })
 
   // ---- How cells look ----
@@ -831,8 +857,8 @@
   <button role="menuitem" onclick={() => (close(), change(clearArea(data, area)))}>Clear</button>
   {#if nr > 1}<button role="menuitem" onclick={() => (close(), change(fillDown(data, area)))}>Fill down</button>{/if}
   {#if nc > 1}<button role="menuitem" onclick={() => (close(), change(fillRight(data, area)))}>Fill right</button>{/if}
-  {@const wholeCols = area.r1 === 0 && area.r2 >= rows - 1}
-  {@const wholeRows = area.c1 === 0 && area.c2 >= cols - 1}
+  {@const wholeCols = whole === "cols" || (area.r1 === 0 && area.r2 >= rows - 1)}
+  {@const wholeRows = whole === "rows" || (area.c1 === 0 && area.c2 >= cols - 1)}
   {@const rowsNear = hiddenRowsNear()}
   {@const colsNear = hiddenColsNear()}
   {#if !wholeCols}
@@ -870,6 +896,7 @@
     onfocus={() => {
       if (editing === null && !locked) {
         editCell = anchor
+        whole = null
         focus = anchor
         editing = editText(anchor[0], anchor[1])
         insertedRef = null

@@ -48,7 +48,23 @@ class SheetState(initial: SheetData) {
         private set
     var focus by mutableStateOf(0 to 0)
         private set
-    val area: SheetArea get() = SheetArea.of(anchor, focus)
+    /**
+     * Whole columns (or rows) are selected, from a header: the selection runs to the last shown row
+     * (column), however far that grows, and selecting it doesn't scroll there.
+     */
+    var wholeCols by mutableStateOf(false)
+        private set
+    var wholeRows by mutableStateOf(false)
+        private set
+    val area: SheetArea
+        get() {
+            val a = SheetArea.of(anchor, focus)
+            return when {
+                wholeCols -> a.copy(r1 = 0, r2 = shownRows - 1)
+                wholeRows -> a.copy(c1 = 0, c2 = shownCols - 1)
+                else -> a
+            }
+        }
 
     /** Typing into the selected cell: what's typed so far (null when not typing). */
     var editing by mutableStateOf<TextFieldValue?>(null)
@@ -123,26 +139,44 @@ class SheetState(initial: SheetData) {
 
     fun select(r: Int, c: Int, extend: Boolean = false) {
         val cell = r.coerceAtLeast(0) to c.coerceAtLeast(0)
+        wholeCols = false
+        wholeRows = false
         if (!extend) anchor = cell
         focus = cell
     }
 
     fun selectArea(a: SheetArea) {
+        wholeCols = false
+        wholeRows = false
         anchor = a.r1 to a.c1
         focus = a.r2 to a.c2
     }
 
+    // A whole row or column selection keeps its corners in the first column or row (so nothing
+    // scrolls along it); [area] stretches it to the end.
     fun selectRows(r1: Int, r2: Int) {
+        wholeCols = false
+        wholeRows = true
         anchor = r1 to 0
-        focus = r2 to (shownCols - 1)
+        focus = r2 to 0
     }
 
     fun selectCols(c1: Int, c2: Int) {
+        wholeRows = false
+        wholeCols = true
         anchor = 0 to c1
-        focus = (shownRows - 1) to c2
+        focus = 0 to c2
     }
 
+    /** Stretches a whole row selection (or, from a cell, starts one at its row) to row [r]. */
+    fun extendRows(r: Int) = selectRows(anchor.first, r.coerceAtLeast(0))
+
+    /** Stretches a whole column selection (or, from a cell, starts one at its column) to column [c]. */
+    fun extendCols(c: Int) = selectCols(anchor.second, c.coerceAtLeast(0))
+
     fun selectAll() {
+        wholeCols = false
+        wholeRows = false
         anchor = 0 to 0
         focus = (maxOf(data.usedSize.first, 1) - 1) to (maxOf(data.usedSize.second, 1) - 1)
     }
@@ -189,6 +223,8 @@ class SheetState(initial: SheetData) {
     /** Starts typing in the selected cell, from [text] (replacing what's there) or from what's there. */
     fun startEdit(text: String? = null) {
         val cell = anchor
+        wholeCols = false
+        wholeRows = false
         focus = anchor
         editCell = cell
         val t = text ?: editText(cell.first, cell.second)

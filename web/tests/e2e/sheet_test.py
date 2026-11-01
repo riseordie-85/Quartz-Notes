@@ -10,6 +10,7 @@ app's format.
 import asyncio
 import json
 import os
+import re
 import sys
 import time
 import urllib.parse
@@ -220,6 +221,21 @@ async def main():
         await expect(page.locator(td(2, 0))).to_be_visible()
         wait_for(lambda: "hidden" not in get_page(pid)["sheet"], "nothing hidden on the server")
         ok("scrollbars; hiding and showing columns and rows")
+
+        # Picking a column from its header doesn't scroll down or add rows (it once ran to the end).
+        await page.evaluate("() => { document.querySelector('.grid').scrollTop = 0 }")
+        rows_before = await page.locator("th[data-row]").count()
+        for _ in range(3):
+            await page.click('[data-col="1"]')
+            await page.wait_for_timeout(150)
+        top = await page.evaluate("() => document.querySelector('.grid').scrollTop")
+        assert top == 0, f"scrolled to {top}"
+        assert await page.locator("th[data-row]").count() == rows_before
+        last = int(await page.locator("th[data-row]").last.get_attribute("data-row"))
+        await expect(page.locator(td(1, 1))).to_have_class(re.compile("sel"))
+        await expect(page.locator(td(last, 1))).to_have_class(re.compile("sel"))
+        await page.click(td(1, 0))
+        ok("picking a column from its header stays put")
 
         # Download as Excel; it opens with the same cells.
         await page.click("button[title='More: rows, columns and downloads']")

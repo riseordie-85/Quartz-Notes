@@ -234,5 +234,22 @@ class SheetEditorTest {
         rule.onNodeWithText("Plain text").performClick()
         settle()
         assertEquals(SheetStyle(fmt = "text"), saved(pageId) { it.cells["C3"]?.s?.fmt == "text" }.cells["C3"]?.s?.copy(b = false))
+
+        // Picking a column from its header stays put (it once scrolled off to the end of the sheet,
+        // further each time): a cell tapped afterwards is the one on screen there.
+        val headerY = 13f * instrumentation.targetContext.resources.displayMetrics.density
+        repeat(3) {
+            grid.performTouchInput { click(Offset(cell(0, 2).x, headerY)) }
+            settle()
+        }
+        screen("s10_column_picked")
+        grid.performTouchInput { click(cell(8, 2)) }
+        settle()
+        grid.performTouchInput { click(cell(8, 2)) }
+        settle()
+        rule.onNodeWithTag("sheet-formula").performTextReplacement("here")
+        rule.onNodeWithTag("sheet-formula").performImeAction()
+        settle()
+        assertEquals("here", saved(pageId) { it.cells["C9"]?.v != null }.cells["C9"]?.v)
     }
 }

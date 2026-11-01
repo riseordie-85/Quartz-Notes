@@ -149,8 +149,13 @@ internal fun SheetGridView(
                 val rr = gg.colX[c + 1]
                 val t = gg.rowY[r]
                 val b = gg.rowY[r + 1]
-                if (l < sx) sx = l else if (rr > sx + cellsW) sx = (rr - cellsW).coerceAtMost(latestMaxX)
-                if (t < sy) sy = t else if (b > sy + cellsH) sy = (b - cellsH).coerceAtMost(latestMaxY)
+                // A whole column selection doesn't move up or down (nor a whole row one sideways).
+                if (!state.wholeRows) {
+                    if (l < sx) sx = l else if (rr > sx + cellsW) sx = (rr - cellsW).coerceAtMost(latestMaxX)
+                }
+                if (!state.wholeCols) {
+                    if (t < sy) sy = t else if (b > sy + cellsH) sy = (b - cellsH).coerceAtMost(latestMaxY)
+                }
             }
         }
 
@@ -297,14 +302,14 @@ internal fun SheetGridView(
                             p0.y < hh -> {
                                 val c = geometry.colAt(p0.x - hw + sx)
                                 if (state.editing != null) state.commitEdit(0, 0)
-                                if (shift) state.select(state.shownRows - 1, c, extend = true) else state.selectCols(c, c)
+                                if (shift) state.extendCols(c) else state.selectCols(c, c)
                                 mode = Drag.COLS
                                 down.consume()
                             }
                             p0.x < hw -> {
                                 val r = geometry.rowAt(p0.y - hh + sy)
                                 if (state.editing != null) state.commitEdit(0, 0)
-                                if (shift) state.select(r, state.shownCols - 1, extend = true) else state.selectRows(r, r)
+                                if (shift) state.extendRows(r) else state.selectRows(r, r)
                                 mode = Drag.ROWS
                                 down.consume()
                             }
@@ -449,8 +454,8 @@ internal fun SheetGridView(
                                 Drag.WIDTH -> resizing = resizing?.let { (c, _) ->
                                     c to (startWidth + (p.x - p0.x) / unitNow).coerceIn(36f, 600f)
                                 }
-                                Drag.COLS -> state.select(state.shownRows - 1, geometry.colAt(p.x - hw + sx), extend = true)
-                                Drag.ROWS -> state.select(geometry.rowAt(p.y - hh + sy), state.shownCols - 1, extend = true)
+                                Drag.COLS -> state.extendCols(geometry.colAt(p.x - hw + sx))
+                                Drag.ROWS -> state.extendRows(geometry.rowAt(p.y - hh + sy))
                                 Drag.REFERENCE -> state.insertReference(SheetArea.of(startCell, at))
                                 else -> state.select(at.first, at.second, extend = true)
                             }
@@ -616,8 +621,8 @@ internal fun SheetMenuItems(
     if (a.rows > 1) Item("Fill down") { state.fillDown() }
     if (a.cols > 1) Item("Fill right") { state.fillRight() }
     // A whole column selected is every row: row commands would act on all of them (and the same for columns).
-    val wholeCols = a.r1 == 0 && a.r2 >= state.shownRows - 1
-    val wholeRows = a.c1 == 0 && a.c2 >= state.shownCols - 1
+    val wholeCols = state.wholeCols || (a.r1 == 0 && a.r2 >= state.shownRows - 1)
+    val wholeRows = state.wholeRows || (a.c1 == 0 && a.c2 >= state.shownCols - 1)
     val rows = if (a.rows > 1) "${a.rows} rows" else "row"
     val cols = if (a.cols > 1) "${a.cols} columns" else "column"
     if (!wholeCols) {
