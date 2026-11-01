@@ -200,6 +200,31 @@ async def main():
         ok("inserting a row moves cells and grows the total's range")
         await page.screenshot(path=f"{OUT}/s07_after_insert.png")
 
+        # Download as Excel; it opens with the same cells.
+        await page.click("button[title='More: rows, columns and downloads']")
+        async with page.expect_download() as dl:
+            await page.get_by_role("menuitem", name="Download as Excel (.xlsx)").click()
+        download = await dl.value
+        assert download.suggested_filename == "November bills.xlsx", download.suggested_filename
+        xlsx_path = f"{OUT}/downloaded.xlsx"
+        await download.save_as(xlsx_path)
+        with open(xlsx_path, "rb") as f:
+            assert f.read(2) == b"PK"
+        ok("download as Excel")
+
+        # Import a CSV as a new sheet page.
+        csv_path = f"{OUT}/import.csv"
+        with open(csv_path, "w") as f:
+            f.write("Name,Amount\nTea,4.5\nCake,=2*3\n")
+        await page.click("button[title='More']")
+        await page.locator("input[type=file][accept*='.xlsx']").set_input_files(csv_path)
+        await expect(page.locator("input.title")).to_have_value("import")
+        await expect(page.locator(td(2, 1))).to_have_text("6")
+        imported = wait_for(lambda: [p for p in api("GET", f"/api/collections/pages/records?perPage=50&filter={urllib.parse.quote(f'notebook="{money}" && title="import"')}", token=TOKEN)["items"]], "the imported page")
+        assert imported[0]["layoutMode"] == "SHEET" and imported[0]["sheet"]["cells"]["B2"]["v"] == "4.5", imported[0]["sheet"]
+        ok("import a CSV as a sheet page")
+        await page.screenshot(path=f"{OUT}/s07b_imported.png")
+
         # Phone size.
         m = await browser.new_context(viewport={"width": 390, "height": 800}, is_mobile=True, has_touch=True)
         mp = await m.new_page()

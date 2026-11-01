@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { emptySheet } from "../lib/sheet"
+  import { emptySheet, fromCsv, fromXlsx, plainText as sheetPlainText, sheetJson } from "../lib/sheet"
   import { store } from "../lib/store.svelte"
   import { router } from "../lib/router.svelte"
   import { argbToCss } from "../lib/richdoc"
@@ -69,6 +69,32 @@
     await sheet?.save()
     const p = await store.addPage(id, page ?? null)
     router.go({ name: "notebook", id, page: p.id })
+  }
+
+  let importer: HTMLInputElement | undefined = $state()
+
+  /** Sheet pages from an Excel or CSV file, after this page (one per worksheet). */
+  async function importSheets(files: FileList | null) {
+    const file = files?.[0]
+    if (!file) return
+    await sheet?.save()
+    const base = file.name.replace(/\.[^.]+$/, "").trim()
+    const found = /\.(csv|tsv|txt)$/i.test(file.name)
+      ? [{ name: base, sheet: fromCsv(await file.text()) }]
+      : await fromXlsx(new Uint8Array(await file.arrayBuffer()))
+    if (!found.length) throw new Error("There are no worksheets in that file")
+    let after = page ?? null
+    let first: string | null = null
+    for (const w of found) {
+      const p = await store.addPage(id, after, {
+        title: found.length === 1 ? base || w.name : w.name,
+        layoutMode: "SHEET", canvasWidth: null, canvasHeight: null, sizeName: "", spread: false,
+        sheet: sheetJson(w.sheet), plainText: sheetPlainText(w.sheet),
+      })
+      first ??= p.id
+      after = p
+    }
+    if (first) router.go({ name: "notebook", id, page: first })
   }
 
   async function addSheetAfter() {
@@ -160,6 +186,16 @@
         onclick={() => picker?.click()}><Icon name="image" /></button
       >
       <input bind:this={picker} type="file" accept="image/*" multiple hidden onchange={(e) => addPictures(e.currentTarget.files)} />
+      <input
+        bind:this={importer}
+        type="file"
+        accept=".xlsx,.csv,.tsv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/csv"
+        hidden
+        onchange={(e) => {
+          const input = e.currentTarget
+          act(() => importSheets(input.files)).finally(() => (input.value = ""))
+        }}
+      />
       <div class="pager">
         <button class="icon-btn" title="Previous page (Alt+←)" disabled={index <= 0} onclick={() => goTo(index - 1)}><Icon name="chevronLeft" /></button>
         <span class="count">{pages.length ? index + 1 : 0}/{pages.length}</span>
@@ -173,6 +209,7 @@
               <p class="label">This page</p>
               <button onclick={() => act(addPageAfter)}><Icon name="addPage" size={20} />Add a page after it</button>
               <button onclick={() => ((more = false), act(addSheetAfter))}><Icon name="table" size={20} />Add a sheet after it</button>
+              <button onclick={() => ((more = false), importer?.click())}><Icon name="table" size={20} />Import a spreadsheet…</button>
               <button onclick={() => ((more = false), (picking = true))}><Icon name="newNotebook" size={20} />Add a page from a template</button>
               <button disabled={index <= 0} onclick={() => act(() => store.movePage(page, index - 1))}><Icon name="arrowBack" size={20} />Move earlier</button>
               <button disabled={index >= pages.length - 1} onclick={() => act(() => store.movePage(page, index + 1))}><Icon name="arrowForward" size={20} />Move later</button>

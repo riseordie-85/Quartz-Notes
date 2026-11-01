@@ -210,7 +210,7 @@
 <svelte:window onbeforeunload={() => save()} />
 
 {#if isSheet}
-  <SheetEditor bind:this={sheetView} sheet={grid} {ink} paper={bg} {locked} onchange={(g) => ((grid = g), changed())}>
+  <SheetEditor bind:this={sheetView} sheet={grid} {ink} paper={bg} {locked} {title} onchange={(g) => ((grid = g), changed())}>
     <div class="title-row" style:padding="14px {padH - 10}px 4px {padH}px">
       <input class="title" placeholder="Sheet title" bind:value={title} oninput={changed} readonly={locked} aria-label="Page title" />
       {#if locked}<span class="lock" title="This page is locked"><Icon name="lock" size={21} /></span>{/if}

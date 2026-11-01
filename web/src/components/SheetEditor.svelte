@@ -40,6 +40,8 @@
     updateStyles,
     usedSize,
     valuedSize,
+    toXlsx,
+    toCsv,
   } from "../lib/sheet"
   import { INK_PRESETS } from "../lib/palette"
 
@@ -52,7 +54,8 @@
     locked,
     onchange,
     children,
-  }: { sheet: SheetData; ink: string; paper: string; locked: boolean; onchange: (s: SheetData) => void; children?: Snippet } = $props()
+    title = "",
+  }: { sheet: SheetData; ink: string; paper: string; locked: boolean; onchange: (s: SheetData) => void; children?: Snippet; title?: string } = $props()
 
   let data: SheetData = $state.raw(untrack(() => initial))
   let clock = $state(0)
@@ -623,6 +626,23 @@
     change(next)
   }
 
+  /** Downloads the sheet as an Excel or CSV file named after the page. */
+  async function download(kind: "xlsx" | "csv") {
+    const name = (title.replace(/[\\/:*?"<>|]/g, " ").trim() || "Sheet") + "." + kind
+    const blob =
+      kind === "xlsx"
+        ? new Blob([(await toXlsx(data, title)) as BlobPart], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" })
+        : new Blob(["\uFEFF" + toCsv(data, calc)], { type: "text/csv" })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement("a")
+    a.href = url
+    a.download = name
+    document.body.appendChild(a)
+    a.click()
+    a.remove()
+    setTimeout(() => URL.revokeObjectURL(url), 10_000)
+  }
+
   function refocus() {
     queueMicrotask(() => {
       if (!(document.activeElement instanceof HTMLInputElement)) gridEl?.focus({ preventScroll: true })
@@ -746,10 +766,13 @@
       </div>
       <div class="group">
         <div class="anchor">
-          <button class="icon-btn" title="More: rows and columns" aria-haspopup="menu" onclick={() => (menu = menu === "more" ? null : "more")}><Icon name="more" /></button>
+          <button class="icon-btn" title="More: rows, columns and downloads" aria-haspopup="menu" onclick={() => (menu = menu === "more" ? null : "more")}><Icon name="more" /></button>
           {#if menu === "more"}
             <div class="menu right" role="menu">
               {@render rowColItems(() => (menu = null))}
+              <hr />
+              <button role="menuitem" onclick={() => ((menu = null), download("xlsx"))}>Download as Excel (.xlsx)</button>
+              <button role="menuitem" onclick={() => ((menu = null), download("csv"))}>Download as CSV</button>
             </div>
           {/if}
         </div>
