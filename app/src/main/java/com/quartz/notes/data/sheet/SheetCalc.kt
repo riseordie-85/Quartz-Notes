@@ -27,8 +27,46 @@ class SheetCalc(private val sheet: SheetData, now: Double? = null) {
     private val lastCol = sheet.usedSize.second
     private val now: Double = now ?: serialNow()
 
-    /** The value of the cell at 0-based row and column. */
+    /** How deep formulas are being worked out inside each other right now. */
+    private var depth = 0
+    private var warmed = false
+
+    /** A chain of formulas too long to follow at once. */
+    private class TooDeep : RuntimeException(null, null, false, false)
+
+    /**
+     * The value of the cell at 0-based row and column. A long chain of formulas (a running total
+     * down thousands of rows) is worked out a step at a time, so it never runs out of room.
+     */
     fun value(r: Int, c: Int): SheetValue {
+        if (depth > 0) return valueOf(r, c)
+        try {
+            return valueOf(r, c)
+        } catch (_: TooDeep) {
+        }
+        if (!warmed) {
+            warmed = true
+            // Every formula in order, top to bottom and then bottom to top, so each step finds
+            // the one before it already worked out.
+            val formulas = sheet.cells.entries
+                .filter { it.value.v?.startsWith("=") == true }
+                .mapNotNull { parseAddr(it.key) }
+                .sortedWith(compareBy({ it.first }, { it.second }))
+            for ((rr, cc) in formulas + formulas.asReversed()) {
+                try {
+                    valueOf(rr, cc)
+                } catch (_: TooDeep) {
+                }
+            }
+            try {
+                return valueOf(r, c)
+            } catch (_: TooDeep) {
+            }
+        }
+        return err("#NUM!")
+    }
+
+    private fun valueOf(r: Int, c: Int): SheetValue {
         val key = addr(r, c)
         memo[key]?.let { return it }
         val cell = sheet.cells[key] ?: return SheetValue.Empty
@@ -39,10 +77,16 @@ class SheetCalc(private val sheet: SheetData, now: Double? = null) {
             out = SheetValue.Str(v)
         } else if (v.startsWith("=")) {
             if (key in busy) return err("#CIRC!")
+            if (depth >= MAX_DEPTH) throw TooDeep()
             busy += key
-            val node = parsed.getOrPut(v) { SheetFormula.parse(v) }
-            out = ev(node)
-            busy -= key
+            depth++
+            try {
+                val node = parsed.getOrPut(v) { SheetFormula.parse(v) }
+                out = ev(node)
+            } finally {
+                depth--
+                busy -= key
+            }
             if (out == SheetValue.Empty) out = num(0.0)
         } else if (SheetNumbers.isStoredNumber(v)) {
             out = num(v.toDouble())
@@ -71,7 +115,7 @@ class SheetCalc(private val sheet: SheetData, now: Double? = null) {
         is Node.Bool -> SheetValue.Bool(node.b)
         is Node.Err -> err(node.e)
         is Node.Name -> err("#NAME?")
-        is Node.RefN -> value(node.r, node.c)
+        is Node.RefN -> valueOf(node.r, node.c)
         is Node.RangeN -> VALUE
         is Node.Plus -> ev(node.x)
         is Node.Neg -> when (val x = toNum(ev(node.x))) {
@@ -333,6 +377,8 @@ class SheetCalc(private val sheet: SheetData, now: Double? = null) {
     }
 
     companion object {
+        /** Formulas inside formulas this deep are worked out a step at a time instead. */
+        private const val MAX_DEPTH = 300
         private val VALUE = SheetValue.Err("#VALUE!")
         private val COMPARE = setOf("=", "<>", "<", ">", "<=", ">=")
 

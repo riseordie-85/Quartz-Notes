@@ -4,6 +4,9 @@ package com.quartz.notes.data.sheet
 // sorting, the filter's hidden rows, and the text used for search. Kept in step with the web
 // app's web/src/lib/sheet/grid.ts; see docs/sheet-format.md.
 object SheetGrid {
+    /** More cells than this in a selection: styles go on the cells already there only. */
+    private const val BIG_AREA = 100_000L
+
     private fun MutableMap<String, SheetCell>.putCell(key: String, cell: SheetCell?) {
         if (cell == null || cell.isEmpty) remove(key) else put(key, cell)
     }
@@ -151,14 +154,31 @@ object SheetGrid {
     /** The sheet as text for search: shown values, tabs between cells, line breaks between rows. */
     fun plainText(sheet: SheetData, now: Double? = null): String {
         val calc = SheetCalc(sheet, now)
-        val (rows, cols) = sheet.usedSize
-        val lines = (0 until rows).map { r ->
-            val cells = (0 until cols).map { c -> calc.display(r, c) }.toMutableList()
-            while (cells.isNotEmpty() && cells.last().isEmpty()) cells.removeAt(cells.size - 1)
-            cells.joinToString("\t")
-        }.toMutableList()
-        while (lines.isNotEmpty() && lines.last().isEmpty()) lines.removeAt(lines.size - 1)
-        return lines.joinToString("\n")
+        // Row by row through the cells there are (a sheet can reach far with little in it).
+        val byRow = java.util.TreeMap<Int, java.util.TreeSet<Int>>()
+        for (key in sheet.cells.keys) {
+            val (r, c) = parseAddr(key) ?: continue
+            byRow.getOrPut(r) { java.util.TreeSet() } += c
+        }
+        val out = StringBuilder()
+        var lastRow = 0
+        var pendingBreaks = 0
+        for ((r, cols) in byRow) {
+            val cells = ArrayList<String>()
+            for (c in cols) {
+                val v = calc.display(r, c)
+                if (v.isEmpty()) continue
+                while (cells.size < c) cells += ""
+                cells += v
+            }
+            if (cells.isEmpty()) continue
+            pendingBreaks += r - lastRow
+            if (out.isNotEmpty()) repeat(pendingBreaks) { out.append('\n') } else repeat(r) { out.append('\n') }
+            pendingBreaks = 0
+            lastRow = r
+            out.append(cells.joinToString("\t"))
+        }
+        return out.toString()
     }
 
     // ---- Working on a selected area ----
@@ -166,6 +186,14 @@ object SheetGrid {
     /** The sheet with [change] applied to the style of every cell in [area]. */
     fun updateStyles(sheet: SheetData, area: SheetArea, change: (SheetStyle) -> SheetStyle): SheetData {
         val cells = LinkedHashMap(sheet.cells)
+        if (area.rows.toLong() * area.cols > BIG_AREA) {
+            // A huge selection: only the cells already there (no millions of new ones).
+            for ((key, old) in sheet.cells) {
+                val (r, c) = parseAddr(key) ?: continue
+                if (r in area.r1..area.r2 && c in area.c1..area.c2) cells.putCell(key, old.copy(s = change(old.s)))
+            }
+            return sheet.copy(cells = cells)
+        }
         area.forEach { r, c ->
             val key = addr(r, c)
             val old = cells[key] ?: SheetCell()
@@ -177,10 +205,9 @@ object SheetGrid {
     /** Clears what's typed in [area] (styles stay unless [styles]). */
     fun clear(sheet: SheetData, area: SheetArea, styles: Boolean = false): SheetData {
         val cells = LinkedHashMap(sheet.cells)
-        area.forEach { r, c ->
-            val key = addr(r, c)
-            val old = cells[key] ?: return@forEach
-            cells.putCell(key, if (styles) null else old.copy(v = null))
+        for ((key, old) in sheet.cells) {
+            val (r, c) = parseAddr(key) ?: continue
+            if (r in area.r1..area.r2 && c in area.c1..area.c2) cells.putCell(key, if (styles) null else old.copy(v = null))
         }
         return sheet.copy(cells = cells)
     }
@@ -298,12 +325,13 @@ object SheetGrid {
     /** Sum, average and count of the numbers in [area], or null when it holds none. */
     data class Stats(val sum: Double, val average: Double, val count: Int)
 
-    fun stats(calc: SheetCalc, area: SheetArea, used: Pair<Int, Int>): Stats? {
+    fun stats(sheet: SheetData, calc: SheetCalc, area: SheetArea): Stats? {
+        // Only cells that hold something: a selection can be far bigger than what's filled in.
         var sum = 0.0
         var count = 0
-        val rEnd = minOf(area.r2, used.first - 1)
-        val cEnd = minOf(area.c2, used.second - 1)
-        for (r in area.r1..rEnd) for (c in area.c1..cEnd) {
+        for (key in sheet.cells.keys) {
+            val (r, c) = parseAddr(key) ?: continue
+            if (r !in area.r1..area.r2 || c !in area.c1..area.c2) continue
             val v = calc.value(r, c)
             if (v is SheetValue.Num) {
                 sum += v.n

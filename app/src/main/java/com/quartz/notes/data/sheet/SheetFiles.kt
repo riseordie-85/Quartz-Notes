@@ -16,6 +16,9 @@ import javax.xml.parsers.DocumentBuilderFactory
 data class ImportedSheet(val name: String, val sheet: SheetData)
 
 object SheetXlsx {
+    /** Rows and columns of styling kept past the last value when reading a file. */
+    private const val MARGIN = 5
+
     // ---- Writing ----
 
     /** A cell's style with the sheet's table look baked in (header color and bold text, bands). */
@@ -430,6 +433,16 @@ object SheetXlsx {
                 if (width <= 0 || col.attr("customWidth") == "0" || col.attr("customWidth") == "false") continue
                 for (i in min..max) widths[colName(i - 1)] = Math.round(width * 7).toFloat()
             }
+            // Formatting that runs on far past the data (whole columns, say) is left behind.
+            val valued = SheetData(cells = cells).valuedSize
+            val keepRows = valued.first + MARGIN
+            val keepCols = valued.second + MARGIN
+            cells.entries.removeIf { (key, cell) ->
+                val (r, c) = parseAddr(key) ?: return@removeIf true
+                cell.v == null && (r >= keepRows || c >= keepCols)
+            }
+            hiddenRows.removeIf { it >= keepRows }
+            hiddenCols.removeIf { colIndex(it) >= keepCols }
             val data = SheetData(cells = cells, widths = widths, hiddenCols = hiddenCols, hiddenRows = hiddenRows)
             val (rows, cols) = data.usedSize
             out += ImportedSheet(sh.getAttribute("name").ifEmpty { "Sheet" }, data.copy(rows = maxOf(DEFAULT_ROWS, rows + 1), cols = maxOf(DEFAULT_COLS, cols + 1)))

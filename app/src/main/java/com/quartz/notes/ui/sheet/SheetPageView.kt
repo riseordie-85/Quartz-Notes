@@ -250,7 +250,7 @@ private fun FormulaBar(state: SheetState, locked: Boolean, ink: Color, modifier:
         )
         val area = state.area
         if (!area.single && editing == null) {
-            val stats = remember(state.data, area, state.calc) { SheetGrid.stats(state.calc, area, state.data.usedSize) }
+            val stats = remember(state.data, area, state.calc) { SheetGrid.stats(state.data, state.calc, area) }
             if (stats != null) {
                 Text(
                     "Sum ${SheetNumbers.general(stats.sum)} · Avg ${SheetNumbers.general(stats.average)} · ${stats.count}",

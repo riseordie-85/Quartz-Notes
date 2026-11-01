@@ -395,6 +395,14 @@ export async function fromXlsx(bytes: Uint8Array): Promise<ImportedSheet[]> {
       if (!width || col.getAttribute("customWidth") === "0" || col.getAttribute("customWidth") === "false") continue
       for (let i = min; i <= max; i++) sheet.widths[colName(i - 1)] = Math.round(width * 7)
     }
+    // Formatting that runs on far past the data (whole columns, say) is left behind.
+    const [keepRows, keepCols] = valuedSize(sheet).map((n) => n + 5)
+    for (const key of Object.keys(sheet.cells)) {
+      const at = parseAddr(key)
+      if (at && sheet.cells[key].v === undefined && (at[0] >= keepRows || at[1] >= keepCols)) delete sheet.cells[key]
+    }
+    hiddenRows.splice(0, hiddenRows.length, ...hiddenRows.filter((r) => r - 1 < keepRows))
+    hiddenCols.splice(0, hiddenCols.length, ...hiddenCols.filter((k) => colIndex(k) < keepCols))
     if (hiddenCols.length || hiddenRows.length) {
       sheet.hidden = { ...(hiddenCols.length ? { cols: [...new Set(hiddenCols)] } : {}), ...(hiddenRows.length ? { rows: hiddenRows } : {}) }
     }

@@ -160,4 +160,39 @@ class SheetFilesTest {
         assertEquals("two\nlines", read.cells["A3"]?.v)
         assertEquals("3", SheetCalc(read).display(2, 1))
     }
+
+    @Test
+    fun longChainsOfFormulas() {
+        val cells = LinkedHashMap<String, SheetCell>()
+        cells["A1"] = SheetCell("1")
+        for (r in 2..5000) cells["A$r"] = SheetCell("=A${r - 1}+1")
+        cells["B5000"] = SheetCell("1")
+        for (r in 4999 downTo 1) cells["B$r"] = SheetCell("=B${r + 1}+1")
+        val calc = SheetCalc(SheetData(cells = cells))
+        assertEquals("5000", calc.display(4999, 0))
+        assertEquals("5000", calc.display(0, 1))
+    }
+
+    @Test
+    fun hugeSelections() {
+        var s = SheetGrid.typeInto(SheetData(), 0, 0, "5")
+        s = SheetGrid.typeInto(s, 900_000, 3, "7")
+        val all = SheetArea(0, 0, 1_000_000, 200)
+        val start = System.currentTimeMillis()
+        assertEquals(SheetGrid.Stats(12.0, 6.0, 2), SheetGrid.stats(s, SheetCalc(s), all))
+        val bold = SheetGrid.updateStyles(s, all) { it.copy(b = true) }
+        assertEquals(setOf("A1", "D900001"), bold.cells.keys)
+        assertEquals(setOf("A1"), SheetGrid.clear(bold, SheetArea(800_000, 0, 1_000_000, 200), styles = true).cells.keys)
+        assert(System.currentTimeMillis() - start < 3000)
+        assertEquals("5", SheetGrid.plainText(s).substringBefore('\n'))
+    }
+
+    @Test
+    fun strayFormattingIsLeftBehind() {
+        var s = SheetGrid.typeInto(SheetData(), 0, 0, "x")
+        s = SheetGrid.updateStyles(s, SheetArea(899, 25, 899, 25)) { it.copy(b = true) }
+        s = SheetGrid.updateStyles(s, SheetArea(2, 1, 2, 1)) { it.copy(fill = "#FFF3B0") }
+        val back = SheetXlsx.read(SheetXlsx.write(s)).single().sheet
+        assertEquals(setOf("A1", "B3"), back.cells.keys)
+    }
 }

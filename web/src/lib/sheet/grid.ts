@@ -202,16 +202,32 @@ export function hiddenRows(sheet: SheetData, calc: SheetCalc = new SheetCalc(she
 /** The sheet as text for search: shown values, tabs between cells, line breaks between rows. */
 export function plainText(sheet: SheetData, options: CalcOptions = {}): string {
   const calc = new SheetCalc(sheet, options)
-  const [rows, cols] = usedSize(sheet)
-  const lines: string[] = []
-  for (let r = 0; r < rows; r++) {
-    const cells: string[] = []
-    for (let c = 0; c < cols; c++) cells.push(calc.display(r, c))
-    while (cells.length && cells[cells.length - 1] === "") cells.pop()
-    lines.push(cells.join("\t"))
+  // Row by row through the cells there are (a sheet can reach far with little in it).
+  const byRow = new Map<number, number[]>()
+  for (const key of Object.keys(sheet.cells)) {
+    const at = parseAddr(key)
+    if (!at) continue
+    const list = byRow.get(at[0]) ?? []
+    list.push(at[1])
+    byRow.set(at[0], list)
   }
-  while (lines.length && lines[lines.length - 1] === "") lines.pop()
-  return lines.join("\n")
+  let out = ""
+  let lastRow = 0
+  let started = false
+  for (const r of [...byRow.keys()].sort((a, b) => a - b)) {
+    const cells: string[] = []
+    for (const c of byRow.get(r)!.sort((a, b) => a - b)) {
+      const v = calc.display(r, c)
+      if (v === "") continue
+      while (cells.length < c) cells.push("")
+      cells.push(v)
+    }
+    if (!cells.length) continue
+    out += "\n".repeat(started ? r - lastRow : r) + cells.join("\t")
+    started = true
+    lastRow = r
+  }
+  return out
 }
 
 // ---- Working on a selected area ----
@@ -247,34 +263,44 @@ export function cleanStyle(s: SheetStyle): SheetStyle | undefined {
 /** The sheet with [change] applied to the style of every cell in [area]. */
 export function updateStyles(sheet: SheetData, area: Area, change: (s: SheetStyle) => SheetStyle): SheetData {
   const out = clone(sheet)
-  for (let r = area.r1; r <= area.r2; r++) {
-    for (let c = area.c1; c <= area.c2; c++) {
-      const key = addr(r, c)
-      const old = out.cells[key] ?? {}
-      const s = cleanStyle(change({ ...(old.s ?? {}) }))
-      const cell: SheetCell = { ...old }
-      if (s) cell.s = s
-      else delete cell.s
-      putCell(out.cells, key, cell)
-    }
+  for (const key of areaKeys(sheet, area, (area.r2 - area.r1 + 1) * (area.c2 - area.c1 + 1) > 100_000)) {
+    const old = out.cells[key] ?? {}
+    const s = cleanStyle(change({ ...(old.s ?? {}) }))
+    const cell: SheetCell = { ...old }
+    if (s) cell.s = s
+    else delete cell.s
+    putCell(out.cells, key, cell)
   }
   return out
+}
+
+/**
+ * The addresses in [area]: every one, or (for a huge selection, where only the cells already there
+ * should change) just the filled-in ones.
+ */
+function areaKeys(sheet: SheetData, area: Area, filledOnly: boolean): string[] {
+  if (filledOnly) {
+    return Object.keys(sheet.cells).filter((k) => {
+      const at = parseAddr(k)
+      return !!at && at[0] >= area.r1 && at[0] <= area.r2 && at[1] >= area.c1 && at[1] <= area.c2
+    })
+  }
+  const keys: string[] = []
+  for (let r = area.r1; r <= area.r2; r++) for (let c = area.c1; c <= area.c2; c++) keys.push(addr(r, c))
+  return keys
 }
 
 /** Clears what's typed in [area] (styles stay unless [styles]). */
 export function clearArea(sheet: SheetData, area: Area, styles = false): SheetData {
   const out = clone(sheet)
-  for (let r = area.r1; r <= area.r2; r++) {
-    for (let c = area.c1; c <= area.c2; c++) {
-      const key = addr(r, c)
-      const old = out.cells[key]
-      if (!old) continue
-      if (styles) delete out.cells[key]
-      else {
-        const cell = { ...old }
-        delete cell.v
-        putCell(out.cells, key, cell)
-      }
+  for (const key of areaKeys(sheet, area, true)) {
+    const old = out.cells[key]
+    if (!old) continue
+    if (styles) delete out.cells[key]
+    else {
+      const cell = { ...old }
+      delete cell.v
+      putCell(out.cells, key, cell)
     }
   }
   return out
@@ -398,16 +424,16 @@ export function autoSum(sheet: SheetData, area: Area, calc: SheetCalc = new Shee
 
 /** Sum, average and count of the numbers in [area], or null when it holds none. */
 export function areaStats(sheet: SheetData, calc: SheetCalc, area: Area): { sum: number; average: number; count: number } | null {
-  const [rows, cols] = usedSize(sheet)
+  // Only cells that hold something: a selection can be far bigger than what's filled in.
   let sum = 0
   let count = 0
-  for (let r = area.r1; r <= Math.min(area.r2, rows - 1); r++) {
-    for (let c = area.c1; c <= Math.min(area.c2, cols - 1); c++) {
-      const v = calc.value(r, c)
-      if (v.k === "num") {
-        sum += v.n
-        count++
-      }
+  for (const key of Object.keys(sheet.cells)) {
+    const at = parseAddr(key)
+    if (!at || at[0] < area.r1 || at[0] > area.r2 || at[1] < area.c1 || at[1] > area.c2) continue
+    const v = calc.value(at[0], at[1])
+    if (v.k === "num") {
+      sum += v.n
+      count++
     }
   }
   return count ? { sum, average: sum / count, count } : null

@@ -1,7 +1,7 @@
 // Working out a sheet's values and what each cell shows. Kept in step with the app's
 // data/sheet/SheetCalc.kt; see docs/sheet-format.md.
 
-import { addr, type SheetData, usedSize } from "./model"
+import { addr, parseAddr, type SheetData, usedSize } from "./model"
 import { parseFormula, type Node } from "./formula"
 import { dateOf, dec15, formatNumber, general, parseNumber, roundDec, serialOf } from "./numbers"
 
@@ -18,6 +18,11 @@ const str = (s: string): Value => ({ k: "str", s })
 const bool = (b: boolean): Value => ({ k: "bool", b })
 const err = (e: string): Value => ({ k: "err", e })
 const VALUE = err("#VALUE!")
+
+/** Formulas inside formulas this deep are worked out a step at a time instead. */
+const MAX_DEPTH = 300
+/** Thrown when a chain of formulas is too long to follow at once. */
+const TOO_DEEP = new Error("too deep")
 
 const STORED_NUMBER = /^-?(\d+\.?\d*|\.\d+)([eE][+-]?\d+)?$/
 
@@ -156,6 +161,9 @@ export interface CalcOptions {
 export class SheetCalc {
   private memo = new Map<string, Value>()
   private busy = new Set<string>()
+  /** How deep formulas are being worked out inside each other right now. */
+  private depth = 0
+  private warmed = false
   private parsed = new Map<string, Node>()
   private readonly lastRow: number
   private readonly lastCol: number
@@ -168,6 +176,38 @@ export class SheetCalc {
 
   /** The value of the cell at 0-based row and column. */
   value(r: number, c: number): Value {
+    if (this.depth > 0) return this.valueOf(r, c)
+    try {
+      return this.valueOf(r, c)
+    } catch (e) {
+      if (e !== TOO_DEEP) throw e
+    }
+    if (!this.warmed) {
+      this.warmed = true
+      // Every formula in order, top to bottom and then bottom to top, so each step finds the one
+      // before it already worked out.
+      const formulas = Object.entries(this.sheet.cells)
+        .filter(([, cell]) => cell.v?.startsWith("="))
+        .map(([key]) => parseAddr(key))
+        .filter((a): a is [number, number] => a !== null)
+        .sort((a, b) => a[0] - b[0] || a[1] - b[1])
+      for (const [rr, cc] of [...formulas, ...[...formulas].reverse()]) {
+        try {
+          this.valueOf(rr, cc)
+        } catch (e) {
+          if (e !== TOO_DEEP) throw e
+        }
+      }
+      try {
+        return this.valueOf(r, c)
+      } catch (e) {
+        if (e !== TOO_DEEP) throw e
+      }
+    }
+    return err("#NUM!")
+  }
+
+  private valueOf(r: number, c: number): Value {
     const key = addr(r, c)
     const known = this.memo.get(key)
     if (known) return known
@@ -179,14 +219,20 @@ export class SheetCalc {
       out = str(v)
     } else if (v.startsWith("=")) {
       if (this.busy.has(key)) return err("#CIRC!")
+      if (this.depth >= MAX_DEPTH) throw TOO_DEEP
       this.busy.add(key)
-      let node = this.parsed.get(v)
-      if (!node) {
-        node = parseFormula(v)
-        this.parsed.set(v, node)
+      this.depth++
+      try {
+        let node = this.parsed.get(v)
+        if (!node) {
+          node = parseFormula(v)
+          this.parsed.set(v, node)
+        }
+        out = this.ev(node)
+      } finally {
+        this.depth--
+        this.busy.delete(key)
       }
-      out = this.ev(node)
-      this.busy.delete(key)
       if (out.k === "empty") out = num(0)
     } else if (STORED_NUMBER.test(v)) {
       out = num(Number(v))
@@ -222,7 +268,7 @@ export class SheetCalc {
       case "name":
         return err("#NAME?")
       case "ref":
-        return this.value(node.r, node.c)
+        return this.valueOf(node.r, node.c)
       case "range":
         return VALUE
       case "plus":

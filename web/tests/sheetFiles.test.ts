@@ -5,7 +5,7 @@ import { describe, expect, it } from "vitest"
 import { readFileSync } from "node:fs"
 import { fileURLToPath } from "node:url"
 import { dirname, join } from "node:path"
-import { SheetCalc, hideCols, hideRows, excelFormula, plainFormula, emptySheet, formatFromCode, fromCsv, fromXlsx, parseAddr, toCsv, toXlsx, typeInto, updateStyles, setBorders, type SheetData } from "../src/lib/sheet"
+import { SheetCalc, areaStats, hideCols, hideRows, excelFormula, plainFormula, emptySheet, formatFromCode, fromCsv, fromXlsx, parseAddr, toCsv, toXlsx, typeInto, updateStyles, setBorders, type SheetData } from "../src/lib/sheet"
 
 const dir = join(dirname(fileURLToPath(import.meta.url)), "../../shared/fixtures/sheets")
 const expected = JSON.parse(readFileSync(join(dir, "xlsx-expected.json"), "utf8"))
@@ -119,5 +119,38 @@ describe("CSV", () => {
     expect(s.cells.A3?.v).toBe("two\nlines")
     expect(s.cells.B3?.v).toBe("=1+2")
     expect(new SheetCalc(s).display(2, 1)).toBe("3")
+  })
+})
+
+describe("big sheets", () => {
+  it("works out long chains of formulas, both ways", () => {
+    const s = emptySheet()
+    s.cells.A1 = { v: "1" }
+    for (let r = 2; r <= 5000; r++) s.cells[`A${r}`] = { v: `=A${r - 1}+1` }
+    s.cells.B5000 = { v: "1" }
+    for (let r = 4999; r >= 1; r--) s.cells[`B${r}`] = { v: `=B${r + 1}+1` }
+    const calc = new SheetCalc(s)
+    expect(calc.display(4999, 0)).toBe("5000")
+    expect(calc.display(0, 1)).toBe("5000")
+  })
+
+  it("totals and styles a huge selection quickly, through the cells there are", () => {
+    let s = emptySheet()
+    s = typeInto(s, 0, 0, "5")
+    s = typeInto(s, 900_000, 3, "7")
+    const all = { r1: 0, c1: 0, r2: 1_000_000, c2: 200 }
+    const t = Date.now()
+    expect(areaStats(s, new SheetCalc(s), all)).toEqual({ sum: 12, average: 6, count: 2 })
+    const bold = updateStyles(s, all, (x) => ({ ...x, b: true }))
+    expect(Object.keys(bold.cells).sort()).toEqual(["A1", "D900001"])
+    expect(Date.now() - t).toBeLessThan(2000)
+  })
+
+  it("leaves formatting far past the data behind when reading a file", async () => {
+    let s = typeInto(emptySheet(), 0, 0, "x")
+    s = updateStyles(s, { r1: 899, c1: 25, r2: 899, c2: 25 }, (x) => ({ ...x, b: true }))
+    s = updateStyles(s, { r1: 2, c1: 1, r2: 2, c2: 1 }, (x) => ({ ...x, fill: "#FFF3B0" }))
+    const [back] = await fromXlsx(await toXlsx(s))
+    expect(Object.keys(back.sheet.cells).sort()).toEqual(["A1", "B3"])
   })
 })
