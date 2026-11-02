@@ -252,8 +252,31 @@ async def main():
         assert [p for p, _ in order] == [0, 1, 2], order
         assert order[0][1] == pid, order
         ok("the list's Add page button adds at the end")
+
+        # Deleting two pages in quick succession deletes those two (it once deleted whatever page
+        # showed while the first delete finished), and Deleted pages brings one back.
+        page.once("dialog", lambda d: asyncio.ensure_future(d.accept()))
+        await page.locator("nav.pages a").nth(1).click()
+        await expect(page.locator(".count")).to_have_text("2/3")
+        await page.get_by_role("button", name="More", exact=True).click()
+        await page.get_by_role("button", name="Delete page").click()
+        page.once("dialog", lambda d: asyncio.ensure_future(d.accept()))
+        await page.get_by_role("button", name="More", exact=True).click()
+        await page.get_by_role("button", name="Delete page").click()
+        await expect(page.locator(".count")).to_have_text("1/1")
+        wait_for(lambda: [i for _, i in pages_here()] == [pid], "only the sheet page left on the server")
+        await page.get_by_role("button", name="More", exact=True).click()
+        await page.get_by_role("button", name="Deleted pages…").click()
+        deleted = page.locator("dialog[open] li")
+        await expect(deleted).to_have_count(2)
+        await deleted.first.get_by_role("button", name="Restore").click()
+        await expect(deleted).to_have_count(1)
+        await page.locator("dialog[open]").get_by_role("button", name="Done").click()
+        await expect(page.locator(".count")).to_have_text("2/2")
+        wait_for(lambda: len(pages_here()) == 2 and pages_here()[0][1] == pid, "the restored page on the server, after the sheet")
+        ok("deleting pages quickly, and restoring a deleted page")
         await page.locator("nav.pages a").first.click()
-        await expect(page.locator(".count")).to_have_text("1/3")
+        await expect(page.locator(".count")).to_have_text("1/2")
 
         # Download as Excel; it opens with the same cells.
         await page.click("button[title='More: rows, columns and downloads']")

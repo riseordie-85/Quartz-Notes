@@ -13,6 +13,7 @@
   import type { Page } from "../lib/types"
   import { preparePicture } from "../lib/pictures"
   import PictureDrop from "./PictureDrop.svelte"
+  import DeletedPages from "./DeletedPages.svelte"
 
   let { id, pageId, onMenu }: { id: string; pageId?: string; onMenu: () => void } = $props()
 
@@ -27,6 +28,31 @@
   let adding = $state(false)
   let editing = $state(false)
   let picking = $state(false)
+  let showDeleted = $state(false)
+  // A page being added or deleted: the buttons wait for it, so a quick second click can't act on
+  // whatever page is shown meanwhile.
+  let pageBusy = $state(false)
+
+  async function busyWith(f: () => Promise<unknown>) {
+    if (pageBusy) return
+    pageBusy = true
+    try {
+      await act(f)
+    } finally {
+      pageBusy = false
+    }
+  }
+
+  async function deleteThisPage() {
+    const target = page
+    if (!target || !confirm("Delete this page on all your devices?")) return
+    await busyWith(async () => {
+      const next = pages[index + 1] ?? pages[index - 1]
+      // Show the next page first, so the deleted one is never what the menu acts on.
+      if (next) router.go({ name: "notebook", id, page: next.id }, true)
+      await store.deletePage(target)
+    })
+  }
 
   // Dragging pages in the list to rearrange them. `held` is set at once, the rest a moment later
   // (changing the page during dragstart makes the browser cancel the drag).
@@ -194,7 +220,7 @@
   <TopBar title={notebook.title || "Untitled notebook"} {onMenu}>
     {#snippet actions()}
       <!-- The page arrows stay at the right edge; nothing beside them comes and goes. -->
-      <button class="icon-btn" title="Add a page after this one" onclick={() => act(addPageAfter)}><Icon name="addPage" /></button>
+      <button class="icon-btn" title="Add a page after this one" disabled={pageBusy} onclick={() => busyWith(addPageAfter)}><Icon name="addPage" /></button>
       <button
         class="icon-btn"
         title={canAddPictures ? "Add pictures to this page" : page?.locked ? "This page is locked" : "Pictures can't go on a section page"}
@@ -223,7 +249,7 @@
           <div class="menu right">
             {#if page}
               <p class="label">This page</p>
-              <button onclick={() => act(addPageAfter)}><Icon name="addPage" size={20} />Add a page after it</button>
+              <button disabled={pageBusy} onclick={() => busyWith(addPageAfter)}><Icon name="addPage" size={20} />Add a page after it</button>
               <button onclick={() => ((more = false), act(addSheetAfter))}><Icon name="table" size={20} />Add a sheet after it</button>
               <button onclick={() => ((more = false), importer?.click())}><Icon name="table" size={20} />Import a spreadsheet…</button>
               <button onclick={() => ((more = false), (picking = true))}><Icon name="newNotebook" size={20} />Add a page from a template</button>
@@ -233,17 +259,15 @@
                 <Icon name={page.locked ? "lockOpen" : "lock"} size={20} />{page.locked ? "Unlock page" : "Lock page"}
               </button>
               <button
-                disabled={pages.length <= 1}
+                disabled={pages.length <= 1 || pageBusy}
                 title={pages.length <= 1 ? "A notebook keeps at least one page" : undefined}
-                onclick={() => confirm("Delete this page on all your devices?") && act(async () => {
-                  const next = pages[index + 1] ?? pages[index - 1]
-                  if (await store.deletePage(page)) router.go({ name: "notebook", id, page: next?.id }, true)
-                })}
+                onclick={() => ((more = false), deleteThisPage())}
               ><Icon name="delete" size={20} />Delete page</button>
               <hr />
             {/if}
             <p class="label">Notebook</p>
             <button onclick={() => ((more = false), (editing = true))}><Icon name="edit" size={20} />Notebook settings</button>
+            <button onclick={() => ((more = false), (showDeleted = true))}><Icon name="undo" size={20} />Deleted pages…</button>
             <button disabled={place <= 0} onclick={() => act(() => store.moveNotebook(notebook, notebook.shelf, place - 1))}>
               <Icon name="arrowUp" size={20} />Move up
             </button>
@@ -295,7 +319,7 @@
         </a>
       {/each}
       <div class="drop-end" class:on={dropBefore === null} role="presentation" ondragover={(e) => dragOver(e, null)} ondrop={dropPage}></div>
-      <button class="add-page" title="Add a page at the end" onclick={() => act(addPageAtEnd)}><Icon name="add" size={20} />Add page</button>
+      <button class="add-page" title="Add a page at the end" disabled={pageBusy} onclick={() => busyWith(addPageAtEnd)}><Icon name="add" size={20} />Add page</button>
       {#if shelf}<p class="shelf">Shelf: {shelf.name}</p>{/if}
     </nav>
     <div class="page-area">
@@ -336,6 +360,15 @@
         const p = await store.addPageFrom(id, page ?? null, c.source)
         router.go({ name: "notebook", id, page: p.id })
       })
+    }}
+  />
+{/if}
+{#if showDeleted}
+  <DeletedPages
+    notebookId={id}
+    onDone={(restored) => {
+      showDeleted = false
+      if (restored) router.go({ name: "notebook", id, page: restored.id })
     }}
   />
 {/if}

@@ -264,7 +264,10 @@ class Store {
           throw e
         }
         const latest = (await pb.collection(c).getOne(id)) as unknown as SyncedRecord
-        if (latest.editedAt > editedAt) {
+        // A deletion goes ahead whatever changed meanwhile (a page renumbered, say): it was asked for.
+        const deleting = (changes as { deleted?: boolean }).deleted === true
+        if (deleting && latest.deleted) return latest as unknown as Collections[C]
+        if (latest.editedAt > editedAt && !deleting) {
           // The other edit is newer: it stays, and ours becomes the copy.
           this.put(c, latest)
           await this.keepCopy(c, mine, latest)
@@ -553,15 +556,71 @@ class Store {
   }
 
   /** Deletes a page and what's on it. A notebook keeps at least one page. */
+  // The pages after it keep their numbers: a gap orders the same, and renumbering a long
+  // notebook on every delete was slow and raced the next one.
   async deletePage(page: Page): Promise<boolean> {
     const pages = this.pagesOf(page.notebook)
     if (pages.length <= 1) return false
-    for (const e of this.elementsOf(page.id)) await this.remove("page_elements", e.id)
-    for (const a of this.attachmentsOf("PAGE", page.id)) await this.remove("attachments", a.id)
     await this.remove("pages", page.id)
-    const rest = pages.filter((p) => p.id !== page.id)
-    for (let i = 0; i < rest.length; i++) if (rest[i].position !== i) await this.save("pages", rest[i].id, { position: i })
+    await Promise.all([
+      ...this.elementsOf(page.id).map((e) => this.remove("page_elements", e.id)),
+      ...this.attachmentsOf("PAGE", page.id).map((a) => this.remove("attachments", a.id)),
+    ])
     return true
+  }
+
+  /** A notebook's deleted pages still on the server, most recently deleted first. */
+  async deletedPages(notebookId: string): Promise<Page[]> {
+    const list = await pb.collection("pages").getFullList({
+      filter: pb.filter("notebook = {:nb} && deleted = true", { nb: notebookId }),
+      sort: "-editedAt",
+      batch: 200,
+    })
+    return list as unknown as Page[]
+  }
+
+  /** Marks a deleted record as not deleted again. */
+  private async undelete(c: CollectionName, rec: SyncedRecord, changes: Record<string, unknown> = {}) {
+    let base = rec.rev
+    for (let attempt = 0; attempt < 3; attempt++) {
+      try {
+        const saved = await pb.collection(c).update(rec.id, { ...changes, deleted: false, baseRev: base, editedAt: Date.now(), device: DEVICE })
+        this.put(c, saved as unknown as SyncedRecord)
+        return
+      } catch (e) {
+        if (!isConflict(e)) throw e
+        base = ((await pb.collection(c).getOne(rec.id)) as unknown as SyncedRecord).rev
+      }
+    }
+  }
+
+  /**
+   * Brings back a deleted page, at the place it had, with the items and attachments that were
+   * deleted along with it (not ones deleted from it before).
+   */
+  async restorePage(page: Page): Promise<void> {
+    const since = page.editedAt - 60_000
+    const elements = await pb.collection("page_elements").getFullList({
+      filter: pb.filter("page = {:p} && deleted = true && editedAt >= {:t}", { p: page.id, t: since }),
+      batch: 500,
+    })
+    for (const e of elements) await this.undelete("page_elements", e as unknown as SyncedRecord)
+    const files = await pb.collection("attachments").getFullList({
+      filter: pb.filter("ownerType = 'PAGE' && ownerUid = {:p} && deleted = true && editedAt >= {:t}", { p: page.id, t: since }),
+      batch: 500,
+    })
+    for (const a of files) await this.undelete("attachments", a as unknown as SyncedRecord)
+    // Before the first page now numbered at or after its old number.
+    const pages = this.pagesOf(page.notebook)
+    const at = pages.findIndex((p) => p.position >= page.position)
+    const next = at < 0 ? null : pages[at]
+    await this.undelete("pages", page as unknown as SyncedRecord, {
+      position: next ? next.position : Math.max(-1, ...pages.map((p) => p.position)) + 1,
+    })
+    if (next) {
+      // Make room after it, keeping the order.
+      for (const p of pages.slice(at)) await this.save("pages", p.id, { position: p.position + 1 })
+    }
   }
 }
 
