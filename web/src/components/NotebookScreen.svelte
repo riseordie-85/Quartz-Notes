@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { tick } from "svelte"
   import { emptySheet, fromCsv, fromXlsx, plainText as sheetPlainText, sheetJson } from "../lib/sheet"
   import { store } from "../lib/store.svelte"
   import { router } from "../lib/router.svelte"
@@ -70,6 +71,21 @@
     const p = await store.addPage(id, page ?? null)
     router.go({ name: "notebook", id, page: p.id })
   }
+
+  /** The list's own button adds after the last page, where it sits (the toolbar one adds after this page). */
+  async function addPageAtEnd() {
+    await sheet?.save()
+    const p = await store.addPage(id, null)
+    router.go({ name: "notebook", id, page: p.id })
+  }
+
+  // The page shown is always in view in the list (a new page at the end, say).
+  let pageList: HTMLElement | undefined = $state()
+  $effect(() => {
+    const current = page?.id
+    if (!current || !pageList) return
+    tick().then(() => pageList?.querySelector("a.active")?.scrollIntoView({ block: "nearest" }))
+  })
 
   let importer: HTMLInputElement | undefined = $state()
 
@@ -247,7 +263,7 @@
   </TopBar>
 
   <div class="layout">
-    <nav class="pages" aria-label="Pages">
+    <nav class="pages" aria-label="Pages" bind:this={pageList}>
       {#each pages as p, i (p.id)}
         <a
           href={`#/notebook/${id}/${p.id}`}
@@ -279,7 +295,7 @@
         </a>
       {/each}
       <div class="drop-end" class:on={dropBefore === null} role="presentation" ondragover={(e) => dragOver(e, null)} ondrop={dropPage}></div>
-      <button class="add-page" onclick={() => act(addPageAfter)}><Icon name="add" size={20} />Add page</button>
+      <button class="add-page" title="Add a page at the end" onclick={() => act(addPageAtEnd)}><Icon name="add" size={20} />Add page</button>
       {#if shelf}<p class="shelf">Shelf: {shelf.name}</p>{/if}
     </nav>
     <div class="page-area">

@@ -237,6 +237,24 @@ async def main():
         await page.click(td(1, 0))
         ok("picking a column from its header stays put")
 
+        # The list's Add page button adds at the end, even from an earlier page.
+        def pages_here():
+            items = api("GET", f"/api/collections/pages/records?perPage=50&filter=notebook%3D%22{money}%22", token=TOKEN)["items"]
+            return sorted((p["position"], p["id"]) for p in items if not p["deleted"])
+        await page.locator("button.add-page").click()
+        await expect(page.locator(".count")).to_have_text("2/2")
+        await page.locator("nav.pages a").first.click()
+        await expect(page.locator(".count")).to_have_text("1/2")
+        await page.locator("button.add-page").click()
+        await expect(page.locator(".count")).to_have_text("3/3")
+        wait_for(lambda: len(pages_here()) == 3, "three pages on the server")
+        order = pages_here()
+        assert [p for p, _ in order] == [0, 1, 2], order
+        assert order[0][1] == pid, order
+        ok("the list's Add page button adds at the end")
+        await page.locator("nav.pages a").first.click()
+        await expect(page.locator(".count")).to_have_text("1/3")
+
         # Download as Excel; it opens with the same cells.
         await page.click("button[title='More: rows, columns and downloads']")
         async with page.expect_download() as dl:
