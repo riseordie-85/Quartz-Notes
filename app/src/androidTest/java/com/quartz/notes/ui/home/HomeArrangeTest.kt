@@ -112,6 +112,36 @@ class HomeArrangeTest {
     }
 
     @Test
+    fun swipingTheShelfDoesNotOpenSettings() {
+        // Enough notebooks that a swipe scrolls the first one out of view (which used to count as
+        // holding it, and opened its settings).
+        val shelf = runBlocking {
+            val repo = container.repository
+            val shelf = repo.addShelf("Swipe")
+            for (i in 1..10) repo.createNotebook(shelf, "Book $i", 0xFF1E6FE8.toInt(), "GLOSS", "none")
+            container.settings.setSelectedShelf(shelf)
+            shelf
+        }
+        show()
+        val step = with(rule.density) { 30.dp.toPx() }
+        rule.onNodeWithText("Book 1").performTouchInput {
+            down(center)
+            repeat(25) {
+                advanceEventTime(16)
+                moveBy(Offset(-step, 0f))
+            }
+            up()
+        }
+        rule.waitForIdle()
+        SystemClock.sleep(800)
+        rule.waitForIdle()
+        screen("home_swiped")
+        rule.onNodeWithText("Book 1").assertDoesNotExist()
+        rule.onNodeWithText("Notebook settings").assertDoesNotExist()
+        assertEquals((1..10).map { "Book $it" }, titles(shelf))
+    }
+
+    @Test
     fun splitViewCanBeTurnedOffOnWideScreens() {
         shelfWithNotebooks("Split")
         runBlocking { container.settings.setSplitView(true) }

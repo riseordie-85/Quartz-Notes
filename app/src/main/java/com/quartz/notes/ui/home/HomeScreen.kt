@@ -581,8 +581,12 @@ private fun NotebookRow(
                 onClick = { onOpenNotebook(nb.id) },
                 gestures = Modifier.pointerInput(nb.id) {
                     var travelled = 0f
+                    // Only a held cover counts: a swipe that scrolls the shelf can end up "cancelled"
+                    // here without ever being held, and mustn't open the notebook's settings.
+                    var held = false
                     detectDragGesturesAfterLongPress(
                         onDragStart = {
+                            held = true
                             haptics.performHapticFeedback(HapticFeedbackType.LongPress)
                             draggingId = nb.id
                             dragOffset = 0f
@@ -604,8 +608,8 @@ private fun NotebookRow(
                                 haptics.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                             }
                         },
-                        onDragEnd = { finish(nb, travelled) },
-                        onDragCancel = { finish(nb, travelled) },
+                        onDragEnd = { if (held) finish(nb, travelled); held = false },
+                        onDragCancel = { if (held) finish(nb, travelled); held = false },
                     )
                 },
             )
