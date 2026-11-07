@@ -7,6 +7,7 @@
   import type { Page, PageElement } from "../lib/types"
   import { sameText, store } from "../lib/store.svelte"
   import { attachedOf, SIDE_ATTACHMENTS } from "../lib/attached"
+  import { ATTACHMENT_TYPE, drag } from "../lib/drag.svelte"
   import { DEVICE, errorMessage } from "../lib/pb"
   import { compactDoc, decodeDoc, fromPlainText, plainText, type RichDoc } from "../lib/richdoc"
   import { contentColorFor, heightFactor } from "../lib/scrapbook"
@@ -58,6 +59,14 @@
   // With room beside the paper, attachments sit in a column there instead of under the text.
   let rowW = $state(0)
   const side = $derived(!scrapbook && !live.isSection && attached.length > 0 && rowW >= 640 + SIDE_ATTACHMENTS)
+
+  /** Picks up an attachment, to drop on another page in the list. */
+  function dragAttachment(ev: DragEvent, e: PageElement) {
+    if (locked || !ev.dataTransfer) return
+    drag.attachment = e
+    ev.dataTransfer.setData(ATTACHMENT_TYPE, e.id)
+    ev.dataTransfer.effectAllowed = "move"
+  }
 
   /** Takes a picture or voice note out of the page's attachments (on every device). */
   async function removeAttached(e: PageElement, what: string) {
@@ -313,14 +322,21 @@
         <div class="thumbs">
           {#each attached.filter((e) => e.kind === "IMAGE") as e (e.id)}
             {@const url = store.mediaUrl(payload(e).path)}
-            <div class="thumb" class:media-missing={!url} title={url ? undefined : "This picture hasn't synced yet"}>
-              {#if url}<button class="open-picture" title="Open picture" onclick={() => openPicture(payload(e).path)}><img src={url} alt="" loading="lazy" /></button>{/if}
+            <div
+              class="thumb"
+              class:media-missing={!url}
+              title={url ? (locked ? undefined : "Drag onto a page in the list to move it there") : "This picture hasn't synced yet"}
+              role="listitem"
+              draggable={!locked}
+              ondragstart={(ev) => dragAttachment(ev, e)}
+            >
+              {#if url}<button class="open-picture" title="Open picture" onclick={() => openPicture(payload(e).path)}><img src={url} alt="" loading="lazy" draggable="false" /></button>{/if}
               {#if !locked}<button class="remove" title="Remove picture" onclick={() => removeAttached(e, "picture")}><Icon name="close" size={18} /></button>{/if}
             </div>
           {/each}
         </div>
         {#each attached.filter((e) => e.kind === "VOICE") as e (e.id)}
-          <div class="voice-row">
+          <div class="voice-row" role="listitem" draggable={!locked} ondragstart={(ev) => dragAttachment(ev, e)}>
             <VoicePlayer url={store.mediaUrl(payload(e).path)} durationMs={Number(payload(e).durationMs) || 0} />
             {#if !locked}<button class="icon-btn remove-voice" title="Remove voice note" onclick={() => removeAttached(e, "voice note")}><Icon name="close" size={20} /></button>{/if}
           </div>
@@ -340,15 +356,18 @@
       <div
         class="side-thumb"
         class:media-missing={!url}
-        title={url ? undefined : "This picture hasn't synced yet"}
+        title={url ? (locked ? undefined : "Drag onto a page in the list to move it there") : "This picture hasn't synced yet"}
         style:aspect-ratio={d.width && d.height ? `${d.width} / ${d.height}` : "1"}
+        role="listitem"
+        draggable={!locked}
+        ondragstart={(ev) => dragAttachment(ev, e)}
       >
-        {#if url}<button class="open-picture" title="Open picture" onclick={() => openPicture(d.path)}><img src={url} alt="" loading="lazy" /></button>{/if}
+        {#if url}<button class="open-picture" title="Open picture" onclick={() => openPicture(d.path)}><img src={url} alt="" loading="lazy" draggable="false" /></button>{/if}
         {#if !locked}<button class="remove" title="Remove picture" onclick={() => removeAttached(e, "picture")}><Icon name="close" size={18} /></button>{/if}
       </div>
     {/each}
     {#each attached.filter((e) => e.kind === "VOICE") as e (e.id)}
-      <div class="voice-row">
+      <div class="voice-row" role="listitem" draggable={!locked} ondragstart={(ev) => dragAttachment(ev, e)}>
         <VoicePlayer url={store.mediaUrl(payload(e).path)} durationMs={Number(payload(e).durationMs) || 0} />
         {#if !locked}<button class="icon-btn remove-voice" title="Remove voice note" onclick={() => removeAttached(e, "voice note")}><Icon name="close" size={20} /></button>{/if}
       </div>

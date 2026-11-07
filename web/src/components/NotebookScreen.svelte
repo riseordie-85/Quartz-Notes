@@ -2,6 +2,7 @@
   import { tick } from "svelte"
   import { panels } from "../lib/panels.svelte"
   import { attachedOf } from "../lib/attached"
+  import { drag } from "../lib/drag.svelte"
   import { emptySheet, fromCsv, fromXlsx, plainText as sheetPlainText, sheetJson } from "../lib/sheet"
   import { store } from "../lib/store.svelte"
   import { router } from "../lib/router.svelte"
@@ -63,7 +64,43 @@
   let dragging = $state<Page | null>(null)
   let dropBefore = $state<string | null | undefined>(undefined)
 
+  // An attachment dragged from the page onto another page in the list moves there.
+  let dropInto = $state<string | null>(null)
+  let notice = $state<string | null>(null)
+  let noticeTimer: ReturnType<typeof setTimeout> | undefined
+  const takesAttachments = (p: Page) => !p.isSection && !p.locked && (p.layoutMode === "INLINE" || !p.layoutMode)
+
+  function attachmentOver(e: DragEvent, p: Page) {
+    const a = drag.attachment
+    if (!a || a.page === p.id || !takesAttachments(p)) {
+      dropInto = null
+      return
+    }
+    e.preventDefault()
+    if (e.dataTransfer) e.dataTransfer.dropEffect = "move"
+    dropInto = p.id
+  }
+
+  async function dropAttachment(e: DragEvent, p: Page) {
+    const a = drag.attachment
+    dropInto = null
+    if (!a || a.page === p.id || !takesAttachments(p)) return
+    e.preventDefault()
+    e.stopPropagation()
+    const n = pages.indexOf(p) + 1
+    await act(async () => {
+      await store.save("page_elements", a.id, { page: p.id })
+      clearTimeout(noticeTimer)
+      notice = `Moved to ${p.title.trim() || `page ${n}`}`
+      noticeTimer = setTimeout(() => (notice = null), 3000)
+    })
+  }
+
   function dragOver(e: DragEvent, p: Page | null) {
+    if (drag.attachment) {
+      if (p) attachmentOver(e, p)
+      return
+    }
     if (!held) return
     e.preventDefault()
     if (e.dataTransfer) e.dataTransfer.dropEffect = "move"
@@ -75,7 +112,11 @@
     dropBefore = before
   }
 
-  async function dropPage(e: DragEvent) {
+  async function dropPage(e: DragEvent, target: Page | null = null) {
+    if (drag.attachment) {
+      if (target) await dropAttachment(e, target)
+      return
+    }
     e.preventDefault()
     const p = held
     const before = dropBefore
@@ -305,6 +346,7 @@
           class:section={p.isSection}
           class:dragging={dragging?.id === p.id}
           class:drop-before={dropBefore === p.id}
+          class:drop-into={dropInto === p.id}
           draggable="true"
           ondragstart={(e) => {
             held = p
@@ -314,7 +356,8 @@
           }}
           ondragend={() => ((held = null), (dragging = null), (dropBefore = undefined))}
           ondragover={(e) => dragOver(e, p)}
-          ondrop={dropPage}
+          ondragleave={() => dropInto === p.id && (dropInto = null)}
+          ondrop={(e) => dropPage(e, p)}
           style:--section={p.isSection ? (argbToCss(p.backgroundArgb ?? (0xfff9c78a | 0)) ?? undefined) : undefined}
           onclick={(e) => {
             e.preventDefault()
@@ -335,6 +378,7 @@
     <div class="page-area" class:wide={page?.layoutMode === "SHEET"} class:with-side={hasAttached}>
       {#if error}<p class="error" role="alert">{error}</p>{/if}
       {#if adding}<p class="status">Adding picture…</p>{/if}
+      {#if notice}<p class="status" role="status">{notice}</p>{/if}
       {#if page}
         {#key page.id}
           <PageSheet bind:this={sheet} {page} onError={(m) => (error = m)} />
@@ -408,6 +452,10 @@
   }
   .pages a.drop-before {
     box-shadow: inset 0 3px 0 var(--accent);
+  }
+  .pages a.drop-into {
+    box-shadow: inset 0 0 0 2px var(--accent);
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
   }
   .drop-end {
     flex: none;

@@ -1,8 +1,9 @@
 <script lang="ts">
   // Drag picture files from the computer anywhere onto the window to add them. While files are
   // over the window an overlay says what will happen. Other drags (text in the editor, notebooks
-  // in the sidebar) are left alone.
+  // in the sidebar, pictures already in the app) are left alone.
   import Icon from "./Icon.svelte"
+  import { drag } from "../lib/drag.svelte"
 
   let {
     target,
@@ -22,6 +23,8 @@
   let timer: ReturnType<typeof setTimeout> | undefined
 
   function hasFiles(e: DragEvent): boolean {
+    // A picture dragged within the app isn't a new file (the browser offers it as one).
+    if (drag.internal) return false
     return !!e.dataTransfer && Array.from(e.dataTransfer.types).includes("Files")
   }
 

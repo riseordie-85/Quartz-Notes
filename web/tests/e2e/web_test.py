@@ -495,6 +495,22 @@ async def main():
         wait_for(lambda: gone(pic_id) and gone(voice_id), "the removed attachments deleted on the server")
         ok("a page's attachments can be removed")
 
+        # Dragging an attachment around the page doesn't copy it; dropped on another page in the
+        # list, it moves there.
+        pic_id = attach("IMAGE", {"path": "media/sunset.png", "aspect": 0.75, "width": 120, "height": 90, "placement": "ATTACHED"})
+        await expect(thumbs).to_have_count(1, timeout=10000)
+        await thumbs.first.drag_to(page.locator(".page-area .text"))
+        await page.wait_for_timeout(1500)
+        await expect(thumbs).to_have_count(1)
+        on_page = lambda: [e for e in find("page_elements", f'page="{kyoto["id"]}" && deleted=false') if e["kind"] == "IMAGE"]
+        assert len([e for e in on_page() if e["data"].get("placement") == "ATTACHED"]) == 1, on_page()
+        budget = find("pages", 'title="Budget"')[0]
+        await thumbs.first.drag_to(page.locator("nav.pages a", has_text="Budget"))
+        await expect(page.get_by_role("status")).to_contain_text("Moved to Budget")
+        await expect(thumbs).to_have_count(0)
+        wait_for(lambda: api("GET", f"/api/collections/page_elements/records/{pic_id}", token=TOKEN)["page"] == budget["id"], "the attachment on the Budget page")
+        ok("dragging an attachment doesn't copy it, and dropping it on another page moves it")
+
         # Phone size.
         phone = await browser.new_context(viewport={"width": 390, "height": 844}, device_scale_factor=2, storage_state=await ctx.storage_state())
         m = await phone.new_page()
