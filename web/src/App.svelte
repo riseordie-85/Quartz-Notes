@@ -6,6 +6,7 @@
   import { theme } from "./lib/theme.svelte"
   import Login from "./components/Login.svelte"
   import Sidebar from "./components/Sidebar.svelte"
+  import { panels } from "./lib/panels.svelte"
   import NotesGrid from "./components/NotesGrid.svelte"
   import NoteScreen from "./components/NoteScreen.svelte"
   import NotebookScreen from "./components/NotebookScreen.svelte"
@@ -15,6 +16,11 @@
   let signedIn = $state(pb.authStore.isValid)
   let loadError = $state<string | null>(null)
   let drawer = $state(false)
+  // Opens the drawer on a narrow screen; brings a tucked-away sidebar back on a wide one.
+  function openMenu() {
+    if (panels.narrow) drawer = true
+    else panels.toggleSidebar(false)
+  }
 
   async function start() {
     loadError = null
@@ -73,19 +79,19 @@
   <div class="center"><p>Loading your notes…</p></div>
 {:else}
   <div class="shell">
-    <Sidebar open={drawer} onClose={() => (drawer = false)} {signOut} />
+    {#if !panels.sidebarHidden || panels.narrow}<Sidebar open={drawer} onClose={() => (drawer = false)} {signOut} />{/if}
     <main>
       {#key router.route.name === "notebook" ? `nb:${router.route.id}` : router.route.name === "note" ? `note:${router.route.id}` : router.route.name}
         {#if router.route.name === "notes"}
-          <NotesGrid archive={false} onMenu={() => (drawer = true)} />
+          <NotesGrid archive={false} onMenu={openMenu} />
         {:else if router.route.name === "archive"}
-          <NotesGrid archive={true} onMenu={() => (drawer = true)} />
+          <NotesGrid archive={true} onMenu={openMenu} />
         {:else if router.route.name === "note"}
-          <NoteScreen id={router.route.id} onMenu={() => (drawer = true)} />
+          <NoteScreen id={router.route.id} onMenu={openMenu} />
         {:else if router.route.name === "notebook"}
-          <NotebookScreen id={router.route.id} pageId={router.route.page} onMenu={() => (drawer = true)} />
+          <NotebookScreen id={router.route.id} pageId={router.route.page} onMenu={openMenu} />
         {:else if router.route.name === "search"}
-          <SearchScreen q={router.route.q} onMenu={() => (drawer = true)} />
+          <SearchScreen q={router.route.q} onMenu={openMenu} />
         {/if}
       {/key}
     </main>

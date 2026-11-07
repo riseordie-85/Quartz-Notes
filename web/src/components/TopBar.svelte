@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Snippet } from "svelte"
   import Icon from "./Icon.svelte"
+  import { panels } from "../lib/panels.svelte"
 
   let { title, onMenu, onBack, actions }: { title?: string; onMenu?: () => void; onBack?: () => void; actions?: Snippet } = $props()
 </script>
@@ -10,7 +11,7 @@
     <button class="icon-btn" title="Back" onclick={onBack}><Icon name="back" /></button>
   {/if}
   {#if onMenu}
-    <button class="icon-btn menu-btn" title="Menu" onclick={onMenu}><Icon name="menu" /></button>
+    <button class="icon-btn menu-btn" class:shown={panels.sidebarHidden} title={panels.sidebarHidden ? "Show the sidebar" : "Menu"} onclick={onMenu}><Icon name="menu" /></button>
   {/if}
   {#if title !== undefined}<h1>{title}</h1>{/if}
   <div class="actions">{@render actions?.()}</div>
@@ -47,6 +48,9 @@
   }
   .menu-btn {
     display: none;
+  }
+  .menu-btn.shown {
+    display: inline-grid;
   }
   @media (max-width: 860px) {
     .menu-btn {

@@ -278,6 +278,23 @@ async def main():
         await page.locator("nav.pages a").first.click()
         await expect(page.locator(".count")).to_have_text("1/2")
 
+        # A sheet uses the full width, and the side panels tuck away (remembered on reload).
+        area = await page.locator(".page-area").bounding_box()
+        await page.get_by_role("button", name="Hide the page list").click()
+        await page.get_by_role("button", name="Hide the sidebar").click()
+        await expect(page.locator("aside")).to_have_count(0)
+        await expect(page.locator("nav.pages")).to_be_hidden()
+        wider = await page.locator(".page-area").bounding_box()
+        assert wider["width"] > area["width"] + 400, (area, wider)
+        await page.reload()
+        await expect(page.locator(".grid")).to_be_visible()
+        await expect(page.locator("aside")).to_have_count(0)
+        await page.get_by_role("button", name="Show the sidebar").click()
+        await page.get_by_role("button", name="Show the page list").click()
+        await expect(page.locator("aside")).to_be_visible()
+        await expect(page.locator("nav.pages")).to_be_visible()
+        ok("full-width sheets, and side panels that tuck away")
+
         # Download as Excel; it opens with the same cells.
         await page.click("button[title='More: rows, columns and downloads']")
         async with page.expect_download() as dl:

@@ -5,6 +5,7 @@
   import { argbToCss } from "../lib/richdoc"
   import type { Notebook } from "../lib/types"
   import Icon from "./Icon.svelte"
+  import { panels } from "../lib/panels.svelte"
   import NotebookDialog from "./NotebookDialog.svelte"
   import { theme, type ThemeMode } from "../lib/theme.svelte"
 
@@ -71,6 +72,7 @@
   <div class="brand">
     <img src="/icon-rounded.png" alt="" width="34" height="34" />
     <span>Quartz Notes</span>
+    <button class="icon-btn hide" title="Hide the sidebar" aria-label="Hide the sidebar" onclick={() => panels.toggleSidebar(true)}><Icon name="chevronLeft" size={22} /></button>
   </div>
 
   <form class="search" role="search" onsubmit={search}>
@@ -170,6 +172,14 @@
   }
   .brand img {
     border-radius: 9px;
+  }
+  .brand span {
+    flex: 1;
+  }
+  .brand .hide {
+    width: 36px;
+    height: 36px;
+    color: var(--muted);
   }
   .search {
     display: flex;
@@ -323,6 +333,9 @@
     display: none;
   }
   @media (max-width: 860px) {
+    .brand .hide {
+      display: none;
+    }
     aside {
       position: fixed;
       z-index: 50;

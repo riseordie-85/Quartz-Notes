@@ -92,7 +92,18 @@
   let extraRows = $state(0)
   let extraCols = $state(0)
   const rows = $derived(Math.max(data.rows, used[0] + 10, focus[0] + 10) + extraRows)
-  const cols = $derived(Math.max(data.cols, used[1] + 3, focus[1] + 3) + extraCols)
+  // Enough columns to fill the width there is, like a spreadsheet app (only shown, not saved).
+  let gridWidth = $state(0)
+  const fillCols = $derived.by(() => {
+    let x = 44
+    let c = 0
+    while (x < gridWidth && c < 702) {
+      if (!colHidden(data, c)) x += data.widths[colName(c)] ?? 100
+      c++
+    }
+    return c
+  })
+  const cols = $derived(Math.max(data.cols, used[1] + 3, focus[1] + 3, fillCols) + extraCols)
   const rowList = $derived(Array.from({ length: rows }, (_, i) => i))
   // Hidden columns aren't drawn at all; a double line marks where they are.
   const colList = $derived(Array.from({ length: cols }, (_, i) => i).filter((c) => !colHidden(data, c)))
@@ -917,6 +928,7 @@
 <div
   class="grid"
   bind:this={gridEl}
+  bind:clientWidth={gridWidth}
   tabindex="0"
   role="grid"
   aria-label="Sheet"
@@ -1218,7 +1230,8 @@
     overflow: scroll;
     scrollbar-width: auto;
     scrollbar-color: color-mix(in srgb, var(--ink) 35%, transparent) transparent;
-    height: min(70vh, 720px);
+    /* Down to just above the bottom of the window. */
+    height: max(320px, calc(100dvh - 300px));
     outline: none;
     font-size: 14px;
     touch-action: pan-x pan-y;

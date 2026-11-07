@@ -1,5 +1,6 @@
 <script lang="ts">
   import { tick } from "svelte"
+  import { panels } from "../lib/panels.svelte"
   import { emptySheet, fromCsv, fromXlsx, plainText as sheetPlainText, sheetJson } from "../lib/sheet"
   import { store } from "../lib/store.svelte"
   import { router } from "../lib/router.svelte"
@@ -220,6 +221,13 @@
   <TopBar title={notebook.title || "Untitled notebook"} {onMenu}>
     {#snippet actions()}
       <!-- The page arrows stay at the right edge; nothing beside them comes and goes. -->
+      <button
+        class="icon-btn pages-btn"
+        class:on={!panels.pagesHidden}
+        title={panels.pagesHidden ? "Show the page list" : "Hide the page list"}
+        aria-pressed={!panels.pagesHidden}
+        onclick={() => panels.togglePages()}
+      ><Icon name="sidePanel" /></button>
       <button class="icon-btn" title="Add a page after this one" disabled={pageBusy} onclick={() => busyWith(addPageAfter)}><Icon name="addPage" /></button>
       <button
         class="icon-btn"
@@ -287,7 +295,7 @@
   </TopBar>
 
   <div class="layout">
-    <nav class="pages" aria-label="Pages" bind:this={pageList}>
+    <nav class="pages" class:hidden={panels.pagesHidden} aria-label="Pages" bind:this={pageList}>
       {#each pages as p, i (p.id)}
         <a
           href={`#/notebook/${id}/${p.id}`}
@@ -322,7 +330,7 @@
       <button class="add-page" title="Add a page at the end" disabled={pageBusy} onclick={() => busyWith(addPageAtEnd)}><Icon name="add" size={20} />Add page</button>
       {#if shelf}<p class="shelf">Shelf: {shelf.name}</p>{/if}
     </nav>
-    <div class="page-area">
+    <div class="page-area" class:wide={page?.layoutMode === "SHEET"}>
       {#if error}<p class="error" role="alert">{error}</p>{/if}
       {#if adding}<p class="status">Adding picture…</p>{/if}
       {#if page}
@@ -514,6 +522,16 @@
     max-width: 780px;
     margin: 0 auto;
   }
+  /* A sheet takes all the room there is. */
+  .page-area.wide {
+    max-width: none;
+  }
+  .pages.hidden {
+    display: none;
+  }
+  .pages-btn.on {
+    color: var(--accent);
+  }
   .anchor {
     position: relative;
   }
@@ -538,7 +556,8 @@
     background: transparent;
   }
   @media (max-width: 1100px) {
-    .pages {
+    .pages,
+    .pages-btn {
       display: none;
     }
   }
