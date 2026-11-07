@@ -59,6 +59,16 @@
   let rowW = $state(0)
   const side = $derived(!scrapbook && !live.isSection && attached.length > 0 && rowW >= 640 + SIDE_ATTACHMENTS)
 
+  /** Takes a picture or voice note out of the page's attachments (on every device). */
+  async function removeAttached(e: PageElement, what: string) {
+    if (!confirm(`Remove this ${what} from the page?`)) return
+    try {
+      await store.remove("page_elements", e.id)
+    } catch (err) {
+      onError(`Couldn't remove it: ${errorMessage(err)}`)
+    }
+  }
+
   /** How far down the page the lowest item reaches (px). */
   const paperUrl = $derived(live.backgroundImage ? store.mediaUrl(live.backgroundImage) : null)
   let paperAspect = $state(0)
@@ -303,15 +313,17 @@
         <div class="thumbs">
           {#each attached.filter((e) => e.kind === "IMAGE") as e (e.id)}
             {@const url = store.mediaUrl(payload(e).path)}
-            {#if url}
-              <button class="thumb open-picture" title="Open picture" onclick={() => openPicture(payload(e).path)}><img src={url} alt="" loading="lazy" /></button>
-            {:else}
-              <div class="thumb media-missing" title="This picture hasn't synced yet"></div>
-            {/if}
+            <div class="thumb" class:media-missing={!url} title={url ? undefined : "This picture hasn't synced yet"}>
+              {#if url}<button class="open-picture" title="Open picture" onclick={() => openPicture(payload(e).path)}><img src={url} alt="" loading="lazy" /></button>{/if}
+              {#if !locked}<button class="remove" title="Remove picture" onclick={() => removeAttached(e, "picture")}><Icon name="close" size={18} /></button>{/if}
+            </div>
           {/each}
         </div>
         {#each attached.filter((e) => e.kind === "VOICE") as e (e.id)}
-          <VoicePlayer url={store.mediaUrl(payload(e).path)} durationMs={Number(payload(e).durationMs) || 0} />
+          <div class="voice-row">
+            <VoicePlayer url={store.mediaUrl(payload(e).path)} durationMs={Number(payload(e).durationMs) || 0} />
+            {#if !locked}<button class="icon-btn remove-voice" title="Remove voice note" onclick={() => removeAttached(e, "voice note")}><Icon name="close" size={20} /></button>{/if}
+          </div>
         {/each}
       </div>
     {/if}
@@ -325,19 +337,21 @@
     {#each attached.filter((e) => e.kind === "IMAGE") as e (e.id)}
       {@const d = payload(e)}
       {@const url = store.mediaUrl(d.path)}
-      {#if url}
-        <button
-          class="side-thumb open-picture"
-          title="Open picture"
-          style:aspect-ratio={d.width && d.height ? `${d.width} / ${d.height}` : "1"}
-          onclick={() => openPicture(d.path)}><img src={url} alt="" loading="lazy" /></button
-        >
-      {:else}
-        <div class="side-thumb media-missing" title="This picture hasn't synced yet"></div>
-      {/if}
+      <div
+        class="side-thumb"
+        class:media-missing={!url}
+        title={url ? undefined : "This picture hasn't synced yet"}
+        style:aspect-ratio={d.width && d.height ? `${d.width} / ${d.height}` : "1"}
+      >
+        {#if url}<button class="open-picture" title="Open picture" onclick={() => openPicture(d.path)}><img src={url} alt="" loading="lazy" /></button>{/if}
+        {#if !locked}<button class="remove" title="Remove picture" onclick={() => removeAttached(e, "picture")}><Icon name="close" size={18} /></button>{/if}
+      </div>
     {/each}
     {#each attached.filter((e) => e.kind === "VOICE") as e (e.id)}
-      <VoicePlayer url={store.mediaUrl(payload(e).path)} durationMs={Number(payload(e).durationMs) || 0} />
+      <div class="voice-row">
+        <VoicePlayer url={store.mediaUrl(payload(e).path)} durationMs={Number(payload(e).durationMs) || 0} />
+        {#if !locked}<button class="icon-btn remove-voice" title="Remove voice note" onclick={() => removeAttached(e, "voice note")}><Icon name="close" size={20} /></button>{/if}
+      </div>
     {/each}
   </aside>
 {/if}
@@ -406,16 +420,70 @@
     box-shadow: 0 1px 3px rgb(0 0 0 / 0.12), 0 2px 8px rgb(0 0 0 / 0.06);
   }
   .side-thumb {
+    position: relative;
     display: block;
     width: 100%;
     min-height: 60px;
     flex: none;
-    padding: 0;
-    border: 0;
     border-radius: 12px;
     overflow: hidden;
     background: color-mix(in srgb, var(--on-surface) 8%, transparent);
-    cursor: zoom-in;
+  }
+  .side-thumb .open-picture {
+    width: 100%;
+    height: 100%;
+  }
+  .thumb {
+    position: relative;
+  }
+  .thumb .open-picture {
+    width: 100%;
+    height: 100%;
+  }
+  /* The remove button shows on hover (always, on touch screens). */
+  .remove {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border: 0;
+    border-radius: 50%;
+    background: rgb(0 0 0 / 0.55);
+    color: #fff;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+  .thumb:hover .remove,
+  .side-thumb:hover .remove,
+  .remove:focus-visible {
+    opacity: 1;
+  }
+  @media (hover: none) {
+    .remove {
+      opacity: 1;
+    }
+  }
+  .voice-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .voice-row > :global(:first-child) {
+    flex: 1;
+    min-width: 0;
+  }
+  .remove-voice {
+    flex: none;
+    width: 36px;
+    height: 36px;
+    opacity: 0.6;
+  }
+  .remove-voice:hover {
+    opacity: 1;
   }
   .side-thumb img {
     display: block;

@@ -470,6 +470,31 @@ async def main():
         await expect(page.locator(".hit")).to_have_count(1)
         ok("search finds page text")
 
+        # A page's attachments: in the side column, and each one can be removed.
+        kyoto = find("pages", 'title="Kyoto"')[0]
+        stamp = int(time.time() * 1000)
+        def attach(kind, data):
+            return api("POST", "/api/collections/page_elements/records", {
+                "id": str(uuid.uuid4()), "page": kyoto["id"], "kind": kind, "x": 0, "y": 0, "width": 0.3, "height": 0.2,
+                "rotation": 0, "z": 50, "data": data, "deleted": False, "device": "test", "editedAt": stamp, "createdAt": stamp,
+            }, TOKEN)["id"]
+        pic_id = attach("IMAGE", {"path": "media/sunset.png", "aspect": 0.75, "width": 120, "height": 90, "placement": "ATTACHED"})
+        voice_id = attach("VOICE", {"path": "media/hello.wav", "durationMs": 2000, "attached": True})
+        await page.goto(f"{BASE}/#/notebook/{kyoto['notebook']}/{kyoto['id']}")
+        # Under the text at this width (beside it on a wider window).
+        thumbs = page.locator(".attachments .thumb, aside.side-attachments .side-thumb")
+        await expect(thumbs).to_have_count(1, timeout=10000)
+        await expect(page.locator(".voice-row")).to_have_count(1)
+        await thumbs.first.hover()
+        await page.get_by_role("button", name="Remove picture").click()
+        await page.get_by_role("button", name="Remove voice note").click()
+        await expect(thumbs).to_have_count(0)
+        await expect(page.locator(".voice-row")).to_have_count(0)
+        def gone(i):
+            return api("GET", f"/api/collections/page_elements/records/{i}", token=TOKEN)["deleted"]
+        wait_for(lambda: gone(pic_id) and gone(voice_id), "the removed attachments deleted on the server")
+        ok("a page's attachments can be removed")
+
         # Phone size.
         phone = await browser.new_context(viewport={"width": 390, "height": 844}, device_scale_factor=2, storage_state=await ctx.storage_state())
         m = await phone.new_page()

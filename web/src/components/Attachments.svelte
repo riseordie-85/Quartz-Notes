@@ -17,8 +17,8 @@
   const voices = $derived(items.filter((a) => a.kind !== "IMAGE"))
   let error = $state<string | null>(null)
 
-  async function remove(id: string) {
-    if (!confirm("Remove this from the note?")) return
+  async function remove(id: string, what = "picture") {
+    if (!confirm(`Remove this ${what} from the note?`)) return
     try {
       await store.remove("attachments", id)
     } catch (e) {
@@ -46,7 +46,10 @@
       </div>
     {/if}
     {#each voices as a (a.id)}
-      <VoicePlayer url={store.mediaUrl(a.path)} durationMs={a.durationMs ?? 0} />
+      <div class="voice-row">
+        <VoicePlayer url={store.mediaUrl(a.path)} durationMs={a.durationMs ?? 0} />
+        {#if editable}<button class="icon-btn remove-voice" title="Remove voice note" onclick={() => remove(a.id, "voice note")}><Icon name="close" size={20} /></button>{/if}
+      </div>
     {/each}
     {#if error}<p class="error">{error}</p>{/if}
   </div>
@@ -128,6 +131,24 @@
     .remove {
       opacity: 1;
     }
+  }
+  .voice-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .voice-row > :global(:first-child) {
+    flex: 1;
+    min-width: 0;
+  }
+  .remove-voice {
+    flex: none;
+    width: 36px;
+    height: 36px;
+    opacity: 0.6;
+  }
+  .remove-voice:hover {
+    opacity: 1;
   }
   .error {
     color: #e53935;
