@@ -146,6 +146,23 @@ fun HomeRoute(
     // Clean up empty notes left over from earlier sessions (never the one that's open).
     LaunchedEffect(Unit) { vm.sweepBlankNotes(except = selectedNote) }
 
+    // Asked for by a widget: a new notebook, a shelf, or the quick notes.
+    var jump by remember { mutableStateOf<HomeJump?>(null) }
+    val homeRequest by com.quartz.notes.Launches.home.collectAsStateWithLifecycle()
+    LaunchedEffect(homeRequest) {
+        val r = homeRequest ?: return@LaunchedEffect
+        com.quartz.notes.Launches.home.value = null
+        when (r) {
+            com.quartz.notes.LaunchRequest.NewNotebook -> notebookSheet = NotebookSheet(null)
+            is com.quartz.notes.LaunchRequest.Notebooks -> {
+                r.shelfId?.let(vm::selectShelf)
+                jump = HomeJump(toNotes = false)
+            }
+            com.quartz.notes.LaunchRequest.QuickNotes -> jump = HomeJump(toNotes = true)
+            else -> Unit
+        }
+    }
+
     BoxWithConstraints(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
         val wide = maxWidth >= TwoPaneMinWidth
         val twoPane = wide && state.splitView
@@ -219,6 +236,7 @@ fun HomeRoute(
                 onToggleGrid = { vm.setGrid(!state.grid) },
                 onSearch = onSearch,
                 onSettings = onSettings,
+                jump = jump,
             )
         }
 
@@ -336,11 +354,18 @@ private fun HomeContent(
     onToggleGrid: () -> Unit,
     onSearch: () -> Unit,
     onSettings: () -> Unit,
+    jump: HomeJump? = null,
 ) {
     // At most one quick note is swiped open at a time; scrolling the list closes it.
     val swipeGroup = rememberSwipeRevealGroup()
     val listState = rememberLazyListState()
     val gridState = rememberLazyStaggeredGridState()
+    // To the shelves at the top, or the quick notes under them (the first thing after the header).
+    LaunchedEffect(jump) {
+        val j = jump ?: return@LaunchedEffect
+        val index = if (j.toNotes) 1 else 0
+        if (state.grid) gridState.animateScrollToItem(index) else listState.animateScrollToItem(index)
+    }
     LaunchedEffect(listState, gridState) {
         snapshotFlow { listState.isScrollInProgress || gridState.isScrollInProgress }
             .filter { it }
@@ -889,3 +914,6 @@ private fun NoteGridCard(note: NoteUi, selected: Boolean, onClick: () -> Unit) {
         }
     }
 }
+
+/** Where a widget asked the home screen to scroll: the shelves, or the quick notes. Each one is new, so asking twice works. */
+internal class HomeJump(val toNotes: Boolean)

@@ -72,6 +72,8 @@ class AppContainer(context: Context) {
     fun startBackgroundTasks(context: Context) {
         val app = context.applicationContext
         sync.start()
+        // Home screen widgets follow the notes.
+        appScope.launch { com.quartz.notes.widget.WidgetUpdates.follow(app, repository) }
         // Look for a newer build now and then (and whenever Settings opens).
         appScope.launch {
             delay(5_000)

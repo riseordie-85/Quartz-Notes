@@ -1,6 +1,12 @@
 package com.quartz.notes.ui
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import com.quartz.notes.LaunchRequest
+import com.quartz.notes.Launches
+import com.quartz.notes.LocalAppContainer
 import androidx.navigation.NavController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -30,6 +36,26 @@ private object Routes {
 @Composable
 fun QuartzNavHost() {
     val nav = rememberNavController()
+    val container = LocalAppContainer.current
+
+    // Opened from a widget: go to the notebook or note, or hand the home screen what's for it.
+    val request by Launches.pending.collectAsState()
+    LaunchedEffect(request) {
+        val r = request ?: return@LaunchedEffect
+        Launches.pending.value = null
+        when (r) {
+            is LaunchRequest.OpenNotebook -> nav.navigate(Routes.notebook(r.id)) { popUpTo(Routes.HOME) }
+            is LaunchRequest.OpenNote -> nav.navigate(Routes.note(r.id)) { popUpTo(Routes.HOME) }
+            LaunchRequest.NewNote -> {
+                val id = container.repository.createNote()
+                nav.navigate(Routes.note(id)) { popUpTo(Routes.HOME) }
+            }
+            else -> {
+                nav.popBackStack(Routes.HOME, inclusive = false)
+                Launches.home.value = r
+            }
+        }
+    }
 
     NavHost(navController = nav, startDestination = Routes.HOME) {
         composable(Routes.HOME) {

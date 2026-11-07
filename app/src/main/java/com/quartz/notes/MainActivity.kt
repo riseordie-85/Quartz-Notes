@@ -1,6 +1,7 @@
 package com.quartz.notes
 
 import android.graphics.Color as AndroidColor
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
@@ -34,8 +35,16 @@ class MainActivity : ComponentActivity() {
         super.onStop()
     }
 
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        Launches.handle(intent)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Opened from a widget: go where it points (only once, not again after a rotation).
+        if (savedInstanceState == null) Launches.handle(intent)
         enableEdgeToEdge()
         val container = (application as QuartzApp).container
 

@@ -1,0 +1,183 @@
+package com.quartz.notes.widget
+
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.os.Handler
+import android.os.Looper
+import android.view.View
+import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.compose.ui.unit.DpSize
+import androidx.compose.ui.unit.dp
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.mutablePreferencesOf
+import androidx.glance.appwidget.GlanceAppWidget
+import androidx.glance.appwidget.GlanceAppWidgetManager
+import androidx.glance.appwidget.state.updateAppWidgetState
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
+import com.quartz.notes.LaunchRequest
+import com.quartz.notes.Launches
+import com.quartz.notes.QuartzApp
+import com.quartz.notes.data.db.QuickNoteEntity
+import kotlinx.coroutines.runBlocking
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
+import org.junit.BeforeClass
+import org.junit.Test
+import org.junit.runner.RunWith
+import java.io.File
+import java.util.concurrent.CountDownLatch
+
+/**
+ * The home screen widgets, drawn the way a launcher draws them (their views made from what they send),
+ * at several sizes, with pictures for checking by eye and checks on what they show.
+ */
+@RunWith(AndroidJUnit4::class)
+class WidgetsTest {
+    companion object {
+        private val app get() = ApplicationProvider.getApplicationContext<QuartzApp>()
+        private var shelf = 0L
+        private val books = ArrayList<Long>()
+
+        @JvmStatic
+        @BeforeClass
+        fun seed() = runBlocking {
+            val repo = app.container.repository
+            shelf = repo.addShelf("Widget shelf")
+            val colors = listOf(0xFF0050D0, 0xFFD6004C, 0xFF00A8D6, 0xFFE68A1E, 0xFF2E9E5B, 0xFF6A3FD0, 0xFFD32F2F, 0xFF00897B, 0xFF795548)
+            val textures = listOf("GLOSS", "LINEN", "LEATHER", "PAPER", "CANVAS", "NONE", "GLOSS", "GLOSS", "LINEN")
+            val icons = listOf("travel", "book", "none", "travel", "book", "none", "travel", "book", "none")
+            for (i in colors.indices) {
+                books += repo.createNotebook(shelf, "Book ${i + 1}", colors[i].toInt(), textures[i], icons[i])
+            }
+            val dao = app.container.database.quickNoteDao()
+            dao.insert(QuickNoteEntity(title = "Groceries", plainText = "Milk\nEggs\nBread", colorKey = "yellow", pinned = true))
+            dao.insert(QuickNoteEntity(title = "Gift ideas", plainText = "Headphones\nA good book", colorKey = "purple"))
+            dao.insert(QuickNoteEntity(title = "", plainText = "Call the dentist on Monday about the appointment.", colorKey = "default"))
+            dao.insert(QuickNoteEntity(title = "Trip", plainText = "Book the train", colorKey = "blue"))
+        }
+    }
+
+    private var nextId = 7000
+
+    /** Runs the widget at [w]×[h] dp with [state], makes its views as a launcher would, and saves a picture. */
+    private fun render(widget: GlanceAppWidget, name: String, w: Int, h: Int, state: Preferences? = null): View = runBlocking {
+        val context = app
+        val glanceId = GlanceAppWidgetManager(context).getGlanceIdBy(nextId++)
+        if (state != null) updateAppWidgetState(context, glanceId) { prefs -> state.asMap().forEach { (k, v) -> @Suppress("UNCHECKED_CAST") prefs[k as Preferences.Key<Any>] = v } }
+        val views = widget.compose(context, glanceId, size = DpSize(w.dp, h.dp), state = state)
+        val density = context.resources.displayMetrics.density
+        val pw = (w * density).toInt()
+        val ph = (h * density).toInt()
+        var view: View? = null
+        val done = CountDownLatch(1)
+        Handler(Looper.getMainLooper()).post {
+            val parent = FrameLayout(context)
+            val v = views.apply(context, parent)
+            parent.addView(v, FrameLayout.LayoutParams(pw, ph))
+            parent.measure(View.MeasureSpec.makeMeasureSpec(pw, View.MeasureSpec.EXACTLY), View.MeasureSpec.makeMeasureSpec(ph, View.MeasureSpec.EXACTLY))
+            parent.layout(0, 0, pw, ph)
+            val bmp = Bitmap.createBitmap(pw, ph, Bitmap.Config.ARGB_8888)
+            val canvas = Canvas(bmp)
+            canvas.drawColor(0xFF2B3550.toInt()) // like dark glass
+            parent.draw(canvas)
+            val dir = File(context.getExternalFilesDir(null), "shots").apply { mkdirs() }
+            File(dir, "widget_$name.png").outputStream().use { bmp.compress(Bitmap.CompressFormat.PNG, 100, it) }
+            view = parent
+            done.countDown()
+        }
+        done.await()
+        InstrumentationRegistry.getInstrumentation().waitForIdleSync()
+        view!!
+    }
+
+    private fun texts(v: View): List<String> = when (v) {
+        is TextView -> listOf(v.text.toString())
+        is ViewGroup -> (0 until v.childCount).flatMap { texts(v.getChildAt(it)) }
+        else -> emptyList()
+    }
+
+    private fun images(v: View): List<String> = when (v) {
+        is ImageView -> listOfNotNull(v.contentDescription?.toString())
+        is ViewGroup -> (0 until v.childCount).flatMap { images(v.getChildAt(it)) }
+        else -> emptyList()
+    }
+
+    private fun shelfState() = mutablePreferencesOf().apply { this[WidgetKeys.SHELF] = shelf }
+
+    @Test
+    fun shelfFillsItsSizeWithTheFirstNotebooksInOrder() {
+        for ((name, w, h) in listOf(Triple("shelf_one_row", 320, 110), Triple("shelf_two_rows", 320, 230), Triple("shelf_page", 400, 640), Triple("shelf_narrow", 150, 110))) {
+            val v = render(ShelfWidget(), name, w, h, shelfState())
+            val plan = ShelfPlan.of((w - 16).dp, (h - 16).dp)
+            val expected = (1..minOf(9, plan.columns * plan.rows)).map { "Book $it" }
+            assertEquals("$name: $plan", expected, images(v))
+        }
+    }
+
+    @Test
+    fun shelfPlanAddsRowsAndColumnsAsItGrows() {
+        val small = ShelfPlan.of(304.dp, 94.dp)
+        val tall = ShelfPlan.of(304.dp, 214.dp)
+        val page = ShelfPlan.of(384.dp, 624.dp)
+        assertEquals(1, small.rows)
+        assertTrue("$tall", tall.rows >= 2)
+        assertTrue("$page", page.rows > tall.rows)
+        assertTrue("$small", small.columns >= 4)
+        assertTrue("$page", page.header && !small.header)
+    }
+
+    @Test
+    fun notebookIsAnIconSmallAndShowsMoreBigger() {
+        val state = mutablePreferencesOf().apply { this[WidgetKeys.NOTEBOOK] = books[0] }
+        val icon = render(NotebookWidget(), "notebook_1x1", 64, 64, state)
+        assertEquals(listOf("Book 1"), images(icon))
+        assertTrue(texts(icon).isEmpty())
+        val square = render(NotebookWidget(), "notebook_2x2", 150, 150, state)
+        assertTrue(texts(square).toString(), "Book 1" in texts(square) && texts(square).any { it.endsWith("page") || it.endsWith("pages") })
+        val wide = render(NotebookWidget(), "notebook_wide", 280, 120, state)
+        assertTrue(texts(wide).toString(), "Book 1" in texts(wide))
+        val none = render(NotebookWidget(), "notebook_unset", 64, 64, mutablePreferencesOf())
+        assertTrue(texts(none).isNotEmpty())
+    }
+
+    @Test
+    fun quickNotesAsAListAndAGrid() {
+        val list = render(QuickNotesWidget(), "notes_list", 300, 320, mutablePreferencesOf())
+        assertTrue(texts(list).toString(), "Quick notes" in texts(list))
+        render(QuickNotesWidget(), "notes_grid", 340, 360, mutablePreferencesOf().apply { this[WidgetKeys.GRID] = true })
+        render(QuickNotesWidget(), "notes_panel_dark_text", 300, 320, mutablePreferencesOf().apply {
+            this[WidgetKeys.PANEL] = true
+            this[WidgetKeys.DARK_TEXT] = true
+        })
+    }
+
+    @Test
+    fun toolbarLabelsItsButtonsWhenThereIsRoom() {
+        val wide = render(ToolbarWidget(), "toolbar_wide", 360, 64, mutablePreferencesOf())
+        assertEquals(listOf("New notebook", "Notebooks", "Quick notes"), texts(wide))
+        val small = render(ToolbarWidget(), "toolbar_small", 180, 56, mutablePreferencesOf())
+        assertEquals(listOf("New notebook", "Notebooks", "Quick notes"), images(small))
+        render(ToolbarWidget(), "toolbar_tall", 140, 220, mutablePreferencesOf())
+    }
+
+    @Test
+    fun launchLinksRoundTrip() {
+        val requests = listOf(
+            LaunchRequest.OpenNotebook(42),
+            LaunchRequest.OpenNote(7),
+            LaunchRequest.NewNote,
+            LaunchRequest.NewNotebook,
+            LaunchRequest.Notebooks(3),
+            LaunchRequest.Notebooks(null),
+            LaunchRequest.QuickNotes,
+        )
+        for (r in requests) assertEquals(r, Launches.parse(Launches.intent(app, r)))
+        // Different places are different intents, so their taps don't get mixed up.
+        assertEquals(requests.size, requests.map { Launches.intent(app, it).data.toString() }.toSet().size)
+    }
+}

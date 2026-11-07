@@ -317,6 +317,8 @@ class QuartzRepository(private val db: QuartzDatabase, scope: CoroutineScope) {
 
     fun observePages(notebookId: Long): Flow<List<PageEntity>> = pages.observeByNotebook(notebookId)
 
+    fun observePageCount(notebookId: Long): Flow<Int> = pages.observeCount(notebookId)
+
     fun observeRecentPages(limit: Int = 60): Flow<List<PageHit>> = pages.observeRecent(limit)
 
     /** Inserts a page after [afterIndex], copying the style of the page it follows. Returns the new id. */

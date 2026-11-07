@@ -111,6 +111,10 @@ interface PageDao {
     @Query("SELECT * FROM pages WHERE notebookId = :notebookId AND deleted = 0 ORDER BY position, id")
     fun observeByNotebook(notebookId: Long): Flow<List<PageEntity>>
 
+    /** How many pages a notebook has (for widgets, without loading them). */
+    @Query("SELECT COUNT(*) FROM pages WHERE notebookId = :notebookId AND deleted = 0")
+    fun observeCount(notebookId: Long): Flow<Int>
+
     @Query("SELECT * FROM pages WHERE notebookId = :notebookId AND deleted = 0 ORDER BY position, id")
     suspend fun getByNotebook(notebookId: Long): List<PageEntity>
 

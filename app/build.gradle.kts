@@ -14,8 +14,8 @@ android {
         applicationId = "com.quartz.notes"
         minSdk = 33
         targetSdk = 35
-        versionCode = 36
-        versionName = "0.17.0"
+        versionCode = 37
+        versionName = "0.18.0"
         vectorDrawables { useSupportLibrary = true }
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -106,6 +106,8 @@ dependencies {
 
     implementation("io.coil-kt:coil-compose:2.7.0")
     implementation("androidx.work:work-runtime-ktx:2.10.0")
+    // Home screen widgets.
+    implementation("androidx.glance:glance-appwidget:1.1.1")
     implementation("androidx.documentfile:documentfile:1.0.1")
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("com.squareup.okhttp3:okhttp-sse:4.12.0")

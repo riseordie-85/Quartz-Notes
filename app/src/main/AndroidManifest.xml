@@ -36,6 +36,66 @@
             </intent-filter>
         </activity>
 
+        <!-- Home screen widgets, and the screen that sets each one up. -->
+        <activity
+            android:name=".widget.WidgetSetupActivity"
+            android:exported="true"
+            android:label="Widget settings"
+            android:excludeFromRecents="true"
+            android:theme="@style/Theme.QuartzNotes">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
+
+        <receiver
+            android:name=".widget.ShelfWidgetReceiver"
+            android:exported="true"
+            android:label="@string/widget_shelf">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_shelf" />
+        </receiver>
+
+        <receiver
+            android:name=".widget.NotebookWidgetReceiver"
+            android:exported="true"
+            android:label="@string/widget_notebook">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_notebook" />
+        </receiver>
+
+        <receiver
+            android:name=".widget.QuickNotesWidgetReceiver"
+            android:exported="true"
+            android:label="@string/widget_quick_notes">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_quick_notes" />
+        </receiver>
+
+        <receiver
+            android:name=".widget.ToolbarWidgetReceiver"
+            android:exported="true"
+            android:label="@string/widget_toolbar">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_toolbar" />
+        </receiver>
+
         <receiver
             android:name=".data.update.UpdateResultReceiver"
             android:exported="false" />
