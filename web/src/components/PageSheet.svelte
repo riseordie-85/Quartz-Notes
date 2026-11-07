@@ -6,6 +6,7 @@
   import type { Editor as TipTap } from "@tiptap/core"
   import type { Page, PageElement } from "../lib/types"
   import { sameText, store } from "../lib/store.svelte"
+  import { attachedOf, SIDE_ATTACHMENTS } from "../lib/attached"
   import { DEVICE, errorMessage } from "../lib/pb"
   import { compactDoc, decodeDoc, fromPlainText, plainText, type RichDoc } from "../lib/richdoc"
   import { contentColorFor, heightFactor } from "../lib/scrapbook"
@@ -53,12 +54,10 @@
       return {}
     }
   }
-  const attached = $derived(
-    elements.filter((e) => {
-      const d = payload(e)
-      return (e.kind === "IMAGE" && d.placement === "ATTACHED") || (e.kind === "VOICE" && d.attached === true)
-    }),
-  )
+  const attached = $derived(attachedOf(elements))
+  // With room beside the paper, attachments sit in a column there instead of under the text.
+  let rowW = $state(0)
+  const side = $derived(!scrapbook && !live.isSection && attached.length > 0 && rowW >= 640 + SIDE_ATTACHMENTS)
 
   /** How far down the page the lowest item reaches (px). */
   const paperUrl = $derived(live.backgroundImage ? store.mediaUrl(live.backgroundImage) : null)
@@ -221,6 +220,7 @@
   <div class="toolbar-row"><Toolbar {editor} /></div>
 {/if}
 
+<div class="page-row" bind:clientWidth={rowW}>
 <div class="frame" bind:clientWidth={avail} style:height={scrapbook ? `${canvasH * scale}px` : undefined}>
 <div
   class="sheet"
@@ -283,7 +283,7 @@
         <div class="rulings lines"></div>
       {/if}
       {#if !scrapbook}
-        <div class="text" style:padding="10px {padH}px {attached.length ? 12 : 40}px">
+        <div class="text" style:padding="10px {padH}px {attached.length && !side ? 12 : 40}px">
           <Editor
             bind:this={editorView}
             bind:editor
@@ -297,7 +297,7 @@
         </div>
       {/if}
     </div>
-    {#if attached.length}
+    {#if attached.length && !side}
       <div class="attachments" style:padding="8px {padH}px 28px">
         <div class="label">Attachments</div>
         <div class="thumbs">
@@ -318,6 +318,29 @@
     {#if W > 0}<ElementsLayer {elements} {W} {ink} onpicture={openPicture} />{/if}
   {/if}
 </div>
+</div>
+{#if side}
+  <aside class="side-attachments" aria-label="Attachments">
+    <div class="label">Attachments</div>
+    {#each attached.filter((e) => e.kind === "IMAGE") as e (e.id)}
+      {@const d = payload(e)}
+      {@const url = store.mediaUrl(d.path)}
+      {#if url}
+        <button
+          class="side-thumb open-picture"
+          title="Open picture"
+          style:aspect-ratio={d.width && d.height ? `${d.width} / ${d.height}` : "1"}
+          onclick={() => openPicture(d.path)}><img src={url} alt="" loading="lazy" /></button
+        >
+      {:else}
+        <div class="side-thumb media-missing" title="This picture hasn't synced yet"></div>
+      {/if}
+    {/each}
+    {#each attached.filter((e) => e.kind === "VOICE") as e (e.id)}
+      <VoicePlayer url={store.mediaUrl(payload(e).path)} durationMs={Number(payload(e).durationMs) || 0} />
+    {/each}
+  </aside>
+{/if}
 </div>
 {/if}
 
@@ -359,6 +382,46 @@
   }
   .frame {
     position: relative;
+    flex: 1;
+    min-width: 0;
+  }
+  .page-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .side-attachments {
+    position: sticky;
+    top: 140px;
+    width: 192px;
+    flex: none;
+    max-height: calc(100vh - 160px);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 14px;
+    border-radius: 20px;
+    background: var(--surface);
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.12), 0 2px 8px rgb(0 0 0 / 0.06);
+  }
+  .side-thumb {
+    display: block;
+    width: 100%;
+    min-height: 60px;
+    flex: none;
+    padding: 0;
+    border: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: color-mix(in srgb, var(--on-surface) 8%, transparent);
+    cursor: zoom-in;
+  }
+  .side-thumb img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   .sheet.freeform {
     transform-origin: top left;

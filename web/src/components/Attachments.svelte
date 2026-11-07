@@ -6,7 +6,12 @@
   import { errorMessage } from "../lib/pb"
   import { lightbox, notePictures } from "../lib/lightbox.svelte"
 
-  let { ownerType, ownerUid, editable = true }: { ownerType: string; ownerUid: string; editable?: boolean } = $props()
+  let {
+    ownerType,
+    ownerUid,
+    editable = true,
+    column = false,
+  }: { ownerType: string; ownerUid: string; editable?: boolean; column?: boolean } = $props()
   const items = $derived(store.attachmentsOf(ownerType, ownerUid))
   const images = $derived(items.filter((a) => a.kind === "IMAGE"))
   const voices = $derived(items.filter((a) => a.kind !== "IMAGE"))
@@ -23,7 +28,8 @@
 </script>
 
 {#if items.length}
-  <div class="attachments">
+  <div class="attachments" class:column>
+    {#if column}<div class="label">Attachments</div>{/if}
     {#if images.length}
       <div class="thumbs">
         {#each images as a (a.id)}
@@ -52,6 +58,23 @@
     flex-direction: column;
     gap: 10px;
     margin-top: 18px;
+  }
+  /* In a side column: one picture under another, the column's width. */
+  .attachments.column {
+    margin-top: 0;
+  }
+  .column .thumbs {
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+  .column .thumb {
+    width: 100%;
+    height: auto;
+  }
+  .label {
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 0.55;
   }
   .thumbs {
     display: flex;

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { tick } from "svelte"
   import { panels } from "../lib/panels.svelte"
+  import { attachedOf } from "../lib/attached"
   import { emptySheet, fromCsv, fromXlsx, plainText as sheetPlainText, sheetJson } from "../lib/sheet"
   import { store } from "../lib/store.svelte"
   import { router } from "../lib/router.svelte"
@@ -22,6 +23,7 @@
   const pages = $derived(store.pagesOf(id))
   const index = $derived(Math.max(0, pages.findIndex((p) => p.id === pageId)))
   const page = $derived(pages[index])
+  const hasAttached = $derived(!!page && !page.isSection && page.layoutMode !== "SHEET" && page.layoutMode !== "SCRAPBOOK" && attachedOf(store.elementsOf(page.id)).length > 0)
   let error = $state<string | null>(null)
   let more = $state(false)
   let sheet: PageSheet | undefined = $state()
@@ -330,7 +332,7 @@
       <button class="add-page" title="Add a page at the end" disabled={pageBusy} onclick={() => busyWith(addPageAtEnd)}><Icon name="add" size={20} />Add page</button>
       {#if shelf}<p class="shelf">Shelf: {shelf.name}</p>{/if}
     </nav>
-    <div class="page-area" class:wide={page?.layoutMode === "SHEET"}>
+    <div class="page-area" class:wide={page?.layoutMode === "SHEET"} class:with-side={hasAttached}>
       {#if error}<p class="error" role="alert">{error}</p>{/if}
       {#if adding}<p class="status">Adding picture…</p>{/if}
       {#if page}
@@ -525,6 +527,10 @@
   /* A sheet takes all the room there is. */
   .page-area.wide {
     max-width: none;
+  }
+  /* The paper keeps its width, with the attachments column beside it. */
+  .page-area.with-side {
+    max-width: calc(780px + 212px);
   }
   .pages.hidden {
     display: none;

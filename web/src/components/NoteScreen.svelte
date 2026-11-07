@@ -18,6 +18,10 @@
   import { lightbox, notePictures } from "../lib/lightbox.svelte"
 
   let { id, onMenu }: { id: string; onMenu: () => void } = $props()
+  // With room beside the note, its attachments sit in a column there instead of under the text.
+  let rowW = $state(0)
+  const hasAttachments = $derived(store.attachmentsOf("NOTE", id).length > 0)
+  const side = $derived(hasAttachments && rowW >= 600 + 212)
 
   const note = $derived(store.note(id))
   const dark = $derived(theme.dark)
@@ -184,15 +188,20 @@
 {#if !note}
   <p class="empty-state">This note was deleted.</p>
 {:else}
-  <div class="wrap">
+  <div class="wrap" class:with-side={hasAttachments}>
     {#if error}<p class="error" role="alert">Couldn't save: {error}</p>{/if}
     {#if notice}<p class="error" role="status">{notice}</p>{/if}
     <div class="toolbar-row"><Toolbar {editor} /></div>
-    <article class="note" style:background={bg} style:--ink={inkOn(bg)} style:color={inkOn(bg)}>
-      <input class="title" placeholder="Title" bind:value={title} oninput={changed} aria-label="Title" />
-      <Editor bind:this={editorView} bind:editor {doc} placeholder="Note" onchange={(d) => ((doc = d), changed())} onfocuschange={(f) => !f && save()} onpicture={(path) => lightbox.open(notePictures(id), path)} />
-      <Attachments ownerType="NOTE" ownerUid={id} />
-    </article>
+    <div class="note-row" bind:clientWidth={rowW}>
+      <article class="note" style:background={bg} style:--ink={inkOn(bg)} style:color={inkOn(bg)}>
+        <input class="title" placeholder="Title" bind:value={title} oninput={changed} aria-label="Title" />
+        <Editor bind:this={editorView} bind:editor {doc} placeholder="Note" onchange={(d) => ((doc = d), changed())} onfocuschange={(f) => !f && save()} onpicture={(path) => lightbox.open(notePictures(id), path)} />
+        {#if !side}<Attachments ownerType="NOTE" ownerUid={id} />{/if}
+      </article>
+      {#if side}
+        <aside class="side-attachments" aria-label="Attachments"><Attachments ownerType="NOTE" ownerUid={id} column /></aside>
+      {/if}
+    </div>
   </div>
 {/if}
 {#if colorMenu}<button class="scrim" aria-label="Close" onclick={() => (colorMenu = false)}></button>{/if}
@@ -205,6 +214,31 @@
     max-width: 820px;
     margin: 0 auto;
     padding: 0 16px 48px;
+  }
+  /* The note keeps its width, with the attachments column beside it. */
+  .wrap.with-side {
+    max-width: calc(820px + 212px);
+  }
+  .note-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .note-row .note {
+    flex: 1;
+    min-width: 0;
+  }
+  .side-attachments {
+    position: sticky;
+    top: 140px;
+    width: 192px;
+    flex: none;
+    max-height: calc(100vh - 160px);
+    overflow-y: auto;
+    padding: 14px;
+    border-radius: 20px;
+    background: var(--surface);
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.12), 0 2px 8px rgb(0 0 0 / 0.06);
   }
   .toolbar-row {
     position: sticky;

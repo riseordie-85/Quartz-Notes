@@ -168,6 +168,12 @@ async def main():
         await page.get_by_role("link", name="Gift ideas").click()
         await page.wait_for_function("() => [...document.querySelectorAll('.attachments img')].some(i => i.complete && i.naturalWidth === 120)")
         ok("a note's synced picture shows")
+        # On a wide window the attachments sit in a column beside the note.
+        await expect(page.locator("aside.side-attachments .attachments .thumb")).to_have_count(1)
+        note_box = await page.locator("article.note").bounding_box()
+        side_box = await page.locator("aside.side-attachments").bounding_box()
+        assert side_box["x"] >= note_box["x"] + note_box["width"], (note_box, side_box)
+        ok("a note's attachments sit beside it on a wide window")
         pic = os.path.join(OUT, "upload-test.png")
         with open(pic, "wb") as f:
             import zlib, struct
