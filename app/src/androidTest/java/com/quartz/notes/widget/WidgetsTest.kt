@@ -23,6 +23,7 @@ import com.quartz.notes.LaunchRequest
 import com.quartz.notes.Launches
 import com.quartz.notes.QuartzApp
 import com.quartz.notes.data.db.QuickNoteEntity
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -84,6 +85,8 @@ class WidgetsTest {
             val canvas = Canvas(bmp)
             canvas.drawColor(0xFF2B3550.toInt()) // like dark glass
             parent.draw(canvas)
+            // A launcher fills lists in as they're shown; here, draw their items in place by hand.
+            lists(parent).forEach { list -> drawItems(list, parent, canvas) }
             val dir = File(context.getExternalFilesDir(null), "shots").apply { mkdirs() }
             File(dir, "widget_$name.png").outputStream().use { bmp.compress(Bitmap.CompressFormat.PNG, 100, it) }
             view = parent
@@ -93,6 +96,48 @@ class WidgetsTest {
         InstrumentationRegistry.getInstrumentation().waitForIdleSync()
         view!!
     }
+
+    private fun lists(v: View): List<android.widget.AdapterView<*>> = when (v) {
+        is android.widget.AdapterView<*> -> listOf(v)
+        is ViewGroup -> (0 until v.childCount).flatMap { lists(v.getChildAt(it)) }
+        else -> emptyList()
+    }
+
+    private fun drawItems(list: android.widget.AdapterView<*>, root: View, canvas: Canvas) {
+        val adapter = list.adapter ?: return
+        if (list.childCount > 0) return
+        var x0 = 0
+        var y0 = 0
+        var v: View = list
+        while (v !== root) {
+            x0 += v.left
+            y0 += v.top
+            v = v.parent as View
+        }
+        val columns = (list as? android.widget.GridView)?.numColumns?.takeIf { it > 0 } ?: 1
+        val cellW = list.width / columns
+        var y = 0
+        var rowH = 0
+        for (i in 0 until adapter.count) {
+            val item = adapter.getView(i, null, list)
+            item.measure(View.MeasureSpec.makeMeasureSpec(cellW, View.MeasureSpec.EXACTLY), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED))
+            item.layout(0, 0, item.measuredWidth, item.measuredHeight)
+            val col = i % columns
+            if (col == 0 && i > 0) {
+                y += rowH
+                rowH = 0
+            }
+            if (y > list.height) break
+            canvas.save()
+            canvas.clipRect(x0, y0, x0 + list.width, y0 + list.height)
+            canvas.translate((x0 + col * cellW).toFloat(), (y0 + y).toFloat())
+            item.draw(canvas)
+            canvas.restore()
+            rowH = maxOf(rowH, item.measuredHeight)
+        }
+    }
+
+    private fun itemCount(v: View): Int = lists(v).sumOf { it.adapter?.count ?: 0 }
 
     private fun texts(v: View): List<String> = when (v) {
         is TextView -> listOf(v.text.toString())
@@ -146,9 +191,12 @@ class WidgetsTest {
 
     @Test
     fun quickNotesAsAListAndAGrid() {
+        val notes = runBlocking { app.container.repository.observeNotes().first() }.size
         val list = render(QuickNotesWidget(), "notes_list", 300, 320, mutablePreferencesOf())
         assertTrue(texts(list).toString(), "Quick notes" in texts(list))
-        render(QuickNotesWidget(), "notes_grid", 340, 360, mutablePreferencesOf().apply { this[WidgetKeys.GRID] = true })
+        assertEquals(notes, itemCount(list))
+        val grid = render(QuickNotesWidget(), "notes_grid", 340, 360, mutablePreferencesOf().apply { this[WidgetKeys.GRID] = true })
+        assertEquals(notes, itemCount(grid))
         render(QuickNotesWidget(), "notes_panel_dark_text", 300, 320, mutablePreferencesOf().apply {
             this[WidgetKeys.PANEL] = true
             this[WidgetKeys.DARK_TEXT] = true

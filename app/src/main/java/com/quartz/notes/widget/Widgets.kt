@@ -43,6 +43,7 @@ import androidx.glance.layout.Column
 import androidx.glance.layout.ContentScale
 import androidx.glance.layout.Row
 import androidx.glance.layout.Spacer
+import androidx.glance.layout.fillMaxHeight
 import androidx.glance.layout.fillMaxSize
 import androidx.glance.layout.fillMaxWidth
 import androidx.glance.layout.height
@@ -105,9 +106,12 @@ class ShelfWidget : GlanceAppWidget() {
  */
 internal data class ShelfPlan(val columns: Int, val rows: Int, val coverWidth: Dp, val header: Boolean) {
     companion object {
-        private val Gap = 6.dp
+        val Gap = 6.dp
         private val Header = 26.dp
         private val RowMin = 76.dp
+
+        /** A row or column of a widget holds at most this many things. */
+        const val MAX_PER_ROW = 10
 
         /** A cover's picture, shadow margin included, for a cover [w] wide. */
         fun outerWidth(w: Dp) = w * (1 + CoverBitmaps.MARGIN * 2)
@@ -121,8 +125,8 @@ internal data class ShelfPlan(val columns: Int, val rows: Int, val coverWidth: D
             val rowHeight = (h - Gap * (rows - 1)) / rows
             val fromHeight = rowHeight / (1 / CoverBitmaps.ASPECT + CoverBitmaps.MARGIN * 2)
             val coverW = minOf(fromHeight, MaxCoverWidth, width / (1 + CoverBitmaps.MARGIN * 2))
-            val columns = maxOf(1, floor(((width + Gap) / (outerWidth(coverW) + Gap)).toDouble()).toInt())
-            return ShelfPlan(columns, rows, coverW, header)
+            val columns = floor(((width + Gap) / (outerWidth(coverW) + Gap)).toDouble()).toInt().coerceIn(1, MAX_PER_ROW)
+            return ShelfPlan(columns, rows.coerceAtMost(MAX_PER_ROW - 1), coverW, header)
         }
     }
 }
@@ -151,12 +155,15 @@ private fun ShelfContent(look: WidgetLook, shelf: ShelfEntity?, notebooks: List<
                 return@Column
             }
             val coverPx = context.px(plan.coverWidth)
-            // Rows share the height evenly, covers sit at the bottom of each (like books on a shelf).
-            shown.chunked(plan.columns).forEach { row ->
-                Row(GlanceModifier.fillMaxWidth().defaultWeight(), verticalAlignment = Alignment.Bottom, horizontalAlignment = Alignment.Start) {
+            val gap = gapFor(plan, size.width - look.pad * 2)
+            // Rows from the top, a little apart. Spacing is padding, not spacers: a widget's row or column
+            // holds at most ten things.
+            shown.chunked(plan.columns).forEachIndexed { r, row ->
+                Row(GlanceModifier.fillMaxWidth().padding(top = if (r > 0) ShelfPlan.Gap else 0.dp)) {
                     row.forEachIndexed { i, nb ->
-                        if (i > 0) Spacer(GlanceModifier.width(gapFor(plan, size.width - look.pad * 2)))
-                        Cover(nb, plan.coverWidth, coverPx, open(context, LaunchRequest.OpenNotebook(nb.id)))
+                        Box(GlanceModifier.padding(start = if (i > 0) gap else 0.dp)) {
+                            Cover(nb, plan.coverWidth, coverPx, open(context, LaunchRequest.OpenNotebook(nb.id)))
+                        }
                     }
                 }
             }
@@ -228,7 +235,7 @@ private fun NotebookContent(look: WidgetLook, nb: NotebookEntity?, pages: Int, l
     }
     if (nb == null) {
         Box(inner.clickable(open(context, LaunchRequest.Notebooks(null))), contentAlignment = Alignment.Center) {
-            Text(if (notebookId < 0) "Choose a notebook in this widget's settings" else "This notebook was deleted", style = look.text(12.sp, color = look.inkDim))
+            Text(if (notebookId < 0) "Choose a notebook" else "Notebook deleted", style = look.text(11.sp, color = look.inkDim))
         }
         return
     }
@@ -384,14 +391,14 @@ private fun ToolbarContent(look: WidgetLook) {
         Row(look.frame(GlanceModifier.fillMaxSize()), verticalAlignment = Alignment.CenterVertically) {
             buttons.forEachIndexed { i, b ->
                 if (i > 0) Spacer(GlanceModifier.width(6.dp))
-                content(b, GlanceModifier.defaultWeight())
+                content(b, GlanceModifier.defaultWeight().fillMaxHeight())
             }
         }
     } else {
         Column(look.frame(GlanceModifier.fillMaxSize()), horizontalAlignment = Alignment.CenterHorizontally) {
             buttons.forEachIndexed { i, b ->
                 if (i > 0) Spacer(GlanceModifier.height(6.dp))
-                content(b, GlanceModifier.defaultWeight())
+                content(b, GlanceModifier.defaultWeight().fillMaxWidth())
             }
         }
     }
@@ -409,7 +416,7 @@ private fun ToolButton(
 ) {
     val context = LocalContext.current
     val bitmap = iconBitmap(context, icon, look.inkArgb, 24.dp)
-    val base = modifier.fillMaxSize().background(look.tile).cornerRadius(16.dp).clickable(onTap)
+    val base = modifier.background(look.tile).cornerRadius(16.dp).clickable(onTap)
     if (stacked && showLabel) {
         Column(base, horizontalAlignment = Alignment.CenterHorizontally, verticalAlignment = Alignment.CenterVertically) {
             Image(ImageProvider(bitmap), contentDescription = label, modifier = GlanceModifier.size(24.dp))
