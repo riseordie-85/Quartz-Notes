@@ -61,7 +61,7 @@ fun NotebookCover(
     /** Extra touch handling that sees touches before the click does (e.g. drag to rearrange). */
     gestures: Modifier = Modifier,
 ) {
-    val textureBrush = rememberTextureBrush(texture, whiteInk = false)
+    val textureBrush = rememberCoverTexture(texture)
     BoxWithConstraints(
         modifier
             .aspectRatio(CoverAspect)

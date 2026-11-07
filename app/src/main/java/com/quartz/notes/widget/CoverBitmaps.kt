@@ -14,7 +14,6 @@ import android.text.StaticLayout
 import android.text.TextPaint
 import android.text.TextUtils
 import androidx.compose.ui.graphics.PathFillType
-import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.graphics.asAndroidPath
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.VectorGroup
@@ -24,7 +23,7 @@ import com.quartz.notes.data.db.NotebookEntity
 import com.quartz.notes.data.model.Texture
 import com.quartz.notes.data.model.enumOrDefault
 import com.quartz.notes.ui.components.NotebookIcons
-import com.quartz.notes.ui.components.TextureCache
+import com.quartz.notes.ui.components.CoverTextures
 
 /**
  * Notebook covers as pictures, for widgets (which can't run the app's drawing code): the same board,
@@ -74,7 +73,7 @@ object CoverBitmaps {
         c.save()
         c.clipPath(shape)
         c.drawColor(color)
-        TextureCache.get(texture, whiteInk = false)?.asAndroidBitmap()?.let { tile ->
+        CoverTextures.get(texture, android.content.res.Resources.getSystem().displayMetrics.density)?.let { tile ->
             c.drawRect(0f, 0f, w, h, Paint().apply { shader = BitmapShader(tile, Shader.TileMode.REPEAT, Shader.TileMode.REPEAT) })
         }
         val spine = w * 0.075f
