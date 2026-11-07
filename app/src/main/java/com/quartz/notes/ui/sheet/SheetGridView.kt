@@ -184,12 +184,16 @@ internal fun SheetGridView(
 
         /** The scrollbars: where each thumb is (start, length) along its track, or null when everything fits. */
         val barTouch = 18f * density.density
+        // A thumb is at least this long, or fills a short track (the grid squeezed by the keyboard
+        // on a folded phone, say).
+        fun thumbLength(track: Float, view: Float, content: Float) =
+            (track * view / content).coerceIn(minOf(28f * density.density, track), track)
         fun vThumb(): Pair<Float, Float>? {
             val track = vh - hh - barTouch
             val content = geometry.height + 40f
             val view = vh - hh
             if (latestMaxY <= 0f || track <= 0f) return null
-            val len = (track * view / content).coerceIn(28f * density.density, track)
+            val len = thumbLength(track, view, content)
             return (hh + (track - len) * (sy / latestMaxY)) to len
         }
         fun hThumb(): Pair<Float, Float>? {
@@ -197,7 +201,7 @@ internal fun SheetGridView(
             val content = geometry.width + 40f
             val view = vw - hw
             if (latestMaxX <= 0f || track <= 0f) return null
-            val len = (track * view / content).coerceIn(28f * density.density, track)
+            val len = thumbLength(track, view, content)
             return (hw + (track - len) * (sx / latestMaxX)) to len
         }
         fun vBarAt(p: Offset) = vThumb() != null && p.x > vw - barTouch && p.y > hh && p.y < vh - barTouch
