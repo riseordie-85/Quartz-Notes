@@ -383,7 +383,9 @@ private fun ToolbarContent(look: WidgetLook) {
     val h = size.height - look.pad * 2
     // Side by side when it's wider than tall, stacked when it's tall.
     val across = w >= h
-    val labels = if (across) w / 3 >= 96.dp || h >= 80.dp else h / 3 >= 44.dp && w >= 120.dp
+    // Labels beside the icons when each button is wide enough for "New notebook", under them when the
+    // buttons are tall enough instead, otherwise icons alone.
+    val labels = if (across) w / 3 >= 128.dp || h >= 80.dp else h / 3 >= 44.dp && w >= 140.dp
     val content: @Composable (Triple<ImageVector, String, LaunchRequest>, GlanceModifier) -> Unit = { (icon, label, request), modifier ->
         ToolButton(look, icon, label, open(context, request), labels, stacked = across && h >= 80.dp, modifier)
     }
@@ -424,11 +426,13 @@ private fun ToolButton(
             Text(label, style = look.text(13.sp, bold = true), maxLines = 1)
         }
     } else {
-        Row(base, horizontalAlignment = Alignment.CenterHorizontally, verticalAlignment = Alignment.CenterVertically) {
-            Image(ImageProvider(bitmap), contentDescription = label, modifier = GlanceModifier.size(22.dp))
-            if (showLabel) {
-                Spacer(GlanceModifier.width(8.dp))
-                Text(label, style = look.text(13.sp, bold = true), maxLines = 1)
+        Box(base, contentAlignment = Alignment.Center) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Image(ImageProvider(bitmap), contentDescription = label, modifier = GlanceModifier.size(22.dp))
+                if (showLabel) {
+                    Spacer(GlanceModifier.width(8.dp))
+                    Text(label, style = look.text(13.sp, bold = true), maxLines = 1)
+                }
             }
         }
     }
