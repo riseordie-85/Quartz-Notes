@@ -48,7 +48,7 @@ class WidgetsTest {
 
         @JvmStatic
         @BeforeClass
-        fun seed() = runBlocking {
+        fun seed(): Unit = runBlocking {
             val repo = app.container.repository
             shelf = repo.addShelf("Widget shelf")
             val colors = listOf(0xFF0050D0, 0xFFD6004C, 0xFF00A8D6, 0xFFE68A1E, 0xFF2E9E5B, 0xFF6A3FD0, 0xFFD32F2F, 0xFF00897B, 0xFF795548)
@@ -62,6 +62,7 @@ class WidgetsTest {
             dao.insert(QuickNoteEntity(title = "Gift ideas", plainText = "Headphones\nA good book", colorKey = "purple"))
             dao.insert(QuickNoteEntity(title = "", plainText = "Call the dentist on Monday about the appointment.", colorKey = "default"))
             dao.insert(QuickNoteEntity(title = "Trip", plainText = "Book the train", colorKey = "blue"))
+            Unit
         }
     }
 
