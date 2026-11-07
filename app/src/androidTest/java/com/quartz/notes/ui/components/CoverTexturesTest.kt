@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.unit.dp
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -81,9 +82,19 @@ class CoverTexturesTest {
             }
         }
         rule.waitForIdle()
-        SystemClock.sleep(600)
-        val bitmap = instrumentation.uiAutomation.takeScreenshot() ?: return
+        // The same covers drawn straight to a picture (as widgets draw them), for checking by eye.
+        val density = instrumentation.targetContext.resources.displayMetrics.density
+        val w = (84 * density).toInt()
+        val covers = (0 until 8).map { k ->
+            com.quartz.notes.widget.CoverBitmaps.render(textures[k % 4].label, colors[k].toArgb(), textures[k % 4], null, w)
+        }
+        val cw = covers[0].width
+        val ch = covers[0].height
+        val sheet = Bitmap.createBitmap(cw * 4 + 50, ch * 2 + 30, Bitmap.Config.ARGB_8888)
+        val canvas = android.graphics.Canvas(sheet)
+        canvas.drawColor(0xFFEFEFF1.toInt())
+        covers.forEachIndexed { k, b -> canvas.drawBitmap(b, 10f + (k % 4) * (cw + 10), 10f + (k / 4) * (ch + 10), null) }
         val dir = File(instrumentation.targetContext.getExternalFilesDir(null), "shots").apply { mkdirs() }
-        File(dir, "cover_textures.png").outputStream().use { bitmap.compress(Bitmap.CompressFormat.PNG, 100, it) }
+        File(dir, "cover_textures.png").outputStream().use { sheet.compress(Bitmap.CompressFormat.PNG, 100, it) }
     }
 }
