@@ -19,6 +19,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.distinctUntilChangedBy
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class QuartzApp : Application() {
@@ -60,9 +61,25 @@ class AppContainer(context: Context) {
         appearance = settings.appearanceStore,
     )
 
+    /** Updates the app from the sync server. */
+    val updater = com.quartz.notes.data.update.AppUpdater(
+        context.applicationContext,
+        appScope,
+        serverUrl = { sync.prefs.first().takeIf { it.signedIn }?.serverUrl },
+        http = com.quartz.notes.data.sync.SyncClient.defaultHttp,
+    )
+
     fun startBackgroundTasks(context: Context) {
         val app = context.applicationContext
         sync.start()
+        // Look for a newer build now and then (and whenever Settings opens).
+        appScope.launch {
+            delay(5_000)
+            while (true) {
+                updater.check()
+                delay(6 * 60 * 60 * 1000L)
+            }
+        }
         // Keep the automatic backup schedule in step with the settings.
         appScope.launch {
             settings.settings

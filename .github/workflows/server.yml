@@ -1,8 +1,8 @@
 name: Sync server
 
 # Checks the sync server's schema and rules and the web app against a real PocketBase, pushes the
-# web app's screenshots to the `ci-web-shots` branch, and on main publishes the server image
-# (ghcr.io/<owner>/quartz-sync) that the NUC runs.
+# web app's screenshots to the `ci-web-shots` branch, and checks the server image builds (the
+# release workflow publishes it, with the app build inside).
 on:
   push:
     branches: [ "**" ]
@@ -67,18 +67,12 @@ jobs:
           git push -q -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" ci-web-shots
 
   image:
-    # Built on every branch to prove it builds; published only from main.
+    # Built on every branch to prove it builds.
     needs: check
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
       - uses: docker/setup-buildx-action@v3
-      - uses: docker/login-action@v3
-        if: github.ref == 'refs/heads/main'
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Image name
         id: name
         run: echo "image=ghcr.io/$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')/quartz-sync" >> "$GITHUB_OUTPUT"
@@ -87,7 +81,8 @@ jobs:
           context: .
           file: server/Dockerfile
           build-args: PB_VERSION=${{ env.PB_VERSION }}
-          push: ${{ github.ref == 'refs/heads/main' }}
+          # Published by the release workflow, with the app build inside.
+          push: false
           tags: |
             ${{ steps.name.outputs.image }}:latest
             ${{ steps.name.outputs.image }}:${{ github.sha }}

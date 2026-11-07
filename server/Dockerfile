@@ -24,6 +24,8 @@ RUN apk add --no-cache ca-certificates tzdata unzip wget \
 COPY server/pb_migrations /pb/pb_migrations
 COPY server/pb_hooks /pb/pb_hooks
 COPY --from=web /src/web/dist /pb/pb_public
+# The matching app build, for devices to update themselves (put here by the release workflow).
+COPY server/app-release/ /pb/pb_public/app/
 
 EXPOSE 8090
 VOLUME /pb/pb_data

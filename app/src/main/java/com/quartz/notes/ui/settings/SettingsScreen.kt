@@ -397,6 +397,13 @@ fun SettingsScreen(
                     item { SettingsSectionTitle("Sync") }
                     item { SyncSection(onMessage = { msg -> scope.launch { snackbar.showSnackbar(msg) } }) }
 
+                    // ---- App updates ----
+                    item { SettingsSectionTitle("App updates") }
+                    item {
+                        val syncPrefs by com.quartz.notes.LocalAppContainer.current.sync.prefs.collectAsStateWithLifecycle(null)
+                        UpdateSection(signedIn = syncPrefs?.signedIn == true)
+                    }
+
                     // ---- Backup ----
                     item { SettingsSectionTitle("Backup & restore") }
                     item { BackupSection(settings = s, snackbar = snackbar) }

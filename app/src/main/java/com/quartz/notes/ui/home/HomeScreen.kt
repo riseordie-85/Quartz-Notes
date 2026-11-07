@@ -355,6 +355,8 @@ private fun HomeContent(
         val coverWidth = ((maxWidth - 32.dp - 36.dp) / 4).coerceIn(74.dp, 150.dp)
 
         val header: @Composable () -> Unit = {
+          Column {
+            com.quartz.notes.ui.settings.UpdateBanner(Modifier.padding(bottom = 12.dp))
             HomeHeader(
                 state = state,
                 coverWidth = coverWidth,
@@ -369,6 +371,7 @@ private fun HomeContent(
                 onToggleGrid = onToggleGrid,
                 onSettings = onSettings,
             )
+          }
         }
 
         if (state.grid) {

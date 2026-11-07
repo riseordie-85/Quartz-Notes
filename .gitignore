@@ -23,3 +23,7 @@ local.properties
 web/node_modules/
 web/dist/
 web/.vite/
+
+# App builds the release workflow drops in for the server image.
+server/app-release/*.apk
+server/app-release/version.json
