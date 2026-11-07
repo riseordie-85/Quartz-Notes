@@ -1,0 +1,316 @@
+11-07 21:52:17.337  4742  4836 I TestRunner: started: eachMaterialIsQuickAndSeamless(com.quartz.notes.ui.components.CoverTexturesTest)
+11-07 21:52:17.391  4742  4836 W FileTestStorage: Output properties is not supported.
+11-07 21:52:17.392  4742  4836 I Tracing : Tracer added: class androidx.test.platform.tracing.AndroidXTracer
+11-07 21:52:17.397  4742  4742 D EventInjectionStrategy: Creating injection strategy with input manager.
+11-07 21:52:17.399  4742  4742 W om.quartz.notes: Accessing hidden method Landroid/hardware/input/InputManager;->getInstance()Landroid/hardware/input/InputManager; (unsupported, reflection, allowed)
+11-07 21:52:17.401  4742  4742 W om.quartz.notes: Accessing hidden method Landroid/hardware/input/InputManager;->injectInputEvent(Landroid/view/InputEvent;I)Z (unsupported, reflection, allowed)
+11-07 21:52:17.402  4742  4742 W om.quartz.notes: Accessing hidden field Landroid/hardware/input/InputManager;->INJECT_INPUT_EVENT_MODE_WAIT_FOR_FINISH:I (unsupported, reflection, allowed)
+11-07 21:52:17.410  4742  4742 W om.quartz.notes: Accessing hidden method Landroid/os/MessageQueue;->next()Landroid/os/Message; (unsupported, reflection, allowed)
+11-07 21:52:17.410  4742  4742 W om.quartz.notes: Accessing hidden field Landroid/os/MessageQueue;->mMessages:Landroid/os/Message; (unsupported, reflection, allowed)
+11-07 21:52:17.411  4742  4742 W om.quartz.notes: Accessing hidden method Landroid/os/Message;->recycleUnchecked()V (unsupported, reflection, allowed)
+11-07 21:52:17.412  4742  4836 D IdlingRegistry: Registering idling resources: [androidx.compose.ui.test.EspressoLink@91d2ac8]
+11-07 21:52:17.420  4742  4836 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+11-07 21:52:17.502  4891  4935 E MendelPackageState: Failed to fetch after encountering old config
+11-07 21:52:17.502  4891  4935 E MendelPackageState: apxm:
+11-07 21:52:17.502  4891  4935 E MendelPackageState: 	at tk_trace.PhenotypeApi.getConfigurationSnapshot(Unknown Source:0)
+11-07 21:52:17.502  4891  4935 E MendelPackageState: 	at tk_trace.Fetching experiments for device(Unknown Source:0)
+11-07 21:52:17.502  4891  4935 E MendelPackageState: 	at tk_trace.(Unknown Source:0)
+11-07 21:52:17.502  4891  4935 E MendelPackageState: 	at tk_trace.Missing root trace(Unknown Source:0)
+11-07 21:52:17.673   762   806 D SplashScreenView: Build android.window.SplashScreenView{3791941 V.E...... ......ID 0,0-0,0}
+11-07 21:52:17.673   762   806 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-07 21:52:17.673   762   806 D SplashScreenView: Branding: view: android.view.View{987bee6 G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-07 21:52:17.681   762   816 W Parcel  : Expecting binder but got null!
+11-07 21:52:17.844  1015  1883 D EGL_emulation: app_time_stats: avg=4940.54ms min=4940.54ms max=4940.54ms count=1
+11-07 21:52:17.926  4742  5480 D libEGL  : loaded /vendor/lib64/egl/libEGL_emulation.so
+11-07 21:52:17.930   482  2342 W system_server: Long monitor contention with owner binder:482_C (1058) at android.content.res.Configuration com.android.server.wm.ActivityTaskManagerService.getGlobalConfigurationForPid(int)(ActivityTaskManagerService.java:1128) waiters=1 in java.util.List com.android.server.wm.ActivityTaskManagerService.getTasks(int, boolean, boolean, int) for 130ms
+11-07 21:52:17.935  4742  5480 D libEGL  : loaded /vendor/lib64/egl/libGLESv1_CM_emulation.so
+11-07 21:52:17.939  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@cc4506a in: PRE_ON_CREATE
+11-07 21:52:17.940  4742  4742 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+11-07 21:52:18.111  4742  5480 D libEGL  : loaded /vendor/lib64/egl/libGLESv2_emulation.so
+11-07 21:52:18.271  1656  2546 W AiAiAutofill: Failed to set whitelist for augmented autofill service.
+11-07 21:52:18.271  1656  2546 W AiAiAutofill: java.lang.SecurityException: caller is not user's Augmented Autofill Service
+11-07 21:52:18.271  1656  2546 W AiAiAutofill: 	at android.view.autofill.AutofillManager.setAugmentedAutofillWhitelist(AutofillManager.java:2386)
+11-07 21:52:18.271  1656  2546 W AiAiAutofill: 	at bzn.b(PG:7)
+11-07 21:52:18.271  1656  2546 W AiAiAutofill: 	at caa.g(PG:8)
+11-07 21:52:18.271  1656  2546 W AiAiAutofill: 	at can.e(PG:9)
+11-07 21:52:18.271  1656  2546 W AiAiAutofill: 	at cat.a(PG:6)
+11-07 21:52:18.271  1656  2546 W AiAiAutofill: 	at hqz.r(PG:17)
+11-07 21:52:18.271  1656  2546 W AiAiAutofill: 	at hqz.b(PG:36)
+11-07 21:52:18.271  1656  2546 W AiAiAutofill: 	at bxg.run(PG:14)
+11-07 21:52:18.271  1656  2546 W AiAiAutofill: 	at dum.run(PG:70)
+11-07 21:52:18.271  1656  2546 W AiAiAutofill: 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:463)
+11-07 21:52:18.271  1656  2546 W AiAiAutofill: 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+11-07 21:52:18.271  1656  2546 W AiAiAutofill: 	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:307)
+11-07 21:52:18.271  1656  2546 W AiAiAutofill: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-07 21:52:18.271  1656  2546 W AiAiAutofill: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-07 21:52:18.271  1656  2546 W AiAiAutofill: 	at dum.run(PG:65)
+11-07 21:52:18.271  1656  2546 W AiAiAutofill: 	at java.lang.Thread.run(Thread.java:1012)
+11-07 21:52:18.283  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@cc4506a in: CREATED
+11-07 21:52:18.283  4742  4742 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=androidx.activity.ComponentActivity@cc4506a
+11-07 21:52:18.284  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@cc4506a in: STARTED
+11-07 21:52:18.284  4742  4742 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=androidx.activity.ComponentActivity@cc4506a
+11-07 21:52:18.314  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@cc4506a in: RESUMED
+11-07 21:52:18.318  4742  4742 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=androidx.activity.ComponentActivity@cc4506a
+11-07 21:52:18.350  4742  4742 D CompatibilityChangeReporter: Compat change id reported: 237531167; UID 10174; state: DISABLED
+11-07 21:52:18.352   482   495 I system_server: Background young concurrent copying GC freed 794223(15MB) AllocSpace objects, 0(0B) LOS objects, 32% free, 32MB/48MB, paused 73us,75us total 157.455ms
+11-07 21:52:18.363  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:52:18.385   339   370 W TransactionTracing: Could not find layer handle 0x77aa88534d50
+11-07 21:52:18.388   339   370 W TransactionTracing: Could not find layer handle 0x77aa88534510
+11-07 21:52:18.389   339   370 W TransactionTracing: Could not find layer handle 0x77aa88534510
+11-07 21:52:18.393   339   370 W TransactionTracing: Could not find layer handle 0x77aa88534d50
+11-07 21:52:18.394   339   370 W TransactionTracing: Could not find layer handle 0x77aa88534d50
+11-07 21:52:18.396   339   370 W TransactionTracing: Could not find layer handle 0x77aa88534d50
+11-07 21:52:18.397   339   370 W TransactionTracing: Could not find layer handle 0x77aa88534510
+11-07 21:52:18.397   339   370 W TransactionTracing: Could not find layer handle 0x77aa88534510
+11-07 21:52:18.414   339   592 W ServiceManager: Permission failure: android.permission.ACCESS_SURFACE_FLINGER from uid=10174 pid=4742
+11-07 21:52:18.414   339   592 D PermissionCache: checking android.permission.ACCESS_SURFACE_FLINGER for uid=10174 => denied (473 us)
+11-07 21:52:18.415   339   592 W ServiceManager: Permission failure: android.permission.ROTATE_SURFACE_FLINGER from uid=10174 pid=4742
+11-07 21:52:18.415   339   592 D PermissionCache: checking android.permission.ROTATE_SURFACE_FLINGER for uid=10174 => denied (989 us)
+11-07 21:52:18.416   339   592 W ServiceManager: Permission failure: android.permission.INTERNAL_SYSTEM_WINDOW from uid=10174 pid=4742
+11-07 21:52:18.416   339   592 D PermissionCache: checking android.permission.INTERNAL_SYSTEM_WINDOW for uid=10174 => denied (574 us)
+11-07 21:52:18.417   339  1036 W ServiceManager: Permission failure: android.permission.ACCESS_SURFACE_FLINGER from uid=10174 pid=0
+11-07 21:52:18.417   339  1036 D PermissionCache: checking android.permission.ACCESS_SURFACE_FLINGER for uid=10174 => denied (3756 us)
+11-07 21:52:18.486  4742  5479 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_multi_configs ANDROID_EMU_hwc_color_transform GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0
+11-07 21:52:18.498  1321  3740 I Dtdi    : [DtdiModuleInitIntentOperation] Cannot initialize Device Discovery. Flag is disabled. [CONTEXT service_id=312 ]
+11-07 21:52:18.501  1321  3740 I Dtdi    : [DtdiModuleInitIntentOperation] Cannot initialize Spatial Orchestration. Flag is disabled. [CONTEXT service_id=312 ]
+11-07 21:52:18.501  1321  3740 I Dtdi    : [DtdiModuleInitIntentOperation] Cannot initialize Media Transfer. Flag is disabled. [CONTEXT service_id=312 ]
+11-07 21:52:18.502  1321  5298 W gle.android.gms: Long monitor contention with owner [com.google.android.gms.chimera.container.intentoperation.GmsIntentOperationChimeraService-Executor] processing com.google.android.gms.dtdi.services.DtdiModuleInitIntentOperation for action com.google.android.chimera.IntentOperation.NEW_MODULE (3740) at void hjm.run()(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3) waiters=0 in void hjm.run() for 14.712s
+11-07 21:52:18.512   339   370 W TransactionTracing: Could not find layer handle 0x77aa88534990
+11-07 21:52:18.512   339   370 W TransactionTracing: Could not find layer handle 0x77aa88534990
+11-07 21:52:18.512   339   370 W TransactionTracing: Could not find layer handle 0x77aa885374b0
+11-07 21:52:18.512   339   370 W TransactionTracing: Could not find layer handle 0x77aa88533430
+11-07 21:52:18.517  4742  5479 W OpenGLRenderer: Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-07 21:52:18.518  4742  5479 D EGL_emulation: eglCreateContext: 0x73e67dd12dd0: maj 3 min 0 rcv 3
+11-07 21:52:18.520  4742  5479 D EGL_emulation: eglMakeCurrent: 0x73e67dd12dd0: ver 3 0 (tinfo 0x73e8a1aac080) (first time)
+11-07 21:52:18.600  1321  3740 I EnterpriseLoader: [ConditionsChecker] ZT config not present. [CONTEXT service_id=225 ]
+11-07 21:52:18.601  1321  3740 I EsimModuleInit: onHandleIntent action: com.google.android.chimera.IntentOperation.NEW_MODULE [CONTEXT service_id=333 ]
+11-07 21:52:18.638   286  5485 I resolv  : GetAddrInfoHandler::run: {100 786532 100 983140 10120 0}
+11-07 21:52:18.639   286  5486 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-07 21:52:18.639   286  5486 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x76f4a7edc810
+11-07 21:52:18.639   286  5486 I resolv  : doQuery: rcode=0, ancount=8, return value=260
+11-07 21:52:18.693   286  5487 I resolv  : res_nmkquery: (QUERY, IN, A)
+11-07 21:52:18.693   286  5487 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x76f497edb710
+11-07 21:52:18.693   286  5487 I resolv  : doQuery: rcode=0, ancount=8, return value=164
+11-07 21:52:18.700  1321  3740 I Fido    : [FidoInitIntentOperation] Initializing Fido module, InitRuntimeState=12
+11-07 21:52:18.723  1321  5298 D TrafficStats: tagSocket(89) with statsTag=0x30001803, statsUid=-1
+11-07 21:52:18.729   286   309 E BpfHandler: Unsupported protocol: 1
+11-07 21:52:18.731  1321  1321 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.checkin.START pkg=com.google.android.gms }
+11-07 21:52:18.733  1321  5298 I TrafficStats: tagSocketFd(89, 805312515, -1) failed with errno-93
+11-07 21:52:18.984   339   370 W TransactionTracing: Could not find layer handle 0x77aa88534510
+11-07 21:52:19.010   762   816 D EGL_emulation: app_time_stats: avg=12525.74ms min=12525.74ms max=12525.74ms count=1
+11-07 21:52:19.031   762   816 D EGL_emulation: app_time_stats: avg=91657.86ms min=91657.86ms max=91657.86ms count=1
+11-07 21:52:19.036   127   127 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+11-07 21:52:19.037  4742  5479 I Gralloc4: mapper 4.x is not supported
+11-07 21:52:19.069   127   127 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.allocator@4.0::IAllocator/default in either framework or device VINTF manifest.
+11-07 21:52:19.073   126   126 I servicemanager: Could not find android.hardware.graphics.allocator.IAllocator/default in the VINTF manifest.
+11-07 21:52:19.073  4742  5479 W Gralloc4: allocator 4.x is not supported
+11-07 21:52:19.096  4742  5479 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_multi_configs ANDROID_EMU_hwc_color_transform GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0
+11-07 21:52:19.110  1060  2930 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.droidguard.DroidGuardGcmTaskService started execution. cause:7 exec_start_elapsed_seconds: 192 [CONTEXT service_id=218 ]
+11-07 21:52:19.115  1060  1071 I .gms.persistent: Background young concurrent copying GC freed 275865(16MB) AllocSpace objects, 0(0B) LOS objects, 28% free, 33MB/47MB, paused 42us,49us total 329.034ms
+11-07 21:52:19.241  1060  5306 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.droidguard.DroidGuardGcmTaskService finished executing. cause:7 result: 1 elapsed_millis: 320 uptime_millis: 320 exec_start_elapsed_seconds: 192 [CONTEXT service_id=218 ]
+11-07 21:52:19.275  1060  5127 I LockboxIntentOp: Completed task: true [CONTEXT service_id=26 ]
+11-07 21:52:19.290  1321  5303 W ChimeraUtils: Module com.google.android.gms.growth missing resource growth_module_display_name(0)
+11-07 21:52:19.295  4742  5478 I OpenGLRenderer: Davey! duration=910ms; Flags=1, FrameTimelineVsyncId=5723, IntendedVsync=191832461362, Vsync=191832461362, InputEventId=0, HandleInputStart=191839912947, AnimationStart=191839916326, PerformTraversalsStart=191839917687, DrawStart=192558581088, FrameDeadline=191849128028, FrameInterval=191839899462, FrameStartTime=16666666, SyncQueued=192560859471, SyncStart=192561120800, IssueDrawCommandsStart=192561364286, SwapBuffers=192593259130, FrameCompleted=192742759488, DequeueBufferDuration=4890, QueueBufferDuration=15250241, GpuCompleted=192742332918, SwapBuffersCompleted=192742759488, DisplayPresentTime=0, CommandSubmissionCompleted=192593259130,
+11-07 21:52:19.309  1321  5303 W ChimeraUtils: Module com.google.android.gms.growth missing resource growth_module_display_name(0)
+11-07 21:52:19.312   482   504 W ziparchive: Unable to open '/data/app/~~ewbzk_m16xDkclmAVpjUzA==/com.quartz.notes-XqM5_4k8BE5yt-arn9ES4A==/base.dm': No such file or directory
+11-07 21:52:19.367  1015  2099 D OneSearchSuggestProvider: Shut down the binder channel
+11-07 21:52:19.386   482   504 I ActivityTaskManager: Displayed com.quartz.notes/androidx.activity.ComponentActivity: +1s873ms
+11-07 21:52:19.397   339   370 W TransactionTracing: Could not find layer handle 0x77aa88536fd0
+11-07 21:52:19.397   339   370 W TransactionTracing: Could not find layer handle 0x77aa885359b0
+11-07 21:52:19.404  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-07 21:52:19.431  1015  1264 I s.nexuslauncher: oneway function results for code 2 on binder at 0x73e60dd65300 will be dropped but finished with status UNKNOWN_TRANSACTION
+11-07 21:52:19.449   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 21:52:19.449   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 21:52:19.500   339   370 W TransactionTracing: Could not find layer handle 0x77aa88536550
+11-07 21:52:19.500   339   370 W TransactionTracing: Could not find layer handle 0x77aa88536550
+11-07 21:52:19.529  1060  5295 I Herrevad: [371] aqwl.a: updateListenState
+11-07 21:52:19.539  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-07 21:52:19.539  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=null}, false)
+11-07 21:52:19.540  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-07 21:52:19.541   482  1058 W InputManager-JNI: Input channel object '3250102 Splash Screen com.quartz.notes (client)' was disposed without first being removed with the input manager!
+11-07 21:52:19.545  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-07 21:52:19.640  1788  2760 I PBSessionCacheImpl: Deleted sessionId[7865501250074666] from persistence.
+11-07 21:52:19.682   955   955 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-07 21:52:19.682   955   955 D MediaPlayerList: Name of package changed: com.google.android.gms
+11-07 21:52:19.682   955   955 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-07 21:52:19.682   955   955 D MediaPlayerList: Name of package changed: com.google.android.gms
+11-07 21:52:19.702   482   594 I InputReader: Reconfiguring input devices, changes=KEYBOARD_LAYOUTS |
+11-07 21:52:19.703   982   982 D CarrierSvcBindHelper: onPackageModified: com.google.android.gms
+11-07 21:52:19.704   982   982 D CarrierSvcBindHelper: No carrier app for: 0
+11-07 21:52:19.721  5034  5050 I PermissionControllerServiceImpl: Updating user sensitive for uid 10120
+11-07 21:52:19.724  2959  3103 I Bugle   : BroadcastReceiverAsyncWorkTracker: Acknowledging broadcast of atsi@4ad15e6
+11-07 21:52:19.757  1788  2516 W SearchServiceCore: Abort, client detached.
+11-07 21:52:19.757  1788  2516 W SearchServiceCore: Abort, client detached.
+11-07 21:52:19.757  1788  2516 W SearchServiceCore: Abort, client detached.
+11-07 21:52:19.772  1788  2516 W SearchServiceCore: Abort, client detached.
+11-07 21:52:19.772  1788  2516 W SearchServiceCore: Abort, client detached.
+11-07 21:52:19.789  1788  2516 I MicroDetectionState: Should stop hotword detection immediately - false
+11-07 21:52:19.793   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 21:52:19.793   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 21:52:19.796  1060  1079 I FontLog : Received query Noto Color Emoji Compat, URI content://com.google.android.gms.fonts [CONTEXT service_id=132 ]
+11-07 21:52:19.796  1060  1079 I FontLog : Query [emojicompat-emoji-font] resolved to {Noto Color Emoji Compat, wdth 100.0, wght 400, ital 0.0, bestEffort false} [CONTEXT service_id=132 ]
+11-07 21:52:19.801  1060  1079 I FontLog : Fetch {Noto Color Emoji Compat, wdth 100.0, wght 400, ital 0.0, bestEffort false} end status Status{statusCode=SUCCESS, resolution=null} [CONTEXT service_id=132 ]
+11-07 21:52:19.819  1321  4376 I PeopleGalProvider: Gal directories started.
+11-07 21:52:19.821  3974  5495 I ProvidersCache: Provider returned no roots. Possibly naughty: com.google.android.apps.docs.storage
+11-07 21:52:19.822  1060  1079 I FontLog : Pulling font file for id = 5, cache size = 5 [CONTEXT service_id=132 ]
+11-07 21:52:19.838  1060  1079 I FontLog : Pulling font file for id = 5, cache size = 5 [CONTEXT service_id=132 ]
+11-07 21:52:19.841  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@cc4506a in: PAUSED
+11-07 21:52:19.841  4742  4742 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=androidx.activity.ComponentActivity@cc4506a
+11-07 21:52:19.852   287   287 D Zygote  : Forked child process 5498
+11-07 21:52:19.859   762   806 D SplashScreenView: Build android.window.SplashScreenView{78de83b V.E...... ......ID 0,0-0,0}
+11-07 21:52:19.859   762   806 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-07 21:52:19.859   762   806 D SplashScreenView: Branding: view: android.view.View{cd00b58 G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-07 21:52:19.860  1321  4376 I PeopleGalProvider: Method 1 completed.
+11-07 21:52:19.860  1321  4376 I PeopleGalProvider: Method 1 finished successfully.
+11-07 21:52:19.874   762   762 D ControlsListingControllerImpl: ServiceConfig reloaded, count: 0
+11-07 21:52:19.889  1321  5303 I MobileDataHub: Scheduling periodic tasks
+11-07 21:52:19.905  1321  5303 W MobileDataHub: [Service] appsupload-periodic periodic task disabled
+11-07 21:52:19.909   762   816 W Parcel  : Expecting binder but got null!
+11-07 21:52:19.917  5498  5498 I artz.notes.test: Late-enabling -Xcheck:jni
+11-07 21:52:19.918  1321  5300 I SnapshotHandler: Unable to retrieve flag snapshot for com.google.android.gms.inappreach#com.google.android.gms, using defaults.
+11-07 21:52:19.989   982   982 D ImsResolver: maybeAddedImsService, packageName: com.google.android.gms
+11-07 21:52:19.993   482   584 I RoleService: Granting default roles...
+11-07 21:52:20.107  1060  5295 I Fitness : OnPackageChangedOperation got intent: Intent { act=android.intent.action.PACKAGE_CHANGED dat=package: flg=0x45000010 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.PersistentIntentOperationService (has extras) } [CONTEXT service_id=17 ]
+11-07 21:52:20.113  1060  5334 I Fitness : FitCleanupIntentOperation received Intent android.intent.action.PACKAGE_CHANGED [CONTEXT service_id=17 ]
+11-07 21:52:20.142  1321  4125 E WakeLock: DG:service ** IS FORCE-RELEASED ON TIMEOUT **
+11-07 21:52:20.211  1321  4715 I Icing   : MaintenanceDriver: Registering all GCM Tasks.
+11-07 21:52:20.221  5034  5072 W Role    : Default holder doesn't have required signing certificate: com.google.android.apps.work.clouddpc:23962F4B43B9857638EA66F4D419518EAE282491ACDA4B94707BD59003C45E58
+11-07 21:52:20.236  5498  5498 I artz.notes.test: Using CollectorTypeCC GC.
+11-07 21:52:20.248  5498  5498 W artz.notes.test: Unexpected CPU variant for x86: x86_64.
+11-07 21:52:20.248  5498  5498 W artz.notes.test: Known variants: atom, sandybridge, silvermont, kabylake, default
+11-07 21:52:20.406   372   395 I adbd    : jdwp connection from 5498
+11-07 21:52:20.421  1656  2546 W AiAiAutofill: Failed to set whitelist for augmented autofill service.
+11-07 21:52:20.421  1656  2546 W AiAiAutofill: java.lang.SecurityException: caller is not user's Augmented Autofill Service
+11-07 21:52:20.421  1656  2546 W AiAiAutofill: 	at android.view.autofill.AutofillManager.setAugmentedAutofillWhitelist(AutofillManager.java:2386)
+11-07 21:52:20.421  1656  2546 W AiAiAutofill: 	at bzn.b(PG:7)
+11-07 21:52:20.421  1656  2546 W AiAiAutofill: 	at caa.g(PG:8)
+11-07 21:52:20.421  1656  2546 W AiAiAutofill: 	at can.e(PG:9)
+11-07 21:52:20.421  1656  2546 W AiAiAutofill: 	at cat.a(PG:6)
+11-07 21:52:20.421  1656  2546 W AiAiAutofill: 	at hqz.r(PG:17)
+11-07 21:52:20.421  1656  2546 W AiAiAutofill: 	at hqz.b(PG:36)
+11-07 21:52:20.421  1656  2546 W AiAiAutofill: 	at bxg.run(PG:14)
+11-07 21:52:20.421  1656  2546 W AiAiAutofill: 	at dum.run(PG:70)
+11-07 21:52:20.421  1656  2546 W AiAiAutofill: 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:463)
+11-07 21:52:20.421  1656  2546 W AiAiAutofill: 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+11-07 21:52:20.421  1656  2546 W AiAiAutofill: 	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:307)
+11-07 21:52:20.421  1656  2546 W AiAiAutofill: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-07 21:52:20.421  1656  2546 W AiAiAutofill: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-07 21:52:20.421  1656  2546 W AiAiAutofill: 	at dum.run(PG:65)
+11-07 21:52:20.421  1656  2546 W AiAiAutofill: 	at java.lang.Thread.run(Thread.java:1012)
+11-07 21:52:20.423   339   370 W TransactionTracing: Could not find layer handle 0x77aa88534630
+11-07 21:52:20.425   482   757 W system_server: Long monitor contention with owner android.anim (508) at void com.android.server.wm.WindowSurfacePlacer$Traverser.run()(WindowSurfacePlacer.java:58) waiters=0 in android.app.ActivityTaskManager$RootTaskInfo com.android.server.wm.ActivityTaskManagerService.getFocusedRootTaskInfo() for 159ms
+11-07 21:52:20.436  1321  3740 I NewModuleOp: Enable component: com.google.android.gms.languageprofile.GcmReceiverService [CONTEXT service_id=167 ]
+11-07 21:52:20.437  1321  3740 I NewModuleOp: Enable component: com.google.android.gms.languageprofile.GcmTaskService [CONTEXT service_id=167 ]
+11-07 21:52:20.438  1321  3740 I NewModuleOp: Schedule LanguageProfileGcmTaskChimeraService tasks. [CONTEXT service_id=167 ]
+11-07 21:52:20.439  1321  3740 I LPGcmTaskChimeraService: Scheduling sync task. [CONTEXT service_id=167 ]
+11-07 21:52:20.447   339   370 W TransactionTracing: Could not find layer handle 0x77aa88535110
+11-07 21:52:20.448   339   370 W TransactionTracing: Could not find layer handle 0x77aa88534990
+11-07 21:52:20.449   339   370 W TransactionTracing: Could not find layer handle 0x77aa88534630
+11-07 21:52:20.449   339   370 W TransactionTracing: Could not find layer handle 0x77aa88534630
+11-07 21:52:20.449  1321  3740 I GmsSyncPolicyEngine: Periodic sync 2 disabled by policy, cancelled.
+11-07 21:52:20.450   339   370 W TransactionTracing: Could not find layer handle 0x77aa88535110
+11-07 21:52:20.450   339   370 W TransactionTracing: Could not find layer handle 0x77aa88535110
+11-07 21:52:20.452   339   370 W TransactionTracing: Could not find layer handle 0x77aa88534990
+11-07 21:52:20.452   339   370 W TransactionTracing: Could not find layer handle 0x77aa88534990
+11-07 21:52:20.460   482  1975 W system_server: Long monitor contention with owner binder:482_2 (500) at int com.android.server.am.ActivityManagerService.bindServiceInstance(android.app.IApplicationThread, android.os.IBinder, android.content.Intent, java.lang.String, android.app.IServiceConnection, int, java.lang.String, boolean, int, java.lang.String, java.lang.String, int)(ActivityManagerService.java:12764) waiters=0 in android.content.Intent com.android.server.am.ActivityManagerService.registerReceiverWithFeature(android.app.IApplicationThread, java.lang.String, java.lang.String, java.lang.String, android.content.IIntentReceiver, android.content.IntentFilter, java.lang.String, int, int) for 243ms
+11-07 21:52:20.469  1321  3740 I GmsSyncPolicyEngine: Periodic sync 6 disabled
+11-07 21:52:20.500   482  1415 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_multi_configs ANDROID_EMU_hwc_color_transform GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0
+11-07 21:52:20.532   482  1415 W OpenGLRenderer: Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-07 21:52:20.536   482  1415 D EGL_emulation: eglCreateContext: 0x73e67dd29810: maj 3 min 0 rcv 3
+11-07 21:52:20.541   482  1415 D EGL_emulation: eglMakeCurrent: 0x73e67dd29810: ver 3 0 (tinfo 0x73e88ac64080) (first time)
+11-07 21:52:20.701   286   904 I netd    : tetherGetStats() -> {[]} <170.07ms>
+11-07 21:52:20.729   339   370 W TransactionTracing: Could not find layer handle 0x77aa88534930
+11-07 21:52:20.738   762   816 D EGL_emulation: app_time_stats: avg=853.14ms min=829.57ms max=876.70ms count=2
+11-07 21:52:20.849  3585  3616 I RemoteProvisioningService: Notify key generated ping for secLevel: 1
+11-07 21:52:20.856  3585  3616 I RemoteProvisioner: Pool status 6, 5, 0, 6
+11-07 21:52:20.856  3585  3616 I RemoteProvisioningService: Pool status.
+11-07 21:52:20.856  3585  3616 I RemoteProvisioningService: Total: 6
+11-07 21:52:20.856  3585  3616 I RemoteProvisioningService: Attested: 6
+11-07 21:52:20.856  3585  3616 I RemoteProvisioningService: Unassigned: 5
+11-07 21:52:20.856  3585  3616 I RemoteProvisioningService: Expiring: 0
+11-07 21:52:20.856  3585  3616 I RemoteProvisioningService.KeyPoolStats: Sufficient keys are available, no CSR needed.
+11-07 21:52:20.856  3585  3616 I RemoteProvisioningService: No provisioning needed.
+11-07 21:52:20.858  5498  5498 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10175; state: ENABLED
+11-07 21:52:20.903  5498  5498 D ApplicationLoaders: Returning zygote-cached class loader: /system/framework/android.test.base.jar
+11-07 21:52:20.923  5498  5498 D nativeloader: Configuring classloader-namespace for other apk /system/framework/android.test.mock.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/data/app/~~4TVIc7XwTeyKClnx2wNTew==/com.quartz.notes.test-zlzTdZBdsXZKg-Xck8A6-w==/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.quartz.notes.test
+11-07 21:52:20.927  5498  5498 D ApplicationLoaders: Returning zygote-cached class loader: /system/framework/android.test.base.jar
+11-07 21:52:20.928   482   697 W system_server: Long monitor contention with owner NetworkStats (695) at void android.net.connectivity.com.android.server.net.NetworkStatsService.performPoll(int)(SourceFile:-1) waiters=0 in void android.net.connectivity.com.android.server.net.NetworkStatsService.noteUidForeground(int, boolean) for 187ms
+11-07 21:52:20.944  5498  5498 W artz.notes.test: ClassLoaderContext shared library size mismatch. Expected=0, found=2 (PCL[] | PCL[]{PCL[/system/framework/android.test.base.jar*2876549756]#PCL[/system/framework/android.test.mock.jar*4109917914]})
+11-07 21:52:20.949  5498  5498 D nativeloader: Configuring classloader-namespace for other apk /system/framework/android.test.runner.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/data/app/~~4TVIc7XwTeyKClnx2wNTew==/com.quartz.notes.test-zlzTdZBdsXZKg-Xck8A6-w==/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.quartz.notes.test
+11-07 21:52:20.949  5498  5498 W ziparchive: Unable to open '/data/app/~~4TVIc7XwTeyKClnx2wNTew==/com.quartz.notes.test-zlzTdZBdsXZKg-Xck8A6-w==/base.dm': No such file or directory
+11-07 21:52:20.949  5498  5498 W ziparchive: Unable to open '/data/app/~~4TVIc7XwTeyKClnx2wNTew==/com.quartz.notes.test-zlzTdZBdsXZKg-Xck8A6-w==/base.dm': No such file or directory
+11-07 21:52:20.978   286   904 I netd    : bandwidthSetGlobalAlert(2097152) <0.14ms>
+11-07 21:52:21.021  5498  5498 D nativeloader: Configuring classloader-namespace for other apk /data/app/~~4TVIc7XwTeyKClnx2wNTew==/com.quartz.notes.test-zlzTdZBdsXZKg-Xck8A6-w==/base.apk. target_sdk_version=35, uses_libraries=, library_path=/data/app/~~4TVIc7XwTeyKClnx2wNTew==/com.quartz.notes.test-zlzTdZBdsXZKg-Xck8A6-w==/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.quartz.notes.test
+11-07 21:52:21.048  5498  5498 V GraphicsEnvironment: ANGLE Developer option for 'com.quartz.notes.test' set to: 'default'
+11-07 21:52:21.054  5498  5498 V GraphicsEnvironment: ANGLE GameManagerService for com.quartz.notes.test: false
+11-07 21:52:21.054  5498  5498 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-07 21:52:21.057  5498  5498 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-07 21:52:21.058  5498  5498 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-07 21:52:21.067  5498  5522 D libEGL  : loaded /vendor/lib64/egl/libEGL_emulation.so
+11-07 21:52:21.086  5498  5522 D libEGL  : loaded /vendor/lib64/egl/libGLESv1_CM_emulation.so
+11-07 21:52:21.095  5498  5522 D libEGL  : loaded /vendor/lib64/egl/libGLESv2_emulation.so
+11-07 21:52:21.115  1321  3740 I LSRModuleInit: New Geofences: [] [CONTEXT service_id=277 ]
+11-07 21:52:21.121  1321  3740 I LSRModuleInit: Attempting to change container components state to enabled: true [CONTEXT service_id=277 ]
+11-07 21:52:21.140  1060  5501 I LSR     : Handling LSR module init in persistent process [CONTEXT service_id=277 ]
+11-07 21:52:21.140  1060  5501 I LSR     : Refreshing periodic location reporting state [CONTEXT service_id=277 ]
+11-07 21:52:21.166   955   955 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-07 21:52:21.166   955   955 D MediaPlayerList: Name of package changed: com.google.android.gms
+11-07 21:52:21.168   482   594 I InputReader: Reconfiguring input devices, changes=KEYBOARD_LAYOUTS |
+11-07 21:52:21.174   955   955 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-07 21:52:21.174   955   955 D MediaPlayerList: Name of package changed: com.google.android.gms
+11-07 21:52:21.179  5034  5050 I PermissionControllerServiceImpl: Updating user sensitive for uid 10120
+11-07 21:52:21.193   762   762 D ControlsListingControllerImpl: ServiceConfig reloaded, count: 0
+11-07 21:52:21.194  1060  5504 I LSR     : No upload requests, reporting should be disabled [CONTEXT service_id=277 ]
+11-07 21:52:21.195  1060  5503 I LSR     : Reporting should be enabled: false [CONTEXT service_id=277 ]
+11-07 21:52:21.195  1060  5503 I LSR     : Stopping periodic location reporting [CONTEXT service_id=277 ]
+11-07 21:52:21.207  2959  3103 I Bugle   : BroadcastReceiverAsyncWorkTracker: Acknowledging broadcast of atsi@4ad15e6
+11-07 21:52:21.223   482   584 I RoleService: Granting default roles...
+11-07 21:52:21.242  1321  3551 I PeopleGalProvider: Gal directories started.
+11-07 21:52:21.243  1321  3551 I PeopleGalProvider: Method 1 completed.
+11-07 21:52:21.243  1321  3551 I PeopleGalProvider: Method 1 finished successfully.
+11-07 21:52:21.246  3974  5527 I ProvidersCache: Provider returned no roots. Possibly naughty: com.google.android.apps.docs.storage
+11-07 21:52:21.260  5498  5498 D CompatibilityChangeReporter: Compat change id reported: 237531167; UID 10175; state: DISABLED
+11-07 21:52:21.265  5498  5521 W Parcel  : Expecting binder but got null!
+11-07 21:52:21.269   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 21:52:21.269   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 21:52:21.271  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@cc4506a in: STOPPED
+11-07 21:52:21.272  4742  4742 V ActivityScenario: Update currentActivityStage to STOPPED, currentActivity=androidx.activity.ComponentActivity@cc4506a
+11-07 21:52:21.283  1060  5296 I Fitness : OnPackageChangedOperation got intent: Intent { act=android.intent.action.PACKAGE_CHANGED dat=package: flg=0x45000010 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.PersistentIntentOperationService (has extras) } [CONTEXT service_id=17 ]
+11-07 21:52:21.293  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@cc4506a in: DESTROYED
+11-07 21:52:21.294  4742  4742 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
+11-07 21:52:21.299  1321  3740 W MagicTether: [MagicTetherInitializer] Invalid account list. [CONTEXT service_id=276 ]
+11-07 21:52:21.300   982   982 D CarrierSvcBindHelper: onPackageModified: com.google.android.gms
+11-07 21:52:21.307   982   982 D CarrierSvcBindHelper: No carrier app for: 0
+11-07 21:52:21.321   982   982 D ImsResolver: maybeAddedImsService, packageName: com.google.android.gms
+11-07 21:52:21.334  1060  5295 I Fitness : FitCleanupIntentOperation received Intent android.intent.action.PACKAGE_CHANGED [CONTEXT service_id=17 ]
+11-07 21:52:21.349   339   592 W ServiceManager: Permission failure: android.permission.ACCESS_SURFACE_FLINGER from uid=10175 pid=0
+11-07 21:52:21.349   339   592 D PermissionCache: checking android.permission.ACCESS_SURFACE_FLINGER for uid=10175 => denied (3553 us)
+11-07 21:52:21.349   339   592 W ServiceManager: Permission failure: android.permission.ROTATE_SURFACE_FLINGER from uid=10175 pid=0
+11-07 21:52:21.349   339   592 D PermissionCache: checking android.permission.ROTATE_SURFACE_FLINGER for uid=10175 => denied (77 us)
+11-07 21:52:21.349   339   592 W ServiceManager: Permission failure: android.permission.INTERNAL_SYSTEM_WINDOW from uid=10175 pid=0
+11-07 21:52:21.349   339   592 D PermissionCache: checking android.permission.INTERNAL_SYSTEM_WINDOW for uid=10175 => denied (64 us)
+11-07 21:52:21.350   482   573 W InputManager-JNI: Input channel object '6ff475f com.quartz.notes/androidx.activity.ComponentActivity (client)' was disposed without first being removed with the input manager!
+11-07 21:52:21.350   339   600 W ServiceManager: Permission failure: android.permission.ACCESS_SURFACE_FLINGER from uid=10175 pid=5498
+11-07 21:52:21.350   339   600 D PermissionCache: checking android.permission.ACCESS_SURFACE_FLINGER for uid=10175 => denied (4182 us)
+11-07 21:52:21.369  1321  3740 I Google Maps Android API: Validating conditions for requesting maps_core feature. [CONTEXT service_id=71 ]
+11-07 21:52:21.369  1321  3740 I Google Maps Android API: Is maps_core feature installed? 1 [CONTEXT service_id=71 ]
+11-07 21:52:21.369  1321  3740 I Google Maps Android API: cutoffSize=2147483648, internalFreeBytes=5259804672
+11-07 21:52:21.369  1321  3740 I Google Maps Android API: Eligible to request maps_core feature. [CONTEXT service_id=71 ]
+11-07 21:52:21.372  5498  5521 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_multi_configs ANDROID_EMU_hwc_color_transform GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0
+11-07 21:52:21.373   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537b70
+11-07 21:52:21.373   339   370 W TransactionTracing: Could not find layer handle 0x77aa88535e90
+11-07 21:52:21.380  1321  3740 I Google Maps Android API: maps_core feature request succeeded. [CONTEXT service_id=71 ]
+11-07 21:52:21.388  5498  5521 W OpenGLRenderer: Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-07 21:52:21.393  5498  5521 D EGL_emulation: eglCreateContext: 0x73e67dd0ce90: maj 3 min 0 rcv 3
+11-07 21:52:21.395  4742  4836 D IdlingRegistry: Unregistering idling resources: [androidx.compose.ui.test.EspressoLink@91d2ac8]
+11-07 21:52:21.397  5498  5521 D EGL_emulation: eglMakeCurrent: 0x73e67dd0ce90: ver 3 0 (tinfo 0x73e8996a2080) (first time)
+11-07 21:52:21.405  1060  5504 I LockboxIntentOp: Completed task: true [CONTEXT service_id=26 ]
+11-07 21:52:21.429  1321  3740 I MS_Utils: version of com.google.android.apps.maps = 1067529190
+11-07 21:52:21.439   339   370 W TransactionTracing: Could not find layer handle 0x77aa88536070
+11-07 21:52:21.440   339   370 W TransactionTracing: Could not find layer handle 0x77aa88535050
+11-07 21:52:21.457   127   127 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+11-07 21:52:21.458  5498  5521 I Gralloc4: mapper 4.x is not supported
+11-07 21:52:21.474   127   127 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.allocator@4.0::IAllocator/default in either framework or device VINTF manifest.
+11-07 21:52:21.476   126   126 I servicemanager: Could not find android.hardware.graphics.allocator.IAllocator/default in the VINTF manifest.
+11-07 21:52:21.476  5498  5521 W Gralloc4: allocator 4.x is not supported
+11-07 21:52:21.488  4742  4836 I TestRunner: finished: eachMaterialIsQuickAndSeamless(com.quartz.notes.ui.components.CoverTexturesTest)

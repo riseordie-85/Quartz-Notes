@@ -1,0 +1,132 @@
+11-07 21:58:05.930  4742  4836 I TestRunner: started: aVeryShortGridStillDraws(com.quartz.notes.ui.sheet.SheetGridShortTest)
+11-07 21:58:05.933  4742  4836 D IdlingRegistry: Registering idling resources: [androidx.compose.ui.test.EspressoLink@2064102]
+11-07 21:58:05.960  4742  4836 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+11-07 21:58:05.967   339   370 W TransactionTracing: Could not find layer handle 0x77aa8853a630
+11-07 21:58:05.968   339   370 W TransactionTracing: Could not find layer handle 0x77aa885393d0
+11-07 21:58:05.968   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538a70
+11-07 21:58:05.968   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537570
+11-07 21:58:05.968   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538ad0
+11-07 21:58:05.968   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537570
+11-07 21:58:06.005   762   806 D SplashScreenView: Build android.window.SplashScreenView{51a069a V.E...... ......ID 0,0-0,0}
+11-07 21:58:06.005   762   806 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-07 21:58:06.005   762   806 D SplashScreenView: Branding: view: android.view.View{f33ebcb G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-07 21:58:06.046  1015  1015 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+11-07 21:58:06.056   762   816 W Parcel  : Expecting binder but got null!
+11-07 21:58:06.075   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538170
+11-07 21:58:06.082   482  1684 W AppSearchIcing: icing-search-engine.cc:217: Error: 5, Message: Document (com.google.android.googlequicksearchbox$OneSearchZeroStateGoogleSuggestions/default, zp) not found.
+11-07 21:58:06.086  1015  2099 D OneSearchSuggestProvider: Created the binder channel successfully for end point service =com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService , mChannel=Q0{delegate=L0{logId=133, target=directaddress:///AndroidComponentAddress%5BIntent%20%7B%20act=grpc.io.action.BIND%20cmp=com.google.android.googlequicksearchbox/com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService%20%7D%5D}} , mOneSearchConnection=y1.J@c2870eb
+11-07 21:58:06.233  1015  1028 I s.nexuslauncher: NativeAlloc concurrent copying GC freed 18475(1078KB) AllocSpace objects, 2(56KB) LOS objects, 49% free, 5419KB/10MB, paused 36us,18us total 156.414ms
+11-07 21:58:06.428   482   508 W system_server: Long monitor contention with owner binder:482_14 (1727) at void com.android.server.wm.StartingSurfaceController$StartingSurface.remove(boolean)(StartingSurfaceController.java:272) waiters=1 in void com.android.server.wm.WindowSurfacePlacer$Traverser.run() for 165ms
+11-07 21:58:06.431   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 21:58:06.431   482   508 W InputManager-JNI: Input channel object '4bb6b65 Splash Screen com.quartz.notes.test (client)' was disposed without first being removed with the input manager!
+11-07 21:58:06.435   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 1
+11-07 21:58:06.437   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 21:58:06.442  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@c759626 in: PRE_ON_CREATE
+11-07 21:58:06.442  4742  4742 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+11-07 21:58:06.443  1015  1015 D MainContentCaptureSession: Flushing 2 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARING
+11-07 21:58:06.444  1015  1015 D MainContentCaptureSession: Flushing 32 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARED
+11-07 21:58:06.475  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@c759626 in: CREATED
+11-07 21:58:06.479  1015  1015 D MainContentCaptureSession: Flushing 2 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+11-07 21:58:06.480  4742  4742 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=androidx.activity.ComponentActivity@c759626
+11-07 21:58:06.496  1788  1788 I A       : Created gRPC endpoint to "search" for service class com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService
+11-07 21:58:06.534  1788  2378 I A       : group apa_head_suggest not present without account in *
+11-07 21:58:06.535  1788  2378 I A       : incrementApaDataDownloadStoreStatus(latency = PT0.001S, appVersion = 13.17.16.23, status = NOT_FOUND, locale = *, fileGroupnames = apa_head_suggest, accountScoped = false, localGroupsAvailable = false, timeSinceSearchBoot = Optional[PT7M58.882S] (FIVE_TO_TEN_MINUTES), timeSinceDataDownloadInit = PT5M8S (FIVE_TO_TEN_MINUTES))
+11-07 21:58:06.535  1788  2516 W A       : Queue length for executor EventBus is now 11. Perhaps some tasks are too long, or the pool is too small.
+11-07 21:58:06.536  1788  2516 I A       : Using proto config with mendel
+11-07 21:58:06.540  1788  2378 I A       : incrementApaDataDownloadStoreStatusNotFound(appVersion = 13.17.16.23, locale = *, groupName = apa_head_suggest, accountScoped = false, foundGroups = 0, status = 0, localGroupsAvailable = false)
+11-07 21:58:06.541  1788  2516 I A       : Using proto config with mendel
+11-07 21:58:06.546  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@c759626 in: STARTED
+11-07 21:58:06.546  4742  4742 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=androidx.activity.ComponentActivity@c759626
+11-07 21:58:06.549  1656  2067 I AiAiEcho: Predicting[0]:
+11-07 21:58:06.549  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@c759626 in: RESUMED
+11-07 21:58:06.549  1656  2067 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:
+11-07 21:58:06.549  4742  4742 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=androidx.activity.ComponentActivity@c759626
+11-07 21:58:06.549  1656  2067 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0
+11-07 21:58:06.553  1656  2067 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0
+11-07 21:58:06.554  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:58:06.557   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:58:06.557   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:58:06.563  1015  1030 W System  : A resource failed to call release.
+11-07 21:58:06.563  1015  1030 W System  : A resource failed to call release.
+11-07 21:58:06.563  1015  1030 W System  : A resource failed to call release.
+11-07 21:58:06.563  1015  1030 W System  : A resource failed to call release.
+11-07 21:58:06.563  1015  1030 W System  : A resource failed to call release.
+11-07 21:58:06.615   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:58:06.616   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:58:06.616   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:58:06.637   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:58:06.637   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:58:06.666  1015  2099 D OneSearchSuggestProvider: Shut down the binder channel
+11-07 21:58:06.674  1788  2562 I PBSessionCacheImpl: Deleted sessionId[7865501250074996] from persistence.
+11-07 21:58:06.687  1788  2516 W SearchServiceCore: Abort, client detached.
+11-07 21:58:06.693   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538230
+11-07 21:58:06.696  1015  1015 D MainContentCaptureSession: Flushing 3 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARING
+11-07 21:58:06.696  1015  1015 D MainContentCaptureSession: Flushing 2 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARED
+11-07 21:58:06.761   339   370 W TransactionTracing: Could not find layer handle 0x77aa88536910
+11-07 21:58:06.763   339   370 W TransactionTracing: Could not find layer handle 0x77aa88539f10
+11-07 21:58:06.782   482  1727 W InputManager-JNI: Input channel object '2ce4319 com.quartz.notes.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity (client)' was disposed without first being removed with the input manager!
+11-07 21:58:06.799   482   495 I system_server: NativeAlloc concurrent copying GC freed 148310(5525KB) AllocSpace objects, 9(180KB) LOS objects, 49% free, 21MB/43MB, paused 193us,65us total 1.010s
+11-07 21:58:06.813   339   370 W TransactionTracing: Could not find layer handle 0x77aa88539610
+11-07 21:58:06.816   339   370 W TransactionTracing: Could not find layer handle 0x77aa885387d0
+11-07 21:58:06.820   339   370 W TransactionTracing: Could not find layer handle 0x77aa885398b0
+11-07 21:58:06.821   339   370 W TransactionTracing: Could not find layer handle 0x77aa88534990
+11-07 21:58:06.973  1015  7306 I s.nexuslauncher: oneway function results for code 2 on binder at 0x73e60dd79550 will be dropped but finished with status UNKNOWN_TRANSACTION
+11-07 21:58:06.988   482   504 W ziparchive: Unable to open '/data/app/~~ewbzk_m16xDkclmAVpjUzA==/com.quartz.notes-XqM5_4k8BE5yt-arn9ES4A==/base.dm': No such file or directory
+11-07 21:58:06.992   482   504 I ActivityTaskManager: Displayed com.quartz.notes/androidx.activity.ComponentActivity: +1s23ms
+11-07 21:58:07.026  4742  4742 D AutofillManager: Fill dialog is enabled:false, hints=[password, passwordAuto, creditCardNumber, creditCardSecurityCode, creditCardExpirationDate]
+11-07 21:58:07.069   482  1460 W InputManager-JNI: Input channel object '22a59f0 Splash Screen com.quartz.notes (client)' was disposed without first being removed with the input manager!
+11-07 21:58:07.130   762   816 D EGL_emulation: app_time_stats: avg=1406.95ms min=1406.95ms max=1406.95ms count=1
+11-07 21:58:07.224   762   816 D EGL_emulation: app_time_stats: avg=815.74ms min=294.76ms max=1474.90ms count=3
+11-07 21:58:07.294  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-07 21:58:07.299  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-07 21:58:07.299  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=null}, false)
+11-07 21:58:07.299  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-07 21:58:07.300  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-07 21:58:07.344   339   370 W TransactionTracing: Could not find layer handle 0x77aa88536df0
+11-07 21:58:07.356   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:58:07.356   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:58:07.640   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:58:07.640   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:58:07.640   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:58:07.640   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:58:07.640   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:58:07.640   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:58:07.883   762   806 D SplashScreenView: Build android.window.SplashScreenView{bfb5dbb V.E...... ......ID 0,0-0,0}
+11-07 21:58:07.883   762   806 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-07 21:58:07.883   762   806 D SplashScreenView: Branding: view: android.view.View{a3812d8 G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-07 21:58:07.884   762   816 W Parcel  : Expecting binder but got null!
+11-07 21:58:07.889  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@c759626 in: PAUSED
+11-07 21:58:07.890  4742  4742 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=androidx.activity.ComponentActivity@c759626
+11-07 21:58:07.938  5498  5521 W Parcel  : Expecting binder but got null!
+11-07 21:58:08.012   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:58:08.012   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:58:08.012   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:58:08.187   339   370 W TransactionTracing: Could not find layer handle 0x77aa88536910
+11-07 21:58:08.241   762   816 D EGL_emulation: app_time_stats: avg=1109.30ms min=1109.30ms max=1109.30ms count=1
+11-07 21:58:08.289   762   816 D EGL_emulation: app_time_stats: avg=1062.54ms min=1062.54ms max=1062.54ms count=1
+11-07 21:58:08.354  1015  1015 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+11-07 21:58:08.363   482  1684 W AppSearchIcing: icing-search-engine.cc:217: Error: 5, Message: Document (com.google.android.googlequicksearchbox$OneSearchZeroStateGoogleSuggestions/default, zp) not found.
+11-07 21:58:08.367  1015  2099 D OneSearchSuggestProvider: Created the binder channel successfully for end point service =com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService , mChannel=Q0{delegate=L0{logId=137, target=directaddress:///AndroidComponentAddress%5BIntent%20%7B%20act=grpc.io.action.BIND%20cmp=com.google.android.googlequicksearchbox/com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService%20%7D%5D}} , mOneSearchConnection=y1.J@42b6adb
+11-07 21:58:08.427   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 21:58:08.427   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 1
+11-07 21:58:08.427   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 21:58:08.447   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:58:08.450   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:58:08.473   339   370 W TransactionTracing: Could not find layer handle 0x77aa88531f90
+11-07 21:58:08.475  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@c759626 in: STOPPED
+11-07 21:58:08.481  4742  4742 V ActivityScenario: Update currentActivityStage to STOPPED, currentActivity=androidx.activity.ComponentActivity@c759626
+11-07 21:58:08.515  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@c759626 in: DESTROYED
+11-07 21:58:08.516  4742  4742 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
+11-07 21:58:08.542  4742  4836 D IdlingRegistry: Unregistering idling resources: [androidx.compose.ui.test.EspressoLink@2064102]
+11-07 21:58:08.559   482  2039 W InputManager-JNI: Input channel object 'bf14977 com.quartz.notes/androidx.activity.ComponentActivity (client)' was disposed without first being removed with the input manager!
+11-07 21:58:08.598  1788  1788 I A       : Created gRPC endpoint to "search" for service class com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService
+11-07 21:58:08.603  1788  2516 I A       : Using proto config with mendel
+11-07 21:58:08.609  1788  2378 I A       : group apa_head_suggest not present without account in *
+11-07 21:58:08.610  1788  2378 I A       : incrementApaDataDownloadStoreStatus(latency = PT0.005S, appVersion = 13.17.16.23, status = NOT_FOUND, locale = *, fileGroupnames = apa_head_suggest, accountScoped = false, localGroupsAvailable = false, timeSinceSearchBoot = Optional[PT8M0.955S] (FIVE_TO_TEN_MINUTES), timeSinceDataDownloadInit = PT5M10.072S (FIVE_TO_TEN_MINUTES))
+11-07 21:58:08.617  1788  2353 I A       : incrementApaDataDownloadStoreStatusNotFound(appVersion = 13.17.16.23, locale = *, groupName = apa_head_suggest, accountScoped = false, foundGroups = 0, status = 0, localGroupsAvailable = false)
+11-07 21:58:08.621  1015  1015 D MainContentCaptureSession: Flushing 2 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARING
+11-07 21:58:08.622  1015  1015 D MainContentCaptureSession: Flushing 32 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARED
+11-07 21:58:08.627  1656  2067 I AiAiEcho: Predicting[0]:
+11-07 21:58:08.628  1656  2067 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:
+11-07 21:58:08.629  1788  2516 I A       : Using proto config with mendel
+11-07 21:58:08.630  4742  4836 I TestRunner: finished: aVeryShortGridStillDraws(com.quartz.notes.ui.sheet.SheetGridShortTest)

@@ -1,0 +1,40 @@
+11-07 21:51:59.977  4742  4836 I TestRunner: started: aNoteSavedAsATemplateStaysOutOfTheListAndMakesNewNotes(com.quartz.notes.data.TemplatesTest)
+11-07 21:52:00.025  2959  3195 I BugleDataModel: PendingMessagesProcessor: process from ProcessPendingMessagesAction due to scheduled processing with delay 0 with queues:
+11-07 21:52:00.032  2959  3195 I BugleDataModel: PendingMessagesProcessor: process from ProcessPendingMessagesAction due to scheduled processing with delay 0 with queues:
+11-07 21:52:00.037  2959  3195 I BugleDataModel: PendingMessagesProcessor: process from ProcessPendingMessagesAction due to scheduled processing with delay 0 with queues:
+11-07 21:52:00.057  2959  3195 I BugleDataModel: PendingMessagesProcessor: process from ProcessPendingMessagesAction due to scheduled processing with delay 0 with queues:
+11-07 21:52:00.064  1644  1689 W ocess.gservices: Weak pointer dereference blocked for 88 milliseconds.
+11-07 21:52:00.086  2959  3089 W Bugle   : TextClassifierLibManagerImpl: Reclaiming memory at level: 40
+11-07 21:52:00.088  1644  1675 I ocess.gservices: Background concurrent copying GC freed 51963(1799KB) AllocSpace objects, 0(0B) LOS objects, 49% free, 2646KB/5293KB, paused 67us,25.471ms total 436.324ms
+11-07 21:52:00.109  5195  5262 D CompatibilityChangeReporter: Compat change id reported: 158482162; UID 10120; state: ENABLED
+11-07 21:52:00.131   762   816 D EGL_emulation: app_time_stats: avg=2078.42ms min=2078.42ms max=2078.42ms count=1
+11-07 21:52:00.159  5195  5270 I CAR.DRIVINGMODE: DrivingMode Settings Indexed from the location module
+11-07 21:52:00.165  5195  5268 I SnapshotHandler: Unable to retrieve flag snapshot for com.google.android.gms.dtdi#com.google.android.gms, using defaults.
+11-07 21:52:00.217  1060  1060 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.instantapps.START pkg=com.google.android.gms }
+11-07 21:52:00.239  1656  2067 I AiAiEcho: Predicting[0]:
+11-07 21:52:00.244  1656  2067 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:
+11-07 21:52:00.251  1656  2067 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0
+11-07 21:52:00.254  1656  2067 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0
+11-07 21:52:00.265  5195  5268 I Nearby  : is blocked device type false, isAuto=false, isIot=false, isLatchsky=false, isChinaWearable=false, isTv=false, isWearable=false (supportWearOs=false), isChromeOsDevice=false (supportChromeOs=false) [CONTEXT service_id=49 ]
+11-07 21:52:00.296  1060  1060 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.instantapps.START pkg=com.google.android.gms }
+11-07 21:52:00.332  1321  3452 W ChimeraConfigurator: Error syncing flags: zgv: SYNC_TIMEOUT, java.util.concurrent.TimeoutException: Timed out waiting for Task
+11-07 21:52:00.332  1321  3452 I GmsDebugLogger: [79] SYNC_TIMEOUT, java.util.concurrent.TimeoutException: Timed out waiting for Task
+11-07 21:52:00.400  1321  3452 I GmsDebugLogger: [52]
+11-07 21:52:00.434  1321  4132 W GmsPipelineLogger: GmsPipelineLogger Failed to obtain device id [CONTEXT service_id=256 ]
+11-07 21:52:00.434  1321  4132 W GmsPipelineLogger: java.lang.NullPointerException
+11-07 21:52:00.434  1321  4132 W GmsPipelineLogger: 	at dhat.y(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 21:52:00.434  1321  4132 W GmsPipelineLogger: 	at avot.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-07 21:52:00.434  1321  4132 W GmsPipelineLogger: 	at avot.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-07 21:52:00.434  1321  4132 W GmsPipelineLogger: 	at avor.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-07 21:52:00.434  1321  4132 W GmsPipelineLogger: 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:463)
+11-07 21:52:00.434  1321  4132 W GmsPipelineLogger: 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+11-07 21:52:00.434  1321  4132 W GmsPipelineLogger: 	at aced.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-07 21:52:00.434  1321  4132 W GmsPipelineLogger: 	at aced.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):7)
+11-07 21:52:00.434  1321  4132 W GmsPipelineLogger: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-07 21:52:00.434  1321  4132 W GmsPipelineLogger: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-07 21:52:00.434  1321  4132 W GmsPipelineLogger: 	at acjn.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 21:52:00.434  1321  4132 W GmsPipelineLogger: 	at java.lang.Thread.run(Thread.java:1012)
+11-07 21:52:00.442  2959  3195 I BugleDataModel: PendingMessagesProcessor: process from ProcessPendingMessagesAction due to scheduled processing with delay 0 with queues:
+11-07 21:52:00.450  5195  5268 I SnapshotHandler: Unable to retrieve flag snapshot for com.google.android.gms.personalsafety, using defaults.
+11-07 21:52:00.475  1321  3452 I ChimeraConfigService: Scheduling checkin for one-off execution between [3300,43200] seconds from now (1794088320475) [CONTEXT service_id=264 ]
+11-07 21:52:00.484  4742  4836 I TestRunner: finished: aNoteSavedAsATemplateStaysOutOfTheListAndMakesNewNotes(com.quartz.notes.data.TemplatesTest)

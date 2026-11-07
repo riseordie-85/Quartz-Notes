@@ -1,0 +1,738 @@
+11-07 21:51:47.543  4742  4836 I TestRunner: started: oversizedSheetIsCompressedAndItsNotebookOpens(com.quartz.notes.data.BigSheetMigrationTest)
+11-07 21:51:47.629   482   514 E system_server: No package ID 7f found for ID 0x7f0802b0.
+11-07 21:51:47.629   482   514 E system_server: No package ID 7f found for ID 0x7f150a40.
+11-07 21:51:47.629   482   514 E system_server: No package ID 7f found for ID 0x7f150a40.
+11-07 21:51:47.629   482   514 E system_server: No package ID 7f found for ID 0x7f150a3f.
+11-07 21:51:47.680  3135  3135 W iss     : [Gmail] ExchangeUpgradeReceiver: ExchangeUpgradeReceiver: action=android.intent.action.BOOT_COMPLETED data=null [CONTEXT android_log_tag="EasBundling" ]
+11-07 21:51:47.685  3135  3135 W iss     : [Gmail] ExchangeUpgradeUtils: ExchangeUpgradeUtils: isExchangeLegacy=false [CONTEXT android_log_tag="EasBundling" ]
+11-07 21:51:47.730  1015  1883 D EGL_emulation: app_time_stats: avg=586.23ms min=42.42ms max=875.79ms count=3
+11-07 21:51:47.733  1656  1656 I AiAi    : onTrimMemory() with level 5
+11-07 21:51:47.801   482   517 I libprocessgroup: Successfully killed process cgroup uid 10144 pid 3135 in 70ms
+11-07 21:51:47.836  2959  3103 I Bugle   : BroadcastReceiverAsyncWorkTracker: Acknowledging broadcast of atsi@4ad15e6
+11-07 21:51:47.853   955   955 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-07 21:51:47.853   955   955 D MediaPlayerList: Name of package changed: com.google.android.gm
+11-07 21:51:47.853   955   955 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-07 21:51:47.853   955   955 D MediaPlayerList: Name of package changed: com.google.android.gm
+11-07 21:51:47.853   482   594 I InputReader: Reconfiguring input devices, changes=KEYBOARD_LAYOUTS |
+11-07 21:51:47.868  1509  1509 I AppBase : AppBase.onTrimMemory():497 onTrimMemory(): 5
+11-07 21:51:47.871  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onTrimMemory():4406 onTrimMemory(): 5
+11-07 21:51:47.902  2959  3093 W Bugle   : TextClassifierLibManagerImpl: Reclaiming memory at level: 40
+11-07 21:51:47.920   776   789 I PermissionControllerServiceImpl: Updating user sensitive for uid 10144
+11-07 21:51:47.930   762   762 D ControlsListingControllerImpl: ServiceConfig reloaded, count: 0
+11-07 21:51:47.937   286   904 I netd    : tetherGetStats() -> {[]} <0.30ms>
+11-07 21:51:47.995  1060  4500 I Fitness : OnPackageChangedOperation got intent: Intent { act=android.intent.action.PACKAGE_CHANGED dat=package: flg=0x45000010 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.PersistentIntentOperationService (has extras) } [CONTEXT service_id=17 ]
+11-07 21:51:48.006   286   904 I netd    : bandwidthSetGlobalAlert(2097152) <0.08ms>
+11-07 21:51:48.019   482   514 E system_server: No package ID 7f found for ID 0x7f0805a7.
+11-07 21:51:48.019   482   514 E system_server: No package ID 7f found for ID 0x7f150421.
+11-07 21:51:48.052   982   982 D CarrierSvcBindHelper: onPackageModified: com.google.android.gm
+11-07 21:51:48.064   982   982 D CarrierSvcBindHelper: No carrier app for: 0
+11-07 21:51:48.072   982   982 D ImsResolver: maybeAddedImsService, packageName: com.google.android.gm
+11-07 21:51:48.157   482   584 I RoleService: Granting default roles...
+11-07 21:51:48.205   776   946 W Role    : Default holder doesn't have required signing certificate: com.google.android.apps.work.clouddpc:23962F4B43B9857638EA66F4D419518EAE282491ACDA4B94707BD59003C45E58
+11-07 21:51:48.246  3974  4887 I ProvidersCache: Provider returned no roots. Possibly naughty: com.google.android.apps.docs.storage
+11-07 21:51:48.246  3974  4888 W oid.documentsui: Long monitor contention with owner pool-34-thread-4 (4887) at void com.android.documentsui.roots.ProvidersCache$MultiProviderUpdateTask.handleDocumentsProvider(android.content.pm.ProviderInfo, com.android.documentsui.base.UserId)(ProvidersCache.java:646) waiters=0 in void com.android.documentsui.roots.ProvidersCache$MultiProviderUpdateTask.handleDocumentsProvider(android.content.pm.ProviderInfo, com.android.documentsui.base.UserId) for 354ms
+11-07 21:51:48.247  3974  4884 W oid.documentsui: Long monitor contention with owner pool-34-thread-4 (4887) at void com.android.documentsui.roots.ProvidersCache$MultiProviderUpdateTask.handleDocumentsProvider(android.content.pm.ProviderInfo, com.android.documentsui.base.UserId)(ProvidersCache.java:646) waiters=1 in void com.android.documentsui.roots.ProvidersCache$MultiProviderUpdateTask.handleDocumentsProvider(android.content.pm.ProviderInfo, com.android.documentsui.base.UserId) for 356ms
+11-07 21:51:48.250  1060  4500 I Fitness : FitCleanupIntentOperation received Intent android.intent.action.PACKAGE_CHANGED [CONTEXT service_id=17 ]
+11-07 21:51:48.269  1321  3740 D TrafficStats: tagSocket(89) with statsTag=0x30001803, statsUid=-1
+11-07 21:51:48.280   287   287 D Zygote  : Forked child process 4891
+11-07 21:51:48.286   287   287 I Zygote  : Process 3135 exited due to signal 9 (Killed)
+11-07 21:51:48.299  4891  4891 I ogle.android.gm: Using CollectorTypeCC GC.
+11-07 21:51:48.299  4891  4891 W ogle.android.gm: Unexpected CPU variant for x86: x86_64.
+11-07 21:51:48.299  4891  4891 W ogle.android.gm: Known variants: atom, sandybridge, silvermont, kabylake, default
+11-07 21:51:48.309   372   395 I adbd    : jdwp connection from 4891
+11-07 21:51:48.334  4891  4891 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10144; state: ENABLED
+11-07 21:51:48.345  4891  4891 D nativeloader: Configuring classloader-namespace for other apk /system/framework/org.apache.http.legacy.jar. target_sdk_version=33, uses_libraries=ALL, library_path=/product/app/PrebuiltGmail/lib/x86_64:/product/app/PrebuiltGmail/PrebuiltGmail.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.gm
+11-07 21:51:48.351  4891  4891 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.extensions.jar. target_sdk_version=33, uses_libraries=ALL, library_path=/product/app/PrebuiltGmail/lib/x86_64:/product/app/PrebuiltGmail/PrebuiltGmail.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.gm
+11-07 21:51:48.362  4891  4891 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.sidecar.jar. target_sdk_version=33, uses_libraries=ALL, library_path=/product/app/PrebuiltGmail/lib/x86_64:/product/app/PrebuiltGmail/PrebuiltGmail.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.gm
+11-07 21:51:48.383  4891  4891 D nativeloader: Configuring vendor-classloader-namespace for unbundled product apk /product/app/PrebuiltGmail/PrebuiltGmail.apk. target_sdk_version=33, uses_libraries=, library_path=/product/app/PrebuiltGmail/lib/x86_64:/product/app/PrebuiltGmail/PrebuiltGmail.apk!/lib/x86_64:/product/lib64:/system/product/lib64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.gm:/product/lib64:/system/product/lib64
+11-07 21:51:48.463  4891  4891 V GraphicsEnvironment: ANGLE Developer option for 'com.google.android.gm' set to: 'default'
+11-07 21:51:48.464  4891  4891 V GraphicsEnvironment: ANGLE GameManagerService for com.google.android.gm: false
+11-07 21:51:48.464  4891  4891 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-07 21:51:48.476  4891  4891 D NetworkSecurityConfig: Using Network Security Config from resource network_security_config debugBuild: false
+11-07 21:51:48.477  4891  4891 D NetworkSecurityConfig: Using Network Security Config from resource network_security_config debugBuild: false
+11-07 21:51:48.660  4891  4908 D CompatibilityChangeReporter: Compat change id reported: 183155436; UID 10144; state: ENABLED
+11-07 21:51:48.778  1015  1883 D EGL_emulation: app_time_stats: avg=524.03ms min=288.08ms max=759.98ms count=2
+11-07 21:51:48.783   762   816 D EGL_emulation: app_time_stats: avg=8769.98ms min=8769.98ms max=8769.98ms count=1
+11-07 21:51:48.787  1060  1060 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.clearcut.bootcount.service.START pkg=com.google.android.gms }
+11-07 21:51:48.894   286  2276 W resolv  : SSL_connect ssl error =5, mark 0xf0064: Connection refused
+11-07 21:51:48.901   286  2276 W resolv  : TLS Handshake failed
+11-07 21:51:48.901   286  2276 W resolv  : query failed
+11-07 21:51:48.905   286  2276 W resolv  : validateDnsTlsServer returned 0 for 10.0.2.3
+11-07 21:51:48.906   286  2276 W resolv  : Validation failed
+11-07 21:51:48.984  4742  4836 W om.quartz.notes: Verification of void kotlinx.serialization.internal.ByteArraySerializer.<clinit>() took 234.459ms (34.12 bytecodes/s) (1360B approximate peak alloc)
+11-07 21:51:49.385  4891  4917 W ogle.android.gm: Accessing hidden field Ljava/util/Collections$SynchronizedCollection;->mutex:Ljava/lang/Object; (max-target-o, reflection, denied)
+11-07 21:51:49.395  4891  4917 W ogle.android.gm: Accessing hidden method Ljava/util/Collections$SynchronizedSet;-><init>(Ljava/util/Set;Ljava/lang/Object;)V (max-target-o, reflection, denied)
+11-07 21:51:49.405  4891  4917 W ogle.android.gm: Accessing hidden method Ljava/util/Collections$SynchronizedCollection;-><init>(Ljava/util/Collection;Ljava/lang/Object;)V (max-target-o, reflection, denied)
+11-07 21:51:49.411   286   904 I netd    : tetherGetStats() -> {[]} <0.55ms>
+11-07 21:51:49.453  1656  1746 I ogle.android.as: Background young concurrent copying GC freed 41011(1707KB) AllocSpace objects, 0(0B) LOS objects, 0% free, 33MB/33MB, paused 30us,27us total 562.222ms
+11-07 21:51:49.525  1060  3708 W .gms.persistent: Long monitor contention with owner highpool[3] (1373) at android.content.res.ApkAssets android.app.ResourcesManager.loadApkAssets(android.app.ResourcesManager$ApkKey)(ResourcesManager.java:454) waiters=0 in android.content.res.ApkAssets android.app.ResourcesManager.loadApkAssets(android.app.ResourcesManager$ApkKey) for 137ms
+11-07 21:51:49.527   286   904 I netd    : bandwidthSetGlobalAlert(2097152) <0.09ms>
+11-07 21:51:49.535   482   696 W system_server: Long monitor contention with owner NetworkStats (695) at void android.net.connectivity.com.android.server.net.NetworkStatsService.performPoll(int)(SourceFile:-1) waiters=0 in android.net.NetworkStatsHistory android.net.connectivity.com.android.server.net.NetworkStatsService.internalGetHistoryForNetwork(android.net.NetworkTemplate, int, int, int, int, long, long) for 114ms
+11-07 21:51:49.537   286   904 I netd    : bandwidthRemoveInterfaceQuota(eth0) <0.61ms>
+11-07 21:51:49.537   286   904 I netd    : bandwidthSetInterfaceQuota(eth0, 9223372036854775807) <0.34ms>
+11-07 21:51:49.597  1666  1720 I FuseDaemon: Background young concurrent copying GC freed 10164(824KB) AllocSpace objects, 27(540KB) LOS objects, 29% free, 3416KB/4825KB, paused 99us,8us total 118.360ms
+11-07 21:51:49.962   482   482 W system_server: Long monitor contention with owner android.bg (514) at void com.android.server.am.ContentProviderHelper.handleProviderRemoval(com.android.server.am.ContentProviderConnection, boolean, boolean)(ContentProviderHelper.java:1500) waiters=0 in int com.android.server.am.ActivityManagerService.getMemoryTrimLevel() for 200ms
+11-07 21:51:49.967   482  1727 W system_server: Long monitor contention with owner android.bg (514) at void com.android.server.am.ContentProviderHelper.handleProviderRemoval(com.android.server.am.ContentProviderConnection, boolean, boolean)(ContentProviderHelper.java:1500) waiters=2 in int com.android.server.am.ActivityManagerService.bindServiceInstance(android.app.IApplicationThread, android.os.IBinder, android.content.Intent, java.lang.String, android.app.IServiceConnection, int, java.lang.String, boolean, int, java.lang.String, java.lang.String, int) for 198ms
+11-07 21:51:49.989  4891  4929 I org.webrtc.Logging: CrashStartupListener: Checking conference crashes for 0 account(s).
+11-07 21:51:50.159   482   514 E system_server: No package ID 7f found for ID 0x7f0805a7.
+11-07 21:51:50.159   482   514 E system_server: No package ID 7f found for ID 0x7f150421.
+11-07 21:51:50.192   482   514 E system_server: No package ID 7f found for ID 0x7f0802b0.
+11-07 21:51:50.193   482   514 E system_server: No package ID 7f found for ID 0x7f150a40.
+11-07 21:51:50.193   482   514 E system_server: No package ID 7f found for ID 0x7f150a40.
+11-07 21:51:50.194   482   514 E system_server: No package ID 7f found for ID 0x7f150a3f.
+11-07 21:51:50.265  1015  1883 D EGL_emulation: app_time_stats: avg=742.73ms min=65.80ms max=1419.65ms count=2
+11-07 21:51:50.301  4891  4936 W ogle.android.gm: Long monitor contention with owner Blocking Thread #2 (4934) at java.lang.Object asah.a()(PG:2) waiters=0 in java.lang.Object asah.a() for 180ms
+11-07 21:51:50.407  4891  4891 D CompatibilityChangeReporter: Compat change id reported: 194532703; UID 10144; state: ENABLED
+11-07 21:51:50.409  4891  4891 W iss     : AccountUtils: For b/73513912, load account content://com.google.android.gm.sapi/account.-2137146394 from MailAppProvider. Is account valid result: 1. [CONTEXT android_log_tag="AccountUtils" ]
+11-07 21:51:50.419  4891  4891 W iss     : AccountUtils: For b/73513912, load account content://com.google.android.gm.email.provider/account.-437561172?suppress_combined%3Dtrue from MailAppProvider. Is account valid result: 1. [CONTEXT android_log_tag="AccountUtils" ]
+11-07 21:51:50.437  1656  1746 I ogle.android.as: Background concurrent copying GC freed 13013(698KB) AllocSpace objects, 0(0B) LOS objects, 39% free, 36MB/60MB, paused 28us,107us total 957.543ms
+11-07 21:51:50.474  4891  4891 W iss     : [Gmail] PhenotypeManagerImpl: Account is null, skip calling setAccount.
+11-07 21:51:50.671  4742  4836 W om.quartz.notes: JNI critical lock held for 21.532ms on Thread[16,tid=4836,Runnable,Thread*=0x73e75dd39270,peer=0x17b00418,"Instr: androidx.test.runner.AndroidJUnitRunner"]
+11-07 21:51:50.748  4891  4935 W ymo     : Toggling Chat components off.
+11-07 21:51:50.803  4891  4924 D CompatibilityChangeReporter: Compat change id reported: 160794467; UID 10144; state: ENABLED
+11-07 21:51:50.848  1060  2272 E AuthPII : [GoogleAccountDataServiceImpl] getToken() -> BAD_AUTHENTICATION. App: com.google.android.gms, Service: oauth2:https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/account.capabilities https://www.googleapis.com/auth/account.service_flags
+11-07 21:51:50.848  1060  2272 E AuthPII : abcp: Long live credential not available.
+11-07 21:51:50.848  1060  2272 E AuthPII : 	at mbt.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):8)
+11-07 21:51:50.848  1060  2272 E AuthPII : 	at mca.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+11-07 21:51:50.848  1060  2272 E AuthPII : 	at lzx.m(:com.google.android.gms@231818047@23.18.18 (190800-535401451):48)
+11-07 21:51:50.848  1060  2272 E AuthPII : 	at lyz.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):22)
+11-07 21:51:50.848  1060  2272 E AuthPII : 	at lze.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-07 21:51:50.848  1060  2272 E AuthPII : 	at mcs.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+11-07 21:51:50.848  1060  2272 E AuthPII : 	at mcs.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-07 21:51:50.848  1060  2272 E AuthPII : 	at lye.hasFeatures(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-07 21:51:50.848  1060  2272 E AuthPII : 	at android.accounts.AbstractAccountAuthenticator$Transport.hasFeatures(AbstractAccountAuthenticator.java:313)
+11-07 21:51:50.848  1060  2272 E AuthPII : 	at android.accounts.IAccountAuthenticator$Stub.onTransact(IAccountAuthenticator.java:288)
+11-07 21:51:50.848  1060  2272 E AuthPII : 	at android.os.Binder.transact(Binder.java:1164)
+11-07 21:51:50.848  1060  2272 E AuthPII : 	at aumo.onTransact(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+11-07 21:51:50.848  1060  2272 E AuthPII : 	at android.os.Binder.transact(Binder.java:1164)
+11-07 21:51:50.848  1060  2272 E AuthPII : 	at aoey.onTransact(:com.google.android.gms@231818047@23.18.18 (190800-535401451):22)
+11-07 21:51:50.848  1060  2272 E AuthPII : 	at android.os.Binder.execTransactInternal(Binder.java:1285)
+11-07 21:51:50.848  1060  2272 E AuthPII : 	at android.os.Binder.execTransact(Binder.java:1244)
+11-07 21:51:50.849  1060  2272 E AuthPII : Message is Long live credential not available.
+11-07 21:51:50.849  1060  2272 E AuthPII : abcp: Long live credential not available.
+11-07 21:51:50.849  1060  2272 E AuthPII : 	at mbt.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):8)
+11-07 21:51:50.849  1060  2272 E AuthPII : 	at mca.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+11-07 21:51:50.849  1060  2272 E AuthPII : 	at lzx.m(:com.google.android.gms@231818047@23.18.18 (190800-535401451):48)
+11-07 21:51:50.849  1060  2272 E AuthPII : 	at lyz.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):22)
+11-07 21:51:50.849  1060  2272 E AuthPII : 	at lze.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-07 21:51:50.849  1060  2272 E AuthPII : 	at mcs.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+11-07 21:51:50.849  1060  2272 E AuthPII : 	at mcs.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-07 21:51:50.849  1060  2272 E AuthPII : 	at lye.hasFeatures(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-07 21:51:50.849  1060  2272 E AuthPII : 	at android.accounts.AbstractAccountAuthenticator$Transport.hasFeatures(AbstractAccountAuthenticator.java:313)
+11-07 21:51:50.849  1060  2272 E AuthPII : 	at android.accounts.IAccountAuthenticator$Stub.onTransact(IAccountAuthenticator.java:288)
+11-07 21:51:50.849  1060  2272 E AuthPII : 	at android.os.Binder.transact(Binder.java:1164)
+11-07 21:51:50.849  1060  2272 E AuthPII : 	at aumo.onTransact(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+11-07 21:51:50.849  1060  2272 E AuthPII : 	at android.os.Binder.transact(Binder.java:1164)
+11-07 21:51:50.849  1060  2272 E AuthPII : 	at aoey.onTransact(:com.google.android.gms@231818047@23.18.18 (190800-535401451):22)
+11-07 21:51:50.849  1060  2272 E AuthPII : 	at android.os.Binder.execTransactInternal(Binder.java:1285)
+11-07 21:51:50.849  1060  2272 E AuthPII : 	at android.os.Binder.execTransact(Binder.java:1244)
+11-07 21:51:50.851  1060  2272 W Auth    : [AccountStateSyncher] Unable to look up account state from server: couldn't fetch accessToken [CONTEXT service_id=153 ]
+11-07 21:51:50.852  1060  2272 W Auth    : [GaiaServicesFlagManager] Services not available! [CONTEXT service_id=153 ]
+11-07 21:51:50.870  1060  2752 E AuthPII : [GoogleAccountDataServiceImpl] getToken() -> BAD_AUTHENTICATION. App: com.google.android.gms, Service: oauth2:https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/account.capabilities https://www.googleapis.com/auth/account.service_flags
+11-07 21:51:50.870  1060  2752 E AuthPII : abcp: Long live credential not available.
+11-07 21:51:50.870  1060  2752 E AuthPII : 	at mbt.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):8)
+11-07 21:51:50.870  1060  2752 E AuthPII : 	at mca.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+11-07 21:51:50.870  1060  2752 E AuthPII : 	at lzx.m(:com.google.android.gms@231818047@23.18.18 (190800-535401451):48)
+11-07 21:51:50.870  1060  2752 E AuthPII : 	at lyz.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):22)
+11-07 21:51:50.870  1060  2752 E AuthPII : 	at lze.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-07 21:51:50.870  1060  2752 E AuthPII : 	at mcs.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+11-07 21:51:50.870  1060  2752 E AuthPII : 	at mcs.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-07 21:51:50.870  1060  2752 E AuthPII : 	at lye.hasFeatures(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-07 21:51:50.870  1060  2752 E AuthPII : 	at android.accounts.AbstractAccountAuthenticator$Transport.hasFeatures(AbstractAccountAuthenticator.java:313)
+11-07 21:51:50.870  1060  2752 E AuthPII : 	at android.accounts.IAccountAuthenticator$Stub.onTransact(IAccountAuthenticator.java:288)
+11-07 21:51:50.870  1060  2752 E AuthPII : 	at android.os.Binder.transact(Binder.java:1164)
+11-07 21:51:50.870  1060  2752 E AuthPII : 	at aumo.onTransact(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+11-07 21:51:50.870  1060  2752 E AuthPII : 	at android.os.Binder.transact(Binder.java:1164)
+11-07 21:51:50.870  1060  2752 E AuthPII : 	at aoey.onTransact(:com.google.android.gms@231818047@23.18.18 (190800-535401451):22)
+11-07 21:51:50.870  1060  2752 E AuthPII : 	at android.os.Binder.execTransactInternal(Binder.java:1285)
+11-07 21:51:50.870  1060  2752 E AuthPII : 	at android.os.Binder.execTransact(Binder.java:1244)
+11-07 21:51:50.870  1060  2752 E AuthPII : Message is Long live credential not available.
+11-07 21:51:50.870  1060  2752 E AuthPII : abcp: Long live credential not available.
+11-07 21:51:50.870  1060  2752 E AuthPII : 	at mbt.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):8)
+11-07 21:51:50.870  1060  2752 E AuthPII : 	at mca.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+11-07 21:51:50.870  1060  2752 E AuthPII : 	at lzx.m(:com.google.android.gms@231818047@23.18.18 (190800-535401451):48)
+11-07 21:51:50.870  1060  2752 E AuthPII : 	at lyz.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):22)
+11-07 21:51:50.870  1060  2752 E AuthPII : 	at lze.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-07 21:51:50.870  1060  2752 E AuthPII : 	at mcs.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+11-07 21:51:50.870  1060  2752 E AuthPII : 	at mcs.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-07 21:51:50.870  1060  2752 E AuthPII : 	at lye.hasFeatures(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-07 21:51:50.870  1060  2752 E AuthPII : 	at android.accounts.AbstractAccountAuthenticator$Transport.hasFeatures(AbstractAccountAuthenticator.java:313)
+11-07 21:51:50.870  1060  2752 E AuthPII : 	at android.accounts.IAccountAuthenticator$Stub.onTransact(IAccountAuthenticator.java:288)
+11-07 21:51:50.870  1060  2752 E AuthPII : 	at android.os.Binder.transact(Binder.java:1164)
+11-07 21:51:50.870  1060  2752 E AuthPII : 	at aumo.onTransact(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+11-07 21:51:50.870  1060  2752 E AuthPII : 	at android.os.Binder.transact(Binder.java:1164)
+11-07 21:51:50.870  1060  2752 E AuthPII : 	at aoey.onTransact(:com.google.android.gms@231818047@23.18.18 (190800-535401451):22)
+11-07 21:51:50.870  1060  2752 E AuthPII : 	at android.os.Binder.execTransactInternal(Binder.java:1285)
+11-07 21:51:50.870  1060  2752 E AuthPII : 	at android.os.Binder.execTransact(Binder.java:1244)
+11-07 21:51:50.871  1060  2752 W Auth    : [AccountStateSyncher] Unable to look up account state from server: couldn't fetch accessToken [CONTEXT service_id=153 ]
+11-07 21:51:50.871  1060  2752 W Auth    : [GaiaServicesFlagManager] Services not available! [CONTEXT service_id=153 ]
+11-07 21:51:50.917   286   904 I netd    : tetherGetStats() -> {[]} <0.35ms>
+11-07 21:51:50.919   286   904 I netd    : bandwidthSetGlobalAlert(2097152) <0.06ms>
+11-07 21:51:50.923  4891  4905 D CompatibilityChangeReporter: Compat change id reported: 150939131; UID 10144; state: ENABLED
+11-07 21:51:51.107  2646  2653 I .android.as.oss: Background young concurrent copying GC freed 17610(1886KB) AllocSpace objects, 0(0B) LOS objects, 43% free, 2936KB/5219KB, paused 30us,9us total 105.075ms
+11-07 21:51:51.162  1060  1060 W .gms.persistent: Long monitor contention with owner lowpool[7] (3030) at boolean abnp.d(abno, android.content.ServiceConnection, java.lang.String, java.util.concurrent.Executor)(:com.google.android.gms@231818047@23.18.18 (190800-535401451):15) waiters=0 in void abnq.onServiceConnected(android.content.ComponentName, android.os.IBinder) for 108ms
+11-07 21:51:51.200   762   816 D EGL_emulation: app_time_stats: avg=2415.53ms min=2415.53ms max=2415.53ms count=1
+11-07 21:51:51.360  1321  1321 I NearbySharing: SharingTileService destroyed [CONTEXT service_id=194 ]
+11-07 21:51:51.371  2959  3195 I BugleDataModel: PendingMessagesProcessor: process from ProcessPendingMessagesAction due to scheduled processing with delay 0 with queues:
+11-07 21:51:51.392  4742  4759 I om.quartz.notes: Background concurrent copying GC freed 907758(25MB) AllocSpace objects, 0(0B) LOS objects, 18% free, 106MB/130MB, paused 761us,15us total 2.975s
+11-07 21:51:51.410  1060  3030 E GmsConnectionFactory: UID for network attribution might be misset for tag 805307399 [CONTEXT service_id=39 ]
+11-07 21:51:51.410  1060  3030 E GmsConnectionFactory: dhwp: FULL
+11-07 21:51:51.410  1060  3030 E GmsConnectionFactory: 	at d.N(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 21:51:51.410  1060  3030 E GmsConnectionFactory: 	at aobf.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):14)
+11-07 21:51:51.410  1060  3030 E GmsConnectionFactory: 	at aqzt.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):8)
+11-07 21:51:51.410  1060  3030 E GmsConnectionFactory: 	at aqzk.d(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+11-07 21:51:51.410  1060  3030 E GmsConnectionFactory: 	at aqzp.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 21:51:51.410  1060  3030 E GmsConnectionFactory: 	at aqzk.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):5)
+11-07 21:51:51.410  1060  3030 E GmsConnectionFactory: 	at aqzk.execute(:com.google.android.gms@231818047@23.18.18 (190800-535401451):8)
+11-07 21:51:51.410  1060  3030 E GmsConnectionFactory: 	at aqzk.execute(:com.google.android.gms@231818047@23.18.18 (190800-535401451):7)
+11-07 21:51:51.410  1060  3030 E GmsConnectionFactory: 	at apiy.h(:com.google.android.gms@231818047@23.18.18 (190800-535401451):51)
+11-07 21:51:51.410  1060  3030 E GmsConnectionFactory: 	at apit.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+11-07 21:51:51.410  1060  3030 E GmsConnectionFactory: 	at aced.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-07 21:51:51.410  1060  3030 E GmsConnectionFactory: 	at aced.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):7)
+11-07 21:51:51.410  1060  3030 E GmsConnectionFactory: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-07 21:51:51.410  1060  3030 E GmsConnectionFactory: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-07 21:51:51.410  1060  3030 E GmsConnectionFactory: 	at acjn.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 21:51:51.410  1060  3030 E GmsConnectionFactory: 	at java.lang.Thread.run(Thread.java:1012)
+11-07 21:51:51.542  2959  3195 I BugleDataModel: PendingMessagesProcessor: process from ProcessPendingMessagesAction due to scheduled processing with delay 0 with queues:
+11-07 21:51:51.891  1060  1401 I WakefulBroadcastRcvr: Processing wakeful broadcast: BootOrGmsUpdated
+11-07 21:51:51.905  1060  3737 I NearbyConnections: Runtime state initialization complete. Nearby connections setting is disabled [CONTEXT service_id=54 ]
+11-07 21:51:51.926  1060  3133 I NearbyMediums: BluetoothAdapter's name was not set by Nearby Connections, ignoring call to restore default scan mode. [CONTEXT service_id=54 ]
+11-07 21:51:51.935  1321  4932 E PhenotypeRegOp: Attempting to overwrite config package for com.google.android.gms.games [CONTEXT service_id=231 ]
+11-07 21:51:51.937  1060  3133 I NearbyMediums: BluetoothAdapter's name was not set by Nearby Connections, ignoring call to restore device name [CONTEXT service_id=54 ]
+11-07 21:51:51.939  2959  3195 I BugleDataModel: PendingMessagesProcessor: process from ProcessPendingMessagesAction due to scheduled processing with delay 0 with queues:
+11-07 21:51:51.961   776   789 I PermissionControllerServiceImpl: Updating user sensitive for uid 10144
+11-07 21:51:51.964   482   584 I RoleService: Granting default roles...
+11-07 21:51:51.968   482   594 I InputReader: Reconfiguring input devices, changes=KEYBOARD_LAYOUTS |
+11-07 21:51:51.970   955   955 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-07 21:51:51.970   955   955 D MediaPlayerList: Name of package changed: com.google.android.gm
+11-07 21:51:51.971   955   955 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-07 21:51:51.971   955   955 D MediaPlayerList: Name of package changed: com.google.android.gm
+11-07 21:51:51.974  2959  3117 I Bugle   : BroadcastReceiverAsyncWorkTracker: Acknowledging broadcast of atsi@4ad15e6
+11-07 21:51:51.979   762   762 D ControlsListingControllerImpl: ServiceConfig reloaded, count: 0
+11-07 21:51:51.986  1321  4932 E PhenotypeRegOp: Attempting to overwrite config package for com.google.android.gms.maps#com.google.android.gms [CONTEXT service_id=231 ]
+11-07 21:51:52.016  1060  1060 D BoundBrokerSvc: onRebind: Intent { act=com.google.android.gms.clearcut.bootcount.service.START pkg=com.google.android.gms }
+11-07 21:51:52.026  3974  4972 I ProvidersCache: Provider returned no roots. Possibly naughty: com.google.android.apps.docs.storage
+11-07 21:51:52.029  1060  1401 I Fitness : OnPackageChangedOperation got intent: Intent { act=android.intent.action.PACKAGE_CHANGED dat=package: flg=0x45000010 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.PersistentIntentOperationService (has extras) } [CONTEXT service_id=17 ]
+11-07 21:51:52.035  1060  4500 I Fitness : FitCleanupIntentOperation received Intent android.intent.action.PACKAGE_CHANGED [CONTEXT service_id=17 ]
+11-07 21:51:52.045   982   982 D CarrierSvcBindHelper: onPackageModified: com.google.android.gm
+11-07 21:51:52.046   982   982 D CarrierSvcBindHelper: No carrier app for: 0
+11-07 21:51:52.063  1788  1854 I earchbox:search: JIT allocated 77KB for compiled code of java.lang.Object com.google.android.apps.gsa.binaries.velvet.app.amm.d()
+11-07 21:51:52.066   982   982 D ImsResolver: maybeAddedImsService, packageName: com.google.android.gm
+11-07 21:51:52.070  1321  4932 E PhenotypeRegOp: Attempting to overwrite config package for com.google.android.gms.cast [CONTEXT service_id=231 ]
+11-07 21:51:52.072  1788  1788 I CalRefreshTaskCtrl: #onDeviceInstallOrBoot(): Starting calendar refresh task.
+11-07 21:51:52.079   776   946 W Role    : Default holder doesn't have required signing certificate: com.google.android.apps.work.clouddpc:23962F4B43B9857638EA66F4D419518EAE282491ACDA4B94707BD59003C45E58
+11-07 21:51:52.081  1788  1788 I CalRefreshTaskCtrl: #refreshCalendarData()
+11-07 21:51:52.093  1788  1788 I CalRefreshTaskCtrl: Do not refresh calendar data because Smartspace is not available on device.
+11-07 21:51:52.096  1788  1788 I CalWorkerScheduler: Scheduling calendar refresh task status check worker at device reboot or app install.
+11-07 21:51:52.130  1788  2933 I A       : Core Geller initializer successfully triggered.
+11-07 21:51:52.144  4891  4950 E PhenotypeFlagCommitter: Retrieving snapshot for com.google.android.gm#com.google.android.gm_Hub failed
+11-07 21:51:52.144  4891  4950 E PhenotypeFlagCommitter: java.util.concurrent.TimeoutException: Timed out waiting for Task
+11-07 21:51:52.144  4891  4950 E PhenotypeFlagCommitter: 	at ogi.v(PG:7)
+11-07 21:51:52.144  4891  4950 E PhenotypeFlagCommitter: 	at qgi.a(PG:2)
+11-07 21:51:52.144  4891  4950 E PhenotypeFlagCommitter: 	at qgi.j(PG:2)
+11-07 21:51:52.144  4891  4950 E PhenotypeFlagCommitter: 	at qgi.h(Unknown Source:4)
+11-07 21:51:52.144  4891  4950 E PhenotypeFlagCommitter: 	at gdz.run(PG:7)
+11-07 21:51:52.144  4891  4950 E PhenotypeFlagCommitter: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-07 21:51:52.144  4891  4950 E PhenotypeFlagCommitter: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-07 21:51:52.144  4891  4950 E PhenotypeFlagCommitter: 	at java.lang.Thread.run(Thread.java:1012)
+11-07 21:51:52.193  1788  2306 I A       : Cobalt: try to find ProjectConfig for given tags
+11-07 21:51:52.195  1788  2306 W A       : Cobalt: couldn't find ProjectConfig for given tags
+11-07 21:51:52.199  1321  4932 E PhenotypeRegOp: Attempting to overwrite config package for com.google.android.gms.mobile_data_plan [CONTEXT service_id=231 ]
+11-07 21:51:52.265   286   904 I netd    : tetherGetStats() -> {[]} <0.35ms>
+11-07 21:51:52.275   286   904 I netd    : bandwidthSetGlobalAlert(2097152) <0.09ms>
+11-07 21:51:52.283  1788  1788 I A       : Setting OMP browser to 2.
+11-07 21:51:52.293  1788  1788 I A       : Scheduling growth periodic tasks
+11-07 21:51:52.294  1788  1788 I WeatherWorkerScheduler: Scheduling weather workers.
+11-07 21:51:52.294  1788  1788 I PcpLocalCalendarStartup: #onDeviceInstallOrBoot(): Starting PCP calendar tasks.
+11-07 21:51:52.295  1788  1788 I PcpLocalCalendarStartup: PCP calendar migration is not enabled.
+11-07 21:51:52.298  1321  4932 E PhenotypeRegOp: Attempting to overwrite config package for com.google.android.gms.udc [CONTEXT service_id=231 ]
+11-07 21:51:52.320  1788  2933 I A       : #Utterance files for modelType-1 found-0
+11-07 21:51:52.323  1788  2933 I A       : Utterances rename task completed.
+11-07 21:51:52.335   286   904 I netd    : bandwidthRemoveInterfaceQuota(eth0) <0.47ms>
+11-07 21:51:52.336   286   904 I netd    : bandwidthSetInterfaceQuota(eth0, 9223372036854775807) <0.45ms>
+11-07 21:51:52.343  1788  1788 I A       : Util.isLowRamDevice: false, canUsePreemptibleAudioSource: true
+11-07 21:51:52.364  1788  1788 I GnpSdk  : [ChimeBroadcastReceiver] Intent received for action [android.intent.action.BOOT_COMPLETED] package [com.google.android.googlequicksearchbox].
+11-07 21:51:52.364  1788  1788 I GnpSdk  : [ChimeBroadcastReceiver] Phenotype initialized.
+11-07 21:51:52.369  1788  1788 I GnpSdk  : [ChimeBroadcastReceiver] Validation OK for action [android.intent.action.BOOT_COMPLETED].
+11-07 21:51:52.374   286   904 I netd    : bandwidthRemoveInterfaceQuota(eth0) <0.40ms>
+11-07 21:51:52.377  1788  1788 W SnapshotHandler: Unable to retrieve flag snapshot for com.google.android.libraries.notifications#com.google.android.googlequicksearchbox, using defaults.
+11-07 21:51:52.377  1788  1788 W SnapshotHandler: java.io.FileNotFoundException: /data/user/0/com.google.android.googlequicksearchbox/files/phenotype/shared/com.google.android.libraries.notifications#com.google.android.googlequicksearchbox.pb: open failed: ENOENT (No such file or directory)
+11-07 21:51:52.377  1788  1788 W SnapshotHandler: 	at libcore.io.IoBridge.open(IoBridge.java:574)
+11-07 21:51:52.377  1788  1788 W SnapshotHandler: 	at java.io.FileInputStream.<init>(FileInputStream.java:160)
+11-07 21:51:52.377  1788  1788 W SnapshotHandler: 	at com.google.android.libraries.storage.a.a.v.e(PG:3)
+11-07 21:51:52.377  1788  1788 W SnapshotHandler: 	at com.google.android.libraries.storage.a.a.c.e(PG:2)
+11-07 21:51:52.377  1788  1788 W SnapshotHandler: 	at com.google.android.libraries.storage.a.g.n.b(PG:1)
+11-07 21:51:52.377  1788  1788 W SnapshotHandler: 	at com.google.android.libraries.storage.a.g.m.a(PG:1)
+11-07 21:51:52.377  1788  1788 W SnapshotHandler: 	at com.google.android.libraries.storage.a.i.c(PG:2)
+11-07 21:51:52.377  1788  1788 W SnapshotHandler: 	at com.google.android.libraries.phenotype.client.stable.aa.b(PG:3)
+11-07 21:51:52.377  1788  1788 W SnapshotHandler: 	at com.google.android.libraries.phenotype.client.stable.bb.c(PG:12)
+11-07 21:51:52.377  1788  1788 W SnapshotHandler: 	at com.google.android.libraries.phenotype.client.stable.bb.a(PG:1)
+11-07 21:51:52.377  1788  1788 W SnapshotHandler: 	at f.a.a.e.a.c.c(PG:1)
+11-07 21:51:52.377  1788  1788 W SnapshotHandler: 	at com.google.android.libraries.notifications.entrypoints.c.onReceive(PG:25)
+11-07 21:51:52.377  1788  1788 W SnapshotHandler: 	at android.app.ActivityThread.handleReceiver(ActivityThread.java:4307)
+11-07 21:51:52.377  1788  1788 W SnapshotHandler: 	at android.app.ActivityThread.-$$Nest$mhandleReceiver(Unknown Source:0)
+11-07 21:51:52.377  1788  1788 W SnapshotHandler: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2153)
+11-07 21:51:52.377  1788  1788 W SnapshotHandler: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+11-07 21:51:52.377  1788  1788 W SnapshotHandler: 	at android.os.Looper.loopOnce(Looper.java:201)
+11-07 21:51:52.377  1788  1788 W SnapshotHandler: 	at android.os.Looper.loop(Looper.java:288)
+11-07 21:51:52.377  1788  1788 W SnapshotHandler: 	at android.app.ActivityThread.main(ActivityThread.java:7924)
+11-07 21:51:52.377  1788  1788 W SnapshotHandler: 	at java.lang.reflect.Method.invoke(Native Method)
+11-07 21:51:52.377  1788  1788 W SnapshotHandler: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:548)
+11-07 21:51:52.377  1788  1788 W SnapshotHandler: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:936)
+11-07 21:51:52.377  1788  1788 W SnapshotHandler: Caused by: android.system.ErrnoException: open failed: ENOENT (No such file or directory)
+11-07 21:51:52.377  1788  1788 W SnapshotHandler: 	at libcore.io.Linux.open(Native Method)
+11-07 21:51:52.377  1788  1788 W SnapshotHandler: 	at libcore.io.ForwardingOs.open(ForwardingOs.java:563)
+11-07 21:51:52.377  1788  1788 W SnapshotHandler: 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:274)
+11-07 21:51:52.377  1788  1788 W SnapshotHandler: 	at libcore.io.ForwardingOs.open(ForwardingOs.java:563)
+11-07 21:51:52.377  1788  1788 W SnapshotHandler: 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7810)
+11-07 21:51:52.377  1788  1788 W SnapshotHandler: 	at libcore.io.IoBridge.open(IoBridge.java:560)
+11-07 21:51:52.377  1788  1788 W SnapshotHandler: 	... 21 more
+11-07 21:51:52.380   286   904 I netd    : bandwidthSetInterfaceQuota(eth0, 9223372036854775807) <1.44ms>
+11-07 21:51:52.381  1788  1788 I GnpSdk  : [ChimeExecutorApiImpl-Tiktok] Submitting Broadcast execution [168358108] to tiktok executor.
+11-07 21:51:52.381  1788  2708 I GnpSdk  : [ChimeBroadcastReceiver] Executing action in BroadcastReceiver [android.intent.action.BOOT_COMPLETED].
+11-07 21:51:52.395   482   761 D NetworkStatsObservers: Unregistering RequestInfo from pid/uid:482/1000(android) for DataUsageRequest [ requestId=7, networkTemplate=NetworkTemplate: matchRule=MOBILE, matchSubscriberIds=[310260...], matchWifiNetworkKeys=[], metered=YES, defaultNetwork=NO, thresholdInBytes=3564606 ] accessLevel:3
+11-07 21:51:52.395   482   696 D NetworkStatsObservers: Registering observer for RequestInfo from pid/uid:482/1000(android) for DataUsageRequest [ requestId=8, networkTemplate=NetworkTemplate: matchRule=MOBILE, matchSubscriberIds=[310260...], matchWifiNetworkKeys=[], metered=YES, defaultNetwork=NO, thresholdInBytes=3562096 ] accessLevel:3
+11-07 21:51:52.404   776   784 I ssioncontroller: Background young concurrent copying GC freed 76468(4399KB) AllocSpace objects, 0(0B) LOS objects, 55% free, 3422KB/7774KB, paused 841us,10us total 229.208ms
+11-07 21:51:52.429  1788  2306 I WM-WorkerWrapper: Worker result SUCCESS for Work [ id=5c332d82-9dbb-4d59-83c7-b6a4e0941d0f, tags={ com.google.apps.tiktok.contrib.work.TikTokListenableWorker, TikTokWorker#com.google.android.apps.gsa.staticplugins.chime.registration.tasks.PeriodicChimeRegistrationWorker } ]
+11-07 21:51:52.432  1060  3030 E GmsTaskScheduler: sendWakeUpEvent called on SchedulerClientBroadcastStrategy
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: Unable to retrieve flag snapshot for com.google.android.libraries.notifications.platform#com.google.android.googlequicksearchbox, using defaults.
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: java.io.FileNotFoundException: /data/user/0/com.google.android.googlequicksearchbox/files/phenotype/shared/com.google.android.libraries.notifications.platform#com.google.android.googlequicksearchbox.pb: open failed: ENOENT (No such file or directory)
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: 	at libcore.io.IoBridge.open(IoBridge.java:574)
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: 	at java.io.FileInputStream.<init>(FileInputStream.java:160)
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: 	at com.google.android.libraries.storage.a.a.v.e(PG:3)
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: 	at com.google.android.libraries.storage.a.a.c.e(PG:2)
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: 	at com.google.android.libraries.storage.a.g.n.b(PG:1)
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: 	at com.google.android.libraries.storage.a.g.m.a(PG:1)
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: 	at com.google.android.libraries.storage.a.i.c(PG:2)
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: 	at com.google.android.libraries.phenotype.client.stable.aa.b(PG:3)
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: 	at com.google.android.libraries.phenotype.client.stable.bb.c(PG:12)
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: 	at com.google.android.libraries.phenotype.client.stable.bb.a(PG:1)
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: 	at f.a.a.i.a.i.b(PG:1)
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: 	at f.a.a.i.a.g.c(PG:1)
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: 	at com.google.android.libraries.notifications.data.impl.n.f(PG:1)
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: 	at com.google.android.libraries.notifications.data.impl.n.a(PG:2)
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: 	at com.google.android.libraries.notifications.data.impl.o.a(PG:2)
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: 	at com.google.android.libraries.notifications.o.a.a.b(PG:5)
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: 	at com.google.android.libraries.notifications.entrypoints.restart.a.b(PG:14)
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: 	at com.google.android.libraries.notifications.entrypoints.c.b(PG:3)
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: 	at com.google.android.libraries.notifications.entrypoints.b.run(PG:2)
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: 	at com.google.apps.tiktok.tracing.ei.run(PG:2)
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:463)
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: 	at com.google.common.util.concurrent.dy.a(PG:1)
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: 	at com.google.common.util.concurrent.cv.run(PG:4)
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: 	at com.google.common.util.concurrent.dz.run(PG:1)
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: 	at com.google.android.libraries.i.i.run(PG:2)
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: 	at com.google.android.libraries.i.p.run(PG:4)
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: 	at java.lang.Thread.run(Thread.java:1012)
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: Caused by: android.system.ErrnoException: open failed: ENOENT (No such file or directory)
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: 	at libcore.io.Linux.open(Native Method)
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: 	at libcore.io.ForwardingOs.open(ForwardingOs.java:563)
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:274)
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: 	at libcore.io.ForwardingOs.open(ForwardingOs.java:563)
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7810)
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: 	at libcore.io.IoBridge.open(IoBridge.java:560)
+11-07 21:51:52.457  1788  2708 W SnapshotHandler: 	... 28 more
+11-07 21:51:52.477  1788  2306 I A       : Cobalt: try to find ProjectConfig for given tags
+11-07 21:51:52.477  1788  2306 W A       : Cobalt: couldn't find ProjectConfig for given tags
+11-07 21:51:52.479  1788  2306 I A       : Cobalt: try to find ProjectConfig for given tags
+11-07 21:51:52.479  1788  2306 W A       : Cobalt: couldn't find ProjectConfig for given tags
+11-07 21:51:52.480  1788  1788 I A       : Start work
+11-07 21:51:52.483  1788  2311 I WM-WorkerWrapper: Worker result SUCCESS for Work [ id=664b28aa-94e8-4bcc-85cf-66084bfc0ca5, tags={ com.google.apps.tiktok.contrib.work.TikTokListenableWorker, TikTokWorker#com.google.android.apps.gsa.staticplugins.opa.worker.nudgeui.ResetOpaNgaQueryCounterTask } ]
+11-07 21:51:52.493  1788  2708 I GnpSdk  : [ChimeExecutorApiImpl-Tiktok] Finished Broadcast execution [168358108].
+11-07 21:51:52.504  1788  2311 I WM-WorkerWrapper: Worker result SUCCESS for Work [ id=098e7609-5852-4e8f-903c-7ca3e17b6b71, tags={ com.google.apps.tiktok.contrib.work.TikTokListenableWorker, TikTokWorker#com.google.android.apps.gsa.smartspace.task.LoggerTask } ]
+11-07 21:51:52.506   286   904 I netd    : tetherGetStats() -> {[]} <0.51ms>
+11-07 21:51:52.537  1788  1788 I A       : Intent { act=android.intent.action.BOOT_COMPLETED flg=0x89000010 cmp=com.google.android.googlequicksearchbox/com.google.android.apps.search.assistant.platform.contexttrigger.impl.ContextTriggerBroadcastReceiver_Receiver (has extras) }
+11-07 21:51:52.545  1788  2353 W A       : No value provided for the places model index flag.
+11-07 21:51:52.563  2959  3195 I BugleDataModel: PendingMessagesProcessor: process from ProcessPendingMessagesAction due to scheduled processing with delay 0 with queues:
+11-07 21:51:52.585  1788  1788 V ClearcutMetricXmitter: Transmission is done.
+11-07 21:51:52.618  1788  1788 I o       : processValidityUpdateForAllData
+11-07 21:51:52.697  1321  4126 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.googlequicksearchbox componentName=AMBIENT_ASSISTANT serviceId=32
+11-07 21:51:52.706  1321  1321 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.ocr.service.internal.START dat=chimera-action:/... cmp=com.google.android.gms/.chimera.GmsInternalApiService }
+11-07 21:51:52.739  1060  1060 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.semanticlocation.service.START_ODLH pkg=com.google.android.gms }
+11-07 21:51:52.739  1060  1060 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.semanticlocation.service.START_ODLH pkg=com.google.android.gms }
+11-07 21:51:52.752  1321  1321 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.wallet.service.BIND pkg=com.google.android.gms }
+11-07 21:51:52.752  1321  1321 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.wallet.service.BIND pkg=com.google.android.gms }
+11-07 21:51:52.769  1788  1788 V ClearcutMetricXmitter: Transmission is done.
+11-07 21:51:52.779  2815  2815 I CarrierServices: [2] CarrierServicesBaseApp.initialize:126 Initialized already, return.
+11-07 21:51:52.823  2815  2815 I CarrierServices: [2] RcsAutoStartReceiver.a: RcsAutoStartReceiver triggered. Fetching RCS State. Action: android.intent.action.BOOT_COMPLETED
+11-07 21:51:52.838  1060  1060 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.tapandpay.service.BIND dat=chimera-action:/... cmp=com.google.android.gms/.chimera.PersistentApiService }
+11-07 21:51:52.838  4742  4983 D ProfileInstaller: Installing profile for com.quartz.notes
+11-07 21:51:52.840  1060  1060 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.tapandpay.service.BIND dat=chimera-action:/... cmp=com.google.android.gms/.chimera.PersistentApiService }
+11-07 21:51:52.885  2815  2815 I CarrierServices: [2] RcsStateFetcher.bindService:108 Migration binding to RcsMigrationService
+11-07 21:51:52.921  2959  2959 I BugleDataModel: RcsMigrationService: Returning RCS state provider.
+11-07 21:51:52.933  1509  1944 I LauncherIconVisibilityInitializerBase: LauncherIconVisibilityInitializerBase.lambda$doUpdate$1():69 doUpdate() : Visible = false
+11-07 21:51:52.941  2959  3195 I BugleDataModel: PendingMessagesProcessor: process from ProcessPendingMessagesAction due to scheduled processing with delay 0 with queues:
+11-07 21:51:52.948  1321  1321 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.pay.service.BIND dat=chimera-action:/... cmp=com.google.android.gms/.chimera.GmsApiService }
+11-07 21:51:52.949  1321  1321 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.pay.service.BIND dat=chimera-action:/... cmp=com.google.android.gms/.chimera.GmsApiService }
+11-07 21:51:52.961   287   287 D Zygote  : Forked child process 4988
+11-07 21:51:52.985  4988  4988 I timeinitializer: Using CollectorTypeCC GC.
+11-07 21:51:52.991  4988  4988 W timeinitializer: Unexpected CPU variant for x86: x86_64.
+11-07 21:51:52.991  4988  4988 W timeinitializer: Known variants: atom, sandybridge, silvermont, kabylake, default
+11-07 21:51:53.021   372   395 I adbd    : jdwp connection from 4988
+11-07 21:51:53.045  4988  4988 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10110; state: ENABLED
+11-07 21:51:53.062  2959  2972 I RcsProvisioning: Failed to read config: no config found /data/user/0/com.google.android.apps.messaging/files/rcsconfig: open failed: ENOENT (No such file or directory)
+11-07 21:51:53.067  4988  4988 D nativeloader: Configuring vendor-classloader-namespace for unbundled product apk /product/priv-app/GoogleOneTimeInitializer/GoogleOneTimeInitializer.apk. target_sdk_version=33, uses_libraries=, library_path=/product/priv-app/GoogleOneTimeInitializer/lib/x86_64:/product/lib64:/system/product/lib64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.onetimeinitializer:/product/lib64:/system/product/lib64
+11-07 21:51:53.074  4988  4988 V GraphicsEnvironment: ANGLE Developer option for 'com.google.android.onetimeinitializer' set to: 'default'
+11-07 21:51:53.075  4988  4988 V GraphicsEnvironment: ANGLE GameManagerService for com.google.android.onetimeinitializer: false
+11-07 21:51:53.075  4988  4988 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-07 21:51:53.076  4988  4988 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-07 21:51:53.076  4988  4988 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-07 21:51:53.077  4988  4988 V OneTimeInitializerReceiver: OneTimeInitializerReceiver.onReceive
+11-07 21:51:53.079   776   789 I PermissionControllerServiceImpl: Updating user sensitive for uid 10119
+11-07 21:51:53.082   482   584 I RoleService: Granting default roles...
+11-07 21:51:53.084   955   955 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-07 21:51:53.085   955   955 D MediaPlayerList: Name of package changed: com.google.android.googlequicksearchbox
+11-07 21:51:53.091   955   955 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-07 21:51:53.091   955   955 D MediaPlayerList: Name of package changed: com.google.android.googlequicksearchbox
+11-07 21:51:53.093   982   982 D CarrierSvcBindHelper: onPackageModified: com.google.android.googlequicksearchbox
+11-07 21:51:53.094   762   762 D ControlsListingControllerImpl: ServiceConfig reloaded, count: 0
+11-07 21:51:53.097  4988  5005 V OneTimeInitializer: OneTimeInitializer.initialize
+11-07 21:51:53.098   982   982 D CarrierSvcBindHelper: No carrier app for: 0
+11-07 21:51:53.099   982   982 D ImsResolver: maybeAddedImsService, packageName: com.google.android.googlequicksearchbox
+11-07 21:51:53.100  2959  3117 I Bugle   : BroadcastReceiverAsyncWorkTracker: Acknowledging broadcast of atsi@4ad15e6
+11-07 21:51:53.110  4988  5005 V OneTimeInitializer: Device Policy is not installed, doing nothing.
+11-07 21:51:53.150  3974  5011 I ProvidersCache: Provider returned no roots. Possibly naughty: com.google.android.apps.docs.storage
+11-07 21:51:53.174  1060  3735 I Fitness : OnPackageChangedOperation got intent: Intent { act=android.intent.action.PACKAGE_CHANGED dat=package: flg=0x45000010 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.PersistentIntentOperationService (has extras) } [CONTEXT service_id=17 ]
+11-07 21:51:53.197  1321  4518 W MDM     : [261] aywf.d: Q+ devices does not need device admin.
+11-07 21:51:53.225   482   594 I InputReader: Reconfiguring input devices, changes=KEYBOARD_LAYOUTS |
+11-07 21:51:53.228  1060  5016 I Fitness : FitCleanupIntentOperation received Intent android.intent.action.PACKAGE_CHANGED [CONTEXT service_id=17 ]
+11-07 21:51:53.401  2959  2972 I RcsProvisioning: Failed to read config: no config found /data/user/0/com.google.android.apps.messaging/files/rcsconfig: open failed: ENOENT (No such file or directory)
+11-07 21:51:53.405   776   776 D CompatibilityChangeReporter: Compat change id reported: 194532703; UID 10166; state: ENABLED
+11-07 21:51:53.417   776   776 I HibernationPolicy: scheduleHibernationJob with frequency 1296000000ms and threshold 7776000000ms
+11-07 21:51:53.469   776   946 W Role    : Default holder doesn't have required signing certificate: com.google.android.apps.work.clouddpc:23962F4B43B9857638EA66F4D419518EAE282491ACDA4B94707BD59003C45E58
+11-07 21:51:53.480   776   776 I HibernationPolicy: user 0 is a profileowner. Running hibernation job.
+11-07 21:51:53.481   776   776 I HibernationPolicy: No existing job, scheduling a new one
+11-07 21:51:53.483  1321  4132 W Icing   : No valid account for uploading user actions
+11-07 21:51:53.490  4742  4759 I om.quartz.notes: Background young concurrent copying GC freed 495026(12MB) AllocSpace objects, 52(41MB) LOS objects, 8% free, 118MB/130MB, paused 78us,13us total 1.189s
+11-07 21:51:53.508  2815  3512 I CarrierServices: [63] RcsStateSaver.saveRcsState:57 Saving RCS State
+11-07 21:51:53.508  2815  3512 I CarrierServices: [63] RcsStateSaver.saveRcsState:66 Old operation mode: 2
+11-07 21:51:53.509  2815  3512 I CarrierServices: [63] RcsStateSaver.saveRcsState:71 New operation mode: 2
+11-07 21:51:53.511  2815  2815 I CarrierServices: [2] RcsStateFetcher$1.onPostExecute:189 Finalizing migration for RCS state: Operation mode FULL STACK
+11-07 21:51:53.514  2959  2972 I BugleRcsEngine: [36] RcsStateProvider.onMigrationComplete: Migration complete.
+11-07 21:51:53.529  2815  2815 I CarrierServices: [2] RcsStateFetcher$GetRcsStateConnection.onFinish:162 Unbinding RcsMigrationService
+11-07 21:51:53.535  2959  3195 I BugleRcsEngine: [77] RcsStateProvider.lambda$onMigrationComplete$0$com-google-android-apps-messaging-rcsmigration-RcsStateProvider: Rcs Engine should be running in cs.apk. Stopping JibeService.
+11-07 21:51:53.536  2959  3195 I RcsClientLib: Disconnecting ChatSessionService
+11-07 21:51:53.541  2959  3088 W Bugle   : TextClassifierLibManagerImpl: Reclaiming memory at level: 40
+11-07 21:51:53.541  2815  3441 I CarrierServices: [62] EventHubProxy.unsubscribe: Removing event listener 218181286 for category 2 for hub UI
+11-07 21:51:53.546  2815  3441 I CarrierServices: [62] EventHubProxy.unsubscribe: Removing event listener 140558824 for category 3 for hub UI
+11-07 21:51:53.547  2815  3441 I CarrierServices: [62] EventHubProxy.unsubscribe: Removing event listener 230125569 for category 5 for hub UI
+11-07 21:51:53.547  2959  3195 I RcsClientLib: Disconnecting EventService
+11-07 21:51:53.549  2959  3195 I RcsClientLib: Disconnecting ContactsService
+11-07 21:51:53.551  2959  3195 I RcsClientLib: Disconnecting FileTransferService
+11-07 21:51:53.552   482   495 I system_server: Background young concurrent copying GC freed 693276(23MB) AllocSpace objects, 22(440KB) LOS objects, 45% free, 26MB/48MB, paused 100us,58us total 219.965ms
+11-07 21:51:53.554  2959  3195 I RcsClientLib: Disconnecting LocationSharingService
+11-07 21:51:53.555  2959  3195 I RcsClientLib: Disconnecting ImsConnectionTrackerService
+11-07 21:51:53.556  2959  3195 I RcsClientLib: Disconnecting RcsProfileService
+11-07 21:51:53.559  2959  3195 I RcsClientLib: Disconnecting BusinessInfoService
+11-07 21:51:53.561  2959  3195 I RcsClientLib: Disconnecting RcsMessagingService
+11-07 21:51:53.562  2959  3195 I RcsClientLib: Disconnecting TransportControlService
+11-07 21:51:53.564  2959  3195 W BugleRcs: disconnecting from all Rcs Services
+11-07 21:51:53.565  2959  3195 I BugleRcsEngine: [77] RcsStateProvider.lambda$onMigrationComplete$0$com-google-android-apps-messaging-rcsmigration-RcsStateProvider: JibeService stopped: false
+11-07 21:51:53.566  2959  3195 I RcsClientLib: Connecting ChatSessionService
+11-07 21:51:53.568  2959  3195 I RcsClientLib: shouldUseCarrierServicesJibeService: true, CarrierServices rcs service found: true
+11-07 21:51:53.571  2959  3195 I RcsClientLib: Connecting EventService
+11-07 21:51:53.572  2959  3112 I RcsClientLib: com.google.android.rcs.client.chatsession.ChatSessionService connected
+11-07 21:51:53.572  2959  3112 I BugleRcs: com.google.android.rcs.client.chatsession.ChatSessionService RCS service connected
+11-07 21:51:53.574  2959  3195 I RcsClientLib: shouldUseCarrierServicesJibeService: true, CarrierServices rcs service found: true
+11-07 21:51:53.576  2959  3195 I RcsClientLib: Connecting ContactsService
+11-07 21:51:53.576  2959  3112 I RcsClientLib: com.google.android.rcs.client.events.EventService connected
+11-07 21:51:53.576  2959  3112 I BugleRcs: com.google.android.rcs.client.events.EventService RCS service connected
+11-07 21:51:53.588  2959  3195 I RcsClientLib: shouldUseCarrierServicesJibeService: true, CarrierServices rcs service found: true
+11-07 21:51:53.592  2959  3195 I RcsClientLib: Connecting FileTransferService
+11-07 21:51:53.592  2959  3112 I RcsClientLib: com.google.android.rcs.client.contacts.ContactsService connected
+11-07 21:51:53.592  2959  3112 I BugleRcs: com.google.android.rcs.client.contacts.ContactsService RCS service connected
+11-07 21:51:53.597  2959  3195 I RcsClientLib: shouldUseCarrierServicesJibeService: true, CarrierServices rcs service found: true
+11-07 21:51:53.599  2959  3195 I RcsClientLib: Connecting LocationSharingService
+11-07 21:51:53.599  2959  3112 I RcsClientLib: com.google.android.rcs.client.filetransfer.FileTransferService connected
+11-07 21:51:53.599  2959  3112 I BugleRcs: com.google.android.rcs.client.filetransfer.FileTransferService RCS service connected
+11-07 21:51:53.601  1666  1720 I FuseDaemon: Background young concurrent copying GC freed 15526(865KB) AllocSpace objects, 15(300KB) LOS objects, 25% free, 3572KB/4825KB, paused 32us,11us total 126.962ms
+11-07 21:51:53.602  2959  3195 I RcsClientLib: shouldUseCarrierServicesJibeService: true, CarrierServices rcs service found: true
+11-07 21:51:53.604  2959  3112 I RcsClientLib: com.google.android.rcs.client.locationsharing.LocationSharingService connected
+11-07 21:51:53.604  2959  3112 I BugleRcs: com.google.android.rcs.client.locationsharing.LocationSharingService RCS service connected
+11-07 21:51:53.604  2959  3195 I RcsClientLib: Connecting ImsConnectionTrackerService
+11-07 21:51:53.608  2959  3195 I RcsClientLib: shouldUseCarrierServicesJibeService: true, CarrierServices rcs service found: true
+11-07 21:51:53.610  2959  3195 I RcsClientLib: Connecting RcsProfileService
+11-07 21:51:53.610  2959  3112 I RcsClientLib: com.google.android.rcs.client.ims.ImsConnectionTrackerService connected
+11-07 21:51:53.610  2959  3112 I BugleRcs: com.google.android.rcs.client.ims.ImsConnectionTrackerService RCS service connected
+11-07 21:51:53.612  2959  3195 I RcsClientLib: shouldUseCarrierServicesJibeService: true, CarrierServices rcs service found: true
+11-07 21:51:53.613  2959  3112 I BugleRcs: subscribing to global rcs listener
+11-07 21:51:53.615  2959  3195 I RcsClientLib: Connecting BusinessInfoService
+11-07 21:51:53.616  2959  3195 I RcsClientLib: shouldUseCarrierServicesJibeService: true, CarrierServices rcs service found: true
+11-07 21:51:53.619  2815  2827 I CarrierServices: [37] EventHubProxy.subscribe: Adding event listener com.google.android.ims.rcsservice.events.IEventObserver$Stub$Proxy@741494 for category 3 with key 7607444 for hub UI
+11-07 21:51:53.619  2959  3195 I RcsClientLib: Connecting RcsMessagingService
+11-07 21:51:53.621  2959  3195 I RcsClientLib: shouldUseCarrierServicesJibeService: true, CarrierServices rcs service found: true
+11-07 21:51:53.623  2959  3195 I RcsClientLib: Connecting TransportControlService
+11-07 21:51:53.623  2815  3224 I CarrierServices: [59] EventHubProxy.subscribe: Adding event listener com.google.android.ims.rcsservice.events.IEventObserver$Stub$Proxy@e2a0b3d for category 5 with key 237636413 for hub UI
+11-07 21:51:53.625  2815  3631 I CarrierServices: [69] EventHubProxy.subscribe: Adding event listener com.google.android.ims.rcsservice.events.IEventObserver$Stub$Proxy@5818f32 for category 2 with key 92376882 for hub UI
+11-07 21:51:53.625  2959  3195 I RcsClientLib: shouldUseCarrierServicesJibeService: true, CarrierServices rcs service found: true
+11-07 21:51:53.627  2959  3195 I BugleRcs: connecting to 10 Rcs Services
+11-07 21:51:53.632  2959  3195 I RcsProvisioning: Failed to read config: no config found /data/user/0/com.google.android.apps.messaging/files/rcsconfig: open failed: ENOENT (No such file or directory)
+11-07 21:51:53.647  1656  1656 I AiAi    : onTrimMemory() with level 15
+11-07 21:51:53.662  1509  1509 I AppBase : AppBase.onTrimMemory():497 onTrimMemory(): 15
+11-07 21:51:53.662  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onTrimMemory():4406 onTrimMemory(): 15
+11-07 21:51:53.665  2959  3117 I Bugle   : BroadcastReceiverAsyncWorkTracker: Acknowledging broadcast of atsi@4ad15e6
+11-07 21:51:53.665   955   955 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-07 21:51:53.666   955   955 D MediaPlayerList: Name of package changed: com.google.android.permissioncontroller
+11-07 21:51:53.666   955   955 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-07 21:51:53.666   955   955 D MediaPlayerList: Name of package changed: com.google.android.permissioncontroller
+11-07 21:51:53.669   762   762 D ControlsListingControllerImpl: ServiceConfig reloaded, count: 0
+11-07 21:51:53.675   482   594 I InputReader: Reconfiguring input devices, changes=KEYBOARD_LAYOUTS |
+11-07 21:51:53.678  3974  5031 I ProvidersCache: Provider returned no roots. Possibly naughty: com.google.android.apps.docs.storage
+11-07 21:51:53.678   482   517 I libprocessgroup: Successfully killed process cgroup uid 10166 pid 776 in 41ms
+11-07 21:51:53.697   287   287 I Zygote  : Process 776 exited due to signal 9 (Killed)
+11-07 21:51:53.711   287   287 D Zygote  : Forked child process 5034
+11-07 21:51:53.725  1060  5016 I Fitness : OnPackageChangedOperation got intent: Intent { act=android.intent.action.PACKAGE_CHANGED dat=package: flg=0x45000010 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.PersistentIntentOperationService (has extras) } [CONTEXT service_id=17 ]
+11-07 21:51:53.732  1060  4976 I Fitness : FitCleanupIntentOperation received Intent android.intent.action.PACKAGE_CHANGED [CONTEXT service_id=17 ]
+11-07 21:51:53.749  5034  5034 I ssioncontroller: Using CollectorTypeCC GC.
+11-07 21:51:53.750  5034  5034 W ssioncontroller: Unexpected CPU variant for x86: x86_64.
+11-07 21:51:53.750  5034  5034 W ssioncontroller: Known variants: atom, sandybridge, silvermont, kabylake, default
+11-07 21:51:53.753   286  5035 I resolv  : GetAddrInfoHandler::run: {100 786532 100 983140 10120 0}
+11-07 21:51:53.758   372   395 I adbd    : jdwp connection from 5034
+11-07 21:51:53.770   286  5041 I resolv  : res_nmkquery: (QUERY, IN, A)
+11-07 21:51:53.774   286  5040 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-07 21:51:53.778   286  5041 I resolv  : res_nsend: used send_dg 79 terrno: 0
+11-07 21:51:53.779   286  5041 I resolv  : doQuery: rcode=0, ancount=2, return value=79
+11-07 21:51:53.784   982   982 D CarrierSvcBindHelper: onPackageModified: com.google.android.permissioncontroller
+11-07 21:51:53.787   982   982 D CarrierSvcBindHelper: No carrier app for: 0
+11-07 21:51:53.792   982   982 D ImsResolver: maybeAddedImsService, packageName: com.google.android.permissioncontroller
+11-07 21:51:53.798   286  5040 I resolv  : res_nsend: used send_dg 91 terrno: 0
+11-07 21:51:53.798   286  5040 I resolv  : doQuery: rcode=0, ancount=2, return value=91
+11-07 21:51:53.824  5049  5049 I idmap2d : Starting
+11-07 21:51:53.844  2959  3112 I RcsClientLib: com.google.android.rcs.client.profile.RcsProfileService connected
+11-07 21:51:53.844  2959  3112 I BugleRcs: com.google.android.rcs.client.profile.RcsProfileService RCS service connected
+11-07 21:51:53.845  5034  5034 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10166; state: ENABLED
+11-07 21:51:53.856  5034  5034 D nativeloader: Configuring classloader-namespace-shared for other apk /system_ext/framework/androidx.window.extensions.jar. target_sdk_version=33, uses_libraries=ALL, library_path=/apex/com.android.permission/priv-app/GooglePermissionController@331710050/lib/x86_64:/system/lib64:/system_ext/lib64, permitted_path=/data:/mnt/expand:/data/user_de/0/com.google.android.permissioncontroller:/apex/com.android.permission/priv-app/GooglePermissionController@331710050:/system/lib64:/system_ext/lib64
+11-07 21:51:53.862  5034  5034 D nativeloader: Configuring classloader-namespace-shared for other apk /system_ext/framework/androidx.window.sidecar.jar. target_sdk_version=33, uses_libraries=ALL, library_path=/apex/com.android.permission/priv-app/GooglePermissionController@331710050/lib/x86_64:/system/lib64:/system_ext/lib64, permitted_path=/data:/mnt/expand:/data/user_de/0/com.google.android.permissioncontroller:/apex/com.android.permission/priv-app/GooglePermissionController@331710050:/system/lib64:/system_ext/lib64
+11-07 21:51:53.869  5034  5034 D nativeloader: Configuring classloader-namespace-shared for other apk /system/framework/org.apache.http.legacy.jar. target_sdk_version=33, uses_libraries=ALL, library_path=/apex/com.android.permission/priv-app/GooglePermissionController@331710050/lib/x86_64:/system/lib64:/system_ext/lib64, permitted_path=/data:/mnt/expand:/data/user_de/0/com.google.android.permissioncontroller:/apex/com.android.permission/priv-app/GooglePermissionController@331710050:/system/lib64:/system_ext/lib64
+11-07 21:51:53.879  5034  5034 D nativeloader: Configuring classloader-namespace-shared for other apk /apex/com.android.permission/priv-app/GooglePermissionController@331710050/GooglePermissionController.apk. target_sdk_version=33, uses_libraries=, library_path=/apex/com.android.permission/priv-app/GooglePermissionController@331710050/lib/x86_64:/system/lib64:/system_ext/lib64, permitted_path=/data:/mnt/expand:/data/user_de/0/com.google.android.permissioncontroller:/apex/com.android.permission/priv-app/GooglePermissionController@331710050:/system/lib64:/system_ext/lib64
+11-07 21:51:53.905  5034  5034 V GraphicsEnvironment: ANGLE Developer option for 'com.google.android.permissioncontroller' set to: 'default'
+11-07 21:51:53.910  5034  5034 V GraphicsEnvironment: ANGLE GameManagerService for com.google.android.permissioncontroller: false
+11-07 21:51:53.910  5034  5034 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-07 21:51:53.915  5034  5034 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-07 21:51:53.915  5034  5034 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-07 21:51:53.945  2959  3112 I RcsClientLib: com.google.android.rcs.client.businessinfo.BusinessInfoService connected
+11-07 21:51:53.945  2959  3112 I BugleRcs: com.google.android.rcs.client.businessinfo.BusinessInfoService RCS service connected
+11-07 21:51:53.953  2959  3195 I BugleRcsEngine: [77] bgrh.b: Deleted transfers file: false
+11-07 21:51:53.967  2959  3112 I RcsClientLib: com.google.android.rcs.client.messaging.RcsMessagingService connected
+11-07 21:51:53.967  2959  3112 I BugleRcs: com.google.android.rcs.client.messaging.RcsMessagingService RCS service connected
+11-07 21:51:53.975  5034  5034 D CompatibilityChangeReporter: Compat change id reported: 194532703; UID 10166; state: ENABLED
+11-07 21:51:53.981  5034  5034 I PermissionEventCleanupJobService: No existing job, scheduling a new one
+11-07 21:51:53.983  5034  5034 D PermissionStorageTimeChangeReceiver: systemTimeSnapshot set to 1794088313983
+11-07 21:51:53.984  5034  5034 D PermissionStorageTimeChangeReceiver: realtimeSnapshot set to 167442
+11-07 21:51:53.999   287   287 D Zygote  : Forked child process 5059
+11-07 21:51:54.008  1060  2930 D TrafficStats: tagSocket(-1) with statsTag=0x30000407, statsUid=-1
+11-07 21:51:54.008  1060  2930 I TrafficStats: tagSocketFd(-1, 805307399, -1) failed with errno-9
+11-07 21:51:54.014  5059  5059 I gearhead:shared: Using CollectorTypeCC GC.
+11-07 21:51:54.016  5059  5059 W gearhead:shared: Unexpected CPU variant for x86: x86_64.
+11-07 21:51:54.016  5059  5059 W gearhead:shared: Known variants: atom, sandybridge, silvermont, kabylake, default
+11-07 21:51:54.017  1060  2930 D TrafficStats: tagSocket(238) with statsTag=0x30000407, statsUid=-1
+11-07 21:51:54.019   372   395 I adbd    : jdwp connection from 5059
+11-07 21:51:54.033  1321  4132 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+11-07 21:51:54.048  2959  3112 I RcsClientLib: com.google.android.rcs.client.transportcontrol.TransportControlService connected
+11-07 21:51:54.048  2959  3112 I BugleRcs: com.google.android.rcs.client.transportcontrol.TransportControlService RCS service connected
+11-07 21:51:54.066   482   584 I RoleService: Granting default roles...
+11-07 21:51:54.075  2959  3195 I RcsProvisioning: Failed to read config: no config found /data/user/0/com.google.android.apps.messaging/files/rcsconfig: open failed: ENOENT (No such file or directory)
+11-07 21:51:54.097  5059  5059 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10108; state: ENABLED
+11-07 21:51:54.102  5059  5059 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.extensions.jar. target_sdk_version=33, uses_libraries=ALL, library_path=/product/priv-app/AndroidAutoStubPrebuilt/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.projection.gearhead
+11-07 21:51:54.103  5059  5059 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.sidecar.jar. target_sdk_version=33, uses_libraries=ALL, library_path=/product/priv-app/AndroidAutoStubPrebuilt/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.projection.gearhead
+11-07 21:51:54.110  5059  5059 D nativeloader: Configuring vendor-classloader-namespace for unbundled product apk /product/priv-app/AndroidAutoStubPrebuilt/AndroidAutoStubPrebuilt.apk. target_sdk_version=33, uses_libraries=, library_path=/product/priv-app/AndroidAutoStubPrebuilt/lib/x86_64:/product/lib64:/system/product/lib64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.projection.gearhead:/product/lib64:/system/product/lib64
+11-07 21:51:54.117  5059  5059 V GraphicsEnvironment: ANGLE Developer option for 'com.google.android.projection.gearhead' set to: 'default'
+11-07 21:51:54.118  5059  5059 V GraphicsEnvironment: ANGLE GameManagerService for com.google.android.projection.gearhead: false
+11-07 21:51:54.118  5059  5059 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-07 21:51:54.119  5059  5059 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-07 21:51:54.119  5059  5059 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-07 21:51:54.126  5059  5059 I CAR.GH  : onCreate
+11-07 21:51:54.138  5059  5077 W gearhead:shared: Accessing hidden field Ljava/util/Collections$SynchronizedCollection;->mutex:Ljava/lang/Object; (max-target-o, reflection, denied)
+11-07 21:51:54.138  5059  5077 W gearhead:shared: Accessing hidden method Ljava/util/Collections$SynchronizedSet;-><init>(Ljava/util/Set;Ljava/lang/Object;)V (max-target-o, reflection, denied)
+11-07 21:51:54.138  5059  5077 W gearhead:shared: Accessing hidden method Ljava/util/Collections$SynchronizedCollection;-><init>(Ljava/util/Collection;Ljava/lang/Object;)V (max-target-o, reflection, denied)
+11-07 21:51:54.164  5059  5059 I GH.FzeroReceiver: Handling intent android.intent.action.BOOT_COMPLETED
+11-07 21:51:54.165  5059  5059 D CompatibilityChangeReporter: Compat change id reported: 183155436; UID 10108; state: ENABLED
+11-07 21:51:54.168  5059  5059 D CompatibilityChangeReporter: Compat change id reported: 194532703; UID 10108; state: ENABLED
+11-07 21:51:54.188  3315  3315 I CAR.StubWirelessUuid: Received intent Intent { act=android.intent.action.BOOT_COMPLETED flg=0x89000010 cmp=com.google.android.projection.gearhead/com.google.android.apps.auto.carservice.gmscorecompatstub.StubWirelessUuidRegistrationReceiver (has extras) }
+11-07 21:51:54.189  3315  3315 I CAR.StubWirelessUuid: Registering AAW UUID
+11-07 21:51:54.206   955   967 D BluetoothAdapterService: Cannot start RFCOMM listener: UUID c26cf572-3369-4cf2-b5cc-d2cd130f5b2c already in use.
+11-07 21:51:54.233   955   955 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-07 21:51:54.233   955   955 D MediaPlayerList: Name of package changed: com.google.android.gms
+11-07 21:51:54.241   955   955 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-07 21:51:54.241   955   955 D MediaPlayerList: Name of package changed: com.google.android.gms
+11-07 21:51:54.265   762   762 D ControlsListingControllerImpl: ServiceConfig reloaded, count: 0
+11-07 21:51:54.267  1321  4123 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.gms componentName=null serviceId=30
+11-07 21:51:54.269   982   982 D CarrierSvcBindHelper: onPackageModified: com.google.android.gms
+11-07 21:51:54.269   982   982 D CarrierSvcBindHelper: No carrier app for: 0
+11-07 21:51:54.272   982   982 D ImsResolver: maybeAddedImsService, packageName: com.google.android.gms
+11-07 21:51:54.273  2959  3103 I Bugle   : BroadcastReceiverAsyncWorkTracker: Acknowledging broadcast of atsi@4ad15e6
+11-07 21:51:54.279  2256  4755 D DownloadManager: [1] Finished with status SUCCESS
+11-07 21:51:54.308  1060  4500 I Fitness : OnPackageChangedOperation got intent: Intent { act=android.intent.action.PACKAGE_CHANGED dat=package: flg=0x45000010 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.PersistentIntentOperationService (has extras) } [CONTEXT service_id=17 ]
+11-07 21:51:54.312  1060  4976 I Fitness : FitCleanupIntentOperation received Intent android.intent.action.PACKAGE_CHANGED [CONTEXT service_id=17 ]
+11-07 21:51:54.313  1321  2445 I PeopleGalProvider: Gal directories started.
+11-07 21:51:54.322   482   517 I libprocessgroup: Successfully killed process cgroup uid 10107 pid 3940 in 0ms
+11-07 21:51:54.332   287   287 I Zygote  : Process 3940 exited due to signal 9 (Killed)
+11-07 21:51:54.333  5034  5050 I PermissionControllerServiceImpl: Updating user sensitive for uid 10120
+11-07 21:51:54.343  1321  2445 I PeopleGalProvider: Method 1 completed.
+11-07 21:51:54.344  1321  2445 I PeopleGalProvider: Method 1 finished successfully.
+11-07 21:51:54.347  3974  5082 I ProvidersCache: Provider returned no roots. Possibly naughty: com.google.android.apps.docs.storage
+11-07 21:51:54.359  5034  5072 W Role    : Default holder doesn't have required signing certificate: com.google.android.apps.work.clouddpc:23962F4B43B9857638EA66F4D419518EAE282491ACDA4B94707BD59003C45E58
+11-07 21:51:54.363   955   955 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-07 21:51:54.363   955   955 D MediaPlayerList: Name of package changed: com.google.android.projection.gearhead
+11-07 21:51:54.367   955   955 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-07 21:51:54.367   955   955 D MediaPlayerList: Name of package changed: com.google.android.projection.gearhead
+11-07 21:51:54.368   762   762 D ControlsListingControllerImpl: ServiceConfig reloaded, count: 0
+11-07 21:51:54.372   982   982 D CarrierSvcBindHelper: onPackageModified: com.google.android.projection.gearhead
+11-07 21:51:54.373   982   982 D CarrierSvcBindHelper: No carrier app for: 0
+11-07 21:51:54.373   982   982 D ImsResolver: maybeAddedImsService, packageName: com.google.android.projection.gearhead
+11-07 21:51:54.383  3974  5091 I ProvidersCache: Provider returned no roots. Possibly naughty: com.google.android.apps.docs.storage
+11-07 21:51:54.386   482   594 I InputReader: Reconfiguring input devices, changes=KEYBOARD_LAYOUTS |
+11-07 21:51:54.389  5034  5050 I PermissionControllerServiceImpl: Updating user sensitive for uid 10108
+11-07 21:51:54.397   482   594 I InputReader: Reconfiguring input devices, changes=KEYBOARD_LAYOUTS |
+11-07 21:51:54.398   955   955 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-07 21:51:54.398   955   955 D MediaPlayerList: Name of package changed: com.google.android.settings.intelligence
+11-07 21:51:54.402   982   982 D CarrierSvcBindHelper: onPackageModified: com.google.android.settings.intelligence
+11-07 21:51:54.403   955   955 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-07 21:51:54.403   955   955 D MediaPlayerList: Name of package changed: com.google.android.settings.intelligence
+11-07 21:51:54.403   982   982 D CarrierSvcBindHelper: No carrier app for: 0
+11-07 21:51:54.404   982   982 D ImsResolver: maybeAddedImsService, packageName: com.google.android.settings.intelligence
+11-07 21:51:54.406   762   762 D ControlsListingControllerImpl: ServiceConfig reloaded, count: 0
+11-07 21:51:54.409  2959  3103 I Bugle   : BroadcastReceiverAsyncWorkTracker: Acknowledging broadcast of atsi@4ad15e6
+11-07 21:51:54.427  3974  5098 I ProvidersCache: Provider returned no roots. Possibly naughty: com.google.android.apps.docs.storage
+11-07 21:51:54.430  5034  5050 I PermissionControllerServiceImpl: Updating user sensitive for uid 10107
+11-07 21:51:54.444  1788  2933 W BlobLobber: Not processing download id 1, not a BlobLobber blob
+11-07 21:51:54.444  1788  2933 W BlobLobber: Notification for download id 1 which we didn't know or failed
+11-07 21:51:54.462   762   816 D EGL_emulation: app_time_stats: avg=3260.21ms min=3260.21ms max=3260.21ms count=1
+11-07 21:51:54.501   482   563 W system_server: Long monitor contention with owner PackageManager (538) at int com.android.server.am.ActivityManagerService$LocalService.broadcastIntent(android.content.Intent, android.content.IIntentReceiver, java.lang.String[], boolean, int, int[], android.os.Bundle)(ActivityManagerService.java:17133) waiters=1 in void com.android.server.am.ActivityManagerService$AppDeathRecipient.binderDied() for 168ms
+11-07 21:51:54.538   482   594 I InputReader: Reconfiguring input devices, changes=KEYBOARD_LAYOUTS |
+11-07 21:51:54.539   955   955 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-07 21:51:54.539   955   955 D MediaPlayerList: Name of package changed: com.google.android.settings.intelligence
+11-07 21:51:54.540   955   955 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-07 21:51:54.540   955   955 D MediaPlayerList: Name of package changed: com.google.android.settings.intelligence
+11-07 21:51:54.541   762   762 D ControlsListingControllerImpl: ServiceConfig reloaded, count: 0
+11-07 21:51:54.544  2959  3103 I Bugle   : BroadcastReceiverAsyncWorkTracker: Acknowledging broadcast of atsi@4ad15e6
+11-07 21:51:54.554  3974  5108 I ProvidersCache: Provider returned no roots. Possibly naughty: com.google.android.apps.docs.storage
+11-07 21:51:54.571  1060  4976 I Fitness : OnPackageChangedOperation got intent: Intent { act=android.intent.action.PACKAGE_CHANGED dat=package: flg=0x45000010 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.PersistentIntentOperationService (has extras) } [CONTEXT service_id=17 ]
+11-07 21:51:54.578  1060  5016 I Fitness : FitCleanupIntentOperation received Intent android.intent.action.PACKAGE_CHANGED [CONTEXT service_id=17 ]
+11-07 21:51:54.587  1060  4500 I Fitness : OnPackageChangedOperation got intent: Intent { act=android.intent.action.PACKAGE_CHANGED dat=package: flg=0x45000010 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.PersistentIntentOperationService (has extras) } [CONTEXT service_id=17 ]
+11-07 21:51:54.592  1060  5016 I Fitness : FitCleanupIntentOperation received Intent android.intent.action.PACKAGE_CHANGED [CONTEXT service_id=17 ]
+11-07 21:51:54.609  1060  4500 I Fitness : OnPackageChangedOperation got intent: Intent { act=android.intent.action.PACKAGE_CHANGED dat=package: flg=0x45000010 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.PersistentIntentOperationService (has extras) } [CONTEXT service_id=17 ]
+11-07 21:51:54.621  1788  2306 I ModelDnldProcssHelpr: #handleDownloadComplete, downloadId=1
+11-07 21:51:54.622  1788  2306 E ModelDnldProcssHelpr: pending download info for pending_hotword_model_download_info is null
+11-07 21:51:54.623  1788  2306 E ModelDnldProcssHelpr: pending download info for pending_xgoogle_hotword_model_download_info is null
+11-07 21:51:54.634  1060  5016 I Fitness : FitCleanupIntentOperation received Intent android.intent.action.PACKAGE_CHANGED [CONTEXT service_id=17 ]
+11-07 21:51:54.635  1321  4132 W Icing   : No valid account for uploading user actions
+11-07 21:51:54.641   286   904 I netd    : tetherGetStats() -> {[]} <0.41ms>
+11-07 21:51:54.644   286   904 I netd    : bandwidthSetGlobalAlert(2097152) <0.10ms>
+11-07 21:51:54.648   286   904 I netd    : bandwidthRemoveInterfaceQuota(eth0) <0.47ms>
+11-07 21:51:54.653   286   904 I netd    : bandwidthSetInterfaceQuota(eth0, 9223372036854775807) <0.47ms>
+11-07 21:51:54.680   287   287 D Zygote  : Forked child process 5113
+11-07 21:51:54.682   982   982 D CarrierSvcBindHelper: onPackageModified: com.google.android.settings.intelligence
+11-07 21:51:54.682   982   982 D CarrierSvcBindHelper: No carrier app for: 0
+11-07 21:51:54.693  5113  5113 I gs.intelligence: Using CollectorTypeCC GC.
+11-07 21:51:54.695  5113  5113 W gs.intelligence: Unexpected CPU variant for x86: x86_64.
+11-07 21:51:54.695  5113  5113 W gs.intelligence: Known variants: atom, sandybridge, silvermont, kabylake, default
+11-07 21:51:54.698   982   982 D ImsResolver: maybeAddedImsService, packageName: com.google.android.settings.intelligence
+11-07 21:51:54.699  5034  5050 I PermissionControllerServiceImpl: Updating user sensitive for uid 10107
+11-07 21:51:54.709   372   395 I adbd    : jdwp connection from 5113
+11-07 21:51:54.743  1321  4132 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+11-07 21:51:54.745  5113  5113 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10107; state: ENABLED
+11-07 21:51:54.757  5113  5113 D nativeloader: Configuring classloader-namespace for other apk /system/framework/org.apache.http.legacy.jar. target_sdk_version=33, uses_libraries=ALL, library_path=/product/priv-app/SettingsIntelligenceGooglePrebuilt/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.settings.intelligence
+11-07 21:51:54.757  5113  5113 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.extensions.jar. target_sdk_version=33, uses_libraries=ALL, library_path=/product/priv-app/SettingsIntelligenceGooglePrebuilt/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.settings.intelligence
+11-07 21:51:54.758  5113  5113 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.sidecar.jar. target_sdk_version=33, uses_libraries=ALL, library_path=/product/priv-app/SettingsIntelligenceGooglePrebuilt/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.settings.intelligence
+11-07 21:51:54.770  5113  5113 D nativeloader: Configuring vendor-classloader-namespace for unbundled product apk /product/priv-app/SettingsIntelligenceGooglePrebuilt/SettingsIntelligenceGooglePrebuilt.apk. target_sdk_version=33, uses_libraries=, library_path=/product/priv-app/SettingsIntelligenceGooglePrebuilt/lib/x86_64:/product/lib64:/system/product/lib64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.settings.intelligence:/product/lib64:/system/product/lib64
+11-07 21:51:54.819  5113  5113 V GraphicsEnvironment: ANGLE Developer option for 'com.google.android.settings.intelligence' set to: 'default'
+11-07 21:51:54.820  5113  5113 V GraphicsEnvironment: ANGLE GameManagerService for com.google.android.settings.intelligence: false
+11-07 21:51:54.820  5113  5113 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-07 21:51:54.821  5113  5113 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-07 21:51:54.821  5113  5113 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-07 21:51:54.908  5113  5113 W gs.intelligence: Accessing hidden field Ljava/util/Collections$SynchronizedCollection;->mutex:Ljava/lang/Object; (max-target-o, reflection, denied)
+11-07 21:51:54.908  5113  5113 W gs.intelligence: Accessing hidden method Ljava/util/Collections$SynchronizedSet;-><init>(Ljava/util/Set;Ljava/lang/Object;)V (max-target-o, reflection, denied)
+11-07 21:51:54.908  5113  5113 W gs.intelligence: Accessing hidden method Ljava/util/Collections$SynchronizedCollection;-><init>(Ljava/util/Collection;Ljava/lang/Object;)V (max-target-o, reflection, denied)
+11-07 21:51:54.914  5113  5113 D CompatibilityChangeReporter: Compat change id reported: 183155436; UID 10107; state: ENABLED
+11-07 21:51:54.916  5113  5113 W BatterySettingsContentProvider: create content provider from null
+11-07 21:51:54.950  5113  5130 D CompatibilityChangeReporter: Compat change id reported: 160794467; UID 10107; state: ENABLED
+11-07 21:51:54.957  5113  5113 D CompatibilityChangeReporter: Compat change id reported: 194532703; UID 10107; state: ENABLED
+11-07 21:51:54.960  5113  5113 W CardCollectorJobService: refreshJob, cancel job.
+11-07 21:51:55.003   986   986 I SetupWizard: [che] notifyDeviceReboot: isPaired=false
+11-07 21:51:55.059   482   584 I RoleService: Granting default roles...
+11-07 21:51:55.137   933   940 I rkstack.process: Background young concurrent copying GC freed 36422(2540KB) AllocSpace objects, 0(0B) LOS objects, 46% free, 2799KB/5241KB, paused 36us,10us total 328.414ms
+11-07 21:51:55.273   982  1010 I m.android.phone: Background concurrent copying GC freed 114376(5137KB) AllocSpace objects, 0(0B) LOS objects, 49% free, 3384KB/6769KB, paused 40us,15us total 1.019s
+11-07 21:51:55.286   982  1012 W System  : A resource failed to call AbstractCursor.close.
+11-07 21:51:55.286   982  1012 W System  : A resource failed to call AbstractCursor.close.
+11-07 21:51:55.286   982  1012 W System  : A resource failed to call AbstractCursor.close.
+11-07 21:51:55.286   982  1012 W System  : A resource failed to call AbstractCursor.close.
+11-07 21:51:55.286   982  1012 W System  : A resource failed to call AbstractCursor.close.
+11-07 21:51:55.286   982  1012 W System  : A resource failed to call AbstractCursor.close.
+11-07 21:51:55.286   982  1012 W System  : A resource failed to call AbstractCursor.close.
+11-07 21:51:55.286   982  1012 W System  : A resource failed to call AbstractCursor.close.
+11-07 21:51:55.286   982  1012 W System  : A resource failed to call AbstractCursor.close.
+11-07 21:51:55.286   982  1012 W System  : A resource failed to call AbstractCursor.close.
+11-07 21:51:55.286   982  1012 W System  : A resource failed to call AbstractCursor.close.
+11-07 21:51:55.286   982  1012 W System  : A resource failed to call AbstractCursor.close.
+11-07 21:51:55.286   982  1012 W System  : A resource failed to call AbstractCursor.close.
+11-07 21:51:55.286   982  1012 W System  : A resource failed to call AbstractCursor.close.
+11-07 21:51:55.286   982  1012 W System  : A resource failed to call AbstractCursor.close.
+11-07 21:51:55.286   982  1012 W System  : A resource failed to call AbstractCursor.close.
+11-07 21:51:55.286   982  1012 W System  : A resource failed to call AbstractCursor.close.
+11-07 21:51:55.286   982  1012 W System  : A resource failed to call AbstractCursor.close.
+11-07 21:51:55.377  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.accessibility.SelectLongPressTimeoutPreferenceController
+11-07 21:51:55.396  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.accessibility.AccessibilityTimeoutPreferenceController
+11-07 21:51:55.396  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.accessibility.AutoclickPreferenceController
+11-07 21:51:55.413  1791  1791 W YT.MDX.acet: CastAppId for type 0 not found. Defaulting to mainCastAppId.
+11-07 21:51:55.441  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.gestures.AssistGestureSettingsPreferenceController
+11-07 21:51:55.442  1102  1117 D AssistGesture: mAssistOnly:false, isSupported:false, isSensorAvailable:false
+11-07 21:51:55.442  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.gestures.SwipeToNotificationPreferenceController
+11-07 21:51:55.442  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.gestures.DoubleTapPowerPreferenceController
+11-07 21:51:55.442  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.gestures.DoubleTwistPreferenceController
+11-07 21:51:55.442  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.gestures.SystemNavigationPreferenceController
+11-07 21:51:55.442  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.gestures.OneHandedEnablePreferenceController
+11-07 21:51:55.450  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.gestures.TapScreenGesturePreferenceController
+11-07 21:51:55.450  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.gestures.DoubleTapScreenPreferenceController
+11-07 21:51:55.450  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.gestures.PickupGesturePreferenceController
+11-07 21:51:55.450  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.gestures.PowerMenuPreferenceController
+11-07 21:51:55.450  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.gestures.PreventRingingParentPreferenceController
+11-07 21:51:55.450  1102  1117 D AssistGesture: mAssistOnly:false, isSupported:false, isSensorAvailable:false
+11-07 21:51:55.514  1102  1117 W SettingsPrefController: Skipping updateNonIndexableKeys, key already in list. com.android.settings.gestures.SwipeToNotificationPreferenceController@13d4ecb
+11-07 21:51:55.522  1102  1114 V DSRotLockSettingsMngr: persistSettingIfChanged: last=, new=
+11-07 21:51:55.539  1791  1791 W YT.MDX.acet: CastAppId for type 0 not found. Defaulting to mainCastAppId.
+11-07 21:51:55.549  1791  1791 W YT.MDX.acet: CastAppId for type 0 not found. Defaulting to mainCastAppId.
+11-07 21:51:55.625  1102  1118 D HighlightableMenu: add menu key: top_level_wellbeing
+11-07 21:51:55.627  1102  1118 D HighlightableMenu: add menu key: top_level_google
+11-07 21:51:55.628  1102  1117 W SettingsPrefController: Skipping updateNonIndexableKeys, key already in list. com.android.settings.gestures.DoubleTwistPreferenceController@11e96a8
+11-07 21:51:55.639  1102  1117 W SettingsPrefController: Skipping updateNonIndexableKeys, key already in list. com.android.settings.gestures.TapScreenGesturePreferenceController@9dd85c1
+11-07 21:51:55.639  1102  1117 W SettingsPrefController: Skipping updateNonIndexableKeys, key already in list. com.android.settings.gestures.DoubleTapScreenPreferenceController@658f166
+11-07 21:51:55.639  1102  1117 W SettingsPrefController: Skipping updateNonIndexableKeys, key already in list. com.android.settings.gestures.PickupGesturePreferenceController@8500ca7
+11-07 21:51:55.644  1102  1117 V SettingsSearchProvider: com.android.settings.display.NightDisplaySettings$1@3fbbcfd tried to add an empty non-indexable key
+11-07 21:51:55.659  1102  1117 V SettingsSearchProvider: com.android.settings.development.featureflags.FeatureFlagsDashboard$1@cc2bf9 tried to add an empty non-indexable key
+11-07 21:51:55.659  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.notification.BubbleNotificationIllustrationPreferenceController
+11-07 21:51:55.659  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.notification.BubbleNotificationPreferenceController
+11-07 21:51:55.660  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.gestures.SystemNavigationPreferenceController
+11-07 21:51:55.660  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.gestures.OneHandedEnablePreferenceController
+11-07 21:51:55.660  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.accessibility.PowerButtonEndsCallPreferenceController
+11-07 21:51:55.661  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.accessibility.LockScreenRotationPreferenceController
+11-07 21:51:55.661  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.display.DeviceStateAutoRotateOverviewController
+11-07 21:51:55.670  1102  1117 W SettingsPrefController: Skipping updateNonIndexableKeys, key already in list. com.android.settings.gestures.OneHandedEnablePreferenceController@3f1aec
+11-07 21:51:55.701   482   563 D ConnectivityService: requestNetwork for uid/pid:10141/1791 activeRequest: null callbackRequest: 129 [NetworkRequest [ REQUEST id=130, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10141 RequestorUid: 10141 RequestorPkg: com.google.android.youtube UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+11-07 21:51:55.709   482   705 D ConnectivityService: NetReassign [130 : null → 100] [c 1] [a 2] [i 3]
+11-07 21:51:55.720   482   698 D WifiNetworkFactory: got request NetworkRequest [ REQUEST id=130, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10141 RequestorUid: 10141 RequestorPkg: com.google.android.youtube UnderlyingNetworks: Null] ]
+11-07 21:51:55.722   482   698 D UntrustedWifiNetworkFactory: got request NetworkRequest [ REQUEST id=130, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10141 RequestorUid: 10141 RequestorPkg: com.google.android.youtube UnderlyingNetworks: Null] ]
+11-07 21:51:55.722   482   698 D OemPaidWifiNetworkFactory: got request NetworkRequest [ REQUEST id=130, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10141 RequestorUid: 10141 RequestorPkg: com.google.android.youtube UnderlyingNetworks: Null] ]
+11-07 21:51:55.723   482   698 D MultiInternetWifiNetworkFactory: got request NetworkRequest [ REQUEST id=130, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10141 RequestorUid: 10141 RequestorPkg: com.google.android.youtube UnderlyingNetworks: Null] ]
+11-07 21:51:55.727  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.gestures.GestureNavigationSettingsAssistController
+11-07 21:51:55.728  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminListPreferenceController
+11-07 21:51:55.734  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.display.darkmode.DarkModeActivationPreferenceController
+11-07 21:51:55.769  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.display.TwilightLocationPreferenceController
+11-07 21:51:55.771  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.display.darkmode.DarkModeScheduleSelectorController
+11-07 21:51:55.771  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.display.darkmode.DarkModeCustomBedtimePreferenceController
+11-07 21:51:55.776  1102  1117 W SettingsPrefController: Skipping updateNonIndexableKeys, key already in list. com.android.settings.display.darkmode.DarkModeCustomBedtimePreferenceController@28a8908
+11-07 21:51:55.776  1102  1117 W libc    : Access denied finding property "ro.vendor.aware_available"
+11-07 21:51:55.776  1102  1117 V SettingsSearchProvider: com.google.android.settings.aware.AwareDisplaySettings$1@1c32db4 tried to add an empty non-indexable key
+11-07 21:51:55.778  1102  1117 V SettingsSearchProvider: com.android.settings.nfc.PaymentSettings$1@a501d52 tried to add an empty non-indexable key
+11-07 21:51:55.790  1060  1060 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.nearby.exposurenotification.START dat=chimera-action:/... cmp=com.google.android.gms/.chimera.PersistentApiServiceNoInstantApps }
+11-07 21:51:55.792  1102  1117 I TetheringManager: registerTetheringEventCallback:com.android.settings
+11-07 21:51:55.812  1102  1117 D AssistGesture: mAssistOnly:false, isSupported:false, isSensorAvailable:false
+11-07 21:51:55.813  1102  1117 D AssistGesture: mAssistOnly:false, isSupported:false, isSensorAvailable:false
+11-07 21:51:55.813  1102  1117 V SettingsSearchProvider: com.android.settings.gestures.AssistGestureSettings$1@6676be4 tried to add an empty non-indexable key
+11-07 21:51:55.813  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.google.android.settings.notification.ClearCallingTogglePreferenceController
+11-07 21:51:55.818  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.google.android.settings.notification.ClearCallingFooterPreferenceController
+11-07 21:51:55.818  1102  1117 V SettingsSearchProvider: com.android.settings.search.BaseSearchIndexProvider@9767f02 tried to add an empty non-indexable key
+11-07 21:51:55.828  1102  1117 V SettingsSearchProvider: com.android.settings.security.ScreenPinningSettings$2@10b6c49 tried to add an empty non-indexable key
+11-07 21:51:55.848  4742  4836 I TestRunner: finished: oversizedSheetIsCompressedAndItsNotebookOpens(com.quartz.notes.data.BigSheetMigrationTest)

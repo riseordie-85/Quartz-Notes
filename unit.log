@@ -1,0 +1,46 @@
+Starting a Gradle Daemon (subsequent builds will be faster)
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:generateDebugResValues
+> Task :app:checkDebugAarMetadata
+> Task :app:mapDebugSourceSetPaths
+> Task :app:generateDebugResources
+> Task :app:packageDebugResources
+> Task :app:createDebugCompatibleScreenManifests
+> Task :app:extractDeepLinksDebug
+> Task :app:mergeDebugResources
+> Task :app:parseDebugLocalResources
+> Task :app:processDebugMainManifest
+> Task :app:processDebugManifest
+> Task :app:preDebugUnitTestBuild UP-TO-DATE
+> Task :app:javaPreCompileDebug
+> Task :app:javaPreCompileDebugUnitTest
+> Task :app:processDebugManifestForPackage
+> Task :app:processDebugResources
+> Task :app:kspDebugKotlin
+> Task :app:compileDebugKotlin
+w: file:///home/runner/work/Quartz-Notes/Quartz-Notes/app/src/main/java/com/quartz/notes/ui/editor/RichTextEditor.kt:200:25 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///home/runner/work/Quartz-Notes/Quartz-Notes/app/src/main/java/com/quartz/notes/ui/editor/RichTextEditor.kt:841:20 'interface ClipboardManager : Any' is deprecated. Use Clipboard instead, which supports suspend functions.
+w: file:///home/runner/work/Quartz-Notes/Quartz-Notes/app/src/main/java/com/quartz/notes/ui/note/NoteSharing.kt:110:52 'field scaledDensity: Float' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Quartz-Notes/Quartz-Notes/app/src/main/java/com/quartz/notes/ui/notebook/NotebookScreen.kt:256:50 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///home/runner/work/Quartz-Notes/Quartz-Notes/app/src/main/java/com/quartz/notes/ui/notebook/PageElements.kt:1103:90 'val Icons.Rounded.ViewQuilt: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Rounded.ViewQuilt.
+w: file:///home/runner/work/Quartz-Notes/Quartz-Notes/app/src/main/java/com/quartz/notes/ui/sheet/SheetGridView.kt:83:21 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///home/runner/work/Quartz-Notes/Quartz-Notes/app/src/main/java/com/quartz/notes/ui/sheet/SheetPageView.kt:59:8 'interface ClipboardManager : Any' is deprecated. Use Clipboard instead, which supports suspend functions.
+w: file:///home/runner/work/Quartz-Notes/Quartz-Notes/app/src/main/java/com/quartz/notes/ui/sheet/SheetPageView.kt:272:74 'interface ClipboardManager : Any' is deprecated. Use Clipboard instead, which supports suspend functions.
+w: file:///home/runner/work/Quartz-Notes/Quartz-Notes/app/src/main/java/com/quartz/notes/ui/sheet/SheetToolbar.kt:107:21 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///home/runner/work/Quartz-Notes/Quartz-Notes/app/src/main/java/com/quartz/notes/ui/templates/TemplateSheets.kt:116:42 'val Icons.Rounded.NoteAdd: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Rounded.NoteAdd.
+
+> Task :app:compileDebugJavaWithJavac
+> Task :app:processDebugJavaRes
+> Task :app:bundleDebugClassesToRuntimeJar
+> Task :app:bundleDebugClassesToCompileJar
+> Task :app:kspDebugUnitTestKotlin
+> Task :app:compileDebugUnitTestKotlin
+> Task :app:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :app:processDebugUnitTestJavaRes
+> Task :app:testDebugUnitTest
+gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run_2-1794087975059.json
+
+BUILD SUCCESSFUL in 1m 40s
+25 actionable tasks: 25 executed

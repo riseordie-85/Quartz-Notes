@@ -1,0 +1,99 @@
+11-07 21:52:11.193  4742  4836 I TestRunner: started: theLaterEditWinsWhicheverDeviceSyncsFirst(com.quartz.notes.data.sync.SyncEngineTest)
+11-07 21:52:11.197  4742  4836 D TrafficStats: tagSocket(100) with statsTag=0xffffffff, statsUid=-1
+11-07 21:52:11.217  1060  1373 I HeterodyneSyncScheduler: Scheduling Phenotype for a PhenotypeSyncImmediately(16, com.google.apps.drive.android#com.google.android.apps.docs) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+11-07 21:52:11.316  1060  1373 I HeterodyneSyncScheduler: Scheduling Phenotype for a PhenotypeSyncImmediately(6, com.google.android.gms.phenotype) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+11-07 21:52:11.390  1060  1373 I HeterodyneSyncScheduler: Scheduling Phenotype for a PhenotypeSyncImmediately(6, com.google.android.apps.maps) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+11-07 21:52:11.457  1321  5312 I Icing   : Indexing com.google.android.deskclock-internal.3p:Alarm_cross_device from com.google.android.deskclock
+11-07 21:52:11.505  1321  5312 E SQLiteLog: (1) no such table: Alarm_cross_device_com.google.android.deskclock_seq_table in "SELECT * FROM [Alarm_cross_device_com.google.android.deskclock_seq_table] WHERE seqno>0 AND tag IS NULL ORDER BY seqno LIMIT 20"
+11-07 21:52:11.512  1478  1478 I DialerRestVoicemailEnabledFn: com.android.dialer.voicemail.service.impl.vvmclients.rest.RestVoicemailEnabledFn.isEnabled:51 disabled by flag [CONTEXT ratelimit_period="1 MINUTES [skipped: 158]" ]
+11-07 21:52:11.514  1478  1478 I DialerCvvmEnabledFn: com.android.dialer.voicemail.service.impl.vvmclients.omtp.protocol.cvvm.CvvmEnabledFn.isEnabled:37 disabled by flag [CONTEXT ratelimit_period="1 MINUTES [skipped: 83]" ]
+11-07 21:52:11.519  1321  5312 E Icing   : Cursor call threw an exception: no such table: Alarm_cross_device_com.google.android.deskclock_seq_table (code 1 SQLITE_ERROR): , while compiling: SELECT * FROM [Alarm_cross_device_com.google.android.deskclock_seq_table] WHERE seqno>0 AND tag IS NULL ORDER BY seqno LIMIT 20
+11-07 21:52:11.529  1478  1478 I DialerStatusCheckJobService: com.android.voicemail.impl.StatusCheckJobService.onStartJob:100 attempting to reactivate ComponentInfo{com.android.phone/com.android.services.telephony.TelephonyConnectionService}, 1, UserHandle{0} [CONTEXT enable_persistent_logger=true ]
+11-07 21:52:11.569  1321  5312 I Icing   : Indexing done com.google.android.deskclock-internal.3p:Alarm_cross_device
+11-07 21:52:11.571  1060  1373 W bwft    : Succeeded but not registered: com.google.android.gms.trustlet_onbody [CONTEXT service_id=51 ]
+11-07 21:52:11.572  1321  5312 E Icing   : Aborting indexing of corpus internal.3p:Alarm_cross_device
+11-07 21:52:11.573  1321  5312 I Icing   : Indexing com.google.android.deskclock-internal.3p:Stopwatch_cross_device from com.google.android.deskclock
+11-07 21:52:11.574  1060  1071 I .gms.persistent: Background young concurrent copying GC freed 16876(874KB) AllocSpace objects, 0(0B) LOS objects, 0% free, 34MB/34MB, paused 83us,164us total 170.797ms
+11-07 21:52:11.580  1321  5312 E SQLiteLog: (1) no such table: Stopwatch_cross_device_com.google.android.deskclock_seq_table in "SELECT * FROM [Stopwatch_cross_device_com.google.android.deskclock_seq_table] WHERE seqno>0 AND tag IS NULL ORDER BY seqno LIMIT
+11-07 21:52:11.587  1321  5312 E Icing   : Cursor call threw an exception: no such table: Stopwatch_cross_device_com.google.android.deskclock_seq_table (code 1 SQLITE_ERROR): , while compiling: SELECT * FROM [Stopwatch_cross_device_com.google.android.deskclock_seq_table] WHERE seqno>0 AND tag IS NULL ORDER BY seqno LIMIT 20
+11-07 21:52:11.594  1321  5312 I Icing   : Indexing done com.google.android.deskclock-internal.3p:Stopwatch_cross_device
+11-07 21:52:11.594  1321  5312 E Icing   : Aborting indexing of corpus internal.3p:Stopwatch_cross_device
+11-07 21:52:11.611  1060  1373 I HeterodyneSyncScheduler: Scheduling Phenotype for a PhenotypeSyncImmediately(6, com.google.android.gms.checkin.binary) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+11-07 21:52:11.644  4891  4934 W DynamiteModule: Local module descriptor class for com.google.android.gms.providerinstaller.dynamite not found.
+11-07 21:52:11.652  1060  2752 W ProviderHelper: Unknown dynamite feature providerinstaller.dynamite
+11-07 21:52:11.675  4891  4934 W ProviderInstaller: Failed to load providerinstaller module: No acceptable module com.google.android.gms.providerinstaller.dynamite found. Local version is 0 and remote version is 0.
+11-07 21:52:11.751  4891  4934 D nativeloader: Configuring classloader-namespace for other apk /system/framework/com.android.media.remotedisplay.jar. target_sdk_version=33, uses_libraries=ALL, library_path=/product/priv-app/PrebuiltGmsCore/lib/x86_64:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.gms
+11-07 21:52:11.758  4891  4934 D nativeloader: Configuring classloader-namespace for other apk /system/framework/com.android.location.provider.jar. target_sdk_version=33, uses_libraries=ALL, library_path=/product/priv-app/PrebuiltGmsCore/lib/x86_64:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.gms
+11-07 21:52:11.770  4891  4934 D nativeloader: Configuring vendor-classloader-namespace for unbundled product apk /product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk. target_sdk_version=33, uses_libraries=, library_path=/product/priv-app/PrebuiltGmsCore/lib/x86_64:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!/lib/x86_64:/product/lib64:/system/product/lib64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.gms:/product/lib64:/system/product/lib64
+11-07 21:52:11.801  4891  4934 V NativeCrypto: Registering com/google/android/gms/org/conscrypt/NativeCrypto's 295 native methods...
+11-07 21:52:11.848  4891  4934 I ProviderInstaller: Installed default security provider GmsCore_OpenSSL
+11-07 21:52:12.004  1788  2353 W A       : Batch timed out; batchId=2 taskId=-1000003
+11-07 21:52:12.005  1788  2933 E SingleDataFileGroupPop: Failed to add file group
+11-07 21:52:12.006  1788  2586 I A       : Starting new batch; batchId=4 corpus=1004
+11-07 21:52:12.008  1788  2933 I A       : Download file group for language pack: en-US
+11-07 21:52:12.008  1788  2933 W A       : Locale en-US is not compatible, please check manifest exists
+11-07 21:52:12.009  1788  2933 I A       : Using proto config with mendel
+11-07 21:52:12.009  1788  2933 I A       : Proto config empty. Exit merge.
+11-07 21:52:12.009  1788  2933 E HotwordModelPopulator: HotwordLocaleConfig does not have a valid URL for model en-US, type OK_GOOGLE: en-US/hotword.data! This model will not be downloaded or updated
+11-07 21:52:12.009  1788  2933 I A       : Using proto config with mendel
+11-07 21:52:12.009  1788  2933 I A       : Proto config empty. Exit merge.
+11-07 21:52:12.010  1788  2933 I HotwordModelPopulator: #updateHotwordFileGroup group name: hotword_model_en-US_okhey, raw locale: en-US, locale: en-US
+11-07 21:52:12.014  1788  2311 I MicroModelsUtil: #getHotwordModelFromMobstore [mobstoreUri: android://com.google.android.googlequicksearchbox/files/datadownload/shared/public/datadownloadfile_1794088287693]
+11-07 21:52:12.016  1788  2311 I HotwordModelPopulator: Updated file group for locale 'hotword_model_en-US_okhey' from location: https://www.gstatic.com/android-search/hotword/x_google/7db96c566dbd33b2218d5799ec330d22/hotword.data. Download already finished.
+11-07 21:52:12.061  5034  5034 I PermissionEventCleanupJobService: onStartJob
+11-07 21:52:12.110  5034  5435 D BasePermissionEventStorage: 0 old permission events removed
+11-07 21:52:12.239  1060  3754 I Nearby  : [MBleClient] Start ble scanning from NearbyDirect:BluetoothAdapterWrapper, context tag = nearby_messages [CONTEXT service_id=49 ]
+11-07 21:52:12.247  1060  3754 D BluetoothAdapter: isLeEnabled(): ON
+11-07 21:52:12.255   955  1768 D BtGatt.GattService: stopScan() - queue size =2
+11-07 21:52:12.262   955  1768 D ActivityAttributionService: notifyActivityAttributionInfo UID=1002 packageName=com.google.android.bluetooth deviceAddress=no_active_device_address
+11-07 21:52:12.262   955  1768 I bt_btif : packages/modules/Bluetooth/system/btif/src/bluetooth.cc:465 get_profile_interface: get_profile_interface: id = activity_attribution
+11-07 21:52:12.269   955  1284 D BtGatt.ScanManager: handling stopping scan  [ScanClient scanModeApp 2 scanModeUsed 2 [appScanStats com.google.uid.shared:10120]]
+11-07 21:52:12.269   955  1284 D BtGatt.ScanManager: stop gattClientScanNative
+11-07 21:52:12.269   955  1284 I bt_stack: [INFO:le_scanning_manager.cc(154)] Scan in shim layer stopped
+11-07 21:52:12.269   955  1290 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:190 unregister_client: Client unregistered
+11-07 21:52:12.269   955  1290 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:194 unregister_client: Cancelled address rotation alarm
+11-07 21:52:12.269   955  1284 I bt_stack: [INFO:le_scanning_manager.cc(174)] ScanFilterParamSetup in shim layer
+11-07 21:52:12.270   955  1254 D BtGatt.GattService: onScanFilterParamsConfigured() - clientIf=1, status=0, action=0, availableSpace=0
+11-07 21:52:12.270   955  1254 D BtGatt.ScanManager: callback done for scannerId - 1 status - 0
+11-07 21:52:12.270   955  1284 I bt_stack: [INFO:le_scanning_manager.cc(174)] ScanFilterParamSetup in shim layer
+11-07 21:52:12.270   955  1254 D BtGatt.GattService: onScanFilterParamsConfigured() - clientIf=1, status=0, action=0, availableSpace=0
+11-07 21:52:12.270   955  1254 D BtGatt.ScanManager: callback done for scannerId - 1 status - 0
+11-07 21:52:12.270   955  1284 I bt_stack: [INFO:le_scanning_manager.cc(174)] ScanFilterParamSetup in shim layer
+11-07 21:52:12.270   955  1254 D BtGatt.GattService: onScanFilterParamsConfigured() - clientIf=1, status=0, action=0, availableSpace=0
+11-07 21:52:12.270   955  1254 D BtGatt.ScanManager: callback done for scannerId - 1 status - 0
+11-07 21:52:12.270   955  1284 I bt_stack: [INFO:le_scanning_manager.cc(174)] ScanFilterParamSetup in shim layer
+11-07 21:52:12.270   955  1254 D BtGatt.GattService: onScanFilterParamsConfigured() - clientIf=1, status=0, action=0, availableSpace=0
+11-07 21:52:12.270   955  1254 D BtGatt.ScanManager: callback done for scannerId - 1 status - 0
+11-07 21:52:12.270   955  1284 I bt_stack: [INFO:le_scanning_manager.cc(174)] ScanFilterParamSetup in shim layer
+11-07 21:52:12.270   955  1254 D BtGatt.GattService: onScanFilterParamsConfigured() - clientIf=1, status=0, action=0, availableSpace=0
+11-07 21:52:12.270   955  1254 D BtGatt.ScanManager: callback done for scannerId - 1 status - 0
+11-07 21:52:12.270   955  1284 D BtGatt.ScanManager: configureRegularScanParams() - queue=1
+11-07 21:52:12.270   955  1284 D BtGatt.ScanManager: configureRegularScanParams() - queue empty, scan stopped
+11-07 21:52:12.281   955  1768 D BtGatt.GattService: unregisterScanner() - scannerId=1
+11-07 21:52:12.283   955  1768 I bt_stack: [INFO:le_scanning_manager.cc(148)] Unregister in shim layer, scanner_id:1
+11-07 21:52:12.283  1060  3754 I Nearby  : [MBleClient] M hardware scan: 1 clients, scanMode= OPPORTUNISTIC, filters size = 5 [CONTEXT service_id=49 ]
+11-07 21:52:12.284  1060  3754 D BluetoothAdapter: isLeEnabled(): ON
+11-07 21:52:12.285   955  1768 D BtGatt.GattService: registerScanner() - UUID=94883ad8-4941-410c-9a01-22ce70718eef
+11-07 21:52:12.290   955  1768 I bt_stack: [INFO:le_scanning_manager.cc(141)] RegisterScanner in shim layer
+11-07 21:52:12.290   955  1254 D BtGatt.GattService: onScannerRegistered() - UUID=94883ad8-4941-410c-9a01-22ce70718eef, scannerId=1, status=0
+11-07 21:52:12.291  1060  2752 D BluetoothLeScanner: onScannerRegistered() - status=0 scannerId=1 mScannerId=0
+11-07 21:52:12.295   955  1768 D BtGatt.GattService: start scan with filters
+11-07 21:52:12.297   955  1768 D BtGatt.GattService: enforcePrivilegedPermissionIfNeeded([BluetoothLeScanFilter [mDeviceName=null, mDeviceAddress=null, mUuid=null, mUuidMask=null, mServiceSolicitationUuid=null, mServiceSolicitationUuidMask=null, mServiceDataUuid=null, mServiceData=null, mServiceDataMask=null, mManufacturerId=224, mManufacturerData=[0, 0, 0], mManufacturerDataMask=[0, 0, -1], mAdvertisingDataType=-1, mAdvertisingData=null, mAdvertisingDataMask=null], BluetoothLeScanFilter [mDeviceName=null, mDeviceAddress=null, mUuid=0000fef3-0000-1000-8000-00805f9b34fb, mUuidMask=null, mServiceSolicitationUuid=null, mServiceSolicitationUuidMask=null, mServiceDataUuid=null, mServiceData=null, mServiceDataMask=null, mManufacturerId=-1, mManufacturerData=null, mManufacturerDataMask=null, mAdvertisingDataType=-1, mAdvertisingData=null, mAdvertisingDataMask=null], BluetoothLeScanFilter [mDeviceName=null, mDeviceAddress=null, mUuid=0000feaa-0000-1000-8000-00805f9b34fb, mUuidMask=null, mServiceSolicitationUuid=null, mServiceSolicitationUuidMask=null, mServiceDataUuid=null, mServiceData=null, mServiceDataMask=null, mManufacturerId=-1, mManufacturerData=null, mManufacturerDataMask=null, mAdvertisingDataType=-1, mAdvertisingData=null, mAdvertisingDataMask=null], BluetoothLeScanFilter [mDeviceName=null, mDeviceAddress=null, mUuid=0000fea0-0000-1000-8000-00805f9b34fb, mUuidMask=null, mServiceSolicitationUuid=null, mServiceSolicitationUuidMask=null, mServiceDataUuid=null, mServiceData=null, mServiceDataMask=null, mManufacturerId=-1, mManufacturerData=null, mManufacturerDataMask=null, mAdvertisingDataType=-1, mAdvertisingData=null, mAdvertisingDataMask=null], BluetoothLeScanFilter [mDeviceName=null, mDeviceAddress=null, mUuid=null, mUuidMask=null, mServiceSolicitationUuid=null, mServiceSolicitationUuidMask=null, mServiceDataUuid=null, mServiceData=null, mServiceDataMask=null, mManufacturerId=76, mManufacturerData=[2, 21], mManufacturerDataMask=[-1, -1], mAdvertisingDataType=-1, mAdvertisingData=null, mAdvertisingDataMask=null]])
+11-07 21:52:12.305   955  1768 D BtGatt.ScanManager: startScan()  [ScanClient scanModeApp -1 scanModeUsed -1 [appScanStats com.google.uid.shared:10120]]
+11-07 21:52:12.305   955  1284 D BtGatt.ScanManager: handling starting scan
+11-07 21:52:12.306   955  1768 D ActivityAttributionService: notifyActivityAttributionInfo UID=1002 packageName=com.google.android.bluetooth deviceAddress=no_active_device_address
+11-07 21:52:12.306   955  1768 I bt_btif : packages/modules/Bluetooth/system/btif/src/bluetooth.cc:465 get_profile_interface: get_profile_interface: id = activity_attribution
+11-07 21:52:12.341  1656  2149 I SP.AiAi : Sync for captions_i18n_v0_en-US succeeded in 57877 ms: {added: [asr_en-US_v3003], metadata: false
+11-07 21:52:12.355  1060  1071 I .gms.persistent: Background concurrent copying GC freed 405831(15MB) AllocSpace objects, 1(20KB) LOS objects, 49% free, 23MB/47MB, paused 71us,29us total 779.252ms
+11-07 21:52:12.378  4742  4758 I om.quartz.notes: JIT allocated 63KB for compiled code of java.lang.Object com.quartz.notes.data.sync.SyncEngine.apply(java.lang.String, kotlinx.serialization.json.JsonObject, boolean, com.quartz.notes.data.sync.SyncEngine$Counts, kotlin.coroutines.Continuation)
+11-07 21:52:12.414  1656  2149 I SP.AiAi : GC for 'captions_i18n_v0_en-US' (10) with ttl of 0 ms took 0 ms (0/0/0)
+11-07 21:52:12.415  1656  2149 I AiAiNowPlaying: Superpacks changed. Refreshing FA controller
+11-07 21:52:12.419  1656  3338 I AiAiCaptions: downloadSuperpack(): Successfully downloaded superpack 'captions_i18n_v0_en-US' version 20210623.
+11-07 21:52:12.421  1656  2611 I AiAiFed : [Now Playing Recognitions FA] *** disabled *** [mode=FEDERATION population=aiai/sense/ambientmusic/]
+11-07 21:52:12.422  1656  2611 I TrainerClient: Preparing to schedule training for population:aiai/sense/ambientmusic/ session_name:ambientmusic
+11-07 21:52:12.450  1656  2680 I AiAiCaptions: ComponentsManagerImpl::update()
+11-07 21:52:12.450  1656  2680 I AiAiCaptions: updateBasicComponents::updateBasicComponents()
+11-07 21:52:12.455  1656  2680 I AiAiCaptions: Would enable com.google.android.apps.miphone.aiai.captions.settingsui.settingsactivity.CaptionsSettingsActivity but already enabled
+11-07 21:52:12.456  1656  2680 I AiAiCaptions: Would enable com.google.android.apps.miphone.aiai.captions.CaptionsSettingsActivity but already enabled
+11-07 21:52:12.457  1656  2680 I AiAiCaptions: Would enable com.google.android.apps.miphone.aiai.captions.downloadservice.CaptionsDownloadService but already enabled
+11-07 21:52:12.575  4742  4836 I TestRunner: finished: theLaterEditWinsWhicheverDeviceSyncsFirst(com.quartz.notes.data.sync.SyncEngineTest)

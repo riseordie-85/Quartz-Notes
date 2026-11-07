@@ -1,0 +1,379 @@
+11-07 21:53:11.645  4742  4836 I TestRunner: started: splitViewCanBeTurnedOffOnWideScreens(com.quartz.notes.ui.home.HomeArrangeTest)
+11-07 21:53:11.647  6181  6181 D nativeloader: Configuring vendor-classloader-namespace for unbundled product apk /product/app/Maps/Maps.apk. target_sdk_version=35, uses_libraries=, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64:/product/lib64:/system/product/lib64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps:/product/lib64:/system/product/lib64
+11-07 21:53:11.651  1060  1373 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+11-07 21:53:11.728  4742  4836 D IdlingRegistry: Registering idling resources: [androidx.compose.ui.test.EspressoLink@e77c914]
+11-07 21:53:11.729  6181  6181 V GraphicsEnvironment: ANGLE Developer option for 'com.google.android.apps.maps' set to: 'default'
+11-07 21:53:11.729  6181  6181 V GraphicsEnvironment: ANGLE GameManagerService for com.google.android.apps.maps: false
+11-07 21:53:11.729  6181  6181 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-07 21:53:11.736  1060  1373 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+11-07 21:53:11.752  6181  6181 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-07 21:53:11.752  6181  6181 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-07 21:53:11.766  1788  2516 I A       : Using proto config with mendel
+11-07 21:53:11.768  4742  4836 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+11-07 21:53:11.774  2959  3085 W Bugle   : TextClassifierLibManagerImpl: Reclaiming memory at level: 40
+11-07 21:53:11.795   762   806 D SplashScreenView: Build android.window.SplashScreenView{b931e1b V.E...... ......ID 0,0-0,0}
+11-07 21:53:11.795   762   806 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-07 21:53:11.795   762   806 D SplashScreenView: Branding: view: android.view.View{4b23bb8 G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-07 21:53:11.801  6181  6181 I ecovery_process: System.exit called, status: 0
+11-07 21:53:11.801  6181  6181 I AndroidRuntime: VM exiting with result code 0, cleanup skipped.
+11-07 21:53:11.805   762   816 W Parcel  : Expecting binder but got null!
+11-07 21:53:11.867   287   287 I Zygote  : Process 6181 exited cleanly (0)
+11-07 21:53:11.904  1762  1822 D StrictMode: StrictMode policy violation: android.os.strictmode.SqliteObjectLeakedViolation: Finalizing a Cursor that has not been deactivated or closed. database = /data/user/0/com.android.providers.contacts/databases/contacts2.db, table = raw_contacts, query = SELECT contacts_view._id AS _id, contacts_view.display_name AS display_name, contacts_view.photo_thumb_uri AS photo_thumb_uri, data1 AS number, data2 AS type, data3 AS label, contacts_view.lookup AS lookup FROM raw_contacts JOIN view_contacts as contacts_view ON (contacts_view._id = raw_contacts.contact_id) JOIN (SELECT data_id,normalized_number FROM phone_lookup WHERE (phone_lookup.min_match = '7654321')) AS lookup ON lookup.data_id=data._id JOIN data ON data.raw_contact_id=raw_contacts._id WHERE (PHONE_NUMBERS_EQUAL(data.data1, '+15551234567', 0, 7)) ORDER BY  length(lookup.normalized_number) DESC
+11-07 21:53:11.904  1762  1822 D StrictMode: 	at android.os.StrictMode.onSqliteObjectLeaked(StrictMode.java:2185)
+11-07 21:53:11.904  1762  1822 D StrictMode: 	at android.database.sqlite.SQLiteCursor.finalize(SQLiteCursor.java:282)
+11-07 21:53:11.904  1762  1822 D StrictMode: 	at java.lang.Daemons$FinalizerDaemon.doFinalize(Daemons.java:319)
+11-07 21:53:11.904  1762  1822 D StrictMode: 	at java.lang.Daemons$FinalizerDaemon.runInternal(Daemons.java:306)
+11-07 21:53:11.904  1762  1822 D StrictMode: 	at java.lang.Daemons$Daemon.run(Daemons.java:140)
+11-07 21:53:11.904  1762  1822 D StrictMode: 	at java.lang.Thread.run(Thread.java:1012)
+11-07 21:53:12.079  1762  1822 D StrictMode: StrictMode policy violation: android.os.strictmode.LeakedClosableViolation: A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+11-07 21:53:12.079  1762  1822 D StrictMode: 	at android.os.StrictMode$AndroidCloseGuardReporter.report(StrictMode.java:1986)
+11-07 21:53:12.079  1762  1822 D StrictMode: 	at dalvik.system.CloseGuard.warnIfOpen(CloseGuard.java:336)
+11-07 21:53:12.079  1762  1822 D StrictMode: 	at android.database.AbstractCursor.finalize(AbstractCursor.java:531)
+11-07 21:53:12.079  1762  1822 D StrictMode: 	at android.database.sqlite.SQLiteCursor.finalize(SQLiteCursor.java:291)
+11-07 21:53:12.079  1762  1822 D StrictMode: 	at java.lang.Daemons$FinalizerDaemon.doFinalize(Daemons.java:319)
+11-07 21:53:12.079  1762  1822 D StrictMode: 	at java.lang.Daemons$FinalizerDaemon.runInternal(Daemons.java:306)
+11-07 21:53:12.079  1762  1822 D StrictMode: 	at java.lang.Daemons$Daemon.run(Daemons.java:140)
+11-07 21:53:12.079  1762  1822 D StrictMode: 	at java.lang.Thread.run(Thread.java:1012)
+11-07 21:53:12.079  1762  1822 D StrictMode: Caused by: java.lang.Throwable: Explicit termination method 'AbstractCursor.close' not called
+11-07 21:53:12.079  1762  1822 D StrictMode: 	at dalvik.system.CloseGuard.openWithCallSite(CloseGuard.java:288)
+11-07 21:53:12.079  1762  1822 D StrictMode: 	at dalvik.system.CloseGuard.open(CloseGuard.java:257)
+11-07 21:53:12.079  1762  1822 D StrictMode: 	at android.database.AbstractCursor.<init>(AbstractCursor.java:227)
+11-07 21:53:12.079  1762  1822 D StrictMode: 	at android.database.AbstractWindowedCursor.<init>(AbstractWindowedCursor.java:39)
+11-07 21:53:12.079  1762  1822 D StrictMode: 	at android.database.sqlite.SQLiteCursor.<init>(SQLiteCursor.java:98)
+11-07 21:53:12.079  1762  1822 D StrictMode: 	at android.database.sqlite.SQLiteDirectCursorDriver.query(SQLiteDirectCursorDriver.java:52)
+11-07 21:53:12.079  1762  1822 D StrictMode: 	at android.database.sqlite.SQLiteDatabase.rawQueryWithFactory(SQLiteDatabase.java:1712)
+11-07 21:53:12.079  1762  1822 D StrictMode: 	at android.database.sqlite.SQLiteQueryBuilder.query(SQLiteQueryBuilder.java:592)
+11-07 21:53:12.079  1762  1822 D StrictMode: 	at com.android.providers.contacts.ContactsProvider2.doQuery(ContactsProvider2.java:7249)
+11-07 21:53:12.079  1762  1822 D StrictMode: 	at com.android.providers.contacts.ContactsProvider2.queryLocal(ContactsProvider2.java:6955)
+11-07 21:53:12.079  1762  1822 D StrictMode: 	at com.android.providers.contacts.ContactsProvider2.queryCorpLookupIfNecessary(ContactsProvider2.java:7419)
+11-07 21:53:12.079  1762  1822 D StrictMode: 	at com.android.providers.contacts.ContactsProvider2.queryLookupEnterprise(ContactsProvider2.java:7558)
+11-07 21:53:12.079  1762  1822 D StrictMode: 	at com.android.providers.contacts.ContactsProvider2.queryPhoneLookupEnterprise(ContactsProvider2.java:7529)
+11-07 21:53:12.079  1762  1822 D StrictMode: 	at com.android.providers.contacts.ContactsProvider2.queryLocal(ContactsProvider2.java:6878)
+11-07 21:53:12.079  1762  1822 D StrictMode: 	at com.android.providers.contacts.ContactsProvider2.queryDirectoryIfNecessary(ContactsProvider2.java:5667)
+11-07 21:53:12.079  1762  1822 D StrictMode: 	at com.android.providers.contacts.ContactsProvider2.queryInternal(ContactsProvider2.java:5609)
+11-07 21:53:12.079  1762  1822 D StrictMode: 	at com.android.providers.contacts.ContactsProvider2.query(ContactsProvider2.java:5559)
+11-07 21:53:12.079  1762  1822 D StrictMode: 	at android.content.ContentProvider.query(ContentProvider.java:1551)
+11-07 21:53:12.079  1762  1822 D StrictMode: 	at android.content.ContentProvider$Transport.query(ContentProvider.java:285)
+11-07 21:53:12.079  1762  1822 D StrictMode: 	at android.content.ContentProviderNative.onTransact(ContentProviderNative.java:107)
+11-07 21:53:12.079  1762  1822 D StrictMode: 	at android.os.Binder.execTransactInternal(Binder.java:1280)
+11-07 21:53:12.079  1762  1822 D StrictMode: 	at android.os.Binder.execTransact(Binder.java:1244)
+11-07 21:53:12.087  1015  1883 D EGL_emulation: app_time_stats: avg=336.41ms min=13.77ms max=753.44ms count=3
+11-07 21:53:12.246   482   697 W system_server: Long monitor contention with owner binder:482_7 (832) at boolean com.android.server.am.OomAdjuster.updateOomAdjLocked(com.android.server.am.ProcessRecord, java.lang.String)(OomAdjuster.java:463) waiters=1 in void com.android.server.am.ActivityManagerService$LocalService.notifyNetworkPolicyRulesUpdated(int, long) for 148ms
+11-07 21:53:12.281   286   904 I netd    : tetherGetStats() -> {[]} <0.45ms>
+11-07 21:53:12.357   286   904 I netd    : bandwidthSetGlobalAlert(2097152) <0.13ms>
+11-07 21:53:12.367   286   904 I netd    : bandwidthRemoveInterfaceQuota(eth0) <0.74ms>
+11-07 21:53:12.372   286   904 I netd    : bandwidthSetInterfaceQuota(eth0, 9223372036854775807) <0.97ms>
+11-07 21:53:12.390   482   517 I libprocessgroup: Successfully killed process cgroup uid 10138 pid 6181 in 0ms
+11-07 21:53:12.417  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@34a0198 in: PRE_ON_CREATE
+11-07 21:53:12.417  4742  4742 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+11-07 21:53:12.432  1656  1656 I AiAi    : onTrimMemory() with level 15
+11-07 21:53:12.434  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@34a0198 in: CREATED
+11-07 21:53:12.434  4742  4742 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=androidx.activity.ComponentActivity@34a0198
+11-07 21:53:12.436  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@34a0198 in: STARTED
+11-07 21:53:12.437  4742  4742 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=androidx.activity.ComponentActivity@34a0198
+11-07 21:53:12.460  1509  1509 I AppBase : AppBase.onTrimMemory():497 onTrimMemory(): 15
+11-07 21:53:12.461  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onTrimMemory():4406 onTrimMemory(): 15
+11-07 21:53:12.484  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@34a0198 in: RESUMED
+11-07 21:53:12.484  4742  4742 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=androidx.activity.ComponentActivity@34a0198
+11-07 21:53:12.506   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537150
+11-07 21:53:12.507   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538050
+11-07 21:53:12.508   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538050
+11-07 21:53:12.508   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537150
+11-07 21:53:12.570   762   816 D EGL_emulation: app_time_stats: avg=1550.87ms min=1550.87ms max=1550.87ms count=1
+11-07 21:53:12.580  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:53:12.680   339   370 W TransactionTracing: Could not find layer handle 0x77aa885390d0
+11-07 21:53:12.807  1060  4641 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+11-07 21:53:12.818   762   816 D EGL_emulation: app_time_stats: avg=3156.23ms min=3156.23ms max=3156.23ms count=1
+11-07 21:53:12.976  1060  4641 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+11-07 21:53:13.016  1060  4641 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+11-07 21:53:13.029  1788  2516 W SearchServiceCore: Abort, client detached.
+11-07 21:53:13.031  1788  2760 I PBSessionCacheImpl: Deleted sessionId[7865501250074852] from persistence.
+11-07 21:53:13.036  1015  2099 D OneSearchSuggestProvider: Shut down the binder channel
+11-07 21:53:13.039   482   504 W ziparchive: Unable to open '/data/app/~~ewbzk_m16xDkclmAVpjUzA==/com.quartz.notes-XqM5_4k8BE5yt-arn9ES4A==/base.dm': No such file or directory
+11-07 21:53:13.043   482   504 I ActivityTaskManager: Displayed com.quartz.notes/androidx.activity.ComponentActivity: +1s116ms
+11-07 21:53:13.071  1060  5971 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+11-07 21:53:13.081  1060  5971 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+11-07 21:53:13.081  1060  5971 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+11-07 21:53:13.085  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-07 21:53:13.090  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-07 21:53:13.090  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=null}, false)
+11-07 21:53:13.090  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-07 21:53:13.090  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-07 21:53:13.096  1015  1040 I s.nexuslauncher: oneway function results for code 2 on binder at 0x73e60dd53180 will be dropped but finished with status UNKNOWN_TRANSACTION
+11-07 21:53:13.124   339   370 W TransactionTracing: Could not find layer handle 0x77aa88535b30
+11-07 21:53:13.124   339   370 W TransactionTracing: Could not find layer handle 0x77aa88536250
+11-07 21:53:13.131   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538dd0
+11-07 21:53:13.252   482  1634 W InputManager-JNI: Input channel object '52bbe80 Splash Screen com.quartz.notes (client)' was disposed without first being removed with the input manager!
+11-07 21:53:13.275   339   370 W TransactionTracing: Could not find layer handle 0x77aa88534030
+11-07 21:53:13.276   339   370 W TransactionTracing: Could not find layer handle 0x77aa88536cd0
+11-07 21:53:13.276   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537570
+11-07 21:53:13.278   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537570
+11-07 21:53:13.361   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537570
+11-07 21:53:13.362   339   370 W TransactionTracing: Could not find layer handle 0x77aa88536cd0
+11-07 21:53:13.376   287   287 D Zygote  : Forked child process 6202
+11-07 21:53:13.408  6202  6202 I ecovery_process: Using CollectorTypeCC GC.
+11-07 21:53:13.410  6202  6202 W ecovery_process: Unexpected CPU variant for x86: x86_64.
+11-07 21:53:13.410  6202  6202 W ecovery_process: Known variants: atom, sandybridge, silvermont, kabylake, default
+11-07 21:53:13.448   372   395 I adbd    : jdwp connection from 6202
+11-07 21:53:13.480  6202  6202 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10138; state: ENABLED
+11-07 21:53:13.486  6202  6202 D nativeloader: Configuring classloader-namespace for other apk /system/framework/org.apache.http.legacy.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps
+11-07 21:53:13.487  6202  6202 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.extensions.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps
+11-07 21:53:13.510  6202  6202 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.sidecar.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps
+11-07 21:53:13.513  6202  6202 D nativeloader: Configuring vendor-classloader-namespace for unbundled product apk /product/app/Maps/Maps.apk. target_sdk_version=35, uses_libraries=, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64:/product/lib64:/system/product/lib64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps:/product/lib64:/system/product/lib64
+11-07 21:53:13.514  4742  4742 D AutofillManager: Fill dialog is enabled:false, hints=[]
+11-07 21:53:13.524  1060  1366 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+11-07 21:53:13.535  6202  6202 V GraphicsEnvironment: ANGLE Developer option for 'com.google.android.apps.maps' set to: 'default'
+11-07 21:53:13.536  6202  6202 V GraphicsEnvironment: ANGLE GameManagerService for com.google.android.apps.maps: false
+11-07 21:53:13.536  6202  6202 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-07 21:53:13.539  6202  6202 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-07 21:53:13.539  6202  6202 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-07 21:53:13.562  6202  6202 I ecovery_process: System.exit called, status: 0
+11-07 21:53:13.562  6202  6202 I AndroidRuntime: VM exiting with result code 0, cleanup skipped.
+11-07 21:53:13.571   482   517 I libprocessgroup: Successfully killed process cgroup uid 10138 pid 6202 in 0ms
+11-07 21:53:13.575  1656  1656 I AiAi    : onTrimMemory() with level 15
+11-07 21:53:13.577   287   287 I Zygote  : Process 6202 exited cleanly (0)
+11-07 21:53:13.579  1509  2076 I SP      : Sync for transformer_expression succeeded in 17812 ms: {added: [2023012316_en], metadata: false
+11-07 21:53:13.590  1509  1509 I AppBase : AppBase.onTrimMemory():497 onTrimMemory(): 15
+11-07 21:53:13.590  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onTrimMemory():4406 onTrimMemory(): 15
+11-07 21:53:13.660  1509  2076 I SP      : Sync for expressive_concepts_triggering succeeded in 17893 ms: {added: [2022011819_en], metadata: false
+11-07 21:53:13.669   287   287 D Zygote  : Forked child process 6219
+11-07 21:53:13.686  6219  6219 I ecovery_process: Using CollectorTypeCC GC.
+11-07 21:53:13.687  6219  6219 W ecovery_process: Unexpected CPU variant for x86: x86_64.
+11-07 21:53:13.687  6219  6219 W ecovery_process: Known variants: atom, sandybridge, silvermont, kabylake, default
+11-07 21:53:13.693   372   395 I adbd    : jdwp connection from 6219
+11-07 21:53:13.717  6219  6219 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10138; state: ENABLED
+11-07 21:53:13.722  6219  6219 D nativeloader: Configuring classloader-namespace for other apk /system/framework/org.apache.http.legacy.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps
+11-07 21:53:13.723  6219  6219 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.extensions.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps
+11-07 21:53:13.728  6219  6219 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.sidecar.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps
+11-07 21:53:13.731  6219  6219 D nativeloader: Configuring vendor-classloader-namespace for unbundled product apk /product/app/Maps/Maps.apk. target_sdk_version=35, uses_libraries=, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64:/product/lib64:/system/product/lib64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps:/product/lib64:/system/product/lib64
+11-07 21:53:13.739  6219  6219 V GraphicsEnvironment: ANGLE Developer option for 'com.google.android.apps.maps' set to: 'default'
+11-07 21:53:13.739  6219  6219 V GraphicsEnvironment: ANGLE GameManagerService for com.google.android.apps.maps: false
+11-07 21:53:13.739  6219  6219 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-07 21:53:13.740  6219  6219 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-07 21:53:13.741  6219  6219 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-07 21:53:13.751  1509  2076 I SP      : Sync for dynamic_art succeeded in 18359 ms: {added: [305f81355a729e382ea9f374dd286d9f, b1f6f47a53f7820be91b9fe247728980], metadata: false
+11-07 21:53:13.764  6219  6219 I ecovery_process: System.exit called, status: 0
+11-07 21:53:13.764  6219  6219 I AndroidRuntime: VM exiting with result code 0, cleanup skipped.
+11-07 21:53:13.825   287   287 I Zygote  : Process 6219 exited cleanly (0)
+11-07 21:53:13.826   482   517 I libprocessgroup: Successfully killed process cgroup uid 10138 pid 6219 in 0ms
+11-07 21:53:13.871   287   287 D Zygote  : Forked child process 6237
+11-07 21:53:13.890  6237  6237 I ecovery_process: Using CollectorTypeCC GC.
+11-07 21:53:13.891  6237  6237 W ecovery_process: Unexpected CPU variant for x86: x86_64.
+11-07 21:53:13.891  6237  6237 W ecovery_process: Known variants: atom, sandybridge, silvermont, kabylake, default
+11-07 21:53:13.911   372   395 I adbd    : jdwp connection from 6237
+11-07 21:53:13.933  6237  6237 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10138; state: ENABLED
+11-07 21:53:13.940  6237  6237 D nativeloader: Configuring classloader-namespace for other apk /system/framework/org.apache.http.legacy.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps
+11-07 21:53:13.941  6237  6237 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.extensions.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps
+11-07 21:53:13.943  6237  6237 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.sidecar.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps
+11-07 21:53:13.954  6237  6237 D nativeloader: Configuring vendor-classloader-namespace for unbundled product apk /product/app/Maps/Maps.apk. target_sdk_version=35, uses_libraries=, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64:/product/lib64:/system/product/lib64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps:/product/lib64:/system/product/lib64
+11-07 21:53:13.961  6237  6237 V GraphicsEnvironment: ANGLE Developer option for 'com.google.android.apps.maps' set to: 'default'
+11-07 21:53:13.961  6237  6237 V GraphicsEnvironment: ANGLE GameManagerService for com.google.android.apps.maps: false
+11-07 21:53:13.961  6237  6237 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-07 21:53:13.962  6237  6237 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-07 21:53:13.962  6237  6237 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-07 21:53:13.990  6237  6237 I ecovery_process: System.exit called, status: 0
+11-07 21:53:13.990  6237  6237 I AndroidRuntime: VM exiting with result code 0, cleanup skipped.
+11-07 21:53:14.008   287   287 I Zygote  : Process 6237 exited cleanly (0)
+11-07 21:53:14.010   482   517 I libprocessgroup: Successfully killed process cgroup uid 10138 pid 6237 in 0ms
+11-07 21:53:14.019  1509  2076 I SP      : Sync for ranking_model succeeded in 18474 ms: {added: [gesture-ranking-20211120_163517], metadata: false
+11-07 21:53:14.043  1509  2076 I SP      : Sync for transformer_concept succeeded in 16143 ms: {added: [2023011913_en], metadata: false
+11-07 21:53:14.059   287   287 D Zygote  : Forked child process 6255
+11-07 21:53:14.070  6255  6255 I ecovery_process: Using CollectorTypeCC GC.
+11-07 21:53:14.071  6255  6255 W ecovery_process: Unexpected CPU variant for x86: x86_64.
+11-07 21:53:14.071  6255  6255 W ecovery_process: Known variants: atom, sandybridge, silvermont, kabylake, default
+11-07 21:53:14.077   372   395 I adbd    : jdwp connection from 6255
+11-07 21:53:14.097  6255  6255 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10138; state: ENABLED
+11-07 21:53:14.105  6255  6255 D nativeloader: Configuring classloader-namespace for other apk /system/framework/org.apache.http.legacy.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps
+11-07 21:53:14.111  6255  6255 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.extensions.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps
+11-07 21:53:14.118  1509  2076 I SP      : Sync for emoji succeeded in 16558 ms: {added: [60932fe37d5f6d7a3e60488d8a1755c4], removed: [7b9ddb0b8c001e17cee03b1edf554b20], metadata: false
+11-07 21:53:14.125  6255  6255 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.sidecar.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps
+11-07 21:53:14.127  6255  6255 D nativeloader: Configuring vendor-classloader-namespace for unbundled product apk /product/app/Maps/Maps.apk. target_sdk_version=35, uses_libraries=, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64:/product/lib64:/system/product/lib64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps:/product/lib64:/system/product/lib64
+11-07 21:53:14.145  6255  6255 V GraphicsEnvironment: ANGLE Developer option for 'com.google.android.apps.maps' set to: 'default'
+11-07 21:53:14.146  6255  6255 V GraphicsEnvironment: ANGLE GameManagerService for com.google.android.apps.maps: false
+11-07 21:53:14.146  6255  6255 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-07 21:53:14.148  6255  6255 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-07 21:53:14.148  6255  6255 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-07 21:53:14.191  1509  2076 I SP      : GC for 'transformer_expression' (10) with ttl of 0 ms took 0 ms (0/0/0)
+11-07 21:53:14.192  1509  2076 I SP      : GC for 'expressive_concepts_triggering' (10) with ttl of 0 ms took 0 ms (0/0/0)
+11-07 21:53:14.192  1509  2076 I SP      : GC for 'dynamic_art' (10) with ttl of 0 ms took 0 ms (0/0/0)
+11-07 21:53:14.192  1509  2076 I SP      : GC for 'ranking_model' (10) with ttl of 0 ms took 0 ms (0/0/0)
+11-07 21:53:14.192  1509  2076 I SP      : GC for 'transformer_concept' (10) with ttl of 0 ms took 0 ms (0/0/0)
+11-07 21:53:14.193  1509  2076 I SP      : GC for 'emoji' (10) with ttl of 0 ms took 0 ms (0/0/0)
+11-07 21:53:14.198  1509  3678 I Environment: Environment.isPackageInstalled():237 com.bitstrips.imoji is not installed
+11-07 21:53:14.204  1509  2076 I SP      : Sync for next-word-predictor succeeded in 12657 ms: {added: [tflite-nwp-be541314788c7304827a9710c3ac4edb], removed: [tflite-nwp-9343e8ce723e0b22aa8e2733a7d475be], metadata: false
+11-07 21:53:14.211  6255  6255 I ecovery_process: System.exit called, status: 0
+11-07 21:53:14.211  6255  6255 I AndroidRuntime: VM exiting with result code 0, cleanup skipped.
+11-07 21:53:14.225   287   287 I Zygote  : Process 6255 exited cleanly (0)
+11-07 21:53:14.234   482   517 I libprocessgroup: Successfully killed process cgroup uid 10138 pid 6255 in 0ms
+11-07 21:53:14.240   287   287 D Zygote  : Forked child process 6272
+11-07 21:53:14.250  6272  6272 I ecovery_process: Using CollectorTypeCC GC.
+11-07 21:53:14.251  6272  6272 W ecovery_process: Unexpected CPU variant for x86: x86_64.
+11-07 21:53:14.251  6272  6272 W ecovery_process: Known variants: atom, sandybridge, silvermont, kabylake, default
+11-07 21:53:14.254   372   395 I adbd    : jdwp connection from 6272
+11-07 21:53:14.275  6272  6272 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10138; state: ENABLED
+11-07 21:53:14.285  6272  6272 D nativeloader: Configuring classloader-namespace for other apk /system/framework/org.apache.http.legacy.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps
+11-07 21:53:14.287  6272  6272 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.extensions.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps
+11-07 21:53:14.293  6272  6272 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.sidecar.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps
+11-07 21:53:14.304  6272  6272 D nativeloader: Configuring vendor-classloader-namespace for unbundled product apk /product/app/Maps/Maps.apk. target_sdk_version=35, uses_libraries=, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64:/product/lib64:/system/product/lib64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps:/product/lib64:/system/product/lib64
+11-07 21:53:14.323  6272  6272 V GraphicsEnvironment: ANGLE Developer option for 'com.google.android.apps.maps' set to: 'default'
+11-07 21:53:14.324  6272  6272 V GraphicsEnvironment: ANGLE GameManagerService for com.google.android.apps.maps: false
+11-07 21:53:14.324  6272  6272 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-07 21:53:14.331  6272  6272 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-07 21:53:14.331  6272  6272 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-07 21:53:14.376  1509  2076 I SP      : GC for 'next-word-predictor' (10) with ttl of 0 ms took 1 ms (0/1/0)
+11-07 21:53:14.382  1509  2076 I SP      : Sync for content_cache succeeded in 8619 ms: {added: [8722425f4121ffdea802b1066df73991, e9a5a2de48a4f8b9a658b411bcfb375d, fa1da98da1212aad6fb9a8efaff48148], removed: [3514c1e9a5c7d614d5646bd12032bfa6], metadata: true
+11-07 21:53:14.384  1509  3678 I EmojiSuperpacksManager: EmojiSuperpacksManager.processPackSet():498 processPackSet() : isBundled = false
+11-07 21:53:14.389  1509  2081 I EmojiShortcutsLoader: EmojiShortcutsLoader.getEmojiShortcuts():117 Reading en_US emoji shortcuts
+11-07 21:53:14.397  6272  6272 I ecovery_process: System.exit called, status: 0
+11-07 21:53:14.397  6272  6272 I AndroidRuntime: VM exiting with result code 0, cleanup skipped.
+11-07 21:53:14.413   287   287 I Zygote  : Process 6272 exited cleanly (0)
+11-07 21:53:14.416   482   517 I libprocessgroup: Successfully killed process cgroup uid 10138 pid 6272 in 0ms
+11-07 21:53:14.424  1509  2076 I SP      : GC for 'content_cache' (10) with ttl of 0 ms took 0 ms (0/0/0)
+11-07 21:53:14.425   286   904 I netd    : tetherGetStats() -> {[]} <0.45ms>
+11-07 21:53:14.431   286   904 I netd    : bandwidthSetGlobalAlert(2097152) <0.12ms>
+11-07 21:53:14.459   287   287 D Zygote  : Forked child process 6290
+11-07 21:53:14.468  6290  6290 I ecovery_process: Using CollectorTypeCC GC.
+11-07 21:53:14.472  6290  6290 W ecovery_process: Unexpected CPU variant for x86: x86_64.
+11-07 21:53:14.472  6290  6290 W ecovery_process: Known variants: atom, sandybridge, silvermont, kabylake, default
+11-07 21:53:14.483   372   395 I adbd    : jdwp connection from 6290
+11-07 21:53:14.505  6290  6290 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10138; state: ENABLED
+11-07 21:53:14.513  6290  6290 D nativeloader: Configuring classloader-namespace for other apk /system/framework/org.apache.http.legacy.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps
+11-07 21:53:14.514  6290  6290 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.extensions.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps
+11-07 21:53:14.522  6290  6290 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.sidecar.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps
+11-07 21:53:14.527  6290  6290 D nativeloader: Configuring vendor-classloader-namespace for unbundled product apk /product/app/Maps/Maps.apk. target_sdk_version=35, uses_libraries=, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64:/product/lib64:/system/product/lib64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps:/product/lib64:/system/product/lib64
+11-07 21:53:14.560  1771  2514 W YouTubeMusic: Could not register for notifications with InnerTube:
+11-07 21:53:14.560  1771  2514 W YouTubeMusic: xvd: wrv: Precondition check failed.
+11-07 21:53:14.560  1771  2514 W YouTubeMusic: 	at xut.apply(Unknown Source:4)
+11-07 21:53:14.560  1771  2514 W YouTubeMusic: 	at vws.p(PG:5)
+11-07 21:53:14.560  1771  2514 W YouTubeMusic: 	at vws.b(PG:2)
+11-07 21:53:14.560  1771  2514 W YouTubeMusic: 	at xuv.d(PG:4)
+11-07 21:53:14.560  1771  2514 W YouTubeMusic: 	at acvk.c(PG:51)
+11-07 21:53:14.560  1771  2514 W YouTubeMusic: 	at acvk.i(PG:4)
+11-07 21:53:14.560  1771  2514 W YouTubeMusic: 	at acvk.c(PG:80)
+11-07 21:53:14.560  1771  2514 W YouTubeMusic: 	at acvk.j(PG:38)
+11-07 21:53:14.560  1771  2514 W YouTubeMusic: 	at acvk.d(PG:3)
+11-07 21:53:14.560  1771  2514 W YouTubeMusic: 	at acvi.run(Unknown Source:2)
+11-07 21:53:14.560  1771  2514 W YouTubeMusic: 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:463)
+11-07 21:53:14.560  1771  2514 W YouTubeMusic: 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+11-07 21:53:14.560  1771  2514 W YouTubeMusic: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-07 21:53:14.560  1771  2514 W YouTubeMusic: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-07 21:53:14.560  1771  2514 W YouTubeMusic: 	at qhq.run(PG:2)
+11-07 21:53:14.560  1771  2514 W YouTubeMusic: 	at qic.run(PG:4)
+11-07 21:53:14.560  1771  2514 W YouTubeMusic: 	at java.lang.Thread.run(Thread.java:1012)
+11-07 21:53:14.560  1771  2514 W YouTubeMusic: Caused by: wrv: Precondition check failed.
+11-07 21:53:14.560  1771  2514 W YouTubeMusic: 	at xtk.k(PG:5)
+11-07 21:53:14.560  1771  2514 W YouTubeMusic: 	at wfa.f(PG:17)
+11-07 21:53:14.560  1771  2514 W YouTubeMusic: 	at wfa.c(PG:1)
+11-07 21:53:14.560  1771  2514 W YouTubeMusic: 	at wdz.run(PG:21)
+11-07 21:53:14.560  1771  2514 W YouTubeMusic: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-07 21:53:14.560  1771  2514 W YouTubeMusic: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-07 21:53:14.560  1771  2514 W YouTubeMusic: 	at vvz.run(PG:11)
+11-07 21:53:14.560  1771  2514 W YouTubeMusic: 	... 1 more
+11-07 21:53:14.560  1771  2514 W YouTubeMusic: Caused by: dlh
+11-07 21:53:14.560  1771  2514 W YouTubeMusic: 	at wdz.run(PG:14)
+11-07 21:53:14.560  1771  2514 W YouTubeMusic: 	... 4 more
+11-07 21:53:14.569  6290  6290 V GraphicsEnvironment: ANGLE Developer option for 'com.google.android.apps.maps' set to: 'default'
+11-07 21:53:14.571  6290  6290 V GraphicsEnvironment: ANGLE GameManagerService for com.google.android.apps.maps: false
+11-07 21:53:14.571  6290  6290 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-07 21:53:14.572  1509  2081 I EmojiShortcutsLoader: EmojiShortcutsLoader.getEmojiShortcuts():134 Read en_US emoji shortcuts successfully.
+11-07 21:53:14.573  6290  6290 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-07 21:53:14.573  6290  6290 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-07 21:53:14.616  6290  6290 I ecovery_process: System.exit called, status: 0
+11-07 21:53:14.616  6290  6290 I AndroidRuntime: VM exiting with result code 0, cleanup skipped.
+11-07 21:53:14.632   287   287 I Zygote  : Process 6290 exited cleanly (0)
+11-07 21:53:14.644   482   517 I libprocessgroup: Successfully killed process cgroup uid 10138 pid 6290 in 0ms
+11-07 21:53:14.677  1564  1564 I PhenotypeBackgroundRecv: Skipping com.google.android.apps.wellbeing.device#com.google.android.apps.wellbeing which doesn't use ProcessStable flags.
+11-07 21:53:14.687  1509  2076 I SP      : <==== Finishing job {m:b:u:l, fg}, 8340 ms. elapsed since start
+11-07 21:53:14.687  1509  2076 I SuperpacksForegroundTaskService: SuperpacksForegroundTaskService.finishJob():54 SuperpacksForegroundTaskService.finishJob()
+11-07 21:53:14.690  1509  2076 I SP      : Download stopped: delight:main_en_840_2022102600_1, succeeded foreground, size: 20290852
+11-07 21:53:14.694  1509  2081 I EmojiShortcutsLoader: EmojiShortcutsLoader.call():63 1 emoji shortcut maps loaded.
+11-07 21:53:14.696   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 21:53:14.696   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 21:53:14.701  1509  2076 I SP      : Scheduling job with delay of 0s for {m:b:u:l, fg}, 1 candidates
+11-07 21:53:14.709   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 21:53:14.709   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 21:53:14.711  1509  1509 I SuperpacksForegroundTaskService: SuperpacksForegroundTaskService.onStartCommand():41 SuperpacksForegroundTaskService.onStartCommand(): 1
+11-07 21:53:14.714  1509  1509 I SP      : ====> Starting job {m:b:u:l, fg}
+11-07 21:53:14.720  1509  2076 I SP      : Scheduling: download stopped, 0 started, 0 paused, 1 scheduled, 1 pending: kc_tflite_model:tflite-kc-en_us_secagg-20220805_235142 * {m:b:u:l, fg}
+11-07 21:53:14.730  1509  2081 I EmojiShortcutsLoader: EmojiShortcutsLoader.call():72 Finished loading emoji shortcuts
+11-07 21:53:14.748  1509  1521 I putmethod.latin: Background young concurrent copying GC freed 213530(10MB) AllocSpace objects, 2(104KB) LOS objects, 38% free, 15MB/24MB, paused 303us,102us total 137.294ms
+11-07 21:53:14.748  1564  5748 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-07 21:53:14.754  1509  2076 I SP      : Scheduling: job start ({m:b:u:l, fg}), 1 started, 0 paused, 0 scheduled, 1 pending: kc_tflite_model:tflite-kc-en_us_secagg-20220805_235142 @ * {m:b:u:l, fg}
+11-07 21:53:14.754  1509  2076 I SP      : Requesting download of URL https://www.gstatic.com/android/keyboard/kc_triggering_model/tflite-kc-en_us_secagg-20220805_235142.zip to tflite-kc-en_us_secagg-20220805_235142.zip.fetched (constraints: m:b:u:l)
+11-07 21:53:14.770  1564  5778 I PhenotypeBackgroundRecv: Successfully updated snapshot for com.google.android.libraries.consentverifier#com.google.android.apps.wellbeing
+11-07 21:53:14.781   286  6308 I resolv  : GetAddrInfoHandler::run: {100 100 100 983140 10134 0}
+11-07 21:53:14.788   286  6309 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-07 21:53:14.788   286  6309 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x76f4a7edbbd0
+11-07 21:53:14.788   286  6309 I resolv  : doQuery: rcode=0, ancount=8, return value=257
+11-07 21:53:14.788   286  6310 I resolv  : res_nmkquery: (QUERY, IN, A)
+11-07 21:53:14.788   286  6310 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x76f497ed9090
+11-07 21:53:14.788   286  6310 I resolv  : doQuery: rcode=0, ancount=8, return value=161
+11-07 21:53:14.790  1509  6307 D TrafficStats: tagSocket(159) with statsTag=0xffffffff, statsUid=-1
+11-07 21:53:14.807  1564  5748 I PhenotypeBackgroundRecv: Successfully updated snapshot for com.google.android.gms.clearcut_client#com.google.android.apps.wellbeing
+11-07 21:53:14.845  1509  2002 I SuperDelight: SuperDelightUnpacker$UnpackCancellableTask.execute():102 UnpackCancellableTask#execute(): fst-decompress /data/user/0/com.google.android.inputmethod.latin/files/superpacks/delight/main_en_840_2022102600_1.staged
+11-07 21:53:14.856  1564  5778 I PhenotypeBackgroundRecv: Successfully updated snapshot for com.google.android.libraries.mdi.sync#com.google.android.apps.wellbeing
+11-07 21:53:14.903  1564  1564 I PhenotypeBackgroundRecv: Skipping com.google.android.gms.kids#com.google.android.apps.wellbeing which doesn't use ProcessStable flags.
+11-07 21:53:14.940  1564  1564 I PhenotypeBackgroundRecv: Skipping com.google.android.apps.kids.libraries.android#com.google.android.apps.wellbeing which doesn't use ProcessStable flags.
+11-07 21:53:14.988  4742  5479 D EGL_emulation: app_time_stats: avg=713.68ms min=153.27ms max=1031.72ms count=3
+11-07 21:53:15.098   482   495 I system_server: Background young concurrent copying GC freed 545184(22MB) AllocSpace objects, 9(308KB) LOS objects, 49% free, 23MB/46MB, paused 194us,46us total 217.796ms
+11-07 21:53:15.115  1564  5778 I PhenotypeBackgroundRecv: Successfully updated snapshot for com.google.android.libraries.onegoogle#com.google.android.apps.wellbeing
+11-07 21:53:15.149  1564  5748 I PhenotypeBackgroundRecv: Successfully updated snapshot for com.google.android.libraries.performance.primes#com.google.android.apps.wellbeing
+11-07 21:53:15.246  1564  5778 I PhenotypeBackgroundRecv: Successfully updated snapshot for com.google.android.libraries.surveys#com.google.android.apps.wellbeing
+11-07 21:53:15.254  2815  2815 I PhenotypeBackgroundRecv: Skipping com.google.android.ims#com.google.android.ims which doesn't use ProcessStable flags.
+11-07 21:53:15.308  2815  3236 I PhenotypeBackgroundRecv: Successfully updated snapshot for com.google.android.gms.clearcut_client#com.google.android.ims
+11-07 21:53:15.325  2815  3236 I PhenotypeBackgroundRecv: Successfully updated snapshot for com.google.android.libraries.mobileconfiguration#com.google.android.ims
+11-07 21:53:15.328  2815  2815 I PhenotypeBackgroundRecv: Skipping com.google.android.apps.messaging.auto#com.google.android.ims which doesn't use ProcessStable flags.
+11-07 21:53:15.330  2815  3236 I PhenotypeBackgroundRecv: Successfully updated snapshot for com.google.android.libraries.performance.primes#com.google.android.ims
+11-07 21:53:15.332  1509  2076 I SP      : <==== Finishing job {m:b:u:l, fg}, 619 ms. elapsed since start
+11-07 21:53:15.332  1509  2076 I SuperpacksForegroundTaskService: SuperpacksForegroundTaskService.finishJob():54 SuperpacksForegroundTaskService.finishJob()
+11-07 21:53:15.334  1509  1944 W LatinCommonCountersMetricsProcessor: LatinCommonCountersMetricsProcessor.processSuperpacksForegroundDownload():1082 processSuperpacksForegroundDownload(): undesired kc_tflite_model
+11-07 21:53:15.337  1509  2076 I SP      : Download stopped: kc_tflite_model:tflite-kc-en_us_secagg-20220805_235142, succeeded foreground, size: 38169
+11-07 21:53:15.344   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 21:53:15.344   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 21:53:15.361  2815  3236 I PhenotypeBackgroundRecv: Successfully updated snapshot for com.google.android.libraries.consentverifier#com.google.android.ims
+11-07 21:53:15.518  1509  2076 I SP      : Sync for kc_tflite_model succeeded in 9755 ms: {added: [tflite-kc-en_us_secagg-20220805_235142], metadata: false
+11-07 21:53:15.550  1509  2076 I SP      : GC for 'kc_tflite_model' (10) with ttl of 0 ms took 0 ms (0/0/0)
+11-07 21:53:15.555   762   806 D SplashScreenView: Build android.window.SplashScreenView{1ce6594 V.E...... ......ID 0,0-0,0}
+11-07 21:53:15.555   762   806 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-07 21:53:15.555   762   806 D SplashScreenView: Branding: view: android.view.View{c4c883d G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-07 21:53:15.569  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@34a0198 in: PAUSED
+11-07 21:53:15.569  4742  4742 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=androidx.activity.ComponentActivity@34a0198
+11-07 21:53:15.585   762   816 W Parcel  : Expecting binder but got null!
+11-07 21:53:15.620  5498  5521 W Parcel  : Expecting binder but got null!
+11-07 21:53:15.687   286   904 I netd    : tetherGetStats() -> {[]} <1.44ms>
+11-07 21:53:15.717   286   904 I netd    : bandwidthSetGlobalAlert(2097152) <0.11ms>
+11-07 21:53:15.722   286   904 I netd    : bandwidthRemoveInterfaceQuota(eth0) <0.79ms>
+11-07 21:53:15.756   286   904 I netd    : bandwidthSetInterfaceQuota(eth0, 9223372036854775807) <1.39ms>
+11-07 21:53:15.779   339   370 W TransactionTracing: Could not find layer handle 0x77aa885371b0
+11-07 21:53:15.779   339   370 W TransactionTracing: Could not find layer handle 0x77aa88535f50
+11-07 21:53:15.779   339   370 W TransactionTracing: Could not find layer handle 0x77aa885371b0
+11-07 21:53:15.779   339   370 W TransactionTracing: Could not find layer handle 0x77aa885371b0
+11-07 21:53:15.779   339   370 W TransactionTracing: Could not find layer handle 0x77aa88535f50
+11-07 21:53:15.779   339   370 W TransactionTracing: Could not find layer handle 0x77aa88535f50
+11-07 21:53:15.779   339   370 W TransactionTracing: Could not find layer handle 0x77aa88535f50
+11-07 21:53:15.779   339   370 W TransactionTracing: Could not find layer handle 0x77aa885371b0
+11-07 21:53:15.958   339   370 W TransactionTracing: Could not find layer handle 0x77aa88535ad0
+11-07 21:53:15.978  1060  1060 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.phenotype.service.START dat=chimera-action:/... cmp=com.google.android.gms/.chimera.PersistentApiService }
+11-07 21:53:15.985   762   816 D EGL_emulation: app_time_stats: avg=1583.06ms min=639.86ms max=2526.26ms count=2
+11-07 21:53:16.005   762   816 D EGL_emulation: app_time_stats: avg=1711.86ms min=879.75ms max=2543.98ms count=2
+11-07 21:53:16.029   482  1415 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_multi_configs ANDROID_EMU_hwc_color_transform GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0
+11-07 21:53:16.072   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 21:53:16.072   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 21:53:16.082   482  1415 W OpenGLRenderer: Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-07 21:53:16.108   482  1415 D EGL_emulation: eglCreateContext: 0x73e67dd2a950: maj 3 min 0 rcv 3
+11-07 21:53:16.115   482  1415 D EGL_emulation: eglMakeCurrent: 0x73e67dd2a950: ver 3 0 (tinfo 0x73e88ac64080) (first time)
+11-07 21:53:16.261  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@34a0198 in: STOPPED
+11-07 21:53:16.262  4742  4742 V ActivityScenario: Update currentActivityStage to STOPPED, currentActivity=androidx.activity.ComponentActivity@34a0198
+11-07 21:53:16.342  1060  1071 I .gms.persistent: Background young concurrent copying GC freed 237656(7962KB) AllocSpace objects, 0(0B) LOS objects, 21% free, 22MB/28MB, paused 49us,57us total 840.025ms
+11-07 21:53:16.351   482  1978 W system_server: Long monitor contention with owner binder:482_13 (1683) at int com.android.server.am.ActivityManagerService.bindServiceInstance(android.app.IApplicationThread, android.os.IBinder, android.content.Intent, java.lang.String, android.app.IServiceConnection, int, java.lang.String, boolean, int, java.lang.String, java.lang.String, int)(ActivityManagerService.java:12764) waiters=1 in int com.android.server.am.ActivityManagerService.bindServiceInstance(android.app.IApplicationThread, android.os.IBinder, android.content.Intent, java.lang.String, android.app.IServiceConnection, int, java.lang.String, boolean, int, java.lang.String, java.lang.String, int) for 152ms
+11-07 21:53:16.363  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@34a0198 in: DESTROYED
+11-07 21:53:16.363  4742  4742 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
+11-07 21:53:16.370  4742  4836 D IdlingRegistry: Unregistering idling resources: [androidx.compose.ui.test.EspressoLink@e77c914]
+11-07 21:53:16.389   482  1601 W InputManager-JNI: Input channel object '38870c com.quartz.notes/androidx.activity.ComponentActivity (client)' was disposed without first being removed with the input manager!
+11-07 21:53:16.480   482  1684 W AppSearchIcing: icing-search-engine.cc:217: Error: 5, Message: Document (com.google.android.googlequicksearchbox$OneSearchZeroStateGoogleSuggestions/default, zp) not found.
+11-07 21:53:16.485  1015  2099 D OneSearchSuggestProvider: Created the binder channel successfully for end point service =com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService , mChannel=Q0{delegate=L0{logId=33, target=directaddress:///AndroidComponentAddress%5BIntent%20%7B%20act=grpc.io.action.BIND%20cmp=com.google.android.googlequicksearchbox/com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService%20%7D%5D}} , mOneSearchConnection=y1.J@13eb626
+11-07 21:53:16.496   339   370 W TransactionTracing: Could not find layer handle 0x77aa885352f0
+11-07 21:53:16.502   339   370 W TransactionTracing: Could not find layer handle 0x77aa88531f90
+11-07 21:53:16.508   339   370 W TransactionTracing: Could not find layer handle 0x77aa885358f0
+11-07 21:53:16.508   339   370 W TransactionTracing: Could not find layer handle 0x77aa88533f70
+11-07 21:53:16.515  4742  4836 I TestRunner: finished: splitViewCanBeTurnedOffOnWideScreens(com.quartz.notes.ui.home.HomeArrangeTest)

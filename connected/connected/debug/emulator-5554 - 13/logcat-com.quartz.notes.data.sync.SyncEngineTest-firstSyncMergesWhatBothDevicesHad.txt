@@ -1,0 +1,265 @@
+11-07 21:52:12.576  4742  4836 I TestRunner: started: firstSyncMergesWhatBothDevicesHad(com.quartz.notes.data.sync.SyncEngineTest)
+11-07 21:52:12.580  4742  4836 D TrafficStats: tagSocket(101) with statsTag=0xffffffff, statsUid=-1
+11-07 21:52:12.605   955   955 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-07 21:52:12.609   955   955 D MediaPlayerList: Name of package changed: com.google.android.gm
+11-07 21:52:12.610   955   955 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-07 21:52:12.610   955   955 D MediaPlayerList: Name of package changed: com.google.android.gm
+11-07 21:52:12.614   482   584 I RoleService: Granting default roles...
+11-07 21:52:12.615   482   594 I InputReader: Reconfiguring input devices, changes=KEYBOARD_LAYOUTS |
+11-07 21:52:12.621  5034  5054 I PermissionControllerServiceImpl: Updating user sensitive for uid 10144
+11-07 21:52:12.638   762   762 D ControlsListingControllerImpl: ServiceConfig reloaded, count: 0
+11-07 21:52:12.642  1656  2680 I AiAiCaptions: initialize(): bound to superpacks service.
+11-07 21:52:12.648  2959  3117 I Bugle   : BroadcastReceiverAsyncWorkTracker: Acknowledging broadcast of atsi@4ad15e6
+11-07 21:52:12.680  1656  2680 I AiAiCaptions: Enable com.google.android.apps.miphone.aiai.captions.CaptionsForegroundService
+11-07 21:52:12.695  1060  5295 I Fitness : OnPackageChangedOperation got intent: Intent { act=android.intent.action.PACKAGE_CHANGED dat=package: flg=0x45000010 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.PersistentIntentOperationService (has extras) } [CONTEXT service_id=17 ]
+11-07 21:52:12.704  3974  5443 I ProvidersCache: Provider returned no roots. Possibly naughty: com.google.android.apps.docs.storage
+11-07 21:52:12.714   982   982 D CarrierSvcBindHelper: onPackageModified: com.google.android.gm
+11-07 21:52:12.716  1060  5295 I Fitness : FitCleanupIntentOperation received Intent android.intent.action.PACKAGE_CHANGED [CONTEXT service_id=17 ]
+11-07 21:52:12.717  1656  2680 I AiAiCaptions: initialize(): bound to superpacks service.
+11-07 21:52:12.718   982   982 D CarrierSvcBindHelper: No carrier app for: 0
+11-07 21:52:12.721  1656  2680 I AiAiCaptions: Would disable com.google.android.apps.miphone.aiai.captions.tulip.audiosource.impl.CIS (reason: Captions for calls is disabled in device config) but already disabled
+11-07 21:52:12.721  1656  2680 I AiAiCaptions: initialize(): bound to superpacks service.
+11-07 21:52:12.725  1656  2680 I AiAiCaptions: Enable com.google.android.apps.miphone.aiai.captions.CaptionsOnboardingService
+11-07 21:52:12.727  5034  5072 W Role    : Default holder doesn't have required signing certificate: com.google.android.apps.work.clouddpc:23962F4B43B9857638EA66F4D419518EAE282491ACDA4B94707BD59003C45E58
+11-07 21:52:12.728  1656  2680 I AiAiCaptions: initialize(): bound to superpacks service.
+11-07 21:52:12.730  1656  2680 I AiAiCaptions: Enable com.google.android.apps.miphone.aiai.captions.notificationbroadcastreceiver.CaptionsNotificationBroadcastReceiver
+11-07 21:52:12.732   982   982 D ImsResolver: maybeAddedImsService, packageName: com.google.android.gm
+11-07 21:52:12.733  1656  2680 I AiAiCaptions: initialize(): bound to superpacks service.
+11-07 21:52:12.734  1656  2680 I AiAiCaptions: Enable com.google.android.apps.miphone.aiai.captions.quicksetting.CaptionsTileService
+11-07 21:52:12.740  1656  2680 I AiAiCaptions: initialize(): bound to superpacks service.
+11-07 21:52:12.743   482   514 E system_server: No package ID 7f found for ID 0x7f0805a7.
+11-07 21:52:12.744   482   514 E system_server: No package ID 7f found for ID 0x7f150421.
+11-07 21:52:12.745  1656  2680 I AiAiCaptions: setVolumeControlEnabled() changing volume control state to enabled because: volume control behavior is: ENABLE
+11-07 21:52:12.753  1656  3354 I AiAiEcho: Settings cha with uri: content://settings/secure/odi_captions_volume_ui_enabled
+11-07 21:52:12.758  1656  2067 I AiAiEcho: Predicting[0]:
+11-07 21:52:12.758  1656  2067 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:
+11-07 21:52:12.760  1656  2067 I AiAiEcho: Predicting[0]:
+11-07 21:52:12.760  1656  2067 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:
+11-07 21:52:12.761  1656  2067 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0
+11-07 21:52:12.764  1656  2680 I AiAiCaptions: updateComponents(): Updated components state
+11-07 21:52:12.768  1656  2067 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0
+11-07 21:52:12.771  1656  2067 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0
+11-07 21:52:12.773  1656  2067 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0
+11-07 21:52:12.787  1656  2680 I AiAiCaptions: updateTriggerState(): stopping trigger.
+11-07 21:52:12.787  1656  2680 I AiAiCaptions: stop(): stop is called but CaptionsTriggerImpl already stopped
+11-07 21:52:12.806  5113  5352 W CursorConverter: Cannot get icon, pkg/id :com.android.settings/2130838217
+11-07 21:52:12.811  5113  5352 W CursorConverter: Cannot get icon, pkg/id :com.android.settings/2130838050
+11-07 21:52:12.811  5113  5352 W CursorConverter: Cannot get icon, pkg/id :com.android.settings/2130838044
+11-07 21:52:12.811  5113  5352 W CursorConverter: Cannot get icon, pkg/id :com.android.settings/2130838051
+11-07 21:52:12.812  5113  5352 W CursorConverter: Cannot get icon, pkg/id :com.android.settings/2130837961
+11-07 21:52:12.815  5113  5352 W CursorConverter: Cannot get icon, pkg/id :com.android.settings/2130837973
+11-07 21:52:12.816  5113  5352 W CursorConverter: Cannot get icon, pkg/id :com.android.settings/2130838041
+11-07 21:52:12.817  5113  5352 W CursorConverter: Cannot get icon, pkg/id :com.android.settings/2130838412
+11-07 21:52:12.817  5113  5352 W CursorConverter: Cannot get icon, pkg/id :com.android.settings/2130837964
+11-07 21:52:12.817  5113  5352 W CursorConverter: Cannot get icon, pkg/id :com.android.settings/2130838540
+11-07 21:52:12.817  5113  5352 W CursorConverter: Cannot get icon, pkg/id :com.android.settings/2130838539
+11-07 21:52:12.817  5113  5352 W CursorConverter: Cannot get icon, pkg/id :com.android.settings/2130838553
+11-07 21:52:12.818  5113  5352 W CursorConverter: Cannot get icon, pkg/id :com.android.settings/2130838190
+11-07 21:52:12.818  5113  5352 W CursorConverter: Cannot get icon, pkg/id :com.android.settings/2130838026
+11-07 21:52:12.818  5113  5352 W CursorConverter: Cannot get icon, pkg/id :com.android.settings/2130838419
+11-07 21:52:12.818  5113  5352 W CursorConverter: Cannot get icon, pkg/id :com.android.settings/2130837999
+11-07 21:52:12.818  5113  5352 W CursorConverter: Cannot get icon, pkg/id :com.android.settings/2130838146
+11-07 21:52:12.830  5113  5352 W CursorConverter: Cannot get icon, pkg/id :com.android.settings/2130837998
+11-07 21:52:12.903  1015  1883 D EGL_emulation: app_time_stats: avg=3556.01ms min=176.87ms max=10247.81ms count=3
+11-07 21:52:12.992  1102  1115 D SlicesDatabaseHelper: Created databases
+11-07 21:52:12.996  1102  1115 D SlicesDatabaseHelper: Created databases
+11-07 21:52:13.012  1788  2708 I A       : Scheduled one-off task for batch; batchId=4 taskId=-1000008 corpora=[1004]
+11-07 21:52:13.012  1788  2708 I A       : Pending callbacks: 2
+11-07 21:52:13.019  1102  1115 D AssistGesture: mAssistOnly:false, isSupported:false, isSensorAvailable:false
+11-07 21:52:13.019  1102  1115 D AssistGesture: mAssistOnly:false, isSupported:false, isSensorAvailable:false
+11-07 21:52:13.045  1102  1115 E SystemServiceRegistry: No service published for: ethernet
+11-07 21:52:13.045  1102  1115 E SystemServiceRegistry: android.os.ServiceManager$ServiceNotFoundException: No service published for: ethernet
+11-07 21:52:13.045  1102  1115 E SystemServiceRegistry: 	at android.os.ServiceManager.getServiceOrThrow(ServiceManager.java:166)
+11-07 21:52:13.045  1102  1115 E SystemServiceRegistry: 	at android.app.SystemServiceRegistry$136.createService(SystemServiceRegistry.java:1809)
+11-07 21:52:13.045  1102  1115 E SystemServiceRegistry: 	at android.app.SystemServiceRegistry$CachedServiceFetcher.getService(SystemServiceRegistry.java:1908)
+11-07 21:52:13.045  1102  1115 E SystemServiceRegistry: 	at android.app.SystemServiceRegistry.getSystemService(SystemServiceRegistry.java:1585)
+11-07 21:52:13.045  1102  1115 E SystemServiceRegistry: 	at android.app.ContextImpl.getSystemService(ContextImpl.java:2120)
+11-07 21:52:13.045  1102  1115 E SystemServiceRegistry: 	at android.content.ContextWrapper.getSystemService(ContextWrapper.java:900)
+11-07 21:52:13.045  1102  1115 E SystemServiceRegistry: 	at android.content.Context.getSystemService(Context.java:4168)
+11-07 21:52:13.045  1102  1115 E SystemServiceRegistry: 	at com.android.settings.network.EthernetTetherPreferenceController.<init>(EthernetTetherPreferenceController.java:46)
+11-07 21:52:13.045  1102  1115 E SystemServiceRegistry: 	at java.lang.reflect.Constructor.newInstance0(Native Method)
+11-07 21:52:13.045  1102  1115 E SystemServiceRegistry: 	at java.lang.reflect.Constructor.newInstance(Constructor.java:343)
+11-07 21:52:13.045  1102  1115 E SystemServiceRegistry: 	at com.android.settings.core.BasePreferenceController.createInstance(BasePreferenceController.java:143)
+11-07 21:52:13.045  1102  1115 E SystemServiceRegistry: 	at com.android.settings.slices.SliceBuilderUtils.getPreferenceController(SliceBuilderUtils.java:362)
+11-07 21:52:13.045  1102  1115 E SystemServiceRegistry: 	at com.android.settings.slices.SliceDataConverter.getSliceDataFromXML(SliceDataConverter.java:204)
+11-07 21:52:13.045  1102  1115 E SystemServiceRegistry: 	at com.android.settings.slices.SliceDataConverter.getSliceDataFromProvider(SliceDataConverter.java:149)
+11-07 21:52:13.045  1102  1115 E SystemServiceRegistry: 	at com.android.settings.slices.SliceDataConverter.getSliceData(SliceDataConverter.java:119)
+11-07 21:52:13.045  1102  1115 E SystemServiceRegistry: 	at com.android.settings.slices.SlicesIndexer.getSliceData(SlicesIndexer.java:94)
+11-07 21:52:13.045  1102  1115 E SystemServiceRegistry: 	at com.android.settings.slices.SlicesIndexer.indexSliceData(SlicesIndexer.java:75)
+11-07 21:52:13.045  1102  1115 E SystemServiceRegistry: 	at com.android.settings.slices.SlicesFeatureProviderImpl.indexSliceData(SlicesFeatureProviderImpl.java:63)
+11-07 21:52:13.045  1102  1115 E SystemServiceRegistry: 	at com.android.settings.slices.SlicesDatabaseAccessor.verifyIndexing(SlicesDatabaseAccessor.java:194)
+11-07 21:52:13.045  1102  1115 E SystemServiceRegistry: 	at com.android.settings.slices.SlicesDatabaseAccessor.getSliceUris(SlicesDatabaseAccessor.java:96)
+11-07 21:52:13.045  1102  1115 E SystemServiceRegistry: 	at com.android.settings.slices.SettingsSliceProvider.onGetSliceDescendants(SettingsSliceProvider.java:332)
+11-07 21:52:13.045  1102  1115 E SystemServiceRegistry: 	at androidx.slice.compat.SliceProviderWrapperContainer$SliceProviderWrapper.onGetSliceDescendants(SliceProviderWrapperContainer.java:165)
+11-07 21:52:13.045  1102  1115 E SystemServiceRegistry: 	at android.app.slice.SliceProvider.handleGetDescendants(SliceProvider.java:425)
+11-07 21:52:13.045  1102  1115 E SystemServiceRegistry: 	at android.app.slice.SliceProvider.call(SliceProvider.java:406)
+11-07 21:52:13.045  1102  1115 E SystemServiceRegistry: 	at androidx.slice.compat.SliceProviderWrapperContainer$SliceProviderWrapper.call(SliceProviderWrapperContainer.java:122)
+11-07 21:52:13.045  1102  1115 E SystemServiceRegistry: 	at android.content.ContentProvider.call(ContentProvider.java:2511)
+11-07 21:52:13.045  1102  1115 E SystemServiceRegistry: 	at android.content.ContentProvider$Transport.call(ContentProvider.java:525)
+11-07 21:52:13.045  1102  1115 E SystemServiceRegistry: 	at android.content.ContentProviderNative.onTransact(ContentProviderNative.java:295)
+11-07 21:52:13.045  1102  1115 E SystemServiceRegistry: 	at android.os.Binder.execTransactInternal(Binder.java:1280)
+11-07 21:52:13.045  1102  1115 E SystemServiceRegistry: 	at android.os.Binder.execTransact(Binder.java:1244)
+11-07 21:52:13.155  1102  1115 D ch_callQuality: isDeviceSupport: falsemIsChecked: true
+11-07 21:52:13.155  1102  1115 D ch_d2d  : isDeviceSupport: falsemIsChecked: false
+11-07 21:52:13.158  1102  1115 W SliceDataConverter: Get slice data from XML failed
+11-07 21:52:13.158  1102  1115 W SliceDataConverter: java.lang.IllegalStateException: Invalid preference controller: com.android.settings.accessibility.VibrationMainSwitchPreferenceController
+11-07 21:52:13.158  1102  1115 W SliceDataConverter: 	at com.android.settings.core.BasePreferenceController.createInstance(BasePreferenceController.java:146)
+11-07 21:52:13.158  1102  1115 W SliceDataConverter: 	at com.android.settings.slices.SliceBuilderUtils.getPreferenceController(SliceBuilderUtils.java:362)
+11-07 21:52:13.158  1102  1115 W SliceDataConverter: 	at com.android.settings.slices.SliceDataConverter.getSliceDataFromXML(SliceDataConverter.java:204)
+11-07 21:52:13.158  1102  1115 W SliceDataConverter: 	at com.android.settings.slices.SliceDataConverter.getSliceDataFromProvider(SliceDataConverter.java:149)
+11-07 21:52:13.158  1102  1115 W SliceDataConverter: 	at com.android.settings.slices.SliceDataConverter.getSliceData(SliceDataConverter.java:119)
+11-07 21:52:13.158  1102  1115 W SliceDataConverter: 	at com.android.settings.slices.SlicesIndexer.getSliceData(SlicesIndexer.java:94)
+11-07 21:52:13.158  1102  1115 W SliceDataConverter: 	at com.android.settings.slices.SlicesIndexer.indexSliceData(SlicesIndexer.java:75)
+11-07 21:52:13.158  1102  1115 W SliceDataConverter: 	at com.android.settings.slices.SlicesFeatureProviderImpl.indexSliceData(SlicesFeatureProviderImpl.java:63)
+11-07 21:52:13.158  1102  1115 W SliceDataConverter: 	at com.android.settings.slices.SlicesDatabaseAccessor.verifyIndexing(SlicesDatabaseAccessor.java:194)
+11-07 21:52:13.158  1102  1115 W SliceDataConverter: 	at com.android.settings.slices.SlicesDatabaseAccessor.getSliceUris(SlicesDatabaseAccessor.java:96)
+11-07 21:52:13.158  1102  1115 W SliceDataConverter: 	at com.android.settings.slices.SettingsSliceProvider.onGetSliceDescendants(SettingsSliceProvider.java:332)
+11-07 21:52:13.158  1102  1115 W SliceDataConverter: 	at androidx.slice.compat.SliceProviderWrapperContainer$SliceProviderWrapper.onGetSliceDescendants(SliceProviderWrapperContainer.java:165)
+11-07 21:52:13.158  1102  1115 W SliceDataConverter: 	at android.app.slice.SliceProvider.handleGetDescendants(SliceProvider.java:425)
+11-07 21:52:13.158  1102  1115 W SliceDataConverter: 	at android.app.slice.SliceProvider.call(SliceProvider.java:406)
+11-07 21:52:13.158  1102  1115 W SliceDataConverter: 	at androidx.slice.compat.SliceProviderWrapperContainer$SliceProviderWrapper.call(SliceProviderWrapperContainer.java:122)
+11-07 21:52:13.158  1102  1115 W SliceDataConverter: 	at android.content.ContentProvider.call(ContentProvider.java:2511)
+11-07 21:52:13.158  1102  1115 W SliceDataConverter: 	at android.content.ContentProvider$Transport.call(ContentProvider.java:525)
+11-07 21:52:13.158  1102  1115 W SliceDataConverter: 	at android.content.ContentProviderNative.onTransact(ContentProviderNative.java:295)
+11-07 21:52:13.158  1102  1115 W SliceDataConverter: 	at android.os.Binder.execTransactInternal(Binder.java:1280)
+11-07 21:52:13.158  1102  1115 W SliceDataConverter: 	at android.os.Binder.execTransact(Binder.java:1244)
+11-07 21:52:13.158  1102  1115 W SliceDataConverter: Caused by: java.lang.reflect.InvocationTargetException
+11-07 21:52:13.158  1102  1115 W SliceDataConverter: 	at java.lang.reflect.Constructor.newInstance0(Native Method)
+11-07 21:52:13.158  1102  1115 W SliceDataConverter: 	at java.lang.reflect.Constructor.newInstance(Constructor.java:343)
+11-07 21:52:13.158  1102  1115 W SliceDataConverter: 	at com.android.settings.core.BasePreferenceController.createInstance(BasePreferenceController.java:143)
+11-07 21:52:13.158  1102  1115 W SliceDataConverter: 	... 19 more
+11-07 21:52:13.158  1102  1115 W SliceDataConverter: Caused by: java.lang.RuntimeException: Can't create handler inside thread Thread[binder:1102_2,5,main] that has not called Looper.prepare()
+11-07 21:52:13.158  1102  1115 W SliceDataConverter: 	at android.os.Handler.<init>(Handler.java:227)
+11-07 21:52:13.158  1102  1115 W SliceDataConverter: 	at android.os.Handler.<init>(Handler.java:194)
+11-07 21:52:13.158  1102  1115 W SliceDataConverter: 	at com.android.settings.accessibility.VibrationMainSwitchPreferenceController.<init>(VibrationMainSwitchPreferenceController.java:52)
+11-07 21:52:13.158  1102  1115 W SliceDataConverter: 	... 22 more
+11-07 21:52:13.175  1102  1115 W SliceData: Highlight menu key res is empty: com.android.settings.deviceinfo.hardwareinfo.DeviceModelPreferenceController
+11-07 21:52:13.204  1102  1115 D RTTSettingsCtr: init controller
+11-07 21:52:13.276  1102  1115 W SliceData: Highlight menu key res is empty: com.android.settings.deviceinfo.firmwareversion.FirmwareVersionDetailPreferenceController
+11-07 21:52:13.292  1102  1115 W LocalMediaManager: BluetoothAdapter is null or muting expected device not exist
+11-07 21:52:13.310  1102  1115 W SliceDataConverter: Get slice data from XML failed
+11-07 21:52:13.310  1102  1115 W SliceDataConverter: java.lang.IllegalStateException: Invalid preference controller: com.android.settings.network.NetworkProviderSimsCategoryController
+11-07 21:52:13.310  1102  1115 W SliceDataConverter: 	at com.android.settings.core.BasePreferenceController.createInstance(BasePreferenceController.java:146)
+11-07 21:52:13.310  1102  1115 W SliceDataConverter: 	at com.android.settings.slices.SliceBuilderUtils.getPreferenceController(SliceBuilderUtils.java:362)
+11-07 21:52:13.310  1102  1115 W SliceDataConverter: 	at com.android.settings.slices.SliceDataConverter.getSliceDataFromXML(SliceDataConverter.java:204)
+11-07 21:52:13.310  1102  1115 W SliceDataConverter: 	at com.android.settings.slices.SliceDataConverter.getSliceDataFromProvider(SliceDataConverter.java:149)
+11-07 21:52:13.310  1102  1115 W SliceDataConverter: 	at com.android.settings.slices.SliceDataConverter.getSliceData(SliceDataConverter.java:119)
+11-07 21:52:13.310  1102  1115 W SliceDataConverter: 	at com.android.settings.slices.SlicesIndexer.getSliceData(SlicesIndexer.java:94)
+11-07 21:52:13.310  1102  1115 W SliceDataConverter: 	at com.android.settings.slices.SlicesIndexer.indexSliceData(SlicesIndexer.java:75)
+11-07 21:52:13.310  1102  1115 W SliceDataConverter: 	at com.android.settings.slices.SlicesFeatureProviderImpl.indexSliceData(SlicesFeatureProviderImpl.java:63)
+11-07 21:52:13.310  1102  1115 W SliceDataConverter: 	at com.android.settings.slices.SlicesDatabaseAccessor.verifyIndexing(SlicesDatabaseAccessor.java:194)
+11-07 21:52:13.310  1102  1115 W SliceDataConverter: 	at com.android.settings.slices.SlicesDatabaseAccessor.getSliceUris(SlicesDatabaseAccessor.java:96)
+11-07 21:52:13.310  1102  1115 W SliceDataConverter: 	at com.android.settings.slices.SettingsSliceProvider.onGetSliceDescendants(SettingsSliceProvider.java:332)
+11-07 21:52:13.310  1102  1115 W SliceDataConverter: 	at androidx.slice.compat.SliceProviderWrapperContainer$SliceProviderWrapper.onGetSliceDescendants(SliceProviderWrapperContainer.java:165)
+11-07 21:52:13.310  1102  1115 W SliceDataConverter: 	at android.app.slice.SliceProvider.handleGetDescendants(SliceProvider.java:425)
+11-07 21:52:13.310  1102  1115 W SliceDataConverter: 	at android.app.slice.SliceProvider.call(SliceProvider.java:406)
+11-07 21:52:13.310  1102  1115 W SliceDataConverter: 	at androidx.slice.compat.SliceProviderWrapperContainer$SliceProviderWrapper.call(SliceProviderWrapperContainer.java:122)
+11-07 21:52:13.310  1102  1115 W SliceDataConverter: 	at android.content.ContentProvider.call(ContentProvider.java:2511)
+11-07 21:52:13.310  1102  1115 W SliceDataConverter: 	at android.content.ContentProvider$Transport.call(ContentProvider.java:525)
+11-07 21:52:13.310  1102  1115 W SliceDataConverter: 	at android.content.ContentProviderNative.onTransact(ContentProviderNative.java:295)
+11-07 21:52:13.310  1102  1115 W SliceDataConverter: 	at android.os.Binder.execTransactInternal(Binder.java:1280)
+11-07 21:52:13.310  1102  1115 W SliceDataConverter: 	at android.os.Binder.execTransact(Binder.java:1244)
+11-07 21:52:13.310  1102  1115 W SliceDataConverter: Caused by: java.lang.NoSuchMethodException: com.android.settings.network.NetworkProviderSimsCategoryController.<init> [class android.content.Context, class java.lang.String]
+11-07 21:52:13.310  1102  1115 W SliceDataConverter: 	at java.lang.Class.getConstructor0(Class.java:2363)
+11-07 21:52:13.310  1102  1115 W SliceDataConverter: 	at java.lang.Class.getConstructor(Class.java:1759)
+11-07 21:52:13.310  1102  1115 W SliceDataConverter: 	at com.android.settings.core.BasePreferenceController.createInstance(BasePreferenceController.java:141)
+11-07 21:52:13.310  1102  1115 W SliceDataConverter: 	... 19 more
+11-07 21:52:13.337  1102  1115 D RefreshRatePrefCtr: DEFAULT_REFRESH_RATE : 60.0 mPeakRefreshRate : 60.0
+11-07 21:52:13.339  1102  1115 W libc    : Access denied finding property "ro.vendor.aware_available"
+11-07 21:52:13.342  1102  1115 W libc    : Access denied finding property "ro.vendor.aware_available"
+11-07 21:52:13.348  1102  1115 W libc    : Access denied finding property "ro.vendor.aware_available"
+11-07 21:52:13.383  1102  1115 W SliceDataConverter: Get slice data from XML failed
+11-07 21:52:13.383  1102  1115 W SliceDataConverter: java.lang.IllegalStateException: Invalid preference controller: com.android.settings.applications.appinfo.ManageAppLocalePreferenceController
+11-07 21:52:13.383  1102  1115 W SliceDataConverter: 	at com.android.settings.core.BasePreferenceController.createInstance(BasePreferenceController.java:146)
+11-07 21:52:13.383  1102  1115 W SliceDataConverter: 	at com.android.settings.slices.SliceBuilderUtils.getPreferenceController(SliceBuilderUtils.java:362)
+11-07 21:52:13.383  1102  1115 W SliceDataConverter: 	at com.android.settings.slices.SliceDataConverter.getSliceDataFromXML(SliceDataConverter.java:204)
+11-07 21:52:13.383  1102  1115 W SliceDataConverter: 	at com.android.settings.slices.SliceDataConverter.getSliceDataFromProvider(SliceDataConverter.java:149)
+11-07 21:52:13.383  1102  1115 W SliceDataConverter: 	at com.android.settings.slices.SliceDataConverter.getSliceData(SliceDataConverter.java:119)
+11-07 21:52:13.383  1102  1115 W SliceDataConverter: 	at com.android.settings.slices.SlicesIndexer.getSliceData(SlicesIndexer.java:94)
+11-07 21:52:13.383  1102  1115 W SliceDataConverter: 	at com.android.settings.slices.SlicesIndexer.indexSliceData(SlicesIndexer.java:75)
+11-07 21:52:13.383  1102  1115 W SliceDataConverter: 	at com.android.settings.slices.SlicesFeatureProviderImpl.indexSliceData(SlicesFeatureProviderImpl.java:63)
+11-07 21:52:13.383  1102  1115 W SliceDataConverter: 	at com.android.settings.slices.SlicesDatabaseAccessor.verifyIndexing(SlicesDatabaseAccessor.java:194)
+11-07 21:52:13.383  1102  1115 W SliceDataConverter: 	at com.android.settings.slices.SlicesDatabaseAccessor.getSliceUris(SlicesDatabaseAccessor.java:96)
+11-07 21:52:13.383  1102  1115 W SliceDataConverter: 	at com.android.settings.slices.SettingsSliceProvider.onGetSliceDescendants(SettingsSliceProvider.java:332)
+11-07 21:52:13.383  1102  1115 W SliceDataConverter: 	at androidx.slice.compat.SliceProviderWrapperContainer$SliceProviderWrapper.onGetSliceDescendants(SliceProviderWrapperContainer.java:165)
+11-07 21:52:13.383  1102  1115 W SliceDataConverter: 	at android.app.slice.SliceProvider.handleGetDescendants(SliceProvider.java:425)
+11-07 21:52:13.383  1102  1115 W SliceDataConverter: 	at android.app.slice.SliceProvider.call(SliceProvider.java:406)
+11-07 21:52:13.383  1102  1115 W SliceDataConverter: 	at androidx.slice.compat.SliceProviderWrapperContainer$SliceProviderWrapper.call(SliceProviderWrapperContainer.java:122)
+11-07 21:52:13.383  1102  1115 W SliceDataConverter: 	at android.content.ContentProvider.call(ContentProvider.java:2511)
+11-07 21:52:13.383  1102  1115 W SliceDataConverter: 	at android.content.ContentProvider$Transport.call(ContentProvider.java:525)
+11-07 21:52:13.383  1102  1115 W SliceDataConverter: 	at android.content.ContentProviderNative.onTransact(ContentProviderNative.java:295)
+11-07 21:52:13.383  1102  1115 W SliceDataConverter: 	at android.os.Binder.execTransactInternal(Binder.java:1280)
+11-07 21:52:13.383  1102  1115 W SliceDataConverter: 	at android.os.Binder.execTransact(Binder.java:1244)
+11-07 21:52:13.383  1102  1115 W SliceDataConverter: Caused by: java.lang.ClassNotFoundException: com.android.settings.applications.appinfo.ManageAppLocalePreferenceController
+11-07 21:52:13.383  1102  1115 W SliceDataConverter: 	at java.lang.Class.classForName(Native Method)
+11-07 21:52:13.383  1102  1115 W SliceDataConverter: 	at java.lang.Class.forName(Class.java:454)
+11-07 21:52:13.383  1102  1115 W SliceDataConverter: 	at java.lang.Class.forName(Class.java:379)
+11-07 21:52:13.383  1102  1115 W SliceDataConverter: 	at com.android.settings.core.BasePreferenceController.createInstance(BasePreferenceController.java:139)
+11-07 21:52:13.383  1102  1115 W SliceDataConverter: 	... 19 more
+11-07 21:52:13.383  1102  1115 W SliceDataConverter: Caused by: java.lang.ClassNotFoundException: com.android.settings.applications.appinfo.ManageAppLocalePreferenceController
+11-07 21:52:13.383  1102  1115 W SliceDataConverter: 	... 23 more
+11-07 21:52:13.449  1060  1366 W .gms.persistent: Long monitor contention with owner lowpool[11] (3708) at void bwhy.D(java.util.Set, java.util.List, dmtw, java.lang.String, boolean, dzew, bwhx, java.util.LinkedHashMap, dhlq, boolean, edam)(:com.google.android.gms@231818047@23.18.18 (190800-535401451):200) waiters=0 in void bwhy.D(java.util.Set, java.util.List, dmtw, java.lang.String, boolean, dzew, bwhx, java.util.LinkedHashMap, dhlq, boolean, edam) for 2.868s
+11-07 21:52:13.473  1102  1115 D CustomizableLockScreenUtils: is_custom_lock_screen_quick_affordances_feature_enabled=0
+11-07 21:52:13.476  1102  1115 D CustomizableLockScreenUtils: is_custom_lock_screen_quick_affordances_feature_enabled=0
+11-07 21:52:13.480  1102  1115 D CustomizableLockScreenUtils: is_custom_lock_screen_quick_affordances_feature_enabled=0
+11-07 21:52:13.488  1102  1115 D AssistGesture: mAssistOnly:false, isSupported:false, isSensorAvailable:false
+11-07 21:52:13.488  1102  1115 D AssistGesture: mAssistOnly:false, isSupported:false, isSensorAvailable:false
+11-07 21:52:13.503  1102  1115 W SliceData: Highlight menu key res is empty: com.android.settings.accessibility.AccessibilitySlicePreferenceController
+11-07 21:52:13.503  1102  1115 W SliceData: Highlight menu key res is empty: com.android.settings.accessibility.AccessibilitySlicePreferenceController
+11-07 21:52:13.503  1102  1115 W SliceData: Highlight menu key res is empty: com.android.settings.accessibility.AccessibilitySlicePreferenceController
+11-07 21:52:13.506  1102  1115 D SlicesIndexer: Indexing slices database took: 511
+11-07 21:52:13.512  1102  1115 D SettingsSliceProvider: Allowlisting 16 uris to 3 pkgs.
+11-07 21:52:13.539  1060  1070 I .gms.persistent: Compiler allocated 4720KB to compile void bwhy.C(java.util.Set, long, dmuh, dmui, java.util.List, java.util.LinkedHashMap, dzew, bwhx, boolean)
+11-07 21:52:13.559  1102  1115 D SlicesIndexer: Slices already indexed - returning.
+11-07 21:52:13.559  1102  1115 D SettingsSliceProvider: Allowlisting 5 uris to 3 pkgs.
+11-07 21:52:13.578  1102  1115 D SettingsSliceProvider: onBindSlice start: content://com.android.settings.slices/action/screen_magnification_gestures_preference_screen
+11-07 21:52:13.582  1102  1392 D SlicesIndexer: Slices already indexed - returning.
+11-07 21:52:13.583  1102  1115 V SettingsSliceProvider: onBindSlice end
+11-07 21:52:13.592  1102  1392 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/screen_magnification_gestures_preference_screen) in: 10
+11-07 21:52:13.616  1102  3973 D SlicesIndexer: Slices already indexed - returning.
+11-07 21:52:13.617  1102  3973 W SliceData: Highlight menu key res is empty: com.android.settings.deviceinfo.hardwareinfo.DeviceModelPreferenceController
+11-07 21:52:13.618  1102  3973 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/hardware_info_device_model) in: 2
+11-07 21:52:13.621  1102  1392 D SlicesIndexer: Slices already indexed - returning.
+11-07 21:52:13.622  1102  1392 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/smart_battery) in: 1
+11-07 21:52:13.625  1102  3973 D SlicesIndexer: Slices already indexed - returning.
+11-07 21:52:13.627  1102  3973 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/gesture_double_tap_power) in: 2
+11-07 21:52:13.628  1102  1392 D SlicesIndexer: Slices already indexed - returning.
+11-07 21:52:13.629  1102  1392 W SliceData: Highlight menu key res is empty: com.android.settings.deviceinfo.firmwareversion.FirmwareVersionDetailPreferenceController
+11-07 21:52:13.629  1102  1392 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/os_firmware_version) in: 1
+11-07 21:52:13.631  1102  3973 D SlicesIndexer: Slices already indexed - returning.
+11-07 21:52:13.631  1102  3973 D VolumeSliceHelper: Registering uri for broadcast relay: content://com.android.settings.slices/action/media_volume
+11-07 21:52:13.631  1102  3973 D SliceBroadcastRelay: Registering Uri for broadcast relay: content://com.android.settings.slices/action/volume_slices
+11-07 21:52:13.633  1102  1102 D SettingsSliceProvider: Starting background worker for: content://com.android.settings.slices/action/media_volume
+11-07 21:52:13.633  1102  1102 D SliceBackgroundWorker: create instance: class com.android.settings.media.MediaOutputIndicatorWorker
+11-07 21:52:13.633  1102  3973 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/media_volume) in: 2
+11-07 21:52:13.635  1102  1392 W LocalMediaManager: BluetoothAdapter is null or muting expected device not exist
+11-07 21:52:13.637  1102  3973 D SlicesIndexer: Slices already indexed - returning.
+11-07 21:52:13.643  1102  3973 D VolumeSliceHelper: Registering uri for broadcast relay: content://com.android.settings.slices/action/call_volume
+11-07 21:52:13.646  1102  1114 D SettingsSliceProvider: onSlicePinned: content://com.android.settings.slices/action/call_volume
+11-07 21:52:13.647  1102  1392 D SlicesIndexer: Slices already indexed - returning.
+11-07 21:52:13.648  1102  3973 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/call_volume) in: 11
+11-07 21:52:13.650  1102  3973 D SlicesIndexer: Slices already indexed - returning.
+11-07 21:52:13.651  1102  3973 D VolumeSliceHelper: Registering uri for broadcast relay: content://com.android.settings.slices/action/ring_volume
+11-07 21:52:13.652  1102  3973 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/ring_volume) in: 3
+11-07 21:52:13.652  1102  1392 D VolumeSliceHelper: Registering uri for broadcast relay: content://com.android.settings.slices/action/call_volume
+11-07 21:52:13.653  1102  1392 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/call_volume) in: 7
+11-07 21:52:13.660  1102  3973 D SlicesIndexer: Slices already indexed - returning.
+11-07 21:52:13.661  1102  3973 D VolumeSliceHelper: Registering uri for broadcast relay: content://com.android.settings.slices/action/separate_ring_volume
+11-07 21:52:13.662  1102  3973 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/separate_ring_volume) in: 2
+11-07 21:52:13.664  1102  1392 D SlicesIndexer: Slices already indexed - returning.
+11-07 21:52:13.666  1102  3973 D SlicesIndexer: Slices already indexed - returning.
+11-07 21:52:13.666  1102  1392 D VolumeSliceHelper: Registering uri for broadcast relay: content://com.android.settings.slices/action/notification_volume
+11-07 21:52:13.666  1102  3973 D VolumeSliceHelper: Registering uri for broadcast relay: content://com.android.settings.slices/action/alarm_volume
+11-07 21:52:13.672  1102  3973 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/alarm_volume) in: 6
+11-07 21:52:13.672  1102  3973 D SlicesIndexer: Slices already indexed - returning.
+11-07 21:52:13.676  1102  1392 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/notification_volume) in: 8
+11-07 21:52:13.679  1102  3973 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/auto_rotate) in: 7
+11-07 21:52:13.714   482   594 I InputReader: Reconfiguring input devices, changes=KEYBOARD_LAYOUTS |
+11-07 21:52:13.716   955   955 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-07 21:52:13.717   955   955 D MediaPlayerList: Name of package changed: com.google.android.as
+11-07 21:52:13.718   955   955 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-07 21:52:13.718   955   955 D MediaPlayerList: Name of package changed: com.google.android.as
+11-07 21:52:13.721   762   762 D ControlsListingControllerImpl: ServiceConfig reloaded, count: 0
+11-07 21:52:13.724   482   584 I RoleService: Granting default roles...
+11-07 21:52:13.727  2959  3103 I Bugle   : BroadcastReceiverAsyncWorkTracker: Acknowledging broadcast of atsi@4ad15e6
+11-07 21:52:13.753  4742  4836 I TestRunner: finished: firstSyncMergesWhatBothDevicesHad(com.quartz.notes.data.sync.SyncEngineTest)

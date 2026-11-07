@@ -1,0 +1,17 @@
+11-07 21:52:14.947  4742  4836 I TestRunner: started: liveChangesArriveWithinSeconds(com.quartz.notes.data.sync.SyncEngineTest)
+11-07 21:52:14.950  4742  4836 D TrafficStats: tagSocket(104) with statsTag=0xffffffff, statsUid=-1
+11-07 21:52:15.072  2847  2847 D CompatibilityChangeReporter: Compat change id reported: 150939131; UID 10137; state: ENABLED
+11-07 21:52:15.104  3974  3974 I ProvidersCache: Updating roots due to change on user 0at content://com.android.providers.media.documents/root
+11-07 21:52:15.137  3974  5470 I ProvidersCache: Provider returned no roots. Possibly naughty: com.google.android.apps.docs.storage
+11-07 21:52:15.481  1762  1762 V ContactsProvider: Scheduled notifyChange started.
+11-07 21:52:15.484   955   955 D BluetoothPbapService:  onChange on contact uri
+11-07 21:52:15.499   955  5473 D BluetoothPbapUtils: primaryVersionCounter = 0, secondaryVersionCounter=0
+11-07 21:52:15.523  1060  5127 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.icing.proxy.IcingInternalCorporaUpdateService started execution. cause:9 exec_start_elapsed_seconds: 188 [CONTEXT service_id=218 ]
+11-07 21:52:15.528  1060  2930 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.icing.proxy.IcingInternalCorporaUpdateService finished executing. cause:9 result: 1 elapsed_millis: 15 uptime_millis: 15 exec_start_elapsed_seconds: 188 [CONTEXT service_id=218 ]
+11-07 21:52:15.557  1060  5306 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService started execution. cause:5 exec_start_elapsed_seconds: 189 [CONTEXT service_id=218 ]
+11-07 21:52:15.560  1321  5312 I Pay     : Device does not support HCE. [CONTEXT service_id=198 ]
+11-07 21:52:15.563  1060  2930 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService finished executing. cause:5 result: 2 elapsed_millis: 17 uptime_millis: 17 exec_start_elapsed_seconds: 189 [CONTEXT service_id=218 ]
+11-07 21:52:15.626  1321  5300 W PeopleGmsPhenoRgstrIntentOp: Google Api connection failed
+11-07 21:52:15.685  4742  5474 D TrafficStats: tagSocket(105) with statsTag=0xffffffff, statsUid=-1
+11-07 21:52:15.718  1060  1060 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.instantapps.START pkg=com.google.android.gms }
+11-07 21:52:16.254  4742  4836 I TestRunner: finished: liveChangesArriveWithinSeconds(com.quartz.notes.data.sync.SyncEngineTest)

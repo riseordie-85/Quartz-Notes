@@ -1,0 +1,237 @@
+11-07 21:52:03.902  4742  4836 I TestRunner: started: accentAndBackgroundAreShared(com.quartz.notes.data.sync.SyncEngineTest)
+11-07 21:52:03.906  4742  4836 D TrafficStats: tagSocket(92) with statsTag=0xffffffff, statsUid=-1
+11-07 21:52:03.912  1321  5299 I EnterpriseLoader: [ConditionsChecker] ZT config not present. [CONTEXT service_id=225 ]
+11-07 21:52:03.914  1321  5303 I EsimModuleInit: onHandleIntent action: android.intent.action.BOOT_COMPLETED [CONTEXT service_id=333 ]
+11-07 21:52:03.914  1321  5303 I Fido    : [FidoInitIntentOperation] Initializing Fido module, InitRuntimeState=2
+11-07 21:52:03.961  1060  5308 I AlarmManager: setExactAndAllowWhileIdle [name: GCM_CONN_ALARM type: 2 triggerAtMillis: 207422]
+11-07 21:52:03.966  1321  5299 W ChimeraUtils: Module com.google.android.gms.growth missing resource growth_module_display_name(0)
+11-07 21:52:03.970  1321  5299 W ChimeraUtils: Module com.google.android.gms.growth missing resource growth_module_display_name(0)
+11-07 21:52:03.978  1060  5294 I Herrevad: [370] aqwl.a: updateListenState
+11-07 21:52:04.006  1321  5299 I MobileDataHub: Scheduling periodic tasks
+11-07 21:52:04.007  1321  5299 W MobileDataHub: [Service] appsupload-periodic periodic task disabled
+11-07 21:52:04.087  3585  4156 I RemoteProvisioningService: Notify key generated ping for secLevel: 1
+11-07 21:52:04.089  3585  4156 I RemoteProvisioner: Pool status 6, 5, 0, 6
+11-07 21:52:04.089  3585  4156 I RemoteProvisioningService: Pool status.
+11-07 21:52:04.089  3585  4156 I RemoteProvisioningService: Total: 6
+11-07 21:52:04.089  3585  4156 I RemoteProvisioningService: Attested: 6
+11-07 21:52:04.089  3585  4156 I RemoteProvisioningService: Unassigned: 5
+11-07 21:52:04.089  3585  4156 I RemoteProvisioningService: Expiring: 0
+11-07 21:52:04.089  3585  4156 I RemoteProvisioningService.KeyPoolStats: Sufficient keys are available, no CSR needed.
+11-07 21:52:04.089  3585  4156 I RemoteProvisioningService: No provisioning needed.
+11-07 21:52:04.114  1321  5303 I LSRModuleInit: Attempting to change container components state to enabled: true [CONTEXT service_id=277 ]
+11-07 21:52:04.134  5204  5223 W System  : A resource failed to call AbstractCursor.close.
+11-07 21:52:04.141  1321  5303 I SnapshotHandler: Unable to retrieve flag snapshot for com.google.android.gms.magictether, using defaults.
+11-07 21:52:04.143  5034  5266 I PermissionControllerServiceImpl: Updating user sensitive for uid 10120
+11-07 21:52:04.147  1321  5303 W MagicTether: [MagicTetherInitializer] Invalid account list. [CONTEXT service_id=276 ]
+11-07 21:52:04.155   482   594 I InputReader: Reconfiguring input devices, changes=KEYBOARD_LAYOUTS |
+11-07 21:52:04.163   955   955 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-07 21:52:04.163   955   955 D MediaPlayerList: Name of package changed: com.google.android.gms
+11-07 21:52:04.174  1762  1822 D StrictMode: StrictMode policy violation: android.os.strictmode.SqliteObjectLeakedViolation: Finalizing a Cursor that has not been deactivated or closed. database = /data/user/0/com.android.providers.contacts/databases/contacts2.db, table = raw_contacts, query = SELECT contacts_view._id AS _id, contacts_view.display_name AS display_name, contacts_view.photo_thumb_uri AS photo_thumb_uri, data1 AS number, data2 AS type, data3 AS label, contacts_view.lookup AS lookup FROM raw_contacts JOIN view_contacts as contacts_view ON (contacts_view._id = raw_contacts.contact_id) JOIN (SELECT data_id,normalized_number FROM phone_lookup WHERE (phone_lookup.min_match = '7654321')) AS lookup ON lookup.data_id=data._id JOIN data ON data.raw_contact_id=raw_contacts._id WHERE (PHONE_NUMBERS_EQUAL(data.data1, '+15551234567', 0, 7)) ORDER BY  length(lookup.normalized_number) DESC
+11-07 21:52:04.174  1762  1822 D StrictMode: 	at android.os.StrictMode.onSqliteObjectLeaked(StrictMode.java:2185)
+11-07 21:52:04.174  1762  1822 D StrictMode: 	at android.database.sqlite.SQLiteCursor.finalize(SQLiteCursor.java:282)
+11-07 21:52:04.174  1762  1822 D StrictMode: 	at java.lang.Daemons$FinalizerDaemon.doFinalize(Daemons.java:319)
+11-07 21:52:04.174  1762  1822 D StrictMode: 	at java.lang.Daemons$FinalizerDaemon.runInternal(Daemons.java:306)
+11-07 21:52:04.174  1762  1822 D StrictMode: 	at java.lang.Daemons$Daemon.run(Daemons.java:140)
+11-07 21:52:04.174  1762  1822 D StrictMode: 	at java.lang.Thread.run(Thread.java:1012)
+11-07 21:52:04.176  1762  1822 D StrictMode: StrictMode policy violation: android.os.strictmode.LeakedClosableViolation: A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+11-07 21:52:04.176  1762  1822 D StrictMode: 	at android.os.StrictMode$AndroidCloseGuardReporter.report(StrictMode.java:1986)
+11-07 21:52:04.176  1762  1822 D StrictMode: 	at dalvik.system.CloseGuard.warnIfOpen(CloseGuard.java:336)
+11-07 21:52:04.176  1762  1822 D StrictMode: 	at android.database.AbstractCursor.finalize(AbstractCursor.java:531)
+11-07 21:52:04.176  1762  1822 D StrictMode: 	at android.database.sqlite.SQLiteCursor.finalize(SQLiteCursor.java:291)
+11-07 21:52:04.176  1762  1822 D StrictMode: 	at java.lang.Daemons$FinalizerDaemon.doFinalize(Daemons.java:319)
+11-07 21:52:04.176  1762  1822 D StrictMode: 	at java.lang.Daemons$FinalizerDaemon.runInternal(Daemons.java:306)
+11-07 21:52:04.176  1762  1822 D StrictMode: 	at java.lang.Daemons$Daemon.run(Daemons.java:140)
+11-07 21:52:04.176  1762  1822 D StrictMode: 	at java.lang.Thread.run(Thread.java:1012)
+11-07 21:52:04.176  1762  1822 D StrictMode: Caused by: java.lang.Throwable: Explicit termination method 'AbstractCursor.close' not called
+11-07 21:52:04.176  1762  1822 D StrictMode: 	at dalvik.system.CloseGuard.openWithCallSite(CloseGuard.java:288)
+11-07 21:52:04.176  1762  1822 D StrictMode: 	at dalvik.system.CloseGuard.open(CloseGuard.java:257)
+11-07 21:52:04.176  1762  1822 D StrictMode: 	at android.database.AbstractCursor.<init>(AbstractCursor.java:227)
+11-07 21:52:04.176  1762  1822 D StrictMode: 	at android.database.AbstractWindowedCursor.<init>(AbstractWindowedCursor.java:39)
+11-07 21:52:04.176  1762  1822 D StrictMode: 	at android.database.sqlite.SQLiteCursor.<init>(SQLiteCursor.java:98)
+11-07 21:52:04.176  1762  1822 D StrictMode: 	at android.database.sqlite.SQLiteDirectCursorDriver.query(SQLiteDirectCursorDriver.java:52)
+11-07 21:52:04.176  1762  1822 D StrictMode: 	at android.database.sqlite.SQLiteDatabase.rawQueryWithFactory(SQLiteDatabase.java:1712)
+11-07 21:52:04.176  1762  1822 D StrictMode: 	at android.database.sqlite.SQLiteQueryBuilder.query(SQLiteQueryBuilder.java:592)
+11-07 21:52:04.176  1762  1822 D StrictMode: 	at com.android.providers.contacts.ContactsProvider2.doQuery(ContactsProvider2.java:7249)
+11-07 21:52:04.176  1762  1822 D StrictMode: 	at com.android.providers.contacts.ContactsProvider2.queryLocal(ContactsProvider2.java:6955)
+11-07 21:52:04.176  1762  1822 D StrictMode: 	at com.android.providers.contacts.ContactsProvider2.queryCorpLookupIfNecessary(ContactsProvider2.java:7419)
+11-07 21:52:04.176  1762  1822 D StrictMode: 	at com.android.providers.contacts.ContactsProvider2.queryLookupEnterprise(ContactsProvider2.java:7558)
+11-07 21:52:04.176  1762  1822 D StrictMode: 	at com.android.providers.contacts.ContactsProvider2.queryPhoneLookupEnterprise(ContactsProvider2.java:7529)
+11-07 21:52:04.176  1762  1822 D StrictMode: 	at com.android.providers.contacts.ContactsProvider2.queryLocal(ContactsProvider2.java:6878)
+11-07 21:52:04.176  1762  1822 D StrictMode: 	at com.android.providers.contacts.ContactsProvider2.queryDirectoryIfNecessary(ContactsProvider2.java:5667)
+11-07 21:52:04.176  1762  1822 D StrictMode: 	at com.android.providers.contacts.ContactsProvider2.queryInternal(ContactsProvider2.java:5609)
+11-07 21:52:04.176  1762  1822 D StrictMode: 	at com.android.providers.contacts.ContactsProvider2.query(ContactsProvider2.java:5559)
+11-07 21:52:04.176  1762  1822 D StrictMode: 	at android.content.ContentProvider.query(ContentProvider.java:1551)
+11-07 21:52:04.176  1762  1822 D StrictMode: 	at android.content.ContentProvider$Transport.query(ContentProvider.java:285)
+11-07 21:52:04.176  1762  1822 D StrictMode: 	at android.content.ContentProviderNative.onTransact(ContentProviderNative.java:107)
+11-07 21:52:04.176  1762  1822 D StrictMode: 	at android.os.Binder.execTransactInternal(Binder.java:1280)
+11-07 21:52:04.176  1762  1822 D StrictMode: 	at android.os.Binder.execTransact(Binder.java:1244)
+11-07 21:52:04.183   955   955 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-07 21:52:04.183   955   955 D MediaPlayerList: Name of package changed: com.google.android.gms
+11-07 21:52:04.189   762   762 D ControlsListingControllerImpl: ServiceConfig reloaded, count: 0
+11-07 21:52:04.218  1060  5294 I LSR     : Handling LSR module init in persistent process [CONTEXT service_id=277 ]
+11-07 21:52:04.220   982   982 D CarrierSvcBindHelper: onPackageModified: com.google.android.gms
+11-07 21:52:04.220   982   982 D CarrierSvcBindHelper: No carrier app for: 0
+11-07 21:52:04.220   982   982 D ImsResolver: maybeAddedImsService, packageName: com.google.android.gms
+11-07 21:52:04.225   482   584 I RoleService: Granting default roles...
+11-07 21:52:04.240  2959  3103 I Bugle   : BroadcastReceiverAsyncWorkTracker: Acknowledging broadcast of atsi@4ad15e6
+11-07 21:52:04.245  1321  5303 I SnapshotHandler: Unable to retrieve flag snapshot for com.google.android.gms.maps#com.google.android.gms, using defaults.
+11-07 21:52:04.245  1321  5303 I Google Maps Android API: Validating conditions for requesting maps_core feature. [CONTEXT service_id=71 ]
+11-07 21:52:04.246  1321  5303 I Google Maps Android API: Is maps_core feature installed? 1 [CONTEXT service_id=71 ]
+11-07 21:52:04.246  1321  5303 I Google Maps Android API: cutoffSize=2147483648, internalFreeBytes=5342711808
+11-07 21:52:04.246  1321  5303 I Google Maps Android API: Eligible to request maps_core feature. [CONTEXT service_id=71 ]
+11-07 21:52:04.256  5034  5072 W Role    : Default holder doesn't have required signing certificate: com.google.android.apps.work.clouddpc:23962F4B43B9857638EA66F4D419518EAE282491ACDA4B94707BD59003C45E58
+11-07 21:52:04.260  3974  5329 I ProvidersCache: Provider returned no roots. Possibly naughty: com.google.android.apps.docs.storage
+11-07 21:52:04.272  1321  2998 I PeopleGalProvider: Gal directories started.
+11-07 21:52:04.283  1321  2998 I PeopleGalProvider: Method 1 completed.
+11-07 21:52:04.283  1321  2998 I PeopleGalProvider: Method 1 finished successfully.
+11-07 21:52:04.286  1321  5303 I Google Maps Android API: maps_core feature request succeeded. [CONTEXT service_id=71 ]
+11-07 21:52:04.309  1321  5299 I GmsDebugLogger: [53] +maps_core:-1
+11-07 21:52:04.319  1321  5311 I LSR     : Empty geofences. [CONTEXT service_id=277 ]
+11-07 21:52:04.355  1060  3030 I LSR     : No upload requests, reporting should be disabled [CONTEXT service_id=277 ]
+11-07 21:52:04.358  1060  5294 I LSR     : Refreshing periodic location reporting state [CONTEXT service_id=277 ]
+11-07 21:52:04.360  1321  5303 I MS_Utils: version of com.google.android.apps.maps = 1067529190
+11-07 21:52:04.366  1060  3030 I LSR     : No upload requests, reporting should be disabled [CONTEXT service_id=277 ]
+11-07 21:52:04.370  1060  5318 I LSR     : Reporting should be enabled: false [CONTEXT service_id=277 ]
+11-07 21:52:04.398  1060  1060 I SnapshotHandler: Unable to retrieve flag snapshot for com.google.android.gms.magictether, using defaults.
+11-07 21:52:04.398  1060  5318 I LSR     : Stopping periodic location reporting [CONTEXT service_id=277 ]
+11-07 21:52:04.436  1321  5299 I MS_RegisterService: Tachyon host: www.google.com, Tachyon port: 443
+11-07 21:52:04.448  3118  3532 W SystemServiceRegistry: No service published for: persistent_data_block
+11-07 21:52:04.454  1321  1321 W ProviderHelper: Unknown dynamite feature providerinstaller.dynamite
+11-07 21:52:04.472  1321  1321 I DynamiteModule: Considering local module com.google.android.gms.providerinstaller.dynamite:1 and remote module com.google.android.gms.providerinstaller.dynamite:0
+11-07 21:52:04.473  1321  1321 I DynamiteModule: Selected local version of com.google.android.gms.providerinstaller.dynamite
+11-07 21:52:04.476  1060  5295 I Fitness : OnPackageChangedOperation got intent: Intent { act=android.intent.action.PACKAGE_CHANGED dat=package: flg=0x45000010 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.PersistentIntentOperationService (has extras) } [CONTEXT service_id=17 ]
+11-07 21:52:04.486  1060  5016 I Fitness : FitCleanupIntentOperation received Intent android.intent.action.PACKAGE_CHANGED [CONTEXT service_id=17 ]
+11-07 21:52:04.545  5034  5044 I ssioncontroller: Background concurrent copying GC freed 107565(6140KB) AllocSpace objects, 23(588KB) LOS objects, 49% free, 2475KB/4950KB, paused 82us,10us total 291.926ms
+11-07 21:52:04.610  1060  5318 I LSR     : Cancelling periodic location reporting maintenance task [CONTEXT service_id=277 ]
+11-07 21:52:04.612  1321  4715 I LT_StubFactory: tachyonHostName = instantmessaging-pa.googleapis.com and tachyonPortNumber = 443
+11-07 21:52:04.620  1321  5303 I MdiSyncModule: initializing module...
+11-07 21:52:04.625  1321  5303 I MdiSyncModule: module initialization completed
+11-07 21:52:04.637  1321  5299 W MDM     : [302] aywf.d: Q+ devices does not need device admin.
+11-07 21:52:04.639  1321  5299 I MlBenchmarkInstaller: Intent: android.intent.action.BOOT_COMPLETED [CONTEXT service_id=340 ]
+11-07 21:52:04.640  1321  5299 I MlBenchmarkInstaller: onInitRuntimeState(), intent action=android.intent.action.BOOT_COMPLETED [CONTEXT service_id=340 ]
+11-07 21:52:04.641  1321  5299 I MlBenchmarkInstaller: Feature is disabled. [CONTEXT service_id=340 ]
+11-07 21:52:04.650  1321  1321 I MlBenchmarkInstaller: Feature unrequest success = true [CONTEXT service_id=340 ]
+11-07 21:52:04.669  3118  3532 D EGL_emulation: eglCreateContext: 0x73e67dd0fa10: maj 3 min 0 rcv 3
+11-07 21:52:04.694  1321  4715 D LT_OkHttpChannelBuilder: Using Spatula header keyless authentication.
+11-07 21:52:04.768  1060  5313 I TetheringManager: registerTetheringEventCallback:com.google.android.gms
+11-07 21:52:04.784  1060  5313 W MagicTether: [TetherListenerService] Invalid account list. [CONTEXT service_id=276 ]
+11-07 21:52:04.812  1321  1321 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.auth.service.START pkg=com.google.android.gms }
+11-07 21:52:04.812  1321  1321 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.auth.service.START pkg=com.google.android.gms }
+11-07 21:52:04.855  3118  3532 W libc    : Access denied finding property "persist.adb.tls_server.enable"
+11-07 21:52:04.855  3118  3532 W libc    : Access denied finding property "service.adb.tls.port"
+11-07 21:52:04.835  3118  3118 W binder:3118_5: type=1400 audit(0.0:48): avc: denied { read } for name="u:object_r:system_adbd_prop:s0" dev="tmpfs" ino=269 scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:object_r:system_adbd_prop:s0 tclass=file permissive=0 app=com.google.android.gms
+11-07 21:52:04.868  1321  5303 W ChimeraUtils: Module com.google.android.gms.mobiledataplan missing resource null(0)
+11-07 21:52:04.873  1321  5244 I MS_RegUtils: checking registration with Lighter
+11-07 21:52:04.879  1321  4715 E enyj    : *~*~*~ Previous channel {0} was not shutdown properly!!! ~*~*~*
+11-07 21:52:04.879  1321  4715 E enyj    :     Make sure to call shutdown()/shutdownNow() and wait until awaitTermination() returns true.
+11-07 21:52:04.879  1321  4715 E enyj    : java.lang.RuntimeException: ManagedChannel allocation site
+11-07 21:52:04.879  1321  4715 E enyj    : 	at enyi.<init>(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+11-07 21:52:04.879  1321  4715 E enyj    : 	at enyj.<init>(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-07 21:52:04.879  1321  4715 E enyj    : 	at enyh.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):21)
+11-07 21:52:04.879  1321  4715 E enyj    : 	at enqe.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 21:52:04.879  1321  4715 E enyj    : 	at abxw.H(:com.google.android.gms@231818047@23.18.18 (190800-535401451):22)
+11-07 21:52:04.879  1321  4715 E enyj    : 	at abxw.f(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-07 21:52:04.879  1321  4715 E enyj    : 	at cdbp.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-07 21:52:04.879  1321  4715 E enyj    : 	at cdav.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+11-07 21:52:04.879  1321  4715 E enyj    : 	at cdav.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 21:52:04.879  1321  4715 E enyj    : 	at zcr.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+11-07 21:52:04.879  1321  4715 E enyj    : 	at aced.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-07 21:52:04.879  1321  4715 E enyj    : 	at aced.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):7)
+11-07 21:52:04.879  1321  4715 E enyj    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-07 21:52:04.879  1321  4715 E enyj    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-07 21:52:04.879  1321  4715 E enyj    : 	at acjn.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 21:52:04.879  1321  4715 E enyj    : 	at java.lang.Thread.run(Thread.java:1012)
+11-07 21:52:04.851  3118  3118 W binder:3118_5: type=1400 audit(0.0:49): avc: denied { read } for name="u:object_r:adbd_prop:s0" dev="tmpfs" ino=61 scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:object_r:adbd_prop:s0 tclass=file permissive=0 app=com.google.android.gms
+11-07 21:52:04.884  1321  5299 I Nearby  : is blocked device type false, isAuto=false, isIot=false, isLatchsky=false, isChinaWearable=false, isTv=false, isWearable=false (supportWearOs=false), isChromeOsDevice=false (supportChromeOs=false) [CONTEXT service_id=49 ]
+11-07 21:52:04.893  1321  5299 I NearbyDiscovery: Trigger rescan contextual cards [CONTEXT service_id=265 ]
+11-07 21:52:04.899  1321  5299 I NearbyDiscovery: FastPair: HeadsetPieceImage, grant permission files:0 [CONTEXT service_id=265 ]
+11-07 21:52:04.906  2959  3089 W Bugle   : TextClassifierLibManagerImpl: Reclaiming memory at level: 40
+11-07 21:52:04.929  1321  5299 I NearbyFastPair: onInitRuntimeState isEnableWearableListener: false [CONTEXT service_id=265 ]
+11-07 21:52:04.934  1321  5299 I NearbyFastPair: FastPairInitIntentOperation: check the Footprints sync tasks. [CONTEXT service_id=265 ]
+11-07 21:52:04.940   286  5346 I resolv  : GetAddrInfoHandler::run: {100 786532 100 983140 10120 0}
+11-07 21:52:04.941  1321  5299 I NearbyFastPair: TaskSchedulerUtils cancelTask TAG_FOOTPRINTS_PERIODIC_SCHEDULE success. [CONTEXT service_id=265 ]
+11-07 21:52:04.941  1321  5299 I NearbyFastPair: TSS cancel footprints recon sync [CONTEXT service_id=265 ]
+11-07 21:52:04.942  1321  5299 I NearbyFastPair: TaskSchedulerUtils cancelTask TAG_FOOTPRINTS_RECON_SYNC_SCHEDULE success. [CONTEXT service_id=265 ]
+11-07 21:52:04.944  1321  5299 I NearbyFastPair: TSS scheduleFootprintsOneOffSync: not enable [CONTEXT service_id=265 ]
+11-07 21:52:04.947  3118  3532 D TrafficStats: tagSocket(109) with statsTag=0x1809, statsUid=-1
+11-07 21:52:04.950  1321  5300 I NearbySharing: Runtime state initialization complete. Sharing is enabled. [CONTEXT service_id=194 ]
+11-07 21:52:04.951  1321  5300 W libc    : Access denied finding property "ro.hardware.chipname"
+11-07 21:52:04.951  3118  3532 D TrafficStats: tagSocket(109) with statsTag=0x1809, statsUid=-1
+11-07 21:52:04.952  1321  5300 W ChipsetHelper: Unknown chipset! [CONTEXT service_id=301 ]
+11-07 21:52:04.952  1321  5300 I NnApiDriverManager: Registering application with chipset 'unknown' [CONTEXT service_id=301 ]
+11-07 21:52:04.953  3118  3532 D TrafficStats: tagSocket(109) with statsTag=0x1809, statsUid=-1
+11-07 21:52:04.960  1321  4932 I Checkin : [CheckinOperation] Starting Checkin: Default Task Reason : 1 Force : false UserId : 0 Start time : 178420
+11-07 21:52:04.967  1321  4932 I CheckinUtil: Classify the device as Phone. [CONTEXT service_id=130 ]
+11-07 21:52:04.977  1321  3181 I FastPair: FastPair: provider is called with method [getCardList]
+11-07 21:52:05.007  1321  5300 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_multi_configs ANDROID_EMU_hwc_color_transform GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0
+11-07 21:52:05.011  1666  2421 I MediaProvider: Scanned internal due to REASON_MOUNTED, found 227 items in 89485ms, 223 inserts 4 updates 0 deletes
+11-07 21:52:05.037  1321  5300 D EGL_emulation: eglCreateContext: 0x73e67dd10010: maj 3 min 0 rcv 3
+11-07 21:52:05.046  1666  2421 W MediaProvider: Didn't find any volume for getVolume(/product/media/audio/ringtones/Ring_Synth_04.ogg)
+11-07 21:52:05.046  1666  2421 I MediaProvider: Open with lower FS for /product/media/audio/ringtones/Ring_Synth_04.ogg. Uid: 10167
+11-07 21:52:05.046  5113  5343 W RankingPostProcessor: A card with invalid score: content://com.android.settings.slices/intent/screen_timeout
+11-07 21:52:05.046  5113  5343 W RankingPostProcessor: A card with invalid score: content://com.google.android.settings.intelligence.modules.contextualcards.slices/suggestion/com.google.android.as/com.google.intelligence.sense.ambientmusic.AmbientMusicSetupWizardActivity
+11-07 21:52:05.047  5113  5343 W RankingPostProcessor: A card with invalid score: content://com.google.android.settings.intelligence.modules.contextualcards.slices/suggestion/com.android.settings/com.android.settings.notification.zen.ZenSuggestionActivity
+11-07 21:52:05.047  5113  5343 W RankingPostProcessor: A card with invalid score: content://com.google.android.settings.intelligence.modules.contextualcards.slices/suggestion/com.google.android.gms/com.google.android.gms.trustlet.onbody.discovery.OnbodyPromotionActivity
+11-07 21:52:05.052  1321  4125 I NearbySharing: onBindSlice failed since shareTargets is empty [CONTEXT service_id=194 ]
+11-07 21:52:05.063  1666  2421 W MediaProvider: Didn't find any volume for getVolume(/product/media/audio/notifications/pixiedust.ogg)
+11-07 21:52:05.064  1666  2421 I MediaProvider: Open with lower FS for /product/media/audio/notifications/pixiedust.ogg. Uid: 10167
+11-07 21:52:05.064  1060  2772 W GLSUser : [DeviceKeyStore] Cannot load key: Device key file not found.
+11-07 21:52:05.064  1060  2772 W GLSUser : [DeviceKeyStore] Cannot load key: Device key file not found.
+11-07 21:52:05.071  1321  4125 I NearbySharing: Granted slice and Uri permissions to android [CONTEXT service_id=194 ]
+11-07 21:52:05.072  1666  2421 W MediaProvider: Didn't find any volume for getVolume(/product/media/audio/alarms/Alarm_Classic.ogg)
+11-07 21:52:05.073  1321  5300 D EGL_emulation: eglMakeCurrent: 0x73e67dd10010: ver 3 0 (tinfo 0x73e89905e100) (first time)
+11-07 21:52:05.073  1321  1321 D LT_ClntIntrcptrFctryV12: Spatula header: CjYKFmNvbS5nb29nbGUuYW5kcm9pZC5nbXMaHFdPSEVFejkwUWV3OUxDY0NjS0ZJQXRwSHVnND0YyvDcrvmu+t0+
+11-07 21:52:05.074  1666  2421 I MediaProvider: Open with lower FS for /product/media/audio/alarms/Alarm_Classic.ogg. Uid: 10167
+11-07 21:52:05.084  1321  5300 I NnApiDriverManager: Registering application with GPU 'Android Emulator OpenGL ES Translator (Google SwiftShader)' by 'Google (Google Inc.)' [CONTEXT service_id=301 ]
+11-07 21:52:05.095  1060  1071 I .gms.persistent: Background young concurrent copying GC freed 267915(14MB) AllocSpace objects, 6(312KB) LOS objects, 43% free, 19MB/34MB, paused 32us,30us total 233.737ms
+11-07 21:52:05.104  1321  4715 D LT_LitBstrpCntrl: Initializing BootstrapController Instance
+11-07 21:52:05.133  1321  5299 I Pay     : Closed loop HCE not migrated or access is not enabled. [CONTEXT service_id=198 ]
+11-07 21:52:05.135  1321  5299 I Pay     : Requested check of feature migrations. [CONTEXT service_id=198 ]
+11-07 21:52:05.147  1060  1060 I MagicTether: [AutoDisconnectIntentOperation] Canceling task. [CONTEXT service_id=276 ]
+11-07 21:52:05.158  1666  2421 W MediaProvider: isAppCloneUserPair for user 0: false
+11-07 21:52:05.159  1666  2421 W MediaProvider: isAppCloneUserPair for user 0: false
+11-07 21:52:05.161  1666  2421 W MediaProvider: isAppCloneUserPair for user 0: false
+11-07 21:52:05.161  1060  1060 I NearbySharing: ReceiveSurfaceService started [CONTEXT service_id=194 ]
+11-07 21:52:05.161  1666  2421 W MediaProvider: isAppCloneUserPair for user 0: false
+11-07 21:52:05.163  1060  5334 I MagicTether: [AutoDisconnectIntentOperation] Canceling task. [CONTEXT service_id=276 ]
+11-07 21:52:05.172  1666  2043 E StorageManager: Failed to set extended attributes for /storage/emulated/0/Android to set project id.: Operation not permitted
+11-07 21:52:05.175  1666  2043 W MediaProvider: Failed to update quota type for /storage/emulated/0/Android
+11-07 21:52:05.175  1666  2043 W MediaProvider: java.io.IOException: Failed to update quota type for /storage/emulated/0/Android
+11-07 21:52:05.175  1666  2043 W MediaProvider: 	at android.os.storage.StorageManager.updateExternalStorageFileQuotaType(StorageManager.java:2618)
+11-07 21:52:05.175  1666  2043 W MediaProvider: 	at com.android.providers.media.MediaProvider.updateQuotaTypeForFileInternal(MediaProvider.java:851)
+11-07 21:52:05.175  1666  2043 W MediaProvider: 	at com.android.providers.media.MediaProvider.updateQuotaTypeForUri(MediaProvider.java:826)
+11-07 21:52:05.175  1666  2043 W MediaProvider: 	at com.android.providers.media.MediaProvider.-$$Nest$mupdateQuotaTypeForUri(Unknown Source:0)
+11-07 21:52:05.175  1666  2043 W MediaProvider: 	at com.android.providers.media.MediaProvider$4.lambda$onInsert$0(MediaProvider.java:880)
+11-07 21:52:05.175  1666  2043 W MediaProvider: 	at com.android.providers.media.MediaProvider$4.$r8$lambda$DnIEye5Sx8fODP4Bt_qvKpm3U-Q(Unknown Source:0)
+11-07 21:52:05.175  1666  2043 W MediaProvider: 	at com.android.providers.media.MediaProvider$4$$ExternalSyntheticLambda0.run(Unknown Source:6)
+11-07 21:52:05.175  1666  2043 W MediaProvider: 	at android.os.Handler.handleCallback(Handler.java:942)
+11-07 21:52:05.175  1666  2043 W MediaProvider: 	at android.os.Handler.dispatchMessage(Handler.java:99)
+11-07 21:52:05.175  1666  2043 W MediaProvider: 	at android.os.Looper.loopOnce(Looper.java:201)
+11-07 21:52:05.175  1666  2043 W MediaProvider: 	at android.os.Looper.loop(Looper.java:288)
+11-07 21:52:05.175  1666  2043 W MediaProvider: 	at android.os.HandlerThread.run(HandlerThread.java:67)
+11-07 21:52:05.178  1666  2043 E StorageManager: Failed to set extended attributes for /storage/emulated/0/Android/media to set project id.: Operation not permitted
+11-07 21:52:05.179  1666  2043 W MediaProvider: Failed to update quota type for /storage/emulated/0/Android/media
+11-07 21:52:05.179  1666  2043 W MediaProvider: java.io.IOException: Failed to update quota type for /storage/emulated/0/Android/media
+11-07 21:52:05.179  1666  2043 W MediaProvider: 	at android.os.storage.StorageManager.updateExternalStorageFileQuotaType(StorageManager.java:2618)
+11-07 21:52:05.179  1666  2043 W MediaProvider: 	at com.android.providers.media.MediaProvider.updateQuotaTypeForFileInternal(MediaProvider.java:851)
+11-07 21:52:05.179  1666  2043 W MediaProvider: 	at com.android.providers.media.MediaProvider.updateQuotaTypeForUri(MediaProvider.java:826)
+11-07 21:52:05.179  1666  2043 W MediaProvider: 	at com.android.providers.media.MediaProvider.-$$Nest$mupdateQuotaTypeForUri(Unknown Source:0)
+11-07 21:52:05.179  1666  2043 W MediaProvider: 	at com.android.providers.media.MediaProvider$4.lambda$onInsert$0(MediaProvider.java:880)
+11-07 21:52:05.179  1666  2043 W MediaProvider: 	at com.android.providers.media.MediaProvider$4.$r8$lambda$DnIEye5Sx8fODP4Bt_qvKpm3U-Q(Unknown Source:0)
+11-07 21:52:05.179  1666  2043 W MediaProvider: 	at com.android.providers.media.MediaProvider$4$$ExternalSyntheticLambda0.run(Unknown Source:6)
+11-07 21:52:05.179  1666  2043 W MediaProvider: 	at android.os.Handler.handleCallback(Handler.java:942)
+11-07 21:52:05.179  1666  2043 W MediaProvider: 	at android.os.Handler.dispatchMessage(Handler.java:99)
+11-07 21:52:05.179  1666  2043 W MediaProvider: 	at android.os.Looper.loopOnce(Looper.java:201)
+11-07 21:52:05.179  1666  2043 W MediaProvider: 	at android.os.Looper.loop(Looper.java:288)
+11-07 21:52:05.179  1666  2043 W MediaProvider: 	at android.os.HandlerThread.run(HandlerThread.java:67)
+11-07 21:52:05.196  1060  5335 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+11-07 21:52:05.198  1060  5335 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+11-07 21:52:05.200  1060  5335 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+11-07 21:52:05.258  1321  5244 W gle.android.gms: Long monitor contention with owner highpool[16] (4715) at cooe cooe.a(android.content.Context)(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2) waiters=0 in cooe cooe.a(android.content.Context) for 361ms
+11-07 21:52:05.264  1060  3133 I TapAndPay: Disabling TapAndPay HCE service [CONTEXT service_id=79 ]
+11-07 21:52:05.267  1321  5299 W Pay     : Active account was null, notification task will be cancelled. [CONTEXT service_id=198 ]
+11-07 21:52:05.267  1321  5299 W Pay     : [eMoney txn sync] exiting without init: active tapandpay account not found! [CONTEXT service_id=198 ]
+11-07 21:52:05.270  1321  5299 W Pay     : Mdl not supported. Not triggering periodic MSO refresh task. [CONTEXT service_id=198 ]
+11-07 21:52:05.271  1321  5299 I Pay     : Requested immediate check to see whether to show pay module downloading complete notification. [CONTEXT service_id=198 ]
+11-07 21:52:05.281  1666  2421 I MediaProvider: Scanned external_primary due to REASON_MOUNTED, found 17 items in 137ms, 4 inserts 0 updates 0 deletes
+11-07 21:52:05.296  4742  4836 I TestRunner: finished: accentAndBackgroundAreShared(com.quartz.notes.data.sync.SyncEngineTest)

@@ -1,0 +1,83 @@
+11-07 21:52:09.743  4742  4836 I TestRunner: started: aNoteTravelsBothWays(com.quartz.notes.data.sync.SyncEngineTest)
+11-07 21:52:09.746  4742  4836 D TrafficStats: tagSocket(98) with statsTag=0xffffffff, statsUid=-1
+11-07 21:52:09.787  1788  2933 I A       : Scheduled one-off task for batch; batchId=3 taskId=-1000007 corpora=[1004]
+11-07 21:52:09.787  1788  2933 I A       : Pending callbacks: 2
+11-07 21:52:10.075  1321  1321 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.auth.service.START pkg=com.google.android.gms }
+11-07 21:52:10.244  1060  3708 I HeterodyneSyncScheduler: Scheduling Phenotype for a PhenotypeSyncImmediately(6, com.google.android.gms.device_performance#com.google.android.youtube) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+11-07 21:52:10.245  1060  1366 W .gms.persistent: Long monitor contention with owner lowpool[17] (5308) at long bwdg.a(bwdv)(:com.google.android.gms@231818047@23.18.18 (190800-535401451):12) waiters=0 in void bwdg.b() for 373ms
+11-07 21:52:10.254  1060  3708 I HeterodyneSyncer: Removed 0 invalid users [CONTEXT service_id=51 ]
+11-07 21:52:10.255  1060  1373 I HeterodyneSyncScheduler: Scheduling Phenotype for a PhenotypeSyncImmediately(16, hub_android.device#com.google.android.gm) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+11-07 21:52:10.331  1509  1509 I PhenotypeModule: PhenotypeModule.receiveBroadcast():373 onReceive() urgent = false
+11-07 21:52:10.343  1509  1509 I PhenotypeModule: PhenotypeModule.maybeFetchAndUpdate():166 maybeFetchAndUpdate: start new task to fetch
+11-07 21:52:10.383  1060  1070 I .gms.persistent: Compiler allocated 4803KB to compile void bwhy.D(java.util.Set, java.util.List, dmtw, java.lang.String, boolean, dzew, bwhx, java.util.LinkedHashMap, dhlq, boolean, edam)
+11-07 21:52:10.392  1060  1373 I HeterodyneSyncScheduler: Scheduling Phenotype for a PhenotypeSyncImmediately(16, gmail_android.user#com.google.android.gm) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+11-07 21:52:10.415  1060  1373 I HeterodyneSyncScheduler: Scheduling Phenotype for a PhenotypeSyncImmediately(16, gmail_android.device#com.google.android.gm) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+11-07 21:52:10.435   286  5417 I resolv  : GetAddrInfoHandler::run: {100 786532 100 983140 10120 0}
+11-07 21:52:10.436  1060  1373 I HeterodyneSyncScheduler: Scheduling Phenotype for a PhenotypeSyncImmediately(6, com.google.android.gm#com.google.android.gm_Hub) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+11-07 21:52:10.438   286  5418 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-07 21:52:10.438   286  5418 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x76f4a7edc810
+11-07 21:52:10.438   286  5418 I resolv  : doQuery: rcode=0, ancount=8, return value=260
+11-07 21:52:10.440   286  5419 I resolv  : res_nmkquery: (QUERY, IN, A)
+11-07 21:52:10.448   286  5419 I resolv  : res_nsend: used send_dg 164 terrno: 0
+11-07 21:52:10.449   286  5419 I resolv  : doQuery: rcode=0, ancount=8, return value=164
+11-07 21:52:10.453  1060  3472 D TrafficStats: tagSocket(104) with statsTag=0x1203, statsUid=10120
+11-07 21:52:10.453  1656  3037 I AstreaHttpConnection: DOWNLOAD COMPLETE: Downloaded 38498810 bytes from https://storage.googleapis.com/captions/aiai-en-US-v3003.zip.
+11-07 21:52:10.470  1656  2339 I SP.AiAi : <==== Finishing job {W:b:u:l, bg}, 83183 ms. elapsed since start
+11-07 21:52:10.494  1060  1366 W BpBinder: Large outgoing transaction of 322428 bytes, interface descriptor <uncached descriptor>, code 4
+11-07 21:52:10.496  1656  2339 I SP.AiAi : Download stopped: captions_i18n_v0_en-US:asr_en-US_v3003, succeeded, size: 38498810
+11-07 21:52:10.513  1060  1366 I HeterodyneSyncScheduler: Scheduling Phenotype for a PhenotypeSyncImmediately(8, com.google.apps.dynamite.device#com.google.android.gm) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+11-07 21:52:10.527  1060  1373 I HeterodyneSyncScheduler: Scheduling Phenotype for a PhenotypeSyncImmediately(8, com.google.apps.dynamite.user#com.google.android.gm) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+11-07 21:52:10.539  1060  1366 I HeterodyneSyncScheduler: Scheduling Phenotype for a PhenotypeSyncImmediately(8, com.google.android.libraries.communications.conference.device#com.google.android.gm) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+11-07 21:52:10.542  1060  1373 I HeterodyneSyncScheduler: Scheduling Phenotype for a PhenotypeSyncImmediately(8, com.google.android.libraries.communications.conference.user#com.google.android.gm) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+11-07 21:52:10.558  2959  3112 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-07 21:52:10.566  1060  1366 W bwft    : Succeeded but not registered: com.google.android.gms.playlog.uploader [CONTEXT service_id=51 ]
+11-07 21:52:10.581  1060  1366 I HeterodyneSyncer: Removed 0 invalid users [CONTEXT service_id=51 ]
+11-07 21:52:10.585  1060  1373 W bwft    : Succeeded but not registered: com.google.android.gms.appintegrity [CONTEXT service_id=51 ]
+11-07 21:52:10.586  1060  1373 W bwft    : Succeeded but not registered: com.google.android.gms.tron.metrics [CONTEXT service_id=51 ]
+11-07 21:52:10.589  1060  1373 E bwfc    : Phenotype API error. Event # edax@d71040d1, EventCode: 32 [CONTEXT service_id=51 ]
+11-07 21:52:10.589  1060  1373 E bwfc    : bwdx: 29503
+11-07 21:52:10.589  1060  1373 E bwfc    : 	at bwgv.g(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-07 21:52:10.589  1060  1373 E bwfc    : 	at bwfc.e(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+11-07 21:52:10.589  1060  1373 E bwfc    : 	at bwfc.f(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-07 21:52:10.589  1060  1373 E bwfc    : 	at avsy.eo(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+11-07 21:52:10.589  1060  1373 E bwfc    : 	at avtf.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):14)
+11-07 21:52:10.589  1060  1373 E bwfc    : 	at dfhf.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-07 21:52:10.589  1060  1373 E bwfc    : 	at aced.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-07 21:52:10.589  1060  1373 E bwfc    : 	at aced.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):8)
+11-07 21:52:10.589  1060  1373 E bwfc    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-07 21:52:10.589  1060  1373 E bwfc    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-07 21:52:10.589  1060  1373 E bwfc    : 	at acjn.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 21:52:10.589  1060  1373 E bwfc    : 	at java.lang.Thread.run(Thread.java:1012)
+11-07 21:52:10.592  1060  1373 W AsyncOperation: operation=SetAppSpecificPropertiesOperationCall, opStatusCode=29503 [CONTEXT service_id=51 ]
+11-07 21:52:10.592  1060  1373 W AsyncOperation: OperationException[Status{statusCode=unknown status code: 29503, resolution=null}]
+11-07 21:52:10.592  1060  1373 W AsyncOperation: 	at bwfc.e(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-07 21:52:10.592  1060  1373 W AsyncOperation: 	at bwfc.f(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-07 21:52:10.592  1060  1373 W AsyncOperation: 	at avsy.eo(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+11-07 21:52:10.592  1060  1373 W AsyncOperation: 	at avtf.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):14)
+11-07 21:52:10.592  1060  1373 W AsyncOperation: 	at dfhf.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-07 21:52:10.592  1060  1373 W AsyncOperation: 	at aced.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-07 21:52:10.592  1060  1373 W AsyncOperation: 	at aced.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):8)
+11-07 21:52:10.592  1060  1373 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-07 21:52:10.592  1060  1373 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-07 21:52:10.592  1060  1373 W AsyncOperation: 	at acjn.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 21:52:10.592  1060  1373 W AsyncOperation: 	at java.lang.Thread.run(Thread.java:1012)
+11-07 21:52:10.602  1321  1321 W NnApiDriverManager: setAppSpecificProperties failed [CONTEXT service_id=301 ]
+11-07 21:52:10.602  1321  1321 W NnApiDriverManager: aard: 29503:
+11-07 21:52:10.602  1321  1321 W NnApiDriverManager: 	at abmc.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-07 21:52:10.602  1321  1321 W NnApiDriverManager: 	at aawv.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-07 21:52:10.602  1321  1321 W NnApiDriverManager: 	at aawv.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 21:52:10.602  1321  1321 W NnApiDriverManager: 	at bwen.o(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 21:52:10.602  1321  1321 W NnApiDriverManager: 	at bwen.ek(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+11-07 21:52:10.602  1321  1321 W NnApiDriverManager: 	at gzc.onTransact(:com.google.android.gms@231818047@23.18.18 (190800-535401451):8)
+11-07 21:52:10.602  1321  1321 W NnApiDriverManager: 	at android.os.Binder.execTransactInternal(Binder.java:1285)
+11-07 21:52:10.602  1321  1321 W NnApiDriverManager: 	at android.os.Binder.execTransact(Binder.java:1244)
+11-07 21:52:10.620  2959  2959 W BugleRcsEngine: [2] benk.i: Unable to send RCS extension log
+11-07 21:52:10.631  1656  2339 I SP.AiAi : Scheduling job with delay of 0s for {m:b:u:l, bg}, 1 candidates
+11-07 21:52:10.636  1656  2339 I SP.AiAi : Scheduling job with delay of 0s for {W:b:I:l, bg}, 1 candidates
+11-07 21:52:10.637  1656  2339 I SP.AiAi : Scheduling job with delay of 0s for {W:b:u:l, bg}, 3 candidates
+11-07 21:52:10.644  1656  2339 I SP.AiAi : Scheduling: download stopped, 0 started, 0 paused, 5 scheduled, 5 pending: manifests:webref-2-en-us-19071200 * {m:b:u:l, bg}, manifests:spelling_correction-21080420 * {W:b:I:l, bg}, text-classifier-annotator:tc_model_19e9928974f9d8742ad3b10f52373dea * {W:b:u:l, bg}, text-classifier-actions:tc_model_e202592534082c01f9642f709a627dd9 * {W:b:u:l, bg}, text-classifier-langid:tc_model_436dc3fd14049b93d75788a8c0cc8eea * {W:b:u:l, bg}
+11-07 21:52:10.664  1060  1373 W bwft    : Succeeded but not registered: com.google.android.gms.rcs [CONTEXT service_id=51 ]
+11-07 21:52:10.679  1060  1373 W bwft    : Succeeded but not registered: com.google.android.gms.tron.metrics [CONTEXT service_id=51 ]
+11-07 21:52:10.692  1060  1373 W bwft    : Succeeded but not registered: com.google.android.gms.auth.easyunlock [CONTEXT service_id=51 ]
+11-07 21:52:10.705  1060  1071 W .gms.persistent: Suspending all threads took: 5.352ms
+11-07 21:52:10.729  4742  4836 I TestRunner: finished: aNoteTravelsBothWays(com.quartz.notes.data.sync.SyncEngineTest)

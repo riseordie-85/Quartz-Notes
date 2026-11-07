@@ -1,0 +1,828 @@
+11-07 21:52:43.706  4742  4836 I TestRunner: started: picturesInLine(com.quartz.notes.ui.editor.EditorScreenshotTest)
+11-07 21:52:43.717  1656  2067 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0
+11-07 21:52:43.717  1656  2067 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0
+11-07 21:52:43.724   482   507 W InputManager-JNI: Input channel object '194b6ba Splash Screen com.quartz.notes.test (client)' was disposed without first being removed with the input manager!
+11-07 21:52:43.752  4742  4836 D IdlingRegistry: Registering idling resources: [androidx.compose.ui.test.EspressoLink@2fae027]
+11-07 21:52:43.793  4742  4836 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+11-07 21:52:43.804  2256  2284 V DownloadManager: Deleting /storage/emulated/0/Android/data/com.google.android.googlequicksearchbox/files/download_cache/en-US-v306-f28.zip via provider delete
+11-07 21:52:43.806   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537570
+11-07 21:52:44.166   762   806 D SplashScreenView: Build android.window.SplashScreenView{e8c4f5a V.E...... ......ID 0,0-0,0}
+11-07 21:52:44.166   762   806 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-07 21:52:44.166   762   806 D SplashScreenView: Branding: view: android.view.View{b87658b G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-07 21:52:44.170  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-07 21:52:44.172  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-07 21:52:44.172  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.google.android.apps.nexuslauncher fieldId=-1 fieldName=null extras=null}, false)
+11-07 21:52:44.172  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-07 21:52:44.173  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-07 21:52:44.177   482   563 W InputManager-JNI: Input channel object '82717f8 com.quartz.notes.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity (client)' was disposed without first being removed with the input manager!
+11-07 21:52:44.292   762   816 W Parcel  : Expecting binder but got null!
+11-07 21:52:44.369   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537150
+11-07 21:52:44.423   339   370 W TransactionTracing: Could not find layer handle 0x77aa88535f50
+11-07 21:52:44.424   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537ff0
+11-07 21:52:44.424   339   370 W TransactionTracing: Could not find layer handle 0x77aa88536cd0
+11-07 21:52:44.424   339   370 W TransactionTracing: Could not find layer handle 0x77aa885365b0
+11-07 21:52:44.449  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@57dfc3b in: PRE_ON_CREATE
+11-07 21:52:44.451  4742  4742 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+11-07 21:52:44.472  1060  1366 W SQLiteConnectionPool: The connection pool for database '/data/user/0/com.google.android.gms/databases/phenotype.db' has been unable to grant a connection to thread 51 (highpool[2]) with flags 0x2 for 30.002 seconds.
+11-07 21:52:44.472  1060  1366 W SQLiteConnectionPool: Connections: 0 active, 1 idle, 1 available.
+11-07 21:52:44.481  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@57dfc3b in: CREATED
+11-07 21:52:44.511  4742  4742 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=androidx.activity.ComponentActivity@57dfc3b
+11-07 21:52:44.512  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@57dfc3b in: STARTED
+11-07 21:52:44.512  4742  4742 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=androidx.activity.ComponentActivity@57dfc3b
+11-07 21:52:44.513  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@57dfc3b in: RESUMED
+11-07 21:52:44.514  4742  4742 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=androidx.activity.ComponentActivity@57dfc3b
+11-07 21:52:44.530  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:52:44.633  1060  3708 W SQLiteConnectionPool: The connection pool for database '/data/user/0/com.google.android.gms/databases/phenotype.db' has been unable to grant a connection to thread 185 (lowpool[11]) with flags 0x2 for 30.315 seconds.
+11-07 21:52:44.633  1060  3708 W SQLiteConnectionPool: Connections: 0 active, 1 idle, 1 available.
+11-07 21:52:44.672   482   495 I system_server: NativeAlloc concurrent copying GC freed 825075(20MB) AllocSpace objects, 6(416KB) LOS objects, 50% free, 21MB/43MB, paused 456us,112us total 1.234s
+11-07 21:52:44.677   482  1683 W system_server: Long monitor contention with owner android.anim (508) at void com.android.server.wm.WindowSurfacePlacer$Traverser.run()(WindowSurfacePlacer.java:58) waiters=0 in void com.android.server.wm.WindowManagerService.reportKeepClearAreasChanged(com.android.server.wm.Session, android.view.IWindow, java.util.List, java.util.List) for 224ms
+11-07 21:52:44.725  1788  1855 I earchbox:search: Background young concurrent copying GC freed 119669(5544KB) AllocSpace objects, 43(1708KB) LOS objects, 58% free, 15MB/38MB, paused 42us,38us total 925.469ms
+11-07 21:52:44.788   339   370 W TransactionTracing: Could not find layer handle 0x77aa88533bb0
+11-07 21:52:44.813   339   370 W TransactionTracing: Could not find layer handle 0x77aa88533bb0
+11-07 21:52:44.885   762   816 D EGL_emulation: app_time_stats: avg=723.49ms min=593.19ms max=853.79ms count=2
+11-07 21:52:44.894  1015  1883 D EGL_emulation: app_time_stats: avg=148.18ms min=38.98ms max=336.96ms count=8
+11-07 21:52:44.970  1666  5670 I MediaProvider: Scanned external_primary due to REASON_DEMAND, found 0 items in 308ms, 0 inserts 0 updates 0 deletes
+11-07 21:52:44.979  1015  1015 W FrameTracker: Missed App frame:UNKNOWN: 74, 11785, 220091638, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+11-07 21:52:44.979  1015  1015 W FrameTracker: Missed SF frame:UNKNOWN: 74, 11785, 220091638, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+11-07 21:52:44.979  1015  1015 W FrameTracker: Missing SF jank callback for vsyncId: 11800, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+11-07 21:52:44.980  1015  1015 W FrameTracker: Missed App frame:UNKNOWN: 24, 11843, 0, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+11-07 21:52:44.980  1015  1015 W FrameTracker: Missed SF frame:UNKNOWN: 24, 11843, 0, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+11-07 21:52:44.980  1015  1015 W FrameTracker: Missing HWUI jank callback for vsyncId: 11843, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+11-07 21:52:44.980  1015  2139 V PerfettoTrigger: Not triggering com.android.telemetry.interaction-jank-monitor-9 - not enough time since last trigger
+11-07 21:52:44.989  1656  3037 I AstreaHttpConnection: DOWNLOAD COMPLETE: Downloaded 335528 bytes from https://gstatic.com/matchmaker/tclib_models/langid/v1/tc_model_436dc3fd14049b93d75788a8c0cc8eea.zip.
+11-07 21:52:44.990  1656  2339 I SP.AiAi : <==== Finishing job {W:b:u:l, bg}, 15320 ms. elapsed since start
+11-07 21:52:45.013  1656  2339 I SP.AiAi : Download stopped: text-classifier-langid:tc_model_436dc3fd14049b93d75788a8c0cc8eea, succeeded, size: 335528
+11-07 21:52:45.045   762   816 D EGL_emulation: app_time_stats: avg=896.46ms min=497.87ms max=1295.05ms count=2
+11-07 21:52:45.135   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537e10
+11-07 21:52:45.154   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 21:52:45.154   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 21:52:45.160  4742  4742 D AutofillManager: Fill dialog is enabled:false, hints=[]
+11-07 21:52:45.167   482   504 W ziparchive: Unable to open '/data/app/~~ewbzk_m16xDkclmAVpjUzA==/com.quartz.notes-XqM5_4k8BE5yt-arn9ES4A==/base.dm': No such file or directory
+11-07 21:52:45.175  1788  2783 I PBSessionCacheImpl: Deleted sessionId[7865501250074824] from persistence.
+11-07 21:52:45.198   482  1973 W InputManager-JNI: Input channel object '9625a91 Splash Screen com.quartz.notes (client)' was disposed without first being removed with the input manager!
+11-07 21:52:45.218   482   504 I ActivityTaskManager: Displayed com.quartz.notes/androidx.activity.ComponentActivity: +1s51ms
+11-07 21:52:45.300   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537450
+11-07 21:52:45.300   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537b70
+11-07 21:52:45.300   339   370 W TransactionTracing: Could not find layer handle 0x77aa88536f70
+11-07 21:52:45.300   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537450
+11-07 21:52:45.300   339   370 W TransactionTracing: Could not find layer handle 0x77aa88536f70
+11-07 21:52:45.306  1015  2099 D OneSearchSuggestProvider: Shut down the binder channel
+11-07 21:52:45.322  1015  1040 I s.nexuslauncher: oneway function results for code 2 on binder at 0x73e60dd753b0 will be dropped but finished with status UNKNOWN_TRANSACTION
+11-07 21:52:45.327  1656  2339 I SP.AiAi : Scheduling job with delay of 0s for {m:b:u:l, bg}, 1 candidates
+11-07 21:52:45.329  1656  2339 I SP.AiAi : Scheduling job with delay of 0s for {W:b:I:l, bg}, 1 candidates
+11-07 21:52:45.331  1656  2339 I SP.AiAi : Scheduling: download stopped, 0 started, 0 paused, 2 scheduled, 2 pending: manifests:webref-2-en-us-19071200 * {m:b:u:l, bg}, manifests:spelling_correction-21080420 * {W:b:I:l, bg}
+11-07 21:52:45.350  1321  1321 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.auth.api.phone.service.SmsRetrieverApiService.START dat=chimera-action:/... cmp=com.google.android.gms/.chimera.GmsApiService }
+11-07 21:52:45.366  4742  4742 W om.quartz.notes: Verification of void com.quartz.notes.ui.media.DecoratedImageKt.DecoratedImage-uFdPcIQ(com.quartz.notes.data.model.ImageData, float, androidx.compose.ui.Modifier, androidx.compose.runtime.Composer, int, int) took 112.568ms (21213.71 bytecodes/s) (61504B approximate peak alloc)
+11-07 21:52:45.369   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537ed0
+11-07 21:52:45.373  1788  2516 W SearchServiceCore: Abort, client detached.
+11-07 21:52:45.373  1788  2516 W SearchServiceCore: Abort, client detached.
+11-07 21:52:45.380  1788  2516 W SearchServiceCore: Abort, client detached.
+11-07 21:52:45.474  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-07 21:52:45.475  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-07 21:52:45.487  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=null}, false)
+11-07 21:52:45.487  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-07 21:52:45.488  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-07 21:52:45.523   339   370 W TransactionTracing: Could not find layer handle 0x77aa88536010
+11-07 21:52:45.556  1656  2149 I SP.AiAi : Sync for text-classifier-actions succeeded in 101780 ms: {added: [tc_model_e202592534082c01f9642f709a627dd9], metadata: false
+11-07 21:52:45.567  1656  2149 I SP.AiAi : GC for 'text-classifier-actions' (10) with ttl of 0 ms took 1 ms (0/1/0)
+11-07 21:52:45.569  1656  2149 I AiAiNowPlaying: Superpacks changed. Refreshing FA controller
+11-07 21:52:45.571  1656  2611 I AiAiFed : [Now Playing Recognitions FA] *** disabled *** [mode=FEDERATION population=aiai/sense/ambientmusic/]
+11-07 21:52:45.571  1656  2611 I TrainerClient: Preparing to schedule training for population:aiai/sense/ambientmusic/ session_name:ambientmusic
+11-07 21:52:45.617  1656  3338 I AiAiTextClassifier: [ResourceDownloaderImpl]: downloadResource(): Successfully downloaded superpack 'text-classifier-actions', download version 1140547708.
+11-07 21:52:45.634  1656  2149 I SP.AiAi : Sync for text-classifier-langid succeeded in 101857 ms: {added: [tc_model_436dc3fd14049b93d75788a8c0cc8eea], metadata: false
+11-07 21:52:45.649  1656  2184 I AiAiTextClassifier: [TcLibModelManagerImpl]: downloadNewModelRecursively: packSet downloaded successfully: https://gstatic.com/matchmaker/tclib_models/actions/v104/en-us/superpacks_manifest.zip
+11-07 21:52:45.650  1656  2149 I SP.AiAi : GC for 'text-classifier-langid' (10) with ttl of 0 ms took 0 ms (0/0/0)
+11-07 21:52:45.651  1656  2149 I AiAiNowPlaying: Superpacks changed. Refreshing FA controller
+11-07 21:52:45.652  1656  2611 I AiAiFed : [Now Playing Recognitions FA] *** disabled *** [mode=FEDERATION population=aiai/sense/ambientmusic/]
+11-07 21:52:45.653  1656  3338 I AiAiTextClassifier: [ResourceDownloaderImpl]: downloadResource(): Successfully downloaded superpack 'text-classifier-langid', download version 1941001461.
+11-07 21:52:45.655  1656  2611 I TrainerClient: Preparing to schedule training for population:aiai/sense/ambientmusic/ session_name:ambientmusic
+11-07 21:52:45.663  1656  2184 I AiAiTextClassifier: [TcLibModelManagerImpl]: updateModelsInTextClassifierLib: Done executing updateModels() from path: /data/user/0/com.google.android.as/files/superpacks/text-classifier-actions/tc_model_e202592534082c01f9642f709a627dd9/en.model.
+11-07 21:52:45.663  1656  2184 I AiAiTextClassifier: [TcLibModelManagerImpl]: downloadNewModelRecursively: packSet downloaded successfully: https://gstatic.com/matchmaker/tclib_models/langid/v1/superpacks_manifest.zip
+11-07 21:52:45.671  1656  2184 I AiAiTextClassifier: [TcLibModelManagerImpl]: updateModelsInTextClassifierLib: Done executing updateModels() from path: /data/user/0/com.google.android.as/files/superpacks/text-classifier-langid/tc_model_436dc3fd14049b93d75788a8c0cc8eea/model.smfb.
+11-07 21:52:45.763  1060  1373 I HeterodyneSyncScheduler: Scheduling Phenotype for a PhenotypeSyncImmediately(7, com.google.android.gms.time#com.google.android.gms) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+11-07 21:52:45.770  1060  3708 I HeterodyneSyncScheduler: Scheduling a periodic sync task every 14400 seconds, with flex of 1800 seconds [CONTEXT service_id=51 ]
+11-07 21:52:45.773  1060  3708 I HeterodyneSyncScheduler: Scheduling adaptive one off task with window [14400, 604800] in seconds [CONTEXT service_id=51 ]
+11-07 21:52:45.790  1788  2702 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-07 21:52:45.911  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-07 21:52:45.911  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-07 21:52:45.911  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x2c001(Normal) imeOptions=0x42000000 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=75 initialSelEnd=75 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=Bundle[mParcelledData.dataSize=404]}, false)
+11-07 21:52:45.911  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-07 21:52:45.912  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-07 21:52:45.914  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x2c001(Normal) imeOptions=0x42000000 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=75 initialSelEnd=75 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=Bundle[mParcelledData.dataSize=404]}, true)
+11-07 21:52:45.914  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-07 21:52:45.914  4742  4742 D InsetsController: show(ime(), fromIme=false)
+11-07 21:52:45.915  4742  4742 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{f54027a VFED..... .F....ID 0,0-1080,2209 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT_BY_INSETS_API
+11-07 21:52:45.916  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-07 21:52:45.917  1509  1509 W SessionManager: SessionManager.beginSession():53 Try to begin an already begun session [INPUT_SESSION], end it first
+11-07 21:52:45.919  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onStartInputView():1995 onStartInputView(EditorInfo{inputType=0x2c001(Normal) imeOptions=0x42000000 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=75 initialSelEnd=75 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false, android.support.text.emoji.emojiCompat_replaceAll=false}]}, false)
+11-07 21:52:45.919  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-07 21:52:45.919  1509  1509 W ModuleManager: ModuleManager.loadModule():450 Module erj is not available
+11-07 21:52:45.920  1509  1944 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-07 21:52:45.929  4742  4742 I AssistStructure: Flattened final assist data: 564 bytes, containing 1 windows, 3 views
+11-07 21:52:45.959  1060  1060 W AutofillChimeraService: Pending fill request while another request in the same session was triggered. [CONTEXT service_id=177 ]
+11-07 21:52:45.964  1537  1537 V InlineSuggestionRenderService: handleDestroySuggestionViews called for 0:1043639281
+11-07 21:52:45.972  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:52:45.982  4742  4742 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{f54027a VFED..... .F....ID 0,0-1080,2209 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+11-07 21:52:45.985  1509  1509 I KeyboardViewUtil: KeyboardViewUtil.getKeyboardHeightRatio():189 systemKeyboardHeightRatio:1.000000; userKeyboardHeightRatio:1.000000.
+11-07 21:52:45.985  1509  1509 I AndroidIME: AbstractIme.onActivate():86 LatinIme.onActivate() : EditorInfo = inputType=0x2c001(Normal) imeOptions=0x42000000 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=75 initialSelEnd=75 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false, android.support.text.emoji.emojiCompat_replaceAll=false}], IncognitoMode = false, DeviceLocked = false
+11-07 21:52:45.986  1509  1509 I Delight5Facilitator: Delight5Facilitator.initializeForIme():777 initializeForIme() : Locale = [en_US], layout = qwerty
+11-07 21:52:45.989  1509  1509 I Delight5Facilitator: Delight5Facilitator.resetDecoder():954 resetDecoder() : Locale = [en_US]
+11-07 21:52:46.038  1509  1509 I Delight5Decoder: Delight5DecoderWrapper.createOrResetDecoder():341 Decoder reset
+11-07 21:52:46.059  4742  4742 D Autofill Status: Autofill popup isn't shown because autofill is not available.
+11-07 21:52:46.059  4742  4742 D Autofill Status:
+11-07 21:52:46.059  4742  4742 D Autofill Status: Did you set up autofill?
+11-07 21:52:46.059  4742  4742 D Autofill Status: 1. Go to Settings > System > Languages&input > Advanced > Autofill Service
+11-07 21:52:46.059  4742  4742 D Autofill Status: 2. Pick a service
+11-07 21:52:46.059  4742  4742 D Autofill Status:
+11-07 21:52:46.059  4742  4742 D Autofill Status: Did you add an account?
+11-07 21:52:46.059  4742  4742 D Autofill Status: 1. Go to Settings > System > Languages&input > Advanced
+11-07 21:52:46.059  4742  4742 D Autofill Status: 2. Click on the settings icon next to the Autofill Service
+11-07 21:52:46.059  4742  4742 D Autofill Status: 3. Add your account
+11-07 21:52:46.064  1509  2081 I MainLanguageModelLoader: MainLanguageModelLoader.call():145 Running LM loader for [en_US]
+11-07 21:52:46.066  1509  2081 I DelightDataFileManagerLanguageModelProvider: DelightDataFileManagerLanguageModelProvider.fetchLanguageModel():73 find data en-US delight
+11-07 21:52:46.066  1509  2003 I SuperDelight: SuperDelightManager.initializeBundledDelightSuperpacks():376 initializeBundledDelightSuperpacks()
+11-07 21:52:46.070  1509  2081 I LmManager: LmManager.asyncUpdateEnabledLanguageModels():90 asyncUpdateEnabledLanguageModels()
+11-07 21:52:46.070  1509  2081 I SuperDelight: SuperDelightManager.initializeDelightSuperpacks():340 initializeDelightSuperpacks()
+11-07 21:52:46.070  1509  2081 I SuperDelight: SuperDelightManager.getDelightMetadataUriAndVersion():1011 getDelightMetadataUriAndVersion(): Phenotype : 2022101700 : https://www.gstatic.com/android/keyboard/dictionarypack/Omei-normal/metadata.json
+11-07 21:52:46.074  1509  2081 I SuperDelight: SuperDelightAppsSuperpacksManager.initializeDelightAppsSuperpacks():92 initializeDelightAppsSuperpacks()
+11-07 21:52:46.074  1509  2081 I SuperDelight: SuperDelightManager.initializeOverridesSuperpacks():402 initializeOverridesSuperpacks()
+11-07 21:52:46.079  1509  2002 I SuperDelight: SuperDelightManager.lambda$registerAndUpgradeSuperpacks$5():476 SuperDelightManager#registerAndUpgradeSuperpacks(delight): current 2022101700, required 2022101700
+11-07 21:52:46.080  1509  1509 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.cancelShutdown():55 cancelShutdown()
+11-07 21:52:46.080  1509  1509 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.syncLanguagePacks():67 syncLanguagePacks()
+11-07 21:52:46.080  1509  1509 I LatinIme: LatinIme.updateEnableInlineSuggestionsOnDecoderSideFlags():1003 inline flag updated to:false
+11-07 21:52:46.086  1509  2002 I SuperDelight: SuperDelightManager.lambda$syncOverridesLanguageModels$14():689 SuperDelightManager#syncOverridesLanguageModels(): Superpack delight_overrides not found or negative version provided
+11-07 21:52:46.087  1509  2076 I SP      : Registering bundled_delight.2022101700, url: null, constraints: *:*:*:*, flags: *, requested: 2022101700, current: 2022101700
+11-07 21:52:46.088  1509  2003 I SuperDelight: SuperDelightManager.lambda$syncDownloadableLanguageModels$8():568 SuperDelightManager#syncDownloadableLanguageModels(delight): [OnDevice] Syncing for version 2022101700
+11-07 21:52:46.088  1509  2003 I SuperDelight: SuperDelightManager$2.onSuccess():635 delight_overrides sync success, adding to data file manager
+11-07 21:52:46.089  1509  2002 I SuperDelight: SuperDelightManager.lambda$syncBundledLanguageModels$16():774 SuperDelightManager#syncBundledLanguageModels(): Syncing for version 2022101700
+11-07 21:52:46.091  1509  2081 I MainLanguageModelLoader: MainLanguageModelLoader.updateLmAvailableState():392 updateLmAvailableState(): locale? en_US prevState? AVAILABLE
+11-07 21:52:46.091  1509  2081 I MainLanguageModelLoader: MainLanguageModelLoader.updateLmAvailableState():428 updateLmAvailableState(): locale? en_US newState? AVAILABLE
+11-07 21:52:46.091  1509  2081 I Delight5Facilitator: BlocklistLoader.call():37 Running blocklist loader
+11-07 21:52:46.091  1509  2081 I Delight5Facilitator: ContactsLanguageModelLoader.call():35 Running contacts language model loader
+11-07 21:52:46.092  1509  2081 I Delight5Facilitator: ContactsLanguageModelLoader.call():47 Contacts language model is unloaded: preferences=false, deviceLocked=false
+11-07 21:52:46.092  1509  2081 I Delight5Facilitator: PersonalLanguageModelLoader.call():44 Running personal language model loader
+11-07 21:52:46.092  1509  2081 I Delight5Facilitator: UserHistoryLanguageModelLoader.call():82 Running user history language model loader
+11-07 21:52:46.093  1509  2081 I EmojiShortcutsLoader: EmojiShortcutsLoader.getEmojiShortcuts():117 Reading en_US emoji shortcuts
+11-07 21:52:46.095  1509  2239 I Delight5Decoder: Delight5DecoderWrapper.loadLanguageModel():649 loadLanguageModel() : 1, version [2022101700]
+11-07 21:52:46.098  1509  2081 I EmojiShortcutsLoader: EmojiShortcutsLoader.getEmojiShortcuts():134 Read en_US emoji shortcuts successfully.
+11-07 21:52:46.102  1509  2081 I EmojiShortcutsLoader: EmojiShortcutsLoader.call():63 1 emoji shortcut maps loaded.
+11-07 21:52:46.103  1509  2081 I EmojiShortcutsLoader: EmojiShortcutsLoader.call():72 Finished loading emoji shortcuts
+11-07 21:52:46.103  1509  2081 I Delight5Facilitator: EmailLanguageModelLoader.call():30 Running email language model loader
+11-07 21:52:46.103  1509  5618 I SpeechFactory: SpeechRecognitionFactory.maybeScheduleAutoPackDownloadForFallback():205 maybeScheduleAutoPackDownloadForFallback()
+11-07 21:52:46.103  1509  5618 I FallbackOnDeviceRecognitionProvider: FallbackOnDeviceRecognitionProvider.maybeScheduleAutoPackDownload():195 maybeScheduleAutoPackDownload() for language tag en-US
+11-07 21:52:46.104  1509  2081 I Delight5Facilitator: KeyCorrectionTfliteModelLoader.call():29 Running Key Correction Tflite Model loader
+11-07 21:52:46.108  1509  2081 I Delight5Facilitator: RankingModelLoader.call():28 Running Ranking Model loader
+11-07 21:52:46.110  1509  1509 I KeyboardWrapper: KeyboardWrapper.consumeEvent():275 Skip consuming an event as current keyboard is deactivated (state=0, keyboard existence=true)
+11-07 21:52:46.111  1509  2076 I SuperDelight: SuperDelightDownloadSlicingStrategy.getSlices():68 DownloadSlicing#getSlices() : Locale = [en_US]
+11-07 21:52:46.117  1509  1509 I KeyboardViewUtil: KeyboardViewUtil.calculateMaxKeyboardBodyHeight():40 leave 354 height for app when screen height:2274, header height:116 and isFullscreenMode:false, so the max keyboard body height is:1804
+11-07 21:52:46.117  1509  1509 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-07 21:52:46.118  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = HEADER, shownType = SHOW_OPTIONAL
+11-07 21:52:46.118  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-07 21:52:46.118  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = BODY, shownType = SHOW_MANDATORY
+11-07 21:52:46.119  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-07 21:52:46.119  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = FLOATING_CANDIDATES, shownType = HIDE
+11-07 21:52:46.119  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = false
+11-07 21:52:46.120  1509  2076 I SuperDelight: SuperDelightDownloadSlicingStrategy.getSlices():125 DownloadSlicing#getSlices(): result {slices=[{delight:main_en_us_2022101700_1, m:*:*:*, fg}], last batch=true, sync metadata=false}
+11-07 21:52:46.121  1509  1509 I KeyboardViewUtil: KeyboardViewUtil.calculateMaxKeyboardBodyHeight():40 leave 354 height for app when screen height:2274, header height:116 and isFullscreenMode:false, so the max keyboard body height is:1804
+11-07 21:52:46.123  1509  1509 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-07 21:52:46.124  1509  2076 I SP      : Syncing delight (2022101700) with slices: [{main_en_us_2022101700_1, m:*:*:*, fg}], metadata: false
+11-07 21:52:46.126  1509  2076 I SuperDelight: SuperDelightBundledSlicingStrategy.getSlices():39 BundledSlicing#getSlices() : Locale = [en_US]
+11-07 21:52:46.127  1509  2076 I SuperDelight: SuperDelightBundledSlicingStrategy.getSlices():65 BundledSlicing#getSlices(): result {slices=[bundled_delight:main_en_us_2022051700_2], last batch=true, sync metadata=false}
+11-07 21:52:46.127  1509  2076 I SP      : Syncing bundled_delight (2022101700) with slices: [main_en_us_2022051700_2], metadata: false
+11-07 21:52:46.134  1509  2081 I CrankEngineLocales: CrankEngineLocales.getLocaleToUseForCrankEngine():66 Using locale en_US for emoji prediction
+11-07 21:52:46.138  1509  1509 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-07 21:52:46.138  1509  1509 I KeyboardModeManager: KeyboardModeManager.setInputView():364 setInputView() : supportsOneHandedMode=true
+11-07 21:52:46.138  1509  1509 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-07 21:52:46.138  1509  1509 I AndroidIME: KeyboardViewManager.updateKeyboardBodyViewHolderPaddingBottom():604 Set finalPaddingBottom = 0 while keyboardBottomGapFromScreen = 0; navigationHeight = 126
+11-07 21:52:46.139  1509  1509 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-07 21:52:46.148  1509  1509 I AndroidIME: KeyboardViewManager.updateKeyboardBodyViewHolderPaddingBottom():604 Set finalPaddingBottom = 0 while keyboardBottomGapFromScreen = 0; navigationHeight = 126
+11-07 21:52:46.148  1509  1509 I KeyboardModeManager: KeyboardModeManager.setInputView():356 setInputView() : entry=hwn{languageTag=en-US, variant=qwerty, hasLocalizedResources=true, conditionCacheKey=_device=phone_device_size=default_enable_adaptive_text_editing=false_enable_inline_suggestions_on_client_side=false_enable_large_tablet_batch_1=false_enable_large_tablet_batch_2=false_enable_more_candidates_view_for_multilingual=false_enable_nav_redesign=false_enable_number_row=false_enable_preemptive_decode=true_enable_secondary_symbols=false_expressions=normal_four_or_more_letter_rows=false_keyboard_mode=normal_language=en-US_orientation=portrait_physical_keyboard=qwerty_show_secondary_digits=true_show_suggestions=true_split_with_duplicate_keys=true_variant=qwerty, imeDef.stringId=ime_english_united_states, imeDef.className=com.google.android.apps.inputmethod.libs.latin5.LatinIme, imeDef.languageTag=en-US}
+11-07 21:52:46.150  1509  1509 I VoiceImeExtension: VoiceImeExtension.shouldStartVoiceInputAutomatically():383 No private IME option set to start voice input.
+11-07 21:52:46.161  1509  2239 E native  : E0000 00:00:1794088366.137458    2239 scoped-file.cc:106] open() failed for /data/user/0/com.google.android.inputmethod.latin/files/personal/adapt_state.en.dat: No such file or directory [2]
+11-07 21:52:46.161  1509  2239 I Delight5Decoder: Delight5DecoderWrapper.loadLanguageModel():671 Loaded main LM 1.en
+11-07 21:52:46.165  1509  2239 I Delight5Decoder: Delight5DecoderWrapper.loadLanguageModel():649 loadLanguageModel() : 7, version [n/a]
+11-07 21:52:46.166  1509  2239 I native  : I0000 00:00:1794088366.166877    2239 blocklist-assembly.cc:121] LoadBlocklist en
+11-07 21:52:46.170  1509  2239 I Delight5Decoder: Delight5DecoderWrapper.loadLanguageModel():690 Loaded dynamic LM 7.en
+11-07 21:52:46.171  1509  2239 I Delight5Decoder: Delight5DecoderWrapper.loadLanguageModel():649 loadLanguageModel() : 4, version [n/a]
+11-07 21:52:46.177  1509  2239 I Delight5Decoder: Delight5DecoderWrapper.loadLanguageModel():690 Loaded dynamic LM 4.en
+11-07 21:52:46.180  1509  2239 I Delight5Decoder: Delight5DecoderWrapper.loadLanguageModel():649 loadLanguageModel() : 3, version [n/a]
+11-07 21:52:46.263  1509  2239 I Delight5Decoder: Delight5DecoderWrapper.loadLanguageModel():690 Loaded dynamic LM 3.en
+11-07 21:52:46.283  4742  4742 D InsetsController: show(ime(), fromIme=true)
+11-07 21:52:46.300  1509  1509 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-07 21:52:46.301  1509  2239 I Delight5Decoder: Delight5DecoderWrapper.setKeyboardLayout():457 setKeyboardLayout()
+11-07 21:52:46.310  4742  4742 D InsetsController: show(ime(), fromIme=true)
+11-07 21:52:46.371  1509  2076 I SuperDelight: SuperDelightMergingStrategy.merge():55 SuperDelightMergingStrategy#merge(): selected[[main_en_us_2022101700_1]] synced[[main_en_us_2022101700_1]]
+11-07 21:52:46.373  1509  2076 I SP      : Sync for delight succeeded in 283 ms: no changes
+11-07 21:52:46.373  1509  2076 I SP      : Sync for bundled_delight succeeded in 284 ms: no changes
+11-07 21:52:46.373  1509  2076 I SP      : GC for 'delight' (10) with ttl of 0 ms took 0 ms (0/0/0)
+11-07 21:52:46.374  1509  2076 I SP      : GC for 'bundled_delight' (10) with ttl of 0 ms took 0 ms (0/0/0)
+11-07 21:52:46.374  1509  2076 I LmManager: LmManager$1.onSuccess():76 Bundled delight sync success
+11-07 21:52:46.380  1509  2002 I SuperDelight: SuperDelightManager$2.onSuccess():635 delight sync success, adding to data file manager
+11-07 21:52:46.380  1509  2003 I SuperDelight: SuperDelightManager$2.onSuccess():635 bundled_delight sync success, adding to data file manager
+11-07 21:52:46.381  1509  2003 I DataFileManager: DataFileManager.addDataWithoutNotify():162 data en-US already exists
+11-07 21:52:46.381  1509  2002 I DataFileManager: DataFileManager.addDataWithoutNotify():162 data en-US already exists
+11-07 21:52:46.436  4742  5479 D EGL_emulation: app_time_stats: avg=188.57ms min=50.18ms max=433.97ms count=7
+11-07 21:52:46.439  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x2c001(Normal) imeOptions=0x42000000 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=31 initialSelEnd=31 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=Bundle[mParcelledData.dataSize=404]}, true)
+11-07 21:52:46.440  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-07 21:52:46.451   762   816 D EGL_emulation: app_time_stats: avg=782.93ms min=463.26ms max=1102.59ms count=2
+11-07 21:52:46.457  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-07 21:52:46.457  1509  1509 W SessionManager: SessionManager.beginSession():53 Try to begin an already begun session [INPUT_SESSION], end it first
+11-07 21:52:46.457  1509  1509 W SessionManager: SessionManager.endSession():96 Child session [INPUT_VIEW_SESSION] is not ended while ending session [{IME_SESSION=1794088365985, INPUT_SESSION=1794088365917, TRAINING_CACHE_SESSION=1794088365986, INPUT_VIEW_SESSION=1794088365919}], ending it now.
+11-07 21:52:46.458  1509  1509 W SessionManager: SessionManager.endSession():96 Child session [IME_SESSION] is not ended while ending session [{IME_SESSION=1794088365985, INPUT_SESSION=1794088365917, TRAINING_CACHE_SESSION=1794088365986, INPUT_VIEW_SESSION=1794088365919}], ending it now.
+11-07 21:52:46.459  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onStartInputView():1995 onStartInputView(EditorInfo{inputType=0x2c001(Normal) imeOptions=0x42000000 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=31 initialSelEnd=31 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false, android.support.text.emoji.emojiCompat_replaceAll=false}]}, true)
+11-07 21:52:46.460  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-07 21:52:46.460  1509  1509 W ModuleManager: ModuleManager.loadModule():450 Module erj is not available
+11-07 21:52:46.462   482  2342 W InputManager-JNI: Input channel object '498f08e Pop-Up Window (client)' was disposed without first being removed with the input manager!
+11-07 21:52:46.480  1509  1944 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-07 21:52:46.546  1509  1509 I KeyboardViewUtil: KeyboardViewUtil.getKeyboardHeightRatio():189 systemKeyboardHeightRatio:1.000000; userKeyboardHeightRatio:1.000000.
+11-07 21:52:46.557  1509  1509 I KeyboardWrapper: KeyboardWrapper.consumeEvent():275 Skip consuming an event as current keyboard is deactivated (state=0, keyboard existence=true)
+11-07 21:52:46.557  1509  1509 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.shutdown():77 shutdown()
+11-07 21:52:46.558  1509  1509 I AndroidIME: AbstractIme.onDeactivate():207 LatinIme.onDeactivate()
+11-07 21:52:46.558  1509  1509 W SessionManager: SessionManager.endSession():88 Try to end a not begun session [IME_SESSION].
+11-07 21:52:46.559  1509  1509 I AndroidIME: AbstractIme.onActivate():86 LatinIme.onActivate() : EditorInfo = inputType=0x2c001(Normal) imeOptions=0x42000000 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=31 initialSelEnd=31 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false, android.support.text.emoji.emojiCompat_replaceAll=false}], IncognitoMode = false, DeviceLocked = false
+11-07 21:52:46.559  1509  1509 I Delight5Facilitator: Delight5Facilitator.initializeForIme():777 initializeForIme() : Locale = [en_US], layout = qwerty
+11-07 21:52:46.559  1509  1509 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.cancelShutdown():55 cancelShutdown()
+11-07 21:52:46.559  1509  1509 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.syncLanguagePacks():67 syncLanguagePacks()
+11-07 21:52:46.560  1509  1509 I LatinIme: LatinIme.updateEnableInlineSuggestionsOnDecoderSideFlags():1003 inline flag updated to:false
+11-07 21:52:46.560  1509  5618 I SpeechFactory: SpeechRecognitionFactory.maybeScheduleAutoPackDownloadForFallback():205 maybeScheduleAutoPackDownloadForFallback()
+11-07 21:52:46.560  1509  5618 I FallbackOnDeviceRecognitionProvider: FallbackOnDeviceRecognitionProvider.maybeScheduleAutoPackDownload():195 maybeScheduleAutoPackDownload() for language tag en-US
+11-07 21:52:46.571  1509  1509 I KeyboardWrapper: KeyboardWrapper.consumeEvent():275 Skip consuming an event as current keyboard is deactivated (state=0, keyboard existence=true)
+11-07 21:52:46.575  1509  1509 I KeyboardViewUtil: KeyboardViewUtil.calculateMaxKeyboardBodyHeight():40 leave 354 height for app when screen height:2274, header height:116 and isFullscreenMode:false, so the max keyboard body height is:1804
+11-07 21:52:46.575  1509  1509 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-07 21:52:46.575  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = HEADER, shownType = SHOW_OPTIONAL
+11-07 21:52:46.575  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-07 21:52:46.575  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = BODY, shownType = SHOW_MANDATORY
+11-07 21:52:46.575  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-07 21:52:46.575  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = FLOATING_CANDIDATES, shownType = HIDE
+11-07 21:52:46.575  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = false
+11-07 21:52:46.576  1509  1509 I KeyboardViewUtil: KeyboardViewUtil.calculateMaxKeyboardBodyHeight():40 leave 354 height for app when screen height:2274, header height:116 and isFullscreenMode:false, so the max keyboard body height is:1804
+11-07 21:52:46.576  1509  1509 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-07 21:52:46.577  1509  1509 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-07 21:52:46.577  1509  1509 I KeyboardModeManager: KeyboardModeManager.setInputView():364 setInputView() : supportsOneHandedMode=true
+11-07 21:52:46.577  1509  1509 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-07 21:52:46.578  1509  1509 I AndroidIME: KeyboardViewManager.updateKeyboardBodyViewHolderPaddingBottom():604 Set finalPaddingBottom = 0 while keyboardBottomGapFromScreen = 0; navigationHeight = 126
+11-07 21:52:46.579  1509  1509 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-07 21:52:46.582  1509  1509 I AndroidIME: KeyboardViewManager.updateKeyboardBodyViewHolderPaddingBottom():604 Set finalPaddingBottom = 0 while keyboardBottomGapFromScreen = 0; navigationHeight = 126
+11-07 21:52:46.583  1509  1509 I KeyboardModeManager: KeyboardModeManager.setInputView():356 setInputView() : entry=hwn{languageTag=en-US, variant=qwerty, hasLocalizedResources=true, conditionCacheKey=_device=phone_device_size=default_enable_adaptive_text_editing=false_enable_inline_suggestions_on_client_side=false_enable_large_tablet_batch_1=false_enable_large_tablet_batch_2=false_enable_more_candidates_view_for_multilingual=false_enable_nav_redesign=false_enable_number_row=false_enable_preemptive_decode=true_enable_secondary_symbols=false_expressions=normal_four_or_more_letter_rows=false_keyboard_mode=normal_language=en-US_orientation=portrait_physical_keyboard=qwerty_show_secondary_digits=true_show_suggestions=true_split_with_duplicate_keys=true_variant=qwerty, imeDef.stringId=ime_english_united_states, imeDef.className=com.google.android.apps.inputmethod.libs.latin5.LatinIme, imeDef.languageTag=en-US}
+11-07 21:52:46.585  1509  1509 I VoiceImeExtension: VoiceImeExtension.shouldStartVoiceInputAutomatically():383 No private IME option set to start voice input.
+11-07 21:52:46.620  1509  1509 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-07 21:52:46.661  4742  4742 D InsetsController: show(ime(), fromIme=true)
+11-07 21:52:46.692  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x2c001(Normal) imeOptions=0x42000000 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=31 initialSelEnd=31 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=Bundle[mParcelledData.dataSize=404]}, true)
+11-07 21:52:46.701  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-07 21:52:46.720  1509  2239 I Delight5Decoder: Delight5DecoderWrapper.setKeyboardLayout():457 setKeyboardLayout()
+11-07 21:52:46.720  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-07 21:52:46.721  1509  1509 W SessionManager: SessionManager.beginSession():53 Try to begin an already begun session [INPUT_SESSION], end it first
+11-07 21:52:46.721  1509  1509 W SessionManager: SessionManager.endSession():96 Child session [INPUT_VIEW_SESSION] is not ended while ending session [{IME_SESSION=1794088366558, INPUT_SESSION=1794088366458, TRAINING_CACHE_SESSION=1794088366559, INPUT_VIEW_SESSION=1794088366459}], ending it now.
+11-07 21:52:46.722  1509  1509 W SessionManager: SessionManager.endSession():96 Child session [IME_SESSION] is not ended while ending session [{IME_SESSION=1794088366558, INPUT_SESSION=1794088366458, TRAINING_CACHE_SESSION=1794088366559, INPUT_VIEW_SESSION=1794088366459}], ending it now.
+11-07 21:52:46.727  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onStartInputView():1995 onStartInputView(EditorInfo{inputType=0x2c001(Normal) imeOptions=0x42000000 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=31 initialSelEnd=31 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false, android.support.text.emoji.emojiCompat_replaceAll=false}]}, true)
+11-07 21:52:46.729  1509  1944 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-07 21:52:46.743  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-07 21:52:46.747  1509  1509 W ModuleManager: ModuleManager.loadModule():450 Module erj is not available
+11-07 21:52:46.762  1509  1509 I KeyboardViewUtil: KeyboardViewUtil.getKeyboardHeightRatio():189 systemKeyboardHeightRatio:1.000000; userKeyboardHeightRatio:1.000000.
+11-07 21:52:46.769  1509  1509 I KeyboardWrapper: KeyboardWrapper.consumeEvent():275 Skip consuming an event as current keyboard is deactivated (state=0, keyboard existence=true)
+11-07 21:52:46.770  1509  1509 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.shutdown():77 shutdown()
+11-07 21:52:46.771  1509  1509 I AndroidIME: AbstractIme.onDeactivate():207 LatinIme.onDeactivate()
+11-07 21:52:46.771  1509  1509 W SessionManager: SessionManager.endSession():88 Try to end a not begun session [IME_SESSION].
+11-07 21:52:46.771  4742  4758 I om.quartz.notes: Compiler allocated 4175KB to compile void com.quartz.notes.ui.editor.RichTextEditorKt$RichTextEditor$1.invoke(androidx.compose.foundation.layout.BoxWithConstraintsScope, androidx.compose.runtime.Composer, int)
+11-07 21:52:46.772  1509  1509 I AndroidIME: AbstractIme.onActivate():86 LatinIme.onActivate() : EditorInfo = inputType=0x2c001(Normal) imeOptions=0x42000000 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=31 initialSelEnd=31 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false, android.support.text.emoji.emojiCompat_replaceAll=false}], IncognitoMode = false, DeviceLocked = false
+11-07 21:52:46.773  1509  1509 I Delight5Facilitator: Delight5Facilitator.initializeForIme():777 initializeForIme() : Locale = [en_US], layout = qwerty
+11-07 21:52:46.773  1509  1509 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.cancelShutdown():55 cancelShutdown()
+11-07 21:52:46.774  1509  1509 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.syncLanguagePacks():67 syncLanguagePacks()
+11-07 21:52:46.774  1509  1509 I LatinIme: LatinIme.updateEnableInlineSuggestionsOnDecoderSideFlags():1003 inline flag updated to:false
+11-07 21:52:46.774  1509  5618 I SpeechFactory: SpeechRecognitionFactory.maybeScheduleAutoPackDownloadForFallback():205 maybeScheduleAutoPackDownloadForFallback()
+11-07 21:52:46.774  1509  5618 I FallbackOnDeviceRecognitionProvider: FallbackOnDeviceRecognitionProvider.maybeScheduleAutoPackDownload():195 maybeScheduleAutoPackDownload() for language tag en-US
+11-07 21:52:46.779  1509  1509 I KeyboardWrapper: KeyboardWrapper.consumeEvent():275 Skip consuming an event as current keyboard is deactivated (state=0, keyboard existence=true)
+11-07 21:52:46.785  1509  1509 I KeyboardViewUtil: KeyboardViewUtil.calculateMaxKeyboardBodyHeight():40 leave 354 height for app when screen height:2274, header height:116 and isFullscreenMode:false, so the max keyboard body height is:1804
+11-07 21:52:46.787  1509  1509 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-07 21:52:46.787  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = HEADER, shownType = SHOW_OPTIONAL
+11-07 21:52:46.787  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-07 21:52:46.788  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = BODY, shownType = SHOW_MANDATORY
+11-07 21:52:46.790  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-07 21:52:46.791  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = FLOATING_CANDIDATES, shownType = HIDE
+11-07 21:52:46.791  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = false
+11-07 21:52:46.792  1509  1509 I KeyboardViewUtil: KeyboardViewUtil.calculateMaxKeyboardBodyHeight():40 leave 354 height for app when screen height:2274, header height:116 and isFullscreenMode:false, so the max keyboard body height is:1804
+11-07 21:52:46.793  1509  1509 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-07 21:52:46.799  1509  1509 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-07 21:52:46.799  1509  1509 I KeyboardModeManager: KeyboardModeManager.setInputView():364 setInputView() : supportsOneHandedMode=true
+11-07 21:52:46.799  1509  1509 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-07 21:52:46.800  1509  1509 I AndroidIME: KeyboardViewManager.updateKeyboardBodyViewHolderPaddingBottom():604 Set finalPaddingBottom = 0 while keyboardBottomGapFromScreen = 0; navigationHeight = 126
+11-07 21:52:46.806  1509  1509 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-07 21:52:46.821  1509  1509 I AndroidIME: KeyboardViewManager.updateKeyboardBodyViewHolderPaddingBottom():604 Set finalPaddingBottom = 0 while keyboardBottomGapFromScreen = 0; navigationHeight = 126
+11-07 21:52:46.821  1509  1509 I KeyboardModeManager: KeyboardModeManager.setInputView():356 setInputView() : entry=hwn{languageTag=en-US, variant=qwerty, hasLocalizedResources=true, conditionCacheKey=_device=phone_device_size=default_enable_adaptive_text_editing=false_enable_inline_suggestions_on_client_side=false_enable_large_tablet_batch_1=false_enable_large_tablet_batch_2=false_enable_more_candidates_view_for_multilingual=false_enable_nav_redesign=false_enable_number_row=false_enable_preemptive_decode=true_enable_secondary_symbols=false_expressions=normal_four_or_more_letter_rows=false_keyboard_mode=normal_language=en-US_orientation=portrait_physical_keyboard=qwerty_show_secondary_digits=true_show_suggestions=true_split_with_duplicate_keys=true_variant=qwerty, imeDef.stringId=ime_english_united_states, imeDef.className=com.google.android.apps.inputmethod.libs.latin5.LatinIme, imeDef.languageTag=en-US}
+11-07 21:52:46.828  1509  1509 I VoiceImeExtension: VoiceImeExtension.shouldStartVoiceInputAutomatically():383 No private IME option set to start voice input.
+11-07 21:52:46.837  1509  1509 W InputContextProxyV4: InputContextProxyV4.applyClientDiffInternal():897 Ignore [FetchSuggestions] diff due to stale request: 33<36, inputStateId=6, lastInputStateId=8
+11-07 21:52:46.888  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = HEADER, shownType = SHOW_MANDATORY_WITH_ANIMATION
+11-07 21:52:46.888  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-07 21:52:46.925  1509  1509 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-07 21:52:46.926  1509  2239 I Delight5Decoder: Delight5DecoderWrapper.setKeyboardLayout():457 setKeyboardLayout()
+11-07 21:52:46.962  1321  3740 E WorkSourceUtil: Could not find package: com.google.android.gms.westworld
+11-07 21:52:46.969  1321  4518 W gle.android.gms: Long monitor contention with owner [com.google.android.gms.chimera.container.intentoperation.GmsIntentOperationChimeraService-Executor] processing com.google.android.gms.westworld.InitOperation for action com.google.android.chimera.IntentOperation.NEW_MODULE (3740) at void hjm.run()(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3) waiters=0 in void hjm.run() for 20.041s
+11-07 21:52:46.984  4742  4742 D InsetsController: show(ime(), fromIme=true)
+11-07 21:52:47.070  1321  3740 I NewModuleComplete: Received com.google.android.chimera.IntentOperation.NEW_MODULE(com.google.android.gms.chimera.GmsIntentOperationService,2,true)
+11-07 21:52:47.157  1321  3740 I NewModuleHelper: Received com.google.android.chimera.container.NEW_MODULE_FINALIZE(2/0): com.google.android.gms.chimera.GmsIntentOperationService,2,true
+11-07 21:52:47.240  1060  5504 I GCoreUlr: WorldUpdater received intent Intent { act=com.google.android.location.reporting.ACTION_UPDATE_WORLD cmp=com.google.android.gms/com.google.android.location.reporting.service.DispatchingService (has extras) } with receiverAction init
+11-07 21:52:47.271  1060  5504 I GCoreUlr: WorldUpdater:init: Ensuring that reporting is stopped because of reasons: (no Google accounts)
+11-07 21:52:47.274  1060  5504 I GCoreUlr: Unbound from all signal providers.
+11-07 21:52:47.303  1060  1060 I GCoreUlr: Unbound from all signal providers.
+11-07 21:52:47.303  1060  1060 I GCoreUlr: Stopping handler for UlrDispSvcFast
+11-07 21:52:47.309  1060  5504 I GCoreUlr: DispatchingService ignoring Intent { act=android.net.wifi.WIFI_STATE_CHANGED flg=0x44000010 (has extras) } because ULR inactive
+11-07 21:52:47.427  1060  1373 I HeterodyneSyncScheduler: Scheduling Phenotype for a PhenotypeSyncImmediately(6, com.google.android.gms.lockbox) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+11-07 21:52:47.440  1060  1373 I HeterodyneSyncScheduler: Scheduling Phenotype for a PhenotypeSyncImmediately(16, com.google.android.gms.icing.mdd) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+11-07 21:52:47.449  4742  5479 D EGL_emulation: app_time_stats: avg=144.47ms min=41.02ms max=360.05ms count=7
+11-07 21:52:47.479  1060  1373 I HeterodyneSyncScheduler: Scheduling Phenotype for a PhenotypeSyncImmediately(16, com.google.android.gms.nnapi.drivermanager) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+11-07 21:52:47.509  1509  1509 E InputConnectionParser: InputConnectionParser.responseWithError():106 responseWithError(): parse_code: 2
+11-07 21:52:47.509  1509  1509 E InputContextProxyV4: InputContextProxyV4.reset():371 reset(): un-successful, parse_code: 2, input_state_id 0
+11-07 21:52:47.509  1509  1509 W Delight5Decoder: Delight5DecoderWrapper.asyncFetchSuggestions():1876 asyncFetchSuggestions(): Decoder state is invalid
+11-07 21:52:47.509  1509  1509 W Delight5Decoder: Delight5DecoderWrapper.asyncFetchSuggestions():1876 asyncFetchSuggestions(): Decoder state is invalid
+11-07 21:52:47.536  1060  1373 I HeterodyneSyncScheduler: Scheduling Phenotype for a PhenotypeSyncImmediately(7, com.google.lighter.android#com.google.android.gms) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+11-07 21:52:47.555  1321  1321 I LT_PhenotypeApiImplV12: Phenotype registration succeeded
+11-07 21:52:47.592  1509  1509 I PhenotypeModule: PhenotypeModule.receiveBroadcast():373 onReceive() urgent = false
+11-07 21:52:47.598  1509  1509 I PhenotypeModule: PhenotypeModule.receiveBroadcast():373 onReceive() urgent = false
+11-07 21:52:47.598  1509  1509 I PhenotypeModule: PhenotypeModule.receiveBroadcast():373 onReceive() urgent = false
+11-07 21:52:47.626  1060  1366 I PackageUpdateTaskChimer: Scheduling Phenotype config package catchup updates to be 86400 seconds from now (1794088367626) [CONTEXT service_id=51 ]
+11-07 21:52:47.676  1509  2142 D EGL_emulation: app_time_stats: avg=277.78ms min=114.38ms max=544.98ms count=5
+11-07 21:52:47.731  1060  1373 I HeterodyneSyncScheduler: Scheduling Phenotype for a PhenotypeSyncImmediately(6, com.google.android.gms.people) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+11-07 21:52:47.778  1060  1373 I HeterodyneSyncScheduler: Scheduling Phenotype for a PhenotypeSyncImmediately(6, com.google.android.westworld) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+11-07 21:52:47.789  1788  2933 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-07 21:52:47.804  1060  3364 W .gms.persistent: Long monitor contention with owner [com.google.android.gms.chimera.container.intentoperation.PersistentIntentOperationChimeraService-Executor] processing com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener for action android.intent.action.BOOT_COMPLETED (3737) at void hjm.run()(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3) waiters=1 in void hjm.run() for 38.110s
+11-07 21:52:47.816  1060  3443 I NewModuleComplete: Received com.google.android.chimera.IntentOperation.NEW_MODULE(com.google.android.gms.chimera.PersistentIntentOperationService,2,true)
+11-07 21:52:47.825  1509  1509 I EmojiSuperpacksManager: EmojiSuperpacksManager.triggerSync():374 triggerSync() : isBundled = false
+11-07 21:52:47.826  1509  2076 I SP      : Registering emoji.20190807, url: https://www.gstatic.com/android/keyboard/modelpack/emoji/20230201113008/superpacks_manifest.zip, constraints: m:*:*:*, flags: fg, requested: 20190807, current: 20190807
+11-07 21:52:47.826  1509  2076 I EmojiSlicingStrategy: EmojiSlicingStrategy.matchEnabledLocalesWithPackLocales():127 matchEnabledLocalesWithPackLocales() : User enabled 1 locales; returning 1 slices
+11-07 21:52:47.826  1509  2076 I SP      : Syncing emoji (20190807) with slices: [{7b9ddb0b8c001e17cee03b1edf554b20, m:*:*:*}], metadata: false
+11-07 21:52:47.827  1509  1509 I EmojiSuperpacksManager: EmojiSuperpacksManager.triggerSync():374 triggerSync() : isBundled = false
+11-07 21:52:47.828  1509  1509 I InputMethodEntryManager: InputMethodEntryManager.startLoadingInputMethodEntrySettings():739 Start loading input method entry settings: [LanguageTagVariantTuple{languageTag=en-US, variant=qwerty}]
+11-07 21:52:47.829  1509  1509 I InputMethodEntryManager: InputMethodEntryManager.updateInputMethodEntrySettingsLoadingTask():826 update loading task with resetImplicitlyEnabledEntries is false
+11-07 21:52:47.829  1509  1509 I InputMethodEntryManager: InputMethodEntryManager$5.onFailure():869 Fail load entries [LanguageTagVariantTuple{languageTag=en-US, variant=qwerty}]
+11-07 21:52:47.829  1509  1509 I InputMethodEntryManager: InputMethodEntryManager.startLoadingInputMethodEntrySettings():739 Start loading input method entry settings: [LanguageTagVariantTuple{languageTag=en-US, variant=qwerty}]
+11-07 21:52:47.829  1509  1509 I InputMethodEntryManager: InputMethodEntryManager.updateInputMethodEntrySettingsLoadingTask():826 update loading task with resetImplicitlyEnabledEntries is false
+11-07 21:52:47.830  1509  1509 I InputMethodEntryManager: InputMethodEntryManager$5.onFailure():869 Fail load entries [LanguageTagVariantTuple{languageTag=en-US, variant=qwerty}]
+11-07 21:52:47.830  1509  1509 I InputMethodEntryManager: InputMethodEntryManager.startLoadingInputMethodEntrySettings():739 Start loading input method entry settings: [LanguageTagVariantTuple{languageTag=en-US, variant=qwerty}]
+11-07 21:52:47.830  1509  1509 I InputMethodEntryManager: InputMethodEntryManager.updateInputMethodEntrySettingsLoadingTask():826 update loading task with resetImplicitlyEnabledEntries is false
+11-07 21:52:47.830  1509  1509 I InputMethodEntryManager: InputMethodEntryManager$5.onFailure():869 Fail load entries [LanguageTagVariantTuple{languageTag=en-US, variant=qwerty}]
+11-07 21:52:47.830  1509  1509 I InputMethodEntryManager: InputMethodEntryManager.startLoadingInputMethodEntrySettings():739 Start loading input method entry settings: [LanguageTagVariantTuple{languageTag=en-US, variant=qwerty}]
+11-07 21:52:47.830  1509  1509 I InputMethodEntryManager: InputMethodEntryManager.updateInputMethodEntrySettingsLoadingTask():826 update loading task with resetImplicitlyEnabledEntries is false
+11-07 21:52:47.830  1509  1509 I InputMethodEntryManager: InputMethodEntryManager$5.onFailure():869 Fail load entries [LanguageTagVariantTuple{languageTag=en-US, variant=qwerty}]
+11-07 21:52:47.830  1509  1509 I InputMethodEntryManager: InputMethodEntryManager.startLoadingInputMethodEntrySettings():739 Start loading input method entry settings: [LanguageTagVariantTuple{languageTag=en-US, variant=qwerty}]
+11-07 21:52:47.830  1509  1509 I InputMethodEntryManager: InputMethodEntryManager.updateInputMethodEntrySettingsLoadingTask():826 update loading task with resetImplicitlyEnabledEntries is false
+11-07 21:52:47.835  1509  1509 I ClipboardDataHandler: ClipboardDataHandler.updateScreenshotsContentObserver():269 Disable the feature of handling screenshots in the clipboard.
+11-07 21:52:47.835  1509  1509 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-07 21:52:47.835  1509  1509 I InputMethodEntryManager: InputMethodEntryManager$5.onFailure():869 Fail load entries [LanguageTagVariantTuple{languageTag=en-US, variant=qwerty}]
+11-07 21:52:47.835  1509  1509 I InputMethodEntryManager: InputMethodEntryManager.startLoadingInputMethodEntrySettings():739 Start loading input method entry settings: [LanguageTagVariantTuple{languageTag=en-US, variant=qwerty}]
+11-07 21:52:47.836  1509  1509 I InputMethodEntryManager: InputMethodEntryManager.updateInputMethodEntrySettingsLoadingTask():826 update loading task with resetImplicitlyEnabledEntries is false
+11-07 21:52:47.836  1509  1509 I InputMethodEntryManager: InputMethodEntryManager$5.onFailure():869 Fail load entries [LanguageTagVariantTuple{languageTag=en-US, variant=qwerty}]
+11-07 21:52:47.836  1509  1509 I InputMethodEntryManager: InputMethodEntryManager.startLoadingInputMethodEntrySettings():739 Start loading input method entry settings: [LanguageTagVariantTuple{languageTag=en-US, variant=qwerty}]
+11-07 21:52:47.837  1509  1509 I InputMethodEntryManager: InputMethodEntryManager.updateInputMethodEntrySettingsLoadingTask():826 update loading task with resetImplicitlyEnabledEntries is false
+11-07 21:52:47.838  1509  1509 I InputMethodEntryManager: InputMethodEntryManager$5.onFailure():869 Fail load entries [LanguageTagVariantTuple{languageTag=en-US, variant=qwerty}]
+11-07 21:52:47.838  1509  1509 I InputMethodEntryManager: InputMethodEntryManager.startLoadingInputMethodEntrySettings():739 Start loading input method entry settings: [LanguageTagVariantTuple{languageTag=en-US, variant=qwerty}]
+11-07 21:52:47.838  1509  1509 I InputMethodEntryManager: InputMethodEntryManager.updateInputMethodEntrySettingsLoadingTask():826 update loading task with resetImplicitlyEnabledEntries is false
+11-07 21:52:47.839  1509  1509 I InputMethodEntryManager: InputMethodEntryManager$5.onFailure():869 Fail load entries [LanguageTagVariantTuple{languageTag=en-US, variant=qwerty}]
+11-07 21:52:47.839  1509  1509 I InputMethodEntryManager: InputMethodEntryManager.startLoadingInputMethodEntrySettings():739 Start loading input method entry settings: [LanguageTagVariantTuple{languageTag=en-US, variant=qwerty}]
+11-07 21:52:47.839  1509  1509 I InputMethodEntryManager: InputMethodEntryManager.updateInputMethodEntrySettingsLoadingTask():826 update loading task with resetImplicitlyEnabledEntries is false
+11-07 21:52:47.840  1509  1509 I SuperDelight: SuperDelightManager.initializeDelightSuperpacks():340 initializeDelightSuperpacks()
+11-07 21:52:47.840  1509  1509 I SuperDelight: SuperDelightManager.getDelightMetadataUriAndVersion():1011 getDelightMetadataUriAndVersion(): Phenotype : 2023020919 : https://www.gstatic.com/android/keyboard/dictionarypack/Omei-normal/metadata.json
+11-07 21:52:47.840  1509  1509 I SuperDelight: SuperDelightAppsSuperpacksManager.initializeDelightAppsSuperpacks():92 initializeDelightAppsSuperpacks()
+11-07 21:52:47.845  1060  3708 E PhenotypeFlagCommitter: Retrieving snapshot for com.google.android.gms.phenotype failed
+11-07 21:52:47.845  1060  3708 E PhenotypeFlagCommitter: java.util.concurrent.TimeoutException: Timed out waiting for Task
+11-07 21:52:47.845  1060  3708 E PhenotypeFlagCommitter: 	at cfsz.o(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-07 21:52:47.845  1060  3708 E PhenotypeFlagCommitter: 	at bwch.e(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-07 21:52:47.845  1060  3708 E PhenotypeFlagCommitter: 	at bwch.j(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-07 21:52:47.845  1060  3708 E PhenotypeFlagCommitter: 	at bwch.h(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 21:52:47.845  1060  3708 E PhenotypeFlagCommitter: 	at bwel.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+11-07 21:52:47.845  1060  3708 E PhenotypeFlagCommitter: 	at com.google.android.gms.phenotype.sync.HeterodyneSyncTaskChimeraService.d(:com.google.android.gms@231818047@23.18.18 (190800-535401451):77)
+11-07 21:52:47.845  1060  3708 E PhenotypeFlagCommitter: 	at com.google.android.gms.phenotype.sync.HeterodyneSyncTaskChimeraService.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):10)
+11-07 21:52:47.845  1060  3708 E PhenotypeFlagCommitter: 	at avzs.call(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+11-07 21:52:47.845  1060  3708 E PhenotypeFlagCommitter: 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+11-07 21:52:47.845  1060  3708 E PhenotypeFlagCommitter: 	at aced.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-07 21:52:47.845  1060  3708 E PhenotypeFlagCommitter: 	at aced.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):7)
+11-07 21:52:47.845  1060  3708 E PhenotypeFlagCommitter: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-07 21:52:47.845  1060  3708 E PhenotypeFlagCommitter: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-07 21:52:47.845  1060  3708 E PhenotypeFlagCommitter: 	at acjn.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 21:52:47.845  1060  3708 E PhenotypeFlagCommitter: 	at java.lang.Thread.run(Thread.java:1012)
+11-07 21:52:47.849  1509  2064 I PhenotypeModule: PhenotypeModule.handlePhenotypeConfigurationUpdatesInternal():350 Latency of updating configurations from phenotype (experiment v4): 31
+11-07 21:52:47.849  1509  2064 I PhenotypeModule: PhenotypeModule.handlePhenotypeConfigurationUpdates():277 Latency of updating configurations from phenotype (ExperimentV4): 31
+11-07 21:52:47.850  1509  2064 I PhenotypeModule: PhenotypeModule.lambda$fetchAndUpdate$2():220 fetchAndUpdate() : Success, hasFlags=true, fetchStatus=2026-11-07 21:52:10{reason=2, isFullFetch=true, success=true, isEmpty=false, isDelta=false, fetchedFlagsCount=923, deletedFlagsCount=0, updatedFlagsCount=0, totalTime=37506}
+11-07 21:52:47.851  1321  3740 I NewModuleHelper: Received com.google.android.chimera.container.NEW_MODULE_FINALIZE(2/0): com.google.android.gms.chimera.PersistentIntentOperationService,2,true
+11-07 21:52:47.851  1321  3740 I NewModuleHelper: Completed all new module init intents for all processes.
+11-07 21:52:47.859  1509  2003 I AbstractOpenableExtension: AbstractOpenableExtension.maybeDestroyExistingKeyboardGroupManager():512 Destroy existing keyboard group manager in een
+11-07 21:52:47.859  1509  2003 I AbstractOpenableExtension: AbstractOpenableExtension.createKeyboardGroupManagerListenableFuture():124 Create keyboard group manager listenable future in een
+11-07 21:52:47.860  1509  2002 I KeyboardGroupDefParser: KeyboardGroupDefParser.parseKeyboardGroupDef():88 parseKeyboardGroupDef() 2132214034 -> 0_resource_name_obfuscated : WaitTime = 0 ms : RunTime = 0 ms
+11-07 21:52:47.866  1788  2702 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-07 21:52:47.867  1509  1509 I SpeechPackManager: SpeechPackManager.refreshManifest():352 refreshManifest()
+11-07 21:52:47.867  1509  1509 I SpeechPackManager: SpeechPackManager.registerManifest():451 registerManifest() : https://dl.google.com/android/voice/gboard/terse/superpacks-manifest-20210519.json
+11-07 21:52:47.868  1509  1509 I EmojiExtensionHelper: EmojiExtensionHelper.flagsUpdated():144 Received flag change: enable_emoji_tall_view{type=Boolean, finalValue=true, DEFAULT=false, PHENOTYPE=true}.
+11-07 21:52:47.868  1509  1509 I AbstractOpenableExtension: AbstractOpenableExtension.maybeDestroyExistingKeyboardGroupManager():512 Destroy existing keyboard group manager in eco
+11-07 21:52:47.868  1509  1509 I AbstractOpenableExtension: AbstractOpenableExtension.createKeyboardGroupManagerListenableFuture():124 Create keyboard group manager listenable future in eco
+11-07 21:52:47.871  1509  2003 I AbstractOpenableExtension: AbstractOpenableExtension.maybeDestroyExistingKeyboardGroupManager():512 Destroy existing keyboard group manager in csi
+11-07 21:52:47.871  1509  2003 I AbstractOpenableExtension: AbstractOpenableExtension.createKeyboardGroupManagerListenableFuture():124 Create keyboard group manager listenable future in csi
+11-07 21:52:47.871  1509  2003 I InputContextSharingModule: InputContextSharingModule.onCreate():44 onCreate()
+11-07 21:52:47.871  1509  2003 I SuperDelight: SuperDelightManager.initializeDelightSuperpacks():340 initializeDelightSuperpacks()
+11-07 21:52:47.872  1509  2003 I SuperDelight: SuperDelightManager.getDelightMetadataUriAndVersion():1011 getDelightMetadataUriAndVersion(): Phenotype : 2023020919 : https://www.gstatic.com/android/keyboard/dictionarypack/Omei-normal/metadata.json
+11-07 21:52:47.872  1509  2003 I SuperDelight: SuperDelightAppsSuperpacksManager.initializeDelightAppsSuperpacks():92 initializeDelightAppsSuperpacks()
+11-07 21:52:47.881  1509  1509 I InputMethodEntryManager: InputMethodEntryManager$5.onSuccess():845 Success load entries: [LanguageTagVariantTuple{languageTag=en-US, variant=qwerty}], resetImplicitlyEnabledEntries=false
+11-07 21:52:47.899  1564  5750 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-07 21:52:47.899  1509  2002 I KeyboardGroupDefParser: KeyboardGroupDefParser.parseKeyboardGroupDef():88 parseKeyboardGroupDef() 2132214027 -> 0_resource_name_obfuscated : WaitTime = 7 ms : RunTime = 23 ms
+11-07 21:52:47.900  1509  2002 I KeyboardGroupDefParser: KeyboardGroupDefParser.parseKeyboardGroupDef():88 parseKeyboardGroupDef() 2132214033 -> 0_resource_name_obfuscated : WaitTime = 29 ms : RunTime = 0 ms
+11-07 21:52:47.903  1509  1509 I AbstractOpenableExtension: AbstractOpenableExtension$3.onSuccess():525 KeyboardGroupManager destroyed in eco.
+11-07 21:52:47.916  1478  5751 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-07 21:52:47.921  1509  1509 W FDL     : FDL logging failed. Add a dependency for Firebase Analytics to your app to enable logging of Dynamic Link events.
+11-07 21:52:47.924  1509  1509 I DictionarySuperpacksManager: DictionarySuperpacksManager$1.onEnabledInputMethodEntriesChanged():61 onEnabledInputMethodEntriesChanged
+11-07 21:52:47.936  1509  1509 I KeyboardWrapper: KeyboardWrapper.consumeEvent():275 Skip consuming an event as current keyboard is deactivated (state=0, keyboard existence=true)
+11-07 21:52:47.937  1509  1509 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.shutdown():77 shutdown()
+11-07 21:52:47.937  1509  1509 I AndroidIME: AbstractIme.onDeactivate():207 LatinIme.onDeactivate()
+11-07 21:52:47.940  1509  1509 I AbstractOpenableExtension: AbstractOpenableExtension.maybeDestroyExistingKeyboardGroupManager():512 Destroy existing keyboard group manager in een
+11-07 21:52:47.940  1509  1509 I AbstractOpenableExtension: AbstractOpenableExtension.createKeyboardGroupManagerListenableFuture():124 Create keyboard group manager listenable future in een
+11-07 21:52:47.940  1509  1509 I AbstractOpenableExtension: AbstractOpenableExtension.maybeDestroyExistingKeyboardGroupManager():512 Destroy existing keyboard group manager in csi
+11-07 21:52:47.940  1509  1509 I AbstractOpenableExtension: AbstractOpenableExtension.createKeyboardGroupManagerListenableFuture():124 Create keyboard group manager listenable future in csi
+11-07 21:52:47.940  1509  1509 I AbstractOpenableExtension: AbstractOpenableExtension.maybeDestroyExistingKeyboardGroupManager():512 Destroy existing keyboard group manager in eco
+11-07 21:52:47.940  1509  1509 I AbstractOpenableExtension: AbstractOpenableExtension.createKeyboardGroupManagerListenableFuture():124 Create keyboard group manager listenable future in eco
+11-07 21:52:47.941  1509  1509 I AbstractOpenableExtension: AbstractOpenableExtension.maybeDestroyExistingKeyboardGroupManager():512 Destroy existing keyboard group manager in ebn
+11-07 21:52:47.941  1509  1509 I AbstractOpenableExtension: AbstractOpenableExtension.createKeyboardGroupManagerListenableFuture():124 Create keyboard group manager listenable future in ebn
+11-07 21:52:47.941  1509  1509 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-07 21:52:47.942  1509  2002 I KeyboardGroupDefParser: KeyboardGroupDefParser.parseKeyboardGroupDef():88 parseKeyboardGroupDef() 2132214034 -> 0_resource_name_obfuscated : WaitTime = 2 ms : RunTime = 0 ms
+11-07 21:52:47.942  1509  2002 I KeyboardGroupDefParser: KeyboardGroupDefParser.parseKeyboardGroupDef():88 parseKeyboardGroupDef() 2132214033 -> 0_resource_name_obfuscated : WaitTime = 1 ms : RunTime = 0 ms
+11-07 21:52:47.947  1509  1509 I StyledKeyboardTheme: StyledKeyboardTheme.<init>():87 Pref: [], themeName: [silk:], darkMode: [false], cacheKey: [overlay_builtin_dynamic_color_light_base.binarypb:dynamic-light-fff0f0f3-ff76d1ff-ce191c6173d879ea127e4e40bfd70d3c]
+11-07 21:52:47.962  1509  1509 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-07 21:52:47.962  1509  1509 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-07 21:52:47.962  1509  1509 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-07 21:52:47.962  1509  1509 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-07 21:52:47.962  1509  1509 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-07 21:52:47.962  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.initializeKeyboardTheme():1343 Apply keyboard theme: theme_border_bottom4dp_stylesheet_noshadow_gsans_pillkey_silkpopup_refinedkp_materiallight_phone_400_overlay_builtin_dynamic_color_light_base.binarypb:dynamic-light-fff0f0f3-ff76d1ff-ce191c6173d879ea127e4e40bfd70d3c_port
+11-07 21:52:47.972  1509  1509 I LatinIme: LatinIme.<init>():328 Language = en-US
+11-07 21:52:47.994  1509  1509 I Delight5Facilitator: Delight5Facilitator.initializeForIme():777 initializeForIme() : Locale = [en_US], layout = qwerty
+11-07 21:52:47.994  1509  1509 I Delight5Facilitator: Delight5Facilitator.resetDecoder():954 resetDecoder() : Locale = [en_US]
+11-07 21:52:47.995  1509  2002 I KeyboardGroupDefParser: KeyboardGroupDefParser.parseKeyboardGroupDef():88 parseKeyboardGroupDef() 2132214027 -> 0_resource_name_obfuscated : WaitTime = 1 ms : RunTime = 4 ms
+11-07 21:52:47.996  1509  1509 I Delight5Decoder: Delight5DecoderWrapper.createOrResetDecoder():341 Decoder reset
+11-07 21:52:48.022  1509  1509 I AndroidIME: AbstractIme.onActivate():86 LatinIme.onActivate() : EditorInfo = inputType=0x2c001(Normal) imeOptions=0x42000000 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=31 initialSelEnd=31 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false, android.support.text.emoji.emojiCompat_replaceAll=false}], IncognitoMode = false, DeviceLocked = false
+11-07 21:52:48.022  1509  2081 I MainLanguageModelLoader: MainLanguageModelLoader.call():145 Running LM loader for [en_US]
+11-07 21:52:48.023  1509  2081 I DelightDataFileManagerLanguageModelProvider: DelightDataFileManagerLanguageModelProvider.fetchLanguageModel():73 find data en-US delight
+11-07 21:52:48.023  1509  2081 I LmManager: LmManager.asyncUpdateEnabledLanguageModels():90 asyncUpdateEnabledLanguageModels()
+11-07 21:52:48.023  1509  2081 I SuperDelight: SuperDelightManager.initializeDelightSuperpacks():340 initializeDelightSuperpacks()
+11-07 21:52:48.023  1509  2081 I SuperDelight: SuperDelightManager.getDelightMetadataUriAndVersion():1011 getDelightMetadataUriAndVersion(): Phenotype : 2023020919 : https://www.gstatic.com/android/keyboard/dictionarypack/Omei-normal/metadata.json
+11-07 21:52:48.023  1509  2081 I SuperDelight: SuperDelightAppsSuperpacksManager.initializeDelightAppsSuperpacks():92 initializeDelightAppsSuperpacks()
+11-07 21:52:48.023  1509  2081 I SuperDelight: SuperDelightManager.initializeOverridesSuperpacks():402 initializeOverridesSuperpacks()
+11-07 21:52:48.024  1509  1509 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.cancelShutdown():55 cancelShutdown()
+11-07 21:52:48.024  1509  1509 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.syncLanguagePacks():67 syncLanguagePacks()
+11-07 21:52:48.024  1509  2081 I DelightDataFileManagerLanguageModelProvider: DelightDataFileManagerLanguageModelProvider.fetchLanguageModel():73 find data en-US delight
+11-07 21:52:48.024  1509  2081 I LmManager: LmManager.asyncUpdateEnabledLanguageModels():90 asyncUpdateEnabledLanguageModels()
+11-07 21:52:48.024  1509  2081 I SuperDelight: SuperDelightManager.initializeDelightSuperpacks():340 initializeDelightSuperpacks()
+11-07 21:52:48.024  1509  2081 I SuperDelight: SuperDelightManager.getDelightMetadataUriAndVersion():1011 getDelightMetadataUriAndVersion(): Phenotype : 2023020919 : https://www.gstatic.com/android/keyboard/dictionarypack/Omei-normal/metadata.json
+11-07 21:52:48.025  1509  1509 I LatinIme: LatinIme.updateEnableInlineSuggestionsOnDecoderSideFlags():1003 inline flag updated to:false
+11-07 21:52:48.032  1509  2081 I SuperDelight: SuperDelightAppsSuperpacksManager.initializeDelightAppsSuperpacks():92 initializeDelightAppsSuperpacks()
+11-07 21:52:48.033  1509  2081 I SuperDelight: SuperDelightManager.initializeOverridesSuperpacks():402 initializeOverridesSuperpacks()
+11-07 21:52:48.033  1509  2239 I Delight5Decoder: Delight5DecoderWrapper.loadLanguageModel():649 loadLanguageModel() : 1, version [2022101700]
+11-07 21:52:48.033  1509  1509 E InputConnectionParser: InputConnectionParser.responseWithError():106 responseWithError(): parse_code: 2
+11-07 21:52:48.033  1509  1509 E InputContextProxyV4: InputContextProxyV4.reset():371 reset(): un-successful, parse_code: 2, input_state_id 0
+11-07 21:52:48.034  1509  1509 I KeyboardWrapper: KeyboardWrapper.consumeEvent():275 Skip consuming an event as current keyboard is deactivated (state=0, keyboard existence=false)
+11-07 21:52:48.035  1509  2002 I KeyboardGroupDefParser: KeyboardGroupDefParser.parseKeyboardGroupDef():88 parseKeyboardGroupDef() 2132214024 -> 0_resource_name_obfuscated : WaitTime = 56 ms : RunTime = 38 ms
+11-07 21:52:48.037  1509  1509 I KeyboardManager: KeyboardManager.requestKeyboard():146 Creating keyboard prime, imeId=ime_english_united_states, cacheKey=theme_border_bottom4dp_stylesheet_noshadow_gsans_pillkey_silkpopup_refinedkp_materiallight_phone
+11-07 21:52:48.041  1509  1509 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-07 21:52:48.042  1509  1509 I KeyboardViewUtil: KeyboardViewUtil.getKeyboardHeightRatio():189 systemKeyboardHeightRatio:1.000000; userKeyboardHeightRatio:1.000000.
+11-07 21:52:48.045  1509  2002 I SuperDelight: SuperDelightManager.initializeBundledDelightSuperpacks():376 initializeBundledDelightSuperpacks()
+11-07 21:52:48.052  1509  2002 I SuperDelight: SuperDelightManager.initializeBundledDelightSuperpacks():376 initializeBundledDelightSuperpacks()
+11-07 21:52:48.073  2959  3117 I Bugle   : BroadcastReceiverAsyncWorkTracker: Acknowledging broadcast of atsi@4ad15e6
+11-07 21:52:48.075   955   955 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-07 21:52:48.075   955   955 D MediaPlayerList: Name of package changed: com.google.android.gms
+11-07 21:52:48.075   955   955 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-07 21:52:48.075   955   955 D MediaPlayerList: Name of package changed: com.google.android.gms
+11-07 21:52:48.075  5034  5050 I PermissionControllerServiceImpl: Updating user sensitive for uid 10120
+11-07 21:52:48.098   982   982 D CarrierSvcBindHelper: onPackageModified: com.google.android.gms
+11-07 21:52:48.100  1509  2239 E native  : E0000 00:00:1794088368.051362    2239 scoped-file.cc:106] open() failed for /data/user/0/com.google.android.inputmethod.latin/files/personal/adapt_state.en.dat: No such file or directory [2]
+11-07 21:52:48.101  1509  5618 I SpeechFactory: SpeechRecognitionFactory.maybeScheduleAutoPackDownloadForFallback():205 maybeScheduleAutoPackDownloadForFallback()
+11-07 21:52:48.101  1509  5618 I FallbackOnDeviceRecognitionProvider: FallbackOnDeviceRecognitionProvider.maybeScheduleAutoPackDownload():195 maybeScheduleAutoPackDownload() for language tag en-US
+11-07 21:52:48.101  1509  2239 I Delight5Decoder: Delight5DecoderWrapper.loadLanguageModel():671 Loaded main LM 1.en
+11-07 21:52:48.101  1509  2003 I KeyboardGroupDefParser: KeyboardGroupDefParser.parseKeyboardGroupDef():88 parseKeyboardGroupDef() 2132214028 -> 0_resource_name_obfuscated : WaitTime = 9 ms : RunTime = 207 ms
+11-07 21:52:48.102   982   982 D CarrierSvcBindHelper: No carrier app for: 0
+11-07 21:52:48.102   482   594 I InputReader: Reconfiguring input devices, changes=KEYBOARD_LAYOUTS |
+11-07 21:52:48.108   982   982 D ImsResolver: maybeAddedImsService, packageName: com.google.android.gms
+11-07 21:52:48.113  1509  1509 I AbstractOpenableExtension: AbstractOpenableExtension$3.onSuccess():525 KeyboardGroupManager destroyed in een.
+11-07 21:52:48.114  1509  1509 I AbstractOpenableExtension: AbstractOpenableExtension$3.onSuccess():525 KeyboardGroupManager destroyed in csi.
+11-07 21:52:48.114  1509  1509 I AbstractOpenableExtension: AbstractOpenableExtension$3.onSuccess():525 KeyboardGroupManager destroyed in eco.
+11-07 21:52:48.115  1509  1509 I AbstractOpenableExtension: AbstractOpenableExtension$3.onSuccess():525 KeyboardGroupManager destroyed in ebn.
+11-07 21:52:48.115   762   762 D ControlsListingControllerImpl: ServiceConfig reloaded, count: 0
+11-07 21:52:48.175  3974  5758 I ProvidersCache: Provider returned no roots. Possibly naughty: com.google.android.apps.docs.storage
+11-07 21:52:48.177  1788  1788 I BgTaskExecutorImpl: Starting EXCLUSIVE background task UPLOAD_ASSISTANT_DEVICE_SETTINGS.
+11-07 21:52:48.181  1680  5752 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-07 21:52:48.186  1509  1944 I JobSchedulerImpl: JobSchedulerImpl.schedule():91 Schedule task: ExpressionDataPrunePeriodicTask (id=1111301416). Success.
+11-07 21:52:48.198  1509  2081 I MainLanguageModelLoader: MainLanguageModelLoader.updateLmAvailableState():392 updateLmAvailableState(): locale? en_US prevState? AVAILABLE
+11-07 21:52:48.198  1509  2081 I MainLanguageModelLoader: MainLanguageModelLoader.updateLmAvailableState():428 updateLmAvailableState(): locale? en_US newState? AVAILABLE
+11-07 21:52:48.203  1060  1373 I HeterodyneSyncScheduler: Scheduling Phenotype for a PhenotypeSyncImmediately(6, com.google.android.ims.library) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+11-07 21:52:48.204  3974  5760 W oid.documentsui: Long monitor contention with owner pool-82-thread-5 (5759) at void com.android.documentsui.roots.ProvidersCache$MultiProviderUpdateTask.handleDocumentsProvider(android.content.pm.ProviderInfo, com.android.documentsui.base.UserId)(ProvidersCache.java:646) waiters=4 in void com.android.documentsui.roots.ProvidersCache$MultiProviderUpdateTask.handleDocumentsProvider(android.content.pm.ProviderInfo, com.android.documentsui.base.UserId) for 120ms
+11-07 21:52:48.215  1564  1699 W UsageLimitServiceImpl: Migrating limits: delete 0 obsolete limits, add 0 new limits
+11-07 21:52:48.227  1788  2783 W LocationOracle: getBestLocation(): no location is available
+11-07 21:52:48.234  1788  2702 I NetworkRecognitionRnr: Using pair HTTP connection
+11-07 21:52:48.239  1509  1509 I KeyboardWrapper: KeyboardWrapper.consumeEvent():275 Skip consuming an event as current keyboard is deactivated (state=1, keyboard existence=false)
+11-07 21:52:48.245  1788  2308 W LocationOracle: No location returned by GMS core getLastLocation()
+11-07 21:52:48.251  1788  2759 I A       : [Upload] Connected
+11-07 21:52:48.285  1509  1509 W Delight5Decoder: Delight5DecoderWrapper.asyncFetchSuggestions():1876 asyncFetchSuggestions(): Decoder state is invalid
+11-07 21:52:48.285  1509  2081 I Delight5Facilitator: BlocklistLoader.call():37 Running blocklist loader
+11-07 21:52:48.307   482   584 I RoleService: Granting default roles...
+11-07 21:52:48.309  1321  1321 D BoundBrokerSvc: onBind: Intent { act=com.google.firebase.dynamiclinks.service.START pkg=com.google.android.gms }
+11-07 21:52:48.335  1509  2239 I Delight5Decoder: Delight5DecoderWrapper.loadLanguageModel():649 loadLanguageModel() : 7, version [n/a]
+11-07 21:52:48.336  1509  2239 I native  : I0000 00:00:1794088368.336813    2239 blocklist-assembly.cc:121] LoadBlocklist en
+11-07 21:52:48.340  1509  2239 I Delight5Decoder: Delight5DecoderWrapper.loadLanguageModel():690 Loaded dynamic LM 7.en
+11-07 21:52:48.361  1564  1564 I PhenotypeBackgroundRecv: Skipping com.google.android.apps.wellbeing.device#com.google.android.apps.wellbeing which doesn't use ProcessStable flags.
+11-07 21:52:48.372  1060  1366 W BpBinder: Large outgoing transaction of 330620 bytes, interface descriptor <uncached descriptor>, code 4
+11-07 21:52:48.388  1321  3968 W gle.android.gms: Long monitor contention with owner [com.google.android.gms.chimera.container.intentoperation.GmsIntentOperationChimeraService-Executor] processing com.google.android.gms.platformconfigurator.PackageUpdateIntentOperation for action android.intent.action.PACKAGE_CHANGED (2315) at void hjm.run()(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3) waiters=0 in void hjm.run() for 68.723s
+11-07 21:52:48.389  1321  1328 I gle.android.gms: Background young concurrent copying GC freed 72508(3475KB) AllocSpace objects, 57(2868KB) LOS objects, 24% free, 18MB/24MB, paused 15.769ms,59us total 546.507ms
+11-07 21:52:48.391  1321  1321 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.firebase.dynamiclinks.service.START pkg=com.google.android.gms }
+11-07 21:52:48.404  1509  2081 I Delight5Facilitator: ContactsLanguageModelLoader.call():35 Running contacts language model loader
+11-07 21:52:48.405  1509  2081 I Delight5Facilitator: ContactsLanguageModelLoader.call():47 Contacts language model is unloaded: preferences=false, deviceLocked=false
+11-07 21:52:48.405  1509  2081 I Delight5Facilitator: PersonalLanguageModelLoader.call():44 Running personal language model loader
+11-07 21:52:48.405  1509  2239 I Delight5Decoder: Delight5DecoderWrapper.loadLanguageModel():649 loadLanguageModel() : 4, version [n/a]
+11-07 21:52:48.405  1509  2239 I Delight5Decoder: Delight5DecoderWrapper.loadLanguageModel():690 Loaded dynamic LM 4.en
+11-07 21:52:48.426  1321  4558 I PeopleGalProvider: Gal directories started.
+11-07 21:52:48.426  1321  4518 I Auth    : [SupervisedAccountIntentOperation] onHandleIntent(): android.intent.action.PACKAGE_ADDED
+11-07 21:52:48.428  1321  4518 I Auth    : [SupervisedAccountIntentOperation] This operation is disabled
+11-07 21:52:48.435  1321  4558 I PeopleGalProvider: Method 1 completed.
+11-07 21:52:48.436  1509  2081 I Delight5Facilitator: UserHistoryLanguageModelLoader.call():82 Running user history language model loader
+11-07 21:52:48.452  1321  4558 I PeopleGalProvider: Method 1 finished successfully.
+11-07 21:52:48.459  1321  4518 I Dck     : doesDeviceHaveSupportedWirelessCapabilities: wccSysProp:0, wccMendel:1, deviceWccOverride:false [CONTEXT service_id=289 ]
+11-07 21:52:48.459  1321  4518 I Dck     : isDckModuleEligible: isAtLeastR:true, hasWccSupport:false, downloadAllowed:false [CONTEXT service_id=289 ]
+11-07 21:52:48.459  1321  4518 W Dck     : Dck module not eligible for asynchronous downloading [CONTEXT service_id=289 ]
+11-07 21:52:48.465  1321  5765 I BlockstoreStorage: Clearing Blockstore Data for package com.quartz.notes.test [CONTEXT service_id=258 ]
+11-07 21:52:48.466  1321  5765 I BlockstoreStorage: Keyless data not found or its IsLastInstallationData = false. [CONTEXT service_id=258 ]
+11-07 21:52:48.476  1060  1373 E bwfc    : Phenotype API error. Event # edax@e84711cf, EventCode: 5 [CONTEXT service_id=51 ]
+11-07 21:52:48.476  1060  1373 E bwfc    : bwdx: 29501: Stale snapshot for com.google.android.apps.messaging#com.google.android.apps.messaging(change count changed - expected 3  but was 1)
+11-07 21:52:48.476  1060  1373 E bwfc    : 	at bwfg.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):16)
+11-07 21:52:48.476  1060  1373 E bwfc    : 	at bwff.g(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 21:52:48.476  1060  1373 E bwfc    : 	at bwfc.e(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+11-07 21:52:48.476  1060  1373 E bwfc    : 	at bwfc.f(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-07 21:52:48.476  1060  1373 E bwfc    : 	at avsy.eo(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+11-07 21:52:48.476  1060  1373 E bwfc    : 	at avtf.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):14)
+11-07 21:52:48.476  1060  1373 E bwfc    : 	at dfhf.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-07 21:52:48.476  1060  1373 E bwfc    : 	at aced.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-07 21:52:48.476  1060  1373 E bwfc    : 	at aced.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):8)
+11-07 21:52:48.476  1060  1373 E bwfc    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-07 21:52:48.476  1060  1373 E bwfc    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-07 21:52:48.476  1060  1373 E bwfc    : 	at acjn.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 21:52:48.476  1060  1373 E bwfc    : 	at java.lang.Thread.run(Thread.java:1012)
+11-07 21:52:48.478  1060  1373 W AsyncOperation: operation=CommitToConfigurationOperationCall, opStatusCode=29501 [CONTEXT service_id=51 ]
+11-07 21:52:48.478  1060  1373 W AsyncOperation: OperationException[Status{statusCode=Stale snapshot for com.google.android.apps.messaging#com.google.android.apps.messaging(change count changed - expected 3  but was 1), resolution=null}]
+11-07 21:52:48.478  1060  1373 W AsyncOperation: 	at bwfc.e(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-07 21:52:48.478  1060  1373 W AsyncOperation: 	at bwfc.f(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-07 21:52:48.478  1060  1373 W AsyncOperation: 	at avsy.eo(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+11-07 21:52:48.478  1060  1373 W AsyncOperation: 	at avtf.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):14)
+11-07 21:52:48.478  1060  1373 W AsyncOperation: 	at dfhf.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-07 21:52:48.478  1060  1373 W AsyncOperation: 	at aced.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-07 21:52:48.478  1060  1373 W AsyncOperation: 	at aced.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):8)
+11-07 21:52:48.478  1060  1373 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-07 21:52:48.478  1060  1373 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-07 21:52:48.478  1060  1373 W AsyncOperation: 	at acjn.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 21:52:48.478  1060  1373 W AsyncOperation: 	at java.lang.Thread.run(Thread.java:1012)
+11-07 21:52:48.479  1509  2081 I EmojiShortcutsLoader: EmojiShortcutsLoader.getEmojiShortcuts():117 Reading en_US emoji shortcuts
+11-07 21:52:48.481  2959  3112 W PhenotypeFlagCommitter: Committing snapshot for com.google.android.apps.messaging#com.google.android.apps.messaging failed, retrying
+11-07 21:52:48.484  1509  2239 I Delight5Decoder: Delight5DecoderWrapper.loadLanguageModel():649 loadLanguageModel() : 3, version [n/a]
+11-07 21:52:48.486  1509  2239 I Delight5Decoder: Delight5DecoderWrapper.loadLanguageModel():690 Loaded dynamic LM 3.en
+11-07 21:52:48.497  1060  1373 I HeterodyneSyncScheduler: Scheduling Phenotype for a PhenotypeSyncImmediately(6, com.google.android.partnersetup) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+11-07 21:52:48.518  1509  2081 I EmojiShortcutsLoader: EmojiShortcutsLoader.getEmojiShortcuts():134 Read en_US emoji shortcuts successfully.
+11-07 21:52:48.537  1788  2708 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-07 21:52:48.551  1509  2081 I EmojiShortcutsLoader: EmojiShortcutsLoader.call():63 1 emoji shortcut maps loaded.
+11-07 21:52:48.566   482  1973 W system_server: Long monitor contention with owner binder:482_8 (927) at android.content.ComponentName com.android.server.am.ActivityManagerService.startService(android.app.IApplicationThread, android.content.Intent, java.lang.String, boolean, java.lang.String, java.lang.String, int)(ActivityManagerService.java:12593) waiters=2 in int com.android.server.am.ActivityManagerService.bindServiceInstance(android.app.IApplicationThread, android.os.IBinder, android.content.Intent, java.lang.String, android.app.IServiceConnection, int, java.lang.String, boolean, int, java.lang.String, java.lang.String, int) for 105ms
+11-07 21:52:48.588  1509  2081 I EmojiShortcutsLoader: EmojiShortcutsLoader.call():72 Finished loading emoji shortcuts
+11-07 21:52:48.589  1509  2081 I Delight5Facilitator: EmailLanguageModelLoader.call():30 Running email language model loader
+11-07 21:52:48.589  1509  2081 I Delight5Facilitator: KeyCorrectionTfliteModelLoader.call():29 Running Key Correction Tflite Model loader
+11-07 21:52:48.589  1509  2081 I Delight5Facilitator: RankingModelLoader.call():28 Running Ranking Model loader
+11-07 21:52:48.598  2607  2607 E GooglePartnerSetup: Phenotype client.register: true
+11-07 21:52:48.623  1509  1944 I PlayCore: UID: [10134]  PID: [1509] SplitInstallService : deferredInstall([tenoranimation_feature_split])
+11-07 21:52:48.677  1680  5749 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-07 21:52:48.727  1509  2076 W SP      : Manifest for delight is not available, version: 2023020919
+11-07 21:52:48.727  1509  2076 W SP      : Manifest for delight is not available, version: 2023020919
+11-07 21:52:48.728  1509  2076 I SP      : Registering emoji.2023020111, url: https://www.gstatic.com/android/keyboard/modelpack/emoji/20230201113008/superpacks_manifest.zip, constraints: m:*:*:*, flags: fg, requested: 2023020111, current: 20190807
+11-07 21:52:48.728  1509  2076 I SP      : Registering ranking_model.20211120, url: https://www.gstatic.com/android/keyboard/gesture_ranking_model/superpacks-manifest-20211120_163517.json, constraints: m:*:*:*, flags: fg, requested: 20211120, current: -1
+11-07 21:52:48.757  5034  5777 W Role    : Default holder doesn't have required signing certificate: com.google.android.apps.work.clouddpc:23962F4B43B9857638EA66F4D419518EAE282491ACDA4B94707BD59003C45E58
+11-07 21:52:48.759  1478  5784 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-07 21:52:48.761  1478  5784 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-07 21:52:48.764  1478  5784 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-07 21:52:48.779  1788  2702 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-07 21:52:48.791   762   806 D SplashScreenView: Build android.window.SplashScreenView{1c7430a V.E...... ......ID 0,0-0,0}
+11-07 21:52:48.791   762   806 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-07 21:52:48.791   762   806 D SplashScreenView: Branding: view: android.view.View{c00c77b G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-07 21:52:48.792  1509  2076 I SP      : Registering transformer_expression.2023012522, url: https://www.gstatic.com/android/keyboard/modelpack/transformer_expression/2023012522/superpacks_manifest.json, constraints: *:*:*:*, flags: *, requested: 2023012522, current: -1
+11-07 21:52:48.828  1509  2002 I SuperDelight: SuperDelightManager.lambda$registerAndUpgradeSuperpacks$5():476 SuperDelightManager#registerAndUpgradeSuperpacks(delight): current 2022101700, required 2023020919
+11-07 21:52:48.828  1509  2002 I SuperDelight: SuperDelightManager.lambda$registerAndUpgradeSuperpacks$5():476 SuperDelightManager#registerAndUpgradeSuperpacks(delight): current 2022101700, required 2023020919
+11-07 21:52:48.830   762   816 W Parcel  : Expecting binder but got null!
+11-07 21:52:48.831  1509  2002 I SuperDelight: SuperDelightManager.lambda$registerAndUpgradeSuperpacks$5():476 SuperDelightManager#registerAndUpgradeSuperpacks(delight): current 2022101700, required 2023020919
+11-07 21:52:48.831  1509  2002 I SuperDelight: SuperDelightManager.lambda$registerAndUpgradeSuperpacks$5():476 SuperDelightManager#registerAndUpgradeSuperpacks(delight): current 2022101700, required 2023020919
+11-07 21:52:48.831  1509  2002 I SuperDelight: SuperDelightManager.lambda$syncOverridesLanguageModels$14():689 SuperDelightManager#syncOverridesLanguageModels(): Superpack delight_overrides not found or negative version provided
+11-07 21:52:48.831  1509  2002 I SuperDelight: SuperDelightManager.lambda$syncOverridesLanguageModels$14():689 SuperDelightManager#syncOverridesLanguageModels(): Superpack delight_overrides not found or negative version provided
+11-07 21:52:48.831  1509  5785 I PlayCore: UID: [10134]  PID: [1509] SplitInstallService : Initiate binding to the service.
+11-07 21:52:48.831  1509  2116 I SpeechPackManager: SpeechPackManager.lambda$registerManifest$4():461 registerManifest() : Fetching hash 1327534105
+11-07 21:52:48.832  1509  2081 I CrankEngineLocales: CrankEngineLocales.getLocaleToUseForCrankEngine():66 Using locale en_US for emoji prediction
+11-07 21:52:48.832  1509  2081 I CrankEngineLocales: CrankEngineLocales.getLocaleToUseForCrankEngine():66 Using locale en_US for emoji prediction
+11-07 21:52:48.832  1509  2081 I CrankEngineLocales: CrankEngineLocales.getLocaleToUseForCrankEngine():66 Using locale en_US for emoji prediction
+11-07 21:52:48.837  1509  2076 I SP      : Registering expressive_concepts_triggering.2022062400, url: https://www.gstatic.com/android/keyboard/modelpack/expressive_concepts_triggering/2022062400/superpacks_manifest.json, constraints: *:*:*:*, flags: *, requested: 2022062400, current: -1
+11-07 21:52:48.838  1509  2076 I SP      : Registering dynamic_art.20220108, url: https://www.gstatic.com/android/keyboard/dynamic_art/20220108002302/manifest.json, constraints: *:*:*:*, flags: *, requested: 20220108, current: -1
+11-07 21:52:48.838  1509  2076 I SP      : Registering transformer_concept.2023011913, url: https://www.gstatic.com/android/keyboard/modelpack/transformer_concept/2023011913/superpacks_manifest.json, constraints: *:*:*:*, flags: *, requested: 2023011913, current: -1
+11-07 21:52:48.838  1509  2076 I SP      : Registering kc_tflite_model.20220919, url: https://www.gstatic.com/android/keyboard/kc_triggering_model/superpacks-manifest-20220805_235142.json, constraints: W:*:*:*, flags: bg, requested: 20220919, current: -1
+11-07 21:52:48.839  1509  2076 I SP      : Registering content_cache.2022112214, url: https://www.gstatic.com/android/keyboard/modelpack/contentcache/202211221443/superpacks_manifest.json, constraints: W:*:*:*, flags: bg, requested: 2022112214, current: 2020101916
+11-07 21:52:48.839  1509  2076 I SP      : Registering next-word-predictor.20230317, url: https://www.gstatic.com/android/keyboard/next_word_predictor/prod/superpacks-manifest-20230309_154225.json, constraints: *:*:*:*, flags: *, requested: 20230317, current: 20210507
+11-07 21:52:48.862  1509  1509 I BaseClearcutAdapter: BaseClearcutAdapter.lambda$queryAndUpdateUserCheckboxOptIn$1():266 Checkbox = false
+11-07 21:52:48.863  1509  5785 I PlayCore: UID: [10134]  PID: [1509] SplitInstallService : Failed to bind to the service.
+11-07 21:52:48.863  1509  1509 W hle     : FeatureSplitObservationModule$requestDeferredInstall$2.onFailure():98 Failed in installing tenoranimation_feature_split.
+11-07 21:52:48.863  1509  1509 W hle     : lja: Failed to bind to the service.
+11-07 21:52:48.863  1509  1509 W hle     : 	at lit.b(PG:9)
+11-07 21:52:48.863  1509  1509 W hle     : 	at liq.run(PG:1)
+11-07 21:52:48.863  1509  1509 W hle     : 	at android.os.Handler.handleCallback(Handler.java:942)
+11-07 21:52:48.863  1509  1509 W hle     : 	at android.os.Handler.dispatchMessage(Handler.java:99)
+11-07 21:52:48.863  1509  1509 W hle     : 	at android.os.Looper.loopOnce(Looper.java:201)
+11-07 21:52:48.863  1509  1509 W hle     : 	at android.os.Looper.loop(Looper.java:288)
+11-07 21:52:48.863  1509  1509 W hle     : 	at android.os.HandlerThread.run(HandlerThread.java:67)
+11-07 21:52:48.863  1788  2702 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-07 21:52:48.872  1788  2702 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-07 21:52:48.877  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@57dfc3b in: PAUSED
+11-07 21:52:48.877  4742  4742 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=androidx.activity.ComponentActivity@57dfc3b
+11-07 21:52:48.969  1788  2759 I NetworkRecognitionRnr: Using pair HTTP connection
+11-07 21:52:49.027  1478  5784 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-07 21:52:49.032  1788  2562 I A       : [Upload] Connected
+11-07 21:52:49.039  1321  1321 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-07 21:52:49.039  1321  1321 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-07 21:52:49.044  1509  2076 I SP      : Registering emoticon_content_description.2022081613, url: https://www.gstatic.com/android/keyboard/emoticon_content_desc/202208161305/superpacks_manifest.json, constraints: W:*:*:*, flags: bg, requested: 2022081613, current: 2022081613
+11-07 21:52:49.058  2959  5781 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-07 21:52:49.060  1509  2076 I SP      : Registering content_cache.2022112214, url: https://www.gstatic.com/android/keyboard/modelpack/contentcache/202211221443/superpacks_manifest.json, constraints: W:*:*:*, flags: bg, requested: 2022112214, current: 2020101916
+11-07 21:52:49.060  1509  2076 I SP      : Registering bundled_delight.2022101700, url: null, constraints: *:*:*:*, flags: *, requested: 2022101700, current: 2022101700
+11-07 21:52:49.060  1509  2076 I SP      : Registering bundled_delight.2022101700, url: null, constraints: *:*:*:*, flags: *, requested: 2022101700, current: 2022101700
+11-07 21:52:49.063  1564  5748 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-07 21:52:49.076  1509  2076 I SP      : Registering kc_tflite_model.20220919, url: https://www.gstatic.com/android/keyboard/kc_triggering_model/superpacks-manifest-20220805_235142.json, constraints: W:*:*:*, flags: bg, requested: 20220919, current: -1
+11-07 21:52:49.080  1788  1788 E A       : onError
+11-07 21:52:49.080  1788  1788 E A       : com.google.android.apps.gsa.shared.speech.a.m: errorCode: 65561, engine: 2
+11-07 21:52:49.080  1788  1788 E A       : 	at com.google.android.apps.gsa.staticplugins.dc.a.e.a(PG:3)
+11-07 21:52:49.080  1788  1788 E A       : 	at com.google.android.apps.gsa.s3.n.hh(PG:1)
+11-07 21:52:49.080  1788  1788 E A       : 	at com.google.cd.g.a.f.e(PG:2)
+11-07 21:52:49.080  1788  1788 E A       : 	at com.google.android.apps.gsa.speech.k.a.g.d(PG:22)
+11-07 21:52:49.080  1788  1788 E A       : 	at com.google.android.apps.gsa.speech.k.a.g.ks(PG:6)
+11-07 21:52:49.080  1788  1788 E A       : 	at com.google.android.apps.gsa.s3.o.e(PG:14)
+11-07 21:52:49.080  1788  1788 E A       : 	at com.google.android.apps.gsa.s3.p.run(PG:1)
+11-07 21:52:49.080  1788  1788 E A       : 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:463)
+11-07 21:52:49.080  1788  1788 E A       : 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+11-07 21:52:49.080  1788  1788 E A       : 	at com.google.android.apps.gsa.shared.util.c.a.e.run(PG:2)
+11-07 21:52:49.080  1788  1788 E A       : 	at com.google.android.apps.gsa.shared.util.c.a.bi.run(PG:1)
+11-07 21:52:49.080  1788  1788 E A       : 	at com.google.android.apps.gsa.shared.util.c.a.bi.run(PG:1)
+11-07 21:52:49.080  1788  1788 E A       : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-07 21:52:49.080  1788  1788 E A       : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-07 21:52:49.080  1788  1788 E A       : 	at java.lang.Thread.run(Thread.java:1012)
+11-07 21:52:49.080  1788  1788 E A       : 	at com.google.android.apps.gsa.shared.util.c.a.l.run(PG:5)
+11-07 21:52:49.080  1788  1788 E A       : Caused by: com.google.android.apps.gsa.shared.speech.a.o: errorCode: 65586, engine: 2
+11-07 21:52:49.080  1788  1788 E A       : 	... 15 more
+11-07 21:52:49.080  1788  1788 E A       : Caused by: com.google.android.apps.gsa.shared.speech.a.k: errorCode: 401, engine: 2
+11-07 21:52:49.080  1788  1788 E A       : 	at com.google.android.apps.gsa.assistant.shared.n.h.a(PG:5)
+11-07 21:52:49.080  1788  1788 E A       : 	at com.google.android.apps.gsa.s3.producers.j.hE(PG:2)
+11-07 21:52:49.080  1788  1788 E A       : 	at com.google.android.apps.gsa.speech.k.a.g.d(PG:16)
+11-07 21:52:49.080  1788  1788 E A       : 	... 12 more
+11-07 21:52:49.110  2959  3112 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-07 21:52:49.115  1680  5779 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-07 21:52:49.121  2959  5781 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-07 21:52:49.125  1509  1509 I KeyboardViewHelper: KeyboardViewHelper.getView():170 Get view with height ratio:1.000000
+11-07 21:52:49.155   482   508 W system_server: Long monitor contention with owner binder:482_10 (1601) at int com.android.server.wm.WindowManagerService.addWindow(com.android.server.wm.Session, android.view.IWindow, android.view.WindowManager$LayoutParams, int, int, int, android.view.InsetsVisibilities, android.view.InputChannel, android.view.InsetsState, android.view.InsetsSourceControl[], android.graphics.Rect, float[])(WindowManagerService.java:1912) waiters=1 in void com.android.server.wm.WindowAnimator.lambda$new$1(long) for 120ms
+11-07 21:52:49.174  1509  2076 I SP      : Registering kc_tflite_model.20220919, url: https://www.gstatic.com/android/keyboard/kc_triggering_model/superpacks-manifest-20220805_235142.json, constraints: W:*:*:*, flags: bg, requested: 20220919, current: -1
+11-07 21:52:49.174  1509  2076 I SP      : Registering kc_tflite_model.20220919, url: https://www.gstatic.com/android/keyboard/kc_triggering_model/superpacks-manifest-20220805_235142.json, constraints: W:*:*:*, flags: bg, requested: 20220919, current: -1
+11-07 21:52:49.176  1788  1788 W A       : Failed to sync device settings.
+11-07 21:52:49.176  1788  1788 I A       : Retrying to sync device settings.
+11-07 21:52:49.189   482   927 W system_server: Long monitor contention with owner binder:482_20 (2342) at android.content.ComponentName com.android.server.am.ActivityManagerService.startService(android.app.IApplicationThread, android.content.Intent, java.lang.String, boolean, java.lang.String, java.lang.String, int)(ActivityManagerService.java:12593) waiters=2 in void com.android.server.am.ActivityManagerService.publishService(android.os.IBinder, android.content.Intent, android.os.IBinder) for 128ms
+11-07 21:52:49.224   482  2049 W system_server: Long monitor contention with owner binder:482_20 (2342) at android.content.ComponentName com.android.server.am.ActivityManagerService.startService(android.app.IApplicationThread, android.content.Intent, java.lang.String, boolean, java.lang.String, java.lang.String, int)(ActivityManagerService.java:12593) waiters=4 in int com.android.server.am.ActivityManagerService.bindServiceInstance(android.app.IApplicationThread, android.os.IBinder, android.content.Intent, java.lang.String, android.app.IServiceConnection, int, java.lang.String, boolean, int, java.lang.String, java.lang.String, int) for 152ms
+11-07 21:52:49.225  1564  5778 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-07 21:52:49.243  2959  5781 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-07 21:52:49.249  1509  1509 I KeyboardViewUtil: KeyboardViewUtil.calculateMaxKeyboardBodyHeight():40 leave 354 height for app when screen height:2274, header height:116 and isFullscreenMode:false, so the max keyboard body height is:1804
+11-07 21:52:49.249  1509  1509 I SoftKeyboardView: SoftKeyboardView.setMaxHeight():731 Set max keyboard height:1804.
+11-07 21:52:49.265  1509  1509 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-07 21:52:49.265  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = HEADER, shownType = SHOW_OPTIONAL
+11-07 21:52:49.265  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-07 21:52:49.265  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = BODY, shownType = SHOW_MANDATORY
+11-07 21:52:49.266  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-07 21:52:49.266  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = FLOATING_CANDIDATES, shownType = HIDE
+11-07 21:52:49.266  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = false
+11-07 21:52:49.266  1509  1509 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-07 21:52:49.266  1509  1509 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-07 21:52:49.278  1509  1509 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-07 21:52:49.279  1509  1509 I KeyboardViewUtil: KeyboardViewUtil.calculateMaxKeyboardBodyHeight():40 leave 354 height for app when screen height:2274, header height:116 and isFullscreenMode:false, so the max keyboard body height is:1804
+11-07 21:52:49.285  1509  1509 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-07 21:52:49.437  1321  4125 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.gms componentName=AppsCorpus serviceId=36
+11-07 21:52:49.491  5498  5521 W Parcel  : Expecting binder but got null!
+11-07 21:52:49.517  1321  5298 D TrafficStats: tagSocket(89) with statsTag=0x30001803, statsUid=-1
+11-07 21:52:49.567  1060  1373 I HeterodyneSyncScheduler: Scheduling Phenotype for a PhenotypeSyncImmediately(16, com.google.android.platform.adservices) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+11-07 21:52:49.581  1060  2452 I FontLog : Received query Google Sans Text:500, URI content://com.google.android.gms.fonts [CONTEXT service_id=132 ]
+11-07 21:52:49.581  1060  2452 I FontLog : Query [Google Sans Text:500] resolved to {Google Sans Text, wdth 100.0, wght 500, ital 0.0, bestEffort false} [CONTEXT service_id=132 ]
+11-07 21:52:49.722   482   927 W system_server: Long monitor contention with owner android.anim (508) at android.content.res.Configuration com.android.server.wm.ActivityTaskManagerService.getGlobalConfigurationForPid(int)(ActivityTaskManagerService.java:1128) waiters=1 in int com.android.server.wm.WindowManagerService.addWindow(com.android.server.wm.Session, android.view.IWindow, android.view.WindowManager$LayoutParams, int, int, int, android.view.InsetsVisibilities, android.view.InputChannel, android.view.InsetsState, android.view.InsetsSourceControl[], android.graphics.Rect, float[]) for 230ms
+11-07 21:52:49.730  1509  1509 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-07 21:52:49.730   482  1727 W system_server: Long monitor contention with owner android.anim (508) at android.content.res.Configuration com.android.server.wm.ActivityTaskManagerService.getGlobalConfigurationForPid(int)(ActivityTaskManagerService.java:1128) waiters=2 in boolean com.android.server.wm.ActivityClientController.finishActivity(android.os.IBinder, int, android.content.Intent, int) for 230ms
+11-07 21:52:49.743   482   500 W system_server: Long monitor contention with owner android.anim (508) at android.content.res.Configuration com.android.server.wm.ActivityTaskManagerService.getGlobalConfigurationForPid(int)(ActivityTaskManagerService.java:1128) waiters=0 in void com.android.server.wm.ActivityClientController.reportSizeConfigurations(android.os.IBinder, android.window.SizeConfigurationBuckets) for 256ms
+11-07 21:52:49.789  1509  2239 I Delight5Decoder: Delight5DecoderWrapper.setKeyboardLayout():457 setKeyboardLayout()
+11-07 21:52:49.792   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537030
+11-07 21:52:49.792   339   370 W TransactionTracing: Could not find layer handle 0x77aa88536f70
+11-07 21:52:49.792   339   370 W TransactionTracing: Could not find layer handle 0x77aa88536070
+11-07 21:52:49.792   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537030
+11-07 21:52:49.792   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537030
+11-07 21:52:49.792   339   370 W TransactionTracing: Could not find layer handle 0x77aa88536f70
+11-07 21:52:49.792   339   370 W TransactionTracing: Could not find layer handle 0x77aa88536f70
+11-07 21:52:49.839  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@57dfc3b in: STOPPED
+11-07 21:52:49.840  4742  4742 V ActivityScenario: Update currentActivityStage to STOPPED, currentActivity=androidx.activity.ComponentActivity@57dfc3b
+11-07 21:52:49.844   339   370 W TransactionTracing: Could not find layer handle 0x77aa88531f90
+11-07 21:52:49.855  1509  2239 I Delight5Decoder: Delight5DecoderWrapper.setKeyboardLayout():457 setKeyboardLayout()
+11-07 21:52:49.921  1060  2452 I FontLog : Font PFD returned from cache for {Google Sans Text, wdth 100.0, wght 500, ital 0.0, bestEffort false} [CONTEXT service_id=132 ]
+11-07 21:52:49.977  1321  5774 I Icing   : updateResources: need to parse arkh{com.google.android.gms}
+11-07 21:52:49.979  1509  2142 D EGL_emulation: app_time_stats: avg=767.67ms min=221.18ms max=1840.03ms count=3
+11-07 21:52:50.011   762   816 D EGL_emulation: app_time_stats: avg=2482.96ms min=266.68ms max=4699.24ms count=2
+11-07 21:52:50.027  1060  2452 I FontLog : Fetch {Google Sans Text, wdth 100.0, wght 500, ital 0.0, bestEffort false} end status Status{statusCode=SUCCESS, resolution=null} [CONTEXT service_id=132 ]
+11-07 21:52:50.074   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 21:52:50.074   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 21:52:50.082  1509  5746 I OpenGLRenderer: Davey! duration=877ms; Flags=0, FrameTimelineVsyncId=13090, IntendedVsync=222549126800, Vsync=222882460120, InputEventId=0, HandleInputStart=222890333441, AnimationStart=222890334039, PerformTraversalsStart=222890334362, DrawStart=222954502976, FrameDeadline=222565793466, FrameInterval=222890329280, FrameStartTime=16666666, SyncQueued=223069764904, SyncStart=223093047463, IssueDrawCommandsStart=223093608863, SwapBuffers=223422344755, FrameCompleted=223449471500, DequeueBufferDuration=3909, QueueBufferDuration=247799, GpuCompleted=223449471500, SwapBuffersCompleted=223438946061, DisplayPresentTime=0, CommandSubmissionCompleted=223422344755,
+11-07 21:52:50.102   336   465 D AF::TrackHandle: OpPlayAudio: track:55 usage:13 not muted
+11-07 21:52:50.103   336   465 D AF::TrackHandle: OpPlayAudio: track:55 usage:13 not muted
+11-07 21:52:50.103   336   465 D AF::TrackHandle: OpPlayAudio: track:55 usage:13 not muted
+11-07 21:52:50.103   336   465 D AF::TrackHandle: OpPlayAudio: track:55 usage:13 not muted
+11-07 21:52:50.104   336   465 D AF::TrackHandle: OpPlayAudio: track:55 usage:13 not muted
+11-07 21:52:50.104   336   465 D AF::TrackHandle: OpPlayAudio: track:55 usage:13 not muted
+11-07 21:52:50.135   336   465 D AF::TrackHandle: OpPlayAudio: track:55 usage:13 not muted
+11-07 21:52:50.135   336   465 D AF::TrackHandle: OpPlayAudio: track:55 usage:13 not muted
+11-07 21:52:50.135   336   565 D AF::TrackHandle: OpPlayAudio: track:55 usage:13 not muted
+11-07 21:52:50.136   336   565 D AF::TrackHandle: OpPlayAudio: track:55 usage:13 not muted
+11-07 21:52:50.136   336   565 D AF::TrackHandle: OpPlayAudio: track:55 usage:13 not muted
+11-07 21:52:50.136   336   565 D AF::TrackHandle: OpPlayAudio: track:55 usage:13 not muted
+11-07 21:52:50.136   336   565 D AF::TrackHandle: OpPlayAudio: track:55 usage:13 not muted
+11-07 21:52:50.136   336   565 D AF::TrackHandle: OpPlayAudio: track:55 usage:13 not muted
+11-07 21:52:50.136   336   565 D AF::TrackHandle: OpPlayAudio: track:55 usage:13 not muted
+11-07 21:52:50.136   336   565 D AF::TrackHandle: OpPlayAudio: track:55 usage:13 not muted
+11-07 21:52:50.164   482   507 W system_server: Long monitor contention with owner binder:482_C (1058) at android.content.res.Configuration com.android.server.wm.ActivityTaskManagerService.getGlobalConfigurationForPid(int)(ActivityTaskManagerService.java:1128) waiters=0 in void com.android.server.wm.RootWindowContainer$RankTaskLayersRunnable.run() for 115ms
+11-07 21:52:50.167  5498  5512 I artz.notes.test: Background young concurrent copying GC freed 5849(293KB) AllocSpace objects, 0(0B) LOS objects, 41% free, 2336KB/3990KB, paused 44us,10us total 678.449ms
+11-07 21:52:50.222  1509  2122 I JobSchedulerImpl: JobSchedulerImpl.schedule():91 Schedule task: mdd_periodical_task_MDD.CHARGING.PERIODIC.TASK (id=-625184177). Success.
+11-07 21:52:50.248   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538b30
+11-07 21:52:50.282  1060  3133 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+11-07 21:52:50.357  1509  1521 W putmethod.latin: Suspending all threads took: 93.775ms
+11-07 21:52:50.368  1509  1944 W MetricsManager: MetricsManager.addProcessorImpl():614 Processor dzr@a546e94 already exists.
+11-07 21:52:50.369  1656  2067 I AiAiEcho: Predicting[0]:
+11-07 21:52:50.370  1656  2067 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:
+11-07 21:52:50.372  1656  2067 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0
+11-07 21:52:50.374  1656  2067 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0
+11-07 21:52:50.380   482  1684 W AppSearchIcing: icing-search-engine.cc:217: Error: 5, Message: Document (com.google.android.googlequicksearchbox$OneSearchZeroStateGoogleSuggestions/default, zp) not found.
+11-07 21:52:50.449  1564  5748 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-07 21:52:50.486  4742  4742 D AutofillManager: onActivityFinishing(): calling cancelLocked()
+11-07 21:52:50.487  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@57dfc3b in: DESTROYED
+11-07 21:52:50.487  4742  4742 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
+11-07 21:52:50.494  1015  2099 D OneSearchSuggestProvider: Created the binder channel successfully for end point service =com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService , mChannel=Q0{delegate=L0{logId=21, target=directaddress:///AndroidComponentAddress%5BIntent%20%7B%20act=grpc.io.action.BIND%20cmp=com.google.android.googlequicksearchbox/com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService%20%7D%5D}} , mOneSearchConnection=y1.J@2d2e535
+11-07 21:52:50.566  1060  1060 W ChimeraUtils: Module com.google.android.gms.location__nonwearable missing resource location_module_display_name(0)
+11-07 21:52:50.592   482  1064 W InputManager-JNI: Input channel object '262a2d2 Splash Screen com.quartz.notes.test (client)' was disposed without first being removed with the input manager!
+11-07 21:52:50.743  1771  2514 W YouTubeMusic: Could not register for notifications with InnerTube:
+11-07 21:52:50.743  1771  2514 W YouTubeMusic: xvd: wrv: Precondition check failed.
+11-07 21:52:50.743  1771  2514 W YouTubeMusic: 	at xut.apply(Unknown Source:4)
+11-07 21:52:50.743  1771  2514 W YouTubeMusic: 	at vws.p(PG:5)
+11-07 21:52:50.743  1771  2514 W YouTubeMusic: 	at vws.b(PG:2)
+11-07 21:52:50.743  1771  2514 W YouTubeMusic: 	at xuv.d(PG:4)
+11-07 21:52:50.743  1771  2514 W YouTubeMusic: 	at acvk.c(PG:51)
+11-07 21:52:50.743  1771  2514 W YouTubeMusic: 	at acvk.i(PG:4)
+11-07 21:52:50.743  1771  2514 W YouTubeMusic: 	at acvk.c(PG:80)
+11-07 21:52:50.743  1771  2514 W YouTubeMusic: 	at acvk.j(PG:38)
+11-07 21:52:50.743  1771  2514 W YouTubeMusic: 	at acvk.d(PG:3)
+11-07 21:52:50.743  1771  2514 W YouTubeMusic: 	at acvi.run(Unknown Source:2)
+11-07 21:52:50.743  1771  2514 W YouTubeMusic: 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:463)
+11-07 21:52:50.743  1771  2514 W YouTubeMusic: 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+11-07 21:52:50.743  1771  2514 W YouTubeMusic: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-07 21:52:50.743  1771  2514 W YouTubeMusic: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-07 21:52:50.743  1771  2514 W YouTubeMusic: 	at qhq.run(PG:2)
+11-07 21:52:50.743  1771  2514 W YouTubeMusic: 	at qic.run(PG:4)
+11-07 21:52:50.743  1771  2514 W YouTubeMusic: 	at java.lang.Thread.run(Thread.java:1012)
+11-07 21:52:50.743  1771  2514 W YouTubeMusic: Caused by: wrv: Precondition check failed.
+11-07 21:52:50.743  1771  2514 W YouTubeMusic: 	at xtk.k(PG:5)
+11-07 21:52:50.743  1771  2514 W YouTubeMusic: 	at wfa.f(PG:17)
+11-07 21:52:50.743  1771  2514 W YouTubeMusic: 	at wfa.c(PG:1)
+11-07 21:52:50.743  1771  2514 W YouTubeMusic: 	at wdz.run(PG:21)
+11-07 21:52:50.743  1771  2514 W YouTubeMusic: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-07 21:52:50.743  1771  2514 W YouTubeMusic: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-07 21:52:50.743  1771  2514 W YouTubeMusic: 	at vvz.run(PG:11)
+11-07 21:52:50.743  1771  2514 W YouTubeMusic: 	... 1 more
+11-07 21:52:50.743  1771  2514 W YouTubeMusic: Caused by: dlh
+11-07 21:52:50.743  1771  2514 W YouTubeMusic: 	at wdz.run(PG:14)
+11-07 21:52:50.743  1771  2514 W YouTubeMusic: 	... 4 more
+11-07 21:52:50.752  1788  1788 I A       : Created gRPC endpoint to "search" for service class com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService
+11-07 21:52:50.754  1060  5741 I Fitness : OnPackageChangedOperation got intent: Intent { act=android.intent.action.PACKAGE_CHANGED dat=package: flg=0x45000010 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.PersistentIntentOperationService (has extras) } [CONTEXT service_id=17 ]
+11-07 21:52:50.758   320  1241 I RanchuHwc: validateDisplay: layer 67 CompositionType 1, fallback to client
+11-07 21:52:50.758   320  1241 I RanchuHwc: validateDisplay: layer 65 CompositionType 1, fallback to client
+11-07 21:52:50.862  1060  5742 I Fitness : FitCleanupIntentOperation received Intent android.intent.action.PACKAGE_CHANGED [CONTEXT service_id=17 ]
+11-07 21:52:50.864   320  1241 I RanchuHwc: validateDisplay: layer 67 CompositionType 1, fallback to client
+11-07 21:52:50.864   320  1241 I RanchuHwc: validateDisplay: layer 65 CompositionType 1, fallback to client
+11-07 21:52:50.878   320  1241 I RanchuHwc: validateDisplay: layer 67 CompositionType 1, fallback to client
+11-07 21:52:50.928  1060  2772 I FontLog : Pulling font file for id = 9, cache size = 7 [CONTEXT service_id=132 ]
+11-07 21:52:50.972   482   500 W InputManager-JNI: Input channel object '5392e83 com.quartz.notes/androidx.activity.ComponentActivity (client)' was disposed without first being removed with the input manager!
+11-07 21:52:50.986  1509  2122 I JobSchedulerImpl: JobSchedulerImpl.schedule():91 Schedule task: mdd_periodical_task_MDD.MAINTENANCE.PERIODIC.GCM.TASK (id=-1115903610). Success.
+11-07 21:52:50.989  4742  4742 I Choreographer: Skipped 48 frames!  The application may be doing too much work on its main thread.
+11-07 21:52:51.084   339   370 W TransactionTracing: Could not find layer handle 0x77aa88533430
+11-07 21:52:51.084   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537750
+11-07 21:52:51.084   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537b70
+11-07 21:52:51.085  2959  5780 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-07 21:52:51.088   482  1064 W system_server: Long monitor contention with owner android.display (507) at android.content.res.Configuration com.android.server.wm.ActivityTaskManagerService.getGlobalConfigurationForPid(int)(ActivityTaskManagerService.java:1128) waiters=2 in android.content.res.CompatibilityInfo com.android.server.wm.ActivityTaskManagerService$LocalService.compatibilityInfoForPackage(android.content.pm.ApplicationInfo) for 301ms
+11-07 21:52:51.101   482   508 W system_server: Long monitor contention with owner android.display (507) at android.content.res.Configuration com.android.server.wm.ActivityTaskManagerService.getGlobalConfigurationForPid(int)(ActivityTaskManagerService.java:1128) waiters=5 in void com.android.server.wm.WindowAnimator.lambda$new$1(long) for 182ms
+11-07 21:52:51.104   482  1460 W system_server: Long monitor contention with owner binder:482_D (1064) at android.content.ComponentName com.android.server.am.ActivityManagerService.startService(android.app.IApplicationThread, android.content.Intent, java.lang.String, boolean, java.lang.String, java.lang.String, int)(ActivityManagerService.java:12593) waiters=1 in void com.android.server.am.ActivityManagerService.serviceDoneExecuting(android.os.IBinder, int, int, int) for 269ms
+11-07 21:52:51.127   482  2056 W system_server: Long monitor contention with owner android.display (507) at android.content.res.Configuration com.android.server.wm.ActivityTaskManagerService.getGlobalConfigurationForPid(int)(ActivityTaskManagerService.java:1128) waiters=1 in void com.android.server.wm.ActivityClientController.activityIdle(android.os.IBinder, android.content.res.Configuration, boolean) for 459ms
+11-07 21:52:51.128   482  1727 W system_server: Long monitor contention with owner android.display (507) at android.content.res.Configuration com.android.server.wm.ActivityTaskManagerService.getGlobalConfigurationForPid(int)(ActivityTaskManagerService.java:1128) waiters=0 in void com.android.server.wm.WindowManagerService.reportKeepClearAreasChanged(com.android.server.wm.Session, android.view.IWindow, java.util.List, java.util.List) for 460ms
+11-07 21:52:51.210  1060  3133 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+11-07 21:52:51.210  1060  3133 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+11-07 21:52:51.250  1321  1321 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-07 21:52:51.256  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onFinishInputView():2241
+11-07 21:52:51.259  1509  1509 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-07 21:52:51.260  1509  1509 I InputBundle: InputBundle.consumeEvent():923 Skip consuming an event as keyboard status is 0
+11-07 21:52:51.265  1509  1509 I KeyboardWrapper: KeyboardWrapper.consumeEvent():275 Skip consuming an event as current keyboard is deactivated (state=0, keyboard existence=true)
+11-07 21:52:51.266  1509  1509 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.shutdown():77 shutdown()
+11-07 21:52:51.271  1509  1509 E native  : E0000 00:00:1794088371.266352    1509 key-correction-manager.cc:322] User feature cache is not ready for key correction!
+11-07 21:52:51.286  1788  2586 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-07 21:52:51.287  1788  2586 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-07 21:52:51.293  4742  4836 D IdlingRegistry: Unregistering idling resources: [androidx.compose.ui.test.EspressoLink@2fae027]
+11-07 21:52:51.295  4742  4836 I TestRunner: finished: picturesInLine(com.quartz.notes.ui.editor.EditorScreenshotTest)

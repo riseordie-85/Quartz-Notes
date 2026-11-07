@@ -1,0 +1,82 @@
+11-07 21:51:59.314  4742  4836 I TestRunner: started: aPageSavedAsATemplateMakesNewPagesWithEverythingOnIt(com.quartz.notes.data.TemplatesTest)
+11-07 21:51:59.316   482   514 E system_server: No package ID 7f found for ID 0x7f140b31.
+11-07 21:51:59.317  5113  5144 W RemoteCallableBase: Null cursor. Cannot add index data for Uri: content://com.google.android.marvin.talkback.preference.search.TalkBackSearchIndexablesProvider/settings/indexables_xml_res
+11-07 21:51:59.318  5113  5144 W MetricsFeatureProvider: Disabled westworld logs writing!!!
+11-07 21:51:59.322  5204  5236 E IndexablesProvider: Provider querying exception:
+11-07 21:51:59.322  5204  5236 E IndexablesProvider: java.lang.IllegalStateException: We should initialize FormFactorUtils before getting instance.
+11-07 21:51:59.322  5204  5236 E IndexablesProvider: 	at com.google.android.accessibility.utils.FormFactorUtils.getInstance(PG:1)
+11-07 21:51:59.322  5204  5236 E IndexablesProvider: 	at com.google.android.accessibility.talkback.preference.search.TalkBackSearchIndexablesProvider.queryRawData(PG:3)
+11-07 21:51:59.322  5204  5236 E IndexablesProvider: 	at com.google.android.settings.search.SearchIndexablesProvider.query(PG:6)
+11-07 21:51:59.322  5204  5236 E IndexablesProvider: 	at android.content.ContentProvider.query(ContentProvider.java:1455)
+11-07 21:51:59.322  5204  5236 E IndexablesProvider: 	at android.content.ContentProvider.query(ContentProvider.java:1551)
+11-07 21:51:59.322  5204  5236 E IndexablesProvider: 	at android.content.ContentProvider$Transport.query(ContentProvider.java:285)
+11-07 21:51:59.322  5204  5236 E IndexablesProvider: 	at android.content.ContentProviderNative.onTransact(ContentProviderNative.java:107)
+11-07 21:51:59.322  5204  5236 E IndexablesProvider: 	at android.os.Binder.execTransactInternal(Binder.java:1280)
+11-07 21:51:59.322  5204  5236 E IndexablesProvider: 	at android.os.Binder.execTransact(Binder.java:1244)
+11-07 21:51:59.322  5113  5144 W RemoteCallableBase: Null cursor. Cannot add index data for Uri: content://com.google.android.marvin.talkback.preference.search.TalkBackSearchIndexablesProvider/settings/indexables_raw
+11-07 21:51:59.322  5113  5144 W MetricsFeatureProvider: Disabled westworld logs writing!!!
+11-07 21:51:59.322  5113  5144 W RemoteCallableBase: Null cursor. Cannot add index data for Uri: content://com.google.android.marvin.talkback.preference.search.TalkBackSearchIndexablesProvider/settings/non_indexables_key
+11-07 21:51:59.322  5113  5144 W MetricsFeatureProvider: Disabled westworld logs writing!!!
+11-07 21:51:59.323  5113  5144 W MetricsFeatureProvider: Disabled westworld logs writing!!!
+11-07 21:51:59.334  3974  5238 W oid.documentsui: Long monitor contention with owner pool-52-thread-4 (5240) at void com.android.documentsui.roots.ProvidersCache$MultiProviderUpdateTask.handleDocumentsProvider(android.content.pm.ProviderInfo, com.android.documentsui.base.UserId)(ProvidersCache.java:646) waiters=1 in void com.android.documentsui.roots.ProvidersCache$MultiProviderUpdateTask.handleDocumentsProvider(android.content.pm.ProviderInfo, com.android.documentsui.base.UserId) for 151ms
+11-07 21:51:59.349   482   514 E system_server: No package ID 7f found for ID 0x7f0806cc.
+11-07 21:51:59.349   482   514 E system_server: No package ID 7f found for ID 0x7f140af3.
+11-07 21:51:59.349   482   514 E system_server: No package ID 7f found for ID 0x7f0806d0.
+11-07 21:51:59.349   482   514 E system_server: No package ID 7f found for ID 0x7f140c3f.
+11-07 21:51:59.349   482   514 E system_server: No package ID 7f found for ID 0x7f0806ca.
+11-07 21:51:59.349   482   514 E system_server: No package ID 7f found for ID 0x7f140422.
+11-07 21:51:59.450   482   514 E system_server: No package ID 7f found for ID 0x7f08069b.
+11-07 21:51:59.450   482   514 E system_server: No package ID 7f found for ID 0x7f140c6e.
+11-07 21:51:59.450   482   514 E system_server: No package ID 7f found for ID 0x7f080729.
+11-07 21:51:59.450   482   514 E system_server: No package ID 7f found for ID 0x7f142028.
+11-07 21:51:59.460  5195  5195 D CompatibilityChangeReporter: Compat change id reported: 160794467; UID 10120; state: ENABLED
+11-07 21:51:59.508  5195  5195 W ProviderHelper: Unknown dynamite feature providerinstaller.dynamite
+11-07 21:51:59.509  5195  5195 I DynamiteModule: Considering local module com.google.android.gms.providerinstaller.dynamite:1 and remote module com.google.android.gms.providerinstaller.dynamite:0
+11-07 21:51:59.509  5195  5195 I DynamiteModule: Selected local version of com.google.android.gms.providerinstaller.dynamite
+11-07 21:51:59.521  1015  1883 D EGL_emulation: app_time_stats: avg=359.85ms min=201.66ms max=589.73ms count=3
+11-07 21:51:59.533  5195  5195 V NativeCrypto: Registering com/google/android/gms/org/conscrypt/NativeCrypto's 295 native methods...
+11-07 21:51:59.536  5195  5226 I DynamiteModule: Considering local module com.google.android.gms.googlecertificates:7 and remote module com.google.android.gms.googlecertificates:7
+11-07 21:51:59.536  5195  5226 I DynamiteModule: Selected local version of com.google.android.gms.googlecertificates
+11-07 21:51:59.615  5195  5195 I ProviderInstaller: Installed default security provider GmsCore_OpenSSL
+11-07 21:51:59.686  5113  5190 W RemoteCallableBase: Null cursor. Cannot add index data for Uri: content://com.google.android.gms.accountsettings.content/settings/indexables_xml_res
+11-07 21:51:59.687  5113  5190 W MetricsFeatureProvider: Disabled westworld logs writing!!!
+11-07 21:51:59.688  5113  5192 W MetricsFeatureProvider: Disabled westworld logs writing!!!
+11-07 21:51:59.698  5195  5195 D CompatibilityChangeReporter: Compat change id reported: 183155436; UID 10120; state: ENABLED
+11-07 21:51:59.698  5195  5195 I GmsApplication: [gms_startup_benchmark] Static start time (ms): 172470, Startup latency (ms): 688, Is system user: true
+11-07 21:51:59.701  5195  5195 I cuir    : Primes not initialized, returning default (no-op) Primes instance which will ignore all calls. Please call Primes.initialize(...) before using any Primes API.
+11-07 21:51:59.705  5195  5256 I GMS_MM_Logger: Start time: 96003
+11-07 21:51:59.705  5195  5256 I GMS_MM_Logger: Started.
+11-07 21:51:59.706  5113  5190 W MetricsFeatureProvider: Disabled westworld logs writing!!!
+11-07 21:51:59.717  5113  5190 W MetricsFeatureProvider: Disabled westworld logs writing!!!
+11-07 21:51:59.718  5113  5190 W MetricsFeatureProvider: Disabled westworld logs writing!!!
+11-07 21:51:59.749  1771  2514 W YouTubeMusic: Could not register for notifications with InnerTube:
+11-07 21:51:59.749  1771  2514 W YouTubeMusic: xvd: wrv: Precondition check failed.
+11-07 21:51:59.749  1771  2514 W YouTubeMusic: 	at xut.apply(Unknown Source:4)
+11-07 21:51:59.749  1771  2514 W YouTubeMusic: 	at vws.p(PG:5)
+11-07 21:51:59.749  1771  2514 W YouTubeMusic: 	at vws.b(PG:2)
+11-07 21:51:59.749  1771  2514 W YouTubeMusic: 	at xuv.d(PG:4)
+11-07 21:51:59.749  1771  2514 W YouTubeMusic: 	at acvk.c(PG:51)
+11-07 21:51:59.749  1771  2514 W YouTubeMusic: 	at acvk.j(PG:38)
+11-07 21:51:59.749  1771  2514 W YouTubeMusic: 	at acvk.d(PG:3)
+11-07 21:51:59.749  1771  2514 W YouTubeMusic: 	at acvi.run(Unknown Source:2)
+11-07 21:51:59.749  1771  2514 W YouTubeMusic: 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:463)
+11-07 21:51:59.749  1771  2514 W YouTubeMusic: 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+11-07 21:51:59.749  1771  2514 W YouTubeMusic: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-07 21:51:59.749  1771  2514 W YouTubeMusic: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-07 21:51:59.749  1771  2514 W YouTubeMusic: 	at qhq.run(PG:2)
+11-07 21:51:59.749  1771  2514 W YouTubeMusic: 	at qic.run(PG:4)
+11-07 21:51:59.749  1771  2514 W YouTubeMusic: 	at java.lang.Thread.run(Thread.java:1012)
+11-07 21:51:59.749  1771  2514 W YouTubeMusic: Caused by: wrv: Precondition check failed.
+11-07 21:51:59.749  1771  2514 W YouTubeMusic: 	at xtk.k(PG:5)
+11-07 21:51:59.749  1771  2514 W YouTubeMusic: 	at wfa.f(PG:17)
+11-07 21:51:59.749  1771  2514 W YouTubeMusic: 	at wfa.c(PG:1)
+11-07 21:51:59.749  1771  2514 W YouTubeMusic: 	at wdz.run(PG:21)
+11-07 21:51:59.749  1771  2514 W YouTubeMusic: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-07 21:51:59.749  1771  2514 W YouTubeMusic: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-07 21:51:59.749  1771  2514 W YouTubeMusic: 	at vvz.run(PG:11)
+11-07 21:51:59.749  1771  2514 W YouTubeMusic: 	... 1 more
+11-07 21:51:59.749  1771  2514 W YouTubeMusic: Caused by: dlh
+11-07 21:51:59.749  1771  2514 W YouTubeMusic: 	at wdz.run(PG:14)
+11-07 21:51:59.749  1771  2514 W YouTubeMusic: 	... 4 more
+11-07 21:51:59.827  1060  1071 I .gms.persistent: Background young concurrent copying GC freed 306677(17MB) AllocSpace objects, 6(408KB) LOS objects, 47% free, 18MB/34MB, paused 3.443ms,20us total 585.122ms
+11-07 21:51:59.848  4742  4836 I TestRunner: finished: aPageSavedAsATemplateMakesNewPagesWithEverythingOnIt(com.quartz.notes.data.TemplatesTest)

@@ -1,0 +1,246 @@
+11-07 21:56:29.356  4742  4836 I TestRunner: started: mouseWheelInTimeline(com.quartz.notes.ui.notebook.PageInputTest)
+11-07 21:56:29.436  1788  2516 I A       : Using proto config with mendel
+11-07 21:56:29.467  4742  4836 D IdlingRegistry: Registering idling resources: [androidx.compose.ui.test.EspressoLink@aae2291]
+11-07 21:56:29.481   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:29.482   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:29.482   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:29.482   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:29.483   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:29.485   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:29.596  4742  4836 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+11-07 21:56:29.638  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onFinishInputView():2241
+11-07 21:56:29.639  1509  1509 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-07 21:56:29.639  1509  1509 I InputBundle: InputBundle.consumeEvent():923 Skip consuming an event as keyboard status is 0
+11-07 21:56:29.640  1509  1509 I KeyboardWrapper: KeyboardWrapper.consumeEvent():275 Skip consuming an event as current keyboard is deactivated (state=0, keyboard existence=true)
+11-07 21:56:29.640  1509  1509 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.shutdown():77 shutdown()
+11-07 21:56:29.641  1509  1509 I AndroidIME: AbstractIme.onDeactivate():207 LatinIme.onDeactivate()
+11-07 21:56:29.642  1509  1944 W ModuleManager: ModuleManager.loadModule():450 Module jjj is not available
+11-07 21:56:29.643  1509  1944 I NebulaeTrainingCacheMetricsProcessor: NebulaeTrainingCacheMetricsProcessor.processEndSession():447 No input action collection in this session, skip logging.
+11-07 21:56:29.739  1788  1854 I earchbox:search: JIT allocated 79KB for compiled code of java.lang.Object com.google.android.apps.gsa.binaries.velvet.app.akj.a()
+11-07 21:56:29.739  1788  1854 I earchbox:search: Compiler allocated 4258KB to compile java.lang.Object com.google.android.apps.gsa.binaries.velvet.app.akj.a()
+11-07 21:56:29.846   482  1978 W system_server: Long monitor contention with owner binder:482_1E (2054) at int com.android.server.wm.ActivityStarter.execute()(ActivityStarter.java:740) waiters=4 in boolean com.android.server.wm.WindowManagerService$LocalService.isHardKeyboardAvailable() for 188ms
+11-07 21:56:29.854  1015  1015 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_ROOT
+11-07 21:56:29.856   762   806 D SplashScreenView: Build android.window.SplashScreenView{d5d9c82 V.E...... ......ID 0,0-0,0}
+11-07 21:56:29.856   762   806 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-07 21:56:29.856   762   806 D SplashScreenView: Branding: view: android.view.View{5176f93 G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-07 21:56:29.861   482  2342 W system_server: Long monitor contention with owner binder:482_1E (2054) at int com.android.server.wm.ActivityStarter.execute()(ActivityStarter.java:740) waiters=1 in int com.android.server.wm.WindowManagerService$LocalService.getTopFocusedDisplayId() for 206ms
+11-07 21:56:29.878  1788  2516 I MicroDetectionState: Should stop hotword detection immediately - true
+11-07 21:56:29.879  1788  2516 I A       : Using proto config with mendel
+11-07 21:56:29.879  1788  2516 I A       : Using proto config with mendel
+11-07 21:56:29.891  1788  2378 I A       : group apa_head_suggest not present without account in *
+11-07 21:56:29.892  1788  2378 I A       : incrementApaDataDownloadStoreStatus(latency = PT0.003S, appVersion = 13.17.16.23, status = NOT_FOUND, locale = *, fileGroupnames = apa_head_suggest, accountScoped = false, localGroupsAvailable = false, timeSinceSearchBoot = Optional[PT6M22.238S] (FIVE_TO_TEN_MINUTES), timeSinceDataDownloadInit = PT3M31.356S (ONE_TO_FIVE_MINUTES))
+11-07 21:56:29.896  1015  1015 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+11-07 21:56:29.897  1788  2353 I A       : incrementApaDataDownloadStoreStatusNotFound(appVersion = 13.17.16.23, locale = *, groupName = apa_head_suggest, accountScoped = false, foundGroups = 0, status = 0, localGroupsAvailable = false)
+11-07 21:56:29.901   482  2054 W InputManager-JNI: Input channel object '8ed7957 com.quartz.notes.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity (client)' was disposed without first being removed with the input manager!
+11-07 21:56:29.902   482  1683 W system_server: Long monitor contention with owner binder:482_1E (2054) at void com.android.server.wm.WindowManagerService.removeWindow(com.android.server.wm.Session, android.view.IWindow)(WindowManagerService.java:2079) waiters=6 in int com.android.server.wm.WindowManagerService.relayoutWindow(com.android.server.wm.Session, android.view.IWindow, android.view.WindowManager$LayoutParams, int, int, int, int, int, int, android.window.ClientWindowFrames, android.util.MergedConfiguration, android.view.SurfaceControl, android.view.InsetsState, android.view.InsetsSourceControl[], android.os.Bundle) for 187ms
+11-07 21:56:30.019  1509  2142 D EGL_emulation: app_time_stats: avg=1411.22ms min=145.55ms max=2676.88ms count=2
+11-07 21:56:30.022   762   816 D EGL_emulation: app_time_stats: avg=32876.19ms min=32876.19ms max=32876.19ms count=1
+11-07 21:56:30.023   762   816 W Parcel  : Expecting binder but got null!
+11-07 21:56:30.026   339   370 W TransactionTracing: Could not find layer handle 0x77aa88539df0
+11-07 21:56:30.026   339   370 W TransactionTracing: Could not find layer handle 0x77aa88535650
+11-07 21:56:30.032  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@65f9285 in: PRE_ON_CREATE
+11-07 21:56:30.032  4742  4742 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+11-07 21:56:30.045  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@65f9285 in: CREATED
+11-07 21:56:30.045  4742  4742 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=androidx.activity.ComponentActivity@65f9285
+11-07 21:56:30.046  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@65f9285 in: STARTED
+11-07 21:56:30.046  4742  4742 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=androidx.activity.ComponentActivity@65f9285
+11-07 21:56:30.095  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-07 21:56:30.096  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-07 21:56:30.097  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.google.android.apps.nexuslauncher fieldId=-1 fieldName=null extras=null}, false)
+11-07 21:56:30.097  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-07 21:56:30.099  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-07 21:56:30.104   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537a50
+11-07 21:56:30.104   339   370 W TransactionTracing: Could not find layer handle 0x77aa885366d0
+11-07 21:56:30.266  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@65f9285 in: RESUMED
+11-07 21:56:30.267  4742  4742 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=androidx.activity.ComponentActivity@65f9285
+11-07 21:56:30.297  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:56:30.299   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:30.300   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:30.300   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:30.300   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:30.396   339   370 W TransactionTracing: Could not find layer handle 0x77aa885383b0
+11-07 21:56:30.396   339   370 W TransactionTracing: Could not find layer handle 0x77aa88539970
+11-07 21:56:30.396   339   370 W TransactionTracing: Could not find layer handle 0x77aa88539970
+11-07 21:56:30.396   339   370 W TransactionTracing: Could not find layer handle 0x77aa885383b0
+11-07 21:56:30.396   339   370 W TransactionTracing: Could not find layer handle 0x77aa885383b0
+11-07 21:56:30.396   339   370 W TransactionTracing: Could not find layer handle 0x77aa885383b0
+11-07 21:56:30.396   339   370 W TransactionTracing: Could not find layer handle 0x77aa88539970
+11-07 21:56:30.396   339   370 W TransactionTracing: Could not find layer handle 0x77aa88539970
+11-07 21:56:30.420  1015  1883 D EGL_emulation: app_time_stats: avg=175.21ms min=80.20ms max=236.62ms count=7
+11-07 21:56:30.471  1788  1855 I earchbox:search: Background young concurrent copying GC freed 65764(3554KB) AllocSpace objects, 75(1732KB) LOS objects, 46% free, 18MB/34MB, paused 39us,36us total 255.570ms
+11-07 21:56:30.584   762   816 D EGL_emulation: app_time_stats: avg=912.20ms min=836.17ms max=988.23ms count=2
+11-07 21:56:30.669   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538b30
+11-07 21:56:30.716   482   504 W ziparchive: Unable to open '/data/app/~~ewbzk_m16xDkclmAVpjUzA==/com.quartz.notes-XqM5_4k8BE5yt-arn9ES4A==/base.dm': No such file or directory
+11-07 21:56:30.719   482   504 I ActivityTaskManager: Displayed com.quartz.notes/androidx.activity.ComponentActivity: +1s76ms
+11-07 21:56:30.721   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 21:56:30.726   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 1
+11-07 21:56:30.734   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 21:56:30.769   482  1978 W InputManager-JNI: Input channel object '5955aff Splash Screen com.quartz.notes (client)' was disposed without first being removed with the input manager!
+11-07 21:56:30.796  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-07 21:56:30.797  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-07 21:56:30.797  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=null}, false)
+11-07 21:56:30.797  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-07 21:56:30.798  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-07 21:56:30.807   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538770
+11-07 21:56:30.808   339   370 W TransactionTracing: Could not find layer handle 0x77aa88536070
+11-07 21:56:30.809   339   370 W TransactionTracing: Could not find layer handle 0x77aa88539b50
+11-07 21:56:30.809   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538770
+11-07 21:56:30.809   339   370 W TransactionTracing: Could not find layer handle 0x77aa88536070
+11-07 21:56:30.809  1788  2759 I PBSessionCacheImpl: Deleted sessionId[7865501250074985] from persistence.
+11-07 21:56:30.810   339   370 W TransactionTracing: Could not find layer handle 0x77aa88536070
+11-07 21:56:30.810   339   370 W TransactionTracing: Could not find layer handle 0x77aa88539b50
+11-07 21:56:30.810   339   370 W TransactionTracing: Could not find layer handle 0x77aa88539b50
+11-07 21:56:30.822  1015  1015 D MainContentCaptureSession: Flushing 2 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARING
+11-07 21:56:30.826  1015  1015 D MainContentCaptureSession: Flushing 2 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARED
+11-07 21:56:30.829  1788  2516 I A       : Using proto config with mendel
+11-07 21:56:30.833  1788  2516 I A       : Using proto config with mendel
+11-07 21:56:30.835  1015  2099 D OneSearchSuggestProvider: Shut down the binder channel
+11-07 21:56:30.847  1015  5811 I s.nexuslauncher: oneway function results for code 2 on binder at 0x73e60dd747e0 will be dropped but finished with status UNKNOWN_TRANSACTION
+11-07 21:56:30.855  1788  2516 W SearchServiceCore: Abort, client detached.
+11-07 21:56:30.857  1788  2516 I MicroDetectionState: Should stop hotword detection immediately - true
+11-07 21:56:30.857  1788  2516 I A       : Using proto config with mendel
+11-07 21:56:30.857  1788  2516 I A       : Using proto config with mendel
+11-07 21:56:30.896   482  1978 D ConnectivityService: requestNetwork for uid/pid:10119/1788 activeRequest: null callbackRequest: 153 [NetworkRequest [ REQUEST id=153, [ Transports: CELLULAR Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN&NOT_VCN_MANAGED Uid: 10119 RequestorUid: 10119 RequestorPkg: com.google.android.googlequicksearchbox UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+11-07 21:56:30.929   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537570
+11-07 21:56:30.929   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538a10
+11-07 21:56:30.954   286   904 I netd    : networkSetPermissionForNetwork(101, 0) <56.45ms>
+11-07 21:56:30.966   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537ff0
+11-07 21:56:30.978   482   705 D ConnectivityService: NetReassign [153 : null → 101] [c 1] [a 79] [i 1]
+11-07 21:56:30.983  4742  4742 D AutofillManager: Fill dialog is enabled:false, hints=[password, passwordAuto, creditCardNumber, creditCardSecurityCode, creditCardExpirationDate]
+11-07 21:56:31.042   482   705 D ConnectivityService: reportNetworkConnectivity(100, false) by 10119
+11-07 21:56:31.042   933  2137 D NetworkMonitor/100: Forcing reevaluation for UID 10119. Dns signal count: 0
+11-07 21:56:31.046   933  7995 D TrafficStats: tagSocket(99) with statsTag=0xffffff81, statsUid=-1
+11-07 21:56:31.047   933  7996 D TrafficStats: tagSocket(69) with statsTag=0xffffff81, statsUid=-1
+11-07 21:56:31.051   933  7995 D TrafficStats: tagSocket(69) with statsTag=0xffffff81, statsUid=-1
+11-07 21:56:31.051   933  7996 D TrafficStats: tagSocket(99) with statsTag=0xffffff81, statsUid=-1
+11-07 21:56:31.055   286  7997 I resolv  : ResNSendHandler::run: 0 / {100 983140 100 983140 1073 1}
+11-07 21:56:31.056   286  7998 I resolv  : ResNSendHandler::run: 0 / {100 983140 100 983140 1073 1}
+11-07 21:56:31.056   286  7998 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x76f4a7edbf50
+11-07 21:56:31.071   762   816 D EGL_emulation: app_time_stats: avg=524.01ms min=439.24ms max=608.79ms count=2
+11-07 21:56:31.097   286  7997 I resolv  : res_nsend: used send_dg 75 terrno: 0
+11-07 21:56:31.100   286  8000 I resolv  : ResNSendHandler::run: 0 / {100 983140 100 983140 1073 1}
+11-07 21:56:31.100   286  8000 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x76f487eda450
+11-07 21:56:31.101   286  7999 I resolv  : ResNSendHandler::run: 0 / {100 983140 100 983140 1073 1}
+11-07 21:56:31.101   933   933 D TrafficStats: tagSocket(69) with statsTag=0xffffffff, statsUid=-1
+11-07 21:56:31.101   933   933 D TrafficStats: tagSocket(69) with statsTag=0xffffffff, statsUid=-1
+11-07 21:56:31.102   933   933 D TrafficStats: tagSocket(69) with statsTag=0xffffffff, statsUid=-1
+11-07 21:56:31.102   933   933 D TrafficStats: tagSocket(69) with statsTag=0xffffffff, statsUid=-1
+11-07 21:56:31.103   933   933 D TrafficStats: tagSocket(69) with statsTag=0xffffffff, statsUid=-1
+11-07 21:56:31.104   933   933 D TrafficStats: tagSocket(69) with statsTag=0xffffffff, statsUid=-1
+11-07 21:56:31.118   933   933 D TrafficStats: tagSocket(69) with statsTag=0xffffffff, statsUid=-1
+11-07 21:56:31.119   933   933 D TrafficStats: tagSocket(69) with statsTag=0xffffffff, statsUid=-1
+11-07 21:56:31.119   933   933 D TrafficStats: tagSocket(69) with statsTag=0xffffffff, statsUid=-1
+11-07 21:56:31.124   933   933 D TrafficStats: tagSocket(69) with statsTag=0xffffffff, statsUid=-1
+11-07 21:56:31.128   286  7999 I resolv  : res_nsend: used send_dg 63 terrno: 0
+11-07 21:56:31.130   933   933 D TrafficStats: tagSocket(69) with statsTag=0xffffffff, statsUid=-1
+11-07 21:56:31.131   933   933 D TrafficStats: tagSocket(69) with statsTag=0xffffffff, statsUid=-1
+11-07 21:56:31.133   933   933 D TrafficStats: tagSocket(69) with statsTag=0xffffffff, statsUid=-1
+11-07 21:56:31.134   933   933 D TrafficStats: tagSocket(69) with statsTag=0xffffffff, statsUid=-1
+11-07 21:56:31.140   933   933 D TrafficStats: tagSocket(69) with statsTag=0xffffffff, statsUid=-1
+11-07 21:56:31.141   933   933 D TrafficStats: tagSocket(69) with statsTag=0xffffffff, statsUid=-1
+11-07 21:56:31.147   933   933 D TrafficStats: tagSocket(69) with statsTag=0xffffffff, statsUid=-1
+11-07 21:56:31.147   933  7995 D NetworkMonitor/100: PROBE_DNS www.google.com 101ms OK 142.251.157.119,142.251.151.119,142.251.153.119,142.251.152.119,142.251.156.119,142.251.154.119,142.251.150.119,142.251.155.119,2001:4860:482a:7700::,2001:4860:4826:7700::,2001:4860:482b:7700::,2001:4860:482c:7700::,2001:4860:4827:7700::,2001:4860:4829:7700::,2001:4860:482d:7700::,2001:4860:4828:7700::
+11-07 21:56:31.147   933   933 D TrafficStats: tagSocket(69) with statsTag=0xffffffff, statsUid=-1
+11-07 21:56:31.148   933  7996 D NetworkMonitor/100: PROBE_DNS connectivitycheck.gstatic.com 103ms OK 142.251.218.3,2001:4860:4826:7800::
+11-07 21:56:31.157   286  8001 I resolv  : GetAddrInfoHandler::run: {100 983140 100 983140 1073 1}
+11-07 21:56:31.158   286  8002 I resolv  : GetAddrInfoHandler::run: {100 983140 100 983140 1073 1}
+11-07 21:56:31.160   286  8005 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-07 21:56:31.161   286  8005 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x76f477ed7a50
+11-07 21:56:31.161   286  8005 I resolv  : doQuery: rcode=0, ancount=1, return value=75
+11-07 21:56:31.162   286  8006 I resolv  : res_nmkquery: (QUERY, IN, A)
+11-07 21:56:31.162   286  8006 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x76f477ed83f0
+11-07 21:56:31.162   286  8006 I resolv  : doQuery: rcode=0, ancount=1, return value=63
+11-07 21:56:31.164   933  7996 D TrafficStats: tagSocket(99) with statsTag=0xffffff81, statsUid=-1
+11-07 21:56:31.168   286  8003 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-07 21:56:31.168   286  8003 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x76f4a7edbf50
+11-07 21:56:31.168   286  8003 I resolv  : doQuery: rcode=0, ancount=8, return value=256
+11-07 21:56:31.168   286  8004 I resolv  : res_nmkquery: (QUERY, IN, A)
+11-07 21:56:31.168   286  8004 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x76f487eda450
+11-07 21:56:31.168   286  8004 I resolv  : doQuery: rcode=0, ancount=8, return value=160
+11-07 21:56:31.170   933  7995 D TrafficStats: tagSocket(69) with statsTag=0xffffff81, statsUid=-1
+11-07 21:56:31.194   933  7996 D NetworkMonitor/100: PROBE_HTTP http://connectivitycheck.gstatic.com/generate_204 time=41ms ret=204 request={Connection=[close], User-Agent=[Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.32 Safari/537.36]} headers={null=[HTTP/1.1 204 No Content], Connection=[close], Content-Length=[0], Cross-Origin-Resource-Policy=[cross-origin], Date=[Sat, 07 Nov 2026 21:56:31 GMT], X-Android-Received-Millis=[1794088591193], X-Android-Response-Source=[NETWORK 204], X-Android-Selected-Protocol=[http/1.1], X-Android-Sent-Millis=[1794088591179]}
+11-07 21:56:31.198  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-07 21:56:31.199  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-07 21:56:31.199  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=null}, false)
+11-07 21:56:31.200  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-07 21:56:31.201  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-07 21:56:31.214   933  7995 D NetworkMonitor/100: PROBE_HTTPS https://www.google.com/generate_204 time=62ms ret=204 request={Connection=[close], User-Agent=[Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.32 Safari/537.36]} headers={null=[HTTP/1.1 204 No Content], Alt-Svc=[h3=":443"; ma=2592000,h3-29=":443"; ma=2592000], Connection=[close], Content-Length=[0], Cross-Origin-Resource-Policy=[cross-origin], Date=[Sat, 07 Nov 2026 21:56:31 GMT], X-Android-Received-Millis=[1794088591214], X-Android-Response-Source=[NETWORK 204], X-Android-Selected-Protocol=[http/1.1], X-Android-Sent-Millis=[1794088591196]}
+11-07 21:56:31.215   933  7994 D NetworkMonitor/100: isCaptivePortal: isSuccessful()=true isPortal()=false RedirectUrl=null isPartialConnectivity()=false Time=171ms
+11-07 21:56:31.216   482   705 D ConnectivityService: [100 WIFI] validation passed
+11-07 21:56:31.303  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:56:31.340   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:31.340   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:31.340   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:31.340   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:31.340   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:31.656  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-07 21:56:31.660  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-07 21:56:31.660  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=null}, false)
+11-07 21:56:31.660  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-07 21:56:31.660  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-07 21:56:32.085   762   816 D EGL_emulation: app_time_stats: avg=1013.97ms min=1013.97ms max=1013.97ms count=1
+11-07 21:56:32.427  1788  2783 W A       : [Download] response code: 400
+11-07 21:56:32.768  4742  4758 I om.quartz.notes: Compiler allocated 4178KB to compile void com.quartz.notes.ui.notebook.PageTimelineKt$PageTimelineSheet$5$invoke$lambda$23$lambda$22$lambda$21$$inlined$itemsIndexed$default$3.invoke(androidx.compose.foundation.lazy.LazyItemScope, int, androidx.compose.runtime.Composer, int)
+11-07 21:56:32.815  4742  4758 I om.quartz.notes: Compiler allocated 4675KB to compile void com.quartz.notes.ui.notebook.PageTimelineKt.PageThumbnail(com.quartz.notes.data.db.PageEntity, java.util.List, boolean, androidx.compose.runtime.Composer, int)
+11-07 21:56:34.352  4742  5479 D EGL_emulation: app_time_stats: avg=976.22ms min=518.55ms max=1484.35ms count=3
+11-07 21:56:36.936  4714  4738 W System  : A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+11-07 21:56:36.937  4714  4738 W System  : java.lang.Throwable: Explicit termination method 'HardwareBuffer.close' not called
+11-07 21:56:36.937  4714  4738 W System  : 	at dalvik.system.CloseGuard.openWithCallSite(CloseGuard.java:288)
+11-07 21:56:36.937  4714  4738 W System  : 	at dalvik.system.CloseGuard.open(CloseGuard.java:257)
+11-07 21:56:36.937  4714  4738 W System  : 	at android.hardware.HardwareBuffer.<init>(HardwareBuffer.java:272)
+11-07 21:56:36.937  4714  4738 W System  : A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+11-07 21:56:36.937  4714  4738 W System  : java.lang.Throwable: Explicit termination method 'HardwareBuffer.close' not called
+11-07 21:56:36.937  4714  4738 W System  : 	at dalvik.system.CloseGuard.openWithCallSite(CloseGuard.java:288)
+11-07 21:56:36.937  4714  4738 W System  : 	at dalvik.system.CloseGuard.open(CloseGuard.java:257)
+11-07 21:56:36.937  4714  4738 W System  : 	at android.hardware.HardwareBuffer.<init>(HardwareBuffer.java:272)
+11-07 21:56:37.141  4742  5479 D EGL_emulation: app_time_stats: avg=922.73ms min=30.78ms max=1860.10ms count=3
+11-07 21:56:37.220  4742  5479 D EGL_emulation: app_time_stats: avg=739.06ms min=60.56ms max=5229.02ms count=9
+11-07 21:56:37.236   482   499 W InputManager-JNI: Input channel object 'd4cbdc7 com.quartz.notes/androidx.activity.ComponentActivity (client)' was disposed without first being removed with the input manager!
+11-07 21:56:37.259   339   370 W TransactionTracing: Could not find layer handle 0x77aa885336d0
+11-07 21:56:37.259   339   370 W TransactionTracing: Could not find layer handle 0x77aa885381d0
+11-07 21:56:37.259   339   370 W TransactionTracing: Could not find layer handle 0x77aa88539970
+11-07 21:56:37.259   339   370 W TransactionTracing: Could not find layer handle 0x77aa885381d0
+11-07 21:56:37.259   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:37.259   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:37.259   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:37.260   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:37.260   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:37.272   762   816 D EGL_emulation: app_time_stats: avg=2228.40ms min=295.81ms max=5873.71ms count=3
+11-07 21:56:37.276   339   370 W TransactionTracing: Could not find layer handle 0x77aa88534810
+11-07 21:56:37.278   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538ef0
+11-07 21:56:37.301   762   816 D EGL_emulation: app_time_stats: avg=5216.06ms min=5216.06ms max=5216.06ms count=1
+11-07 21:56:37.353  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-07 21:56:37.353  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-07 21:56:37.354  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=null}, false)
+11-07 21:56:37.354  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-07 21:56:37.357  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-07 21:56:37.387   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537a50
+11-07 21:56:38.281   762   806 D SplashScreenView: Build android.window.SplashScreenView{a5cb77e V.E...... ......ID 0,0-0,0}
+11-07 21:56:38.281   762   806 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-07 21:56:38.281   762   806 D SplashScreenView: Branding: view: android.view.View{2d6b4df G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-07 21:56:38.284  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@65f9285 in: PAUSED
+11-07 21:56:38.285  4742  4742 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=androidx.activity.ComponentActivity@65f9285
+11-07 21:56:38.286   762   816 W Parcel  : Expecting binder but got null!
+11-07 21:56:38.379  5498  5521 W Parcel  : Expecting binder but got null!
+11-07 21:56:38.512   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537570
+11-07 21:56:38.512   339   370 W TransactionTracing: Could not find layer handle 0x77aa88534630
+11-07 21:56:38.602   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537870
+11-07 21:56:38.617   762   816 D EGL_emulation: app_time_stats: avg=1344.43ms min=1344.43ms max=1344.43ms count=1
+11-07 21:56:38.727   762   816 D EGL_emulation: app_time_stats: avg=1423.49ms min=1423.49ms max=1423.49ms count=1
+11-07 21:56:38.899   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 21:56:38.899   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 1
+11-07 21:56:38.899   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 21:56:38.900   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:38.914  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@65f9285 in: STOPPED
+11-07 21:56:38.914  4742  4742 V ActivityScenario: Update currentActivityStage to STOPPED, currentActivity=androidx.activity.ComponentActivity@65f9285
+11-07 21:56:38.922   339   370 W TransactionTracing: Could not find layer handle 0x77aa88539cd0
+11-07 21:56:38.923   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538110
+11-07 21:56:39.020  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@65f9285 in: DESTROYED
+11-07 21:56:39.021  4742  4742 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
+11-07 21:56:39.037  4742  4836 D IdlingRegistry: Unregistering idling resources: [androidx.compose.ui.test.EspressoLink@aae2291]
+11-07 21:56:39.040   482   499 W InputManager-JNI: Input channel object 'ec057c9 com.quartz.notes/androidx.activity.ComponentActivity (client)' was disposed without first being removed with the input manager!
+11-07 21:56:39.056   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:39.057   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:39.117   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538170
+11-07 21:56:39.117   339   370 W TransactionTracing: Could not find layer handle 0x77aa885367f0
+11-07 21:56:39.119  4742  4836 I TestRunner: finished: mouseWheelInTimeline(com.quartz.notes.ui.notebook.PageInputTest)

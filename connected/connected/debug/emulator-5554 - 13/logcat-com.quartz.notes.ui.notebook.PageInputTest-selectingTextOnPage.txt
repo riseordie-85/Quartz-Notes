@@ -1,0 +1,846 @@
+11-07 21:55:53.657  4742  4836 I TestRunner: started: selectingTextOnPage(com.quartz.notes.ui.notebook.PageInputTest)
+11-07 21:55:53.660  4742  4836 D IdlingRegistry: Registering idling resources: [androidx.compose.ui.test.EspressoLink@e521d0]
+11-07 21:55:53.668  1015  1015 D MainContentCaptureSession: Flushing 2 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARING
+11-07 21:55:53.668   339   370 W TransactionTracing: Could not find layer handle 0x77aa88539070
+11-07 21:55:53.669   339   370 W TransactionTracing: Could not find layer handle 0x77aa885381d0
+11-07 21:55:53.676   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538650
+11-07 21:55:53.676   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537a50
+11-07 21:55:53.676   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538ad0
+11-07 21:55:53.677  4742  4836 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+11-07 21:55:53.699  1015  1015 D MainContentCaptureSession: Flushing 32 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARED
+11-07 21:55:53.727  1788  1788 I A       : Created gRPC endpoint to "search" for service class com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService
+11-07 21:55:53.876   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:55:53.878   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:55:53.936   482   507 W system_server: Long monitor contention with owner android.anim (508) at void com.android.server.wm.WindowAnimator.lambda$new$1(long)(WindowAnimator.java:110) waiters=2 in void com.android.server.wm.WindowManagerService$H.handleMessage(android.os.Message) for 236ms
+11-07 21:55:53.937   482   507 W InputManager-JNI: Input channel object '6ab9218 Splash Screen com.quartz.notes.test (client)' was disposed without first being removed with the input manager!
+11-07 21:55:54.085  1788  2353 W A       : Queue length for executor EventBus is now 11. Perhaps some tasks are too long, or the pool is too small.
+11-07 21:55:54.112   482   495 I system_server: NativeAlloc concurrent copying GC freed 310395(10MB) AllocSpace objects, 23(460KB) LOS objects, 49% free, 22MB/44MB, paused 65us,125us total 975.837ms
+11-07 21:55:54.214   482   507 W system_server: Long monitor contention with owner binder:482_B (1046) at android.content.ComponentName com.android.server.am.ActivityManagerService.startService(android.app.IApplicationThread, android.content.Intent, java.lang.String, boolean, java.lang.String, java.lang.String, int)(ActivityManagerService.java:12593) waiters=0 in void com.android.server.am.ProcessRecord.setRunningRemoteAnimation(boolean) for 152ms
+11-07 21:55:54.233   482  1045 W InputManager-JNI: Input channel object '4f0762e com.quartz.notes.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity (client)' was disposed without first being removed with the input manager!
+11-07 21:55:54.255   762   806 D SplashScreenView: Build android.window.SplashScreenView{5719de0 V.E...... ......ID 0,0-0,0}
+11-07 21:55:54.255   762   806 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-07 21:55:54.255   762   806 D SplashScreenView: Branding: view: android.view.View{abaa899 G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-07 21:55:54.351   762   816 D EGL_emulation: app_time_stats: avg=32092.38ms min=32092.38ms max=32092.38ms count=1
+11-07 21:55:54.351   339   370 W TransactionTracing: Could not find layer handle 0x77aa88536cd0
+11-07 21:55:54.351   339   370 W TransactionTracing: Could not find layer handle 0x77aa88534510
+11-07 21:55:54.351   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537c30
+11-07 21:55:54.352   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537ff0
+11-07 21:55:54.352   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537c30
+11-07 21:55:54.357   762   816 W Parcel  : Expecting binder but got null!
+11-07 21:55:54.400  1788  2353 W CorpusConfigHelper: Invalid input from icing corpus JSON flag.
+11-07 21:55:54.400  1788  2353 W CorpusConfigHelper: android.util.MalformedJsonException: Use JsonReader.setLenient(true) to accept malformed JSON at line 123 column 2
+11-07 21:55:54.400  1788  2353 W CorpusConfigHelper: 	at android.util.JsonReader.syntaxError(JsonReader.java:1162)
+11-07 21:55:54.400  1788  2353 W CorpusConfigHelper: 	at android.util.JsonReader.checkLenient(JsonReader.java:840)
+11-07 21:55:54.400  1788  2353 W CorpusConfigHelper: 	at android.util.JsonReader.nextInArray(JsonReader.java:615)
+11-07 21:55:54.400  1788  2353 W CorpusConfigHelper: 	at android.util.JsonReader.peek(JsonReader.java:345)
+11-07 21:55:54.400  1788  2353 W CorpusConfigHelper: 	at android.util.JsonReader.hasNext(JsonReader.java:321)
+11-07 21:55:54.400  1788  2353 W CorpusConfigHelper: 	at com.google.android.apps.gsa.searchbox.c.b.b.k.c(PG:7)
+11-07 21:55:54.400  1788  2353 W CorpusConfigHelper: 	at com.google.android.apps.gsa.searchbox.c.b.b.k.<init>(PG:5)
+11-07 21:55:54.400  1788  2353 W CorpusConfigHelper: 	at com.google.android.apps.gsa.staticplugins.searchboxroot.features.n.a.c.<init>(PG:16)
+11-07 21:55:54.400  1788  2353 W CorpusConfigHelper: 	at com.google.android.apps.gsa.staticplugins.searchboxroot.b.a(PG:14)
+11-07 21:55:54.400  1788  2353 W CorpusConfigHelper: 	at com.google.android.apps.gsa.staticplugins.searchboxroot.x.<init>(PG:7)
+11-07 21:55:54.400  1788  2353 W CorpusConfigHelper: 	at com.google.android.apps.gsa.binaries.velvet.app.akd.b(PG:15)
+11-07 21:55:54.400  1788  2353 W CorpusConfigHelper: 	at dagger.a.e.b(PG:1)
+11-07 21:55:54.400  1788  2353 W CorpusConfigHelper: 	at com.google.android.apps.gsa.staticplugins.searchboxroot.a.a.a(PG:3)
+11-07 21:55:54.400  1788  2353 W CorpusConfigHelper: 	at com.google.android.apps.gsa.binaries.velvet.app.ok.f(Unknown Source:2541)
+11-07 21:55:54.400  1788  2353 W CorpusConfigHelper: 	at com.google.android.apps.gsa.binaries.velvet.app.ok.b(PG:1)
+11-07 21:55:54.400  1788  2353 W CorpusConfigHelper: 	at com.google.android.apps.gsa.search.core.service.g.a.c.a(PG:2)
+11-07 21:55:54.400  1788  2353 W CorpusConfigHelper: 	at com.google.android.libraries.gsa.k.a.f.a(PG:2)
+11-07 21:55:54.400  1788  2353 W CorpusConfigHelper: 	at com.google.common.util.concurrent.dx.a(PG:1)
+11-07 21:55:54.400  1788  2353 W CorpusConfigHelper: 	at com.google.common.util.concurrent.cv.run(PG:4)
+11-07 21:55:54.400  1788  2353 W CorpusConfigHelper: 	at com.google.common.util.concurrent.dz.run(PG:1)
+11-07 21:55:54.400  1788  2353 W CorpusConfigHelper: 	at com.google.android.libraries.i.ae.run(PG:1)
+11-07 21:55:54.400  1788  2353 W CorpusConfigHelper: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-07 21:55:54.400  1788  2353 W CorpusConfigHelper: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-07 21:55:54.400  1788  2353 W CorpusConfigHelper: 	at com.google.android.libraries.i.k.run(PG:2)
+11-07 21:55:54.400  1788  2353 W CorpusConfigHelper: 	at com.google.android.libraries.i.p.run(PG:4)
+11-07 21:55:54.400  1788  2353 W CorpusConfigHelper: 	at java.lang.Thread.run(Thread.java:1012)
+11-07 21:55:54.410  1788  2516 I A       : Using proto config with mendel
+11-07 21:55:54.411  1788  2516 I A       : Using proto config with mendel
+11-07 21:55:54.428  1788  2516 I A       : Using proto config with mendel
+11-07 21:55:54.441  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@84f3d94 in: PRE_ON_CREATE
+11-07 21:55:54.441  4742  4742 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+11-07 21:55:54.456  1015  1015 D MainContentCaptureSession: Flushing 0 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_ROOT
+11-07 21:55:54.456  1656  1656 W ContentCaptureService: handleSendEvents() received empty list of events
+11-07 21:55:54.467  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@84f3d94 in: CREATED
+11-07 21:55:54.470  4742  4742 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=androidx.activity.ComponentActivity@84f3d94
+11-07 21:55:54.471  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@84f3d94 in: STARTED
+11-07 21:55:54.471  4742  4742 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=androidx.activity.ComponentActivity@84f3d94
+11-07 21:55:54.475  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@84f3d94 in: RESUMED
+11-07 21:55:54.478  4742  4742 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=androidx.activity.ComponentActivity@84f3d94
+11-07 21:55:54.633  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:55:54.680  1015  1015 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+11-07 21:55:54.718  1788  2516 I A       : Using proto config with mendel
+11-07 21:55:54.972  1788  2516 I A       : Using proto config with mendel
+11-07 21:55:54.976  1788  2516 I A       : Merging legacy hotword config map with new proto.
+11-07 21:55:54.977  1788  2516 I A       : Adding from config to map. Locale: cmn-Hant-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+11-07 21:55:54.987  1788  2516 I A       : Adding from config to map. Locale: id-ID modelPrefix: x_google Location:cfffcc1a4c1c084c003c8eb27f73d770 isSpeakerIdSupported: true
+11-07 21:55:54.987  1015  1883 D EGL_emulation: app_time_stats: avg=194.40ms min=39.99ms max=431.81ms count=7
+11-07 21:55:54.987  1788  2516 I A       : Adding from config to map. Locale: ko-KR modelPrefix: x_google Location:0b132163a2eb2c1194b202067475724b isSpeakerIdSupported: true
+11-07 21:55:54.987  1788  2516 I A       : Skipping. Expected model: 2 Found: 1
+11-07 21:55:54.988  1788  2516 I A       : Adding from config to map. Locale: zh-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+11-07 21:55:54.992  1788  2516 I A       : Using proto config with mendel
+11-07 21:55:55.000   482  1618 W system_server: Long monitor contention with owner android.anim (508) at void com.android.server.wm.WindowSurfacePlacer$Traverser.run()(WindowSurfacePlacer.java:58) waiters=1 in android.app.ActivityTaskManager$RootTaskInfo com.android.server.wm.ActivityTaskManagerService.getFocusedRootTaskInfo() for 114ms
+11-07 21:55:55.016   762   816 D EGL_emulation: app_time_stats: avg=873.59ms min=604.98ms max=1142.20ms count=2
+11-07 21:55:55.053   339   370 W TransactionTracing: Could not find layer handle 0x77aa8853a570
+11-07 21:55:55.053   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538ad0
+11-07 21:55:55.053   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538ad0
+11-07 21:55:55.053   339   370 W TransactionTracing: Could not find layer handle 0x77aa8853a570
+11-07 21:55:55.053   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538ad0
+11-07 21:55:55.053   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538ad0
+11-07 21:55:55.053   339   370 W TransactionTracing: Could not find layer handle 0x77aa8853a570
+11-07 21:55:55.053   339   370 W TransactionTracing: Could not find layer handle 0x77aa8853a570
+11-07 21:55:55.054   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:55:55.054   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:55:55.054   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:55:55.054   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:55:55.054   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:55:55.063  1788  2516 I A       : Using proto config with mendel
+11-07 21:55:55.063  1788  2516 I A       : Using proto config with mendel
+11-07 21:55:55.083  1788  2378 I A       : group apa_head_suggest not present without account in *
+11-07 21:55:55.084  1788  2378 I A       : incrementApaDataDownloadStoreStatus(latency = PT0.004S, appVersion = 13.17.16.23, status = NOT_FOUND, locale = *, fileGroupnames = apa_head_suggest, accountScoped = false, localGroupsAvailable = false, timeSinceSearchBoot = Optional[PT5M47.429S] (FIVE_TO_TEN_MINUTES), timeSinceDataDownloadInit = PT2M56.547S (ONE_TO_FIVE_MINUTES))
+11-07 21:55:55.084  1788  2378 I A       : incrementApaDataDownloadStoreStatusNotFound(appVersion = 13.17.16.23, locale = *, groupName = apa_head_suggest, accountScoped = false, foundGroups = 0, status = 0, localGroupsAvailable = false)
+11-07 21:55:55.229   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:55:55.234   482   504 W ziparchive: Unable to open '/data/app/~~ewbzk_m16xDkclmAVpjUzA==/com.quartz.notes-XqM5_4k8BE5yt-arn9ES4A==/base.dm': No such file or directory
+11-07 21:55:55.236   482   504 I ActivityTaskManager: Displayed com.quartz.notes/androidx.activity.ComponentActivity: +1s173ms
+11-07 21:55:55.246  1788  2516 I MicroDetectionState: Should stop hotword detection immediately - true
+11-07 21:55:55.248  1788  2516 I MicroDetectionState: Should stop hotword detection immediately - true
+11-07 21:55:55.261   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 21:55:55.268   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 1
+11-07 21:55:55.269   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 21:55:55.272  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onFinishInputView():2241
+11-07 21:55:55.277  1509  1509 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-07 21:55:55.282  1509  1509 I InputBundle: InputBundle.consumeEvent():923 Skip consuming an event as keyboard status is 0
+11-07 21:55:55.283  1509  1509 I KeyboardWrapper: KeyboardWrapper.consumeEvent():275 Skip consuming an event as current keyboard is deactivated (state=0, keyboard existence=true)
+11-07 21:55:55.283  1509  1509 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.shutdown():77 shutdown()
+11-07 21:55:55.284  1509  1509 I AndroidIME: AbstractIme.onDeactivate():207 LatinIme.onDeactivate()
+11-07 21:55:55.284  1509  1944 W ModuleManager: ModuleManager.loadModule():450 Module jjj is not available
+11-07 21:55:55.308  1788  2516 I A       : Using proto config with mendel
+11-07 21:55:55.309  1788  2516 I A       : Using proto config with mendel
+11-07 21:55:55.337  4742  4742 E ImeBackDispatcher: Ime callback not found. Ignoring unregisterReceivedCallback. callbackId: 153165356
+11-07 21:55:55.355  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-07 21:55:55.362  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-07 21:55:55.362  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=null}, false)
+11-07 21:55:55.362  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-07 21:55:55.374  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-07 21:55:55.381  4742  4742 D AutofillManager: Fill dialog is enabled:false, hints=[password, passwordAuto, creditCardNumber, creditCardSecurityCode, creditCardExpirationDate]
+11-07 21:55:55.440   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:55:55.442  1509  2142 D EGL_emulation: app_time_stats: avg=1849.21ms min=118.83ms max=3579.59ms count=2
+11-07 21:55:55.470   482  1045 W InputManager-JNI: Input channel object 'bc3819e Splash Screen com.quartz.notes (client)' was disposed without first being removed with the input manager!
+11-07 21:55:55.517   339   370 W TransactionTracing: Could not find layer handle 0x77aa885395b0
+11-07 21:55:55.519   339   370 W TransactionTracing: Could not find layer handle 0x77aa885352f0
+11-07 21:55:55.519   339   370 W TransactionTracing: Could not find layer handle 0x77aa885395b0
+11-07 21:55:55.519   339   370 W TransactionTracing: Could not find layer handle 0x77aa885352f0
+11-07 21:55:55.519   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538fb0
+11-07 21:55:55.520   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538fb0
+11-07 21:55:55.520   339   370 W TransactionTracing: Could not find layer handle 0x77aa885352f0
+11-07 21:55:55.520   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538fb0
+11-07 21:55:55.520   339   370 W TransactionTracing: Could not find layer handle 0x77aa885352f0
+11-07 21:55:55.520   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538fb0
+11-07 21:55:55.522   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:55:55.577   339   370 W TransactionTracing: Could not find layer handle 0x77aa885370f0
+11-07 21:55:55.661  1015  2099 D OneSearchSuggestProvider: Shut down the binder channel
+11-07 21:55:55.662  1015  2569 I s.nexuslauncher: oneway function results for code 2 on binder at 0x73e60dd73a00 will be dropped but finished with status UNKNOWN_TRANSACTION
+11-07 21:55:55.680  1788  2516 I A       : Using proto config with mendel
+11-07 21:55:55.685  1015  1015 D MainContentCaptureSession: Flushing 2 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARING
+11-07 21:55:55.685  1788  2783 I PBSessionCacheImpl: Deleted sessionId[7865501250074982] from persistence.
+11-07 21:55:55.686  1788  2516 I A       : Using proto config with mendel
+11-07 21:55:55.690  1788  2516 W SearchServiceCore: Abort, client detached.
+11-07 21:55:55.691  1788  2516 I MicroDetectionState: Should stop hotword detection immediately - true
+11-07 21:55:55.691  1788  2516 I A       : Using proto config with mendel
+11-07 21:55:55.692  1788  2516 I A       : Using proto config with mendel
+11-07 21:55:55.693  1015  1015 D MainContentCaptureSession: Flushing 2 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARED
+11-07 21:55:55.697  1015  1015 W FrameTracker: Missed App frame:UNKNOWN: 74, 48433, 0, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+11-07 21:55:55.697  1015  1015 W FrameTracker: Missed SF frame:UNKNOWN: 74, 48433, 0, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+11-07 21:55:55.697  1015  1015 W FrameTracker: Missing HWUI jank callback for vsyncId: 48433, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+11-07 21:55:55.697  1015  1015 W FrameTracker: Missed App frame:UNKNOWN: 74, 48441, 467976568, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+11-07 21:55:55.697  1015  1015 W FrameTracker: Missed SF frame:UNKNOWN: 74, 48441, 467976568, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+11-07 21:55:55.697  1015  1015 W FrameTracker: Missed App frame:UNKNOWN: 74, 48472, 0, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+11-07 21:55:55.697  1015  1015 W FrameTracker: Missed SF frame:UNKNOWN: 74, 48472, 0, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+11-07 21:55:55.697  1015  1015 W FrameTracker: Missing HWUI jank callback for vsyncId: 48472, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+11-07 21:55:55.712   339   370 W TransactionTracing: Could not find layer handle 0x77aa88534870
+11-07 21:55:55.713   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537210
+11-07 21:55:55.765   762   816 D EGL_emulation: app_time_stats: avg=705.35ms min=429.13ms max=981.57ms count=2
+11-07 21:55:55.784  7031  7152 I GMS_MM_Logger: Memory Metric Logging not allowed. Stopping.
+11-07 21:55:55.861  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-07 21:55:55.863  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-07 21:55:55.863  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=null}, false)
+11-07 21:55:55.863  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-07 21:55:55.864  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-07 21:55:56.519  1015  1015 D TaplEvents: TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_DOWN, actionButton=0, id[0]=0, x[0]=110.0, y[0]=962.5, toolType[0]=TOOL_TYPE_FINGER, buttonState=0, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=409950, downTime=409950, deviceId=-1, source=0x1002, displayId=0, eventId=-563878502 }
+11-07 21:55:56.579  1015  1015 D TaplEvents: TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_UP, actionButton=0, id[0]=0, x[0]=110.0, y[0]=962.5, toolType[0]=TOOL_TYPE_FINGER, buttonState=0, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=410037, downTime=409950, deviceId=-1, source=0x1002, displayId=0, eventId=-598523334 }
+11-07 21:55:56.589  4742  4742 I AssistStructure: Flattened final assist data: 736 bytes, containing 1 windows, 4 views
+11-07 21:55:56.595  4742  4742 D InsetsController: show(ime(), fromIme=false)
+11-07 21:55:56.595  4742  4742 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{8a8ca65 VFED..... .F....ID 0,0-1080,2209 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT_BY_INSETS_API
+11-07 21:55:56.603  6979  6979 W AutofillChimeraService: Pending fill request while another request in the same session was triggered. [CONTEXT service_id=177 ]
+11-07 21:55:56.604  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x2c001(Normal) imeOptions=0x42000000 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=104 initialSelEnd=104 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=Bundle[mParcelledData.dataSize=404]}, true)
+11-07 21:55:56.605  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-07 21:55:56.605  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-07 21:55:56.605  1509  1509 W SessionManager: SessionManager.beginSession():53 Try to begin an already begun session [INPUT_SESSION], end it first
+11-07 21:55:56.641  4742  5479 D EGL_emulation: app_time_stats: avg=585.13ms min=297.10ms max=780.70ms count=3
+11-07 21:55:56.642  4742  4742 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{8a8ca65 VFED..... .F...... 0,0-1080,2209 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+11-07 21:55:56.645  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onStartInputView():1995 onStartInputView(EditorInfo{inputType=0x2c001(Normal) imeOptions=0x42000000 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=104 initialSelEnd=104 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false, android.support.text.emoji.emojiCompat_replaceAll=false}]}, false)
+11-07 21:55:56.650  1509  1944 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-07 21:55:56.651  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-07 21:55:56.652  1537  1537 V InlineSuggestionRenderService: handleDestroySuggestionViews called for 0:153622297
+11-07 21:55:56.653  4742  4742 D Autofill Status: Autofill popup isn't shown because autofill is not available.
+11-07 21:55:56.653  4742  4742 D Autofill Status:
+11-07 21:55:56.653  4742  4742 D Autofill Status: Did you set up autofill?
+11-07 21:55:56.653  4742  4742 D Autofill Status: 1. Go to Settings > System > Languages&input > Advanced > Autofill Service
+11-07 21:55:56.653  4742  4742 D Autofill Status: 2. Pick a service
+11-07 21:55:56.653  4742  4742 D Autofill Status:
+11-07 21:55:56.653  4742  4742 D Autofill Status: Did you add an account?
+11-07 21:55:56.653  4742  4742 D Autofill Status: 1. Go to Settings > System > Languages&input > Advanced
+11-07 21:55:56.653  4742  4742 D Autofill Status: 2. Click on the settings icon next to the Autofill Service
+11-07 21:55:56.653  4742  4742 D Autofill Status: 3. Add your account
+11-07 21:55:56.653  1509  1509 W ModuleManager: ModuleManager.loadModule():450 Module erj is not available
+11-07 21:55:56.654  6979  6994 I .gms.persistent: oneway function results for code 1 on binder at 0x73e60dd7c3a0 will be dropped but finished with status UNKNOWN_TRANSACTION and reply parcel size 80
+11-07 21:55:56.683  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:55:56.689  1509  1509 I KeyboardViewUtil: KeyboardViewUtil.getKeyboardHeightRatio():189 systemKeyboardHeightRatio:1.000000; userKeyboardHeightRatio:1.000000.
+11-07 21:55:56.689  1509  1509 I AndroidIME: AbstractIme.onActivate():86 LatinIme.onActivate() : EditorInfo = inputType=0x2c001(Normal) imeOptions=0x42000000 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=104 initialSelEnd=104 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false, android.support.text.emoji.emojiCompat_replaceAll=false}], IncognitoMode = false, DeviceLocked = false
+11-07 21:55:56.698  1509  1509 I Delight5Facilitator: Delight5Facilitator.initializeForIme():777 initializeForIme() : Locale = [en_US], layout = qwerty
+11-07 21:55:56.701  1509  1509 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.cancelShutdown():55 cancelShutdown()
+11-07 21:55:56.701  1509  1509 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.syncLanguagePacks():67 syncLanguagePacks()
+11-07 21:55:56.701  1509  1509 I LatinIme: LatinIme.updateEnableInlineSuggestionsOnDecoderSideFlags():1003 inline flag updated to:false
+11-07 21:55:56.702  1509  5618 I SpeechFactory: SpeechRecognitionFactory.maybeScheduleAutoPackDownloadForFallback():205 maybeScheduleAutoPackDownloadForFallback()
+11-07 21:55:56.703  1509  5618 I FallbackOnDeviceRecognitionProvider: FallbackOnDeviceRecognitionProvider.maybeScheduleAutoPackDownload():195 maybeScheduleAutoPackDownload() for language tag en-US
+11-07 21:55:56.711  1509  1509 I KeyboardWrapper: KeyboardWrapper.consumeEvent():275 Skip consuming an event as current keyboard is deactivated (state=0, keyboard existence=true)
+11-07 21:55:56.722  1509  1509 I KeyboardViewUtil: KeyboardViewUtil.calculateMaxKeyboardBodyHeight():40 leave 354 height for app when screen height:2274, header height:116 and isFullscreenMode:false, so the max keyboard body height is:1804
+11-07 21:55:56.723  1509  1509 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-07 21:55:56.723  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = HEADER, shownType = SHOW_OPTIONAL
+11-07 21:55:56.723  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-07 21:55:56.724  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = BODY, shownType = SHOW_MANDATORY
+11-07 21:55:56.724  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-07 21:55:56.724  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = FLOATING_CANDIDATES, shownType = HIDE
+11-07 21:55:56.724  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = false
+11-07 21:55:56.725  1509  1509 I KeyboardViewUtil: KeyboardViewUtil.calculateMaxKeyboardBodyHeight():40 leave 354 height for app when screen height:2274, header height:116 and isFullscreenMode:false, so the max keyboard body height is:1804
+11-07 21:55:56.726  1509  1509 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-07 21:55:56.727  1509  1509 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-07 21:55:56.727  1509  1509 I KeyboardModeManager: KeyboardModeManager.setInputView():364 setInputView() : supportsOneHandedMode=true
+11-07 21:55:56.727  1509  1509 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-07 21:55:56.728  1509  1509 I AndroidIME: KeyboardViewManager.updateKeyboardBodyViewHolderPaddingBottom():604 Set finalPaddingBottom = 0 while keyboardBottomGapFromScreen = 0; navigationHeight = 126
+11-07 21:55:56.728  1509  1509 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-07 21:55:56.729  1509  1509 I AndroidIME: KeyboardViewManager.updateKeyboardBodyViewHolderPaddingBottom():604 Set finalPaddingBottom = 0 while keyboardBottomGapFromScreen = 0; navigationHeight = 126
+11-07 21:55:56.730  1509  1509 I KeyboardModeManager: KeyboardModeManager.setInputView():356 setInputView() : entry=hwn{languageTag=en-US, variant=qwerty, hasLocalizedResources=true, conditionCacheKey=_device=phone_device_size=default_enable_adaptive_text_editing=true_enable_inline_suggestions_on_client_side=false_enable_large_tablet_batch_1=false_enable_large_tablet_batch_2=false_enable_more_candidates_view_for_multilingual=false_enable_nav_redesign=false_enable_number_row=false_enable_preemptive_decode=true_enable_secondary_symbols=false_expressions=normal_four_or_more_letter_rows=false_keyboard_mode=normal_language=en-US_orientation=portrait_physical_keyboard=qwerty_show_secondary_digits=true_show_suggestions=true_split_with_duplicate_keys=true_variant=qwerty, imeDef.stringId=ime_english_united_states, imeDef.className=com.google.android.apps.inputmethod.libs.latin5.LatinIme, imeDef.languageTag=en-US}
+11-07 21:55:56.733  1509  1509 I VoiceImeExtension: VoiceImeExtension.shouldStartVoiceInputAutomatically():383 No private IME option set to start voice input.
+11-07 21:55:56.933  4742  4742 D InsetsController: show(ime(), fromIme=true)
+11-07 21:55:56.937  1509  1509 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-07 21:55:56.937  1509  2239 I Delight5Decoder: Delight5DecoderWrapper.setKeyboardLayout():457 setKeyboardLayout()
+11-07 21:55:56.938  1509  1509 W InputContextProxyV4: InputContextProxyV4.applyClientDiffInternal():897 Ignore [FetchSuggestions] diff due to stale request: 126<127, inputStateId=55, lastInputStateId=56
+11-07 21:55:56.944  4742  4742 D InsetsController: show(ime(), fromIme=true)
+11-07 21:55:57.011  7031  7031 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-07 21:55:57.014  7031  7031 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-07 21:55:57.025  7031  7031 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-07 21:55:57.056  7031  7031 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-07 21:55:57.062  7031  7031 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-07 21:55:57.063  7031  7031 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-07 21:55:57.137  1509  1509 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-07 21:55:57.146   762   816 D EGL_emulation: app_time_stats: avg=1380.60ms min=1380.60ms max=1380.60ms count=1
+11-07 21:55:57.162  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = HEADER, shownType = SHOW_MANDATORY_WITH_ANIMATION
+11-07 21:55:57.163  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-07 21:55:57.652  4742  5479 D EGL_emulation: app_time_stats: avg=252.78ms min=129.13ms max=435.21ms count=4
+11-07 21:55:57.737  1015  1015 D TaplEvents: TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_DOWN, actionButton=0, id[0]=0, x[0]=178.81177, y[0]=646.5, toolType[0]=TOOL_TYPE_FINGER, buttonState=0, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=411168, downTime=411168, deviceId=-1, source=0x1002, displayId=0, eventId=-657670631 }
+11-07 21:55:57.799  1015  1015 D TaplEvents: TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_UP, actionButton=0, id[0]=0, x[0]=178.81177, y[0]=646.5, toolType[0]=TOOL_TYPE_FINGER, buttonState=0, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=411258, downTime=411168, deviceId=-1, source=0x1002, displayId=0, eventId=-849083524 }
+11-07 21:55:57.809  4742  4742 D InsetsController: show(ime(), fromIme=false)
+11-07 21:55:57.818  4742  4742 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{8a8ca65 VFED..... .F...... 0,0-1080,2209 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+11-07 21:55:57.824  4742  4742 D InsetsController: show(ime(), fromIme=true)
+11-07 21:55:57.946  1015  1015 D TaplEvents: TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_DOWN, actionButton=0, id[0]=0, x[0]=178.81177, y[0]=646.5, toolType[0]=TOOL_TYPE_FINGER, buttonState=0, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=411366, downTime=411366, deviceId=-1, source=0x1002, displayId=0, eventId=-252893652 }
+11-07 21:55:57.971  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:55:58.065  1015  1015 D TaplEvents: TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_UP, actionButton=0, id[0]=0, x[0]=178.81177, y[0]=646.5, toolType[0]=TOOL_TYPE_FINGER, buttonState=0, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=411511, downTime=411366, deviceId=-1, source=0x1002, displayId=0, eventId=-282321291 }
+11-07 21:55:58.093  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:55:58.099  4742  6919 D androidtc: Initializing SystemTextClassifier, type = System
+11-07 21:55:58.101  1656  1656 I AiAiTextClassifier: onCreateTextClassificationSession = TextClassificationSessionId {47ee03da-904b-4df6-8881-87abcdd14899}
+11-07 21:55:58.102  1656  1656 I AiAiTextClassifier: AiaiTextClassifierServiceConnector.onSuggestSelection
+11-07 21:55:58.143  1656  2368 I AiAiTextClassifier: [AiaiTextClassifierLibWrapper]: suggestSelectionInternal: return system response
+11-07 21:55:58.152   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537bd0
+11-07 21:55:58.152   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538d10
+11-07 21:55:58.152   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:55:58.152   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:55:58.191   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:55:58.191   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:55:58.192  1656  1656 I AiAiTextClassifier: AiaiTextClassifierServiceConnector.onClassifyText
+11-07 21:55:58.230  1656  2368 I AiAiTextClassifier: [AiaiTextClassifierLibWrapper]: classifyTextInternal: return system response
+11-07 21:55:58.356   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:55:58.402   482  1046 W InputManager-JNI: Input channel object '8b70037 Pop-Up Window (client)' was disposed without first being removed with the input manager!
+11-07 21:55:58.416   339   370 W TransactionTracing: Could not find layer handle 0x77aa88535ad0
+11-07 21:55:58.417   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:55:58.417   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:55:58.417   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:55:58.499   482  1046 W InputManager-JNI: Input channel object 'c362cc3 PopupWindow:8b21c71 (client)' was disposed without first being removed with the input manager!
+11-07 21:55:58.506   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538650
+11-07 21:55:58.506   339   370 W TransactionTracing: Could not find layer handle 0x77aa88539370
+11-07 21:55:58.527  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:55:58.767  1788  2378 I BistoDBWrapper: Close DB
+11-07 21:55:58.781  1509  1509 W InputConnectionWrapper: InputConnectionWrapper.recordDuration():1451 IPC IC_GET_SURROUNDING_TEXT took 287 ms
+11-07 21:55:58.836  1509  2142 D EGL_emulation: app_time_stats: avg=976.21ms min=374.00ms max=1578.42ms count=2
+11-07 21:55:58.850  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:55:58.860  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:55:59.010  1509  1509 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-07 21:55:59.028  4742  5479 D EGL_emulation: app_time_stats: avg=343.74ms min=177.42ms max=599.09ms count=4
+11-07 21:55:59.040   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:55:59.040   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:55:59.040   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:55:59.040   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:55:59.087   325   325 E android.hardware.power.stats@1.0-service-mock: Failed to getEnergyData
+11-07 21:55:59.341   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:55:59.342   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:00.002  1656  2067 I AiAiEcho: Predicting[0]:
+11-07 21:56:00.003  1656  2067 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:
+11-07 21:56:00.004  1656  2067 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0
+11-07 21:56:00.004  1656  2067 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0
+11-07 21:56:00.017  1656  2067 I AiAiEcho: Predicting[0]:
+11-07 21:56:00.017   762   816 D EGL_emulation: app_time_stats: avg=2500.43ms min=682.05ms max=4318.81ms count=2
+11-07 21:56:00.019  1656  2067 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:
+11-07 21:56:00.019  1656  2067 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0
+11-07 21:56:00.020  1656  2067 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0
+11-07 21:56:01.439  1015  1015 D TaplEvents: TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_DOWN, actionButton=0, id[0]=0, x[0]=110.0, y[0]=962.5, toolType[0]=TOOL_TYPE_FINGER, buttonState=0, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=414873, downTime=414873, deviceId=-1, source=0x1002, displayId=0, eventId=-459925603 }
+11-07 21:56:01.503  1015  1015 D TaplEvents: TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_UP, actionButton=0, id[0]=0, x[0]=110.0, y[0]=962.5, toolType[0]=TOOL_TYPE_FINGER, buttonState=0, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=414961, downTime=414873, deviceId=-1, source=0x1002, displayId=0, eventId=-870607166 }
+11-07 21:56:01.507  4742  4742 D InsetsController: show(ime(), fromIme=false)
+11-07 21:56:01.512   482  1046 W InputManager-JNI: Input channel object '9c05b1 PopupWindow:8b21c71 (client)' was disposed without first being removed with the input manager!
+11-07 21:56:01.517  4742  4742 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{8a8ca65 VFED..... .F...... 0,0-1080,2209 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+11-07 21:56:01.520  4742  4742 D InsetsController: show(ime(), fromIme=true)
+11-07 21:56:01.524   339   370 W TransactionTracing: Could not find layer handle 0x77aa885342d0
+11-07 21:56:01.525   339   370 W TransactionTracing: Could not find layer handle 0x77aa885367f0
+11-07 21:56:01.525   339   370 W TransactionTracing: Could not find layer handle 0x77aa885367f0
+11-07 21:56:01.548  4742  5479 D EGL_emulation: app_time_stats: avg=2519.22ms min=2519.22ms max=2519.22ms count=1
+11-07 21:56:01.637   482  1046 W InputManager-JNI: Input channel object '2fcb9e9 Pop-Up Window (client)' was disposed without first being removed with the input manager!
+11-07 21:56:01.645   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538d10
+11-07 21:56:01.647   339   370 W TransactionTracing: Could not find layer handle 0x77aa88539850
+11-07 21:56:01.669   482   500 W InputManager-JNI: Input channel object '3c2ba22 Pop-Up Window (client)' was disposed without first being removed with the input manager!
+11-07 21:56:01.680   339   370 W TransactionTracing: Could not find layer handle 0x77aa885337f0
+11-07 21:56:01.680   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538fb0
+11-07 21:56:01.681   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538fb0
+11-07 21:56:01.756  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:56:01.896   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:01.898   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:01.898   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:01.898   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:01.898   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:01.947  1509  1509 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-07 21:56:01.958  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = HEADER, shownType = SHOW_MANDATORY_WITH_ANIMATION
+11-07 21:56:01.958  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-07 21:56:02.039  1509  2142 D EGL_emulation: app_time_stats: avg=1601.08ms min=131.33ms max=3070.83ms count=2
+11-07 21:56:02.585  4742  5479 D EGL_emulation: app_time_stats: avg=206.00ms min=72.84ms max=439.57ms count=5
+11-07 21:56:02.596   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:02.596   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:02.596   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:02.663  1015  1015 D TaplEvents: TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_DOWN, actionButton=0, id[0]=0, x[0]=178.81177, y[0]=646.5, toolType[0]=TOOL_TYPE_FINGER, buttonState=0, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=416103, downTime=416103, deviceId=-1, source=0x1002, displayId=0, eventId=-342317531 }
+11-07 21:56:03.095  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:56:03.199   482   500 W InputManager-JNI: Input channel object '30148a3 Pop-Up Window (client)' was disposed without first being removed with the input manager!
+11-07 21:56:03.226   339   370 W TransactionTracing: Could not find layer handle 0x77aa88534870
+11-07 21:56:03.226   339   370 W TransactionTracing: Could not find layer handle 0x77aa88539850
+11-07 21:56:03.255  1509  1509 W InputConnectionWrapper: InputConnectionWrapper.recordDuration():1451 IPC IC_GET_SURROUNDING_TEXT took 126 ms
+11-07 21:56:03.295  1509  2142 D EGL_emulation: app_time_stats: avg=1256.63ms min=1256.63ms max=1256.63ms count=1
+11-07 21:56:03.440   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:03.462  1509  1509 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-07 21:56:04.369  4742  5479 D EGL_emulation: app_time_stats: avg=54.54ms min=21.04ms max=249.22ms count=23
+11-07 21:56:04.927  1015  1015 D TaplEvents: TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_UP, actionButton=0, id[0]=0, x[0]=178.81177, y[0]=646.5, toolType[0]=TOOL_TYPE_FINGER, buttonState=0, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=418385, downTime=416103, deviceId=-1, source=0x1002, displayId=0, eventId=-436662020 }
+11-07 21:56:04.947  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:56:04.952  1656  1656 I AiAiTextClassifier: AiaiTextClassifierServiceConnector.onSuggestSelection
+11-07 21:56:04.962  1656  2368 I AiAiTextClassifier: [AiaiTextClassifierLibWrapper]: suggestSelectionInternal: return system response
+11-07 21:56:04.984   339   370 W TransactionTracing: Could not find layer handle 0x77aa88534630
+11-07 21:56:04.984   339   370 W TransactionTracing: Could not find layer handle 0x77aa88539310
+11-07 21:56:05.217  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:56:05.238  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:56:05.431  4742  5479 D EGL_emulation: app_time_stats: avg=948.40ms min=98.65ms max=2134.52ms count=3
+11-07 21:56:05.858   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:05.858   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:05.858   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:05.858   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:06.624  4714  4738 W System  : A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+11-07 21:56:06.624  4714  4738 W System  : java.lang.Throwable: Explicit termination method 'HardwareBuffer.close' not called
+11-07 21:56:06.624  4714  4738 W System  : 	at dalvik.system.CloseGuard.openWithCallSite(CloseGuard.java:288)
+11-07 21:56:06.624  4714  4738 W System  : 	at dalvik.system.CloseGuard.open(CloseGuard.java:257)
+11-07 21:56:06.624  4714  4738 W System  : 	at android.hardware.HardwareBuffer.<init>(HardwareBuffer.java:272)
+11-07 21:56:06.624  4714  4738 W System  : A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+11-07 21:56:06.624  4714  4738 W System  : java.lang.Throwable: Explicit termination method 'HardwareBuffer.close' not called
+11-07 21:56:06.624  4714  4738 W System  : 	at dalvik.system.CloseGuard.openWithCallSite(CloseGuard.java:288)
+11-07 21:56:06.624  4714  4738 W System  : 	at dalvik.system.CloseGuard.open(CloseGuard.java:257)
+11-07 21:56:06.624  4714  4738 W System  : 	at android.hardware.HardwareBuffer.<init>(HardwareBuffer.java:272)
+11-07 21:56:06.770  1015  1015 D TaplEvents: TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_DOWN, actionButton=0, id[0]=0, x[0]=110.0, y[0]=962.5, toolType[0]=TOOL_TYPE_FINGER, buttonState=0, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=420206, downTime=420206, deviceId=-1, source=0x1002, displayId=0, eventId=-636605010 }
+11-07 21:56:06.830  1015  1015 D TaplEvents: TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_UP, actionButton=0, id[0]=0, x[0]=110.0, y[0]=962.5, toolType[0]=TOOL_TYPE_FINGER, buttonState=0, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=420288, downTime=420206, deviceId=-1, source=0x1002, displayId=0, eventId=-55745336 }
+11-07 21:56:06.840  4742  4742 D InsetsController: show(ime(), fromIme=false)
+11-07 21:56:06.848   482  1974 W InputManager-JNI: Input channel object '2ffa72a PopupWindow:aff046c (client)' was disposed without first being removed with the input manager!
+11-07 21:56:06.854  4742  4742 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{8a8ca65 VFED..... .F...... 0,0-1080,2209 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+11-07 21:56:06.861   339   370 W TransactionTracing: Could not find layer handle 0x77aa88536250
+11-07 21:56:06.861   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538950
+11-07 21:56:06.861   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538950
+11-07 21:56:06.946  4742  5479 D EGL_emulation: app_time_stats: avg=1515.33ms min=1515.33ms max=1515.33ms count=1
+11-07 21:56:06.957   482  1974 W InputManager-JNI: Input channel object '7f1f182 Pop-Up Window (client)' was disposed without first being removed with the input manager!
+11-07 21:56:06.963   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:06.963   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:06.963   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:06.970   482  1974 W InputManager-JNI: Input channel object 'b033bf7 Pop-Up Window (client)' was disposed without first being removed with the input manager!
+11-07 21:56:06.979   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538530
+11-07 21:56:06.979   339   370 W TransactionTracing: Could not find layer handle 0x77aa88534630
+11-07 21:56:06.979   339   370 W TransactionTracing: Could not find layer handle 0x77aa88534630
+11-07 21:56:06.979   339   370 W TransactionTracing: Could not find layer handle 0x77aa88535ad0
+11-07 21:56:06.979   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538fb0
+11-07 21:56:07.014  4742  4742 D InsetsController: show(ime(), fromIme=true)
+11-07 21:56:07.069  1509  1509 W InputConnectionWrapper: InputConnectionWrapper.recordDuration():1451 IPC IC_GET_SURROUNDING_TEXT took 192 ms
+11-07 21:56:07.094  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:56:07.218  1509  1521 I putmethod.latin: Background concurrent copying GC freed 227349(9302KB) AllocSpace objects, 39(1528KB) LOS objects, 49% free, 11MB/23MB, paused 36us,49us total 137.964ms
+11-07 21:56:07.227   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:07.227   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:07.227   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:07.238  1509  1523 W SP      : File ref is being finalized but wasn't closed, file: main_en_us_2022051700_2[20]
+11-07 21:56:07.238  1509  1523 W SP      : File ref is being finalized but wasn't closed, file: main_en_us_2022051700_2[20]
+11-07 21:56:07.238  1509  1523 W SP      : File ref is being finalized but wasn't closed, file: main_en_us_2022101700_1[24]
+11-07 21:56:07.238  1509  1523 W SP      : File ref is being finalized but wasn't closed, file: main_en_840_2022102600_1[10]
+11-07 21:56:07.238  1509  1523 W SP      : File ref is being finalized but wasn't closed, file: main_en_us_2022101700_1[24]
+11-07 21:56:07.238  1509  1523 W SP      : File ref is being finalized but wasn't closed, file: main_en_840_2022102600_1[10]
+11-07 21:56:07.238  1509  1523 W SP      : File ref is being finalized but wasn't closed, file: main_en_us_2022051700_2[20]
+11-07 21:56:07.238  1509  1523 W SP      : File ref is being finalized but wasn't closed, file: main_en_us_2022051700_2[20]
+11-07 21:56:07.238  1509  1523 W SP      : File ref is being finalized but wasn't closed, file: 2023012316_en[13]
+11-07 21:56:07.239  1509  1523 W SP      : File ref is being finalized but wasn't closed, file: 2023012316_en[13]
+11-07 21:56:07.239  1509  1523 W SP      : File ref is being finalized but wasn't closed, file: main_en_us_2022101700_1[24]
+11-07 21:56:07.239  1509  1523 W SP      : File ref is being finalized but wasn't closed, file: main_en_840_2022102600_1[10]
+11-07 21:56:07.239  1509  1523 W SP      : File ref is being finalized but wasn't closed, file: main_en_us_2022101700_1[24]
+11-07 21:56:07.239  1509  1523 W SP      : File ref is being finalized but wasn't closed, file: main_en_840_2022102600_1[10]
+11-07 21:56:07.239  1509  1523 W SP      : File ref is being finalized but wasn't closed, file: 2023012316_en[13]
+11-07 21:56:07.239  1509  1523 W SP      : File ref is being finalized but wasn't closed, file: 2023012316_en[13]
+11-07 21:56:07.239  1509  1523 W SP      : File ref is being finalized but wasn't closed, file: 2023012316_en[13]
+11-07 21:56:07.239  1509  1523 W SP      : File ref is being finalized but wasn't closed, file: 2023012316_en[13]
+11-07 21:56:07.239  1509  1523 W SP      : File ref is being finalized but wasn't closed, file: tflite-nwp-be541314788c7304827a9710c3ac4edb[5]
+11-07 21:56:07.239  1509  1523 W SP      : File ref is being finalized but wasn't closed, file: tflite-nwp-be541314788c7304827a9710c3ac4edb[5]
+11-07 21:56:07.290  1509  1509 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-07 21:56:07.296  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = HEADER, shownType = SHOW_MANDATORY_WITH_ANIMATION
+11-07 21:56:07.297  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-07 21:56:07.337  1509  2142 D EGL_emulation: app_time_stats: avg=2020.48ms min=101.17ms max=3939.80ms count=2
+11-07 21:56:08.069  4742  5479 D EGL_emulation: app_time_stats: avg=223.53ms min=106.81ms max=464.50ms count=5
+11-07 21:56:08.139  1015  1015 D TaplEvents: TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_DOWN, actionButton=0, id[0]=0, x[0]=178.81177, y[0]=646.5, toolType[0]=TOOL_TYPE_FINGER, buttonState=0, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=421572, downTime=421572, deviceId=-1, source=0x1002, displayId=0, eventId=-725180602 }
+11-07 21:56:08.578  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:56:08.665   482   500 W InputManager-JNI: Input channel object '438c494 Pop-Up Window (client)' was disposed without first being removed with the input manager!
+11-07 21:56:08.807  1509  2142 D EGL_emulation: app_time_stats: avg=1469.93ms min=1469.93ms max=1469.93ms count=1
+11-07 21:56:08.927  1509  1509 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-07 21:56:09.540   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:09.540   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:09.540   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:09.959   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:09.960   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:09.960   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:09.960   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:09.960   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:10.001  4742  5479 D EGL_emulation: app_time_stats: avg=59.60ms min=18.01ms max=366.17ms count=22
+11-07 21:56:10.926  4742  5479 D EGL_emulation: app_time_stats: avg=952.22ms min=114.67ms max=2156.27ms count=3
+11-07 21:56:11.092  4742  5479 D EGL_emulation: app_time_stats: avg=58.00ms min=7.92ms max=151.56ms count=18
+11-07 21:56:11.196  1509  1509 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-07 21:56:11.240   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:11.242   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:11.242   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:11.242   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:11.788   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:11.868  1509  1509 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-07 21:56:11.868  1509  1509 E InputConnectionParser: InputConnectionParser.responseWithError():106 responseWithError(): parse_code: 2
+11-07 21:56:11.870  1509  1509 E InputContextProxyV4: InputContextProxyV4.reset():371 reset(): un-successful, parse_code: 2, input_state_id 0
+11-07 21:56:11.870  1509  1509 W Delight5Decoder: Delight5DecoderWrapper.asyncFetchSuggestions():1876 asyncFetchSuggestions(): Decoder state is invalid
+11-07 21:56:12.156  4742  5479 D EGL_emulation: app_time_stats: avg=307.44ms min=111.76ms max=505.97ms count=4
+11-07 21:56:12.290  4742  5479 D EGL_emulation: app_time_stats: avg=59.55ms min=10.13ms max=224.75ms count=19
+11-07 21:56:12.418  1015  1015 D TaplEvents: TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_UP, actionButton=0, id[0]=0, x[0]=174.10373, y[0]=883.5, toolType[0]=TOOL_TYPE_FINGER, buttonState=0, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=425877, downTime=421572, deviceId=-1, source=0x1002, displayId=0, eventId=-805693693 }
+11-07 21:56:12.433  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:56:12.494  1509  1509 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-07 21:56:12.495  1509  1509 E InputConnectionParser: InputConnectionParser.responseWithError():106 responseWithError(): parse_code: 2
+11-07 21:56:12.496  1509  1509 E InputContextProxyV4: InputContextProxyV4.reset():371 reset(): un-successful, parse_code: 2, input_state_id 0
+11-07 21:56:12.497  1509  1509 W Delight5Decoder: Delight5DecoderWrapper.asyncFetchSuggestions():1876 asyncFetchSuggestions(): Decoder state is invalid
+11-07 21:56:12.533  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:56:12.536  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:56:12.609   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:12.609   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:12.664   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:12.852   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:12.852   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:12.852   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:12.852   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:12.852   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:12.852   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:13.925  1015  1015 D TaplEvents: TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_DOWN, actionButton=0, id[0]=0, x[0]=110.0, y[0]=962.5, toolType[0]=TOOL_TYPE_FINGER, buttonState=0, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=427354, downTime=427354, deviceId=-1, source=0x1002, displayId=0, eventId=-917981895 }
+11-07 21:56:13.984  1015  1015 D TaplEvents: TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_UP, actionButton=0, id[0]=0, x[0]=110.0, y[0]=962.5, toolType[0]=TOOL_TYPE_FINGER, buttonState=0, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=427442, downTime=427354, deviceId=-1, source=0x1002, displayId=0, eventId=-142739589 }
+11-07 21:56:13.990  4742  4742 D InsetsController: show(ime(), fromIme=false)
+11-07 21:56:14.020   482   499 W InputManager-JNI: Input channel object 'b70122c PopupWindow:8c8260 (client)' was disposed without first being removed with the input manager!
+11-07 21:56:14.072  4742  4742 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{8a8ca65 VFED..... .F...... 0,0-1080,2209 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+11-07 21:56:14.137  4742  5479 D EGL_emulation: app_time_stats: avg=659.04ms min=103.17ms max=1459.66ms count=3
+11-07 21:56:14.155   482  1974 W InputManager-JNI: Input channel object 'a607ac4 Pop-Up Window (client)' was disposed without first being removed with the input manager!
+11-07 21:56:14.181   482  1974 W InputManager-JNI: Input channel object 'e274b71 Pop-Up Window (client)' was disposed without first being removed with the input manager!
+11-07 21:56:14.191  4742  4742 D InsetsController: show(ime(), fromIme=true)
+11-07 21:56:14.206   339   370 W TransactionTracing: Could not find layer handle 0x77aa88539850
+11-07 21:56:14.206   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538650
+11-07 21:56:14.272  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:56:14.438  1509  1509 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-07 21:56:14.464  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = HEADER, shownType = SHOW_MANDATORY_WITH_ANIMATION
+11-07 21:56:14.465  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-07 21:56:14.502  1509  2142 D EGL_emulation: app_time_stats: avg=2796.23ms min=28.82ms max=5563.63ms count=2
+11-07 21:56:14.583   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:14.583   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:14.583   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:14.583   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:14.583   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:14.583   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:15.300  4742  5479 D EGL_emulation: app_time_stats: avg=232.43ms min=114.94ms max=480.19ms count=5
+11-07 21:56:15.333  1788  2516 I WorkerManager: dispose()
+11-07 21:56:15.334  1788  2516 W A       : Queue length for executor EventBus is now 11. Perhaps some tasks are too long, or the pool is too small.
+11-07 21:56:15.380  1015  1015 D TaplEvents: TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_DOWN, actionButton=0, id[0]=0, x[0]=178.81177, y[0]=646.5, toolType[0]=TOOL_TYPE_STYLUS, buttonState=0, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=428821, downTime=428821, deviceId=-1, source=0x5002, displayId=0, eventId=-1068485124 }
+11-07 21:56:15.811  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:56:15.905   482  1046 W InputManager-JNI: Input channel object '5be2806 Pop-Up Window (client)' was disposed without first being removed with the input manager!
+11-07 21:56:15.979  1509  1509 W InputConnectionWrapper: InputConnectionWrapper.recordDuration():1451 IPC IC_GET_SURROUNDING_TEXT took 114 ms
+11-07 21:56:16.073  1509  2142 D EGL_emulation: app_time_stats: avg=1570.05ms min=1570.05ms max=1570.05ms count=1
+11-07 21:56:16.187  1509  1509 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-07 21:56:16.429   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:16.976   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:16.977   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:17.094  4742  5479 D EGL_emulation: app_time_stats: avg=55.71ms min=21.44ms max=265.51ms count=22
+11-07 21:56:17.323   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:17.323   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:17.562   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:17.563   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:17.563   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:17.699  1015  1015 D TaplEvents: TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_UP, actionButton=0, id[0]=0, x[0]=178.81177, y[0]=646.5, toolType[0]=TOOL_TYPE_STYLUS, buttonState=0, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=431158, downTime=428821, deviceId=-1, source=0x5002, displayId=0, eventId=-743454908 }
+11-07 21:56:17.732  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:56:17.737  1656  1656 I AiAiTextClassifier: AiaiTextClassifierServiceConnector.onSuggestSelection
+11-07 21:56:17.746  1656  2368 I AiAiTextClassifier: [AiaiTextClassifierLibWrapper]: suggestSelectionInternal: return system response
+11-07 21:56:17.949  1478  5976 I DialerOmtpVvmCarrierConfigHelper: com.android.voicemail.impl.OmtpVvmCarrierConfigHelper.handleEvent:527 OmtpEvent:CONFIG_STATUS_SMS_TIME_OUT PhoneAccountHandle: [ComponentName: com.android.phone/com.android.services.telephony.TelephonyConnectionService subId: 1] [CONTEXT enable_persistent_logger=true ]
+11-07 21:56:17.977  1478  1478 I DialerRetryPolicy: com.android.voicemail.impl.scheduling.RetryPolicy.onCompleted:118 discarding deferred status [CONTEXT enable_persistent_logger=true ]
+11-07 21:56:17.979  1478  1478 I DialerTaskExecutor: com.android.voicemail.impl.scheduling.TaskExecutor.prepareStop:371 no more tasks, stopping service if no task are added in 5000 millis [CONTEXT enable_persistent_logger=true ]
+11-07 21:56:17.979  1478  1478 I DialerLogcatLoggingBindings: com.android.dialer.logging.logcat.LogcatLoggingBindings.logImpression:41 Impression: VVM_AUTO_RETRY_ACTIVATION
+11-07 21:56:17.979  1478  1478 I DialerTaskReceiver: com.android.voicemail.impl.scheduling.TaskReceiver.onReceive:68 task received [CONTEXT enable_persistent_logger=true ]
+11-07 21:56:17.980  1478  1478 I DialerTaskReceiver: com.android.voicemail.impl.scheduling.TaskReceiver.onReceive:73 TaskExecutor already running [CONTEXT enable_persistent_logger=true ]
+11-07 21:56:17.980  1478  1478 I DialerTasks: com.android.voicemail.impl.scheduling.Tasks.createTask:59 Task.createTask create task:com.android.voicemail.impl.ActivationTask [CONTEXT enable_persistent_logger=true ]
+11-07 21:56:17.980  1478  1478 I DialerRetryPolicy: com.android.voicemail.impl.scheduling.RetryPolicy.onCreate:81 retry #3 for com.android.voicemail.impl.ActivationTask@b69db59 queued, executing in 5000 [CONTEXT enable_persistent_logger=true ]
+11-07 21:56:17.983  1478  1478 I DialerTaskExecutor: com.android.voicemail.impl.scheduling.TaskExecutor.addTask:299 com.android.voicemail.impl.ActivationTask@b69db59 added [CONTEXT enable_persistent_logger=true ]
+11-07 21:56:17.983  1478  1478 I DialerTaskExecutor: com.android.voicemail.impl.scheduling.TaskExecutor.runNextTask:345 minimal wait time:4998 [CONTEXT enable_persistent_logger=true ]
+11-07 21:56:17.983  1478  1478 I DialerTaskExecutor: com.android.voicemail.impl.scheduling.TaskExecutor.sleep:355 sleep for 4998 millis [CONTEXT enable_persistent_logger=true ]
+11-07 21:56:18.082  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:56:18.093  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:56:18.279  4742  5479 D EGL_emulation: app_time_stats: avg=992.99ms min=145.53ms max=2242.47ms count=3
+11-07 21:56:19.154  1015  1015 D TaplEvents: TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_DOWN, actionButton=0, id[0]=0, x[0]=110.0, y[0]=962.5, toolType[0]=TOOL_TYPE_FINGER, buttonState=0, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=432583, downTime=432583, deviceId=-1, source=0x1002, displayId=0, eventId=-687797315 }
+11-07 21:56:19.221  1015  1015 D TaplEvents: TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_UP, actionButton=0, id[0]=0, x[0]=110.0, y[0]=962.5, toolType[0]=TOOL_TYPE_FINGER, buttonState=0, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=432680, downTime=432583, deviceId=-1, source=0x1002, displayId=0, eventId=-486498797 }
+11-07 21:56:19.240  4742  4742 D InsetsController: show(ime(), fromIme=false)
+11-07 21:56:19.254   482   500 W InputManager-JNI: Input channel object 'd9c1d19 PopupWindow:64ebcf0 (client)' was disposed without first being removed with the input manager!
+11-07 21:56:19.275   339   370 W TransactionTracing: Could not find layer handle 0x77aa88539550
+11-07 21:56:19.275   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538b90
+11-07 21:56:19.276  4742  4742 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{8a8ca65 VFED..... .F...... 0,0-1080,2209 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+11-07 21:56:19.342  4742  5479 D EGL_emulation: app_time_stats: avg=1061.74ms min=1061.74ms max=1061.74ms count=1
+11-07 21:56:19.349   482  1683 W InputManager-JNI: Input channel object '398ab24 Pop-Up Window (client)' was disposed without first being removed with the input manager!
+11-07 21:56:19.362   482  1683 W InputManager-JNI: Input channel object '12b5651 Pop-Up Window (client)' was disposed without first being removed with the input manager!
+11-07 21:56:19.366  4742  4742 D InsetsController: show(ime(), fromIme=true)
+11-07 21:56:19.396   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537450
+11-07 21:56:19.396   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537690
+11-07 21:56:19.396   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537690
+11-07 21:56:19.427  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:56:19.460   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:19.460   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:19.570  1509  1509 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-07 21:56:19.582  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = HEADER, shownType = SHOW_MANDATORY_WITH_ANIMATION
+11-07 21:56:19.584  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-07 21:56:19.629  1509  2142 D EGL_emulation: app_time_stats: avg=1778.21ms min=54.28ms max=3502.14ms count=2
+11-07 21:56:19.888   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:19.890   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:19.891   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:19.891   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:19.891   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:19.892   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:19.892   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:20.350  4742  5479 D EGL_emulation: app_time_stats: avg=198.72ms min=56.09ms max=479.91ms count=5
+11-07 21:56:20.436  1015  1015 D TaplEvents: TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_DOWN, actionButton=0, id[0]=0, x[0]=178.81177, y[0]=646.5, toolType[0]=TOOL_TYPE_STYLUS, buttonState=0, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=433872, downTime=433872, deviceId=-1, source=0x5002, displayId=0, eventId=-952150669 }
+11-07 21:56:20.495  1015  1015 D TaplEvents: TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_UP, actionButton=0, id[0]=0, x[0]=178.81177, y[0]=646.5, toolType[0]=TOOL_TYPE_STYLUS, buttonState=0, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=433953, downTime=433872, deviceId=-1, source=0x5002, displayId=0, eventId=-415014265 }
+11-07 21:56:20.506  4742  4742 D InsetsController: show(ime(), fromIme=false)
+11-07 21:56:20.509  4742  4742 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{8a8ca65 VFED..... .F...... 0,0-1080,2209 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+11-07 21:56:20.518  4742  4742 D InsetsController: show(ime(), fromIme=true)
+11-07 21:56:20.630  1015  1015 D TaplEvents: TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_DOWN, actionButton=0, id[0]=0, x[0]=178.81177, y[0]=646.5, toolType[0]=TOOL_TYPE_STYLUS, buttonState=0, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=434070, downTime=434070, deviceId=-1, source=0x5002, displayId=0, eventId=-325780291 }
+11-07 21:56:20.644  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:56:20.718  1015  1015 D TaplEvents: TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_UP, actionButton=0, id[0]=0, x[0]=178.81177, y[0]=646.5, toolType[0]=TOOL_TYPE_STYLUS, buttonState=0, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=434174, downTime=434070, deviceId=-1, source=0x5002, displayId=0, eventId=-944416712 }
+11-07 21:56:20.777   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:20.777   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:20.777   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:20.777   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:20.795  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:56:20.803  1656  1656 I AiAiTextClassifier: AiaiTextClassifierServiceConnector.onSuggestSelection
+11-07 21:56:20.820   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537690
+11-07 21:56:20.869   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:20.933  1656  2368 I AiAiTextClassifier: [AiaiTextClassifierLibWrapper]: suggestSelectionInternal: return system response
+11-07 21:56:20.940   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:21.012   482  1046 W InputManager-JNI: Input channel object '7322166 Pop-Up Window (client)' was disposed without first being removed with the input manager!
+11-07 21:56:21.040   339   370 W TransactionTracing: Could not find layer handle 0x77aa88539550
+11-07 21:56:21.041   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537450
+11-07 21:56:21.041   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537450
+11-07 21:56:21.043   482   500 W InputManager-JNI: Input channel object 'e342c0 PopupWindow:f4abe87 (client)' was disposed without first being removed with the input manager!
+11-07 21:56:21.047  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:56:21.089   339   370 W TransactionTracing: Could not find layer handle 0x77aa88539130
+11-07 21:56:21.089   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538b30
+11-07 21:56:21.140  1509  2142 D EGL_emulation: app_time_stats: avg=1510.64ms min=1510.64ms max=1510.64ms count=1
+11-07 21:56:21.325  4742  4759 I om.quartz.notes: NativeAlloc concurrent copying GC freed 278821(9502KB) AllocSpace objects, 1(24KB) LOS objects, 49% free, 10MB/21MB, paused 437us,19us total 586.051ms
+11-07 21:56:21.329  1509  1509 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-07 21:56:21.433  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:56:21.439  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:56:21.536   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:21.536   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:21.536   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:21.536   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:21.656  4742  5479 D EGL_emulation: app_time_stats: avg=326.19ms min=160.93ms max=509.41ms count=4
+11-07 21:56:21.914   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:22.451  1015  1015 D TaplEvents: TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_DOWN, actionButton=0, id[0]=0, x[0]=110.0, y[0]=962.5, toolType[0]=TOOL_TYPE_FINGER, buttonState=0, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=435884, downTime=435884, deviceId=-1, source=0x1002, displayId=0, eventId=-738184036 }
+11-07 21:56:22.514  1015  1015 D TaplEvents: TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_UP, actionButton=0, id[0]=0, x[0]=110.0, y[0]=962.5, toolType[0]=TOOL_TYPE_FINGER, buttonState=0, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=435972, downTime=435884, deviceId=-1, source=0x1002, displayId=0, eventId=-350575897 }
+11-07 21:56:22.523  4742  4742 D InsetsController: show(ime(), fromIme=false)
+11-07 21:56:22.545   482   500 W InputManager-JNI: Input channel object 'b4e5131 PopupWindow:f4abe87 (client)' was disposed without first being removed with the input manager!
+11-07 21:56:22.596  4742  4742 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{8a8ca65 VFED..... .F...... 0,0-1080,2209 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+11-07 21:56:22.632   339   370 W TransactionTracing: Could not find layer handle 0x77aa88539130
+11-07 21:56:22.632   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537450
+11-07 21:56:22.646   482   500 W InputManager-JNI: Input channel object '13cf569 Pop-Up Window (client)' was disposed without first being removed with the input manager!
+11-07 21:56:22.671   339   370 W TransactionTracing: Could not find layer handle 0x77aa88534750
+11-07 21:56:22.671   339   370 W TransactionTracing: Could not find layer handle 0x77aa88539370
+11-07 21:56:22.671   339   370 W TransactionTracing: Could not find layer handle 0x77aa88539370
+11-07 21:56:22.702   482  1683 W InputManager-JNI: Input channel object 'fab7a2 Pop-Up Window (client)' was disposed without first being removed with the input manager!
+11-07 21:56:22.706   339   370 W TransactionTracing: Could not find layer handle 0x77aa88536190
+11-07 21:56:22.706   339   370 W TransactionTracing: Could not find layer handle 0x77aa8853a6f0
+11-07 21:56:22.710  4742  4742 D InsetsController: show(ime(), fromIme=true)
+11-07 21:56:22.805  4742  5479 D EGL_emulation: app_time_stats: avg=573.44ms min=179.46ms max=967.42ms count=2
+11-07 21:56:22.812  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:56:22.922  1509  1509 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-07 21:56:22.970  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = HEADER, shownType = SHOW_MANDATORY_WITH_ANIMATION
+11-07 21:56:22.970  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-07 21:56:23.056  1478  5976 I DialerTaskExecutor: com.android.voicemail.impl.scheduling.TaskExecutor$WorkerThreadHandler.handleMessage:221 executing task com.android.voicemail.impl.ActivationTask@b69db59 [CONTEXT enable_persistent_logger=true ]
+11-07 21:56:23.062  1478  1478 I DialerLogcatLoggingBindings: com.android.dialer.logging.logcat.LogcatLoggingBindings.logImpression:41 Impression: VVM_ACTIVATION_STARTED
+11-07 21:56:23.108  1478  5976 I DialerPreOMigrationHandler: com.android.voicemail.impl.PreOMigrationHandler.migrate:76 ComponentInfo{com.android.phone/com.android.services.telephony.TelephonyConnectionService}, 1, UserHandle{0} already migrated [CONTEXT enable_persistent_logger=true ]
+11-07 21:56:23.121  1478  5976 I DialerOmtpVvmCarrierConfigHelper: com.android.voicemail.impl.OmtpVvmCarrierConfigHelper.isCarrierAppInstalled:637 carrier app not installed in this device [CONTEXT ratelimit_period="1 MINUTES [skipped: 4]" ]
+11-07 21:56:23.122  1478  5976 I DialerVoicemailStatus: com.android.voicemail.impl.VoicemailStatus$Editor.apply:112 enter
+11-07 21:56:23.167  1478  5976 I DialerVoicemailStatusDataServiceImpl: com.android.dialer.voicemailstatus.dataservice.impl.VoicemailStatusDataServiceImpl.insertOrUpdateVoicemailStatus:196 enter
+11-07 21:56:23.170  1509  2142 D EGL_emulation: app_time_stats: avg=953.46ms min=114.73ms max=1792.18ms count=2
+11-07 21:56:23.218  1478  7971 I DialerRestVoicemailEnabledFn: com.android.dialer.voicemail.service.impl.vvmclients.rest.RestVoicemailEnabledFn.isEnabled:51 disabled by flag [CONTEXT ratelimit_period="1 MINUTES [skipped: 23]" ]
+11-07 21:56:23.218  1478  7971 I DialerCvvmEnabledFn: com.android.dialer.voicemail.service.impl.vvmclients.omtp.protocol.cvvm.CvvmEnabledFn.isEnabled:37 disabled by flag [CONTEXT ratelimit_period="1 MINUTES [skipped: 11]" ]
+11-07 21:56:23.251  1478  7971 W Settings: Setting airplane_mode_on has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+11-07 21:56:23.252  1478  7971 I DialerVoicemailStatusDataServiceImpl: com.android.dialer.voicemailstatus.dataservice.impl.VoicemailStatusDataServiceImpl.lambda$insertOrUpdateVoicemailStatus$5:213 merged status: # kee@6600c263
+11-07 21:56:23.253  1478  5976 I DialerActivationTask: com.android.voicemail.impl.ActivationTask.onExecuteInBackgroundThread:292 VVM content provider configured - vvm_type_cvvm PhoneAccountHandle: [ComponentName: com.android.phone/com.android.services.telephony.TelephonyConnectionService subId: 1] [CONTEXT enable_persistent_logger=true ]
+11-07 21:56:23.254  1478  5976 I DialerActivationTask: com.android.voicemail.impl.ActivationTask.updateVoicemailsWithIccId:477 conversion disabled [CONTEXT enable_persistent_logger=true ]
+11-07 21:56:23.256  1478  5976 I DialerOmtpVvmCarrierConfigHelper: com.android.voicemail.impl.OmtpVvmCarrierConfigHelper.handleEvent:527 OmtpEvent:CONFIG_ACTIVATING PhoneAccountHandle: [ComponentName: com.android.phone/com.android.services.telephony.TelephonyConnectionService subId: 1] [CONTEXT enable_persistent_logger=true ]
+11-07 21:56:23.257  1478  5976 I DialerVoicemailStatus: com.android.voicemail.impl.VoicemailStatus$Editor.apply:112 enter
+11-07 21:56:23.258  1478  5976 I DialerVoicemailStatusDataServiceImpl: com.android.dialer.voicemailstatus.dataservice.impl.VoicemailStatusDataServiceImpl.insertOrUpdateVoicemailStatus:196 enter
+11-07 21:56:23.333  1478  7972 W Settings: Setting airplane_mode_on has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+11-07 21:56:23.337  1478  7972 I DialerVoicemailStatusDataServiceImpl: com.android.dialer.voicemailstatus.dataservice.impl.VoicemailStatusDataServiceImpl.lambda$insertOrUpdateVoicemailStatus$5:213 merged status: # kee@6600c263
+11-07 21:56:23.347  1478  5976 I DialerActivationTask: com.android.voicemail.impl.ActivationTask.onExecuteInBackgroundThread:339 sending an activation request [CONTEXT enable_persistent_logger=true ]
+11-07 21:56:23.359   982  1496 D SmsNumberUtils: enter filterDestAddr. destAddr="[BajqU4K5_YhSYbs-7QUn0dOwcmI]"
+11-07 21:56:23.364   982  1496 D SmsNumberUtils: destAddr is not formatted.
+11-07 21:56:23.364   982  1496 D SmsNumberUtils: leave filterDestAddr, new destAddr="[BajqU4K5_YhSYbs-7QUn0dOwcmI]"
+11-07 21:56:23.372  1478  5976 I DialerLogcatLoggingBindings: com.android.dialer.logging.logcat.LogcatLoggingBindings.logImpression:46 Impression: CVVM_SEND_VVM_SMS
+11-07 21:56:23.407  1478  1478 I DialerStatusSmsFetcher: com.android.voicemail.impl.sms.StatusSmsFetcher.onReceive:106 Request SMS successfully sent [CONTEXT enable_persistent_logger=true ]
+11-07 21:56:23.884  4742  5479 D EGL_emulation: app_time_stats: avg=269.57ms min=99.30ms max=517.67ms count=4
+11-07 21:56:23.949  1015  1015 D TaplEvents: TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_DOWN, actionButton=0, id[0]=0, x[0]=178.81177, y[0]=646.5, toolType[0]=TOOL_TYPE_MOUSE, buttonState=BUTTON_PRIMARY, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=437397, downTime=437397, deviceId=-1, source=0x2002, displayId=0, eventId=-137925699 }
+11-07 21:56:24.008   482  1683 E InputDispatcher: Motion event has invalid action code 0xb
+11-07 21:56:24.081   482  1683 E InputDispatcher: Motion event has invalid action code 0xc
+11-07 21:56:24.096  1015  1015 D TaplEvents: TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_UP, actionButton=0, id[0]=0, x[0]=178.81177, y[0]=646.5, toolType[0]=TOOL_TYPE_MOUSE, buttonState=0, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=437544, downTime=437397, deviceId=-1, source=0x2002, displayId=0, eventId=-561971375 }
+11-07 21:56:24.110  4742  4742 D InsetsController: show(ime(), fromIme=false)
+11-07 21:56:24.123  4742  4742 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{8a8ca65 VFED..... .F...... 0,0-1080,2209 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+11-07 21:56:24.228  4742  4742 D InsetsController: show(ime(), fromIme=true)
+11-07 21:56:24.325  1015  1015 D TaplEvents: TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_DOWN, actionButton=0, id[0]=0, x[0]=178.81177, y[0]=646.5, toolType[0]=TOOL_TYPE_MOUSE, buttonState=BUTTON_PRIMARY, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=437634, downTime=437633, deviceId=-1, source=0x2002, displayId=0, eventId=-356469420 }
+11-07 21:56:24.342   482  1683 E InputDispatcher: Motion event has invalid action code 0xb
+11-07 21:56:24.408   482   500 E InputDispatcher: Motion event has invalid action code 0xc
+11-07 21:56:24.431  1015  1015 D TaplEvents: TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_UP, actionButton=0, id[0]=0, x[0]=178.81177, y[0]=646.5, toolType[0]=TOOL_TYPE_MOUSE, buttonState=0, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=437870, downTime=437633, deviceId=-1, source=0x2002, displayId=0, eventId=-132891685 }
+11-07 21:56:24.471   482  1683 W InputManager-JNI: Input channel object 'eb01823 Pop-Up Window (client)' was disposed without first being removed with the input manager!
+11-07 21:56:24.517   339   370 W TransactionTracing: Could not find layer handle 0x77aa88536190
+11-07 21:56:24.517   339   370 W TransactionTracing: Could not find layer handle 0x77aa88539370
+11-07 21:56:24.517   339   370 W TransactionTracing: Could not find layer handle 0x77aa88539370
+11-07 21:56:24.733  1509  1509 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-07 21:56:24.745  1509  2142 D EGL_emulation: app_time_stats: avg=1574.24ms min=1574.24ms max=1574.24ms count=1
+11-07 21:56:24.865  1015  1015 D TaplEvents: TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_DOWN, actionButton=0, id[0]=0, x[0]=110.0, y[0]=962.5, toolType[0]=TOOL_TYPE_FINGER, buttonState=0, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=438292, downTime=438292, deviceId=-1, source=0x1002, displayId=0, eventId=-814714524 }
+11-07 21:56:24.963  1015  1015 D TaplEvents: TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_UP, actionButton=0, id[0]=0, x[0]=110.0, y[0]=962.5, toolType[0]=TOOL_TYPE_FINGER, buttonState=0, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=438421, downTime=438292, deviceId=-1, source=0x1002, displayId=0, eventId=-330569039 }
+11-07 21:56:24.979  4742  4742 D InsetsController: show(ime(), fromIme=false)
+11-07 21:56:24.990  4742  4742 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{8a8ca65 VFED..... .F...... 0,0-1080,2209 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+11-07 21:56:24.999  4742  4742 D InsetsController: show(ime(), fromIme=true)
+11-07 21:56:25.040  4742  5479 D EGL_emulation: app_time_stats: avg=162.81ms min=68.40ms max=250.75ms count=7
+11-07 21:56:25.041  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:56:25.260  1509  1509 W InputConnectionWrapper: InputConnectionWrapper.recordDuration():1451 IPC IC_GET_SURROUNDING_TEXT took 249 ms
+11-07 21:56:25.464  1509  1509 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-07 21:56:25.469  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = HEADER, shownType = SHOW_MANDATORY_WITH_ANIMATION
+11-07 21:56:25.469  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-07 21:56:26.030  1015  1015 D TaplEvents: TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_DOWN, actionButton=0, id[0]=0, x[0]=178.81177, y[0]=646.5, toolType[0]=TOOL_TYPE_MOUSE, buttonState=BUTTON_PRIMARY, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=439466, downTime=439466, deviceId=-1, source=0x2002, displayId=0, eventId=-81285004 }
+11-07 21:56:26.063   482  1683 E InputDispatcher: Motion event has invalid action code 0xb
+11-07 21:56:26.107  4742  5479 D EGL_emulation: app_time_stats: avg=213.25ms min=65.58ms max=392.74ms count=5
+11-07 21:56:26.128   482  1683 E InputDispatcher: Motion event has invalid action code 0xc
+11-07 21:56:26.147  1015  1015 D TaplEvents: TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_UP, actionButton=0, id[0]=0, x[0]=178.81177, y[0]=646.5, toolType[0]=TOOL_TYPE_MOUSE, buttonState=0, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=439592, downTime=439466, deviceId=-1, source=0x2002, displayId=0, eventId=-984334255 }
+11-07 21:56:26.157  4742  4742 D InsetsController: show(ime(), fromIme=false)
+11-07 21:56:26.160  4742  4742 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{8a8ca65 VFED..... .F...... 0,0-1080,2209 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+11-07 21:56:26.210  4742  4742 D InsetsController: show(ime(), fromIme=true)
+11-07 21:56:26.276  1015  1015 D TaplEvents: TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_DOWN, actionButton=0, id[0]=0, x[0]=178.81177, y[0]=646.5, toolType[0]=TOOL_TYPE_MOUSE, buttonState=BUTTON_PRIMARY, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=439727, downTime=439727, deviceId=-1, source=0x2002, displayId=0, eventId=-207571245 }
+11-07 21:56:26.361   482   500 E InputDispatcher: Motion event has invalid action code 0xb
+11-07 21:56:26.449   482  1683 E InputDispatcher: Motion event has invalid action code 0xc
+11-07 21:56:26.498   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:26.498   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:26.501  1015  1015 D TaplEvents: TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_UP, actionButton=0, id[0]=0, x[0]=178.81177, y[0]=646.5, toolType[0]=TOOL_TYPE_MOUSE, buttonState=0, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=439909, downTime=439727, deviceId=-1, source=0x2002, displayId=0, eventId=-252775432 }
+11-07 21:56:26.626  1015  1015 D TaplEvents: TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_DOWN, actionButton=0, id[0]=0, x[0]=178.81177, y[0]=646.5, toolType[0]=TOOL_TYPE_MOUSE, buttonState=BUTTON_PRIMARY, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=440068, downTime=440068, deviceId=-1, source=0x2002, displayId=0, eventId=-933086410 }
+11-07 21:56:26.641   482   500 E InputDispatcher: Motion event has invalid action code 0xb
+11-07 21:56:26.747   482   500 E InputDispatcher: Motion event has invalid action code 0xc
+11-07 21:56:26.776  1015  1015 D TaplEvents: TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_UP, actionButton=0, id[0]=0, x[0]=178.81177, y[0]=646.5, toolType[0]=TOOL_TYPE_MOUSE, buttonState=0, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=440212, downTime=440068, deviceId=-1, source=0x2002, displayId=0, eventId=-459279852 }
+11-07 21:56:26.936   482  1683 W InputManager-JNI: Input channel object 'df6af02 Pop-Up Window (client)' was disposed without first being removed with the input manager!
+11-07 21:56:26.951   339   370 W TransactionTracing: Could not find layer handle 0x77aa885398b0
+11-07 21:56:26.955   339   370 W TransactionTracing: Could not find layer handle 0x77aa88534510
+11-07 21:56:26.955   339   370 W TransactionTracing: Could not find layer handle 0x77aa88534510
+11-07 21:56:27.175  1509  1509 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-07 21:56:27.196  1509  2142 D EGL_emulation: app_time_stats: avg=816.99ms min=165.08ms max=1711.26ms count=3
+11-07 21:56:27.231  4742  5479 D EGL_emulation: app_time_stats: avg=224.76ms min=99.45ms max=366.56ms count=5
+11-07 21:56:27.354   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:27.354   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:27.354   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:27.354   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:27.885  4714  4738 W System  : A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+11-07 21:56:27.886  4714  4738 W System  : java.lang.Throwable: Explicit termination method 'HardwareBuffer.close' not called
+11-07 21:56:27.886  4714  4738 W System  : 	at dalvik.system.CloseGuard.openWithCallSite(CloseGuard.java:288)
+11-07 21:56:27.886  4714  4738 W System  : 	at dalvik.system.CloseGuard.open(CloseGuard.java:257)
+11-07 21:56:27.886  4714  4738 W System  : 	at android.hardware.HardwareBuffer.<init>(HardwareBuffer.java:272)
+11-07 21:56:27.886  4714  4738 W System  : A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+11-07 21:56:27.886  4714  4738 W System  : java.lang.Throwable: Explicit termination method 'HardwareBuffer.close' not called
+11-07 21:56:27.886  4714  4738 W System  : 	at dalvik.system.CloseGuard.openWithCallSite(CloseGuard.java:288)
+11-07 21:56:27.886  4714  4738 W System  : 	at dalvik.system.CloseGuard.open(CloseGuard.java:257)
+11-07 21:56:27.886  4714  4738 W System  : 	at android.hardware.HardwareBuffer.<init>(HardwareBuffer.java:272)
+11-07 21:56:28.032   762   806 D SplashScreenView: Build android.window.SplashScreenView{8ccdad2 V.E...... ......ID 0,0-0,0}
+11-07 21:56:28.032   762   806 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-07 21:56:28.032   762   806 D SplashScreenView: Branding: view: android.view.View{a5157a3 G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-07 21:56:28.050  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@84f3d94 in: PAUSED
+11-07 21:56:28.050  4742  4742 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=androidx.activity.ComponentActivity@84f3d94
+11-07 21:56:28.057   762   816 W Parcel  : Expecting binder but got null!
+11-07 21:56:28.141  1788  1788 I BgTaskExecutorImpl: Starting EXCLUSIVE background task UPLOAD_ASSISTANT_DEVICE_SETTINGS.
+11-07 21:56:28.199  5498  5521 W Parcel  : Expecting binder but got null!
+11-07 21:56:28.275  1788  2516 I A       : Using proto config with mendel
+11-07 21:56:28.275  1788  2516 I A       : Using proto config with mendel
+11-07 21:56:28.275  1788  2516 I A       : Using proto config with mendel
+11-07 21:56:28.275  1788  2516 I A       : Merging legacy hotword config map with new proto.
+11-07 21:56:28.275  1788  2516 I A       : Adding from config to map. Locale: cmn-Hant-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+11-07 21:56:28.275  1788  2516 I A       : Adding from config to map. Locale: id-ID modelPrefix: x_google Location:cfffcc1a4c1c084c003c8eb27f73d770 isSpeakerIdSupported: true
+11-07 21:56:28.275  1788  2516 I A       : Adding from config to map. Locale: ko-KR modelPrefix: x_google Location:0b132163a2eb2c1194b202067475724b isSpeakerIdSupported: true
+11-07 21:56:28.275  1788  2516 I A       : Skipping. Expected model: 2 Found: 1
+11-07 21:56:28.276  1788  2516 I A       : Adding from config to map. Locale: zh-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+11-07 21:56:28.282  1788  2516 I A       : Using proto config with mendel
+11-07 21:56:28.282  1788  2516 I A       : Using proto config with mendel
+11-07 21:56:28.282  1788  2516 I A       : Using proto config with mendel
+11-07 21:56:28.353  1788  2516 I MicroDetectionState: Should stop hotword detection immediately - true
+11-07 21:56:28.358   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:28.358   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:28.358   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:28.358   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:28.426  1788  2783 W LocationOracle: getBestLocation(): no location is available
+11-07 21:56:28.432  1788  7623 I NetworkRecognitionRnr: Using pair HTTP connection
+11-07 21:56:28.530   482  2342 W system_server: Long monitor contention with owner android.anim (508) at android.content.res.Configuration com.android.server.wm.ActivityTaskManagerService.getGlobalConfigurationForPid(int)(ActivityTaskManagerService.java:1128) waiters=0 in void com.android.server.wm.Session.setOnBackInvokedCallbackInfo(android.view.IWindow, android.window.OnBackInvokedCallbackInfo) for 173ms
+11-07 21:56:28.542  1788  2310 W LocationOracle: No location returned by GMS core getLastLocation()
+11-07 21:56:28.543  1788  2760 I A       : [Upload] Connected
+11-07 21:56:28.605   339   370 W TransactionTracing: Could not find layer handle 0x77aa88534510
+11-07 21:56:28.606   339   370 W TransactionTracing: Could not find layer handle 0x77aa88534510
+11-07 21:56:28.606   339   370 W TransactionTracing: Could not find layer handle 0x77aa885388f0
+11-07 21:56:28.607   339   370 W TransactionTracing: Could not find layer handle 0x77aa885367f0
+11-07 21:56:28.608   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537c30
+11-07 21:56:28.608   339   370 W TransactionTracing: Could not find layer handle 0x77aa885367f0
+11-07 21:56:28.608   339   370 W TransactionTracing: Could not find layer handle 0x77aa885388f0
+11-07 21:56:28.608   339   370 W TransactionTracing: Could not find layer handle 0x77aa885388f0
+11-07 21:56:28.609   339   370 W TransactionTracing: Could not find layer handle 0x77aa885367f0
+11-07 21:56:28.609   339   370 W TransactionTracing: Could not find layer handle 0x77aa88534510
+11-07 21:56:28.609   339   370 W TransactionTracing: Could not find layer handle 0x77aa88534510
+11-07 21:56:28.609   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:28.759   762   816 D EGL_emulation: app_time_stats: avg=28741.32ms min=28741.32ms max=28741.32ms count=1
+11-07 21:56:28.788  1788  2308 W CronetNetworkRqstWrppr: Upload request without a content type.
+11-07 21:56:28.793  1788  2760 I NetworkRecognitionRnr: Using pair HTTP connection
+11-07 21:56:28.794  1788  2562 I A       : [Upload] Connected
+11-07 21:56:28.795  1788  1788 E A       : onError
+11-07 21:56:28.795  1788  1788 E A       : com.google.android.apps.gsa.shared.speech.a.m: errorCode: 65561, engine: 2
+11-07 21:56:28.795  1788  1788 E A       : 	at com.google.android.apps.gsa.staticplugins.dc.a.e.a(PG:3)
+11-07 21:56:28.795  1788  1788 E A       : 	at com.google.android.apps.gsa.s3.n.hh(PG:1)
+11-07 21:56:28.795  1788  1788 E A       : 	at com.google.cd.g.a.f.e(PG:2)
+11-07 21:56:28.795  1788  1788 E A       : 	at com.google.android.apps.gsa.speech.k.a.g.d(PG:22)
+11-07 21:56:28.795  1788  1788 E A       : 	at com.google.android.apps.gsa.speech.k.a.g.ks(PG:6)
+11-07 21:56:28.795  1788  1788 E A       : 	at com.google.android.apps.gsa.s3.o.e(PG:14)
+11-07 21:56:28.795  1788  1788 E A       : 	at com.google.android.apps.gsa.s3.p.run(PG:1)
+11-07 21:56:28.795  1788  1788 E A       : 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:463)
+11-07 21:56:28.795  1788  1788 E A       : 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+11-07 21:56:28.795  1788  1788 E A       : 	at com.google.android.apps.gsa.shared.util.c.a.e.run(PG:2)
+11-07 21:56:28.795  1788  1788 E A       : 	at com.google.android.apps.gsa.shared.util.c.a.bi.run(PG:1)
+11-07 21:56:28.795  1788  1788 E A       : 	at com.google.android.apps.gsa.shared.util.c.a.bi.run(PG:1)
+11-07 21:56:28.795  1788  1788 E A       : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-07 21:56:28.795  1788  1788 E A       : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-07 21:56:28.795  1788  1788 E A       : 	at java.lang.Thread.run(Thread.java:1012)
+11-07 21:56:28.795  1788  1788 E A       : 	at com.google.android.apps.gsa.shared.util.c.a.l.run(PG:5)
+11-07 21:56:28.795  1788  1788 E A       : Caused by: com.google.android.apps.gsa.shared.speech.a.o: errorCode: 65586, engine: 2
+11-07 21:56:28.795  1788  1788 E A       : 	... 15 more
+11-07 21:56:28.795  1788  1788 E A       : Caused by: com.google.android.apps.gsa.shared.speech.a.k: errorCode: 401, engine: 2
+11-07 21:56:28.795  1788  1788 E A       : 	at com.google.android.apps.gsa.assistant.shared.n.h.a(PG:5)
+11-07 21:56:28.795  1788  1788 E A       : 	at com.google.android.apps.gsa.s3.producers.j.hE(PG:2)
+11-07 21:56:28.795  1788  1788 E A       : 	at com.google.android.apps.gsa.speech.k.a.g.d(PG:16)
+11-07 21:56:28.795  1788  1788 E A       : 	... 12 more
+11-07 21:56:28.817  1788  1788 W A       : Failed to sync device settings.
+11-07 21:56:28.817  1788  1788 I A       : Retrying to sync device settings.
+11-07 21:56:28.865  1015  1028 I s.nexuslauncher: NativeAlloc concurrent copying GC freed 51903(3032KB) AllocSpace objects, 3(84KB) LOS objects, 49% free, 5496KB/10MB, paused 43us,19us total 147.119ms
+11-07 21:56:28.904   339   370 W TransactionTracing: Could not find layer handle 0x77aa885337f0
+11-07 21:56:28.929   482   504 W ziparchive: Unable to open '/data/app/~~4TVIc7XwTeyKClnx2wNTew==/com.quartz.notes.test-zlzTdZBdsXZKg-Xck8A6-w==/base.dm': No such file or directory
+11-07 21:56:28.991  1015  1030 W System  : A resource failed to call release.
+11-07 21:56:28.991  1015  1030 W System  : A resource failed to call release.
+11-07 21:56:28.991  1015  1030 W System  : A resource failed to call release.
+11-07 21:56:28.992  1015  1030 W System  : A resource failed to call release.
+11-07 21:56:28.992  1015  1030 W System  : A resource failed to call release.
+11-07 21:56:28.992  1015  1030 W System  : A resource failed to call release.
+11-07 21:56:28.992  1015  1030 W System  : A resource failed to call release.
+11-07 21:56:28.992  1015  1030 W System  : A resource failed to call release.
+11-07 21:56:28.992  1015  1030 W System  : A resource failed to call release.
+11-07 21:56:28.997   482   504 I ActivityTaskManager: Displayed com.quartz.notes.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity: +908ms
+11-07 21:56:29.038  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@84f3d94 in: STOPPED
+11-07 21:56:29.112  4742  4742 V ActivityScenario: Update currentActivityStage to STOPPED, currentActivity=androidx.activity.ComponentActivity@84f3d94
+11-07 21:56:29.115   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 21:56:29.115   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 1
+11-07 21:56:29.115   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 21:56:29.120   482  2054 W InputManager-JNI: Input channel object '7cdcb2 Splash Screen com.quartz.notes.test (client)' was disposed without first being removed with the input manager!
+11-07 21:56:29.125  4742  4742 I System.out: FocusRelatedWarning:
+11-07 21:56:29.125  4742  4742 I System.out:    FocusRequester is not initialized. Here are some possible fixes:
+11-07 21:56:29.125  4742  4742 I System.out:
+11-07 21:56:29.125  4742  4742 I System.out:    1. Remember the FocusRequester: val focusRequester = remember { FocusRequester() }
+11-07 21:56:29.125  4742  4742 I System.out:    2. Did you forget to add a Modifier.focusRequester() ?
+11-07 21:56:29.132   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538b90
+11-07 21:56:29.142  4742  4742 I System.out:    3. Are you attempting to request focus during composition? Focus requests should be made in
+11-07 21:56:29.142  4742  4742 I System.out:    response to some event. Eg Modifier.clickable { focusRequester.requestFocus() }
+11-07 21:56:29.157   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537ed0
+11-07 21:56:29.157   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537ed0
+11-07 21:56:29.157   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537ed0
+11-07 21:56:29.157   339   370 W TransactionTracing: Could not find layer handle 0x77aa88539310
+11-07 21:56:29.157   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:29.157   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:29.196  4742  4742 D AutofillManager: onActivityFinishing(): calling cancelLocked()
+11-07 21:56:29.196  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@84f3d94 in: DESTROYED
+11-07 21:56:29.197  4742  4742 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
+11-07 21:56:29.198  4742  4836 D IdlingRegistry: Unregistering idling resources: [androidx.compose.ui.test.EspressoLink@e521d0]
+11-07 21:56:29.200  1015  1015 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+11-07 21:56:29.208   482  1684 W AppSearchIcing: icing-search-engine.cc:217: Error: 5, Message: Document (com.google.android.googlequicksearchbox$OneSearchZeroStateGoogleSuggestions/default, zp) not found.
+11-07 21:56:29.213  1015  2099 D OneSearchSuggestProvider: Created the binder channel successfully for end point service =com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService , mChannel=Q0{delegate=L0{logId=89, target=directaddress:///AndroidComponentAddress%5BIntent%20%7B%20act=grpc.io.action.BIND%20cmp=com.google.android.googlequicksearchbox/com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService%20%7D%5D}} , mOneSearchConnection=y1.J@2d06380
+11-07 21:56:29.214  1015  1015 D MainContentCaptureSession: Flushing 2 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARING
+11-07 21:56:29.215  1015  1015 D MainContentCaptureSession: Flushing 32 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARED
+11-07 21:56:29.234   482  2342 W InputManager-JNI: Input channel object '612e99b com.quartz.notes/androidx.activity.ComponentActivity (client)' was disposed without first being removed with the input manager!
+11-07 21:56:29.245  1788  1788 I A       : Created gRPC endpoint to "search" for service class com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService
+11-07 21:56:29.286   339   370 W TransactionTracing: Could not find layer id -1
+11-07 21:56:29.289  1788  2516 I A       : Using proto config with mendel
+11-07 21:56:29.294  1788  2516 W A       : Queue length for executor EventBus is now 11. Perhaps some tasks are too long, or the pool is too small.
+11-07 21:56:29.305  1788  2353 W CorpusConfigHelper: Invalid input from icing corpus JSON flag.
+11-07 21:56:29.305  1788  2353 W CorpusConfigHelper: android.util.MalformedJsonException: Use JsonReader.setLenient(true) to accept malformed JSON at line 123 column 2
+11-07 21:56:29.305  1788  2353 W CorpusConfigHelper: 	at android.util.JsonReader.syntaxError(JsonReader.java:1162)
+11-07 21:56:29.305  1788  2353 W CorpusConfigHelper: 	at android.util.JsonReader.checkLenient(JsonReader.java:840)
+11-07 21:56:29.305  1788  2353 W CorpusConfigHelper: 	at android.util.JsonReader.nextInArray(JsonReader.java:615)
+11-07 21:56:29.305  1788  2353 W CorpusConfigHelper: 	at android.util.JsonReader.peek(JsonReader.java:345)
+11-07 21:56:29.305  1788  2353 W CorpusConfigHelper: 	at android.util.JsonReader.hasNext(JsonReader.java:321)
+11-07 21:56:29.305  1788  2353 W CorpusConfigHelper: 	at com.google.android.apps.gsa.searchbox.c.b.b.k.c(PG:7)
+11-07 21:56:29.305  1788  2353 W CorpusConfigHelper: 	at com.google.android.apps.gsa.searchbox.c.b.b.k.<init>(PG:5)
+11-07 21:56:29.305  1788  2353 W CorpusConfigHelper: 	at com.google.android.apps.gsa.staticplugins.searchboxroot.features.n.a.c.<init>(PG:16)
+11-07 21:56:29.305  1788  2353 W CorpusConfigHelper: 	at com.google.android.apps.gsa.staticplugins.searchboxroot.b.a(PG:14)
+11-07 21:56:29.305  1788  2353 W CorpusConfigHelper: 	at com.google.android.apps.gsa.staticplugins.searchboxroot.x.<init>(PG:7)
+11-07 21:56:29.305  1788  2353 W CorpusConfigHelper: 	at com.google.android.apps.gsa.binaries.velvet.app.akd.b(PG:15)
+11-07 21:56:29.305  1788  2353 W CorpusConfigHelper: 	at dagger.a.e.b(PG:1)
+11-07 21:56:29.305  1788  2353 W CorpusConfigHelper: 	at com.google.android.apps.gsa.staticplugins.searchboxroot.a.a.a(PG:3)
+11-07 21:56:29.305  1788  2353 W CorpusConfigHelper: 	at com.google.android.apps.gsa.binaries.velvet.app.ok.f(Unknown Source:2541)
+11-07 21:56:29.305  1788  2353 W CorpusConfigHelper: 	at com.google.android.apps.gsa.binaries.velvet.app.ok.b(PG:1)
+11-07 21:56:29.305  1788  2353 W CorpusConfigHelper: 	at com.google.android.apps.gsa.search.core.service.g.a.c.a(PG:2)
+11-07 21:56:29.305  1788  2353 W CorpusConfigHelper: 	at com.google.android.libraries.gsa.k.a.f.a(PG:2)
+11-07 21:56:29.305  1788  2353 W CorpusConfigHelper: 	at com.google.common.util.concurrent.dx.a(PG:1)
+11-07 21:56:29.305  1788  2353 W CorpusConfigHelper: 	at com.google.common.util.concurrent.cv.run(PG:4)
+11-07 21:56:29.305  1788  2353 W CorpusConfigHelper: 	at com.google.common.util.concurrent.dz.run(PG:1)
+11-07 21:56:29.305  1788  2353 W CorpusConfigHelper: 	at com.google.android.libraries.i.ae.run(PG:1)
+11-07 21:56:29.305  1788  2353 W CorpusConfigHelper: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-07 21:56:29.305  1788  2353 W CorpusConfigHelper: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-07 21:56:29.305  1788  2353 W CorpusConfigHelper: 	at com.google.android.libraries.i.k.run(PG:2)
+11-07 21:56:29.305  1788  2353 W CorpusConfigHelper: 	at com.google.android.libraries.i.p.run(PG:4)
+11-07 21:56:29.305  1788  2353 W CorpusConfigHelper: 	at java.lang.Thread.run(Thread.java:1012)
+11-07 21:56:29.332   339   370 W TransactionTracing: Could not find layer handle 0x77aa88536c70
+11-07 21:56:29.332   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537b70
+11-07 21:56:29.345  1656  2067 I AiAiEcho: Predicting[0]:
+11-07 21:56:29.345  1656  2067 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:
+11-07 21:56:29.346  1656  2067 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0
+11-07 21:56:29.348  1656  2067 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0
+11-07 21:56:29.353  4742  4836 I TestRunner: finished: selectingTextOnPage(com.quartz.notes.ui.notebook.PageInputTest)

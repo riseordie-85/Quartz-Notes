@@ -1,0 +1,5 @@
+11-07 21:52:17.086  4742  4836 I TestRunner: started: openNoteShowsChangesOrKeepsThemAsACopy(com.quartz.notes.ui.LiveEditTest)
+11-07 21:52:17.153  4742  4742 W om.quartz.notes: Method void androidx.compose.runtime.snapshots.SnapshotStateListKt.clearImpl(androidx.compose.runtime.snapshots.SnapshotStateList) failed lock verification and will run slower.
+11-07 21:52:17.153  4742  4742 W om.quartz.notes: Common causes for lock verification issues are non-optimized dex code
+11-07 21:52:17.153  4742  4742 W om.quartz.notes: and incorrect proguard optimizations.
+11-07 21:52:17.297  4742  4836 I TestRunner: finished: openNoteShowsChangesOrKeepsThemAsACopy(com.quartz.notes.ui.LiveEditTest)

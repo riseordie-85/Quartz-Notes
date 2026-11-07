@@ -1,0 +1,45 @@
+11-07 21:52:07.134  4742  4836 I TestRunner: started: picturesRecordingsAndFontsTravel(com.quartz.notes.data.sync.SyncEngineTest)
+11-07 21:52:07.137  4742  4836 D TrafficStats: tagSocket(95) with statsTag=0xffffffff, statsUid=-1
+11-07 21:52:07.166  1321  4132 I Pay     : Attempting migration; GP2 not installed. [CONTEXT service_id=198 ]
+11-07 21:52:07.209  1321  4132 I Pay     : Migration flag not enabled. [CONTEXT service_id=198 ]
+11-07 21:52:07.209  1321  4132 I Pay     : Migration flag not enabled. [CONTEXT service_id=198 ]
+11-07 21:52:07.211  1321  4132 I Pay     : Migration flag not enabled. [CONTEXT service_id=198 ]
+11-07 21:52:07.211  1321  4132 I Pay     : Migration flag not enabled. [CONTEXT service_id=198 ]
+11-07 21:52:07.211  1321  4132 I Pay     : [SeTosMigration] walletJpEligibility is not enabled [CONTEXT service_id=198 ]
+11-07 21:52:07.214  1321  4132 I Pay     : Wallet install state NOT_INSTALLED [CONTEXT service_id=198 ]
+11-07 21:52:07.215  1321  4132 I Pay     : Migration flag not enabled. [CONTEXT service_id=198 ]
+11-07 21:52:07.218  1060  2930 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService finished executing. cause:5 result: 1 elapsed_millis: 233 uptime_millis: 233 exec_start_elapsed_seconds: 180 [CONTEXT service_id=218 ]
+11-07 21:52:07.240  1060  3133 I TapAndPay: Disabling TapAndPay HCE service [CONTEXT service_id=79 ]
+11-07 21:52:07.241  1321  5311 W Pay     : Active account was null, notification task will be cancelled. [CONTEXT service_id=198 ]
+11-07 21:52:07.241  1321  5311 W Pay     : No account found on the task or the device. Notification task will not be rescheduled. [CONTEXT service_id=198 ]
+11-07 21:52:07.242  1060  5307 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService started execution. cause:5 exec_start_elapsed_seconds: 180 [CONTEXT service_id=218 ]
+11-07 21:52:07.248  1060  2930 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService finished executing. cause:5 result: 2 elapsed_millis: 16 uptime_millis: 16 exec_start_elapsed_seconds: 180 [CONTEXT service_id=218 ]
+11-07 21:52:07.267  1060  5307 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService started execution. cause:5 exec_start_elapsed_seconds: 180 [CONTEXT service_id=218 ]
+11-07 21:52:07.275  1060  2930 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService finished executing. cause:5 result: 1 elapsed_millis: 13 uptime_millis: 13 exec_start_elapsed_seconds: 180 [CONTEXT service_id=218 ]
+11-07 21:52:07.293  1060  5307 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService started execution. cause:5 exec_start_elapsed_seconds: 180 [CONTEXT service_id=218 ]
+11-07 21:52:07.307  1060  2930 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService finished executing. cause:5 result: 1 elapsed_millis: 17 uptime_millis: 17 exec_start_elapsed_seconds: 180 [CONTEXT service_id=218 ]
+11-07 21:52:07.338  1060  5307 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.udc.service.UdcContextInitService started execution. cause:5 exec_start_elapsed_seconds: 180 [CONTEXT service_id=218 ]
+11-07 21:52:07.352  1060  1076 E GmsTaskScheduler: sendWakeUpEvent called on SchedulerClientBroadcastStrategy
+11-07 21:52:07.380  1060  2930 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.udc.service.UdcContextInitService finished executing. cause:5 result: 1 elapsed_millis: 57 uptime_millis: 57 exec_start_elapsed_seconds: 180 [CONTEXT service_id=218 ]
+11-07 21:52:07.504  1321  5357 E PhenotypeFlagCommitter: Retrieving snapshot for com.google.lighter.android#com.google.android.gms failed
+11-07 21:52:07.504  1321  5357 E PhenotypeFlagCommitter: java.util.concurrent.TimeoutException: Timed out waiting for Task
+11-07 21:52:07.504  1321  5357 E PhenotypeFlagCommitter: 	at cfsz.o(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-07 21:52:07.504  1321  5357 E PhenotypeFlagCommitter: 	at bwch.e(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-07 21:52:07.504  1321  5357 E PhenotypeFlagCommitter: 	at bwch.j(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-07 21:52:07.504  1321  5357 E PhenotypeFlagCommitter: 	at bwch.h(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 21:52:07.504  1321  5357 E PhenotypeFlagCommitter: 	at crqn.apply(:com.google.android.gms@231818047@23.18.18 (190800-535401451):10)
+11-07 21:52:07.504  1321  5357 E PhenotypeFlagCommitter: 	at dlny.d(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-07 21:52:07.504  1321  5357 E PhenotypeFlagCommitter: 	at dlnz.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):9)
+11-07 21:52:07.504  1321  5357 E PhenotypeFlagCommitter: 	at dlpk.execute(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 21:52:07.504  1321  5357 E PhenotypeFlagCommitter: 	at dlnv.h(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+11-07 21:52:07.504  1321  5357 E PhenotypeFlagCommitter: 	at dlnv.l(:com.google.android.gms@231818047@23.18.18 (190800-535401451):10)
+11-07 21:52:07.504  1321  5357 E PhenotypeFlagCommitter: 	at dlnv.o(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 21:52:07.504  1321  5357 E PhenotypeFlagCommitter: 	at dlrs.e(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 21:52:07.504  1321  5357 E PhenotypeFlagCommitter: 	at dlqs.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-07 21:52:07.504  1321  5357 E PhenotypeFlagCommitter: 	at dlrt.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 21:52:07.504  1321  5357 E PhenotypeFlagCommitter: 	at crqq.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-07 21:52:07.504  1321  5357 E PhenotypeFlagCommitter: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-07 21:52:07.504  1321  5357 E PhenotypeFlagCommitter: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-07 21:52:07.504  1321  5357 E PhenotypeFlagCommitter: 	at crri.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 21:52:07.504  1321  5357 E PhenotypeFlagCommitter: 	at java.lang.Thread.run(Thread.java:1012)
+11-07 21:52:07.798  4742  4836 I TestRunner: finished: picturesRecordingsAndFontsTravel(com.quartz.notes.data.sync.SyncEngineTest)

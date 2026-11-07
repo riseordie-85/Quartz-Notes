@@ -1,0 +1,13 @@
+11-07 21:58:27.424  4742  4836 I TestRunner: started: shelfFillsItsSizeWithTheFirstNotebooksInOrder(com.quartz.notes.widget.WidgetsTest)
+11-07 21:58:28.468  1478  5976 I DialerOmtpVvmCarrierConfigHelper: com.android.voicemail.impl.OmtpVvmCarrierConfigHelper.handleEvent:527 OmtpEvent:CONFIG_STATUS_SMS_TIME_OUT PhoneAccountHandle: [ComponentName: com.android.phone/com.android.services.telephony.TelephonyConnectionService subId: 1] [CONTEXT enable_persistent_logger=true ]
+11-07 21:58:28.473  1478  1478 I DialerRetryPolicy: com.android.voicemail.impl.scheduling.RetryPolicy.onCompleted:106 Retry limit for com.android.voicemail.impl.ActivationTask@f4a5ee1 reached [CONTEXT enable_persistent_logger=true ]
+11-07 21:58:28.473  1478  1478 I DialerRetryPolicy: com.android.voicemail.impl.scheduling.RetryPolicy.onCompleted:108 committing deferred status [CONTEXT enable_persistent_logger=true ]
+11-07 21:58:28.474  1478  1478 I DialerTaskExecutor: com.android.voicemail.impl.scheduling.TaskExecutor.prepareStop:371 no more tasks, stopping service if no task are added in 5000 millis [CONTEXT enable_persistent_logger=true ]
+11-07 21:58:28.476  1478  8350 I DialerVoicemailStatus: com.android.voicemail.impl.VoicemailStatus$Editor.apply:112 enter
+11-07 21:58:28.477  1478  8350 I DialerVoicemailStatusDataServiceImpl: com.android.dialer.voicemailstatus.dataservice.impl.VoicemailStatusDataServiceImpl.insertOrUpdateVoicemailStatus:196 enter
+11-07 21:58:28.480  1478  8351 I DialerRestVoicemailEnabledFn: com.android.dialer.voicemail.service.impl.vvmclients.rest.RestVoicemailEnabledFn.isEnabled:51 disabled by flag [CONTEXT ratelimit_period="1 MINUTES [skipped: 23]" ]
+11-07 21:58:28.480  1478  8351 I DialerCvvmEnabledFn: com.android.dialer.voicemail.service.impl.vvmclients.omtp.protocol.cvvm.CvvmEnabledFn.isEnabled:37 disabled by flag [CONTEXT ratelimit_period="1 MINUTES [skipped: 11]" ]
+11-07 21:58:28.483  1478  8351 I DialerOmtpVvmCarrierConfigHelper: com.android.voicemail.impl.OmtpVvmCarrierConfigHelper.isCarrierAppInstalled:637 carrier app not installed in this device [CONTEXT ratelimit_period="1 MINUTES [skipped: 4]" ]
+11-07 21:58:28.487  1478  8351 W Settings: Setting airplane_mode_on has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+11-07 21:58:28.487  1478  8351 I DialerVoicemailStatusDataServiceImpl: com.android.dialer.voicemailstatus.dataservice.impl.VoicemailStatusDataServiceImpl.lambda$insertOrUpdateVoicemailStatus$5:213 merged status: # kee@5cbbd7c4
+11-07 21:58:28.747  4742  4836 I TestRunner: finished: shelfFillsItsSizeWithTheFirstNotebooksInOrder(com.quartz.notes.widget.WidgetsTest)

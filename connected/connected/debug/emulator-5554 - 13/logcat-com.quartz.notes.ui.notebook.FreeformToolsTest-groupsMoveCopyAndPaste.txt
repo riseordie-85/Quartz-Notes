@@ -1,0 +1,91 @@
+11-07 21:54:30.477  4742  4836 I TestRunner: started: groupsMoveCopyAndPaste(com.quartz.notes.ui.notebook.FreeformToolsTest)
+11-07 21:54:30.547  4742  4836 D IdlingRegistry: Registering idling resources: [androidx.compose.ui.test.EspressoLink@d649df4]
+11-07 21:54:30.553  1788  2378 I A       : group apa_head_suggest not present without account in *
+11-07 21:54:30.555  1788  2378 I A       : incrementApaDataDownloadStoreStatus(latency = PT0.056S, appVersion = 13.17.16.23, status = NOT_FOUND, locale = *, fileGroupnames = apa_head_suggest, accountScoped = false, localGroupsAvailable = false, timeSinceSearchBoot = Optional[PT4M22.85S] (ONE_TO_FIVE_MINUTES), timeSinceDataDownloadInit = PT1M31.968S (ONE_TO_FIVE_MINUTES))
+11-07 21:54:30.556  4742  4836 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+11-07 21:54:30.573  1788  2378 I A       : incrementApaDataDownloadStoreStatusNotFound(appVersion = 13.17.16.23, locale = *, groupName = apa_head_suggest, accountScoped = false, foundGroups = 0, status = 0, localGroupsAvailable = false)
+11-07 21:54:30.617  1788  2516 I A       : Using proto config with mendel
+11-07 21:54:30.618  1788  2516 W A       : Queue length for executor EventBus is now 11. Perhaps some tasks are too long, or the pool is too small.
+11-07 21:54:30.681   482   507 W system_server: Long monitor contention with owner binder:482_12 (1634) at void com.android.server.am.ActivityManagerService.finishReceiver(android.os.IBinder, int, java.lang.String, android.os.Bundle, boolean, int)(ActivityManagerService.java:14660) waiters=0 in void com.android.server.am.ProcessRecord.setRunningRemoteAnimation(boolean) for 144ms
+11-07 21:54:30.711  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-07 21:54:30.738  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-07 21:54:30.738  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.google.android.apps.nexuslauncher fieldId=-1 fieldName=null extras=null}, false)
+11-07 21:54:30.738  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-07 21:54:30.742  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-07 21:54:30.895  1015  1015 D MainContentCaptureSession: Flushing 0 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_ROOT
+11-07 21:54:30.904  1656  1656 W ContentCaptureService: handleSendEvents() received empty list of events
+11-07 21:54:30.943   339   370 W TransactionTracing: Could not find layer handle 0x77aa88533bb0
+11-07 21:54:30.944   482   499 W system_server: Long monitor contention with owner binder:482_12 (1634) at void com.android.server.am.ActivityManagerService.finishReceiver(android.os.IBinder, int, java.lang.String, android.os.Bundle, boolean, int)(ActivityManagerService.java:14660) waiters=2 in android.content.ComponentName com.android.server.am.ActivityManagerService.startService(android.app.IApplicationThread, android.content.Intent, java.lang.String, boolean, java.lang.String, java.lang.String, int) for 713ms
+11-07 21:54:30.955   482  1058 W InputManager-JNI: Input channel object 'e8d22a3 com.quartz.notes.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity (client)' was disposed without first being removed with the input manager!
+11-07 21:54:30.969   482   927 W system_server: Long monitor contention with owner binder:482_12 (1634) at void com.android.server.am.ActivityManagerService.finishReceiver(android.os.IBinder, int, java.lang.String, android.os.Bundle, boolean, int)(ActivityManagerService.java:14660) waiters=1 in void com.android.server.am.ActivityManagerService.setHasTopUi(boolean) for 780ms
+11-07 21:54:31.001   762   806 D SplashScreenView: Build android.window.SplashScreenView{71c634 V.E...... ......ID 0,0-0,0}
+11-07 21:54:31.001   762   806 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-07 21:54:31.001   762   806 D SplashScreenView: Branding: view: android.view.View{b0d6c5d G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-07 21:54:31.002   762   816 W Parcel  : Expecting binder but got null!
+11-07 21:54:31.021   339   370 W TransactionTracing: Could not find layer handle 0x77aa88535650
+11-07 21:54:31.022   339   370 W TransactionTracing: Could not find layer handle 0x77aa885392b0
+11-07 21:54:31.022   339   370 W TransactionTracing: Could not find layer handle 0x77aa885371b0
+11-07 21:54:31.022   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538110
+11-07 21:54:31.089   762   816 D EGL_emulation: app_time_stats: avg=1419.57ms min=1419.57ms max=1419.57ms count=1
+11-07 21:54:31.325  1788  2516 I A       : Using proto config with mendel
+11-07 21:54:31.338  1788  2516 W A       : Task o[ServiceTransaction[SessionController#handleGenericClientEvent]] was queued for 1003ms before starting on executor EventBus
+11-07 21:54:31.421  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@f28c078 in: PRE_ON_CREATE
+11-07 21:54:31.422  4742  4742 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+11-07 21:54:31.436  1015  1015 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+11-07 21:54:31.468  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@f28c078 in: CREATED
+11-07 21:54:31.469  4742  4742 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=androidx.activity.ComponentActivity@f28c078
+11-07 21:54:31.470  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@f28c078 in: STARTED
+11-07 21:54:31.470  4742  4742 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=androidx.activity.ComponentActivity@f28c078
+11-07 21:54:31.477  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@f28c078 in: RESUMED
+11-07 21:54:31.477  4742  4742 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=androidx.activity.ComponentActivity@f28c078
+11-07 21:54:31.484  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:54:31.680   339   370 W TransactionTracing: Could not find layer handle 0x77aa8853a6f0
+11-07 21:54:31.697   482  1058 W system_server: Long monitor contention with owner android.anim (508) at void com.android.server.wm.InputMonitor$UpdateInputWindows.run()(InputMonitor.java:138) waiters=5 in void com.android.server.wm.Session.setOnBackInvokedCallbackInfo(android.view.IWindow, android.window.OnBackInvokedCallbackInfo) for 121ms
+11-07 21:54:31.744  1015  1883 D EGL_emulation: app_time_stats: avg=212.63ms min=40.19ms max=388.45ms count=7
+11-07 21:54:31.758   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 21:54:31.760   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 1
+11-07 21:54:31.760   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 21:54:31.765   482   504 W ziparchive: Unable to open '/data/app/~~ewbzk_m16xDkclmAVpjUzA==/com.quartz.notes-XqM5_4k8BE5yt-arn9ES4A==/base.dm': No such file or directory
+11-07 21:54:31.765   482   504 I ActivityTaskManager: Displayed com.quartz.notes/androidx.activity.ComponentActivity: +754ms
+11-07 21:54:31.812   762   816 D EGL_emulation: app_time_stats: avg=1022.71ms min=573.74ms max=1471.68ms count=2
+11-07 21:54:31.830  1015  2099 D OneSearchSuggestProvider: Shut down the binder channel
+11-07 21:54:31.897  1788  2759 I PBSessionCacheImpl: Deleted sessionId[7865501250074942] from persistence.
+11-07 21:54:31.903  1015  1015 D MainContentCaptureSession: Flushing 2 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARING
+11-07 21:54:31.904  1015  1015 D MainContentCaptureSession: Flushing 2 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARED
+11-07 21:54:31.912  1788  2516 W SearchServiceCore: Abort, client detached.
+11-07 21:54:31.931   482  1618 W InputManager-JNI: Input channel object 'db88b5 Splash Screen com.quartz.notes (client)' was disposed without first being removed with the input manager!
+11-07 21:54:31.949   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538ad0
+11-07 21:54:31.954  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-07 21:54:31.955  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-07 21:54:31.955  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=null}, false)
+11-07 21:54:31.955  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-07 21:54:31.956  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-07 21:54:31.973   339   370 W TransactionTracing: Could not find layer handle 0x77aa885394f0
+11-07 21:54:31.974   339   370 W TransactionTracing: Could not find layer handle 0x77aa88535650
+11-07 21:54:32.020   339   370 W TransactionTracing: Could not find layer handle 0x77aa88533430
+11-07 21:54:32.037  1015  2073 I s.nexuslauncher: oneway function results for code 2 on binder at 0x73e60dd73a00 will be dropped but finished with status UNKNOWN_TRANSACTION
+11-07 21:54:32.132   762   816 D EGL_emulation: app_time_stats: avg=520.66ms min=53.18ms max=988.14ms count=2
+11-07 21:54:32.174   482   482 W ServiceConnector.Impl: mayInterruptIfRunning not supported - ignoring
+11-07 21:54:32.181  1656  1656 D AugmentedAutofillService: handleOnConnected(): debug=true, verbose=false
+11-07 21:54:32.192  1656  2553 I AiAiAutofill: Disconnected AiAiAugmentedAutofillService.
+11-07 21:54:32.206  1656  2553 I AiAiAutofill: Connected AiAiAugmentedAutofillService.
+11-07 21:54:32.295   762   806 D SplashScreenView: Build android.window.SplashScreenView{18c2b82 V.E...... ......ID 0,0-0,0}
+11-07 21:54:32.295   762   806 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-07 21:54:32.295   762   806 D SplashScreenView: Branding: view: android.view.View{67c5293 G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-07 21:54:32.297   762   816 W Parcel  : Expecting binder but got null!
+11-07 21:54:32.303  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@f28c078 in: PAUSED
+11-07 21:54:32.303  4742  4742 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=androidx.activity.ComponentActivity@f28c078
+11-07 21:54:32.521  5498  5521 W Parcel  : Expecting binder but got null!
+11-07 21:54:32.532  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@f28c078 in: STOPPED
+11-07 21:54:32.544  4742  4742 V ActivityScenario: Update currentActivityStage to STOPPED, currentActivity=androidx.activity.ComponentActivity@f28c078
+11-07 21:54:32.596   339   370 W TransactionTracing: Could not find layer handle 0x77aa8853a090
+11-07 21:54:32.598   339   370 W TransactionTracing: Could not find layer handle 0x77aa8853a090
+11-07 21:54:32.598   339   370 W TransactionTracing: Could not find layer handle 0x77aa8853a090
+11-07 21:54:32.618   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 21:54:32.618   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 1
+11-07 21:54:32.619   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 21:54:32.756  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@f28c078 in: DESTROYED
+11-07 21:54:32.756  4742  4742 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
+11-07 21:54:32.759  4742  4836 D IdlingRegistry: Unregistering idling resources: [androidx.compose.ui.test.EspressoLink@d649df4]
+11-07 21:54:32.761   482  2049 W InputManager-JNI: Input channel object 'c19ad77 com.quartz.notes/androidx.activity.ComponentActivity (client)' was disposed without first being removed with the input manager!
+11-07 21:54:32.764  4742  4836 I TestRunner: finished: groupsMoveCopyAndPaste(com.quartz.notes.ui.notebook.FreeformToolsTest)

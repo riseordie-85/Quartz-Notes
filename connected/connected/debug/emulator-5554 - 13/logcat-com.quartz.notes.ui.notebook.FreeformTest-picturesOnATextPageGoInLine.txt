@@ -1,0 +1,152 @@
+11-07 21:54:05.146  4742  4836 I TestRunner: started: picturesOnATextPageGoInLine(com.quartz.notes.ui.notebook.FreeformTest)
+11-07 21:54:05.186  1788  1788 I A       : Created gRPC endpoint to "search" for service class com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService
+11-07 21:54:05.243   482  1058 W InputManager-JNI: Input channel object '58d6aec com.quartz.notes.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity (client)' was disposed without first being removed with the input manager!
+11-07 21:54:05.245   339   370 W TransactionTracing: Could not find layer handle 0x77aa88538350
+11-07 21:54:05.250   339   370 W TransactionTracing: Could not find layer handle 0x77aa88535b30
+11-07 21:54:05.294  5498  5498 I Choreographer: Skipped 43 frames!  The application may be doing too much work on its main thread.
+11-07 21:54:05.301  1509  1944 I ProtoXDBBufferWrapper: ProtoXDBBufferWrapper.flushToStorage():153 Flushed 7 data item(s) to storage.
+11-07 21:54:05.306  4742  4836 D IdlingRegistry: Registering idling resources: [androidx.compose.ui.test.EspressoLink@8de4f90]
+11-07 21:54:05.362  4742  4836 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+11-07 21:54:05.369   339   370 W TransactionTracing: Could not find layer handle 0x77aa88536970
+11-07 21:54:05.413  1788  2353 I A       : group apa_head_suggest not present without account in *
+11-07 21:54:05.422  1788  2353 I A       : incrementApaDataDownloadStoreStatus(latency = PT0.02S, appVersion = 13.17.16.23, status = NOT_FOUND, locale = *, fileGroupnames = apa_head_suggest, accountScoped = false, localGroupsAvailable = false, timeSinceSearchBoot = Optional[PT3M57.753S] (ONE_TO_FIVE_MINUTES), timeSinceDataDownloadInit = PT1M6.87S (ONE_TO_FIVE_MINUTES))
+11-07 21:54:05.424  1788  2353 I A       : incrementApaDataDownloadStoreStatusNotFound(appVersion = 13.17.16.23, locale = *, groupName = apa_head_suggest, accountScoped = false, foundGroups = 0, status = 0, localGroupsAvailable = false)
+11-07 21:54:05.475  1015  1015 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+11-07 21:54:05.608  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@4d4ff54 in: PRE_ON_CREATE
+11-07 21:54:05.609  4742  4742 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+11-07 21:54:05.615  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@4d4ff54 in: CREATED
+11-07 21:54:05.616  4742  4742 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=androidx.activity.ComponentActivity@4d4ff54
+11-07 21:54:05.617  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@4d4ff54 in: STARTED
+11-07 21:54:05.619  4742  4742 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=androidx.activity.ComponentActivity@4d4ff54
+11-07 21:54:05.620  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@4d4ff54 in: RESUMED
+11-07 21:54:05.621  4742  4742 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=androidx.activity.ComponentActivity@4d4ff54
+11-07 21:54:05.628   762   901 W ndroid.systemui: Long monitor contention with owner SysUiBg (821) at boolean android.os.MessageQueue.enqueueMessage(android.os.Message, long)(MessageQueue.java:600) waiters=2 in boolean android.os.MessageQueue.enqueueMessage(android.os.Message, long) for 183ms
+11-07 21:54:05.630   762   806 D SplashScreenView: Build android.window.SplashScreenView{bc26635 V.E...... ......ID 0,0-0,0}
+11-07 21:54:05.630   762   806 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-07 21:54:05.630   762   806 D SplashScreenView: Branding: view: android.view.View{ee7daca G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-07 21:54:05.633   762   816 W Parcel  : Expecting binder but got null!
+11-07 21:54:05.639  4742  5479 W Parcel  : Expecting binder but got null!
+11-07 21:54:05.825  6979  7191 I Nearby  : [MBleClient] Start ble scanning from NearbyDirect:BluetoothAdapterWrapper, context tag = nearby_messages [CONTEXT service_id=49 ]
+11-07 21:54:05.847  6979  7191 D BluetoothAdapter: isLeEnabled(): ON
+11-07 21:54:05.933  1015  1883 D EGL_emulation: app_time_stats: avg=324.19ms min=114.86ms max=597.13ms count=5
+11-07 21:54:05.998  1788  2516 W A       : Queue length for executor EventBus is now 11. Perhaps some tasks are too long, or the pool is too small.
+11-07 21:54:06.065  1788  2516 I A       : Using proto config with mendel
+11-07 21:54:06.085  7031  7043 I gle.android.gms: Background concurrent copying GC freed 352710(16MB) AllocSpace objects, 452(19MB) LOS objects, 49% free, 7659KB/14MB, paused 56us,26us total 1.886s
+11-07 21:54:06.095   482   507 W system_server: Long monitor contention with owner android.anim (508) at void com.android.server.wm.WindowSurfacePlacer$Traverser.run()(WindowSurfacePlacer.java:58) waiters=0 in void com.android.server.wm.ActivityRecord$2.run() for 132ms
+11-07 21:54:06.388   762   816 D EGL_emulation: app_time_stats: avg=859.31ms min=170.91ms max=1547.72ms count=2
+11-07 21:54:06.491   482  1634 W system_server: Long monitor contention with owner android.anim (508) at void com.android.server.wm.StartingSurfaceController$StartingSurface.remove(boolean)(StartingSurfaceController.java:272) waiters=1 in int com.android.server.wm.ActivityTaskManagerService.getLastResumedActivityUserId() for 356ms
+11-07 21:54:06.534   482   507 W system_server: Long monitor contention with owner android.anim (508) at void com.android.server.wm.StartingSurfaceController$StartingSurface.remove(boolean)(StartingSurfaceController.java:272) waiters=0 in void com.android.server.wm.WindowManagerService$H.handleMessage(android.os.Message) for 358ms
+11-07 21:54:06.551   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 21:54:06.553   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 1
+11-07 21:54:06.554   955  1284 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 2
+11-07 21:54:06.555  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-07 21:54:06.561   482  1058 W system_server: Long monitor contention with owner android.anim (508) at com.android.server.pm.Computer com.android.server.pm.PackageManagerService.snapshotComputer()(PackageManagerService.java:1111) waiters=0 in com.android.server.pm.Computer com.android.server.pm.PackageManagerService.snapshotComputer() for 142ms
+11-07 21:54:06.562  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-07 21:54:06.563  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=null}, false)
+11-07 21:54:06.563  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-07 21:54:06.563  1509  1509 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-07 21:54:06.568  1478  5976 I DialerOmtpVvmCarrierConfigHelper: com.android.voicemail.impl.OmtpVvmCarrierConfigHelper.handleEvent:527 OmtpEvent:CONFIG_STATUS_SMS_TIME_OUT PhoneAccountHandle: [ComponentName: com.android.phone/com.android.services.telephony.TelephonyConnectionService subId: 1] [CONTEXT enable_persistent_logger=true ]
+11-07 21:54:06.570   762   816 D EGL_emulation: app_time_stats: avg=1571.03ms min=1571.03ms max=1571.03ms count=1
+11-07 21:54:06.572   482  1974 W system_server: Long monitor contention with owner android.anim (508) at com.android.server.pm.Computer com.android.server.pm.PackageManagerService.snapshotComputer()(PackageManagerService.java:1111) waiters=1 in com.android.server.pm.Computer com.android.server.pm.PackageManagerService.snapshotComputer() for 577ms
+11-07 21:54:06.573   482   697 W system_server: Long monitor contention with owner android.anim (508) at com.android.server.pm.Computer com.android.server.pm.PackageManagerService.snapshotComputer()(PackageManagerService.java:1111) waiters=2 in com.android.server.pm.Computer com.android.server.pm.PackageManagerService.snapshotComputer() for 566ms
+11-07 21:54:06.574   482   927 W system_server: Long monitor contention with owner android.anim (508) at com.android.server.pm.Computer com.android.server.pm.PackageManagerService.snapshotComputer()(PackageManagerService.java:1111) waiters=3 in com.android.server.pm.Computer com.android.server.pm.PackageManagerService.snapshotComputer() for 503ms
+11-07 21:54:06.575   482  2054 W system_server: Long monitor contention with owner android.anim (508) at com.android.server.pm.Computer com.android.server.pm.PackageManagerService.snapshotComputer()(PackageManagerService.java:1111) waiters=4 in com.android.server.pm.Computer com.android.server.pm.PackageManagerService.snapshotComputer() for 495ms
+11-07 21:54:06.593   955   984 D BtGatt.GattService: stopScan() - queue size =3
+11-07 21:54:06.601   955   984 D ActivityAttributionService: notifyActivityAttributionInfo UID=1002 packageName=com.google.android.bluetooth deviceAddress=no_active_device_address
+11-07 21:54:06.602  1478  1478 I DialerRetryPolicy: com.android.voicemail.impl.scheduling.RetryPolicy.onCompleted:118 discarding deferred status [CONTEXT enable_persistent_logger=true ]
+11-07 21:54:06.604   955   984 I bt_btif : packages/modules/Bluetooth/system/btif/src/bluetooth.cc:465 get_profile_interface: get_profile_interface: id = activity_attribution
+11-07 21:54:06.604   955  1284 D BtGatt.ScanManager: handling stopping scan  [ScanClient scanModeApp 2 scanModeUsed 2 [appScanStats com.google.uid.shared:10120]]
+11-07 21:54:06.604   955  1284 I bt_stack: [INFO:le_scanning_manager.cc(174)] ScanFilterParamSetup in shim layer
+11-07 21:54:06.605   955  1254 D BtGatt.GattService: onScanFilterParamsConfigured() - clientIf=3, status=0, action=0, availableSpace=0
+11-07 21:54:06.605   955  1254 D BtGatt.ScanManager: callback done for scannerId - 3 status - 0
+11-07 21:54:06.605   955  1284 I bt_stack: [INFO:le_scanning_manager.cc(174)] ScanFilterParamSetup in shim layer
+11-07 21:54:06.605   955  1254 D BtGatt.GattService: onScanFilterParamsConfigured() - clientIf=3, status=0, action=0, availableSpace=0
+11-07 21:54:06.605   955  1254 D BtGatt.ScanManager: callback done for scannerId - 3 status - 0
+11-07 21:54:06.605   955  1284 I bt_stack: [INFO:le_scanning_manager.cc(174)] ScanFilterParamSetup in shim layer
+11-07 21:54:06.605   955  1254 D BtGatt.GattService: onScanFilterParamsConfigured() - clientIf=3, status=0, action=0, availableSpace=0
+11-07 21:54:06.606   955  1254 D BtGatt.ScanManager: callback done for scannerId - 3 status - 0
+11-07 21:54:06.606   955  1284 I bt_stack: [INFO:le_scanning_manager.cc(174)] ScanFilterParamSetup in shim layer
+11-07 21:54:06.606   955  1254 D BtGatt.GattService: onScanFilterParamsConfigured() - clientIf=3, status=0, action=0, availableSpace=0
+11-07 21:54:06.606   955  1254 D BtGatt.ScanManager: callback done for scannerId - 3 status - 0
+11-07 21:54:06.606   955  1284 I bt_stack: [INFO:le_scanning_manager.cc(174)] ScanFilterParamSetup in shim layer
+11-07 21:54:06.606   955  1254 D BtGatt.GattService: onScanFilterParamsConfigured() - clientIf=3, status=0, action=0, availableSpace=0
+11-07 21:54:06.606   955  1254 D BtGatt.ScanManager: callback done for scannerId - 3 status - 0
+11-07 21:54:06.608   955  1284 D BtGatt.ScanManager: configureRegularScanParams() - queue=2
+11-07 21:54:06.611  1478  1478 I DialerTaskExecutor: com.android.voicemail.impl.scheduling.TaskExecutor.prepareStop:371 no more tasks, stopping service if no task are added in 5000 millis [CONTEXT enable_persistent_logger=true ]
+11-07 21:54:06.616   955   984 D BtGatt.GattService: unregisterScanner() - scannerId=3
+11-07 21:54:06.616   955   984 I bt_stack: [INFO:le_scanning_manager.cc(148)] Unregister in shim layer, scanner_id:3
+11-07 21:54:06.617  6979  7191 I Nearby  : [MBleClient] M hardware scan: 1 clients, scanMode= OPPORTUNISTIC, filters size = 5 [CONTEXT service_id=49 ]
+11-07 21:54:06.617  6979  7191 D BluetoothAdapter: isLeEnabled(): ON
+11-07 21:54:06.622  1478  1478 I DialerLogcatLoggingBindings: com.android.dialer.logging.logcat.LogcatLoggingBindings.logImpression:41 Impression: VVM_AUTO_RETRY_ACTIVATION
+11-07 21:54:06.632   955  1284 I bt_stack: [INFO:le_scanning_manager.cc(154)] Scan in shim layer stopped
+11-07 21:54:06.640   955  1290 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:190 unregister_client: Client unregistered
+11-07 21:54:06.640   955  1290 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:194 unregister_client: Cancelled address rotation alarm
+11-07 21:54:06.641   955   984 D BtGatt.GattService: registerScanner() - UUID=a08c6eba-15b7-401b-ba70-f416ddd8f85a
+11-07 21:54:06.645   955  1284 D BtGatt.ScanManager: Start gattClientScanNative with old scanMode 2 new scanMode 1 ( in MS: 730 / 183, in scan unit: 1168 / 292 ) [ScanClient scanModeApp 1 scanModeUsed 1 [appScanStats com.google.uid.shared:10120]]
+11-07 21:54:06.649   955  1284 I bt_stack: [INFO:le_scanning_manager.cc(250)] SetScanParameters in shim layer
+11-07 21:54:06.650   955  1254 D BtGatt.GattService: onScanParamSetupCompleted : 0
+11-07 21:54:06.650   955  1284 I bt_stack: [INFO:le_scanning_manager.cc(154)] Scan in shim layer started
+11-07 21:54:06.650   955  1290 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_scanning_manager.cc:659 stop_scan: Scanning already stopped, return!
+11-07 21:54:06.650   955  1290 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:172 register_client: Scheduled address rotation for first client registered
+11-07 21:54:06.650   955  1290 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:175 register_client: Client registered
+11-07 21:54:06.651   955   984 I bt_stack: [INFO:le_scanning_manager.cc(141)] RegisterScanner in shim layer
+11-07 21:54:06.651   955  1254 D BtGatt.GattService: onScannerRegistered() - UUID=a08c6eba-15b7-401b-ba70-f416ddd8f85a, scannerId=3, status=0
+11-07 21:54:06.651  6979  7253 D BluetoothLeScanner: onScannerRegistered() - status=0 scannerId=3 mScannerId=0
+11-07 21:54:06.665   955   984 D BtGatt.GattService: start scan with filters
+11-07 21:54:06.667   955   984 D BtGatt.GattService: enforcePrivilegedPermissionIfNeeded([BluetoothLeScanFilter [mDeviceName=null, mDeviceAddress=null, mUuid=null, mUuidMask=null, mServiceSolicitationUuid=null, mServiceSolicitationUuidMask=null, mServiceDataUuid=null, mServiceData=null, mServiceDataMask=null, mManufacturerId=224, mManufacturerData=[0, 0, 0], mManufacturerDataMask=[0, 0, -1], mAdvertisingDataType=-1, mAdvertisingData=null, mAdvertisingDataMask=null], BluetoothLeScanFilter [mDeviceName=null, mDeviceAddress=null, mUuid=0000fef3-0000-1000-8000-00805f9b34fb, mUuidMask=null, mServiceSolicitationUuid=null, mServiceSolicitationUuidMask=null, mServiceDataUuid=null, mServiceData=null, mServiceDataMask=null, mManufacturerId=-1, mManufacturerData=null, mManufacturerDataMask=null, mAdvertisingDataType=-1, mAdvertisingData=null, mAdvertisingDataMask=null], BluetoothLeScanFilter [mDeviceName=null, mDeviceAddress=null, mUuid=0000feaa-0000-1000-8000-00805f9b34fb, mUuidMask=null, mServiceSolicitationUuid=null, mServiceSolicitationUuidMask=null, mServiceDataUuid=null, mServiceData=null, mServiceDataMask=null, mManufacturerId=-1, mManufacturerData=null, mManufacturerDataMask=null, mAdvertisingDataType=-1, mAdvertisingData=null, mAdvertisingDataMask=null], BluetoothLeScanFilter [mDeviceName=null, mDeviceAddress=null, mUuid=0000fea0-0000-1000-8000-00805f9b34fb, mUuidMask=null, mServiceSolicitationUuid=null, mServiceSolicitationUuidMask=null, mServiceDataUuid=null, mServiceData=null, mServiceDataMask=null, mManufacturerId=-1, mManufacturerData=null, mManufacturerDataMask=null, mAdvertisingDataType=-1, mAdvertisingData=null, mAdvertisingDataMask=null], BluetoothLeScanFilter [mDeviceName=null, mDeviceAddress=null, mUuid=null, mUuidMask=null, mServiceSolicitationUuid=null, mServiceSolicitationUuidMask=null, mServiceDataUuid=null, mServiceData=null, mServiceDataMask=null, mManufacturerId=76, mManufacturerData=[2, 21], mManufacturerDataMask=[-1, -1], mAdvertisingDataType=-1, mAdvertisingData=null, mAdvertisingDataMask=null]])
+11-07 21:54:06.678   955   984 D BtGatt.ScanManager: startScan()  [ScanClient scanModeApp -1 scanModeUsed -1 [appScanStats com.google.uid.shared:10120]]
+11-07 21:54:06.680   955   984 D ActivityAttributionService: notifyActivityAttributionInfo UID=1002 packageName=com.google.android.bluetooth deviceAddress=no_active_device_address
+11-07 21:54:06.680   955   984 I bt_btif : packages/modules/Bluetooth/system/btif/src/bluetooth.cc:465 get_profile_interface: get_profile_interface: id = activity_attribution
+11-07 21:54:06.680   955  1284 D BtGatt.ScanManager: handling starting scan
+11-07 21:54:06.725  1788  2516 I A       : Using proto config with mendel
+11-07 21:54:06.729  1788  2516 W A       : Task o[ServiceTransaction[SessionController#handleGenericClientEvent]] was queued for 1400ms before starting on executor EventBus
+11-07 21:54:06.867   482  1978 W system_server: Long monitor contention with owner LazyTaskWriterThread (4021) at void com.android.server.wm.TaskPersister.writeTaskIdsFiles()(TaskPersister.java:468) waiters=0 in int com.android.server.wm.WindowManagerService.relayoutWindow(com.android.server.wm.Session, android.view.IWindow, android.view.WindowManager$LayoutParams, int, int, int, int, int, int, android.window.ClientWindowFrames, android.util.MergedConfiguration, android.view.SurfaceControl, android.view.InsetsState, android.view.InsetsSourceControl[], android.os.Bundle) for 294ms
+11-07 21:54:06.870   482   504 W ziparchive: Unable to open '/data/app/~~ewbzk_m16xDkclmAVpjUzA==/com.quartz.notes-XqM5_4k8BE5yt-arn9ES4A==/base.dm': No such file or directory
+11-07 21:54:06.926   482   504 I ActivityTaskManager: Displayed com.quartz.notes/androidx.activity.ComponentActivity: +1s36ms
+11-07 21:54:07.025   339   370 W TransactionTracing: Could not find layer handle 0x77aa88536550
+11-07 21:54:07.026   339   370 W TransactionTracing: Could not find layer handle 0x77aa885376f0
+11-07 21:54:07.036   339   370 W TransactionTracing: Could not find layer handle 0x77aa885376f0
+11-07 21:54:07.051  1478  1478 I DialerTaskReceiver: com.android.voicemail.impl.scheduling.TaskReceiver.onReceive:68 task received [CONTEXT enable_persistent_logger=true ]
+11-07 21:54:07.052  1478  1478 I DialerTaskReceiver: com.android.voicemail.impl.scheduling.TaskReceiver.onReceive:73 TaskExecutor already running [CONTEXT enable_persistent_logger=true ]
+11-07 21:54:07.052  1478  1478 I DialerTasks: com.android.voicemail.impl.scheduling.Tasks.createTask:59 Task.createTask create task:com.android.voicemail.impl.ActivationTask [CONTEXT enable_persistent_logger=true ]
+11-07 21:54:07.054  1478  1478 I DialerRetryPolicy: com.android.voicemail.impl.scheduling.RetryPolicy.onCreate:81 retry #1 for com.android.voicemail.impl.ActivationTask@8642de7 queued, executing in 5000 [CONTEXT enable_persistent_logger=true ]
+11-07 21:54:07.065   482  1978 W InputManager-JNI: Input channel object '2108403 Splash Screen com.quartz.notes (client)' was disposed without first being removed with the input manager!
+11-07 21:54:07.075   339   370 W TransactionTracing: Could not find layer handle 0x77aa88533df0
+11-07 21:54:07.075   339   370 W TransactionTracing: Could not find layer handle 0x77aa88534930
+11-07 21:54:07.075   339   370 W TransactionTracing: Could not find layer handle 0x77aa88533df0
+11-07 21:54:07.081  1788  2760 I PBSessionCacheImpl: Deleted sessionId[7865501250074936] from persistence.
+11-07 21:54:07.098  1015  2099 D OneSearchSuggestProvider: Shut down the binder channel
+11-07 21:54:07.161  1015  1033 I s.nexuslauncher: oneway function results for code 2 on binder at 0x73e60dd57290 will be dropped but finished with status UNKNOWN_TRANSACTION
+11-07 21:54:07.164  1788  2516 W SearchServiceCore: Abort, client detached.
+11-07 21:54:07.167  1478  1478 I DialerTaskExecutor: com.android.voicemail.impl.scheduling.TaskExecutor.addTask:299 com.android.voicemail.impl.ActivationTask@8642de7 added [CONTEXT enable_persistent_logger=true ]
+11-07 21:54:07.167  1015  1015 D MainContentCaptureSession: Flushing 2 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARING
+11-07 21:54:07.167  1478  1478 I DialerTaskExecutor: com.android.voicemail.impl.scheduling.TaskExecutor.runNextTask:345 minimal wait time:4886 [CONTEXT enable_persistent_logger=true ]
+11-07 21:54:07.167  1015  1015 D MainContentCaptureSession: Flushing 2 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARED
+11-07 21:54:07.168  1478  1478 I DialerTaskExecutor: com.android.voicemail.impl.scheduling.TaskExecutor.sleep:355 sleep for 4886 millis [CONTEXT enable_persistent_logger=true ]
+11-07 21:54:07.170   482   927 W system_server: Long monitor contention with owner ActivityManager (515) at void com.android.server.am.BroadcastQueue.processNextBroadcast(boolean)(BroadcastQueue.java:1156) waiters=0 in int com.android.server.am.ActivityManagerService.bindServiceInstance(android.app.IApplicationThread, android.os.IBinder, android.content.Intent, java.lang.String, android.app.IServiceConnection, int, java.lang.String, boolean, int, java.lang.String, java.lang.String, int) for 441ms
+11-07 21:54:07.174   339   370 W TransactionTracing: Could not find layer handle 0x77aa885380b0
+11-07 21:54:07.219   762   806 D SplashScreenView: Build android.window.SplashScreenView{4948a7a V.E...... ......ID 0,0-0,0}
+11-07 21:54:07.219   762   806 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-07 21:54:07.219   762   806 D SplashScreenView: Branding: view: android.view.View{9cc522b G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-07 21:54:07.222   762   816 W Parcel  : Expecting binder but got null!
+11-07 21:54:07.307  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@4d4ff54 in: PAUSED
+11-07 21:54:07.308  4742  4742 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=androidx.activity.ComponentActivity@4d4ff54
+11-07 21:54:07.522   482   927 W system_server: Long monitor contention with owner android.anim (508) at void com.android.server.wm.WindowSurfacePlacer$Traverser.run()(WindowSurfacePlacer.java:58) waiters=3 in android.app.ActivityTaskManager$RootTaskInfo com.android.server.wm.ActivityTaskManagerService.getFocusedRootTaskInfo() for 125ms
+11-07 21:54:07.525  5498  5521 W Parcel  : Expecting binder but got null!
+11-07 21:54:07.587   339   370 W TransactionTracing: Could not find layer handle 0x77aa885371b0
+11-07 21:54:07.602   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537570
+11-07 21:54:07.602   339   370 W TransactionTracing: Could not find layer handle 0x77aa885371b0
+11-07 21:54:07.602   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537570
+11-07 21:54:07.602   339   370 W TransactionTracing: Could not find layer handle 0x77aa885371b0
+11-07 21:54:07.602   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537570
+11-07 21:54:07.691   339   370 W TransactionTracing: Could not find layer handle 0x77aa88537bd0
+11-07 21:54:07.691   339   370 W TransactionTracing: Could not find layer handle 0x77aa88535650
+11-07 21:54:07.733  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@4d4ff54 in: STOPPED
+11-07 21:54:07.734  4742  4742 V ActivityScenario: Update currentActivityStage to STOPPED, currentActivity=androidx.activity.ComponentActivity@4d4ff54
+11-07 21:54:07.740  4742  4742 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@4d4ff54 in: DESTROYED
+11-07 21:54:07.741  4742  4742 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
+11-07 21:54:07.742   762   816 D EGL_emulation: app_time_stats: avg=675.89ms min=655.39ms max=696.39ms count=2
+11-07 21:54:07.747   482   927 W InputManager-JNI: Input channel object '31ab1fe com.quartz.notes/androidx.activity.ComponentActivity (client)' was disposed without first being removed with the input manager!
+11-07 21:54:07.790   339   370 W TransactionTracing: Could not find layer handle 0x77aa885352f0
+11-07 21:54:07.797  4742  4836 D IdlingRegistry: Unregistering idling resources: [androidx.compose.ui.test.EspressoLink@8de4f90]
+11-07 21:54:07.798  4742  4836 I TestRunner: finished: picturesOnATextPageGoInLine(com.quartz.notes.ui.notebook.FreeformTest)

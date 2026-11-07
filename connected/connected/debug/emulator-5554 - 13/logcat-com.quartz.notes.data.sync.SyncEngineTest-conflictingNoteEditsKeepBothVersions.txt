@@ -1,0 +1,36 @@
+11-07 21:52:07.799  4742  4836 I TestRunner: started: conflictingNoteEditsKeepBothVersions(com.quartz.notes.data.sync.SyncEngineTest)
+11-07 21:52:07.803  4742  4836 D TrafficStats: tagSocket(96) with statsTag=0xffffffff, statsUid=-1
+11-07 21:52:08.155   482   584 E RoleControllerManager: Error calling grantDefaultRoles()
+11-07 21:52:08.155   482   584 E RoleControllerManager: java.util.concurrent.TimeoutException
+11-07 21:52:08.155   482   584 E RoleControllerManager: 	at com.android.permission.jarjar.com.android.internal.infra.AndroidFuture.triggerTimeout(AndroidFuture.java:289)
+11-07 21:52:08.155   482   584 E RoleControllerManager: 	at com.android.permission.jarjar.com.android.internal.infra.AndroidFuture$$ExternalSyntheticLambda2.run(Unknown Source:2)
+11-07 21:52:08.155   482   584 E RoleControllerManager: 	at android.os.Handler.handleCallback(Handler.java:942)
+11-07 21:52:08.155   482   584 E RoleControllerManager: 	at android.os.Handler.dispatchMessage(Handler.java:99)
+11-07 21:52:08.155   482   584 E RoleControllerManager: 	at android.os.Looper.loopOnce(Looper.java:201)
+11-07 21:52:08.155   482   584 E RoleControllerManager: 	at android.os.Looper.loop(Looper.java:288)
+11-07 21:52:08.155   482   584 E RoleControllerManager: 	at com.android.server.SystemServer.run(SystemServer.java:962)
+11-07 21:52:08.155   482   584 E RoleControllerManager: 	at com.android.server.SystemServer.main(SystemServer.java:647)
+11-07 21:52:08.155   482   584 E RoleControllerManager: 	at java.lang.reflect.Method.invoke(Native Method)
+11-07 21:52:08.155   482   584 E RoleControllerManager: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:548)
+11-07 21:52:08.155   482   584 E RoleControllerManager: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:914)
+11-07 21:52:08.373  1788  2353 W A       : Batch timed out; batchId=1 taskId=-1000002
+11-07 21:52:08.422  1788  2378 I A       : NGA Sync: MDD Task: MDD.CHARGING.PERIODIC.TASK done.
+11-07 21:52:08.425  1788  2378 I A       : NGA Sync: isNgaSyncEnabled: false; enableFileGroupPopulator: false; requiresMddAssets: false
+11-07 21:52:08.427  1788  2308 I A       : Refresh account policy.
+11-07 21:52:08.459  1788  2708 D t       : Starting download: https://www.gstatic.com/android-search/hotword/x_google/7db96c566dbd33b2218d5799ec330d22/hotword.data
+11-07 21:52:08.460  1788  2708 V t       : Is http uri, downloading (uri: https://www.gstatic.com/android-search/hotword/x_google/7db96c566dbd33b2218d5799ec330d22/hotword.data)
+11-07 21:52:08.520  1788  2708 E MDD     : DownloadProgressMonitor: Can't find file group for uri: android://com.google.android.googlequicksearchbox/files/datadownload/shared/public/datadownloadfile_1794088287693
+11-07 21:52:08.691  1788  1855 I earchbox:search: Background young concurrent copying GC freed 160765(7627KB) AllocSpace objects, 43(2180KB) LOS objects, 39% free, 14MB/24MB, paused 97us,18us total 136.440ms
+11-07 21:52:08.777  1788  2933 E SingleDataFileGroupPop: Failed to add file group
+11-07 21:52:08.784  1788  2708 I A       : Starting new batch; batchId=3 corpus=1004
+11-07 21:52:08.788  1788  2933 I A       : Download file group for language pack: en-US
+11-07 21:52:08.789  1788  2933 W A       : Locale en-US is not compatible, please check manifest exists
+11-07 21:52:08.790  1788  2933 I A       : Using proto config with mendel
+11-07 21:52:08.790  1788  2933 I A       : Proto config empty. Exit merge.
+11-07 21:52:08.790  1788  2933 E HotwordModelPopulator: HotwordLocaleConfig does not have a valid URL for model en-US, type OK_GOOGLE: en-US/hotword.data! This model will not be downloaded or updated
+11-07 21:52:08.791  1788  2933 I A       : Using proto config with mendel
+11-07 21:52:08.791  1788  2933 I A       : Proto config empty. Exit merge.
+11-07 21:52:08.791  1788  2933 I HotwordModelPopulator: #updateHotwordFileGroup group name: hotword_model_en-US_okhey, raw locale: en-US, locale: en-US
+11-07 21:52:08.798  1788  2308 I MicroModelsUtil: #getHotwordModelFromMobstore [mobstoreUri: android://com.google.android.googlequicksearchbox/files/datadownload/shared/public/datadownloadfile_1794088287693]
+11-07 21:52:08.799  1788  2308 I HotwordModelPopulator: Updated file group for locale 'hotword_model_en-US_okhey' from location: https://www.gstatic.com/android-search/hotword/x_google/7db96c566dbd33b2218d5799ec330d22/hotword.data. Download already finished.
+11-07 21:52:08.886  4742  4836 I TestRunner: finished: conflictingNoteEditsKeepBothVersions(com.quartz.notes.data.sync.SyncEngineTest)

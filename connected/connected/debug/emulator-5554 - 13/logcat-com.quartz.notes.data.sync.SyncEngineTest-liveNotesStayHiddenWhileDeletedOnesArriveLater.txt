@@ -1,0 +1,25 @@
+11-07 21:52:13.755  4742  4836 I TestRunner: started: liveNotesStayHiddenWhileDeletedOnesArriveLater(com.quartz.notes.data.sync.SyncEngineTest)
+11-07 21:52:13.758  4742  4836 D TrafficStats: tagSocket(102) with statsTag=0xffffffff, statsUid=-1
+11-07 21:52:13.769   982   982 D CarrierSvcBindHelper: onPackageModified: com.google.android.as
+11-07 21:52:13.769   982   982 D CarrierSvcBindHelper: No carrier app for: 0
+11-07 21:52:13.769   982   982 D ImsResolver: maybeAddedImsService, packageName: com.google.android.as
+11-07 21:52:13.770  5034  5054 I PermissionControllerServiceImpl: Updating user sensitive for uid 10117
+11-07 21:52:13.792  1060  5334 I Fitness : OnPackageChangedOperation got intent: Intent { act=android.intent.action.PACKAGE_CHANGED dat=package: flg=0x45000010 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.PersistentIntentOperationService (has extras) } [CONTEXT service_id=17 ]
+11-07 21:52:13.793  3974  5455 I ProvidersCache: Provider returned no roots. Possibly naughty: com.google.android.apps.docs.storage
+11-07 21:52:13.798  1060  5295 I Fitness : FitCleanupIntentOperation received Intent android.intent.action.PACKAGE_CHANGED [CONTEXT service_id=17 ]
+11-07 21:52:13.823  5034  5072 W Role    : Default holder doesn't have required signing certificate: com.google.android.apps.work.clouddpc:23962F4B43B9857638EA66F4D419518EAE282491ACDA4B94707BD59003C45E58
+11-07 21:52:13.952  1102  1115 D WifiCallingSliceHelper: Wifi calling is either not provisioned or not enabled by Platform
+11-07 21:52:13.990  1102  1392 D SlicesIndexer: Slices already indexed - returning.
+11-07 21:52:13.992  1102  1392 D SettingsSliceProvider: Built slice (content://android.settings.slices/action/battery_saver) in: 2
+11-07 21:52:13.993  1102  3973 D SlicesIndexer: Slices already indexed - returning.
+11-07 21:52:13.995  1102  3973 D SettingsSliceProvider: Built slice (content://android.settings.slices/action/airplane_mode) in: 1
+11-07 21:52:14.023  1102  1115 D WifiSlice: calling uid name : com.google.android.settings.intelligence
+11-07 21:52:14.108   482   495 I system_server: Background young concurrent copying GC freed 581418(16MB) AllocSpace objects, 10(264KB) LOS objects, 33% free, 32MB/48MB, paused 77us,48us total 154.405ms
+11-07 21:52:14.169  1788  2708 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-07 21:52:14.234  1509  1509 I PhenotypeModule: PhenotypeModule.receiveBroadcast():373 onReceive() urgent = false
+11-07 21:52:14.235  1509  1509 I PhenotypeModule: PhenotypeModule.receiveBroadcast():373 onReceive() urgent = false
+11-07 21:52:14.235  1509  1509 I PhenotypeModule: PhenotypeModule.receiveBroadcast():373 onReceive() urgent = false
+11-07 21:52:14.237  1509  1509 I PhenotypeModule: PhenotypeModule.receiveBroadcast():373 onReceive() urgent = false
+11-07 21:52:14.239  1509  1509 I PhenotypeModule: PhenotypeModule.receiveBroadcast():373 onReceive() urgent = false
+11-07 21:52:14.240  1509  1509 I PhenotypeModule: PhenotypeModule.receiveBroadcast():373 onReceive() urgent = false
+11-07 21:52:14.288  4742  4836 I TestRunner: finished: liveNotesStayHiddenWhileDeletedOnesArriveLater(com.quartz.notes.data.sync.SyncEngineTest)

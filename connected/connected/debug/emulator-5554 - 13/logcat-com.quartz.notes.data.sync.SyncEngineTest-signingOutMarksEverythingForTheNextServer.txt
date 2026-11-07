@@ -1,0 +1,23 @@
+11-07 21:52:16.256  4742  4836 I TestRunner: started: signingOutMarksEverythingForTheNextServer(com.quartz.notes.data.sync.SyncEngineTest)
+11-07 21:52:16.259  4742  4836 D TrafficStats: tagSocket(72) with statsTag=0xffffffff, statsUid=-1
+11-07 21:52:16.785   482  1727 D ConnectivityService: requestNetwork for uid/pid:10109/1478 activeRequest: null callbackRequest: 131 [NetworkRequest [ REQUEST id=132, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10109 RequestorUid: 10109 RequestorPkg: com.google.android.dialer UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+11-07 21:52:16.797  1478  1478 I DialerConstellationSyncWorker: com.android.dialer.businessvoice.control.worker.ConstellationSyncWorker.startWork:66 starting work
+11-07 21:52:16.799   482   705 D ConnectivityService: NetReassign [132 : null → 100] [c 5] [a 4] [i 3]
+11-07 21:52:16.800   482   698 D WifiNetworkFactory: got request NetworkRequest [ REQUEST id=132, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10109 RequestorUid: 10109 RequestorPkg: com.google.android.dialer UnderlyingNetworks: Null] ]
+11-07 21:52:16.802   482   698 D UntrustedWifiNetworkFactory: got request NetworkRequest [ REQUEST id=132, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10109 RequestorUid: 10109 RequestorPkg: com.google.android.dialer UnderlyingNetworks: Null] ]
+11-07 21:52:16.802   482   698 D OemPaidWifiNetworkFactory: got request NetworkRequest [ REQUEST id=132, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10109 RequestorUid: 10109 RequestorPkg: com.google.android.dialer UnderlyingNetworks: Null] ]
+11-07 21:52:16.803  1478  1622 I DialerCountryCodeProvider: com.android.dialer.businessvoice.verifiedcall.impl.i18n.CountryCodeProvider.getSimCountryCodeInternal:85 returning Redacted-2-chars
+11-07 21:52:16.803  1478  1622 I DialerCachedVerifiedNumberProvider: com.android.dialer.businessvoice.verifiedcall.impl.constellation.CachedVerifiedNumberProvider.refreshConstellationInfo:190 Retrieving constellation info and refreshing the cache.
+11-07 21:52:16.804   482   698 D MultiInternetWifiNetworkFactory: got request NetworkRequest [ REQUEST id=132, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10109 RequestorUid: 10109 RequestorPkg: com.google.android.dialer UnderlyingNetworks: Null] ]
+11-07 21:52:16.821  1478  1632 W DialerVerifiedNumberProvider: com.android.dialer.businessvoice.verifiedcall.impl.constellation.VerifiedNumberProvider.lambda$getConstellationResponse$1:155 Failed to get constellation token.
+11-07 21:52:16.821  1478  1632 W DialerVerifiedNumberProvider: nkq: 5005:
+11-07 21:52:16.821  1478  1632 W DialerVerifiedNumberProvider: 	at nov.au(PG:1)
+11-07 21:52:16.821  1478  1632 W DialerVerifiedNumberProvider: 	at nnf.g(PG:2)
+11-07 21:52:16.821  1478  1632 W DialerVerifiedNumberProvider: 	at npo.a(Unknown Source:2)
+11-07 21:52:16.821  1478  1632 W DialerVerifiedNumberProvider: 	at npy.dm(PG:9)
+11-07 21:52:16.821  1478  1632 W DialerVerifiedNumberProvider: 	at ncz.onTransact(PG:4)
+11-07 21:52:16.821  1478  1632 W DialerVerifiedNumberProvider: 	at android.os.Binder.execTransactInternal(Binder.java:1285)
+11-07 21:52:16.821  1478  1632 W DialerVerifiedNumberProvider: 	at android.os.Binder.execTransact(Binder.java:1244)
+11-07 21:52:16.826  1478  1632 W DialerConstellationSyncWorker: com.android.dialer.businessvoice.control.worker.ConstellationSyncWorker.lambda$syncConstellation$2:110 Constellation api request failed, status code: 5005
+11-07 21:52:16.827  1478  1599 I WM-WorkerWrapper: Worker result RETRY for Work [ id=61d74046-de2d-4949-9f41-5a72cc2b10f6, tags={ com.google.apps.tiktok.contrib.work.TikTokListenableWorker, TikTokWorker#com.android.dialer.businessvoice.control.worker.ConstellationSyncWorker } ]
+11-07 21:52:17.083  4742  4836 I TestRunner: finished: signingOutMarksEverythingForTheNextServer(com.quartz.notes.data.sync.SyncEngineTest)

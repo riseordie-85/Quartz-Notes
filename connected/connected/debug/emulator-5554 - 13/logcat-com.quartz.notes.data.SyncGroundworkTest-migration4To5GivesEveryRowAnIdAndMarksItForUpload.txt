@@ -1,0 +1,87 @@
+11-07 21:51:58.002  4742  4836 I TestRunner: started: migration4To5GivesEveryRowAnIdAndMarksItForUpload(com.quartz.notes.data.SyncGroundworkTest)
+11-07 21:51:58.053   762   816 D EGL_emulation: app_time_stats: avg=1211.45ms min=1211.45ms max=1211.45ms count=1
+11-07 21:51:58.136  1060  5127 E GmsTaskScheduler: sendWakeUpEvent called on SchedulerClientBroadcastStrategy
+11-07 21:51:58.159   482   514 E system_server: No package ID 7f found for ID 0x7f0801ef.
+11-07 21:51:58.159   482   514 E system_server: No package ID 7f found for ID 0x7f140400.
+11-07 21:51:58.159   482   514 E system_server: No package ID 7f found for ID 0x7f140401.
+11-07 21:51:58.159   482   514 E system_server: No package ID 7f found for ID 0x7f0801f0.
+11-07 21:51:58.159   482   514 E system_server: No package ID 7f found for ID 0x7f140402.
+11-07 21:51:58.159   482   514 E system_server: No package ID 7f found for ID 0x7f140403.
+11-07 21:51:58.180  1060  5127 I AlarmManager: setExactAndAllowWhileIdle [name: GCM_HB_ALARM type: 2 triggerAtMillis: 701633]
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: Failed to apply ContentProviderOperation(type=insert uri=content://media/internal/file values={instance_id=null, compilation=null, disc_number=0, duration=4383, is_ringtone=0, album_artist=null, resolution=null, orientation=null, artist=pdx, author=null, height=null, is_drm=0, is_audiobook=0, date_modified=1725920748, writer=null, composer=null, _modifier=3, is_recording=0, datetaken=null, mime_type=audio/ogg, is_notification=1, bitrate=96000, cd_track_number=0, xmp=[], year=null, _data=/product/media/audio/notifications/vega.ogg, _size=29476, album=Unknown, genre=Unknown, is_alarm=0, title=Vega, track=0, width=null, is_music=0, document_id=null, is_podcast=0, capture_framerate=null, num_tracks=1, original_document_id=null, media_type=2} exceptionAllowed)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: android.database.sqlite.SQLiteConstraintException: UNIQUE constraint failed: files._data (code 2067 SQLITE_CONSTRAINT_UNIQUE)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at android.database.sqlite.SQLiteConnection.nativeExecuteForLastInsertedRowId(Native Method)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at android.database.sqlite.SQLiteConnection.executeForLastInsertedRowId(SQLiteConnection.java:961)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at android.database.sqlite.SQLiteSession.executeForLastInsertedRowId(SQLiteSession.java:790)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at android.database.sqlite.SQLiteStatement.executeInsert(SQLiteStatement.java:89)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at com.android.providers.media.util.DatabaseUtils.executeInsert(DatabaseUtils.java:456)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at com.android.providers.media.util.SQLiteQueryBuilder.insert(SQLiteQueryBuilder.java:611)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at com.android.providers.media.util.SQLiteQueryBuilder.lambda$insert$1(SQLiteQueryBuilder.java:575)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at com.android.providers.media.util.SQLiteQueryBuilder.$r8$lambda$J8sHyRt4f9G-jpErUkeO-jG4Hmw(Unknown Source:0)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at com.android.providers.media.util.SQLiteQueryBuilder$$ExternalSyntheticLambda2.apply(Unknown Source:6)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at com.android.providers.media.DatabaseHelper.runWithTransaction(DatabaseHelper.java:935)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at com.android.providers.media.util.SQLiteQueryBuilder.insert(SQLiteQueryBuilder.java:574)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at com.android.providers.media.MediaProvider.lambda$insertAllowingUpsert$21(MediaProvider.java:4679)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at com.android.providers.media.MediaProvider.$r8$lambda$zUZ633S1gYcQeuZJqLm8-gCBez4(Unknown Source:0)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at com.android.providers.media.MediaProvider$$ExternalSyntheticLambda51.apply(Unknown Source:13)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at com.android.providers.media.DatabaseHelper.runWithTransaction(DatabaseHelper.java:935)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at com.android.providers.media.MediaProvider.insertAllowingUpsert(MediaProvider.java:4669)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at com.android.providers.media.MediaProvider.insertFile(MediaProvider.java:4651)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at com.android.providers.media.MediaProvider.insertInternal(MediaProvider.java:5114)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at com.android.providers.media.MediaProvider.insert(MediaProvider.java:4813)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at android.content.ContentProviderOperation.applyInternal(ContentProviderOperation.java:375)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at android.content.ContentProviderOperation.apply(ContentProviderOperation.java:347)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at android.content.ContentProvider.applyBatch(ContentProvider.java:2485)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at com.android.providers.media.MediaProvider.applyBatch(MediaProvider.java:5166)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at android.content.ContentProvider.applyBatch(ContentProvider.java:2476)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at android.content.ContentResolver.applyBatch(ContentResolver.java:2230)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at com.android.providers.media.scan.ModernMediaScanner$Scan.applyPending(ModernMediaScanner.java:915)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at com.android.providers.media.scan.ModernMediaScanner$Scan.maybeApplyPending(ModernMediaScanner.java:905)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at com.android.providers.media.scan.ModernMediaScanner$Scan.visitFile(ModernMediaScanner.java:811)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at com.android.providers.media.scan.ModernMediaScanner$Scan.visitFile(ModernMediaScanner.java:311)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at java.nio.file.Files.walkFileTree(Files.java:2670)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at java.nio.file.Files.walkFileTree(Files.java:2742)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at com.android.providers.media.scan.ModernMediaScanner$Scan.walkFileTree(ModernMediaScanner.java:430)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at com.android.providers.media.scan.ModernMediaScanner$Scan.runInternal(ModernMediaScanner.java:393)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at com.android.providers.media.scan.ModernMediaScanner$Scan.run(ModernMediaScanner.java:382)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at com.android.providers.media.scan.ModernMediaScanner.scanDirectory(ModernMediaScanner.java:239)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at com.android.providers.media.MediaProvider.scanDirectory(MediaProvider.java:1865)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at com.android.providers.media.MediaService.onScanVolume(MediaService.java:204)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at com.android.providers.media.MediaService.onScanVolume(MediaService.java:172)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at com.android.providers.media.MediaService.onHandleWork(MediaService.java:95)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at androidx.core.app.JobIntentService$CommandProcessor.doInBackground(JobIntentService.java:396)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at androidx.core.app.JobIntentService$CommandProcessor.doInBackground(JobIntentService.java:387)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at android.os.AsyncTask$3.call(AsyncTask.java:394)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-07 21:51:58.190  1666  2421 W ModernMediaScanner: 	at java.lang.Thread.run(Thread.java:1012)
+11-07 21:51:58.205  1102  1117 D BackupCallingPrefCtrl: Not supported by framework. subId = 1
+11-07 21:51:58.256  1102  1117 D BackupCallingPrefCtrl: Not supported by framework. subId = 1
+11-07 21:51:58.264  1102  1117 W Enable2gPreferenceController: Telephony manager not yet initialized
+11-07 21:51:58.267  1102  1117 D VoNrSettings: init:
+11-07 21:51:58.267  1102  1117 D VoNrSettings: mHas5gCapability: true,mIsNrEnabledFromCarrierConfig: true,mIsVonrEnabledFromCarrierConfig: false,mIsVonrVisibleFromCarrierConfig: true
+11-07 21:51:58.267  1102  1117 D VoNrSettings: init:
+11-07 21:51:58.267  1102  1117 D VoNrSettings: mHas5gCapability: true,mIsNrEnabledFromCarrierConfig: true,mIsVonrEnabledFromCarrierConfig: false,mIsVonrVisibleFromCarrierConfig: true
+11-07 21:51:58.280  1102  1117 W SettingsPrefController: Skipping updateNonIndexableKeys, key already in list. com.android.settings.network.telephony.DisableSimFooterPreferenceController@96c3281
+11-07 21:51:58.280  1102  1117 W SettingsPrefController: Skipping updateNonIndexableKeys, key already in list. com.android.settings.network.telephony.NrDisabledInDsdsFooterPreferenceController@b3aff26
+11-07 21:51:58.281  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.location.RecentLocationAccessSeeAllPreferenceController
+11-07 21:51:58.283  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.biometrics.face.FaceSettingsLockscreenBypassPreferenceController
+11-07 21:51:58.283  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.users.AddUserWhenLockedPreferenceController
+11-07 21:51:58.296  1060  1366 W SQLiteConnectionPool: The connection pool for database '/data/user/0/com.google.android.gms/databases/phenotype.db' has been unable to grant a connection to thread 51 (highpool[2]) with flags 0x2 for 60.004 seconds.
+11-07 21:51:58.296  1060  1366 W SQLiteConnectionPool: Connections: 0 active, 1 idle, 1 available.
+11-07 21:51:58.298  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.display.WalletPrivacyPreferenceController
+11-07 21:51:58.301  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.display.ControlsPrivacyPreferenceController
+11-07 21:51:58.301  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.display.ControlsTrivialPrivacyPreferenceController
+11-07 21:51:58.301  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.display.CustomizableLockScreenQuickAffordancesPreferenceController
+11-07 21:51:58.301  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.display.LockscreenClockPreferenceController
+11-07 21:51:58.301  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.google.android.settings.display.LockscreenWeatherPreferenceController
+11-07 21:51:58.301  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.display.AmbientDisplayWhenToShowPreferenceController
+11-07 21:51:58.301  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.display.AmbientDisplayAlwaysOnPreferenceController
+11-07 21:51:58.301  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.gestures.TapScreenGesturePreferenceController
+11-07 21:51:58.301  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.gestures.DoubleTapScreenPreferenceController
+11-07 21:51:58.301  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.gestures.PickupGesturePreferenceController
+11-07 21:51:58.301  1102  1117 D PrefCtrlListHelper: Could not find Context-only controller for pref: com.android.settings.display.AmbientDisplayNotificationsPreferenceController
+11-07 21:51:58.301  1102  1117 W PrefControllerMixin: Skipping updateNonIndexableKeys due to empty key com.android.settings.notification.LockScreenNotificationPreferenceController@1df3280
+11-07 21:51:58.304  1102  1117 W SettingsPrefController: Skipping updateNonIndexableKeys, key already in list. com.android.settings.biometrics.face.FaceSettingsLockscreenBypassPreferenceController@c6bb0b9
+11-07 21:51:58.307  4742  4836 I TestRunner: finished: migration4To5GivesEveryRowAnIdAndMarksItForUpload(com.quartz.notes.data.SyncGroundworkTest)
