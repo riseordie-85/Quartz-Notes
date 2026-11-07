@@ -2,8 +2,6 @@ package com.quartz.notes.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import com.quartz.notes.LaunchRequest
 import com.quartz.notes.Launches
 import com.quartz.notes.LocalAppContainer
@@ -13,6 +11,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import kotlinx.coroutines.flow.filterNotNull
 import com.quartz.notes.ui.home.HomeRoute
 import com.quartz.notes.ui.note.NoteEditorRoute
 import com.quartz.notes.ui.notebook.NotebookScreen
@@ -38,21 +37,22 @@ fun QuartzNavHost() {
     val nav = rememberNavController()
     val container = LocalAppContainer.current
 
-    // Opened from a widget: go to the notebook or note, or hand the home screen what's for it.
-    val request by Launches.pending.collectAsState()
-    LaunchedEffect(request) {
-        val r = request ?: return@LaunchedEffect
-        Launches.pending.value = null
-        when (r) {
-            is LaunchRequest.OpenNotebook -> nav.navigate(Routes.notebook(r.id)) { popUpTo(Routes.HOME) }
-            is LaunchRequest.OpenNote -> nav.navigate(Routes.note(r.id)) { popUpTo(Routes.HOME) }
-            LaunchRequest.NewNote -> {
-                val id = container.repository.createNote()
-                nav.navigate(Routes.note(id)) { popUpTo(Routes.HOME) }
-            }
-            else -> {
-                nav.popBackStack(Routes.HOME, inclusive = false)
-                Launches.home.value = r
+    // Opened from a widget: go to the notebook or note, or hand the home screen what's for it. Collected
+    // rather than keyed on the request, so clearing it doesn't cancel the work (making a new note) under way.
+    LaunchedEffect(Unit) {
+        Launches.pending.filterNotNull().collect { r ->
+            Launches.pending.value = null
+            when (r) {
+                is LaunchRequest.OpenNotebook -> nav.navigate(Routes.notebook(r.id)) { popUpTo(Routes.HOME) }
+                is LaunchRequest.OpenNote -> nav.navigate(Routes.note(r.id)) { popUpTo(Routes.HOME) }
+                LaunchRequest.NewNote -> {
+                    val id = container.repository.createNote()
+                    nav.navigate(Routes.note(id)) { popUpTo(Routes.HOME) }
+                }
+                else -> {
+                    nav.popBackStack(Routes.HOME, inclusive = false)
+                    Launches.home.value = r
+                }
             }
         }
     }
