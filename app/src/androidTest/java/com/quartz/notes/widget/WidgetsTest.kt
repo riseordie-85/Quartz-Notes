@@ -15,9 +15,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.mutablePreferencesOf
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.ExperimentalGlanceApi
-import androidx.glance.appwidget.GlanceAppWidgetManager
 import androidx.glance.appwidget.compose
-import androidx.glance.appwidget.state.updateAppWidgetState
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
@@ -66,14 +64,11 @@ class WidgetsTest {
         }
     }
 
-    private var nextId = 7000
-
     /** Runs the widget at [w]×[h] dp with [state], makes its views as a launcher would, and saves a picture. */
     private fun render(widget: GlanceAppWidget, name: String, w: Int, h: Int, state: Preferences? = null): View = runBlocking {
         val context = app
-        val glanceId = GlanceAppWidgetManager(context).getGlanceIdBy(nextId++)
-        if (state != null) updateAppWidgetState(context, glanceId) { prefs -> state.asMap().forEach { (k, v) -> @Suppress("UNCHECKED_CAST") prefs[k as Preferences.Key<Any>] = v } }
-        val views = widget.compose(context, glanceId, size = DpSize(w.dp, h.dp), state = state)
+        // Not on a home screen, so its settings come in directly.
+        val views = widget.compose(context, size = DpSize(w.dp, h.dp), state = state)
         val density = context.resources.displayMetrics.density
         val pw = (w * density).toInt()
         val ph = (h * density).toInt()

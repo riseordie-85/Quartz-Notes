@@ -35,7 +35,6 @@ import androidx.glance.appwidget.lazy.LazyColumn
 import androidx.glance.appwidget.lazy.LazyVerticalGrid
 import androidx.glance.appwidget.lazy.items
 import androidx.glance.appwidget.provideContent
-import androidx.glance.appwidget.state.getAppWidgetState
 import androidx.glance.background
 import androidx.glance.currentState
 import androidx.glance.layout.Alignment
@@ -62,6 +61,7 @@ import com.quartz.notes.data.db.ShelfEntity
 import com.quartz.notes.ui.theme.NoteColor
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 import kotlin.math.floor
 
 private fun Context.repo() = (applicationContext as QuartzApp).container.repository
@@ -98,13 +98,16 @@ class ShelfWidget : GlanceAppWidget() {
     }
 }
 
-/** How a shelf's covers are laid out in the widget's size. */
+/**
+ * How a shelf's covers are laid out in the widget's size: as many rows as fit down (each at least
+ * [RowMin] tall, so a widget one cell high is one shelf and two cells high is two), covers sized to
+ * fill a row's height, and as many across as fit.
+ */
 internal data class ShelfPlan(val columns: Int, val rows: Int, val coverWidth: Dp, val header: Boolean) {
     companion object {
         private val Gap = 6.dp
         private val Header = 26.dp
-        private val Target = 66.dp
-        private val Smallest = 36.dp
+        private val RowMin = 76.dp
 
         /** A cover's picture, shadow margin included, for a cover [w] wide. */
         fun outerWidth(w: Dp) = w * (1 + CoverBitmaps.MARGIN * 2)
@@ -112,17 +115,13 @@ internal data class ShelfPlan(val columns: Int, val rows: Int, val coverWidth: D
 
         /** [width] and [height] are inside the padding. */
         fun of(width: Dp, height: Dp): ShelfPlan {
-            val header = height >= 150.dp
+            val header = height >= 260.dp
             val h = height - (if (header) Header else 0.dp)
-            fun fit(w: Dp) = maxOf(1, floor(((width + Gap) / (outerWidth(w) + Gap)).toDouble()).toInt())
-            var columns = fit(Target)
-            var coverW = minOf((width - Gap * (columns - 1)) / columns / (1 + CoverBitmaps.MARGIN * 2), MaxCoverWidth)
-            if (outerHeight(coverW) > h) {
-                // Too short for a row of that size: smaller covers, and more of them across.
-                coverW = maxOf(h / (1 / CoverBitmaps.ASPECT + CoverBitmaps.MARGIN * 2), Smallest)
-                columns = fit(coverW)
-            }
-            val rows = maxOf(1, floor(((h + Gap) / (outerHeight(coverW) + Gap)).toDouble()).toInt())
+            val rows = maxOf(1, floor(((h + Gap) / (RowMin + Gap)).toDouble()).toInt())
+            val rowHeight = (h - Gap * (rows - 1)) / rows
+            val fromHeight = rowHeight / (1 / CoverBitmaps.ASPECT + CoverBitmaps.MARGIN * 2)
+            val coverW = minOf(fromHeight, MaxCoverWidth, width / (1 + CoverBitmaps.MARGIN * 2))
+            val columns = maxOf(1, floor(((width + Gap) / (outerWidth(coverW) + Gap)).toDouble()).toInt())
             return ShelfPlan(columns, rows, coverW, header)
         }
     }
@@ -205,15 +204,15 @@ class NotebookWidget : GlanceAppWidget() {
         val repo = context.repo()
         val hint = LauncherHint.of(context, id)
         fun data(notebookId: Long) = combine(repo.observeNotebook(notebookId), repo.observePageCount(notebookId)) { nb, n -> nb to n }
-        val startId = getAppWidgetState(context, PreferencesGlanceStateDefinition, id)[WidgetKeys.NOTEBOOK] ?: -1L
-        val start = data(startId).first()
         provideContent {
             val prefs = currentState<Preferences>()
             val look = WidgetLook.of(prefs, hint)
             val notebookId = prefs[WidgetKeys.NOTEBOOK] ?: -1L
             val flow = remember(notebookId) { data(notebookId) }
-            val loaded by flow.collectAsState(initial = if (notebookId == startId) start else null)
-            NotebookContent(look, loaded?.first, loaded?.second ?: 0, loaded != null, notebookId)
+            // Drawn with the notebook as it is now (widgets compose off the main thread), then kept up to date.
+            val start = remember(notebookId) { runBlocking { flow.first() } }
+            val loaded by flow.collectAsState(initial = start)
+            NotebookContent(look, loaded.first, loaded.second, true, notebookId)
         }
     }
 }
