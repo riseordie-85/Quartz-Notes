@@ -10,6 +10,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.glance.GlanceId
 import androidx.glance.GlanceModifier
@@ -37,6 +38,9 @@ object WidgetKeys {
 
     /** Dark writing, for light glass or a light panel. */
     val DARK_TEXT = booleanPreferencesKey("darkText")
+
+    /** The most covers across a shelf widget (none: as many as fit). */
+    val MAX_ACROSS = intPreferencesKey("maxAcross")
 }
 
 /**

@@ -89,6 +89,8 @@ internal data class WidgetChoices(
     val grid: Boolean = false,
     val panel: Boolean = false,
     val darkText: Boolean = false,
+    /** The most covers across a shelf widget; null for as many as fit. */
+    val maxAcross: Int? = null,
 )
 
 /**
@@ -133,6 +135,7 @@ class WidgetSetupActivity : ComponentActivity() {
                         grid = prefs[WidgetKeys.GRID] ?: false,
                         panel = prefs[WidgetKeys.PANEL] ?: false,
                         darkText = prefs[WidgetKeys.DARK_TEXT] ?: false,
+                        maxAcross = prefs[WidgetKeys.MAX_ACROSS],
                     )
                 }
             }
@@ -168,6 +171,7 @@ class WidgetSetupActivity : ComponentActivity() {
             prefs[WidgetKeys.GRID] = choices.grid
             prefs[WidgetKeys.PANEL] = choices.panel
             prefs[WidgetKeys.DARK_TEXT] = choices.darkText
+            choices.maxAcross?.let { prefs[WidgetKeys.MAX_ACROSS] = it } ?: prefs.remove(WidgetKeys.MAX_ACROSS)
         }
         type.widget().update(this, glanceId)
     }
@@ -203,6 +207,20 @@ internal fun WidgetSetupScreen(
                             shelves.forEachIndexed { i, shelf ->
                                 val chosen = (choices.shelf ?: shelves.firstOrNull()?.id) == shelf.id
                                 Choice(shelf.name, chosen, Modifier.testTag("shelf-$i")) { choices = choices.copy(shelf = shelf.id) }
+                            }
+                        }
+                    }
+                    item { SettingsSectionTitle("Books across") }
+                    item {
+                        QuartzCard(Modifier.fillMaxWidth()) {
+                            Choice(
+                                "As many as fit",
+                                choices.maxAcross == null,
+                                Modifier.testTag("across-fit"),
+                                subtitle = "More books as the widget gets wider",
+                            ) { choices = choices.copy(maxAcross = null) }
+                            ACROSS_CHOICES.forEach { n ->
+                                Choice("At most $n", choices.maxAcross == n, Modifier.testTag("across-$n")) { choices = choices.copy(maxAcross = n) }
                             }
                         }
                     }
@@ -279,6 +297,9 @@ internal fun WidgetSetupScreen(
         }
     }
 }
+
+/** The limits offered for books across a shelf widget. */
+private val ACROSS_CHOICES = listOf(2, 3, 4, 5, 6, 8)
 
 @Composable
 private fun Choice(label: String, selected: Boolean, modifier: Modifier = Modifier, subtitle: String? = null, onClick: () -> Unit) {

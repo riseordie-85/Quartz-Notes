@@ -164,6 +164,24 @@ class WidgetsTest {
     }
 
     @Test
+    fun shelfCanBeHeldToAFewBooksAcross() {
+        val fits = ShelfPlan.of(304.dp, 214.dp)
+        assertTrue("$fits", fits.columns > 3 && fits.rows >= 2)
+        val held = ShelfPlan.of(304.dp, 214.dp, maxAcross = 3)
+        assertEquals(3, held.columns)
+        assertEquals(fits.rows, held.rows)
+        assertEquals(fits.coverWidth, held.coverWidth)
+        // A limit above what fits changes nothing.
+        assertEquals(fits, ShelfPlan.of(304.dp, 214.dp, maxAcross = 20))
+        // The covers sit together, not strung out to the edges.
+        assertTrue(gapFor(held, 304.dp) <= ShelfPlan.outerWidth(held.coverWidth))
+
+        val state = shelfState().apply { this[WidgetKeys.MAX_ACROSS] = 3 }
+        val v = render(ShelfWidget(), "shelf_three_across", 320, 230, state)
+        assertEquals((1..minOf(9, 3 * held.rows)).map { "Book $it" }, images(v))
+    }
+
+    @Test
     fun shelfPlanAddsRowsAndColumnsAsItGrows() {
         val small = ShelfPlan.of(304.dp, 94.dp)
         val tall = ShelfPlan.of(304.dp, 214.dp)

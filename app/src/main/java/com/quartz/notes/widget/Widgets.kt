@@ -94,7 +94,7 @@ class ShelfWidget : GlanceAppWidget() {
             val loaded by data.collectAsState(initial = start)
             val (shelves, notebooks) = loaded
             val shelf = shelves.firstOrNull { it.id == prefs[WidgetKeys.SHELF] } ?: shelves.firstOrNull()
-            ShelfContent(look, shelf, notebooks.filter { it.shelfId == shelf?.id })
+            ShelfContent(look, shelf, notebooks.filter { it.shelfId == shelf?.id }, prefs[WidgetKeys.MAX_ACROSS])
         }
     }
 }
@@ -117,26 +117,28 @@ internal data class ShelfPlan(val columns: Int, val rows: Int, val coverWidth: D
         fun outerWidth(w: Dp) = w * (1 + CoverBitmaps.MARGIN * 2)
         fun outerHeight(w: Dp) = w / CoverBitmaps.ASPECT + w * CoverBitmaps.MARGIN * 2
 
-        /** [width] and [height] are inside the padding. */
-        fun of(width: Dp, height: Dp): ShelfPlan {
+        /** [width] and [height] are inside the padding; [maxAcross] caps the covers in a row (null: as many as fit). */
+        fun of(width: Dp, height: Dp, maxAcross: Int? = null): ShelfPlan {
             val header = height >= 260.dp
             val h = height - (if (header) Header else 0.dp)
             val rows = maxOf(1, floor(((h + Gap) / (RowMin + Gap)).toDouble()).toInt())
             val rowHeight = (h - Gap * (rows - 1)) / rows
             val fromHeight = rowHeight / (1 / CoverBitmaps.ASPECT + CoverBitmaps.MARGIN * 2)
             val coverW = minOf(fromHeight, MaxCoverWidth, width / (1 + CoverBitmaps.MARGIN * 2))
-            val columns = floor(((width + Gap) / (outerWidth(coverW) + Gap)).toDouble()).toInt().coerceIn(1, MAX_PER_ROW)
+            val columns = floor(((width + Gap) / (outerWidth(coverW) + Gap)).toDouble()).toInt()
+                .coerceIn(1, MAX_PER_ROW)
+                .let { fit -> if (maxAcross != null && maxAcross > 0) minOf(fit, maxAcross) else fit }
             return ShelfPlan(columns, rows.coerceAtMost(MAX_PER_ROW - 1), coverW, header)
         }
     }
 }
 
 @Composable
-private fun ShelfContent(look: WidgetLook, shelf: ShelfEntity?, notebooks: List<NotebookEntity>) {
+private fun ShelfContent(look: WidgetLook, shelf: ShelfEntity?, notebooks: List<NotebookEntity>, maxAcross: Int? = null) {
     val context = LocalContext.current
     val size = LocalSize.current
     Box(look.frame(GlanceModifier.fillMaxSize()), contentAlignment = Alignment.Center) {
-        val plan = ShelfPlan.of(size.width - look.pad * 2, size.height - look.pad * 2)
+        val plan = ShelfPlan.of(size.width - look.pad * 2, size.height - look.pad * 2, maxAcross)
         val shown = notebooks.take(plan.columns * plan.rows)
         Column(GlanceModifier.fillMaxSize()) {
             if (plan.header) {
@@ -155,11 +157,14 @@ private fun ShelfContent(look: WidgetLook, shelf: ShelfEntity?, notebooks: List<
                 return@Column
             }
             val coverPx = context.px(plan.coverWidth)
-            val gap = gapFor(plan, size.width - look.pad * 2)
+            val inside = size.width - look.pad * 2
+            val gap = gapFor(plan, inside)
+            // A row held to a few covers sits in the middle; a short last row still starts at the left of the others.
+            val indent = ((inside - ShelfPlan.outerWidth(plan.coverWidth) * plan.columns - gap * (plan.columns - 1)) / 2).coerceAtLeast(0.dp)
             // Rows from the top, a little apart. Spacing is padding, not spacers: a widget's row or column
             // holds at most ten things.
             shown.chunked(plan.columns).forEachIndexed { r, row ->
-                Row(GlanceModifier.fillMaxWidth().padding(top = if (r > 0) ShelfPlan.Gap else 0.dp)) {
+                Row(GlanceModifier.fillMaxWidth().padding(start = indent, top = if (r > 0) ShelfPlan.Gap else 0.dp)) {
                     row.forEachIndexed { i, nb ->
                         Box(GlanceModifier.padding(start = if (i > 0) gap else 0.dp)) {
                             Cover(nb, plan.coverWidth, coverPx, open(context, LaunchRequest.OpenNotebook(nb.id)))
@@ -171,10 +176,15 @@ private fun ShelfContent(look: WidgetLook, shelf: ShelfEntity?, notebooks: List<
     }
 }
 
-/** Spreads a row's covers across the width. */
-private fun gapFor(plan: ShelfPlan, width: Dp): Dp {
+/**
+ * Spreads a row's covers across the width, but no further apart than about a cover's width, so a row held to
+ * a few covers sits together in the middle rather than strung out to the edges.
+ */
+internal fun gapFor(plan: ShelfPlan, width: Dp): Dp {
     if (plan.columns <= 1) return 0.dp
-    return ((width - ShelfPlan.outerWidth(plan.coverWidth) * plan.columns) / (plan.columns - 1)).coerceAtLeast(0.dp)
+    val outer = ShelfPlan.outerWidth(plan.coverWidth)
+    val spread = ((width - outer * plan.columns) / (plan.columns - 1)).coerceAtLeast(0.dp)
+    return minOf(spread, outer * 0.6f)
 }
 
 /** One cover, with room for its shadow, opening the notebook when tapped. */
