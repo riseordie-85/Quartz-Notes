@@ -11,7 +11,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import kotlinx.coroutines.flow.filterNotNull
 import com.quartz.notes.ui.home.HomeRoute
 import com.quartz.notes.ui.note.NoteEditorRoute
 import com.quartz.notes.ui.notebook.NotebookScreen
@@ -37,11 +36,9 @@ fun QuartzNavHost() {
     val nav = rememberNavController()
     val container = LocalAppContainer.current
 
-    // Opened from a widget: go to the notebook or note, or hand the home screen what's for it. Collected
-    // rather than keyed on the request, so clearing it doesn't cancel the work (making a new note) under way.
+    // Opened from a widget: go to the notebook or note, or hand the home screen what's for it.
     LaunchedEffect(Unit) {
-        Launches.pending.filterNotNull().collect { r ->
-            Launches.pending.value = null
+        Launches.follow { r ->
             when (r) {
                 is LaunchRequest.OpenNotebook -> nav.navigate(Routes.notebook(r.id)) { popUpTo(Routes.HOME) }
                 is LaunchRequest.OpenNote -> nav.navigate(Routes.note(r.id)) { popUpTo(Routes.HOME) }

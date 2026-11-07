@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.filterNotNull
 
 /** Somewhere a widget (or another way in) asks the app to go. */
 sealed interface LaunchRequest {
@@ -61,6 +62,17 @@ object Launches {
             "notebooks" -> LaunchRequest.Notebooks(id.takeIf { it > 0 })
             "quick-notes" -> LaunchRequest.QuickNotes
             else -> null
+        }
+    }
+
+    /**
+     * Hands each waiting request to [act], one at a time, clearing it as it's taken. Clearing doesn't stop
+     * [act] part-way (making a new note, say), as it did when the screen restarted its work on every change.
+     */
+    suspend fun follow(act: suspend (LaunchRequest) -> Unit) {
+        pending.filterNotNull().collect { r ->
+            pending.value = null
+            act(r)
         }
     }
 
