@@ -119,6 +119,7 @@ import com.quartz.notes.ui.theme.NoteColor
 import com.quartz.notes.ui.theme.SectionTitleStyle
 import com.quartz.notes.ui.theme.contentColorFor
 import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 /** Width at which the home screen shows notes side by side with the list (tablets, unfolded phones). */
@@ -365,6 +366,21 @@ private fun HomeContent(
         val j = jump ?: return@LaunchedEffect
         val index = if (j.toNotes) 1 else 0
         if (state.grid) gridState.animateScrollToItem(index) else listState.animateScrollToItem(index)
+    }
+    // The update card goes in above the shelves once the check finds a new version. The list keeps its
+    // place by what's at the top, so it could appear just out of sight; when the list is at the top,
+    // bring it into view.
+    val updater = com.quartz.notes.LocalAppContainer.current.updater
+    val offering by updater.state
+        .map { it is com.quartz.notes.data.update.UpdateState.Available }
+        .collectAsStateWithLifecycle(initialValue = false)
+    LaunchedEffect(offering) {
+        if (!offering) return@LaunchedEffect
+        if (state.grid) {
+            if (gridState.firstVisibleItemIndex == 0) gridState.scrollToItem(0)
+        } else if (listState.firstVisibleItemIndex == 0) {
+            listState.scrollToItem(0)
+        }
     }
     LaunchedEffect(listState, gridState) {
         snapshotFlow { listState.isScrollInProgress || gridState.isScrollInProgress }

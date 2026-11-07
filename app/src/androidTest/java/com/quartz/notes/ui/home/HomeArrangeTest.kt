@@ -142,6 +142,25 @@ class HomeArrangeTest {
     }
 
     @Test
+    fun anUpdateFoundAfterOpeningShowsAtTheTop() {
+        show()
+        rule.waitForIdle()
+        SystemClock.sleep(500)
+        // The check finds a new version a few seconds after the app opens, with the home screen already up.
+        val updater = container.updater
+        updater.showForTest(com.quartz.notes.data.update.UpdateState.Available(com.quartz.notes.data.update.AppRelease(9999, "99.0", "quartz-notes-99.0.apk", 1, "")))
+        try {
+            rule.waitForIdle()
+            SystemClock.sleep(500)
+            rule.waitForIdle()
+            screen("home_update_card")
+            rule.onNodeWithText("Version 99.0 is ready").assertIsDisplayed()
+        } finally {
+            updater.showForTest(com.quartz.notes.data.update.UpdateState.Unknown)
+        }
+    }
+
+    @Test
     fun splitViewCanBeTurnedOffOnWideScreens() {
         shelfWithNotebooks("Split")
         runBlocking { container.settings.setSplitView(true) }

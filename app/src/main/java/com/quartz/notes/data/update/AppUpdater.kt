@@ -125,6 +125,12 @@ class AppUpdater(
         }
     }
 
+    /** Sets what the updater shows, for tests. */
+    @androidx.annotation.VisibleForTesting
+    internal fun showForTest(state: UpdateState) {
+        _state.value = state
+    }
+
     /** True when Android lets Quartz Notes install its own updates. */
     fun canInstall(): Boolean = context.packageManager.canRequestPackageInstalls()
 
