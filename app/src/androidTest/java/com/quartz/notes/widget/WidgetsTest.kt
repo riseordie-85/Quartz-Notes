@@ -14,7 +14,9 @@ import androidx.compose.ui.unit.dp
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.mutablePreferencesOf
 import androidx.glance.appwidget.GlanceAppWidget
+import androidx.glance.ExperimentalGlanceApi
 import androidx.glance.appwidget.GlanceAppWidgetManager
+import androidx.glance.appwidget.compose
 import androidx.glance.appwidget.state.updateAppWidgetState
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -36,6 +38,7 @@ import java.util.concurrent.CountDownLatch
  * The home screen widgets, drawn the way a launcher draws them (their views made from what they send),
  * at several sizes, with pictures for checking by eye and checks on what they show.
  */
+@OptIn(ExperimentalGlanceApi::class)
 @RunWith(AndroidJUnit4::class)
 class WidgetsTest {
     companion object {
@@ -77,7 +80,7 @@ class WidgetsTest {
         val done = CountDownLatch(1)
         Handler(Looper.getMainLooper()).post {
             val parent = FrameLayout(context)
-            val v = views.apply(context, parent)
+            val v: View = views.apply(context, parent)
             parent.addView(v, FrameLayout.LayoutParams(pw, ph))
             parent.measure(View.MeasureSpec.makeMeasureSpec(pw, View.MeasureSpec.EXACTLY), View.MeasureSpec.makeMeasureSpec(ph, View.MeasureSpec.EXACTLY))
             parent.layout(0, 0, pw, ph)
