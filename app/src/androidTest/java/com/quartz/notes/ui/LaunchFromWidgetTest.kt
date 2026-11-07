@@ -49,6 +49,9 @@ class LaunchFromWidgetTest {
 
         // The note editor opens on a new note (its Share button is only on the editor).
         rule.waitUntil(10_000) { rule.onAllNodesWithContentDescription("Share").fetchSemanticsNodes().isNotEmpty() }
+        // Let the move to the editor finish: closing the test window part-way through trips up navigation.
+        rule.mainClock.advanceTimeBy(2_000)
+        rule.waitForIdle()
         val made = noteIds() - before
         assertEquals("one new note: $made", 1, made.size)
     }
