@@ -87,6 +87,26 @@ class UpdateUiTest {
     }
 
     @Test
+    fun aNewVersionPopsUpOnceWithUpdateAndLater() {
+        server.enqueue(release(updater.installedVersionCode + 1, "99.1"))
+        val settings = runBlocking { app.container.settings.settings.first() }
+        rule.setContent {
+            CompositionLocalProvider(LocalAppContainer provides app.container) {
+                QuartzTheme(settings = settings, dark = false) { UpdatePrompt(updater = updater) }
+            }
+        }
+        updater.check()
+        rule.waitUntil(10_000) { updater.state.value is UpdateState.Available }
+        rule.onNodeWithText("Quartz Notes 99.1 is ready").assertExists()
+        rule.onNodeWithText("Update").assertExists()
+        rule.onNodeWithText("Later").performClick()
+        rule.waitForIdle()
+        rule.onNodeWithText("Quartz Notes 99.1 is ready").assertDoesNotExist()
+        // Not again for the same version while the app runs.
+        assertEquals(updater.installedVersionCode + 1, updater.promptedFor)
+    }
+
+    @Test
     fun saysUpToDateWhenTheServerHasThisVersion() {
         server.enqueue(release(updater.installedVersionCode, "same"))
         show()

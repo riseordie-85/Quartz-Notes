@@ -93,6 +93,7 @@ class AppUpdater(
     /** Asks the server whether there's a newer build. Quietly does nothing while one is under way. */
     fun check() = scope.launch {
         if (!mutex.tryLock()) return@launch
+        lastCheck = System.currentTimeMillis()
         try {
             val base = serverUrl()?.takeIf { it.isNotBlank() } ?: run {
                 _state.value = UpdateState.Unknown
@@ -124,6 +125,18 @@ class AppUpdater(
             AppRelease.parse(res.body?.string().orEmpty())
         }
     }
+
+    @Volatile
+    private var lastCheck = 0L
+
+    /** Checks again if it's been a minute since the last look (the app coming back to the front, say). */
+    fun checkIfStale() {
+        if (System.currentTimeMillis() - lastCheck > 60_000) check()
+    }
+
+    /** The version the "new version" popup was last shown for, so it shows once per version each time the app runs. */
+    @Volatile
+    var promptedFor: Long = 0L
 
     /** Sets what the updater shows, for tests. */
     @androidx.annotation.VisibleForTesting

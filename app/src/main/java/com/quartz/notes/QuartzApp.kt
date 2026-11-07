@@ -76,7 +76,7 @@ class AppContainer(context: Context) {
         appScope.launch { com.quartz.notes.widget.WidgetUpdates.follow(app, repository) }
         // Look for a newer build now and then (and whenever Settings opens).
         appScope.launch {
-            delay(5_000)
+            delay(1_500)
             while (true) {
                 updater.check()
                 delay(6 * 60 * 60 * 1000L)

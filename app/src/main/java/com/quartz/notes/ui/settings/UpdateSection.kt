@@ -24,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -161,4 +162,44 @@ fun UpdateBanner(modifier: Modifier = Modifier, updater: AppUpdater = LocalAppCo
             LinearProgressIndicator(progress = { it.progress }, modifier = Modifier.fillMaxWidth().padding(horizontal = 18.dp).padding(bottom = 12.dp))
         }
     }
+}
+
+/**
+ * A popup when a new version turns up, wherever you are in the app: Update starts it at once, Later
+ * leaves it for the card on the home screen and Settings → App updates. Shown once per version each
+ * time the app runs.
+ */
+@Composable
+fun UpdatePrompt(updater: AppUpdater = LocalAppContainer.current.updater) {
+    val state by updater.state.collectAsStateWithLifecycle()
+    val context = LocalContext.current
+    // Wherever the person is when they come back from allowing installs, carry on.
+    ResumeAfterPermission(updater, state)
+    val release = (state as? UpdateState.Available)?.release ?: return
+    var shownFor by remember { mutableStateOf(updater.promptedFor) }
+    if (shownFor == release.versionCode) return
+    val close = {
+        updater.promptedFor = release.versionCode
+        shownFor = release.versionCode
+    }
+    androidx.compose.material3.AlertDialog(
+        onDismissRequest = close,
+        icon = { Icon(Icons.Rounded.SystemUpdate, null, tint = MaterialTheme.colorScheme.primary) },
+        title = { Text("Quartz Notes ${release.versionName} is ready") },
+        text = {
+            Text(
+                "You have ${updater.installedVersionName}. Update now? It downloads from your sync server, " +
+                    "and Android asks you to confirm the install.",
+            )
+        },
+        confirmButton = {
+            Button(onClick = {
+                close()
+                updater.update()
+                // The first time, Android needs installing from Quartz Notes allowed: straight there.
+                if (!updater.canInstall()) context.startActivity(updater.permissionIntent())
+            }) { Text("Update") }
+        },
+        dismissButton = { TextButton(onClick = close) { Text("Later") } },
+    )
 }

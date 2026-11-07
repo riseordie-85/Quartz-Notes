@@ -28,6 +28,8 @@ class MainActivity : ComponentActivity() {
     override fun onStart() {
         super.onStart()
         (application as QuartzApp).container.sync.setForeground(true)
+        // Coming back to the app: look for a new version (at most once a minute).
+        (application as QuartzApp).container.updater.checkIfStale()
     }
 
     override fun onStop() {
@@ -77,6 +79,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     QuartzTheme(settings = current, dark = dark) {
                         QuartzNavHost()
+                        com.quartz.notes.ui.settings.UpdatePrompt()
                     }
                 }
             }
