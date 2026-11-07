@@ -1,0 +1,321 @@
+11-07 07:54:28.157  5655  5677 I TestRunner: started: coversShowTheirMaterial(com.quartz.notes.ui.components.CoverTexturesTest)
+11-07 07:54:28.162  5655  5677 D IdlingRegistry: Registering idling resources: [androidx.compose.ui.test.EspressoLink@849943e]
+11-07 07:54:28.164  5655  5677 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+11-07 07:54:28.198   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f3810
+11-07 07:54:28.198   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f5a90
+11-07 07:54:28.198   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f7770
+11-07 07:54:28.199   359   584 W ServiceManager: Permission failure: android.permission.ACCESS_SURFACE_FLINGER from uid=10175 pid=0
+11-07 07:54:28.199   359   584 D PermissionCache: checking android.permission.ACCESS_SURFACE_FLINGER for uid=10175 => denied (860 us)
+11-07 07:54:28.202   359   584 W ServiceManager: Permission failure: android.permission.ROTATE_SURFACE_FLINGER from uid=10175 pid=0
+11-07 07:54:28.202   359   584 D PermissionCache: checking android.permission.ROTATE_SURFACE_FLINGER for uid=10175 => denied (3060 us)
+11-07 07:54:28.202   359   584 W ServiceManager: Permission failure: android.permission.INTERNAL_SYSTEM_WINDOW from uid=10175 pid=0
+11-07 07:54:28.202   359   584 D PermissionCache: checking android.permission.INTERNAL_SYSTEM_WINDOW for uid=10175 => denied (63 us)
+11-07 07:54:28.207   359  1024 W ServiceManager: Permission failure: android.permission.ACCESS_SURFACE_FLINGER from uid=10175 pid=6584
+11-07 07:54:28.207   359  1024 D PermissionCache: checking android.permission.ACCESS_SURFACE_FLINGER for uid=10175 => denied (12138 us)
+11-07 07:54:28.222  6584  6614 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_multi_configs ANDROID_EMU_hwc_color_transform GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0
+11-07 07:54:28.222   757   809 D SplashScreenView: Build android.window.SplashScreenView{b061ba8 V.E...... ......ID 0,0-0,0}
+11-07 07:54:28.222   757   809 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-07 07:54:28.222   757   809 D SplashScreenView: Branding: view: android.view.View{9f726c1 G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-07 07:54:28.223   757   812 W Parcel  : Expecting binder but got null!
+11-07 07:54:28.224  6584  6614 W OpenGLRenderer: Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-07 07:54:28.225  6584  6614 D EGL_emulation: eglCreateContext: 0x704172d55a90: maj 3 min 0 rcv 3
+11-07 07:54:28.226  6584  6614 D EGL_emulation: eglMakeCurrent: 0x704172d55a90: ver 3 0 (tinfo 0x704392c22080) (first time)
+11-07 07:54:28.230  1636  2231 E HotwordModelPopulator: Failed to add hotword file group for 'hotword_model_en-US_okhey' from location: https://www.gstatic.com/android-search/hotword/x_google/975058821313279e27b2c3f04de0beef/hotword.data
+11-07 07:54:28.252  2127  2134 I d.process.media: Background young concurrent copying GC freed 8484(575KB) AllocSpace objects, 0(0B) LOS objects, 14% free, 3473KB/4059KB, paused 14us,11us total 141.345ms
+11-07 07:54:28.323   126   126 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+11-07 07:54:28.324  6584  6614 I Gralloc4: mapper 4.x is not supported
+11-07 07:54:28.334   126   126 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.allocator@4.0::IAllocator/default in either framework or device VINTF manifest.
+11-07 07:54:28.335   125   125 I servicemanager: Could not find android.hardware.graphics.allocator.IAllocator/default in the VINTF manifest.
+11-07 07:54:28.335  6584  6614 W Gralloc4: allocator 4.x is not supported
+11-07 07:54:28.342  6584  6614 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_multi_configs ANDROID_EMU_hwc_color_transform GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0
+11-07 07:54:28.369  1636  2229 E HotwordModelPopulator: Failed to add hotword file group for 'hotword_model_en-US_okhey' from location: https://www.gstatic.com/android-search/hotword/x_google/975058821313279e27b2c3f04de0beef/hotword.data
+11-07 07:54:28.517  1636  2669 W Parcel  : Expecting binder but got null!
+11-07 07:54:28.559  5655  5655 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@3e7c4a2 in: PRE_ON_CREATE
+11-07 07:54:28.559  5655  5655 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+11-07 07:54:28.571  5655  5655 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@3e7c4a2 in: CREATED
+11-07 07:54:28.573  5655  5655 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=androidx.activity.ComponentActivity@3e7c4a2
+11-07 07:54:28.575  5655  5655 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@3e7c4a2 in: STARTED
+11-07 07:54:28.576  5655  5655 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=androidx.activity.ComponentActivity@3e7c4a2
+11-07 07:54:28.579  5655  5655 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@3e7c4a2 in: RESUMED
+11-07 07:54:28.581  5655  5655 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=androidx.activity.ComponentActivity@3e7c4a2
+11-07 07:54:28.589   479   509 W InputManager-JNI: Input channel object '739ff32 Splash Screen com.quartz.notes.test (client)' was disposed without first being removed with the input manager!
+11-07 07:54:28.597  5655  6561 W Parcel  : Expecting binder but got null!
+11-07 07:54:28.598   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f6c90
+11-07 07:54:28.598   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f8370
+11-07 07:54:28.598   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f6630
+11-07 07:54:28.598   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f6c90
+11-07 07:54:28.598   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f8370
+11-07 07:54:28.602  6176  6218 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService started execution. cause:5 exec_start_elapsed_seconds: 118 [CONTEXT service_id=218 ]
+11-07 07:54:28.608  1578  1892 W AiAiEcho: SmartspaceNotificationPredictor no parser can handle this notification or notification is invalid
+11-07 07:54:28.705   757   812 D EGL_emulation: app_time_stats: avg=1074.02ms min=1074.02ms max=1074.02ms count=1
+11-07 07:54:28.733   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f5190
+11-07 07:54:28.733   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f5190
+11-07 07:54:28.733   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f5190
+11-07 07:54:28.736   479   505 W ziparchive: Unable to open '/data/app/~~zQFeJXZS5WhC5lfAeCkjYQ==/com.quartz.notes-feD_HGqKna9TAMJS1tgmSA==/base.dm': No such file or directory
+11-07 07:54:28.741   479   505 I ActivityTaskManager: Displayed com.quartz.notes/androidx.activity.ComponentActivity: +552ms
+11-07 07:54:28.747   479  2539 W InputManager-JNI: Input channel object '2976f4c com.quartz.notes.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity (client)' was disposed without first being removed with the input manager!
+11-07 07:54:28.760   479   752 W InputManager-JNI: Input channel object 'ea81a6f Splash Screen com.quartz.notes (client)' was disposed without first being removed with the input manager!
+11-07 07:54:28.767   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f51f0
+11-07 07:54:28.767   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f5d90
+11-07 07:54:28.803   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f8010
+11-07 07:54:28.803   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f6750
+11-07 07:54:28.803   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f4890
+11-07 07:54:28.803   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f6d50
+11-07 07:54:28.803   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f7050
+11-07 07:54:28.803   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f5f70
+11-07 07:54:28.803   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f5f70
+11-07 07:54:28.803   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f5f70
+11-07 07:54:29.001  1636  2669 W Parcel  : Expecting binder but got null!
+11-07 07:54:29.006   479  1750 W InputManager-JNI: Input channel object '7379ab3 com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity (client)' was disposed without first being removed with the input manager!
+11-07 07:54:29.014   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f5eb0
+11-07 07:54:29.014   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f6ab0
+11-07 07:54:29.057   424  3089 D NuPlayerDriver: NuPlayerDriver(0x7fc56965f430) created, clientPid(757)
+11-07 07:54:29.065   126   126 I hwservicemanager: getTransport: Cannot find entry android.hardware.media.omx@1.0::IOmx/default in either framework or device VINTF manifest.
+11-07 07:54:29.068   424  3089 D MediaPlayerService: OMX service is not available
+11-07 07:54:29.084   479  2539 W InputManager-JNI: Input channel object '4e38b0 com.google.android.googlequicksearchbox/android.app.ContextImpl (client)' was disposed without first being removed with the input manager!
+11-07 07:54:29.107   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f3b10
+11-07 07:54:29.111  6176  6315 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService finished executing. cause:5 result: 1 elapsed_millis: 732 uptime_millis: 732 exec_start_elapsed_seconds: 118 [CONTEXT service_id=218 ]
+11-07 07:54:29.138   424  6631 D GenericSource: FileSource remote
+11-07 07:54:29.147   757   812 D EGL_emulation: app_time_stats: avg=1585.58ms min=1585.58ms max=1585.58ms count=1
+11-07 07:54:29.199  5655  5655 W om.quartz.notes: Accessing hidden method Landroid/os/SystemProperties;->addChangeCallback(Ljava/lang/Runnable;)V (unsupported, reflection, allowed)
+11-07 07:54:29.205  1636  2765 D t       : Starting download: https://www.gstatic.com/android-search/hotword/x_google/975058821313279e27b2c3f04de0beef/hotword.data
+11-07 07:54:29.205  1636  2765 V t       : Is http uri, downloading (uri: https://www.gstatic.com/android-search/hotword/x_google/975058821313279e27b2c3f04de0beef/hotword.data)
+11-07 07:54:29.244   479  2539 I MediaFocusControl: requestAudioFocus() from uid/pid 10157/757 AA=USAGE_NOTIFICATION/CONTENT_TYPE_SONIFICATION clientId=android.media.AudioManager@bd08ac callingPack=com.android.systemui req=3 flags=0x0 sdk=33
+11-07 07:54:29.248   479  2539 I AudioService.FadeOutManager: unfadeOutUid() uid:10157
+11-07 07:54:29.341  6176  6218 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService started execution. cause:5 exec_start_elapsed_seconds: 119 [CONTEXT service_id=218 ]
+11-07 07:54:29.381  2127  6581 D DownloadManager: [7] Finished with status SUCCESS
+11-07 07:54:29.390  6282  6404 I Pay     : Device does not support HCE. [CONTEXT service_id=198 ]
+11-07 07:54:29.398  2127  2134 I d.process.media: Background concurrent copying GC freed 24507(1080KB) AllocSpace objects, 8(160KB) LOS objects, 49% free, 2850KB/5700KB, paused 3.765ms,8us total 181.574ms
+11-07 07:54:29.399   757   816 D LocalImageResolver: Couldn't use ImageDecoder for drawable, falling back to non-resized load.
+11-07 07:54:29.405   757   816 D LocalImageResolver: Couldn't use ImageDecoder for drawable, falling back to non-resized load.
+11-07 07:54:29.491  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-07 07:54:29.493  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-07 07:54:29.493  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=null}, false)
+11-07 07:54:29.493  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-07 07:54:29.493  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-07 07:54:29.545   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f82b0
+11-07 07:54:29.630   282   317 I netd    : tetherGetStats() -> {[]} <0.33ms>
+11-07 07:54:29.635  1636  2636 I BlobLobber: Handling download id 7 (blob brain_en_us_201705_arm32_release_signed)
+11-07 07:54:29.639  6176  6315 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService finished executing. cause:5 result: 2 elapsed_millis: 368 uptime_millis: 368 exec_start_elapsed_seconds: 119 [CONTEXT service_id=218 ]
+11-07 07:54:29.645   282   317 I netd    : bandwidthSetGlobalAlert(2097152) <0.09ms>
+11-07 07:54:29.789   424  6629 I GenericSource: start
+11-07 07:54:29.804   479   498 I system_server: Background young concurrent copying GC freed 817853(17MB) AllocSpace objects, 1(20KB) LOS objects, 5% free, 41MB/44MB, paused 62us,48us total 532.794ms
+11-07 07:54:29.823   757  6623 W RingtonePlayer: Notification sound delayed by 1453msecs
+11-07 07:54:29.838   757   812 D EGL_emulation: app_time_stats: avg=226.50ms min=115.24ms max=337.50ms count=5
+11-07 07:54:29.840  1578  1892 W AiAiEcho: SmartspaceNotificationPredictor no parser can handle this notification or notification is invalid
+11-07 07:54:29.909  6176  6183 I .gms.persistent: Background concurrent copying GC freed 413793(23MB) AllocSpace objects, 8(1752KB) LOS objects, 39% free, 36MB/60MB, paused 29us,22us total 963.167ms
+11-07 07:54:29.917  1578  1898 I AiAiStatsd: Successfully logged feature usage for VISUAL_CORTEX.
+11-07 07:54:29.917  2127  6597 D DownloadManager: [8] Finished with status SUCCESS
+11-07 07:54:29.918   424  6638 D CCodec  : allocate(c2.android.vorbis.decoder)
+11-07 07:54:29.920  6176  6185 W System  : A resource failed to call close.
+11-07 07:54:29.930   424  6638 I CCodec  : setting up 'default' as default (vendor) store
+11-07 07:54:29.938   434   813 V C2Store : in init
+11-07 07:54:29.938   434   813 V C2Store : loading dll
+11-07 07:54:29.958   424  6638 I CCodec  : Created component [c2.android.vorbis.decoder]
+11-07 07:54:29.959   424  6638 D CCodecConfig: read media type: audio/vorbis
+11-07 07:54:29.960   424  6638 D ReflectedParamUpdater: extent() != 1 for single value type: algo.buffers.max-count.values
+11-07 07:54:29.960   424  6638 D ReflectedParamUpdater: extent() != 1 for single value type: output.subscribed-indices.values
+11-07 07:54:29.960   424  6638 D ReflectedParamUpdater: extent() != 1 for single value type: input.buffers.allocator-ids.values
+11-07 07:54:29.960   424  6638 D ReflectedParamUpdater: extent() != 1 for single value type: output.buffers.allocator-ids.values
+11-07 07:54:29.961   424  6638 D ReflectedParamUpdater: extent() != 1 for single value type: algo.buffers.allocator-ids.values
+11-07 07:54:29.961   424  6638 D ReflectedParamUpdater: extent() != 1 for single value type: output.buffers.pool-ids.values
+11-07 07:54:29.961   424  6638 D ReflectedParamUpdater: extent() != 1 for single value type: algo.buffers.pool-ids.values
+11-07 07:54:29.965   424  6638 I CCodecConfig: query failed after returning 7 values (BAD_INDEX)
+11-07 07:54:29.965   424  6638 D CCodecConfig: c2 config diff is Dict {
+11-07 07:54:29.965   424  6638 D CCodecConfig:   c2::u32 coded.bitrate.value = 64000
+11-07 07:54:29.965   424  6638 D CCodecConfig:   c2::u32 input.buffers.max-size.value = 32768
+11-07 07:54:29.965   424  6638 D CCodecConfig:   c2::u32 input.delay.value = 0
+11-07 07:54:29.965   424  6638 D CCodecConfig:   string input.media-type.value = "audio/vorbis"
+11-07 07:54:29.965   424  6638 D CCodecConfig:   string output.media-type.value = "audio/raw"
+11-07 07:54:29.965   424  6638 D CCodecConfig:   c2::u32 raw.channel-count.value = 1
+11-07 07:54:29.965   424  6638 D CCodecConfig:   c2::u32 raw.sample-rate.value = 48000
+11-07 07:54:29.965   424  6638 D CCodecConfig: }
+11-07 07:54:29.973   424  6638 D MediaCodec: flushMediametrics
+11-07 07:54:29.973   424  6638 D CCodec  : [c2.android.vorbis.decoder] buffers are bound to CCodec for this session
+11-07 07:54:29.973   424  6638 D CCodecConfig: no c2 equivalents for durationUs
+11-07 07:54:29.973   424  6638 D CCodecConfig: no c2 equivalents for csd-1
+11-07 07:54:29.973   424  6638 D CCodecConfig: no c2 equivalents for flags
+11-07 07:54:29.974   424  6638 D CCodecConfig: c2 config diff is   c2::u32 coded.bitrate.value = 70000
+11-07 07:54:29.974   424  6638 W Codec2Client: query -- param skipped: index = 1107298332.
+11-07 07:54:29.974   424  6638 D CCodec  : encoding statistics level = 0
+11-07 07:54:29.974   424  6638 D CCodec  : setup formats input: AMessage(what = 0x00000000) = {
+11-07 07:54:29.974   424  6638 D CCodec  :   int32_t bitrate = 70000
+11-07 07:54:29.974   424  6638 D CCodec  :   int32_t channel-count = 1
+11-07 07:54:29.974   424  6638 D CCodec  :   int32_t max-input-size = 32768
+11-07 07:54:29.974   424  6638 D CCodec  :   string mime = "audio/vorbis"
+11-07 07:54:29.974   424  6638 D CCodec  :   int32_t sample-rate = 48000
+11-07 07:54:29.974   424  6638 D CCodec  : }
+11-07 07:54:29.974   424  6638 D CCodec  : setup formats output: AMessage(what = 0x00000000) = {
+11-07 07:54:29.974   424  6638 D CCodec  :   int32_t channel-count = 1
+11-07 07:54:29.974   424  6638 D CCodec  :   string mime = "audio/raw"
+11-07 07:54:29.974   424  6638 D CCodec  :   int32_t sample-rate = 48000
+11-07 07:54:29.974   424  6638 D CCodec  :   int32_t channel-mask = 1
+11-07 07:54:29.974   424  6638 D CCodec  :   int32_t android._config-pcm-encoding = 2
+11-07 07:54:29.974   424  6638 D CCodec  : }
+11-07 07:54:29.980   424  6638 I CCodecConfig: query failed after returning 7 values (BAD_INDEX)
+11-07 07:54:29.980   424  6638 I MediaCodec: MediaCodec will operate in async mode
+11-07 07:54:29.980   424  6637 D MediaCodec: keep callback message for reclaim
+11-07 07:54:29.981   424  6638 W Codec2Client: query -- param skipped: index = 1342179345.
+11-07 07:54:29.981   424  6638 W Codec2Client: query -- param skipped: index = 2415921170.
+11-07 07:54:29.983   424  6638 D C2Store : Using DMABUF Heaps
+11-07 07:54:29.983   757   757 D MediaRouter: onRestoreRoute() : route=RouteInfo{ name=Phone, description=null, status=null, category=RouteCategory{ name=System types=ROUTE_TYPE_LIVE_AUDIO ROUTE_TYPE_LIVE_VIDEO  groupable=false }, supportedTypes=ROUTE_TYPE_LIVE_AUDIO ROUTE_TYPE_LIVE_VIDEO , presentationDisplay=null }
+11-07 07:54:29.984   757   757 V MediaRouter: Selecting route: RouteInfo{ name=Phone, description=null, status=null, category=RouteCategory{ name=System types=ROUTE_TYPE_LIVE_AUDIO ROUTE_TYPE_LIVE_VIDEO  groupable=false }, supportedTypes=ROUTE_TYPE_LIVE_AUDIO ROUTE_TYPE_LIVE_VIDEO , presentationDisplay=null }
+11-07 07:54:29.988   424  6638 D CCodecBufferChannel: [c2.android.vorbis.decoder#4] Created input block pool with allocatorID 16 => poolID 17 - OK (0)
+11-07 07:54:29.990   479   513 D BufferPoolAccessor2.0: bufferpool2 0x7041c2df2498 : 0(0 size) total buffers - 0(0 size) used buffers - 1/7 (recycle/alloc) - 6/18 (fetch/transfer)
+11-07 07:54:29.990   479   828 D BufferPoolAccessor2.0: bufferpool2 0x7041c2df3968 : 0(0 size) total buffers - 0(0 size) used buffers - 1/7 (recycle/alloc) - 6/24 (fetch/transfer)
+11-07 07:54:29.990   479   828 D BufferPoolAccessor2.0: Destruction - bufferpool2 0x7041c2df3968 cached: 0/0M, 0/0% in use; allocs: 7, 14% recycled; transfers: 24, 75% unfetched
+11-07 07:54:29.991   757  1150 D BufferPoolAccessor2.0: bufferpool2 0x7041c2d751f8 : 0(0 size) total buffers - 0(0 size) used buffers - 2/7 (recycle/alloc) - 5/36 (fetch/transfer)
+11-07 07:54:29.991   479   727 D BufferPoolAccessor2.0: bufferpool2 0x7041c2df2248 : 0(0 size) total buffers - 0(0 size) used buffers - 1/7 (recycle/alloc) - 6/24 (fetch/transfer)
+11-07 07:54:29.991   757  1150 D BufferPoolAccessor2.0: Destruction - bufferpool2 0x7041c2d751f8 cached: 0/0M, 0/0% in use; allocs: 7, 29% recycled; transfers: 36, 86% unfetched
+11-07 07:54:29.991   757  1150 D BufferPoolAccessor2.0: bufferpool2 0x7041c2d73888 : 0(0 size) total buffers - 0(0 size) used buffers - 2/7 (recycle/alloc) - 5/38 (fetch/transfer)
+11-07 07:54:29.991   757  1150 D BufferPoolAccessor2.0: Destruction - bufferpool2 0x7041c2d73888 cached: 0/0M, 0/0% in use; allocs: 7, 29% recycled; transfers: 38, 87% unfetched
+11-07 07:54:29.992   757  1150 D BufferPoolAccessor2.0: bufferpool2 0x7041c2d71828 : 0(0 size) total buffers - 0(0 size) used buffers - 1/7 (recycle/alloc) - 6/18 (fetch/transfer)
+11-07 07:54:29.992   757  1150 D BufferPoolAccessor2.0: Destruction - bufferpool2 0x7041c2d71828 cached: 0/0M, 0/0% in use; allocs: 7, 14% recycled; transfers: 18, 67% unfetched
+11-07 07:54:29.992   479   727 D BufferPoolAccessor2.0: Destruction - bufferpool2 0x7041c2df2248 cached: 0/0M, 0/0% in use; allocs: 7, 14% recycled; transfers: 24, 75% unfetched
+11-07 07:54:29.992   479   725 D BufferPoolAccessor2.0: bufferpool2 0x7041c2df4998 : 0(0 size) total buffers - 0(0 size) used buffers - 2/7 (recycle/alloc) - 5/34 (fetch/transfer)
+11-07 07:54:29.992   479   725 D BufferPoolAccessor2.0: Destruction - bufferpool2 0x7041c2df4998 cached: 0/0M, 0/0% in use; allocs: 7, 29% recycled; transfers: 34, 85% unfetched
+11-07 07:54:29.992   479   727 D BufferPoolAccessor2.0: bufferpool2 0x7041c2df52d8 : 0(0 size) total buffers - 0(0 size) used buffers - 1/7 (recycle/alloc) - 6/34 (fetch/transfer)
+11-07 07:54:29.992   479   727 D BufferPoolAccessor2.0: Destruction - bufferpool2 0x7041c2df52d8 cached: 0/0M, 0/0% in use; allocs: 7, 14% recycled; transfers: 34, 82% unfetched
+11-07 07:54:29.993   424  6638 I CCodecBufferChannel: [c2.android.vorbis.decoder#4] Created output block pool with allocatorID 16 => poolID 26 - OK
+11-07 07:54:29.993   424  6638 D CCodecBufferChannel: [c2.android.vorbis.decoder#4] Configured output block pool ids 26 => OK
+11-07 07:54:29.994   479   828 D BufferPoolAccessor2.0: bufferpool2 0x7041c2df4058 : 0(0 size) total buffers - 0(0 size) used buffers - 1/7 (recycle/alloc) - 6/26 (fetch/transfer)
+11-07 07:54:29.994   479   828 D BufferPoolAccessor2.0: Destruction - bufferpool2 0x7041c2df4058 cached: 0/0M, 0/0% in use; allocs: 7, 14% recycled; transfers: 26, 77% unfetched
+11-07 07:54:29.994   479   513 D BufferPoolAccessor2.0: Destruction - bufferpool2 0x7041c2df2498 cached: 0/0M, 0/0% in use; allocs: 7, 14% recycled; transfers: 18, 67% unfetched
+11-07 07:54:29.995   424  6638 I DMABUFHEAPS: Using DMA-BUF heap named: system
+11-07 07:54:29.996   434  6642 D SimpleC2Component: Using output block pool with poolID 26 => got 26 - 0
+11-07 07:54:30.009   355   459 D AudioFlinger: Client defaulted notificationFrames to 12144 for frameCount 24288
+11-07 07:54:30.012   355   459 D AF::TrackHandle: OpPlayAudio: track:55 usage:5 not muted
+11-07 07:54:30.030   757   816 D LocalImageResolver: Couldn't use ImageDecoder for drawable, falling back to non-resized load.
+11-07 07:54:30.031  6176  6218 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService started execution. cause:5 exec_start_elapsed_seconds: 120 [CONTEXT service_id=218 ]
+11-07 07:54:30.055  2127  6636 V DownloadManager: Deleting /storage/emulated/0/Android/data/com.google.android.googlequicksearchbox/files/pending_blobs/brain_en_us_201705_arm32_release_signed via provider delete
+11-07 07:54:30.075  6176  6315 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService finished executing. cause:5 result: 1 elapsed_millis: 85 uptime_millis: 85 exec_start_elapsed_seconds: 120 [CONTEXT service_id=218 ]
+11-07 07:54:30.107   757   816 D LocalImageResolver: Couldn't use ImageDecoder for drawable, falling back to non-resized load.
+11-07 07:54:30.156  5655  5667 I OpenGLRenderer: Davey! duration=1276ms; Flags=0, FrameTimelineVsyncId=6917, IntendedVsync=119027527153, Vsync=119427527137, InputEventId=0, HandleInputStart=119439469894, AnimationStart=119439471767, PerformTraversalsStart=119439472448, DrawStart=119595867007, FrameDeadline=119044193819, FrameInterval=119439459078, FrameStartTime=16666666, SyncQueued=119611453278, SyncStart=119611475782, IssueDrawCommandsStart=119612591395, SwapBuffers=120245868569, FrameCompleted=120304379387, DequeueBufferDuration=5017, QueueBufferDuration=5808801, GpuCompleted=120304315392, SwapBuffersCompleted=120304379387, DisplayPresentTime=0, CommandSubmissionCompleted=120245868569,
+11-07 07:54:30.161   355   462 D AudioFlinger: mixer(0x7b7da44b49a0) throttle end: throttle time(9)
+11-07 07:54:30.194  1582  5632 I MediaProvider: Scanned external_primary due to REASON_DEMAND, found 0 items in 23ms, 0 inserts 0 updates 0 deletes
+11-07 07:54:30.209  6176  6218 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.tapandpay.gcmtask.TapAndPayGcmTaskService started execution. cause:5 exec_start_elapsed_seconds: 120 [CONTEXT service_id=218 ]
+11-07 07:54:30.224   355   462 D AudioFlinger: mixer(0x7b7da44b49a0) throttle end: throttle time(35)
+11-07 07:54:30.237  6176  6218 W TapAndPay: NfcAdapter is null while obtaining CardEmulation instance. [CONTEXT service_id=79 ]
+11-07 07:54:30.237  6176  6218 W TapAndPay: java.lang.NullPointerException: NfcAdapter is null
+11-07 07:54:30.237  6176  6218 W TapAndPay: 	at android.nfc.cardemulation.CardEmulation.getInstance(CardEmulation.java:154)
+11-07 07:54:30.237  6176  6218 W TapAndPay: 	at cdoy.<init>(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 07:54:30.237  6176  6218 W TapAndPay: 	at com.google.android.gms.tapandpay.hce.task.TapAndPayAidRegistrationTaskOperation.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):5)
+11-07 07:54:30.237  6176  6218 W TapAndPay: 	at com.google.android.gms.tapandpay.gcmtask.TapAndPayGcmTaskChimeraService.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+11-07 07:54:30.237  6176  6218 W TapAndPay: 	at avzs.call(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+11-07 07:54:30.237  6176  6218 W TapAndPay: 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+11-07 07:54:30.237  6176  6218 W TapAndPay: 	at aced.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-07 07:54:30.237  6176  6218 W TapAndPay: 	at aced.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):7)
+11-07 07:54:30.237  6176  6218 W TapAndPay: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-07 07:54:30.237  6176  6218 W TapAndPay: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-07 07:54:30.237  6176  6218 W TapAndPay: 	at acjn.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 07:54:30.237  6176  6218 W TapAndPay: 	at java.lang.Thread.run(Thread.java:1012)
+11-07 07:54:30.247  6176  6218 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.tapandpay.gcmtask.TapAndPayGcmTaskService finished executing. cause:5 result: 3 elapsed_millis: 54 uptime_millis: 54 exec_start_elapsed_seconds: 120 [CONTEXT service_id=218 ]
+11-07 07:54:30.248  1636  2636 W DynamiteModule: Local module descriptor class for com.google.android.gms.providerinstaller.dynamite not found.
+11-07 07:54:30.262  6176  6198 W ProviderHelper: Unknown dynamite feature providerinstaller.dynamite
+11-07 07:54:30.285   479   499 W JavaBinder: BinderProxy is being destroyed but the application did not call unlinkToDeath to unlink all of its death recipients beforehand.  Releasing leaked death recipient: com.android.server.wm.ActivityRecord$$ExternalSyntheticLambda0
+11-07 07:54:30.285   479   499 I BpBinder: onLastStrongRef automatically unlinking death recipients: <uncached descriptor>
+11-07 07:54:30.285   479   499 W JavaBinder: BinderProxy is being destroyed but the application did not call unlinkToDeath to unlink all of its death recipients beforehand.  Releasing leaked death recipient: com.android.server.wm.ActivityRecord$$ExternalSyntheticLambda0
+11-07 07:54:30.285   479   499 I BpBinder: onLastStrongRef automatically unlinking death recipients: <uncached descriptor>
+11-07 07:54:30.297  1636  2636 I DynamiteModule: Considering local module com.google.android.gms.providerinstaller.dynamite:0 and remote module com.google.android.gms.providerinstaller.dynamite:0
+11-07 07:54:30.302   757   809 D SplashScreenView: Build android.window.SplashScreenView{6330db V.E...... ......ID 0,0-0,0}
+11-07 07:54:30.302   757   809 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-07 07:54:30.302   757   809 D SplashScreenView: Branding: view: android.view.View{780b778 G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-07 07:54:30.305   757   812 W Parcel  : Expecting binder but got null!
+11-07 07:54:30.308  5655  5655 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@3e7c4a2 in: PAUSED
+11-07 07:54:30.308  5655  5655 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=androidx.activity.ComponentActivity@3e7c4a2
+11-07 07:54:30.356  1636  2636 W ProviderInstaller: Failed to load providerinstaller module: No acceptable module com.google.android.gms.providerinstaller.dynamite found. Local version is 0 and remote version is 0.
+11-07 07:54:30.399   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f82b0
+11-07 07:54:30.400   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f7770
+11-07 07:54:30.427  1578  1892 W AiAiEcho: SmartspaceNotificationPredictor no parser can handle this notification or notification is invalid
+11-07 07:54:30.439  1636  2231 I A       : Using proto config with mendel
+11-07 07:54:30.439  1636  2231 I A       : Using proto config with mendel
+11-07 07:54:30.439  1636  2231 I A       : Using proto config with mendel
+11-07 07:54:30.439  1636  2231 I A       : Using proto config with mendel
+11-07 07:54:30.439  1636  2231 I A       : Using proto config with mendel
+11-07 07:54:30.439  1636  2231 I A       : Using proto config with mendel
+11-07 07:54:30.439  1636  2231 I A       : Merging legacy hotword config map with new proto.
+11-07 07:54:30.439  1636  2231 I A       : Skipping. Expected model: 1 Found: 2
+11-07 07:54:30.439  1636  2231 I A       : Skipping. Expected model: 1 Found: 2
+11-07 07:54:30.439  1636  2231 I A       : Skipping. Expected model: 1 Found: 2
+11-07 07:54:30.439  1636  2231 I A       : Adding from config to map. Locale: ro-RO modelPrefix: okgoogle Location:b051c93dce7bb4dcb5d9ddcbbb2ca760Test isSpeakerIdSupported: false
+11-07 07:54:30.439  1636  2231 I A       : Skipping. Expected model: 1 Found: 2
+11-07 07:54:30.444   757   812 D EGL_emulation: app_time_stats: avg=1296.63ms min=1296.63ms max=1296.63ms count=1
+11-07 07:54:30.449  1636  2231 I A       : Using proto config with mendel
+11-07 07:54:30.456  1636  2231 I ModelDownloadController: Hotword model update tasks finished.
+11-07 07:54:30.491  6584  6614 W Parcel  : Expecting binder but got null!
+11-07 07:54:30.492   355   462 D AudioFlinger: mixer(0x7b7da44b49a0) throttle end: throttle time(27)
+11-07 07:54:30.512   757   816 D LocalImageResolver: Couldn't use ImageDecoder for drawable, falling back to non-resized load.
+11-07 07:54:30.550   757   816 D LocalImageResolver: Couldn't use ImageDecoder for drawable, falling back to non-resized load.
+11-07 07:54:30.563  1636  2709 I MicroDetectionWorker: Initializing MicroDataManager InitializeType-2, isForced-true, isActivePhoneEnrollment-false isActiveGoogleHomeEnrollment-false
+11-07 07:54:30.564  1636  2709 I A       : Using proto config with mendel
+11-07 07:54:30.564  1636  2709 I A       : Using proto config with mendel
+11-07 07:54:30.575  1636  2229 I A       : Using proto config with mendel
+11-07 07:54:30.575  1636  2229 I A       : Merging legacy hotword config map with new proto.
+11-07 07:54:30.575  1636  2229 I A       : Adding from config to map. Locale: cmn-Hant-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+11-07 07:54:30.575  1636  2229 I A       : Adding from config to map. Locale: id-ID modelPrefix: x_google Location:cfffcc1a4c1c084c003c8eb27f73d770 isSpeakerIdSupported: true
+11-07 07:54:30.575  1636  2229 I A       : Adding from config to map. Locale: ko-KR modelPrefix: x_google Location:0b132163a2eb2c1194b202067475724b isSpeakerIdSupported: true
+11-07 07:54:30.575  1636  2229 I A       : Skipping. Expected model: 2 Found: 1
+11-07 07:54:30.575  1636  2229 I A       : Adding from config to map. Locale: zh-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+11-07 07:54:30.575  1636  2229 I MicroDataManager: Location for model with model type: 2 and locale: en-US, is : https://www.gstatic.com/android-search/hotword/x_google/975058821313279e27b2c3f04de0beef/hotword.data
+11-07 07:54:30.576  1636  2229 I MicroModelsUtil: #getHotwordModel [locale: en-US, modelType: 2]
+11-07 07:54:30.579  1636  2636 D nativeloader: Configuring classloader-namespace for other apk /system/framework/com.android.media.remotedisplay.jar. target_sdk_version=33, uses_libraries=ALL, library_path=/product/priv-app/PrebuiltGmsCore/lib/x86_64:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.gms
+11-07 07:54:30.583  1636  2636 D nativeloader: Configuring classloader-namespace for other apk /system/framework/com.android.location.provider.jar. target_sdk_version=33, uses_libraries=ALL, library_path=/product/priv-app/PrebuiltGmsCore/lib/x86_64:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.gms
+11-07 07:54:30.587  1636  2636 D nativeloader: Configuring vendor-classloader-namespace for unbundled product apk /product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk. target_sdk_version=33, uses_libraries=, library_path=/product/priv-app/PrebuiltGmsCore/lib/x86_64:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!/lib/x86_64:/product/lib64:/system/product/lib64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.gms:/product/lib64:/system/product/lib64
+11-07 07:54:30.590  6176  6315 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.tapandpay.gcmtask.TapAndPayGcmTaskService started execution. cause:5 exec_start_elapsed_seconds: 120 [CONTEXT service_id=218 ]
+11-07 07:54:30.601  1636  2636 V NativeCrypto: Registering com/google/android/gms/org/conscrypt/NativeCrypto's 295 native methods...
+11-07 07:54:30.603   951  1256 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 07:54:30.603   951  1256 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 07:54:30.603   951  1256 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 1
+11-07 07:54:30.612  5655  5655 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@3e7c4a2 in: STOPPED
+11-07 07:54:30.623  5655  5655 V ActivityScenario: Update currentActivityStage to STOPPED, currentActivity=androidx.activity.ComponentActivity@3e7c4a2
+11-07 07:54:30.626   424  6635 D AudioTrack: getTimestamp_l(15): device stall time corrected using current time 120790003998
+11-07 07:54:30.627  1636  2636 I ProviderInstaller: Installed default security provider GmsCore_OpenSSL
+11-07 07:54:30.627  1636  2231 I MicroModelsUtil: #getHotwordModelFromMobstore [mobstoreUri: android://com.google.android.googlequicksearchbox/files/datadownload/shared/public/datadownloadfile_1794038067304]
+11-07 07:54:30.632  1636  2358 I MicroDataManager: MicroDataManager InitializationTask. googleHotwordData is null: true, hotwordModel is null: false , sourceLocationOfCurrentHotwordModel https://www.gstatic.com/android-search/hotword/x_google/975058821313279e27b2c3f04de0beef/hotword.data
+11-07 07:54:30.632  1636  2709 I A       : Using proto config with mendel
+11-07 07:54:30.632  1636  2709 I A       : Using proto config with mendel
+11-07 07:54:30.635  1636  2709 I A       : Using proto config with mendel
+11-07 07:54:30.635  1636  2709 I A       : Merging legacy hotword config map with new proto.
+11-07 07:54:30.635  1636  2709 I A       : Adding from config to map. Locale: cmn-Hant-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+11-07 07:54:30.635  1636  2709 I A       : Adding from config to map. Locale: id-ID modelPrefix: x_google Location:cfffcc1a4c1c084c003c8eb27f73d770 isSpeakerIdSupported: true
+11-07 07:54:30.635  1636  2709 I A       : Adding from config to map. Locale: ko-KR modelPrefix: x_google Location:0b132163a2eb2c1194b202067475724b isSpeakerIdSupported: true
+11-07 07:54:30.635  1636  2709 I A       : Skipping. Expected model: 2 Found: 1
+11-07 07:54:30.635  1636  2709 I A       : Adding from config to map. Locale: zh-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+11-07 07:54:30.635  1636  2709 I MicroDetectionState: Should stop hotword detection immediately - true
+11-07 07:54:30.635  1636  2709 I A       : Using proto config with mendel
+11-07 07:54:30.636  1636  2709 I A       : Using proto config with mendel
+11-07 07:54:30.651   424  3089 D NuPlayerDriver: stop(0x7fc56965f430)
+11-07 07:54:30.659  6176  6315 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.tapandpay.gcmtask.TapAndPayGcmTaskService finished executing. cause:5 result: 1 elapsed_millis: 304 uptime_millis: 304 exec_start_elapsed_seconds: 120 [CONTEXT service_id=218 ]
+11-07 07:54:30.690   757  6659 V MediaPlayer: resetDrmState:  mDrmInfo=null mDrmProvisioningThread=null mPrepareDrmInProgress=false mActiveDrmScheme=false
+11-07 07:54:30.690   757  6659 V MediaPlayer: cleanDrmObj: mDrmObj=null mDrmSessionId=null
+11-07 07:54:30.691   424  3089 D NuPlayerDriver: reset(0x7fc56965f430) at state 8
+11-07 07:54:30.694   424  6638 D CCodecBuffers: [c2.android.vorbis.decoder#4:1D-Output.Impl[N]] Client returned a buffer it does not own according to our record: 0
+11-07 07:54:30.694   424  6638 D CCodecBuffers: [c2.android.vorbis.decoder#4:1D-Output.Impl[N]] Client returned a buffer it does not own according to our record: 1
+11-07 07:54:30.694   424  6638 D CCodecBuffers: [c2.android.vorbis.decoder#4:1D-Output.Impl[N]] Client returned a buffer it does not own according to our record: 2
+11-07 07:54:30.698   479   505 W ziparchive: Unable to open '/data/app/~~l9aOkzql9-5Kuw640uF40w==/com.quartz.notes.test-mYUghIsEX31ahTere-tqvQ==/base.dm': No such file or directory
+11-07 07:54:30.700   479   505 I ActivityTaskManager: Displayed com.quartz.notes.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity: +404ms
+11-07 07:54:30.732  5655  5655 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@3e7c4a2 in: DESTROYED
+11-07 07:54:30.732  5655  5655 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
+11-07 07:54:30.742   424  6637 D MediaCodec: flushMediametrics
+11-07 07:54:30.745   424  6629 D NuPlayerDriver: notifyResetComplete(0x7fc56965f430)
+11-07 07:54:30.745   424  3089 W AMessage: failed to post message as target looper for handler 0 is gone.
+11-07 07:54:30.750   479  1935 I MediaFocusControl: abandonAudioFocus() from uid/pid 10157/757 clientId=android.media.AudioManager@bd08ac
+11-07 07:54:30.753   434   447 I hw-BpHwBinder: onLastStrongRef automatically unlinking death recipients
+11-07 07:54:30.755   434   447 I hw-BpHwBinder: onLastStrongRef automatically unlinking death recipients
+11-07 07:54:30.756   434   447 V C2Store : in ~ComponentModule
+11-07 07:54:30.756   434   447 V C2Store : unloading dll
+11-07 07:54:30.756   424  6661 I hw-BpHwBinder: onLastStrongRef automatically unlinking death recipients
+11-07 07:54:30.808  5655  5677 D IdlingRegistry: Unregistering idling resources: [androidx.compose.ui.test.EspressoLink@849943e]
+11-07 07:54:30.841   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f65d0
+11-07 07:54:30.871   988   988 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+11-07 07:54:30.887   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f7110
+11-07 07:54:30.918   951  1256 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 07:54:30.918   951  1256 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 07:54:30.918   951  1256 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 1
+11-07 07:54:30.965  5655  5655 W om.quartz.notes: Verification of java.util.Iterator kotlin.sequences.GeneratorSequence.iterator() took 127.618ms (62.69 bytecodes/s) (1408B approximate peak alloc)
+11-07 07:54:30.983   479  2539 W InputManager-JNI: Input channel object 'e0ff9d com.quartz.notes/androidx.activity.ComponentActivity (client)' was disposed without first being removed with the input manager!
+11-07 07:54:30.985  1578  1866 I AiAiEcho: Predicting[0]:
+11-07 07:54:30.985  1578  1866 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:
+11-07 07:54:30.985  1578  1866 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0
+11-07 07:54:30.985  1578  1866 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0
+11-07 07:54:30.990  5655  5677 I TestRunner: finished: coversShowTheirMaterial(com.quartz.notes.ui.components.CoverTexturesTest)

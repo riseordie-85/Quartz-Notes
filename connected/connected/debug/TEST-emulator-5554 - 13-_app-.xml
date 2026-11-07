@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<testsuite name="com.quartz.notes.data.BigSheetMigrationTest" tests="85" failures="1" errors="0" skipped="0" time="271.416" timestamp="2026-11-07T07:58:40" hostname="localhost">
+  <properties>
+    <property name="device" value="emulator-5554 - 13" />
+    <property name="flavor" value="" />
+    <property name="project" value=":app" />
+  </properties>
+  <testcase name="oversizedSheetIsCompressedAndItsNotebookOpens" classname="com.quartz.notes.data.BigSheetMigrationTest" time="2.21" />
+  <testcase name="wordTextAndSheets" classname="com.quartz.notes.data.ExportBuilderTest" time="0.043" />
+  <testcase name="combinedPdfAndPerPageZip" classname="com.quartz.notes.data.ExportBuilderTest" time="0.405" />
+  <testcase name="deletingSomethingSyncedLeavesAHiddenMarker" classname="com.quartz.notes.data.SyncGroundworkTest" time="0.028" />
+  <testcase name="newDatabaseStartsWithATrackedShelf" classname="com.quartz.notes.data.SyncGroundworkTest" time="0.003" />
+  <testcase name="copiesGetTheirOwnIds" classname="com.quartz.notes.data.SyncGroundworkTest" time="0.05" />
+  <testcase name="wholeRowSavesAreTracked" classname="com.quartz.notes.data.SyncGroundworkTest" time="0.054" />
+  <testcase name="anOldCopyCantBringBackADeletedRow" classname="com.quartz.notes.data.SyncGroundworkTest" time="0.03" />
+  <testcase name="editsMarkRowsForUploadButSyncWritesDoNot" classname="com.quartz.notes.data.SyncGroundworkTest" time="0.001" />
+  <testcase name="migration4To5GivesEveryRowAnIdAndMarksItForUpload" classname="com.quartz.notes.data.SyncGroundworkTest" time="0.125" />
+  <testcase name="deletingANotebookDeletesItsPagesAndItems" classname="com.quartz.notes.data.SyncGroundworkTest" time="0.027" />
+  <testcase name="restoringABackupKeepsIdsAndAddingAlongsideMakesNewOnes" classname="com.quartz.notes.data.SyncGroundworkTest" time="0.027" />
+  <testcase name="deletingSomethingNeverSyncedErasesIt" classname="com.quartz.notes.data.SyncGroundworkTest" time="0.0" />
+  <testcase name="startersLoadAndMakePagesAndNotes" classname="com.quartz.notes.data.TemplatesTest" time="0.03" />
+  <testcase name="pagesAddedInTheTemplatesNotebookAreTemplates" classname="com.quartz.notes.data.TemplatesTest" time="0.027" />
+  <testcase name="aPageSavedAsATemplateMakesNewPagesWithEverythingOnIt" classname="com.quartz.notes.data.TemplatesTest" time="0.06" />
+  <testcase name="migration5To6AddsTemplateAndBackgroundFields" classname="com.quartz.notes.data.TemplatesTest" time="0.081" />
+  <testcase name="aNoteSavedAsATemplateStaysOutOfTheListAndMakesNewNotes" classname="com.quartz.notes.data.TemplatesTest" time="0.026" />
+  <testcase name="notebooksWithPagesItemsAndAttachments" classname="com.quartz.notes.data.sync.SyncEngineTest" time="1.333" />
+  <testcase name="accentAndBackgroundAreShared" classname="com.quartz.notes.data.sync.SyncEngineTest" time="0.731" />
+  <testcase name="deletingReachesTheOtherDevice" classname="com.quartz.notes.data.sync.SyncEngineTest" time="0.886" />
+  <testcase name="templatesAndBackgroundPicturesSync" classname="com.quartz.notes.data.sync.SyncEngineTest" time="0.831" />
+  <testcase name="picturesRecordingsAndFontsTravel" classname="com.quartz.notes.data.sync.SyncEngineTest" time="1.008" />
+  <testcase name="conflictingNoteEditsKeepBothVersions" classname="com.quartz.notes.data.sync.SyncEngineTest" time="0.503" />
+  <testcase name="remoteChangesAreReported" classname="com.quartz.notes.data.sync.SyncEngineTest" time="0.871" />
+  <testcase name="aNoteTravelsBothWays" classname="com.quartz.notes.data.sync.SyncEngineTest" time="0.444" />
+  <testcase name="offlineIsReportedAndNothingIsLost" classname="com.quartz.notes.data.sync.SyncEngineTest" time="1.992" />
+  <testcase name="theLaterEditWinsWhicheverDeviceSyncsFirst" classname="com.quartz.notes.data.sync.SyncEngineTest" time="0.504" />
+  <testcase name="firstSyncMergesWhatBothDevicesHad" classname="com.quartz.notes.data.sync.SyncEngineTest" time="0.729" />
+  <testcase name="liveNotesStayHiddenWhileDeletedOnesArriveLater" classname="com.quartz.notes.data.sync.SyncEngineTest" time="0.731" />
+  <testcase name="conflictingPageEditsKeepBothVersions" classname="com.quartz.notes.data.sync.SyncEngineTest" time="0.327" />
+  <testcase name="liveChangesArriveWithinSeconds" classname="com.quartz.notes.data.sync.SyncEngineTest" time="0.832" />
+  <testcase name="signingOutMarksEverythingForTheNextServer" classname="com.quartz.notes.data.sync.SyncEngineTest" time="0.705" />
+  <testcase name="openNoteShowsChangesOrKeepsThemAsACopy" classname="com.quartz.notes.ui.LiveEditTest" time="0.129" />
+  <testcase name="openPageShowsChanges" classname="com.quartz.notes.ui.LiveEditTest" time="0.202" />
+  <testcase name="eachMaterialIsQuickAndSeamless" classname="com.quartz.notes.ui.components.CoverTexturesTest" time="2.789" />
+  <testcase name="coversShowTheirMaterial" classname="com.quartz.notes.ui.components.CoverTexturesTest" time="2.813" />
+  <testcase name="typingEnterAndLists" classname="com.quartz.notes.ui.editor.EditorScreenshotTest" time="5.332" />
+  <testcase name="selectAcrossParagraphs" classname="com.quartz.notes.ui.editor.EditorScreenshotTest" time="3.754" />
+  <testcase name="layout" classname="com.quartz.notes.ui.editor.EditorScreenshotTest" time="1.428" />
+  <testcase name="picturesInLine" classname="com.quartz.notes.ui.editor.EditorScreenshotTest" time="3.621" />
+  <testcase name="dividers" classname="com.quartz.notes.ui.editor.EditorScreenshotTest" time="4.135" />
+  <testcase name="holdAndDragANotebookToMoveIt" classname="com.quartz.notes.ui.home.HomeArrangeTest" time="8.495" />
+  <testcase name="splitViewCanBeTurnedOffOnWideScreens" classname="com.quartz.notes.ui.home.HomeArrangeTest" time="2.785" />
+  <testcase name="anUpdateFoundAfterOpeningShowsAtTheTop" classname="com.quartz.notes.ui.home.HomeArrangeTest" time="3.717" />
+  <testcase name="noSplitViewButtonOnAPhone" classname="com.quartz.notes.ui.home.HomeArrangeTest" time="2.195" />
+  <testcase name="swipingTheShelfDoesNotOpenSettings" classname="com.quartz.notes.ui.home.HomeArrangeTest" time="3.632" />
+  <testcase name="brushesSizesAndTwoFingerUndo" classname="com.quartz.notes.ui.notebook.BrushTest" time="12.312" />
+  <testcase name="aNewNotebookIsSetUpStepByStep" classname="com.quartz.notes.ui.notebook.FreeformTest" time="11.009" />
+  <testcase name="picturesOnATextPageGoInLine" classname="com.quartz.notes.ui.notebook.FreeformTest" time="0.96" />
+  <testcase name="aSmallPageIsCenteredAndPinchingAPictureResizesIt" classname="com.quartz.notes.ui.notebook.FreeformTest" time="5.314" />
+  <testcase name="freeformNotebooksMakePagesOfTheirSize" classname="com.quartz.notes.ui.notebook.FreeformTest" time="0.884" />
+  <testcase name="aFreeformPageZoomsAndFitsAgain" classname="com.quartz.notes.ui.notebook.FreeformTest" time="5.168" />
+  <testcase name="drawingToolsOnATextPageOfferAFreeformPage" classname="com.quartz.notes.ui.notebook.FreeformTest" time="5.026" />
+  <testcase name="groupsMoveCopyAndPaste" classname="com.quartz.notes.ui.notebook.FreeformToolsTest" time="1.037" />
+  <testcase name="lassoPicksItemsAndUndoBringsThemBack" classname="com.quartz.notes.ui.notebook.FreeformToolsTest" time="7.275" />
+  <testcase name="undoAndRedoItemChanges" classname="com.quartz.notes.ui.notebook.FreeformToolsTest" time="1.107" />
+  <testcase name="pictureWindowFitsAndTurnsThePicture" classname="com.quartz.notes.ui.notebook.PageBackgroundTest" time="12.031" />
+  <testcase name="pageButtonsAndTimeline" classname="com.quartz.notes.ui.notebook.PageInputTest" time="6.736" />
+  <testcase name="clickAnywhereOnALine" classname="com.quartz.notes.ui.notebook.PageInputTest" time="3.814" />
+  <testcase name="composeMouseOnBareEditor" classname="com.quartz.notes.ui.notebook.PageInputTest" time="2.403" />
+  <testcase name="selectingTextOnBareEditor" classname="com.quartz.notes.ui.notebook.PageInputTest" time="22.224" />
+  <testcase name="selectingTextOnPage" classname="com.quartz.notes.ui.notebook.PageInputTest" time="23.7" />
+  <testcase name="mouseWheelInTimeline" classname="com.quartz.notes.ui.notebook.PageInputTest" time="7.627" />
+  <testcase name="composeMouseOnPage" classname="com.quartz.notes.ui.notebook.PageInputTest" time="3.361" />
+  <testcase name="handlesOnPage" classname="com.quartz.notes.ui.notebook.PageInputTest" time="4.959" />
+  <testcase name="handlesOnBareEditor" classname="com.quartz.notes.ui.notebook.PageInputTest" time="4.169" />
+  <testcase name="toolbarOnTop" classname="com.quartz.notes.ui.notebook.PageInputTest" time="2.301" />
+  <testcase name="rightClickThumbnailToDelete" classname="com.quartz.notes.ui.notebook.PageInputTest" time="5.827" />
+  <testcase name="penHandlesOnPage" classname="com.quartz.notes.ui.notebook.PageInputTest" time="4.317" />
+  <testcase name="sheetShowsTypesAndFormats" classname="com.quartz.notes.ui.notebook.SheetEditorTest" time="35.598" />
+  <testcase name="dragAPageAlongTheTimeline" classname="com.quartz.notes.ui.notebook.TimelineDragTest" time="3.87" />
+  <testcase name="aNewVersionPopsUpOnceWithUpdateAndLater" classname="com.quartz.notes.ui.settings.UpdateUiTest" time="0.986" />
+  <testcase name="anOlderServerWithoutAppBuildsIsFine" classname="com.quartz.notes.ui.settings.UpdateUiTest" time="0.995" />
+  <testcase name="offersANewerBuildAndAsksToAllowInstalling" classname="com.quartz.notes.ui.settings.UpdateUiTest" time="1.017" />
+  <testcase name="saysUpToDateWhenTheServerHasThisVersion" classname="com.quartz.notes.ui.settings.UpdateUiTest" time="0.973" />
+  <testcase name="aVeryShortGridStillDraws" classname="com.quartz.notes.ui.sheet.SheetGridShortTest" time="1.229" />
+  <testcase name="templatesAndBackgroundPictures" classname="com.quartz.notes.ui.templates.TemplatesUiTest" time="4.22">
+    <failure>java.lang.AssertionError: Failed: assertExists.
+Reason: Expected exactly '1' node but could not find any node that satisfies: (Text + InputText + EditableText contains 'My planner' (ignoreCase: false))
+
+at androidx.compose.ui.test.SemanticsNodeInteraction.fetchOneOrThrow(SemanticsNodeInteraction.kt:178)
+at androidx.compose.ui.test.SemanticsNodeInteraction.fetchOneOrThrow$default(SemanticsNodeInteraction.kt:150)
+at androidx.compose.ui.test.SemanticsNodeInteraction.assertExists(SemanticsNodeInteraction.kt:125)
+at androidx.compose.ui.test.SemanticsNodeInteraction.assertExists$default(SemanticsNodeInteraction.kt:124)
+at com.quartz.notes.ui.templates.TemplatesUiTest.templatesAndBackgroundPictures(TemplatesUiTest.kt:116)
+</failure>
+  </testcase>
+  <testcase name="settingsListsTemplates" classname="com.quartz.notes.ui.templates.TemplatesUiTest" time="3.284" />
+  <testcase name="launchLinksRoundTrip" classname="com.quartz.notes.widget.WidgetsTest" time="0.003" />
+  <testcase name="shelfFillsItsSizeWithTheFirstNotebooksInOrder" classname="com.quartz.notes.widget.WidgetsTest" time="1.202" />
+  <testcase name="notebookIsAnIconSmallAndShowsMoreBigger" classname="com.quartz.notes.widget.WidgetsTest" time="0.88" />
+  <testcase name="quickNotesAsAListAndAGrid" classname="com.quartz.notes.widget.WidgetsTest" time="0.679" />
+  <testcase name="shelfPlanAddsRowsAndColumnsAsItGrows" classname="com.quartz.notes.widget.WidgetsTest" time="0.0" />
+  <testcase name="toolbarLabelsItsButtonsWhenThereIsRoom" classname="com.quartz.notes.widget.WidgetsTest" time="0.852" />
+</testsuite>

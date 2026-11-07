@@ -1,0 +1,235 @@
+11-07 07:54:40.076  5655  5677 I TestRunner: started: layout(com.quartz.notes.ui.editor.EditorScreenshotTest)
+11-07 07:54:40.079  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-07 07:54:40.079  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-07 07:54:40.079  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.google.android.apps.nexuslauncher fieldId=-1 fieldName=null extras=null}, false)
+11-07 07:54:40.079  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-07 07:54:40.080  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-07 07:54:40.094   286   286 I Zygote  : Process 6787 exited cleanly (0)
+11-07 07:54:40.118   479   518 I libprocessgroup: Successfully killed process cgroup uid 10143 pid 6787 in 0ms
+11-07 07:54:40.123  1636  2709 I A       : Using proto config with mendel
+11-07 07:54:40.127  1636  2709 W A       : Queue length for executor EventBus is now 11. Perhaps some tasks are too long, or the pool is too small.
+11-07 07:54:40.162  1578  1578 I AiAi    : onTrimMemory() with level 15
+11-07 07:54:40.172  1636  2709 I A       : Using proto config with mendel
+11-07 07:54:40.188  1636  2363 I A       : group apa_head_suggest not present without account in *
+11-07 07:54:40.189  1636  2358 I A       : incrementApaDataDownloadStoreStatus(latency = PT0.001S, appVersion = 13.17.16.23, status = NOT_FOUND, locale = *, fileGroupnames = apa_head_suggest, accountScoped = false, localGroupsAvailable = false, timeSinceSearchBoot = Optional[PT1M42.661S] (ONE_TO_FIVE_MINUTES), timeSinceDataDownloadInit = PT8.117S (FIVE_TO_TEN_SECONDS))
+11-07 07:54:40.189  1636  2358 I A       : incrementApaDataDownloadStoreStatusNotFound(appVersion = 13.17.16.23, locale = *, groupName = apa_head_suggest, accountScoped = false, foundGroups = 0, status = 0, localGroupsAvailable = false)
+11-07 07:54:40.189  6282  6282 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.checkin.START pkg=com.google.android.gms }
+11-07 07:54:40.190  6282  6282 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.auth.cryptauth.cryptauthservice.START dat=chimera-action:/... cmp=com.google.android.gms/.chimera.GmsBoundBrokerService }
+11-07 07:54:40.194  5415  5415 I A       : Trimming objects from memory, since app is in the background.
+11-07 07:54:40.197  6176  6176 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.presencemanager.service.INTERNAL_IDENTITY dat=chimera-action:/... cmp=com.google.android.gms/.chimera.PersistentApiService }
+11-07 07:54:40.197  6176  6176 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.pseudonymous.service.START dat=chimera-action:/... cmp=com.google.android.gms/.chimera.PersistentApiService }
+11-07 07:54:40.198  5655  5677 D IdlingRegistry: Registering idling resources: [androidx.compose.ui.test.EspressoLink@110269]
+11-07 07:54:40.200   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f4770
+11-07 07:54:40.200   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f66f0
+11-07 07:54:40.200   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f8310
+11-07 07:54:40.200   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f5f10
+11-07 07:54:40.200   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f69f0
+11-07 07:54:40.200   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f4230
+11-07 07:54:40.200   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f5f10
+11-07 07:54:40.200   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f5130
+11-07 07:54:40.200   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f5f10
+11-07 07:54:40.213   286   286 D Zygote  : Forked child process 6823
+11-07 07:54:40.214   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f7830
+11-07 07:54:40.214   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f6f30
+11-07 07:54:40.234  5655  5677 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+11-07 07:54:40.235  1472  1472 I AppBase : AppBase.onTrimMemory():497 onTrimMemory(): 15
+11-07 07:54:40.235  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.onTrimMemory():4406 onTrimMemory(): 15
+11-07 07:54:40.267  6823  6823 I ecovery_process: Using CollectorTypeCC GC.
+11-07 07:54:40.268  6823  6823 W ecovery_process: Unexpected CPU variant for x86: x86_64.
+11-07 07:54:40.268  6823  6823 W ecovery_process: Known variants: atom, sandybridge, silvermont, kabylake, default
+11-07 07:54:40.279   919  6814 D TrafficStats: tagSocket(6) with statsTag=0xffffff81, statsUid=-1
+11-07 07:54:40.279   919  6813 D TrafficStats: tagSocket(69) with statsTag=0xffffff81, statsUid=-1
+11-07 07:54:40.289   919  6813 D TrafficStats: tagSocket(69) with statsTag=0xffffff81, statsUid=-1
+11-07 07:54:40.289   919  6814 D TrafficStats: tagSocket(6) with statsTag=0xffffff81, statsUid=-1
+11-07 07:54:40.290   282  6827 I resolv  : ResNSendHandler::run: 0 / {100 983140 100 983140 1073 1}
+11-07 07:54:40.290   282  6827 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x775a53a16a50
+11-07 07:54:40.291   282  6828 I resolv  : ResNSendHandler::run: 0 / {100 983140 100 983140 1073 1}
+11-07 07:54:40.291   282  6828 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x775a23a20890
+11-07 07:54:40.294   282  6830 I resolv  : ResNSendHandler::run: 0 / {100 983140 100 983140 1073 1}
+11-07 07:54:40.294   282  6830 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x775a23a20a50
+11-07 07:54:40.294   919   919 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+11-07 07:54:40.294  3349  3428 W Bugle   : TextClassifierLibManagerImpl: Reclaiming memory at level: 40
+11-07 07:54:40.295   919   919 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+11-07 07:54:40.304   757   809 D SplashScreenView: Build android.window.SplashScreenView{9b385c7 V.E...... ......ID 0,0-0,0}
+11-07 07:54:40.304   757   809 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-07 07:54:40.304   757   809 D SplashScreenView: Branding: view: android.view.View{31cc7f4 G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-07 07:54:40.328   282  6829 I resolv  : ResNSendHandler::run: 0 / {100 983140 100 983140 1073 1}
+11-07 07:54:40.329   282  6829 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x775a33a1d610
+11-07 07:54:40.329   919  6814 D NetworkMonitor/100: PROBE_DNS connectivitycheck.gstatic.com 16ms OK 173.194.206.94,2001:4860:4826:7800::
+11-07 07:54:40.347   988   988 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+11-07 07:54:40.348  5655  5655 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@4ceadd in: PRE_ON_CREATE
+11-07 07:54:40.348  5655  5655 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+11-07 07:54:40.349  1472  1548 I ProtoXDBBufferWrapper: ProtoXDBBufferWrapper.flushToStorage():153 Flushed 13 data item(s) to storage.
+11-07 07:54:40.349   919   919 D TrafficStats: tagSocket(68) with statsTag=0xffffffff, statsUid=-1
+11-07 07:54:40.352  5655  5655 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@4ceadd in: CREATED
+11-07 07:54:40.352  5655  5655 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=androidx.activity.ComponentActivity@4ceadd
+11-07 07:54:40.353  5655  5655 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@4ceadd in: STARTED
+11-07 07:54:40.353  5655  5655 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=androidx.activity.ComponentActivity@4ceadd
+11-07 07:54:40.353  5655  5655 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@4ceadd in: RESUMED
+11-07 07:54:40.353  5655  5655 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=androidx.activity.ComponentActivity@4ceadd
+11-07 07:54:40.355  5655  6561 W Parcel  : Expecting binder but got null!
+11-07 07:54:40.363   282  6832 I resolv  : GetAddrInfoHandler::run: {100 983140 100 983140 1073 1}
+11-07 07:54:40.381   919   919 D TrafficStats: tagSocket(68) with statsTag=0xffffffff, statsUid=-1
+11-07 07:54:40.385   919   919 D TrafficStats: tagSocket(68) with statsTag=0xffffffff, statsUid=-1
+11-07 07:54:40.385   919   919 D TrafficStats: tagSocket(68) with statsTag=0xffffffff, statsUid=-1
+11-07 07:54:40.385   919   919 D TrafficStats: tagSocket(68) with statsTag=0xffffffff, statsUid=-1
+11-07 07:54:40.450   919   919 D TrafficStats: tagSocket(68) with statsTag=0xffffffff, statsUid=-1
+11-07 07:54:40.456   919   919 D TrafficStats: tagSocket(68) with statsTag=0xffffffff, statsUid=-1
+11-07 07:54:40.465   282  6834 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-07 07:54:40.465   282  6834 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x775a23a20890
+11-07 07:54:40.465   282  6834 I resolv  : doQuery: rcode=0, ancount=1, return value=75
+11-07 07:54:40.465   282  6835 I resolv  : res_nmkquery: (QUERY, IN, A)
+11-07 07:54:40.465   282  6835 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x775a23a20a50
+11-07 07:54:40.465   282  6835 I resolv  : doQuery: rcode=0, ancount=1, return value=63
+11-07 07:54:40.469   919  6814 D TrafficStats: tagSocket(6) with statsTag=0xffffff81, statsUid=-1
+11-07 07:54:40.481   757   812 D EGL_emulation: app_time_stats: avg=1605.50ms min=891.74ms max=2319.26ms count=2
+11-07 07:54:40.487   919   919 D TrafficStats: tagSocket(68) with statsTag=0xffffffff, statsUid=-1
+11-07 07:54:40.496   757   812 W Parcel  : Expecting binder but got null!
+11-07 07:54:40.510   919   919 D TrafficStats: tagSocket(68) with statsTag=0xffffffff, statsUid=-1
+11-07 07:54:40.510   919   919 D TrafficStats: tagSocket(68) with statsTag=0xffffffff, statsUid=-1
+11-07 07:54:40.510   919   919 D TrafficStats: tagSocket(68) with statsTag=0xffffffff, statsUid=-1
+11-07 07:54:40.511   919   919 D TrafficStats: tagSocket(68) with statsTag=0xffffffff, statsUid=-1
+11-07 07:54:40.511   919   919 D TrafficStats: tagSocket(68) with statsTag=0xffffffff, statsUid=-1
+11-07 07:54:40.511   919   919 D TrafficStats: tagSocket(68) with statsTag=0xffffffff, statsUid=-1
+11-07 07:54:40.511   919   919 D TrafficStats: tagSocket(68) with statsTag=0xffffffff, statsUid=-1
+11-07 07:54:40.511   919   919 D TrafficStats: tagSocket(68) with statsTag=0xffffffff, statsUid=-1
+11-07 07:54:40.511   919  6813 D NetworkMonitor/100: PROBE_DNS www.google.com 231ms OK 142.251.154.119,142.251.152.119,142.251.151.119,142.251.153.119,142.251.155.119,142.251.150.119,142.251.157.119,142.251.156.119,2001:4860:482b:7700::,2001:4860:4827:7700::,2001:4860:482d:7700::,2001:4860:4829:7700::,2001:4860:4826:7700::,2001:4860:482c:7700::,2001:4860:4828:7700::,2001:4860:482a:7700::
+11-07 07:54:40.537   376   399 I adbd    : jdwp connection from 6823
+11-07 07:54:40.553   282  6844 I resolv  : GetAddrInfoHandler::run: {100 983140 100 983140 1073 1}
+11-07 07:54:40.567   282  6847 I resolv  : res_nmkquery: (QUERY, IN, A)
+11-07 07:54:40.567   282  6847 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x775a33a1d610
+11-07 07:54:40.568   282  6847 I resolv  : doQuery: rcode=0, ancount=8, return value=160
+11-07 07:54:40.569   282  6846 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-07 07:54:40.569   282  6846 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x775a53a16a50
+11-07 07:54:40.569   282  6846 I resolv  : doQuery: rcode=0, ancount=8, return value=256
+11-07 07:54:40.582   919  6813 D TrafficStats: tagSocket(68) with statsTag=0xffffff81, statsUid=-1
+11-07 07:54:40.613   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f49b0
+11-07 07:54:40.613   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f4650
+11-07 07:54:40.614   479   505 W ziparchive: Unable to open '/data/app/~~zQFeJXZS5WhC5lfAeCkjYQ==/com.quartz.notes-feD_HGqKna9TAMJS1tgmSA==/base.dm': No such file or directory
+11-07 07:54:40.663   479   505 I ActivityTaskManager: Displayed com.quartz.notes/androidx.activity.ComponentActivity: +305ms
+11-07 07:54:40.666   988  2013 D OneSearchSuggestProvider: Shut down the binder channel
+11-07 07:54:40.667   988  1632 I s.nexuslauncher: oneway function results for code 2 on binder at 0x704102daaf80 will be dropped but finished with status UNKNOWN_TRANSACTION
+11-07 07:54:40.696   757   812 D EGL_emulation: app_time_stats: avg=582.13ms min=486.88ms max=677.38ms count=2
+11-07 07:54:40.707  1636  2709 W SearchServiceCore: Abort, client detached.
+11-07 07:54:40.726  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-07 07:54:40.727  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-07 07:54:40.727  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=null}, false)
+11-07 07:54:40.727  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-07 07:54:40.729  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-07 07:54:40.743  5655  5655 D AutofillManager: Fill dialog is enabled:false, hints=[password, passwordAuto, creditCardNumber, creditCardSecurityCode, creditCardExpirationDate]
+11-07 07:54:40.746  1636  2592 I PBSessionCacheImpl: Deleted sessionId[7196998130147179] from persistence.
+11-07 07:54:40.770   479  2125 W InputManager-JNI: Input channel object '6fd05b9 Splash Screen com.quartz.notes (client)' was disposed without first being removed with the input manager!
+11-07 07:54:40.777  6823  6823 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10143; state: ENABLED
+11-07 07:54:40.780  6823  6823 D nativeloader: Configuring classloader-namespace for other apk /system/framework/org.apache.http.legacy.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps
+11-07 07:54:40.782  6823  6823 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.extensions.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps
+11-07 07:54:40.782  6823  6823 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.sidecar.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps
+11-07 07:54:40.783   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f8070
+11-07 07:54:40.783   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f6b10
+11-07 07:54:40.783   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f8070
+11-07 07:54:40.783   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f8070
+11-07 07:54:40.783   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f8070
+11-07 07:54:40.783   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f7c50
+11-07 07:54:40.783   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f3d50
+11-07 07:54:40.783   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f8070
+11-07 07:54:40.784  6823  6823 D nativeloader: Configuring vendor-classloader-namespace for unbundled product apk /product/app/Maps/Maps.apk. target_sdk_version=35, uses_libraries=, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64:/product/lib64:/system/product/lib64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps:/product/lib64:/system/product/lib64
+11-07 07:54:40.794   479   838 W system_server: Long monitor contention with owner binder:479_E (1750) at void com.android.server.am.ActivityManagerService.attachApplication(android.app.IApplicationThread, long)(ActivityManagerService.java:5077) waiters=4 in boolean com.android.server.am.ActivityManagerService.unbindService(android.app.IServiceConnection) for 127ms
+11-07 07:54:40.818   951  1256 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 07:54:40.818   951  1256 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 07:54:40.818   951  1256 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 1
+11-07 07:54:40.818   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f6210
+11-07 07:54:40.826  6823  6823 V GraphicsEnvironment: ANGLE Developer option for 'com.google.android.apps.maps' set to: 'default'
+11-07 07:54:40.827  6823  6823 V GraphicsEnvironment: ANGLE GameManagerService for com.google.android.apps.maps: false
+11-07 07:54:40.827  6823  6823 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-07 07:54:40.847  6823  6823 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-07 07:54:40.848  6823  6823 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-07 07:54:40.860   479  6595 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_multi_configs ANDROID_EMU_hwc_color_transform GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0
+11-07 07:54:40.876   479  6595 W OpenGLRenderer: Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-07 07:54:40.877   479  6595 D EGL_emulation: eglCreateContext: 0x704172d67fd0: maj 3 min 0 rcv 3
+11-07 07:54:40.894   479  6595 D EGL_emulation: eglMakeCurrent: 0x704172d67fd0: ver 3 0 (tinfo 0x70437b786100) (first time)
+11-07 07:54:40.967  6176  6183 I .gms.persistent: Background concurrent copying GC freed 574883(24MB) AllocSpace objects, 21(688KB) LOS objects, 49% free, 14MB/29MB, paused 27us,16us total 217.126ms
+11-07 07:54:40.980  6823  6823 I ecovery_process: System.exit called, status: 0
+11-07 07:54:40.980  6823  6823 I AndroidRuntime: VM exiting with result code 0, cleanup skipped.
+11-07 07:54:41.004   286   286 I Zygote  : Process 6823 exited cleanly (0)
+11-07 07:54:41.006   479   518 I libprocessgroup: Successfully killed process cgroup uid 10143 pid 6823 in 0ms
+11-07 07:54:41.043   286   286 D Zygote  : Forked child process 6858
+11-07 07:54:41.047  1472  1482 W SP      : File ref is being finalized but wasn't closed, file: main_en_840_2022102600_1[12]
+11-07 07:54:41.047  1472  1482 W SP      : File ref is being finalized but wasn't closed, file: main_en_us_2022101700_1[16]
+11-07 07:54:41.047  1472  1482 W SP      : File ref is being finalized but wasn't closed, file: main_en_us_2022051700_2[12]
+11-07 07:54:41.047  1472  1482 W SP      : File ref is being finalized but wasn't closed, file: main_en_840_2022102600_1[12]
+11-07 07:54:41.047  1472  1482 W SP      : File ref is being finalized but wasn't closed, file: main_en_us_2022101700_1[16]
+11-07 07:54:41.050  6858  6858 I ecovery_process: Using CollectorTypeCC GC.
+11-07 07:54:41.050  6858  6858 W ecovery_process: Unexpected CPU variant for x86: x86_64.
+11-07 07:54:41.050  6858  6858 W ecovery_process: Known variants: atom, sandybridge, silvermont, kabylake, default
+11-07 07:54:41.051  1472  1482 W SP      : File ref is being finalized but wasn't closed, file: main_en_840_2022102600_1[12]
+11-07 07:54:41.051  1472  1482 W SP      : File ref is being finalized but wasn't closed, file: main_en_us_2022101700_1[16]
+11-07 07:54:41.051  1472  1482 W SP      : File ref is being finalized but wasn't closed, file: main_en_840_2022102600_1[12]
+11-07 07:54:41.051  1472  1482 W SP      : File ref is being finalized but wasn't closed, file: main_en_us_2022101700_1[16]
+11-07 07:54:41.052  1472  1482 W SP      : File ref is being finalized but wasn't closed, file: main_en_us_2022051700_2[12]
+11-07 07:54:41.052  1472  1482 W SP      : File ref is being finalized but wasn't closed, file: main_en_us_2022051700_2[12]
+11-07 07:54:41.052  1472  1482 W SP      : File ref is being finalized but wasn't closed, file: main_en_840_2022102600_1[12]
+11-07 07:54:41.052  1472  1482 W SP      : File ref is being finalized but wasn't closed, file: main_en_us_2022101700_1[16]
+11-07 07:54:41.052  1472  1482 W SP      : File ref is being finalized but wasn't closed, file: 2023011913_en[5]
+11-07 07:54:41.052  1472  1482 W SP      : File ref is being finalized but wasn't closed, file: 2023011913_en[5]
+11-07 07:54:41.052  1472  1482 W SP      : File ref is being finalized but wasn't closed, file: main_en_840_2022102600_1[12]
+11-07 07:54:41.052  1472  1482 W SP      : File ref is being finalized but wasn't closed, file: main_en_us_2022101700_1[16]
+11-07 07:54:41.125   376   399 I adbd    : jdwp connection from 6858
+11-07 07:54:41.148  6858  6858 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10143; state: ENABLED
+11-07 07:54:41.171  6858  6858 D nativeloader: Configuring classloader-namespace for other apk /system/framework/org.apache.http.legacy.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps
+11-07 07:54:41.173  6858  6858 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.extensions.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps
+11-07 07:54:41.174  6858  6858 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.sidecar.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps
+11-07 07:54:41.177  6858  6858 D nativeloader: Configuring vendor-classloader-namespace for unbundled product apk /product/app/Maps/Maps.apk. target_sdk_version=35, uses_libraries=, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64:/product/lib64:/system/product/lib64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps:/product/lib64:/system/product/lib64
+11-07 07:54:41.181  6858  6858 V GraphicsEnvironment: ANGLE Developer option for 'com.google.android.apps.maps' set to: 'default'
+11-07 07:54:41.181  6858  6858 V GraphicsEnvironment: ANGLE GameManagerService for com.google.android.apps.maps: false
+11-07 07:54:41.182  6858  6858 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-07 07:54:41.182  6858  6858 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-07 07:54:41.183  6858  6858 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-07 07:54:41.214  1472  1472 I PhenotypeModule: PhenotypeModule.receiveBroadcast():373 onReceive() urgent = false
+11-07 07:54:41.214  1472  1472 I PhenotypeModule: PhenotypeModule.maybeFetchAndUpdate():166 maybeFetchAndUpdate: start new task to fetch
+11-07 07:54:41.214  1472  1472 I PhenotypeModule: PhenotypeModule.receiveBroadcast():373 onReceive() urgent = false
+11-07 07:54:41.221  6176  6267 I PackageUpdateTaskChimer: Scheduling Phenotype config package catchup updates to be 86400 seconds from now (1794038081221) [CONTEXT service_id=51 ]
+11-07 07:54:41.245  6858  6858 I ecovery_process: System.exit called, status: 0
+11-07 07:54:41.245  6858  6858 I AndroidRuntime: VM exiting with result code 0, cleanup skipped.
+11-07 07:54:41.270  1578  1578 I AiAi    : onTrimMemory() with level 15
+11-07 07:54:41.273   286   286 I Zygote  : Process 6858 exited cleanly (0)
+11-07 07:54:41.274   479   518 I libprocessgroup: Successfully killed process cgroup uid 10143 pid 6858 in 5ms
+11-07 07:54:41.281  1472  1472 I AppBase : AppBase.onTrimMemory():497 onTrimMemory(): 15
+11-07 07:54:41.281  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.onTrimMemory():4406 onTrimMemory(): 15
+11-07 07:54:41.308  5655  5655 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@4ceadd in: PAUSED
+11-07 07:54:41.309  5655  5655 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=androidx.activity.ComponentActivity@4ceadd
+11-07 07:54:41.309   757   809 D SplashScreenView: Build android.window.SplashScreenView{cc3afdb V.E...... ......ID 0,0-0,0}
+11-07 07:54:41.309   757   809 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-07 07:54:41.309   757   809 D SplashScreenView: Branding: view: android.view.View{d48ca78 G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-07 07:54:41.310   757   812 W Parcel  : Expecting binder but got null!
+11-07 07:54:41.382   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f5f70
+11-07 07:54:41.383   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f7f50
+11-07 07:54:41.383   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f7f50
+11-07 07:54:41.383   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f7f50
+11-07 07:54:41.384   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f5f70
+11-07 07:54:41.384   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f5f70
+11-07 07:54:41.384   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f7f50
+11-07 07:54:41.384   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f5f70
+11-07 07:54:41.385  1509  1509 I PhenotypeBackgroundRecv: Skipping com.google.android.apps.wellbeing.device#com.google.android.apps.wellbeing which doesn't use ProcessStable flags.
+11-07 07:54:41.407  6584  6614 W Parcel  : Expecting binder but got null!
+11-07 07:54:41.412  5655  5655 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@4ceadd in: STOPPED
+11-07 07:54:41.413  5655  5655 V ActivityScenario: Update currentActivityStage to STOPPED, currentActivity=androidx.activity.ComponentActivity@4ceadd
+11-07 07:54:41.427  5655  5655 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@4ceadd in: DESTROYED
+11-07 07:54:41.427  5655  5655 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
+11-07 07:54:41.497  6176  6281 W PhenotypeFlagCommitter: Committing snapshot for com.google.android.gms.lockbox failed, retrying
+11-07 07:54:41.497  6176  6281 W PhenotypeFlagCommitter: java.util.concurrent.TimeoutException: Timed out waiting for Task
+11-07 07:54:41.497  6176  6281 W PhenotypeFlagCommitter: 	at cfsz.o(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-07 07:54:41.497  6176  6281 W PhenotypeFlagCommitter: 	at bwch.j(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-07 07:54:41.497  6176  6281 W PhenotypeFlagCommitter: 	at bwch.h(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 07:54:41.497  6176  6281 W PhenotypeFlagCommitter: 	at com.google.android.gms.lockbox.LockboxIntentOperation.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):5)
+11-07 07:54:41.497  6176  6281 W PhenotypeFlagCommitter: 	at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-07 07:54:41.497  6176  6281 W PhenotypeFlagCommitter: 	at zhv.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+11-07 07:54:41.497  6176  6281 W PhenotypeFlagCommitter: 	at hjm.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+11-07 07:54:41.497  6176  6281 W PhenotypeFlagCommitter: 	at hjl.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):11)
+11-07 07:54:41.497  6176  6281 W PhenotypeFlagCommitter: 	at dfhf.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-07 07:54:41.497  6176  6281 W PhenotypeFlagCommitter: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-07 07:54:41.497  6176  6281 W PhenotypeFlagCommitter: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-07 07:54:41.497  6176  6281 W PhenotypeFlagCommitter: 	at java.lang.Thread.run(Thread.java:1012)
+11-07 07:54:41.498   479  1935 W InputManager-JNI: Input channel object 'b5dcf7c com.quartz.notes/androidx.activity.ComponentActivity (client)' was disposed without first being removed with the input manager!
+11-07 07:54:41.517   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f6f30
+11-07 07:54:41.517   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f5e50
+11-07 07:54:41.518  5655  5677 D IdlingRegistry: Unregistering idling resources: [androidx.compose.ui.test.EspressoLink@110269]
+11-07 07:54:41.519  5655  5677 I TestRunner: finished: layout(com.quartz.notes.ui.editor.EditorScreenshotTest)

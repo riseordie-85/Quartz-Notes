@@ -1,0 +1,229 @@
+11-07 07:56:23.251  5655  5677 I TestRunner: started: composeMouseOnBareEditor(com.quartz.notes.ui.notebook.PageInputTest)
+11-07 07:56:23.275  5655  5677 D IdlingRegistry: Registering idling resources: [androidx.compose.ui.test.EspressoLink@966d761]
+11-07 07:56:23.280  5655  5677 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+11-07 07:56:23.301   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f7170
+11-07 07:56:23.301   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f61b0
+11-07 07:56:23.309   757   809 D SplashScreenView: Build android.window.SplashScreenView{2d0c71d V.E...... ......ID 0,0-0,0}
+11-07 07:56:23.309   757   809 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-07 07:56:23.309   757   809 D SplashScreenView: Branding: view: android.view.View{cfdcd92 G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-07 07:56:23.309   757   812 W Parcel  : Expecting binder but got null!
+11-07 07:56:23.335   988   988 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+11-07 07:56:23.347  5655  5655 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@f112e55 in: PRE_ON_CREATE
+11-07 07:56:23.347  5655  5655 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+11-07 07:56:23.394   359   374 W TransactionTracing: Could not find layer id -1
+11-07 07:56:23.394   359   374 W TransactionTracing: Could not find layer id -1
+11-07 07:56:23.394   359   374 W TransactionTracing: Could not find layer id -1
+11-07 07:56:23.394   359   374 W TransactionTracing: Could not find layer id -1
+11-07 07:56:23.394   359   374 W TransactionTracing: Could not find layer id -1
+11-07 07:56:23.450  5655  5655 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@f112e55 in: CREATED
+11-07 07:56:23.450  5655  5655 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=androidx.activity.ComponentActivity@f112e55
+11-07 07:56:23.479  5655  5655 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@f112e55 in: STARTED
+11-07 07:56:23.481  5655  5655 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=androidx.activity.ComponentActivity@f112e55
+11-07 07:56:23.485  5655  5655 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@f112e55 in: RESUMED
+11-07 07:56:23.485  5655  5655 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=androidx.activity.ComponentActivity@f112e55
+11-07 07:56:23.503  5655  6561 W Parcel  : Expecting binder but got null!
+11-07 07:56:23.526   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f6e70
+11-07 07:56:23.526   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f6870
+11-07 07:56:23.526   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f6870
+11-07 07:56:23.526   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f6e70
+11-07 07:56:23.527   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f6e70
+11-07 07:56:23.527   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f6e70
+11-07 07:56:23.527   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f6870
+11-07 07:56:23.530   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f6870
+11-07 07:56:23.554   479  6886 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_multi_configs ANDROID_EMU_hwc_color_transform GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0
+11-07 07:56:23.556   479  6886 W OpenGLRenderer: Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-07 07:56:23.556   479  6886 D EGL_emulation: eglCreateContext: 0x704172d6da90: maj 3 min 0 rcv 3
+11-07 07:56:23.596  2791  7621 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_multi_configs ANDROID_EMU_hwc_color_transform GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0
+11-07 07:56:23.607   951  1256 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 07:56:23.607   951  1256 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 07:56:23.607   951  1256 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 1
+11-07 07:56:23.610  5655  5655 D AutofillManager: Fill dialog is enabled:false, hints=[password, passwordAuto, creditCardNumber, creditCardSecurityCode, creditCardExpirationDate]
+11-07 07:56:23.611   479  6886 D EGL_emulation: eglMakeCurrent: 0x704172d6da90: ver 3 0 (tinfo 0x70437b786180) (first time)
+11-07 07:56:23.616   479   505 W ziparchive: Unable to open '/data/app/~~zQFeJXZS5WhC5lfAeCkjYQ==/com.quartz.notes-feD_HGqKna9TAMJS1tgmSA==/base.dm': No such file or directory
+11-07 07:56:23.624   479   505 I ActivityTaskManager: Displayed com.quartz.notes/androidx.activity.ComponentActivity: +310ms
+11-07 07:56:23.640  2791  7621 D EGL_emulation: eglCreateContext: 0x704172d54b90: maj 3 min 0 rcv 3
+11-07 07:56:23.645  2791  7621 D EGL_emulation: eglMakeCurrent: 0x704172d54b90: ver 3 0 (tinfo 0x704392b5d300) (first time)
+11-07 07:56:23.647  1636  3028 I PBSessionCacheImpl: Deleted sessionId[7196998130147310] from persistence.
+11-07 07:56:23.653   359   374 W TransactionTracing: Could not find layer id -1
+11-07 07:56:23.658   988  2013 D OneSearchSuggestProvider: Shut down the binder channel
+11-07 07:56:23.658   988  1948 I s.nexuslauncher: oneway function results for code 2 on binder at 0x704102d97c60 will be dropped but finished with status UNKNOWN_TRANSACTION
+11-07 07:56:23.660  1636  2709 W SearchServiceCore: Abort, client detached.
+11-07 07:56:23.667   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f3690
+11-07 07:56:23.683   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f3ed0
+11-07 07:56:23.684   359   374 W TransactionTracing: Could not find layer id -1
+11-07 07:56:23.684   359   374 W TransactionTracing: Could not find layer id -1
+11-07 07:56:23.684   479  1750 W InputManager-JNI: Input channel object '62d3ab Splash Screen com.quartz.notes (client)' was disposed without first being removed with the input manager!
+11-07 07:56:23.754   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f7170
+11-07 07:56:23.755   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f4770
+11-07 07:56:23.755   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f3690
+11-07 07:56:23.805  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-07 07:56:23.814  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-07 07:56:23.814  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=null}, false)
+11-07 07:56:23.814  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-07 07:56:23.817   479  2539 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_multi_configs ANDROID_EMU_hwc_color_transform GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0
+11-07 07:56:23.820  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-07 07:56:23.827   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f7350
+11-07 07:56:23.827   359   374 W TransactionTracing: Could not find layer id -1
+11-07 07:56:23.827   359   374 W TransactionTracing: Could not find layer id -1
+11-07 07:56:23.827   359   374 W TransactionTracing: Could not find layer id -1
+11-07 07:56:23.828   757   812 D EGL_emulation: app_time_stats: avg=585.33ms min=309.92ms max=860.75ms count=2
+11-07 07:56:23.867   757   812 D EGL_emulation: app_time_stats: avg=397.06ms min=270.35ms max=609.19ms count=3
+11-07 07:56:23.985   757   812 W Parcel  : Expecting binder but got null!
+11-07 07:56:23.991  2791  7621 W SystemServiceRegistry: No service published for: persistent_data_block
+11-07 07:56:23.996   757   812 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-07 07:56:24.018   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f71d0
+11-07 07:56:24.021  5655  5655 D InsetsController: show(ime(), fromIme=false)
+11-07 07:56:24.021  5655  5655 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{300f3d4 VFED..... .F....ID 0,0-1080,2209 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT_BY_INSETS_API
+11-07 07:56:24.023   988  1034 W System  : A resource failed to call release.
+11-07 07:56:24.023   988  1034 W System  : A resource failed to call release.
+11-07 07:56:24.023   988  1034 W System  : A resource failed to call release.
+11-07 07:56:24.023   988  1034 W System  : A resource failed to call release.
+11-07 07:56:24.023   988  1034 W System  : A resource failed to call release.
+11-07 07:56:24.023   988  1034 W System  : A resource failed to call release.
+11-07 07:56:24.023  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-07 07:56:24.029  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-07 07:56:24.032  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x2c001(Normal) imeOptions=0x42000000 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=104 initialSelEnd=104 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=Bundle[mParcelledData.dataSize=404]}, false)
+11-07 07:56:24.032  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-07 07:56:24.034  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-07 07:56:24.035  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x2c001(Normal) imeOptions=0x42000000 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=104 initialSelEnd=104 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=Bundle[mParcelledData.dataSize=404]}, true)
+11-07 07:56:24.035  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-07 07:56:24.036  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-07 07:56:24.036  1472  1472 W SessionManager: SessionManager.beginSession():53 Try to begin an already begun session [INPUT_SESSION], end it first
+11-07 07:56:24.037  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.onStartInputView():1995 onStartInputView(EditorInfo{inputType=0x2c001(Normal) imeOptions=0x42000000 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=104 initialSelEnd=104 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false, android.support.text.emoji.emojiCompat_replaceAll=false}]}, false)
+11-07 07:56:24.037  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-07 07:56:24.037  1472  1472 W ModuleManager: ModuleManager.loadModule():450 Module erj is not available
+11-07 07:56:24.038  5655  5655 I AssistStructure: Flattened final assist data: 592 bytes, containing 1 windows, 3 views
+11-07 07:56:24.050  5655  5655 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{300f3d4 VFED..... .F....ID 0,0-1080,2209 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+11-07 07:56:24.050  1472  1548 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-07 07:56:24.054  6176  6176 W AutofillChimeraService: Pending fill request while another request in the same session was triggered. [CONTEXT service_id=177 ]
+11-07 07:56:24.057  1500  1500 V InlineSuggestionRenderService: handleDestroySuggestionViews called for 0:1071597251
+11-07 07:56:24.059  1472  1472 I KeyboardViewUtil: KeyboardViewUtil.getKeyboardHeightRatio():189 systemKeyboardHeightRatio:1.000000; userKeyboardHeightRatio:1.000000.
+11-07 07:56:24.059  1472  1472 I AndroidIME: AbstractIme.onActivate():86 LatinIme.onActivate() : EditorInfo = inputType=0x2c001(Normal) imeOptions=0x42000000 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=104 initialSelEnd=104 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false, android.support.text.emoji.emojiCompat_replaceAll=false}], IncognitoMode = false, DeviceLocked = false
+11-07 07:56:24.060  5655  5655 D Autofill Status: Autofill popup isn't shown because autofill is not available.
+11-07 07:56:24.060  5655  5655 D Autofill Status:
+11-07 07:56:24.060  5655  5655 D Autofill Status: Did you set up autofill?
+11-07 07:56:24.060  5655  5655 D Autofill Status: 1. Go to Settings > System > Languages&input > Advanced > Autofill Service
+11-07 07:56:24.060  5655  5655 D Autofill Status: 2. Pick a service
+11-07 07:56:24.060  5655  5655 D Autofill Status:
+11-07 07:56:24.060  5655  5655 D Autofill Status: Did you add an account?
+11-07 07:56:24.060  5655  5655 D Autofill Status: 1. Go to Settings > System > Languages&input > Advanced
+11-07 07:56:24.060  5655  5655 D Autofill Status: 2. Click on the settings icon next to the Autofill Service
+11-07 07:56:24.060  5655  5655 D Autofill Status: 3. Add your account
+11-07 07:56:24.061  1472  1472 I Delight5Facilitator: Delight5Facilitator.initializeForIme():777 initializeForIme() : Locale = [en_US], layout = qwerty
+11-07 07:56:24.063  1472  1472 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.cancelShutdown():55 cancelShutdown()
+11-07 07:56:24.064  1472  1472 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.syncLanguagePacks():67 syncLanguagePacks()
+11-07 07:56:24.064  1472  6681 I SpeechFactory: SpeechRecognitionFactory.maybeScheduleAutoPackDownloadForFallback():205 maybeScheduleAutoPackDownloadForFallback()
+11-07 07:56:24.065  1472  6681 I FallbackOnDeviceRecognitionProvider: FallbackOnDeviceRecognitionProvider.maybeScheduleAutoPackDownload():195 maybeScheduleAutoPackDownload() for language tag en-US
+11-07 07:56:24.066  1472  1472 I LatinIme: LatinIme.updateEnableInlineSuggestionsOnDecoderSideFlags():1003 inline flag updated to:false
+11-07 07:56:24.071  1472  1472 I KeyboardWrapper: KeyboardWrapper.consumeEvent():275 Skip consuming an event as current keyboard is deactivated (state=0, keyboard existence=true)
+11-07 07:56:24.096  1472  1472 I KeyboardViewUtil: KeyboardViewUtil.calculateMaxKeyboardBodyHeight():40 leave 354 height for app when screen height:2274, header height:116 and isFullscreenMode:false, so the max keyboard body height is:1804
+11-07 07:56:24.096  1472  1472 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-07 07:56:24.096  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = HEADER, shownType = SHOW_OPTIONAL
+11-07 07:56:24.096  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-07 07:56:24.096  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = BODY, shownType = SHOW_MANDATORY
+11-07 07:56:24.096  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-07 07:56:24.096  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = FLOATING_CANDIDATES, shownType = HIDE
+11-07 07:56:24.096  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = false
+11-07 07:56:24.097  1472  1472 I KeyboardViewUtil: KeyboardViewUtil.calculateMaxKeyboardBodyHeight():40 leave 354 height for app when screen height:2274, header height:116 and isFullscreenMode:false, so the max keyboard body height is:1804
+11-07 07:56:24.097  1472  1472 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-07 07:56:24.098  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = HEADER, shownType = SHOW_MANDATORY_WITH_ANIMATION
+11-07 07:56:24.098  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-07 07:56:24.099  1472  1472 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-07 07:56:24.099  1472  1472 I KeyboardModeManager: KeyboardModeManager.setInputView():364 setInputView() : supportsOneHandedMode=true
+11-07 07:56:24.099  1472  1472 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-07 07:56:24.099  1472  1472 I AndroidIME: KeyboardViewManager.updateKeyboardBodyViewHolderPaddingBottom():604 Set finalPaddingBottom = 0 while keyboardBottomGapFromScreen = 0; navigationHeight = 126
+11-07 07:56:24.099  1472  1472 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-07 07:56:24.100  1472  1472 I AndroidIME: KeyboardViewManager.updateKeyboardBodyViewHolderPaddingBottom():604 Set finalPaddingBottom = 0 while keyboardBottomGapFromScreen = 0; navigationHeight = 126
+11-07 07:56:24.100  1472  1472 I KeyboardModeManager: KeyboardModeManager.setInputView():356 setInputView() : entry=hwn{languageTag=en-US, variant=qwerty, hasLocalizedResources=true, conditionCacheKey=_device=phone_device_size=default_enable_adaptive_text_editing=true_enable_inline_suggestions_on_client_side=false_enable_large_tablet_batch_1=false_enable_large_tablet_batch_2=false_enable_more_candidates_view_for_multilingual=false_enable_nav_redesign=false_enable_number_row=false_enable_preemptive_decode=true_enable_secondary_symbols=false_expressions=normal_four_or_more_letter_rows=false_keyboard_mode=normal_language=en-US_orientation=portrait_physical_keyboard=qwerty_show_secondary_digits=true_show_suggestions=true_split_with_duplicate_keys=true_variant=qwerty, imeDef.stringId=ime_english_united_states, imeDef.className=com.google.android.apps.inputmethod.libs.latin5.LatinIme, imeDef.languageTag=en-US}
+11-07 07:56:24.101  1472  1472 I VoiceImeExtension: VoiceImeExtension.shouldStartVoiceInputAutomatically():383 No private IME option set to start voice input.
+11-07 07:56:24.118  6282  6282 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-07 07:56:24.118  6282  6282 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-07 07:56:24.122  6282  6282 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-07 07:56:24.154   282  7646 I resolv  : GetAddrInfoHandler::run: {100 786532 100 983140 10120 0}
+11-07 07:56:24.157  2791  7621 D TrafficStats: tagSocket(114) with statsTag=0x1809, statsUid=-1
+11-07 07:56:24.159  2791  7621 D TrafficStats: tagSocket(114) with statsTag=0x1809, statsUid=-1
+11-07 07:56:24.159  2791  7621 D TrafficStats: tagSocket(114) with statsTag=0x1809, statsUid=-1
+11-07 07:56:24.162  5655  5655 D InsetsController: show(ime(), fromIme=true)
+11-07 07:56:24.165  1472  1472 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-07 07:56:24.171  2791  7621 W libc    : Access denied finding property "persist.adb.tls_server.enable"
+11-07 07:56:24.171  2791  7621 W libc    : Access denied finding property "service.adb.tls.port"
+11-07 07:56:24.167  2791  2791 W IntentService[D: type=1400 audit(0.0:64): avc: denied { read } for name="u:object_r:system_adbd_prop:s0" dev="tmpfs" ino=269 scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:object_r:system_adbd_prop:s0 tclass=file permissive=0 app=com.google.android.gms
+11-07 07:56:24.178  6282  6282 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-07 07:56:24.178  6282  6282 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-07 07:56:24.179  6282  6282 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-07 07:56:24.185  1472  2071 I native  : I0000 00:00:1794038184.185793    2071 input-context-store.cc:255] Ignoring stale client request for FetchSuggestions
+11-07 07:56:24.186  1472  1472 W InputContextProxyV4: InputContextProxyV4.applyClientDiffInternal():897 Ignore [FetchSuggestions] diff due to stale request: 77<79, inputStateId=17, lastInputStateId=17
+11-07 07:56:24.187  1472  2071 I Delight5Decoder: Delight5DecoderWrapper.setKeyboardLayout():457 setKeyboardLayout()
+11-07 07:56:24.188  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = HEADER, shownType = SHOW_MANDATORY_WITH_ANIMATION
+11-07 07:56:24.188  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-07 07:56:24.167  2791  2791 W IntentService[D: type=1400 audit(0.0:65): avc: denied { read } for name="u:object_r:adbd_prop:s0" dev="tmpfs" ino=61 scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:object_r:adbd_prop:s0 tclass=file permissive=0 app=com.google.android.gms
+11-07 07:56:24.233  1472  1472 I KeyboardViewController: KeyboardViewController.lambda$showSelfAndAncestors$6():609 current view doesn't has the priority com.google.android.libraries.inputmethod.accesspoint.widget.AccessPointsBar{546d5c8 I.E...... ......ID 0,0-850,116 #7f0b0018 app:id/0_resource_name_obfuscated} to show itself, DEFAULT
+11-07 07:56:24.256   359   374 W TransactionTracing: Could not find layer id -1
+11-07 07:56:24.256   359   374 W TransactionTracing: Could not find layer id -1
+11-07 07:56:24.256   359   374 W TransactionTracing: Could not find layer id -1
+11-07 07:56:24.256   359   374 W TransactionTracing: Could not find layer id -1
+11-07 07:56:24.256   359   374 W TransactionTracing: Could not find layer id -1
+11-07 07:56:24.334  5655  5655 D InsetsController: show(ime(), fromIme=false)
+11-07 07:56:24.354  5655  5655 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{300f3d4 VFED..... .F...... 0,0-1080,2209 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+11-07 07:56:24.367  1472  1472 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-07 07:56:24.370  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = HEADER, shownType = SHOW_MANDATORY_WITH_ANIMATION
+11-07 07:56:24.370  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-07 07:56:24.375  5655  5655 D InsetsController: show(ime(), fromIme=true)
+11-07 07:56:24.598  1472  1472 E InputConnectionParser: InputConnectionParser.responseWithError():106 responseWithError(): parse_code: 2
+11-07 07:56:24.598  1472  1472 E InputContextProxyV4: InputContextProxyV4.reset():371 reset(): un-successful, parse_code: 2, input_state_id 0
+11-07 07:56:24.602  1472  1472 W Delight5Decoder: Delight5DecoderWrapper.asyncFetchSuggestions():1876 asyncFetchSuggestions(): Decoder state is invalid
+11-07 07:56:24.602  1472  1472 W Delight5Decoder: Delight5DecoderWrapper.asyncFetchSuggestions():1876 asyncFetchSuggestions(): Decoder state is invalid
+11-07 07:56:24.795  1472  1472 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-07 07:56:25.109  5641  5651 W System  : A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+11-07 07:56:25.109  5641  5651 W System  : java.lang.Throwable: Explicit termination method 'HardwareBuffer.close' not called
+11-07 07:56:25.109  5641  5651 W System  : 	at dalvik.system.CloseGuard.openWithCallSite(CloseGuard.java:288)
+11-07 07:56:25.109  5641  5651 W System  : 	at dalvik.system.CloseGuard.open(CloseGuard.java:257)
+11-07 07:56:25.109  5641  5651 W System  : 	at android.hardware.HardwareBuffer.<init>(HardwareBuffer.java:272)
+11-07 07:56:25.109  5641  5651 W System  : A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+11-07 07:56:25.109  5641  5651 W System  : java.lang.Throwable: Explicit termination method 'HardwareBuffer.close' not called
+11-07 07:56:25.109  5641  5651 W System  : 	at dalvik.system.CloseGuard.openWithCallSite(CloseGuard.java:288)
+11-07 07:56:25.109  5641  5651 W System  : 	at dalvik.system.CloseGuard.open(CloseGuard.java:257)
+11-07 07:56:25.109  5641  5651 W System  : 	at android.hardware.HardwareBuffer.<init>(HardwareBuffer.java:272)
+11-07 07:56:25.187   757   809 D SplashScreenView: Build android.window.SplashScreenView{df4b9af V.E...... ......ID 0,0-0,0}
+11-07 07:56:25.187   757   809 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-07 07:56:25.187   757   809 D SplashScreenView: Branding: view: android.view.View{e2091bc G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-07 07:56:25.192  5655  5655 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@f112e55 in: PAUSED
+11-07 07:56:25.192  5655  5655 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=androidx.activity.ComponentActivity@f112e55
+11-07 07:56:25.193   757   812 W Parcel  : Expecting binder but got null!
+11-07 07:56:25.235   359   374 W TransactionTracing: Could not find layer id -1
+11-07 07:56:25.235   359   374 W TransactionTracing: Could not find layer id -1
+11-07 07:56:25.235   359   374 W TransactionTracing: Could not find layer id -1
+11-07 07:56:25.240  6584  6614 W Parcel  : Expecting binder but got null!
+11-07 07:56:25.269   359   374 W TransactionTracing: Could not find layer id -1
+11-07 07:56:25.269   359   374 W TransactionTracing: Could not find layer id -1
+11-07 07:56:25.371   359   374 W TransactionTracing: Could not find layer id -1
+11-07 07:56:25.371   359   374 W TransactionTracing: Could not find layer id -1
+11-07 07:56:25.371   359   374 W TransactionTracing: Could not find layer id -1
+11-07 07:56:25.371   359   374 W TransactionTracing: Could not find layer id -1
+11-07 07:56:25.371   359   374 W TransactionTracing: Could not find layer id -1
+11-07 07:56:25.371   359   374 W TransactionTracing: Could not find layer id -1
+11-07 07:56:25.371   359   374 W TransactionTracing: Could not find layer id -1
+11-07 07:56:25.371   359   374 W TransactionTracing: Could not find layer id -1
+11-07 07:56:25.493   359   374 W TransactionTracing: Could not find layer id -1
+11-07 07:56:25.504   359   374 W TransactionTracing: Could not find layer id -1
+11-07 07:56:25.535   359   374 W TransactionTracing: Could not find layer id -1
+11-07 07:56:25.577   988   988 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+11-07 07:56:25.577   951  1256 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 07:56:25.577   951  1256 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 07:56:25.577   951  1256 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 1
+11-07 07:56:25.578  5655  5655 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@f112e55 in: STOPPED
+11-07 07:56:25.578   479  1617 W AppSearchIcing: icing-search-engine.cc:217: Error: 5, Message: Document (com.google.android.googlequicksearchbox$OneSearchZeroStateGoogleSuggestions/default, zp) not found.
+11-07 07:56:25.580   988  2013 D OneSearchSuggestProvider: Created the binder channel successfully for end point service =com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService , mChannel=Q0{delegate=L0{logId=101, target=directaddress:///AndroidComponentAddress%5BIntent%20%7B%20act=grpc.io.action.BIND%20cmp=com.google.android.googlequicksearchbox/com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService%20%7D%5D}} , mOneSearchConnection=y1.J@52e43f
+11-07 07:56:25.580  5655  5655 V ActivityScenario: Update currentActivityStage to STOPPED, currentActivity=androidx.activity.ComponentActivity@f112e55
+11-07 07:56:25.581   359   374 W TransactionTracing: Could not find layer id -1
+11-07 07:56:25.587  5655  5655 D AutofillManager: onActivityFinishing(): calling cancelLocked()
+11-07 07:56:25.620  5655  5655 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@f112e55 in: DESTROYED
+11-07 07:56:25.620  5655  5655 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
+11-07 07:56:25.621  5655  5677 D IdlingRegistry: Unregistering idling resources: [androidx.compose.ui.test.EspressoLink@966d761]
+11-07 07:56:25.645  1578  1866 I AiAiEcho: Predicting[0]:
+11-07 07:56:25.645  1578  1866 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:
+11-07 07:56:25.646  1578  1866 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0
+11-07 07:56:25.646  1578  1866 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0
+11-07 07:56:25.653   479   681 W InputManager-JNI: Input channel object 'e84754d com.quartz.notes/androidx.activity.ComponentActivity (client)' was disposed without first being removed with the input manager!
+11-07 07:56:25.664   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f78f0
+11-07 07:56:25.667  5655  5677 I TestRunner: finished: composeMouseOnBareEditor(com.quartz.notes.ui.notebook.PageInputTest)

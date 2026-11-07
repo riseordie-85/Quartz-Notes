@@ -1,0 +1,56 @@
+11-07 07:54:25.054  5655  5677 I TestRunner: started: openNoteShowsChangesOrKeepsThemAsACopy(com.quartz.notes.ui.LiveEditTest)
+11-07 07:54:25.055  6282  6383 I GmsDebugLogger: [73] 1801
+11-07 07:54:25.057  6282  6383 W ZappDownloader: No successful module downloads for requested features [mlkit.barcode.ui].
+11-07 07:54:25.057  6282  6383 I GmsDebugLogger: [30] [VisionBarcode.optional:231818100800],[TfliteDynamiteDynamite.integ:264010405100800],[MlkitBarcodeUi.optional:231818100000]
+11-07 07:54:25.060  6282  6383 W ChimeraConfigService: Retry attempt was throttled. [CONTEXT service_id=264 ]
+11-07 07:54:25.060  6282  6383 I GmsDebugLogger: [83] 1 [mlkit.barcode.ui]
+11-07 07:54:25.078  6176  6218 W NetworkScheduler: Running in whitelist mode. Ignoring task: com.google.android.gms/.tapandpay.gcmtask.TapAndPayGcmTaskService{u=0 tag="keyguard.check" trigger=window{period=3600s,flex=1200s,earliest=2399s,latest=3599s} requirements=[NET_CONNECTED,PREFERRED_CHARGING] attributes=[PERSISTED,RECURRING] scheduled=0s last_run=N/A exec_window_multiplier=1.0000 jid=N/A status=UNKNOWN retries=0 client_lib=GMS_TASK_SCHEDULER-231818000} [CONTEXT service_id=218 ]
+11-07 07:54:25.100  6282  6372 I GmsSyncPolicyEngine: Periodic sync 1 disabled by policy, cancelled.
+11-07 07:54:25.101  6282  6372 I GmsSyncPolicyEngine: Periodic sync 2 disabled by policy, cancelled.
+11-07 07:54:25.101  6282  6372 I GmsSyncPolicyEngine: Periodic sync 3 disabled by policy, cancelled.
+11-07 07:54:25.103  6282  6387 I AlarmManager: setExactAndAllowWhileIdle [name: RemindersNSREFRESH_TIME_REMINDERS_ALARM type: 0 triggerAtMillis: 1794096000000]
+11-07 07:54:25.109  5655  5655 W om.quartz.notes: Method void androidx.compose.runtime.snapshots.SnapshotStateListKt.clearImpl(androidx.compose.runtime.snapshots.SnapshotStateList) failed lock verification and will run slower.
+11-07 07:54:25.109  5655  5655 W om.quartz.notes: Common causes for lock verification issues are non-optimized dex code
+11-07 07:54:25.109  5655  5655 W om.quartz.notes: and incorrect proguard optimizations.
+11-07 07:54:25.117  6176  6218 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.gass.chimera.SchedulePeriodicTasksService started execution. cause:5 exec_start_elapsed_seconds: 115 [CONTEXT service_id=218 ]
+11-07 07:54:25.118  6282  6383 I SemanticLocation: [Scheduler] Periodic Task com.google.android.gms.semanticlocationhistory.deidentifieddata.storevisits.StoreVisitsProcessingService.StoreVisitsProcessing is scheduled to run EVERY_6_HOURS [CONTEXT service_id=173 ]
+11-07 07:54:25.118  6282  6383 I SemanticLocation: [Scheduler] Periodic Task com.google.android.gms.semanticlocationhistory.deidentifieddata.wifi.WifiPlaceVisitProcessingService.WifiPlaceVisit is scheduled to run EVERY_DAY [CONTEXT service_id=173 ]
+11-07 07:54:25.119  6282  6383 I SemanticLocation: [Scheduler] Periodic Task com.google.android.gms.semanticlocationhistory.deidentifieddata.uploads.BatchDeidentifiedDataUploadService.BatchDeidentifiedDataUpload is scheduled to run EVERY_6_HOURS [CONTEXT service_id=173 ]
+11-07 07:54:25.119  6282  6383 I SemanticLocation: [Scheduler] Periodic Task com.google.android.gms.semanticlocationhistory.geller.GellerCleanupService.GellerCleanup is scheduled to run EVERY_DAY [CONTEXT service_id=173 ]
+11-07 07:54:25.119  6282  6383 I SemanticLocation: [Scheduler] Periodic Task com.google.android.gms.semanticlocationhistory.settings.LocationHistoryActiveProcessingService.LocationHistoryActiveProcessing is scheduled to run EVERY_DAY [CONTEXT service_id=173 ]
+11-07 07:54:25.119  6282  6383 I SemanticLocation: [Scheduler] Periodic Task com.google.android.gms.semanticlocationhistory.pulp.PulpInferenceService.PulpInference is scheduled to run EVERY_7_DAYS [CONTEXT service_id=173 ]
+11-07 07:54:25.119  6282  6383 I SemanticLocation: [Scheduler] Periodic Task com.google.android.gms.semanticlocationhistory.pulp.PulpMddDownloadScheduleService.PulpMddRefreshDownloadTask is scheduled to run EVERY_DAY [CONTEXT service_id=173 ]
+11-07 07:54:25.120  6282  6383 I SemanticLocation: [Scheduler] Periodic Task com.google.android.gms.semanticlocationhistory.pulp.PulpMddMaintenanceService.PulpMddMaintenanceTask is scheduled to run EVERY_DAY [CONTEXT service_id=173 ]
+11-07 07:54:25.120  6282  6383 I SemanticLocation: [Scheduler] Periodic Task com.google.android.gms.semanticlocationhistory.federated.FederatedScheduleService.FederatedLocation is scheduled to run EVERY_DAY [CONTEXT service_id=173 ]
+11-07 07:54:25.120  6282  6383 W GmsTaskScheduler: com.google.android.gms.semanticlocationhistory.federated.FederatedTaskIdentityDataService is not available. This may cause the task to be lost.
+11-07 07:54:25.120  6282  6383 I SemanticLocation: [Scheduler] Periodic Task com.google.android.gms.semanticlocationhistory.federated.FederatedTaskIdentityDataService.FederatedLocation is scheduled to run EVERY_DAY [CONTEXT service_id=173 ]
+11-07 07:54:25.121  6282  6383 W GmsTaskScheduler: com.google.android.gms.semanticlocationhistory.federated.FederatedJobHistoryService is not available. This may cause the task to be lost.
+11-07 07:54:25.121  6282  6383 I SemanticLocation: [Scheduler] Periodic Task com.google.android.gms.semanticlocationhistory.federated.FederatedJobHistoryService.FederatedLocation is scheduled to run EVERY_DAY [CONTEXT service_id=173 ]
+11-07 07:54:25.121  6282  6383 I SemanticLocation: [Scheduler] Periodic Task com.google.android.gms.semanticlocationhistory.db.OdlhDatabaseCleanupJob.OdlhDatabaseCleanup is scheduled to run EVERY_DAY [CONTEXT service_id=173 ]
+11-07 07:54:25.121  6282  6383 I SemanticLocation: [Scheduler] Periodic Task com.google.android.gms.semanticlocationhistory.edit.EditMergeJob.EditMergeJob is scheduled to run EVERY_DAY [CONTEXT service_id=173 ]
+11-07 07:54:25.121  6282  6383 I SemanticLocation: [Scheduler] Periodic Task com.google.android.gms.semanticlocationhistory.edit.EditUploadJob.EditUploadJob is scheduled to run EVERY_DAY [CONTEXT service_id=173 ]
+11-07 07:54:25.122  6282  6383 I SemanticLocation: [Scheduler] Periodic Task com.google.android.gms.semanticlocationhistory.deidentifieddata.historicalbusyness.HistoricalBusynessProcessingService.HistoricalBusyness is scheduled to run EVERY_DAY [CONTEXT service_id=173 ]
+11-07 07:54:25.122  6282  6383 I SemanticLocation: [Scheduler] Periodic Task com.google.android.gms.semanticlocationhistory.db.OdlhRemovedAccountsCleanupJob.OdlhRemovedAccountsCleanup is scheduled to run EVERY_DAY [CONTEXT service_id=173 ]
+11-07 07:54:25.122  6282  6383 I SemanticLocation: [Scheduler] Periodic Task com.google.android.gms.semanticlocationhistory.db.OdlhUserEditSyncJob.OdlhUserEditSync is scheduled to run EVERY_DAY [CONTEXT service_id=173 ]
+11-07 07:54:25.122  6282  6383 I SemanticLocation: [Scheduler] Periodic Task com.google.android.gms.semanticlocationhistory.federated.regionfetcher.RegionMddMaintenanceService.RegionMddMaintenanceTask is scheduled to run EVERY_DAY [CONTEXT service_id=173 ]
+11-07 07:54:25.122  6282  6383 I SemanticLocation: [Scheduler] Periodic Task com.google.android.gms.semanticlocationhistory.federated.regionfetcher.RegionMddDownloadScheduleService.RegionMddRefreshDownloadTask is scheduled to run EVERY_6_HOURS [CONTEXT service_id=173 ]
+11-07 07:54:25.124  6282  6387 V SmartDevice: [ModuleInitializer] ModuleInitializer got intent Intent { act=android.intent.action.BOOT_COMPLETED flg=0x89000010 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.GmsIntentOperationService (has extras) } with flag 2
+11-07 07:54:25.124  6282  6387 W ChimeraUtils: Module com.google.android.gms.smartdevice missing resource null(0)
+11-07 07:54:25.130  6282  6387 D SmartDevice: [ModuleInitializer] Module init - scheduling buffered logs cleanup task
+11-07 07:54:25.131  6282  6387 I SmartDevice: [CleanBufferedLogsService] Periodic task upload_buffered_logs_periodic scheduled!
+11-07 07:54:25.132  6282  6387 I AppLinksModuleInit: onInitRuntimeState [CONTEXT service_id=244 ]
+11-07 07:54:25.134  6282  6387 I AppLinksModuleInit: verifying requested domain links post-boot [CONTEXT service_id=244 ]
+11-07 07:54:25.144  4623  4634 I PermissionControllerServiceImpl: Updating user sensitive for uid 10120
+11-07 07:54:25.145   951   951 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-07 07:54:25.145   951   951 D MediaPlayerList: Name of package changed: com.google.android.gms
+11-07 07:54:25.145   951   951 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-07 07:54:25.145   951   951 D MediaPlayerList: Name of package changed: com.google.android.gms
+11-07 07:54:25.146  3349  3449 I Bugle   : BroadcastReceiverAsyncWorkTracker: Acknowledging broadcast of atsi@e6e78de
+11-07 07:54:25.148   757   757 D ControlsListingControllerImpl: ServiceConfig reloaded, count: 0
+11-07 07:54:25.152   479   577 I RoleService: Granting default roles...
+11-07 07:54:25.155  3753  6544 I ProvidersCache: Provider returned no roots. Possibly naughty: com.google.android.apps.docs.storage
+11-07 07:54:25.157   984   984 D CarrierSvcBindHelper: onPackageModified: com.google.android.gms
+11-07 07:54:25.158   984   984 D CarrierSvcBindHelper: No carrier app for: 0
+11-07 07:54:25.159   984   984 D ImsResolver: maybeAddedImsService, packageName: com.google.android.gms
+11-07 07:54:25.160  4623  4708 W Role    : Default holder doesn't have required signing certificate: com.google.android.apps.work.clouddpc:23962F4B43B9857638EA66F4D419518EAE282491ACDA4B94707BD59003C45E58
+11-07 07:54:25.175  5655  5677 I TestRunner: finished: openNoteShowsChangesOrKeepsThemAsACopy(com.quartz.notes.ui.LiveEditTest)

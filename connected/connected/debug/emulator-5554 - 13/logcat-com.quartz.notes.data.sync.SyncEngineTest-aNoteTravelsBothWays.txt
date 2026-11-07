@@ -1,0 +1,93 @@
+11-07 07:54:18.776  5655  5677 I TestRunner: started: aNoteTravelsBothWays(com.quartz.notes.data.sync.SyncEngineTest)
+11-07 07:54:18.777  5655  5677 D TrafficStats: tagSocket(97) with statsTag=0xffffffff, statsUid=-1
+11-07 07:54:18.778  1582  5632 I MediaProvider: Scanned internal due to REASON_DEMAND, found 0 items in 23ms, 0 inserts 0 updates 0 deletes
+11-07 07:54:18.787  1255  5030 I ChimeraCfgMgr: Updating module config: container:2318189190800 -> container:2318189190800
+11-07 07:54:18.787  1255  5030 E DowngradeHelper: isModuleDowngradeRequired false
+11-07 07:54:18.787  1255  4432 I Pay     : Migration flag not enabled. [CONTEXT service_id=198 ]
+11-07 07:54:18.802  2127  3524 D CompatibilityChangeReporter: Compat change id reported: 150939131; UID 10076; state: ENABLED
+11-07 07:54:18.813  1255  4432 I Pay     : Migration already completed. [CONTEXT service_id=198 ]
+11-07 07:54:18.828  1255  4432 I Pay     : Migration already completed. [CONTEXT service_id=198 ]
+11-07 07:54:18.828  1255  4432 I Pay     : Migration flag not enabled. [CONTEXT service_id=198 ]
+11-07 07:54:18.828  1255  4432 I Pay     : Migration flag not enabled. [CONTEXT service_id=198 ]
+11-07 07:54:18.829  1255  4432 I Pay     : Migration flag not enabled. [CONTEXT service_id=198 ]
+11-07 07:54:18.829  1255  4432 I Pay     : Migration flag not enabled. [CONTEXT service_id=198 ]
+11-07 07:54:18.829  1255  4432 I Pay     : [SeTosMigration] walletJpEligibility is not enabled [CONTEXT service_id=198 ]
+11-07 07:54:18.837  1255  6161 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+11-07 07:54:18.838  1255  4432 I Pay     : Wallet install state NOT_INSTALLED [CONTEXT service_id=198 ]
+11-07 07:54:18.847  1255  4432 I Pay     : Migration flag not enabled. [CONTEXT service_id=198 ]
+11-07 07:54:18.853  1062  3551 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.pay.gcmtask.PayGcmTaskService finished executing. cause:7 result: 1 elapsed_millis: 423 uptime_millis: 423 exec_start_elapsed_seconds: 108 [CONTEXT service_id=218 ]
+11-07 07:54:18.854  3349  3433 W Bugle   : TextClassifierLibManagerImpl: Reclaiming memory at level: 40
+11-07 07:54:18.871  3349  3439 W Bugle   : TextClassifierLibManagerImpl: Reclaiming memory at level: 40
+11-07 07:54:18.876  3349  3428 W Bugle   : TextClassifierLibManagerImpl: Reclaiming memory at level: 40
+11-07 07:54:18.879  3349  3438 W Bugle   : TextClassifierLibManagerImpl: Reclaiming memory at level: 40
+11-07 07:54:18.882  1255  1264 I gle.android.gms: Background concurrent copying GC freed 274274(11MB) AllocSpace objects, 84(4160KB) LOS objects, 49% free, 17MB/34MB, paused 3.631ms,30us total 467.875ms
+11-07 07:54:18.884  1255  6161 I Icing   : Indexing com.google.android.gms-internal.3p:MobileApplication from com.google.android.gms
+11-07 07:54:18.893  1255  5030 I GmsDebugLogger: [46] container:2318189190800
+11-07 07:54:18.899  1062  1062 I ChimeraModuleLdr: Module config changed, forcing restart due to module com.google.android.gms.herrevad
+11-07 07:54:18.899  1062  1062 I Process : Sending signal. PID: 1062 SIG: 9
+11-07 07:54:18.902  4774  4774 I ChimeraModuleLdr: Module config changed, forcing restart due to module com.google.android.gms.core_download
+11-07 07:54:18.902  4774  4774 I Process : Sending signal. PID: 4774 SIG: 9
+11-07 07:54:18.910   286   286 I Zygote  : Process 4774 exited due to signal 9 (Killed)
+11-07 07:54:18.912   479   518 I libprocessgroup: Successfully killed process cgroup uid 10120 pid 4774 in 0ms
+11-07 07:54:18.922  1255  5030 I ChimeraModuleLdr: Module config changed, forcing restart due to module com.google.android.gms.appintegrity
+11-07 07:54:18.922  1255  5030 I Process : Sending signal. PID: 1255 SIG: 9
+11-07 07:54:18.993   479   518 I libprocessgroup: Successfully killed process cgroup uid 10120 pid 1255 in 2ms
+11-07 07:54:19.002   286   286 I Zygote  : Process 1255 exited due to signal 9 (Killed)
+11-07 07:54:19.026   286   286 I Zygote  : Process 1062 exited due to signal 9 (Killed)
+11-07 07:54:19.027   479   518 I libprocessgroup: Successfully killed process cgroup uid 10120 pid 1062 in 0ms
+11-07 07:54:19.060   951  1836 D BtGatt.GattService: Binder is dead - unregistering scanner (2)!
+11-07 07:54:19.060   951  1622 D BtGatt.GattService: Binder is dead - unregistering scanner (1)!
+11-07 07:54:19.062   951  1836 D BtGatt.GattService: stopScan() - queue size =2
+11-07 07:54:19.063   951  1622 D BtGatt.GattService: stopScan() - queue size =2
+11-07 07:54:19.063   479   694 D ConnectivityService: releasing NetworkRequest [ REQUEST id=125, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10120 RequestorUid: 10120 RequestorPkg: com.google.android.gms UnderlyingNetworks: Null] ] (release request)
+11-07 07:54:19.073  1578  1578 I AiAi    : onTrimMemory() with level 15
+11-07 07:54:19.075   951  1836 D ActivityAttributionService: notifyActivityAttributionInfo UID=1002 packageName=com.google.android.bluetooth deviceAddress=no_active_device_address
+11-07 07:54:19.075   479   505 I ServiceWatcher: [HardwareActivityRecognitionProxy] disconnected from 10120/com.google.android.gms/com.google.android.location.internal.server.HardwareArProviderService@1
+11-07 07:54:19.075   479   505 I ServiceWatcher: [fused] disconnected from 10120/com.google.android.gms/com.google.android.location.fused.FusedLocationService@1
+11-07 07:54:19.075   479   505 I ServiceWatcher: [network] disconnected from 10120/com.google.android.gms/com.google.android.location.network.NetworkLocationService@2
+11-07 07:54:19.076   479   505 I ServiceWatcher: [GeocoderProxy] disconnected from 10120/com.google.android.gms/.location.geocode.GeocodeService@2
+11-07 07:54:19.076   479   505 I ServiceWatcher: [GeofenceProxy] disconnected from 10120/com.google.android.gms/com.google.android.location.internal.GoogleLocationManagerService@1
+11-07 07:54:19.076   479   505 I ServiceWatcher: [RealLocationTimeZoneProviderProxy] disconnected from 10120/com.google.android.gms/.geotimezone.GeoTimeZoneService@1
+11-07 07:54:19.077   951  1622 D ActivityAttributionService: notifyActivityAttributionInfo UID=1002 packageName=com.google.android.bluetooth deviceAddress=no_active_device_address
+11-07 07:54:19.077   951  1256 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 07:54:19.078   951  1256 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 07:54:19.078   951  1256 D BtGatt.ScanManager: handling stopping scan  [ScanClient scanModeApp -1 scanModeUsed -1 [appScanStats com.google.uid.shared:10120]]
+11-07 07:54:19.078   951  1256 D BtGatt.ScanManager: stop gattClientScanNative
+11-07 07:54:19.092   951  1622 I bt_btif : packages/modules/Bluetooth/system/btif/src/bluetooth.cc:465 get_profile_interface: get_profile_interface: id = activity_attribution
+11-07 07:54:19.093   951  1836 I bt_btif : packages/modules/Bluetooth/system/btif/src/bluetooth.cc:465 get_profile_interface: get_profile_interface: id = activity_attribution
+11-07 07:54:19.097   479   691 W WificondScannerImpl: stopBatchedScan() is not supported
+11-07 07:54:19.098  1472  1472 I AppBase : AppBase.onTrimMemory():497 onTrimMemory(): 15
+11-07 07:54:19.098  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.onTrimMemory():4406 onTrimMemory(): 15
+11-07 07:54:19.102   951  1256 I bt_stack: [INFO:le_scanning_manager.cc(154)] Scan in shim layer stopped
+11-07 07:54:19.108   286   286 D Zygote  : Forked child process 6176
+11-07 07:54:19.113  2127  6165 D DownloadManager: [6] Finished with status SUCCESS
+11-07 07:54:19.114   951  1282 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_scanning_manager.cc:659 stop_scan: Scanning already stopped, return!
+11-07 07:54:19.117   951  1256 D BtGatt.ScanManager: app died, unregister scanner - 2
+11-07 07:54:19.117   951  1256 D BtGatt.GattService: unregisterScanner() - scannerId=2
+11-07 07:54:19.118   951  1256 I bt_stack: [INFO:le_scanning_manager.cc(148)] Unregister in shim layer, scanner_id:2
+11-07 07:54:19.118   951  1256 D BtGatt.ScanManager: handling stopping scan  [ScanClient scanModeApp -1 scanModeUsed -1 [appScanStats com.google.uid.shared:10120]]
+11-07 07:54:19.118   951  1256 D BtGatt.ScanManager: stop gattClientScanNative
+11-07 07:54:19.119   951  1256 I bt_stack: [INFO:le_scanning_manager.cc(154)] Scan in shim layer stopped
+11-07 07:54:19.119   951  1282 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_scanning_manager.cc:659 stop_scan: Scanning already stopped, return!
+11-07 07:54:19.119   951  1256 D BtGatt.ScanManager: app died, unregister scanner - 1
+11-07 07:54:19.120   951  1256 D BtGatt.GattService: unregisterScanner() - scannerId=1
+11-07 07:54:19.121   951  1256 I bt_stack: [INFO:le_scanning_manager.cc(148)] Unregister in shim layer, scanner_id:1
+11-07 07:54:19.121  6176  6176 I .gms.persistent: Using CollectorTypeCC GC.
+11-07 07:54:19.122  6176  6176 W .gms.persistent: Unexpected CPU variant for x86: x86_64.
+11-07 07:54:19.122  6176  6176 W .gms.persistent: Known variants: atom, sandybridge, silvermont, kabylake, default
+11-07 07:54:19.129   376   399 I adbd    : jdwp connection from 6176
+11-07 07:54:19.146  6176  6176 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10120; state: ENABLED
+11-07 07:54:19.155  6176  6176 D nativeloader: Configuring classloader-namespace for other apk /system/framework/org.apache.http.legacy.jar. target_sdk_version=33, uses_libraries=ALL, library_path=/product/priv-app/PrebuiltGmsCore/lib/x86_64:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.gms
+11-07 07:54:19.157  6176  6176 D nativeloader: Configuring classloader-namespace for other apk /system/framework/com.android.media.remotedisplay.jar. target_sdk_version=33, uses_libraries=ALL, library_path=/product/priv-app/PrebuiltGmsCore/lib/x86_64:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.gms
+11-07 07:54:19.159  6176  6176 D nativeloader: Configuring classloader-namespace for other apk /system/framework/com.android.location.provider.jar. target_sdk_version=33, uses_libraries=ALL, library_path=/product/priv-app/PrebuiltGmsCore/lib/x86_64:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.gms
+11-07 07:54:19.159  6176  6176 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.extensions.jar. target_sdk_version=33, uses_libraries=ALL, library_path=/product/priv-app/PrebuiltGmsCore/lib/x86_64:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.gms
+11-07 07:54:19.160  6176  6176 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.sidecar.jar. target_sdk_version=33, uses_libraries=ALL, library_path=/product/priv-app/PrebuiltGmsCore/lib/x86_64:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.gms
+11-07 07:54:19.165  6176  6176 D nativeloader: Configuring vendor-classloader-namespace for unbundled product apk /product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk. target_sdk_version=33, uses_libraries=, library_path=/product/priv-app/PrebuiltGmsCore/lib/x86_64:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!/lib/x86_64:/product/lib64:/system/product/lib64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.gms:/product/lib64:/system/product/lib64
+11-07 07:54:19.181  6176  6176 V GraphicsEnvironment: ANGLE Developer option for 'com.google.android.gms' set to: 'default'
+11-07 07:54:19.181  6176  6176 V GraphicsEnvironment: ANGLE GameManagerService for com.google.android.gms: false
+11-07 07:54:19.181  6176  6176 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-07 07:54:19.182  6176  6176 D NetworkSecurityConfig: Using Network Security Config from resource network_security_config debugBuild: false
+11-07 07:54:19.183  6176  6176 D NetworkSecurityConfig: Using Network Security Config from resource network_security_config debugBuild: false
+11-07 07:54:19.219  6176  6176 I Safeboot: Checking safeboot...
+11-07 07:54:19.229  6176  6176 D CompatibilityChangeReporter: Compat change id reported: 160794467; UID 10120; state: ENABLED
+11-07 07:54:19.232  5655  5677 I TestRunner: finished: aNoteTravelsBothWays(com.quartz.notes.data.sync.SyncEngineTest)

@@ -1,0 +1,96 @@
+11-07 07:55:51.144  5655  5677 I TestRunner: started: groupsMoveCopyAndPaste(com.quartz.notes.ui.notebook.FreeformToolsTest)
+11-07 07:55:51.146   479   508 W InputManager-JNI: Input channel object '4082770 Splash Screen com.quartz.notes.test (client)' was disposed without first being removed with the input manager!
+11-07 07:55:51.147  1636  2709 I A       : Using proto config with mendel
+11-07 07:55:51.149  5655  5677 D IdlingRegistry: Registering idling resources: [androidx.compose.ui.test.EspressoLink@33943c8]
+11-07 07:55:51.208   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f5f10
+11-07 07:55:51.208   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f7c50
+11-07 07:55:51.208   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f3c30
+11-07 07:55:51.208   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f79b0
+11-07 07:55:51.208   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f5cd0
+11-07 07:55:51.208   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f72f0
+11-07 07:55:51.208   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f3c30
+11-07 07:55:51.209   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f3c30
+11-07 07:55:51.209   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f3c30
+11-07 07:55:51.209   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f5cd0
+11-07 07:55:51.217  5655  5677 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+11-07 07:55:51.224  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-07 07:55:51.234  1636  2363 I A       : group apa_head_suggest present without account in *
+11-07 07:55:51.236  1636  2363 I A       : incrementApaDataDownloadStoreStatus(latency = PT0.101S, appVersion = 13.17.16.23, status = OK, locale = *, fileGroupnames = apa_head_suggest, accountScoped = false, localGroupsAvailable = false, timeSinceSearchBoot = Optional[PT2M53.608S] (ONE_TO_FIVE_MINUTES), timeSinceDataDownloadInit = PT1M19.064S (ONE_TO_FIVE_MINUTES))
+11-07 07:55:51.242  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-07 07:55:51.242  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.google.android.apps.nexuslauncher fieldId=-1 fieldName=null extras=null}, false)
+11-07 07:55:51.242  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-07 07:55:51.244  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-07 07:55:51.250   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f49b0
+11-07 07:55:51.251   479  2126 W InputManager-JNI: Input channel object '1743e21 com.quartz.notes.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity (client)' was disposed without first being removed with the input manager!
+11-07 07:55:51.264  1636  2709 I A       : Using proto config with mendel
+11-07 07:55:51.304   757   812 W Parcel  : Expecting binder but got null!
+11-07 07:55:51.307   757   809 D SplashScreenView: Build android.window.SplashScreenView{e1f3c06 V.E...... ......ID 0,0-0,0}
+11-07 07:55:51.307   757   809 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-07 07:55:51.307   757   809 D SplashScreenView: Branding: view: android.view.View{a3a92c7 G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-07 07:55:51.346   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f61b0
+11-07 07:55:51.347   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f88b0
+11-07 07:55:51.347   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f85b0
+11-07 07:55:51.367   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f8070
+11-07 07:55:51.368   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f85b0
+11-07 07:55:51.466   988   988 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+11-07 07:55:51.470  5655  5655 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@5303e0c in: PRE_ON_CREATE
+11-07 07:55:51.470  5655  5655 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+11-07 07:55:51.474  5655  5655 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@5303e0c in: CREATED
+11-07 07:55:51.474  5655  5655 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=androidx.activity.ComponentActivity@5303e0c
+11-07 07:55:51.475  5655  5655 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@5303e0c in: STARTED
+11-07 07:55:51.475  5655  5655 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=androidx.activity.ComponentActivity@5303e0c
+11-07 07:55:51.476  5655  5655 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@5303e0c in: RESUMED
+11-07 07:55:51.476  5655  5655 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=androidx.activity.ComponentActivity@5303e0c
+11-07 07:55:51.477  5655  6561 W Parcel  : Expecting binder but got null!
+11-07 07:55:51.484   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f3690
+11-07 07:55:51.679   479   505 W ziparchive: Unable to open '/data/app/~~zQFeJXZS5WhC5lfAeCkjYQ==/com.quartz.notes-feD_HGqKna9TAMJS1tgmSA==/base.dm': No such file or directory
+11-07 07:55:51.679   479   505 I ActivityTaskManager: Displayed com.quartz.notes/androidx.activity.ComponentActivity: +439ms
+11-07 07:55:51.725   951  1256 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 07:55:51.726   951  1256 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 07:55:51.730   951  1256 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 1
+11-07 07:55:51.730   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f5250
+11-07 07:55:51.730   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f5f10
+11-07 07:55:51.730   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f5f10
+11-07 07:55:51.731   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f5250
+11-07 07:55:51.734  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-07 07:55:51.734  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-07 07:55:51.734  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=null}, false)
+11-07 07:55:51.734  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-07 07:55:51.735  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-07 07:55:51.748  1636  2592 I PBSessionCacheImpl: Deleted sessionId[7196998130147305] from persistence.
+11-07 07:55:51.749   988  2013 D OneSearchSuggestProvider: Shut down the binder channel
+11-07 07:55:51.749   988  7116 I s.nexuslauncher: oneway function results for code 2 on binder at 0x704102db9b00 will be dropped but finished with status UNKNOWN_TRANSACTION
+11-07 07:55:51.755  1636  2709 W SearchServiceCore: Abort, client detached.
+11-07 07:55:51.757   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f7590
+11-07 07:55:51.795   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f6ff0
+11-07 07:55:51.800   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f6f90
+11-07 07:55:51.804  6282  6371 D TrafficStats: tagSocket(90) with statsTag=0x30001803, statsUid=-1
+11-07 07:55:51.834   479   845 W InputManager-JNI: Input channel object '74a4963 Splash Screen com.quartz.notes (client)' was disposed without first being removed with the input manager!
+11-07 07:55:51.876   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f5fd0
+11-07 07:55:51.877   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f7230
+11-07 07:55:51.877   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f5fd0
+11-07 07:55:51.877   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f5910
+11-07 07:55:51.877   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f5910
+11-07 07:55:51.877   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f5910
+11-07 07:55:51.878   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f5910
+11-07 07:55:51.878   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f7230
+11-07 07:55:51.878   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f7230
+11-07 07:55:51.878   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f5fd0
+11-07 07:55:51.878   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f7230
+11-07 07:55:51.878   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f5fd0
+11-07 07:55:51.878   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f8370
+11-07 07:55:52.056   757   809 D SplashScreenView: Build android.window.SplashScreenView{5a90378 V.E...... ......ID 0,0-0,0}
+11-07 07:55:52.056   757   809 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-07 07:55:52.056   757   809 D SplashScreenView: Branding: view: android.view.View{ed53a51 G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-07 07:55:52.064  5655  5655 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@5303e0c in: PAUSED
+11-07 07:55:52.065  5655  5655 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=androidx.activity.ComponentActivity@5303e0c
+11-07 07:55:52.075   757   812 W Parcel  : Expecting binder but got null!
+11-07 07:55:52.140   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f8130
+11-07 07:55:52.184  6584  6614 W Parcel  : Expecting binder but got null!
+11-07 07:55:52.188  5655  5655 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@5303e0c in: STOPPED
+11-07 07:55:52.188  5655  5655 V ActivityScenario: Update currentActivityStage to STOPPED, currentActivity=androidx.activity.ComponentActivity@5303e0c
+11-07 07:55:52.188  5655  5655 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@5303e0c in: DESTROYED
+11-07 07:55:52.189  5655  5655 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
+11-07 07:55:52.189   479  1936 W InputManager-JNI: Input channel object 'b1581db com.quartz.notes/androidx.activity.ComponentActivity (client)' was disposed without first being removed with the input manager!
+11-07 07:55:52.192  5655  5677 D IdlingRegistry: Unregistering idling resources: [androidx.compose.ui.test.EspressoLink@33943c8]
+11-07 07:55:52.192  5655  5677 I TestRunner: finished: groupsMoveCopyAndPaste(com.quartz.notes.ui.notebook.FreeformToolsTest)

@@ -1,0 +1,19 @@
+11-07 07:54:12.500  5655  5677 I TestRunner: started: migration5To6AddsTemplateAndBackgroundFields(com.quartz.notes.data.TemplatesTest)
+11-07 07:54:12.514  5826  5826 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10143; state: ENABLED
+11-07 07:54:12.519  5826  5826 D nativeloader: Configuring classloader-namespace for other apk /system/framework/org.apache.http.legacy.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps
+11-07 07:54:12.519  5826  5826 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.extensions.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps
+11-07 07:54:12.520  5826  5826 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.sidecar.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps
+11-07 07:54:12.522  5826  5826 D nativeloader: Configuring vendor-classloader-namespace for unbundled product apk /product/app/Maps/Maps.apk. target_sdk_version=35, uses_libraries=, library_path=/product/app/Maps/lib/x86_64:/product/app/Maps/Maps.apk!/lib/x86_64:/product/lib64:/system/product/lib64, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.apps.maps:/product/lib64:/system/product/lib64
+11-07 07:54:12.526  5826  5826 V GraphicsEnvironment: ANGLE Developer option for 'com.google.android.apps.maps' set to: 'default'
+11-07 07:54:12.527  5826  5826 V GraphicsEnvironment: ANGLE GameManagerService for com.google.android.apps.maps: false
+11-07 07:54:12.527  5826  5826 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-07 07:54:12.528  5826  5826 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-07 07:54:12.528  5826  5826 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-07 07:54:12.544  5826  5826 I ecovery_process: System.exit called, status: 0
+11-07 07:54:12.544  5826  5826 I AndroidRuntime: VM exiting with result code 0, cleanup skipped.
+11-07 07:54:12.550   286   286 I Zygote  : Process 5826 exited cleanly (0)
+11-07 07:54:12.551   479   518 I libprocessgroup: Successfully killed process cgroup uid 10143 pid 5826 in 0ms
+11-07 07:54:12.554  3349  3433 W Bugle   : TextClassifierLibManagerImpl: Reclaiming memory at level: 40
+11-07 07:54:12.557  1062  1070 I .gms.persistent: Background young concurrent copying GC freed 317062(12MB) AllocSpace objects, 10(312KB) LOS objects, 42% free, 17MB/30MB, paused 27us,20us total 101.405ms
+11-07 07:54:12.576  1509  1509 I PhenotypeBackgroundRecv: Skipping com.google.android.apps.wellbeing.device#com.google.android.apps.wellbeing which doesn't use ProcessStable flags.
+11-07 07:54:12.583  5655  5677 I TestRunner: finished: migration5To6AddsTemplateAndBackgroundFields(com.quartz.notes.data.TemplatesTest)

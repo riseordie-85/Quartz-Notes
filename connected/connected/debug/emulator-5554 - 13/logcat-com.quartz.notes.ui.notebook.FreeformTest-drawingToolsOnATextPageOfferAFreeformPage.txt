@@ -1,0 +1,342 @@
+11-07 07:55:46.102  5655  5677 I TestRunner: started: drawingToolsOnATextPageOfferAFreeformPage(com.quartz.notes.ui.notebook.FreeformTest)
+11-07 07:55:46.111   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f3ff0
+11-07 07:55:46.112   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f73b0
+11-07 07:55:46.112   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f7470
+11-07 07:55:46.139  5655  5677 D IdlingRegistry: Registering idling resources: [androidx.compose.ui.test.EspressoLink@34f5237]
+11-07 07:55:46.139   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f5cd0
+11-07 07:55:46.139   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f82b0
+11-07 07:55:46.217  5655  5677 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+11-07 07:55:46.277  1636  1636 I A       : Created gRPC endpoint to "search" for service class com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService
+11-07 07:55:46.282  1636  2363 I A       : group apa_head_suggest not present without account in *
+11-07 07:55:46.284  1636  2363 I A       : incrementApaDataDownloadStoreStatus(latency = PT0.002S, appVersion = 13.17.16.23, status = NOT_FOUND, locale = *, fileGroupnames = apa_head_suggest, accountScoped = false, localGroupsAvailable = false, timeSinceSearchBoot = Optional[PT2M48.755S] (ONE_TO_FIVE_MINUTES), timeSinceDataDownloadInit = PT1M14.211S (ONE_TO_FIVE_MINUTES))
+11-07 07:55:46.286  1636  2709 I A       : Using proto config with mendel
+11-07 07:55:46.290  1636  2709 W A       : Queue length for executor EventBus is now 11. Perhaps some tasks are too long, or the pool is too small.
+11-07 07:55:46.291  1636  2358 I A       : incrementApaDataDownloadStoreStatusNotFound(appVersion = 13.17.16.23, locale = *, groupName = apa_head_suggest, accountScoped = false, foundGroups = 0, status = 0, localGroupsAvailable = false)
+11-07 07:55:46.303   988   988 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+11-07 07:55:46.307  1636  2709 I A       : Using proto config with mendel
+11-07 07:55:46.313   757   809 D SplashScreenView: Build android.window.SplashScreenView{6785034 V.E...... ......ID 0,0-0,0}
+11-07 07:55:46.313   757   809 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-07 07:55:46.313   757   809 D SplashScreenView: Branding: view: android.view.View{5e22e5d G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-07 07:55:46.324   951  1256 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 07:55:46.325   951  1256 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 07:55:46.325   951  1256 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 1
+11-07 07:55:46.326  1636  2358 W NamedFutures: Timeout future task has been cancelled: 60000 milliseconds
+11-07 07:55:46.335   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f5730
+11-07 07:55:46.336  1636  1636 E A       : Task 255 failed or timed out. Client 7196998130147190 disconnecting from SearchService!
+11-07 07:55:46.336  1636  1636 E A       : java.util.concurrent.CancellationException: Task was cancelled.
+11-07 07:55:46.336  1636  1636 E A       : 	at com.google.common.util.concurrent.d.s(PG:3)
+11-07 07:55:46.336  1636  1636 E A       : 	at com.google.common.util.concurrent.d.get(PG:4)
+11-07 07:55:46.336  1636  1636 E A       : 	at com.google.common.util.concurrent.eb.a(PG:1)
+11-07 07:55:46.336  1636  1636 E A       : 	at com.google.common.util.concurrent.ci.r(PG:2)
+11-07 07:55:46.336  1636  1636 E A       : 	at com.google.common.util.concurrent.cb.run(PG:4)
+11-07 07:55:46.336  1636  1636 E A       : 	at com.google.android.apps.gsa.shared.util.c.a.ba.run(PG:1)
+11-07 07:55:46.336  1636  1636 E A       : 	at android.os.Handler.handleCallback(Handler.java:942)
+11-07 07:55:46.336  1636  1636 E A       : 	at android.os.Handler.dispatchMessage(Handler.java:99)
+11-07 07:55:46.336  1636  1636 E A       : 	at android.os.Looper.loopOnce(Looper.java:201)
+11-07 07:55:46.336  1636  1636 E A       : 	at android.os.Looper.loop(Looper.java:288)
+11-07 07:55:46.336  1636  1636 E A       : 	at android.app.ActivityThread.main(ActivityThread.java:7924)
+11-07 07:55:46.336  1636  1636 E A       : 	at java.lang.reflect.Method.invoke(Native Method)
+11-07 07:55:46.336  1636  1636 E A       : 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:548)
+11-07 07:55:46.336  1636  1636 E A       : 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:936)
+11-07 07:55:46.341  5655  5655 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@43ad14b in: PRE_ON_CREATE
+11-07 07:55:46.342  5655  5655 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+11-07 07:55:46.346   757   812 W Parcel  : Expecting binder but got null!
+11-07 07:55:46.351  5655  5655 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@43ad14b in: CREATED
+11-07 07:55:46.356   988  2013 D OneSearchSuggestProvider: Shut down the binder channel
+11-07 07:55:46.359  5655  5655 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=androidx.activity.ComponentActivity@43ad14b
+11-07 07:55:46.359  5655  5655 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@43ad14b in: STARTED
+11-07 07:55:46.359  5655  5655 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=androidx.activity.ComponentActivity@43ad14b
+11-07 07:55:46.360  5655  5655 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@43ad14b in: RESUMED
+11-07 07:55:46.363  5655  5655 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=androidx.activity.ComponentActivity@43ad14b
+11-07 07:55:46.365  5655  6561 W Parcel  : Expecting binder but got null!
+11-07 07:55:46.436   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f85b0
+11-07 07:55:46.436   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f75f0
+11-07 07:55:46.436   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f90f0
+11-07 07:55:46.443  1636  2592 I PBSessionCacheImpl: Deleted sessionId[7196998130147300] from persistence.
+11-07 07:55:46.483  1636  2709 W SearchServiceCore: Abort, client detached.
+11-07 07:55:46.499  1636  2709 W SearchServiceCore: Abort, client detached.
+11-07 07:55:46.502   479   509 W InputManager-JNI: Input channel object 'a474ecf Splash Screen com.quartz.notes.test (client)' was disposed without first being removed with the input manager!
+11-07 07:55:46.514  1636  2709 W SearchServiceCore: Abort, client detached.
+11-07 07:55:46.533   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f9330
+11-07 07:55:46.534   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f7ad0
+11-07 07:55:46.534   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f6ed0
+11-07 07:55:46.534   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f6ed0
+11-07 07:55:46.534   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f9330
+11-07 07:55:46.536  1636  6922 E BgTaskExecutorImpl: PERIODIC background task MDD_WIFI_CHARGING_TASK was cancelled.
+11-07 07:55:46.536  1636  6922 E BgTaskExecutorImpl: java.util.concurrent.CancellationException: Task was cancelled.
+11-07 07:55:46.536  1636  6922 E BgTaskExecutorImpl: 	at com.google.common.util.concurrent.d.s(PG:3)
+11-07 07:55:46.536  1636  6922 E BgTaskExecutorImpl: 	at com.google.common.util.concurrent.d.get(PG:4)
+11-07 07:55:46.536  1636  6922 E BgTaskExecutorImpl: 	at com.google.common.util.concurrent.eb.a(PG:1)
+11-07 07:55:46.536  1636  6922 E BgTaskExecutorImpl: 	at com.google.common.util.concurrent.ci.r(PG:2)
+11-07 07:55:46.536  1636  6922 E BgTaskExecutorImpl: 	at com.google.common.util.concurrent.cb.run(PG:4)
+11-07 07:55:46.536  1636  6922 E BgTaskExecutorImpl: 	at com.google.android.apps.gsa.shared.util.c.a.cf.b(PG:1)
+11-07 07:55:46.536  1636  6922 E BgTaskExecutorImpl: 	at com.google.android.apps.gsa.shared.util.c.a.ci.run(PG:1)
+11-07 07:55:46.536  1636  6922 E BgTaskExecutorImpl: 	at com.google.android.libraries.i.ae.run(PG:1)
+11-07 07:55:46.536  1636  6922 E BgTaskExecutorImpl: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-07 07:55:46.536  1636  6922 E BgTaskExecutorImpl: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-07 07:55:46.536  1636  6922 E BgTaskExecutorImpl: 	at com.google.android.libraries.i.i.run(PG:2)
+11-07 07:55:46.536  1636  6922 E BgTaskExecutorImpl: 	at com.google.android.libraries.i.p.run(PG:4)
+11-07 07:55:46.536  1636  6922 E BgTaskExecutorImpl: 	at java.lang.Thread.run(Thread.java:1012)
+11-07 07:55:46.542   479   505 W ziparchive: Unable to open '/data/app/~~zQFeJXZS5WhC5lfAeCkjYQ==/com.quartz.notes-feD_HGqKna9TAMJS1tgmSA==/base.dm': No such file or directory
+11-07 07:55:46.544   479   505 I ActivityTaskManager: Displayed com.quartz.notes/androidx.activity.ComponentActivity: +294ms
+11-07 07:55:46.551   757   766 I ndroid.systemui: NativeAlloc concurrent copying GC freed 65679(2837KB) AllocSpace objects, 3(60KB) LOS objects, 49% free, 16MB/32MB, paused 28us,27us total 600.123ms
+11-07 07:55:46.588   479  1932 W InputManager-JNI: Input channel object 'acc4dee Splash Screen com.quartz.notes (client)' was disposed without first being removed with the input manager!
+11-07 07:55:46.595   479   498 I system_server: NativeAlloc concurrent copying GC freed 186845(6477KB) AllocSpace objects, 3(60KB) LOS objects, 49% free, 21MB/43MB, paused 40us,62us total 701.988ms
+11-07 07:55:46.605   479  2126 W InputManager-JNI: Input channel object '9bdcef4 com.quartz.notes.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity (client)' was disposed without first being removed with the input manager!
+11-07 07:55:46.612  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-07 07:55:46.612  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-07 07:55:46.612  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=null}, false)
+11-07 07:55:46.612  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-07 07:55:46.612  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-07 07:55:46.615  5655  5655 D AutofillManager: Fill dialog is enabled:false, hints=[password, passwordAuto, creditCardNumber, creditCardSecurityCode, creditCardExpirationDate]
+11-07 07:55:46.619   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f7ef0
+11-07 07:55:46.625  6176  6176 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.scheduler.ACTION_PROXY_SCHEDULE dat=chimera-action:/... cmp=com.google.android.gms/.chimera.PersistentApiService }
+11-07 07:55:46.626   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f83d0
+11-07 07:55:46.626   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f6630
+11-07 07:55:46.626   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f96f0
+11-07 07:55:46.626   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f66f0
+11-07 07:55:46.626   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f7230
+11-07 07:55:46.626   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f8130
+11-07 07:55:46.626   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f8130
+11-07 07:55:46.626   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f8130
+11-07 07:55:46.626   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f6630
+11-07 07:55:46.626   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f7230
+11-07 07:55:46.626   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f8130
+11-07 07:55:46.626   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f66f0
+11-07 07:55:46.626   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f66f0
+11-07 07:55:46.651   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f7410
+11-07 07:55:46.651   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f7410
+11-07 07:55:46.727   988  1125 I s.nexuslauncher: oneway function results for code 2 on binder at 0x704102dd0420 will be dropped but finished with status UNKNOWN_TRANSACTION
+11-07 07:55:46.865  1472  1548 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.shutdownVoiceInternal():95 shutdownVoiceInternal()
+11-07 07:55:46.913  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-07 07:55:46.925  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-07 07:55:46.925  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=null}, false)
+11-07 07:55:46.925  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-07 07:55:46.926  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-07 07:55:46.961   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f6270
+11-07 07:55:47.284  1636  2358 W NamedFutures: Timeout future task has been cancelled: 60000 milliseconds
+11-07 07:55:47.285  1636  6916 I BgTaskExecutorImpl: Starting NONEXCLUSIVE background task MDD_CELLULAR_CHARGING_TASK.
+11-07 07:55:47.285  1636  1636 E A       : Task 255 failed or timed out. Client 7196998130147252 disconnecting from SearchService!
+11-07 07:55:47.285  1636  1636 E A       : java.util.concurrent.CancellationException: Task was cancelled.
+11-07 07:55:47.285  1636  1636 E A       : 	at com.google.common.util.concurrent.d.s(PG:3)
+11-07 07:55:47.285  1636  1636 E A       : 	at com.google.common.util.concurrent.d.get(PG:4)
+11-07 07:55:47.285  1636  1636 E A       : 	at com.google.common.util.concurrent.eb.a(PG:1)
+11-07 07:55:47.285  1636  1636 E A       : 	at com.google.common.util.concurrent.ci.r(PG:2)
+11-07 07:55:47.285  1636  1636 E A       : 	at com.google.common.util.concurrent.cb.run(PG:4)
+11-07 07:55:47.285  1636  1636 E A       : 	at com.google.android.apps.gsa.shared.util.c.a.ba.run(PG:1)
+11-07 07:55:47.285  1636  1636 E A       : 	at android.os.Handler.handleCallback(Handler.java:942)
+11-07 07:55:47.285  1636  1636 E A       : 	at android.os.Handler.dispatchMessage(Handler.java:99)
+11-07 07:55:47.285  1636  1636 E A       : 	at android.os.Looper.loopOnce(Looper.java:201)
+11-07 07:55:47.285  1636  1636 E A       : 	at android.os.Looper.loop(Looper.java:288)
+11-07 07:55:47.285  1636  1636 E A       : 	at android.app.ActivityThread.main(ActivityThread.java:7924)
+11-07 07:55:47.285  1636  1636 E A       : 	at java.lang.reflect.Method.invoke(Native Method)
+11-07 07:55:47.285  1636  1636 E A       : 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:548)
+11-07 07:55:47.285  1636  1636 E A       : 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:936)
+11-07 07:55:47.287  1636  6922 E BgTaskExecutorImpl: PERIODIC background task MDD_CELLULAR_CHARGING_TASK was cancelled.
+11-07 07:55:47.287  1636  6922 E BgTaskExecutorImpl: java.util.concurrent.CancellationException: Task was cancelled.
+11-07 07:55:47.287  1636  6922 E BgTaskExecutorImpl: 	at com.google.common.util.concurrent.d.s(PG:3)
+11-07 07:55:47.287  1636  6922 E BgTaskExecutorImpl: 	at com.google.common.util.concurrent.d.get(PG:4)
+11-07 07:55:47.287  1636  6922 E BgTaskExecutorImpl: 	at com.google.common.util.concurrent.eb.a(PG:1)
+11-07 07:55:47.287  1636  6922 E BgTaskExecutorImpl: 	at com.google.common.util.concurrent.ci.r(PG:2)
+11-07 07:55:47.287  1636  6922 E BgTaskExecutorImpl: 	at com.google.common.util.concurrent.cb.run(PG:4)
+11-07 07:55:47.287  1636  6922 E BgTaskExecutorImpl: 	at com.google.android.apps.gsa.shared.util.c.a.cf.b(PG:1)
+11-07 07:55:47.287  1636  6922 E BgTaskExecutorImpl: 	at com.google.android.apps.gsa.shared.util.c.a.ci.run(PG:1)
+11-07 07:55:47.287  1636  6922 E BgTaskExecutorImpl: 	at com.google.android.libraries.i.ae.run(PG:1)
+11-07 07:55:47.287  1636  6922 E BgTaskExecutorImpl: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-07 07:55:47.287  1636  6922 E BgTaskExecutorImpl: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-07 07:55:47.287  1636  6922 E BgTaskExecutorImpl: 	at com.google.android.libraries.i.i.run(PG:2)
+11-07 07:55:47.287  1636  6922 E BgTaskExecutorImpl: 	at com.google.android.libraries.i.p.run(PG:4)
+11-07 07:55:47.287  1636  6922 E BgTaskExecutorImpl: 	at java.lang.Thread.run(Thread.java:1012)
+11-07 07:55:47.289  1636  2231 W A       : Corpus: GDD_APA_LIGHTWEIGHT_TOKENS is disabled
+11-07 07:55:47.290  1636  2230 I A       : Starting batch sync for corpora: [1004]
+11-07 07:55:47.295  1636  2221 I A       : Starting batch sync for corpora: [1014]
+11-07 07:55:47.295  1636  2229 I A       : Starting batch sync for corpora: [1015]
+11-07 07:55:47.311  1636  2230 I A       : Setting isLegacySQLite mode to false.
+11-07 07:55:47.338  1636  6922 I DeviceCapHelper: Adding surface identity to the device capabilities for surface OPA_AGSA.
+11-07 07:55:47.341  1636  2764 I DeviceCapHelper: Adding surface identity to the device capabilities for surface OPA_AGSA.
+11-07 07:55:47.351  1636  6916 I DeviceCapHelper: Adding surface identity to the device capabilities for surface OPA_AGSA.
+11-07 07:55:47.356  1636  2764 I A       : The GellerConfig is not present, defaulting isUploadEnabled for corpus GDD_APA_HEAD_SUGGEST to true.
+11-07 07:55:47.356  1636  2363 I A       : There are 0 elements to be updated on the server for corpus GDD_APA_HEAD_SUGGEST.
+11-07 07:55:47.356  1636  2363 I A       : There are 0 elements to delete from the server for corpus GDD_APA_HEAD_SUGGEST.
+11-07 07:55:47.356  1636  6916 I A       : No previous syncToken for corpus GDD_APA_HEAD_SUGGEST found.
+11-07 07:55:47.357  1636  2764 I A       : The GellerConfig is not present, defaulting isUploadEnabled for corpus GDD_APA_SMART_ACTION_MODELS to true.
+11-07 07:55:47.357  1636  2358 I A       : There are 0 elements to be updated on the server for corpus GDD_APA_SMART_ACTION_MODELS.
+11-07 07:55:47.357  1636  2358 I A       : There are 0 elements to delete from the server for corpus GDD_APA_SMART_ACTION_MODELS.
+11-07 07:55:47.357  1636  6916 I A       : No previous syncToken for corpus GDD_APA_SMART_ACTION_MODELS found.
+11-07 07:55:47.359  1636  2764 I A       : The GellerConfig is not present, defaulting isUploadEnabled for corpus GDD_APA_BISTO to true.
+11-07 07:55:47.359  1636  2363 I A       : There are 0 elements to be updated on the server for corpus GDD_APA_BISTO.
+11-07 07:55:47.359  1636  2363 I A       : There are 0 elements to delete from the server for corpus GDD_APA_BISTO.
+11-07 07:55:47.359  1636  6916 I A       : No previous syncToken for corpus GDD_APA_BISTO found.
+11-07 07:55:47.360   282  7492 I resolv  : GetAddrInfoHandler::run: {100 262244 100 983140 10119 0}
+11-07 07:55:47.360   282  7495 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-07 07:55:47.361   282  7496 I resolv  : res_nmkquery: (QUERY, IN, A)
+11-07 07:55:47.361   282  7494 I resolv  : GetAddrInfoHandler::run: {100 262244 100 983140 10119 0}
+11-07 07:55:47.361   282  7497 I resolv  : GetAddrInfoHandler::run: {100 262244 100 983140 10119 0}
+11-07 07:55:47.361   282  7498 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-07 07:55:47.361   282  7498 I resolv  : resolv_cache_lookup: Waiting for previous request
+11-07 07:55:47.361   282  7499 I resolv  : res_nmkquery: (QUERY, IN, A)
+11-07 07:55:47.361   282  7499 I resolv  : resolv_cache_lookup: Waiting for previous request
+11-07 07:55:47.361   282  7501 I resolv  : res_nmkquery: (QUERY, IN, A)
+11-07 07:55:47.361   282  7501 I resolv  : resolv_cache_lookup: Waiting for previous request
+11-07 07:55:47.362   282  7500 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-07 07:55:47.362   282  7500 I resolv  : resolv_cache_lookup: Waiting for previous request
+11-07 07:55:47.389   282  7496 I resolv  : res_nsend: used send_dg 170 terrno: 0
+11-07 07:55:47.389   282  7496 I resolv  : doQuery: rcode=0, ancount=8, return value=170
+11-07 07:55:47.389   282  7499 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x775a43a177f0
+11-07 07:55:47.389   282  7499 I resolv  : doQuery: rcode=0, ancount=8, return value=170
+11-07 07:55:47.389   282  7501 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x775a43a177f0
+11-07 07:55:47.389   282  7501 I resolv  : doQuery: rcode=0, ancount=8, return value=170
+11-07 07:55:47.403   282  7495 I resolv  : res_nsend: used send_dg 266 terrno: 0
+11-07 07:55:47.403   282  7495 I resolv  : doQuery: rcode=0, ancount=8, return value=266
+11-07 07:55:47.403   282  7498 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x775a53a15c50
+11-07 07:55:47.403   282  7498 I resolv  : doQuery: rcode=0, ancount=8, return value=266
+11-07 07:55:47.404   282  7500 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x775a53a15c50
+11-07 07:55:47.404   282  7500 I resolv  : doQuery: rcode=0, ancount=8, return value=266
+11-07 07:55:47.405  1636  2764 D TrafficStats: tagSocket(172) with statsTag=0x0, statsUid=-1
+11-07 07:55:47.405  1636  6916 D TrafficStats: tagSocket(173) with statsTag=0x0, statsUid=-1
+11-07 07:55:47.406  1636  6922 D TrafficStats: tagSocket(175) with statsTag=0x0, statsUid=-1
+11-07 07:55:47.515  1636  2764 I A       : Writing metadata key: _sync_timestamp_micros, corpus: GDD_APA_BISTO
+11-07 07:55:47.516  1636  2764 I A       : Writing metadata key: _sync_token, corpus: GDD_APA_BISTO
+11-07 07:55:47.521  1636  6916 I A       : Writing metadata key: _sync_timestamp_micros, corpus: GDD_APA_HEAD_SUGGEST
+11-07 07:55:47.522  1636  6916 I A       : Writing metadata key: _sync_token, corpus: GDD_APA_HEAD_SUGGEST
+11-07 07:55:47.529  1636  6916 I A       : Writing metadata key: _sync_timestamp_micros, corpus: GDD_APA_SMART_ACTION_MODELS
+11-07 07:55:47.530  1636  6916 I A       : Writing metadata key: _sync_token, corpus: GDD_APA_SMART_ACTION_MODELS
+11-07 07:55:47.530  1636  2363 W A       : onTaskDone() callback not found; batchId=1
+11-07 07:55:47.531  1636  6922 I BgTaskExecutorImpl: Starting NONEXCLUSIVE background task MDD_CELLULAR_CHARGING_TASK.
+11-07 07:55:47.533  1636  2229 I A       : Scheduling a pending sync for corpus: GDD_APA_HEAD_SUGGEST
+11-07 07:55:47.533  1636  2358 I A       : Starting batch sync for corpora: [1014]
+11-07 07:55:47.534  1636  2221 W A       : Corpus: GDD_APA_LIGHTWEIGHT_TOKENS is disabled
+11-07 07:55:47.534  1636  2221 I A       : Scheduling a pending sync for corpus: GDD_APA_BISTO
+11-07 07:55:47.534  1636  2221 I A       : Scheduling a pending sync for corpus: GDD_APA_SMART_ACTION_MODELS
+11-07 07:55:47.534  1636  2358 I A       : Starting batch sync for corpora: [1004]
+11-07 07:55:47.534  1636  2363 I A       : Starting batch sync for corpora: [1015]
+11-07 07:55:47.541  1636  6916 I DeviceCapHelper: Adding surface identity to the device capabilities for surface OPA_AGSA.
+11-07 07:55:47.543  1636  6916 I A       : The GellerConfig is not present, defaulting isUploadEnabled for corpus GDD_APA_HEAD_SUGGEST to true.
+11-07 07:55:47.543  1636  2363 I A       : There are 0 elements to be updated on the server for corpus GDD_APA_HEAD_SUGGEST.
+11-07 07:55:47.543  1636  2363 I A       : There are 0 elements to delete from the server for corpus GDD_APA_HEAD_SUGGEST.
+11-07 07:55:47.543  1636  2764 I A       : The syncToken for corpus GDD_APA_HEAD_SUGGEST is EgkI+o6G9LD1lwM=.
+11-07 07:55:47.544  1636  2764 D TrafficStats: tagSocket(172) with statsTag=0x0, statsUid=-1
+11-07 07:55:47.546  1636  6922 I DeviceCapHelper: Adding surface identity to the device capabilities for surface OPA_AGSA.
+11-07 07:55:47.546  1636  6919 I DeviceCapHelper: Adding surface identity to the device capabilities for surface OPA_AGSA.
+11-07 07:55:47.547  1636  6919 I A       : The GellerConfig is not present, defaulting isUploadEnabled for corpus GDD_APA_BISTO to true.
+11-07 07:55:47.547  1636  2358 I A       : There are 0 elements to be updated on the server for corpus GDD_APA_BISTO.
+11-07 07:55:47.547  1636  2358 I A       : There are 0 elements to delete from the server for corpus GDD_APA_BISTO.
+11-07 07:55:47.547  1636  6919 I A       : The GellerConfig is not present, defaulting isUploadEnabled for corpus GDD_APA_SMART_ACTION_MODELS to true.
+11-07 07:55:47.548  1636  2363 I A       : There are 0 elements to be updated on the server for corpus GDD_APA_SMART_ACTION_MODELS.
+11-07 07:55:47.548  1636  2363 I A       : There are 0 elements to delete from the server for corpus GDD_APA_SMART_ACTION_MODELS.
+11-07 07:55:47.548  1636  6922 I A       : The syncToken for corpus GDD_APA_BISTO is Ei4I94iG9LD1lwPiPiIKIGJjZjkwNDk4ZTNlMjI3Mjc2NTdhYWE3ODQ1YzQ4MmIw.
+11-07 07:55:47.549  1636  6919 I A       : The syncToken for corpus GDD_APA_SMART_ACTION_MODELS is EgkI2sqG9LD1lwM=.
+11-07 07:55:47.549  1636  6922 D TrafficStats: tagSocket(173) with statsTag=0x0, statsUid=-1
+11-07 07:55:47.549  1636  6919 D TrafficStats: tagSocket(175) with statsTag=0x0, statsUid=-1
+11-07 07:55:47.650  1636  2762 I A       : Writing metadata key: _sync_timestamp_micros, corpus: GDD_APA_SMART_ACTION_MODELS
+11-07 07:55:47.651  1636  2762 I A       : Writing metadata key: _sync_token, corpus: GDD_APA_SMART_ACTION_MODELS
+11-07 07:55:47.654  1636  6919 I A       : Writing metadata key: _sync_timestamp_micros, corpus: GDD_APA_HEAD_SUGGEST
+11-07 07:55:47.655  1636  6919 I A       : Writing metadata key: _sync_token, corpus: GDD_APA_HEAD_SUGGEST
+11-07 07:55:47.658  1636  6919 I A       : Writing metadata key: _sync_timestamp_micros, corpus: GDD_APA_BISTO
+11-07 07:55:47.659  1636  6919 I A       : Writing metadata key: _sync_token, corpus: GDD_APA_BISTO
+11-07 07:55:47.661  1636  2358 I A       : Batch succeeded; batchId=2 taskId=-1000008
+11-07 07:55:47.672  1636  6922 D t       : Starting download: https://dl.google.com/mdi-serving/agsa-apa-bisto-hotword-models/20023/9ddd15509ef1423e75c283efb4659f475c74ee60
+11-07 07:55:47.672  1636  6922 V t       : Is http uri, downloading (uri: https://dl.google.com/mdi-serving/agsa-apa-bisto-hotword-models/20023/9ddd15509ef1423e75c283efb4659f475c74ee60)
+11-07 07:55:47.672  1636  6919 D t       : Starting download: https://dl.google.com/mdi-serving/agsa-apa-bisto-hotword-models/20023/ed62ea940f5a5958c55577276e8511a01a19ea87
+11-07 07:55:47.673  1636  6919 V t       : Is http uri, downloading (uri: https://dl.google.com/mdi-serving/agsa-apa-bisto-hotword-models/20023/ed62ea940f5a5958c55577276e8511a01a19ea87)
+11-07 07:55:47.724  5655  6561 W Parcel  : Expecting binder but got null!
+11-07 07:55:47.745  1636  6922 E MDD     : DownloadProgressMonitor: Can't find file group for uri: android://com.google.android.googlequicksearchbox/files/datadownload/shared/public/datadownloadfile_1794038067313
+11-07 07:55:47.749  1636  6916 D t       : Starting download: https://dl.google.com/mdi-serving/agsa-apa-head-suggest/13542/4a4841d2932d2e54913c9bdb2c19268dda35e6ed
+11-07 07:55:47.750  1636  6916 V t       : Is http uri, downloading (uri: https://dl.google.com/mdi-serving/agsa-apa-head-suggest/13542/4a4841d2932d2e54913c9bdb2c19268dda35e6ed)
+11-07 07:55:47.761  1636  6919 E MDD     : DownloadProgressMonitor: Can't find file group for uri: android://com.google.android.googlequicksearchbox/files/datadownload/shared/public/datadownloadfile_1794038067312
+11-07 07:55:47.769  1636  6922 D t       : Starting download: https://dl.google.com/mdi-serving/agsa-apa-smart-action-models/1129/093578cccafa7554c592b1756ecd6d0176942a9f
+11-07 07:55:47.769  1636  6922 V t       : Is http uri, downloading (uri: https://dl.google.com/mdi-serving/agsa-apa-smart-action-models/1129/093578cccafa7554c592b1756ecd6d0176942a9f)
+11-07 07:55:47.866  5655  6561 D EGL_emulation: app_time_stats: avg=336.39ms min=56.01ms max=840.07ms count=4
+11-07 07:55:47.884  1636  6916 E MDD     : DownloadProgressMonitor: Can't find file group for uri: android://com.google.android.googlequicksearchbox/files/datadownload/shared/public/datadownloadfile_1794038067314
+11-07 07:55:47.894  1636  6922 E MDD     : DownloadProgressMonitor: Can't find file group for uri: android://com.google.android.googlequicksearchbox/files/datadownload/shared/public/datadownloadfile_1794038067315
+11-07 07:55:47.914   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f62d0
+11-07 07:55:47.914   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f62d0
+11-07 07:55:47.914   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f62d0
+11-07 07:55:47.922  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-07 07:55:47.926  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-07 07:55:47.926  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=null}, false)
+11-07 07:55:47.926  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-07 07:55:47.928  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-07 07:55:47.932   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f3690
+11-07 07:55:47.932   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f5fd0
+11-07 07:55:47.932   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f5fd0
+11-07 07:55:48.109  1636  6919 D t       : Starting download: https://dl.google.com/mdi-serving/agsa-apa-smart-action-models/1129/7c880c786013ae8631e40f5d800ff15a868d2929
+11-07 07:55:48.109  1636  6919 V t       : Is http uri, downloading (uri: https://dl.google.com/mdi-serving/agsa-apa-smart-action-models/1129/7c880c786013ae8631e40f5d800ff15a868d2929)
+11-07 07:55:48.130  1636  2363 I A       : NGA Sync: MDD Task: MDD.CELLULAR.CHARGING.PERIODIC.TASK done.
+11-07 07:55:48.130  1636  2363 I A       : NGA Sync: isNgaSyncEnabled: false; enableFileGroupPopulator: false; requiresMddAssets: false
+11-07 07:55:48.130  1636  2229 I A       : Refresh account policy.
+11-07 07:55:48.221  1636  6919 E MDD     : DownloadProgressMonitor: Can't find file group for uri: android://com.google.android.googlequicksearchbox/files/datadownload/shared/public/datadownloadfile_1794038067316
+11-07 07:55:48.338  1636  6916 D t       : Starting download: https://dl.google.com/mdi-serving/agsa-apa-smart-action-models/1129/265b5ad4cc2df325212297efbc5c8dd52681b24a
+11-07 07:55:48.339  1636  6916 V t       : Is http uri, downloading (uri: https://dl.google.com/mdi-serving/agsa-apa-smart-action-models/1129/265b5ad4cc2df325212297efbc5c8dd52681b24a)
+11-07 07:55:48.479  1636  6916 E MDD     : DownloadProgressMonitor: Can't find file group for uri: android://com.google.android.googlequicksearchbox/files/datadownload/shared/public/datadownloadfile_1794038067317
+11-07 07:55:48.532  1636  6922 D t       : Starting download: https://dl.google.com/mdi-serving/agsa-apa-smart-action-models/1129/262d6f61914ff6e28557d9adfcb3632975ddf9d2
+11-07 07:55:48.532  1636  6922 V t       : Is http uri, downloading (uri: https://dl.google.com/mdi-serving/agsa-apa-smart-action-models/1129/262d6f61914ff6e28557d9adfcb3632975ddf9d2)
+11-07 07:55:48.624  1636  6922 E MDD     : DownloadProgressMonitor: Can't find file group for uri: android://com.google.android.googlequicksearchbox/files/datadownload/shared/public/datadownloadfile_1794038067318
+11-07 07:55:49.118   282   317 I netd    : tetherGetStats() -> {[]} <0.29ms>
+11-07 07:55:49.121   282   317 I netd    : bandwidthSetGlobalAlert(2097152) <0.08ms>
+11-07 07:55:49.122   282   317 I netd    : bandwidthRemoveInterfaceQuota(eth0) <0.51ms>
+11-07 07:55:49.123   282   317 I netd    : bandwidthSetInterfaceQuota(eth0, 9223372036854775807) <0.33ms>
+11-07 07:55:49.125   282   317 I netd    : bandwidthRemoveInterfaceQuota(eth0) <0.22ms>
+11-07 07:55:49.125   282   317 I netd    : bandwidthSetInterfaceQuota(eth0, 9223372036854775807) <0.24ms>
+11-07 07:55:49.126   479   756 D NetworkStatsObservers: Unregistering RequestInfo from pid/uid:479/1000(android) for DataUsageRequest [ requestId=13, networkTemplate=NetworkTemplate: matchRule=MOBILE, matchSubscriberIds=[310260...], matchWifiNetworkKeys=[], metered=YES, defaultNetwork=NO, thresholdInBytes=3535361 ] accessLevel:3
+11-07 07:55:49.126   479   685 D NetworkStatsObservers: Registering observer for RequestInfo from pid/uid:479/1000(android) for DataUsageRequest [ requestId=14, networkTemplate=NetworkTemplate: matchRule=MOBILE, matchSubscriberIds=[310260...], matchWifiNetworkKeys=[], metered=YES, defaultNetwork=NO, thresholdInBytes=3532126 ] accessLevel:3
+11-07 07:55:49.145   282   317 I netd    : tetherGetStats() -> {[]} <0.13ms>
+11-07 07:55:49.357   479  1936 W InputManager-JNI: Input channel object '5b991ba com.quartz.notes/androidx.activity.ComponentActivity (client)' was disposed without first being removed with the input manager!
+11-07 07:55:49.370   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f7dd0
+11-07 07:55:49.370   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f6ff0
+11-07 07:55:49.397   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f73b0
+11-07 07:55:49.397   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f80d0
+11-07 07:55:49.406  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-07 07:55:49.407  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-07 07:55:49.407  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.quartz.notes fieldId=-1 fieldName=null extras=null}, false)
+11-07 07:55:49.407  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-07 07:55:49.407  1472  1472 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-07 07:55:49.414   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f3ff0
+11-07 07:55:49.424  5655  6561 D EGL_emulation: app_time_stats: avg=1557.64ms min=1557.64ms max=1557.64ms count=1
+11-07 07:55:49.589  1636  2358 I A       : NGA Sync: MDD Task: MDD.WIFI.CHARGING.PERIODIC.TASK done.
+11-07 07:55:49.589  1636  2358 I A       : NGA Sync: isNgaSyncEnabled: false; enableFileGroupPopulator: false; requiresMddAssets: false
+11-07 07:55:49.589  1636  2230 I A       : Refresh account policy.
+11-07 07:55:49.617  6176  6176 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.clearcut.service.START dat=chimera-action:/... cmp=com.google.android.gms/.chimera.PersistentDirectBootAwareApiService }
+11-07 07:55:50.808  5641  5651 W System  : A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+11-07 07:55:50.808  5641  5651 W System  : java.lang.Throwable: Explicit termination method 'HardwareBuffer.close' not called
+11-07 07:55:50.808  5641  5651 W System  : 	at dalvik.system.CloseGuard.openWithCallSite(CloseGuard.java:288)
+11-07 07:55:50.808  5641  5651 W System  : 	at dalvik.system.CloseGuard.open(CloseGuard.java:257)
+11-07 07:55:50.808  5641  5651 W System  : 	at android.hardware.HardwareBuffer.<init>(HardwareBuffer.java:272)
+11-07 07:55:50.808  5641  5651 W System  : A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+11-07 07:55:50.808  5641  5651 W System  : java.lang.Throwable: Explicit termination method 'HardwareBuffer.close' not called
+11-07 07:55:50.808  5641  5651 W System  : 	at dalvik.system.CloseGuard.openWithCallSite(CloseGuard.java:288)
+11-07 07:55:50.808  5641  5651 W System  : 	at dalvik.system.CloseGuard.open(CloseGuard.java:257)
+11-07 07:55:50.808  5641  5651 W System  : 	at android.hardware.HardwareBuffer.<init>(HardwareBuffer.java:272)
+11-07 07:55:50.883   757   809 D SplashScreenView: Build android.window.SplashScreenView{15994fb V.E...... ......ID 0,0-0,0}
+11-07 07:55:50.883   757   809 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-07 07:55:50.883   757   809 D SplashScreenView: Branding: view: android.view.View{3ab1918 G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-07 07:55:50.884   757   812 W Parcel  : Expecting binder but got null!
+11-07 07:55:50.888  5655  5655 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@43ad14b in: PAUSED
+11-07 07:55:50.888  5655  5655 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=androidx.activity.ComponentActivity@43ad14b
+11-07 07:55:50.897  6584  6614 W Parcel  : Expecting binder but got null!
+11-07 07:55:50.935   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f7950
+11-07 07:55:50.936   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f63f0
+11-07 07:55:50.982   757   812 D EGL_emulation: app_time_stats: avg=2480.30ms min=626.12ms max=4334.49ms count=2
+11-07 07:55:50.988   479   505 W ziparchive: Unable to open '/data/app/~~l9aOkzql9-5Kuw640uF40w==/com.quartz.notes.test-mYUghIsEX31ahTere-tqvQ==/base.dm': No such file or directory
+11-07 07:55:50.989   479   505 I ActivityTaskManager: Displayed com.quartz.notes.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity: +106ms
+11-07 07:55:50.992   988   988 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+11-07 07:55:50.995   479  1617 W AppSearchIcing: icing-search-engine.cc:217: Error: 5, Message: Document (com.google.android.googlequicksearchbox$OneSearchZeroStateGoogleSuggestions/default, zp) not found.
+11-07 07:55:50.997   951  1256 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 07:55:50.997   951  1256 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-07 07:55:50.997   951  1256 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 1
+11-07 07:55:51.002   988  2013 D OneSearchSuggestProvider: Created the binder channel successfully for end point service =com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService , mChannel=Q0{delegate=L0{logId=77, target=directaddress:///AndroidComponentAddress%5BIntent%20%7B%20act=grpc.io.action.BIND%20cmp=com.google.android.googlequicksearchbox/com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService%20%7D%5D}} , mOneSearchConnection=y1.J@51a4474
+11-07 07:55:51.007   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f7d10
+11-07 07:55:51.007   359   374 W TransactionTracing: Could not find layer handle 0x72ed4e9f3690
+11-07 07:55:51.030  1578  1866 I AiAiEcho: Predicting[0]:
+11-07 07:55:51.030  1578  1866 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:
+11-07 07:55:51.030  1578  1866 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0
+11-07 07:55:51.031  1578  1866 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0
+11-07 07:55:51.106  5655  5655 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@43ad14b in: STOPPED
+11-07 07:55:51.106  5655  5655 V ActivityScenario: Update currentActivityStage to STOPPED, currentActivity=androidx.activity.ComponentActivity@43ad14b
+11-07 07:55:51.109   757   812 D EGL_emulation: app_time_stats: avg=2510.17ms min=655.85ms max=4364.50ms count=2
+11-07 07:55:51.123  1636  1636 I A       : Created gRPC endpoint to "search" for service class com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService
+11-07 07:55:51.123  5655  5655 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@43ad14b in: DESTROYED
+11-07 07:55:51.123  5655  5655 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
+11-07 07:55:51.126  5655  5677 D IdlingRegistry: Unregistering idling resources: [androidx.compose.ui.test.EspressoLink@34f5237]
+11-07 07:55:51.140   479  1936 W InputManager-JNI: Input channel object 'fe80925 com.quartz.notes/androidx.activity.ComponentActivity (client)' was disposed without first being removed with the input manager!
+11-07 07:55:51.143  5655  5677 I TestRunner: finished: drawingToolsOnATextPageOfferAFreeformPage(com.quartz.notes.ui.notebook.FreeformTest)

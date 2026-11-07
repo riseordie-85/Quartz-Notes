@@ -1,0 +1,127 @@
+11-07 07:54:21.222  5655  5677 I TestRunner: started: theLaterEditWinsWhicheverDeviceSyncsFirst(com.quartz.notes.data.sync.SyncEngineTest)
+11-07 07:54:21.224  5655  5677 D TrafficStats: tagSocket(99) with statsTag=0xffffffff, statsUid=-1
+11-07 07:54:21.244  6176  6287 D TrafficStats: tagSocket(156) with statsTag=0x30000407, statsUid=-1
+11-07 07:54:21.255  6176  6287 I AlarmManager: setExactAndAllowWhileIdle [name: GCM_HB_ALARM type: 2 triggerAtMillis: 671418]
+11-07 07:54:21.264  6176  6226 W GLSUser : [AppCertManager] Exception while requesting key:
+11-07 07:54:21.264  6176  6226 W GLSUser : java.util.concurrent.ExecutionException: avvw: Parse Proto Exception.
+11-07 07:54:21.264  6176  6226 W GLSUser : 	at dlnv.s(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+11-07 07:54:21.264  6176  6226 W GLSUser : 	at dlnv.get(:com.google.android.gms@231818047@23.18.18 (190800-535401451):7)
+11-07 07:54:21.264  6176  6226 W GLSUser : 	at oub.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):78)
+11-07 07:54:21.264  6176  6226 W GLSUser : 	at otz.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):8)
+11-07 07:54:21.264  6176  6226 W GLSUser : 	at otv.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 07:54:21.264  6176  6226 W GLSUser : 	at otx.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-07 07:54:21.264  6176  6226 W GLSUser : 	at otx.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 07:54:21.264  6176  6226 W GLSUser : 	at abxk.r(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+11-07 07:54:21.264  6176  6226 W GLSUser : 	at abxw.e(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+11-07 07:54:21.264  6176  6226 W GLSUser : 	at abxw.g(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 07:54:21.264  6176  6226 W GLSUser : 	at cyeg.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):27)
+11-07 07:54:21.264  6176  6226 W GLSUser : 	at czpd.call(:com.google.android.gms@231818047@23.18.18 (190800-535401451):78)
+11-07 07:54:21.264  6176  6226 W GLSUser : 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+11-07 07:54:21.264  6176  6226 W GLSUser : 	at aced.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-07 07:54:21.264  6176  6226 W GLSUser : 	at aced.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):7)
+11-07 07:54:21.264  6176  6226 W GLSUser : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-07 07:54:21.264  6176  6226 W GLSUser : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-07 07:54:21.264  6176  6226 W GLSUser : 	at acjn.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 07:54:21.264  6176  6226 W GLSUser : 	at java.lang.Thread.run(Thread.java:1012)
+11-07 07:54:21.264  6176  6226 W GLSUser : Caused by: avvw: Parse Proto Exception.
+11-07 07:54:21.264  6176  6226 W GLSUser : 	at avwn.f(:com.google.android.gms@231818047@23.18.18 (190800-535401451):5)
+11-07 07:54:21.264  6176  6226 W GLSUser : 	at avxk.onSucceeded(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 07:54:21.264  6176  6226 W GLSUser : 	at jf.onSucceeded(:com.google.android.gms.dynamite_cronetdynamite@231818047@23.18.18 (190800-0):0)
+11-07 07:54:21.264  6176  6226 W GLSUser : 	at ie.run(:com.google.android.gms.dynamite_cronetdynamite@231818047@23.18.18 (190800-0):4)
+11-07 07:54:21.264  6176  6226 W GLSUser : 	... 6 more
+11-07 07:54:21.264  6176  6226 W GLSUser : Caused by: dzfz: Protocol message contained an invalid tag (zero).
+11-07 07:54:21.264  6176  6226 W GLSUser : 	at dzdb.k(:com.google.android.gms@231818047@23.18.18 (190800-535401451):13)
+11-07 07:54:21.264  6176  6226 W GLSUser : 	at dzha.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):47)
+11-07 07:54:21.264  6176  6226 W GLSUser : 	at dzha.h(:com.google.android.gms@231818047@23.18.18 (190800-535401451):45)
+11-07 07:54:21.264  6176  6226 W GLSUser : 	at dzfd.A(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-07 07:54:21.264  6176  6226 W GLSUser : 	at dzex.f(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 07:54:21.264  6176  6226 W GLSUser : 	at dzcx.d(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 07:54:21.264  6176  6226 W GLSUser : 	at dzcx.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 07:54:21.264  6176  6226 W GLSUser : 	at dzcx.n(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 07:54:21.264  6176  6226 W GLSUser : 	at avwn.h(:com.google.android.gms@231818047@23.18.18 (190800-535401451):7)
+11-07 07:54:21.264  6176  6226 W GLSUser : 	at avwn.f(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+11-07 07:54:21.264  6176  6226 W GLSUser : 	... 9 more
+11-07 07:54:21.265  6176  6226 W GLSUser : [DeviceKeyStore] Cannot load key: Device key file not found.
+11-07 07:54:21.270   282  6444 I resolv  : GetAddrInfoHandler::run: {100 786532 100 983140 10120 0}
+11-07 07:54:21.270   282  6445 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-07 07:54:21.270   282  6445 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x775a53a1a5d0
+11-07 07:54:21.271   282  6445 I resolv  : doQuery: rcode=0, ancount=8, return value=269
+11-07 07:54:21.271   282  6446 I resolv  : res_nmkquery: (QUERY, IN, A)
+11-07 07:54:21.271   282  6446 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x775a43a15170
+11-07 07:54:21.271   282  6446 I resolv  : doQuery: rcode=0, ancount=8, return value=173
+11-07 07:54:21.276  6176  6321 D TrafficStats: tagSocket(78) with statsTag=0x34000609, statsUid=10117
+11-07 07:54:21.298  6176  6321 W Conscrypt: Could not set socket write timeout: java.net.SocketException: Socket closed
+11-07 07:54:21.298  6176  6321 W Conscrypt: 	at com.google.android.gms.org.conscrypt.Platform.setSocketWriteTimeout(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-07 07:54:21.298  6176  6321 W Conscrypt: 	at com.google.android.gms.org.conscrypt.ConscryptFileDescriptorSocket.setSoWriteTimeout(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 07:54:21.303  6176  6287 I AlarmManager: setExactAndAllowWhileIdle [name: GCM_HB_ALARM type: 2 triggerAtMillis: 671466]
+11-07 07:54:21.305  6176  6287 I AlarmManager: setExactAndAllowWhileIdle [name: GCM_HB_ALARM type: 2 triggerAtMillis: 671468]
+11-07 07:54:21.384  6176  6321 W Conscrypt: Could not set socket write timeout: java.net.SocketException: Socket closed
+11-07 07:54:21.384  6176  6321 W Conscrypt: 	at com.google.android.gms.org.conscrypt.Platform.setSocketWriteTimeout(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-07 07:54:21.384  6176  6321 W Conscrypt: 	at com.google.android.gms.org.conscrypt.ConscryptFileDescriptorSocket.setSoWriteTimeout(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 07:54:21.448  6176  6226 W GlsClientGrpc: Voilatile gRPC failure INVALID_ARGUMENT: Application credential header not valid. Please fix the client to pass a valid application credential header. [CONTEXT service_id=6 ]
+11-07 07:54:21.448  6176  6226 W GlsClientGrpc: enms: INVALID_ARGUMENT: Application credential header not valid. Please fix the client to pass a valid application credential header.
+11-07 07:54:21.448  6176  6226 W GlsClientGrpc: 	at enmr.h(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 07:54:21.448  6176  6226 W GlsClientGrpc: 	at abxw.u(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-07 07:54:21.448  6176  6226 W GlsClientGrpc: 	at abxw.e(:com.google.android.gms@231818047@23.18.18 (190800-535401451):17)
+11-07 07:54:21.448  6176  6226 W GlsClientGrpc: 	at abxw.g(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 07:54:21.448  6176  6226 W GlsClientGrpc: 	at cyeg.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):27)
+11-07 07:54:21.448  6176  6226 W GlsClientGrpc: 	at czpd.call(:com.google.android.gms@231818047@23.18.18 (190800-535401451):78)
+11-07 07:54:21.448  6176  6226 W GlsClientGrpc: 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+11-07 07:54:21.448  6176  6226 W GlsClientGrpc: 	at aced.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-07 07:54:21.448  6176  6226 W GlsClientGrpc: 	at aced.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):7)
+11-07 07:54:21.448  6176  6226 W GlsClientGrpc: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-07 07:54:21.448  6176  6226 W GlsClientGrpc: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-07 07:54:21.448  6176  6226 W GlsClientGrpc: 	at acjn.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-07 07:54:21.448  6176  6226 W GlsClientGrpc: 	at java.lang.Thread.run(Thread.java:1012)
+11-07 07:54:21.458  3349  3439 W Bugle   : TextClassifierLibManagerImpl: Reclaiming memory at level: 40
+11-07 07:54:21.460  3349  3433 W Bugle   : TextClassifierLibManagerImpl: Reclaiming memory at level: 40
+11-07 07:54:21.497  5655  5661 I om.quartz.notes: JIT allocated 63KB for compiled code of java.lang.Object com.quartz.notes.data.sync.SyncEngine.apply(java.lang.String, kotlinx.serialization.json.JsonObject, boolean, com.quartz.notes.data.sync.SyncEngine$Counts, kotlin.coroutines.Continuation)
+11-07 07:54:21.501  6176  6318 I Nearby  : is blocked device type false, isAuto=false, isIot=false, isLatchsky=false, isChinaWearable=false, isTv=false, isWearable=false (supportWearOs=false), isChromeOsDevice=false (supportChromeOs=false) [CONTEXT service_id=49 ]
+11-07 07:54:21.501  6176  6318 I NearbyDiscovery: DiscoveryController, showNotification, itemSize=0 [CONTEXT service_id=265 ]
+11-07 07:54:21.501  6176  6318 I NearbyDiscovery: Show notifications: 0 total, no changes since last shown, no-op. [CONTEXT service_id=265 ]
+11-07 07:54:21.539  4623  4867 I PermissionControllerServiceImpl: Updating user sensitive for uid 10120
+11-07 07:54:21.541   479   588 I InputReader: Reconfiguring input devices, changes=KEYBOARD_LAYOUTS |
+11-07 07:54:21.542   951   951 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-07 07:54:21.542   951   951 D MediaPlayerList: Name of package changed: com.google.android.gms
+11-07 07:54:21.542   951   951 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-07 07:54:21.542   951   951 D MediaPlayerList: Name of package changed: com.google.android.gms
+11-07 07:54:21.543   757   757 D ControlsListingControllerImpl: ServiceConfig reloaded, count: 0
+11-07 07:54:21.545  3349  3449 I Bugle   : BroadcastReceiverAsyncWorkTracker: Acknowledging broadcast of atsi@e6e78de
+11-07 07:54:21.548   479   577 I RoleService: Granting default roles...
+11-07 07:54:21.556  3349  3439 W Bugle   : TextClassifierLibManagerImpl: Reclaiming memory at level: 40
+11-07 07:54:21.559  3349  3433 W Bugle   : TextClassifierLibManagerImpl: Reclaiming memory at level: 40
+11-07 07:54:21.567   984   984 D CarrierSvcBindHelper: onPackageModified: com.google.android.gms
+11-07 07:54:21.568  6176  6281 I Fitness : OnPackageChangedOperation got intent: Intent { act=android.intent.action.PACKAGE_CHANGED dat=package: flg=0x45000010 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.PersistentIntentOperationService (has extras) } [CONTEXT service_id=17 ]
+11-07 07:54:21.569   984   984 D CarrierSvcBindHelper: No carrier app for: 0
+11-07 07:54:21.569  3753  6451 I ProvidersCache: Provider returned no roots. Possibly naughty: com.google.android.apps.docs.storage
+11-07 07:54:21.570   984   984 D ImsResolver: maybeAddedImsService, packageName: com.google.android.gms
+11-07 07:54:21.570  6282  6397 I Icing   : updateResources: need to parse arkh{com.google.android.gms}
+11-07 07:54:21.571  3349  3439 W Bugle   : TextClassifierLibManagerImpl: Reclaiming memory at level: 40
+11-07 07:54:21.572  6282  6420 I PeopleGalProvider: Gal directories started.
+11-07 07:54:21.572  6282  6420 I PeopleGalProvider: Method 1 completed.
+11-07 07:54:21.572  6282  6420 I PeopleGalProvider: Method 1 finished successfully.
+11-07 07:54:21.573  4623  4708 W Role    : Default holder doesn't have required signing certificate: com.google.android.apps.work.clouddpc:23962F4B43B9857638EA66F4D419518EAE282491ACDA4B94707BD59003C45E58
+11-07 07:54:21.578  6176  6281 I Fitness : FitCleanupIntentOperation received Intent android.intent.action.PACKAGE_CHANGED [CONTEXT service_id=17 ]
+11-07 07:54:21.581  3349  3433 W Bugle   : TextClassifierLibManagerImpl: Reclaiming memory at level: 40
+11-07 07:54:21.583  6176  6209 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+11-07 07:54:21.590  6176  6209 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+11-07 07:54:21.591  3349  3439 W Bugle   : TextClassifierLibManagerImpl: Reclaiming memory at level: 40
+11-07 07:54:21.615  3349  3433 W Bugle   : TextClassifierLibManagerImpl: Reclaiming memory at level: 40
+11-07 07:54:21.634   757   812 D EGL_emulation: app_time_stats: avg=1748.40ms min=581.21ms max=2915.58ms count=2
+11-07 07:54:21.646  3349  3466 W BugleConnectivity: Unregister ConnectivityStateListener for subId -1 fail.
+11-07 07:54:21.676  3349  3466 I BugleRcsEngine: [59] bgfx.g: No RCS Configuration was found in Bugle for simID: redacted-pii:sim_id[chars:20,last3:897]
+11-07 07:54:21.677  3349  3466 W BugleConnectivity: getNetworkState: NetworkStateMonitor not found for subId 1.
+11-07 07:54:21.682  3349  3466 I BugleDataModel: PendingMessagesProcessor: process from ProcessPendingMessagesAction due to scheduled processing with delay 0 with queues:
+11-07 07:54:21.685  3349  3466 W BugleConnectivity: Unregister ConnectivityStateListener for subId -1 fail.
+11-07 07:54:21.689  3349  3466 W BugleConnectivity: getNetworkState: NetworkStateMonitor not found for subId 1.
+11-07 07:54:21.692  3349  3466 I BugleDataModel: PendingMessagesProcessor: process from ProcessPendingMessagesAction due to scheduled processing with delay 0 with queues:
+11-07 07:54:21.694  3349  3466 W BugleConnectivity: Unregister ConnectivityStateListener for subId -1 fail.
+11-07 07:54:21.697  3349  3466 W BugleConnectivity: getNetworkState: NetworkStateMonitor not found for subId 1.
+11-07 07:54:21.701  3349  3466 I BugleDataModel: PendingMessagesProcessor: process from ProcessPendingMessagesAction due to scheduled processing with delay 0 with queues:
+11-07 07:54:21.702  3349  3466 W BugleConnectivity: Unregister ConnectivityStateListener for subId -1 fail.
+11-07 07:54:21.705  3349  3466 W BugleConnectivity: getNetworkState: NetworkStateMonitor not found for subId 1.
+11-07 07:54:21.707  3349  3466 I BugleDataModel: PendingMessagesProcessor: process from ProcessPendingMessagesAction due to scheduled processing with delay 0 with queues:
+11-07 07:54:21.715  3349  3466 W BugleConnectivity: Unregister ConnectivityStateListener for subId -1 fail.
+11-07 07:54:21.717  3349  3466 W BugleConnectivity: getNetworkState: NetworkStateMonitor not found for subId 1.
+11-07 07:54:21.720  3349  3466 I BugleDataModel: PendingMessagesProcessor: process from ProcessPendingMessagesAction due to scheduled processing with delay 0 with queues:
+11-07 07:54:21.736  5655  5677 I TestRunner: finished: theLaterEditWinsWhicheverDeviceSyncsFirst(com.quartz.notes.data.sync.SyncEngineTest)

@@ -1,0 +1,70 @@
+11-07 07:54:11.580  5655  5677 I TestRunner: started: combinedPdfAndPerPageZip(com.quartz.notes.data.ExportBuilderTest)
+11-07 07:54:11.678  1431  1831 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-07 07:54:11.681  1636  2764 I BgTaskExecutorImpl: Starting EXCLUSIVE background task FETCH_CONFIGS_FROM_PHENOTYPE.
+11-07 07:54:11.684  3349  3438 W Bugle   : TextClassifierLibManagerImpl: Reclaiming memory at level: 40
+11-07 07:54:11.708  1255  5030 I Icing   : Indexing com.google.android.gms-internal.3p:MobileApplication from com.google.android.gms
+11-07 07:54:11.744  1255  5030 I Icing   : Indexing done com.google.android.gms-apps
+11-07 07:54:11.749  1255  5030 I Icing   : Indexing done com.google.android.gms-internal.3p:MobileApplication
+11-07 07:54:11.775  1636  2221 W A       : Can't format flag AndroidGsaVelourJars__velour_birthdaydoodle_jar__name to integer.
+11-07 07:54:11.775  1636  2221 W A       : Can't format flag AndroidGsaVelourJars__velour_call_jar__name to integer.
+11-07 07:54:11.775  1636  2221 W A       : Can't format flag AndroidGsaVelourJars__velour_canvas_jar__name to integer.
+11-07 07:54:11.775  1636  2221 W A       : Can't format flag AndroidGsaVelourJars__velour_chkpkg_jar__name to integer.
+11-07 07:54:11.775  1636  2221 W A       : Can't format flag AndroidGsaVelourJars__velour_crashtest_jar__name to integer.
+11-07 07:54:11.775  1636  2221 W A       : Can't format flag AndroidGsaVelourJars__velour_dining_jar__name to integer.
+11-07 07:54:11.775  1636  2221 W A       : Can't format flag AndroidGsaVelourJars__velour_doodle_notifications_jar__name to integer.
+11-07 07:54:11.775  1636  2221 W A       : Can't format flag AndroidGsaVelourJars__velour_imageviewer_jar__name to integer.
+11-07 07:54:11.775  1636  2221 W A       : Can't format flag AndroidGsaVelourJars__velour_ipa_jar__name to integer.
+11-07 07:54:11.775  1636  2221 W A       : Can't format flag AndroidGsaVelourJars__velour_jslocation_jar__name to integer.
+11-07 07:54:11.775  1636  2221 W A       : Can't format flag AndroidGsaVelourJars__velour_localintent_jar__name to integer.
+11-07 07:54:11.775  1636  2221 W A       : Can't format flag AndroidGsaVelourJars__velour_messaging_jar__name to integer.
+11-07 07:54:11.775  1636  2221 W A       : Can't format flag AndroidGsaVelourJars__velour_nativesrp_activity_jar__name to integer.
+11-07 07:54:11.775  1636  2221 W A       : Can't format flag AndroidGsaVelourJars__velour_nativesrp_presenter_jar__name to integer.
+11-07 07:54:11.775  1636  2221 W A       : Can't format flag AndroidGsaVelourJars__velour_nowcontent_jar__name to integer.
+11-07 07:54:11.775  1636  2221 W A       : Can't format flag AndroidGsaVelourJars__velour_recents_activity_jar__name to integer.
+11-07 07:54:11.776  1636  2221 W A       : Can't format flag AndroidGsaVelourJars__velour_save_jar__name to integer.
+11-07 07:54:11.776  1636  2221 W A       : Can't format flag AndroidGsaVelourJars__velour_searchresults_activity_jar__name to integer.
+11-07 07:54:11.776  1636  2221 W A       : Can't format flag AndroidGsaVelourJars__velour_test_jar__name to integer.
+11-07 07:54:11.776  1636  2221 W A       : Can't format flag AndroidGsaVelourJars__velour_weather_jar__name to integer.
+11-07 07:54:11.776  1636  2221 W A       : Can't format flag bindle_flags__bloblobber_blob to integer.
+11-07 07:54:11.776  1636  2221 W A       : Can't format flag bindle_flags__velour_jar to integer.
+11-07 07:54:11.784  1636  2230 I A       : Refusing EXCLUSIVE task 24, it is already pending. Try again in 334 seconds.
+11-07 07:54:11.784  1636  2231 I FedAssExpListener: Fed-ass not supported for signed out users.
+11-07 07:54:11.785  1636  2229 I A       : NGA disabled due to not being eligible.
+11-07 07:54:11.785  1636  2231 I FedAssExpListener: Successfully processed experiments changed.
+11-07 07:54:11.785  1636  2230 I OpaEligibilityChecker: send OpaEligibilityChange broadcast to CommonBroadcastReceiver
+11-07 07:54:11.787  3349  3428 W Bugle   : TextClassifierLibManagerImpl: Reclaiming memory at level: 40
+11-07 07:54:11.789  1636  2230 W CorpusConfigHelper: Invalid input from icing corpus JSON flag.
+11-07 07:54:11.789  1636  2230 W CorpusConfigHelper: android.util.MalformedJsonException: Use JsonReader.setLenient(true) to accept malformed JSON at line 123 column 2
+11-07 07:54:11.789  1636  2230 W CorpusConfigHelper: 	at android.util.JsonReader.syntaxError(JsonReader.java:1162)
+11-07 07:54:11.789  1636  2230 W CorpusConfigHelper: 	at android.util.JsonReader.checkLenient(JsonReader.java:840)
+11-07 07:54:11.789  1636  2230 W CorpusConfigHelper: 	at android.util.JsonReader.nextInArray(JsonReader.java:615)
+11-07 07:54:11.789  1636  2230 W CorpusConfigHelper: 	at android.util.JsonReader.peek(JsonReader.java:345)
+11-07 07:54:11.789  1636  2230 W CorpusConfigHelper: 	at android.util.JsonReader.hasNext(JsonReader.java:321)
+11-07 07:54:11.789  1636  2230 W CorpusConfigHelper: 	at com.google.android.apps.gsa.searchbox.c.b.b.k.c(PG:7)
+11-07 07:54:11.789  1636  2230 W CorpusConfigHelper: 	at com.google.android.apps.gsa.searchbox.c.b.b.j.a(Unknown Source:2)
+11-07 07:54:11.789  1636  2230 W CorpusConfigHelper: 	at com.google.android.apps.gsa.search.core.i.r.run(PG:5)
+11-07 07:54:11.789  1636  2230 W CorpusConfigHelper: 	at com.google.android.libraries.gsa.k.a.h.run(PG:2)
+11-07 07:54:11.789  1636  2230 W CorpusConfigHelper: 	at com.google.android.apps.gsa.shared.util.c.a.cf.b(PG:1)
+11-07 07:54:11.789  1636  2230 W CorpusConfigHelper: 	at com.google.android.apps.gsa.shared.util.c.a.ci.run(PG:1)
+11-07 07:54:11.789  1636  2230 W CorpusConfigHelper: 	at com.google.android.libraries.i.ae.run(PG:1)
+11-07 07:54:11.789  1636  2230 W CorpusConfigHelper: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-07 07:54:11.789  1636  2230 W CorpusConfigHelper: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-07 07:54:11.789  1636  2230 W CorpusConfigHelper: 	at com.google.android.libraries.i.k.run(PG:2)
+11-07 07:54:11.789  1636  2230 W CorpusConfigHelper: 	at com.google.android.libraries.i.p.run(PG:4)
+11-07 07:54:11.789  1636  2230 W CorpusConfigHelper: 	at java.lang.Thread.run(Thread.java:1012)
+11-07 07:54:11.798  3349  3438 W Bugle   : TextClassifierLibManagerImpl: Reclaiming memory at level: 40
+11-07 07:54:11.799  1255  3891 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.googlequicksearchbox componentName=agsa_icing_connection serviceId=33
+11-07 07:54:11.801  1255  3071 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.googlequicksearchbox componentName=agsa_icing_connection serviceId=32
+11-07 07:54:11.803  3349  3439 W Bugle   : TextClassifierLibManagerImpl: Reclaiming memory at level: 40
+11-07 07:54:11.804  1255  5030 W Icing   : No valid account for uploading user actions
+11-07 07:54:11.807  1062  2713 W BpBinder: Large outgoing transaction of 323868 bytes, interface descriptor <uncached descriptor>, code 4
+11-07 07:54:11.814  1255  5030 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+11-07 07:54:11.815  1255  5030 W Icing   : No valid account for uploading user actions
+11-07 07:54:11.818  1255  5030 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+11-07 07:54:11.831  3349  3438 W Bugle   : TextClassifierLibManagerImpl: Reclaiming memory at level: 40
+11-07 07:54:11.836  4640  4640 I PhenotypeBackgroundRecv: Skipping com.google.android.projection.gearhead which doesn't use ProcessStable flags.
+11-07 07:54:11.852  1472  1472 I PhenotypeBackgroundRecv: Skipping com.google.android.gms.learning#com.google.android.inputmethod.latin which doesn't use ProcessStable flags.
+11-07 07:54:11.853  1472  1472 I PhenotypeBackgroundRecv: Skipping com.google.android.gms.icing.mdd#com.google.android.inputmethod.latin which doesn't use ProcessStable flags.
+11-07 07:54:11.854  1472  1472 I PhenotypeBackgroundRecv: Skipping com.google.android.inputmethod.latin#com.google.android.inputmethod.latin which doesn't use ProcessStable flags.
+11-07 07:54:11.873  5655  5662 I om.quartz.notes: Background young concurrent copying GC freed 477230(12MB) AllocSpace objects, 0(0B) LOS objects, 0% free, 109MB/109MB, paused 31us,9us total 838.663ms
+11-07 07:54:11.984  5655  5677 I TestRunner: finished: combinedPdfAndPerPageZip(com.quartz.notes.data.ExportBuilderTest)
