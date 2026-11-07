@@ -1,11 +1,13 @@
 name: Release
 
-# On main: builds the app, signed with the same key Android Studio uses on Tim's PC (so it installs
-# over the app already on his devices), and publishes the sync server image with that build inside
-# at /app. Each device then offers the update itself (Settings → App updates).
+# On main: builds the release app, signed with Tim's own key (the one he signs with in Android
+# Studio, E:\Dev\Notes.jks) so it installs over the app already on his devices, and publishes the
+# sync server image with that build inside at /app. Each device then offers the update itself
+# (Settings → App updates).
 #
-# The key comes from the DEBUG_KEYSTORE_B64 secret: Tim's C:\Users\timot\.android\debug.keystore in
-# base64. Without it the image is still published, just without an app build.
+# The key comes from repository secrets: NOTES_KEYSTORE_B64 (the .jks file in base64),
+# NOTES_KEYSTORE_PASSWORD, NOTES_KEY_ALIAS and NOTES_KEY_PASSWORD. Without them the image is still
+# published, just without an app build.
 
 on:
   push:
@@ -36,25 +38,34 @@ jobs:
         id: apk
         shell: bash
         env:
-          KEYSTORE: ${{ secrets.DEBUG_KEYSTORE_B64 }}
+          KEYSTORE_B64: ${{ secrets.NOTES_KEYSTORE_B64 }}
+          QUARTZ_KEYSTORE_PASSWORD: ${{ secrets.NOTES_KEYSTORE_PASSWORD }}
+          QUARTZ_KEY_ALIAS: ${{ secrets.NOTES_KEY_ALIAS }}
+          QUARTZ_KEY_PASSWORD: ${{ secrets.NOTES_KEY_PASSWORD }}
         run: |
-          if [ -z "$KEYSTORE" ]; then
-            echo "::warning::No DEBUG_KEYSTORE_B64 secret: publishing the server without an app build."
+          if [ -z "$KEYSTORE_B64" ] || [ -z "$QUARTZ_KEYSTORE_PASSWORD" ] || [ -z "$QUARTZ_KEY_ALIAS" ]; then
+            echo "::warning::The signing secrets aren't set: publishing the server without an app build."
             echo "built=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          mkdir -p ~/.android
-          echo "$KEYSTORE" | base64 -d > ~/.android/debug.keystore
+          # A key with no separate key password uses the store password.
+          export QUARTZ_KEY_PASSWORD="${QUARTZ_KEY_PASSWORD:-$QUARTZ_KEYSTORE_PASSWORD}"
+          export QUARTZ_KEYSTORE="$RUNNER_TEMP/notes.jks"
+          echo "$KEYSTORE_B64" | base64 -d > "$QUARTZ_KEYSTORE"
           chmod +x gradlew
-          ./gradlew assembleDebug --stacktrace
+          ./gradlew assembleRelease --stacktrace
+          rm -f "$QUARTZ_KEYSTORE"
           code=$(grep -oP 'versionCode = \K[0-9]+' app/build.gradle.kts)
           name=$(grep -oP 'versionName = "\K[^"]+' app/build.gradle.kts)
           apk="quartz-notes-${name}.apk"
-          cp app/build/outputs/apk/debug/app-debug.apk "server/app-release/${apk}"
+          cp app/build/outputs/apk/release/app-release.apk "server/app-release/${apk}"
           size=$(stat -c %s "server/app-release/${apk}")
           sum=$(sha256sum "server/app-release/${apk}" | cut -d' ' -f1)
           printf '{"versionCode":%s,"versionName":"%s","apk":"%s","size":%s,"sha256":"%s"}\n' "$code" "$name" "$apk" "$size" "$sum" > server/app-release/version.json
           cat server/app-release/version.json
+          # Which key signed it, to compare with the app on the devices if an install is refused.
+          signer=$(ls "$ANDROID_HOME"/build-tools/*/apksigner | sort -V | tail -1)
+          "$signer" verify --print-certs "server/app-release/${apk}" | grep -i "SHA-256" | head -1 || true
           echo "built=true" >> "$GITHUB_OUTPUT"
           echo "### App ${name} (${code}) is in this server image" >> "$GITHUB_STEP_SUMMARY"
 

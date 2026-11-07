@@ -20,8 +20,24 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    // The release workflow signs with Tim's key (E:\Dev\Notes.jks, from repository secrets) so its
+    // builds install over the ones he makes in Android Studio. Without those settings (his own
+    // builds, CI checks) nothing changes here.
+    val releaseKeystore = System.getenv("QUARTZ_KEYSTORE")?.takeIf { it.isNotBlank() }
+    signingConfigs {
+        if (releaseKeystore != null) {
+            create("quartz") {
+                storeFile = file(releaseKeystore)
+                storePassword = System.getenv("QUARTZ_KEYSTORE_PASSWORD")
+                keyAlias = System.getenv("QUARTZ_KEY_ALIAS")
+                keyPassword = System.getenv("QUARTZ_KEY_PASSWORD")
+            }
+        }
+    }
+
     buildTypes {
         release {
+            if (releaseKeystore != null) signingConfig = signingConfigs.getByName("quartz")
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
