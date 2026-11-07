@@ -40,14 +40,21 @@ class CoverTexturesTest {
             val took = SystemClock.elapsedRealtime() - start
             assertNotNull(tile)
             assertTrue("$t took ${took}ms", took < 1500)
-            // Opposite edges match up closely, so the repeats don't show seams.
+            // Across the tile's edge, neighbouring pixels differ no more than neighbours inside it do,
+            // so the repeats don't show seams.
             val n = tile!!.width
-            var diff = 0L
-            for (k in 0 until n) {
-                diff += kotlin.math.abs((tile.getPixel(0, k) ushr 24) - (tile.getPixel(n - 1, k) ushr 24))
-                diff += kotlin.math.abs((tile.getPixel(k, 0) ushr 24) - (tile.getPixel(k, n - 1) ushr 24))
+            fun v(x: Int, y: Int): Int {
+                val p = tile.getPixel(x, y)
+                val a = p ushr 24
+                return if (p and 0xFFFFFF != 0) a else -a
             }
-            assertTrue("$t edges differ by ${diff / (2 * n)} on average", diff / (2 * n) < 40)
+            var seam = 0L
+            var inside = 0L
+            for (k in 0 until n) {
+                seam += kotlin.math.abs(v(0, k) - v(n - 1, k)) + kotlin.math.abs(v(k, 0) - v(k, n - 1))
+                inside += kotlin.math.abs(v(n / 2, k) - v(n / 2 - 1, k)) + kotlin.math.abs(v(k, n / 2) - v(k, n / 2 - 1))
+            }
+            assertTrue("$t: seam $seam, inside $inside", seam <= inside * 2 + n * 4)
         }
     }
 
