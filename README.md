@@ -16,7 +16,7 @@ Every push also builds on GitHub Actions (`.github/workflows/android.yml`); the 
 ## Project layout
 
 ```
-app/src/main/java/com/quartz/notes/
+app/src/main/java/com/timcordova/quartznotes/
   data/            Room database, repository, settings (DataStore), fonts
     rich/          Rich text document model (blocks + style spans, stored as JSON)
   ui/

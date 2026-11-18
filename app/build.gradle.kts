@@ -7,15 +7,15 @@ plugins {
 }
 
 android {
-    namespace = "com.quartz.notes"
+    namespace = "com.timcordova.quartznotes"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.quartz.notes"
+        applicationId = "com.timcordova.quartznotes"
         minSdk = 33
         targetSdk = 35
-        versionCode = 41
-        versionName = "0.18.4"
+        versionCode = 42
+        versionName = "0.19.0"
         vectorDrawables { useSupportLibrary = true }
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
