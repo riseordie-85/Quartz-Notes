@@ -1,0 +1,554 @@
+11-18 05:01:00.109  7023  7040 I TestRunner: started: mouseWheelInTimeline(com.timcordova.quartznotes.ui.notebook.PageInputTest)
+11-18 05:01:00.110   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b99f0
+11-18 05:01:00.110   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9f90
+11-18 05:01:00.110   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9d50
+11-18 05:01:00.110   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9f90
+11-18 05:01:00.120  7023  7040 D IdlingRegistry: Registering idling resources: [androidx.compose.ui.test.EspressoLink@3d2454b]
+11-18 05:01:00.125  7023  7040 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+11-18 05:01:00.146  1640  1951 I AiAiEcho: Predicting[0]:
+11-18 05:01:00.146  1640  1951 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:
+11-18 05:01:00.147  1640  1951 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0
+11-18 05:01:00.147  1640  1951 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0
+11-18 05:01:00.147   789   833 D SplashScreenView: Build android.window.SplashScreenView{aebdd51 V.E...... ......ID 0,0-0,0}
+11-18 05:01:00.147   789   833 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-18 05:01:00.147   789   833 D SplashScreenView: Branding: view: android.view.View{18219b6 G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-18 05:01:00.154   789   845 W Parcel  : Expecting binder but got null!
+11-18 05:01:00.249  1768  1768 I A       : Created gRPC endpoint to "search" for service class com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService
+11-18 05:01:00.249  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@7db181f in: PRE_ON_CREATE
+11-18 05:01:00.249  7023  7023 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+11-18 05:01:00.252  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@7db181f in: CREATED
+11-18 05:01:00.252   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 1
+11-18 05:01:00.252   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-18 05:01:00.252   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-18 05:01:00.253  1054  1054 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+11-18 05:01:00.253  7023  7023 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=androidx.activity.ComponentActivity@7db181f
+11-18 05:01:00.263   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:00.265  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@7db181f in: STARTED
+11-18 05:01:00.265  7023  7023 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=androidx.activity.ComponentActivity@7db181f
+11-18 05:01:00.266   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:00.282   789   845 D EGL_emulation: app_time_stats: avg=12498.74ms min=513.88ms max=24483.61ms count=2
+11-18 05:01:00.306  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@7db181f in: RESUMED
+11-18 05:01:00.307  7023  7023 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=androidx.activity.ComponentActivity@7db181f
+11-18 05:01:00.308  1054  2068 D OneSearchSuggestProvider: Shut down the binder channel
+11-18 05:01:00.337  1768  2283 I A       : Using proto config with mendel
+11-18 05:01:00.338  1768  2283 W A       : Queue length for executor EventBus is now 11. Perhaps some tasks are too long, or the pool is too small.
+11-18 05:01:00.342   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bb610
+11-18 05:01:00.342  7023  7110 W Parcel  : Expecting binder but got null!
+11-18 05:01:00.353  1768  2283 I A       : Using proto config with mendel
+11-18 05:01:00.384  1768  2207 W CorpusConfigHelper: Invalid input from icing corpus JSON flag.
+11-18 05:01:00.384  1768  2207 W CorpusConfigHelper: android.util.MalformedJsonException: Use JsonReader.setLenient(true) to accept malformed JSON at line 123 column 2
+11-18 05:01:00.384  1768  2207 W CorpusConfigHelper: 	at android.util.JsonReader.syntaxError(JsonReader.java:1162)
+11-18 05:01:00.384  1768  2207 W CorpusConfigHelper: 	at android.util.JsonReader.checkLenient(JsonReader.java:840)
+11-18 05:01:00.384  1768  2207 W CorpusConfigHelper: 	at android.util.JsonReader.nextInArray(JsonReader.java:615)
+11-18 05:01:00.384  1768  2207 W CorpusConfigHelper: 	at android.util.JsonReader.peek(JsonReader.java:345)
+11-18 05:01:00.384  1768  2207 W CorpusConfigHelper: 	at android.util.JsonReader.hasNext(JsonReader.java:321)
+11-18 05:01:00.384  1768  2207 W CorpusConfigHelper: 	at com.google.android.apps.gsa.searchbox.c.b.b.k.c(PG:7)
+11-18 05:01:00.384  1768  2207 W CorpusConfigHelper: 	at com.google.android.apps.gsa.searchbox.c.b.b.k.<init>(PG:5)
+11-18 05:01:00.384  1768  2207 W CorpusConfigHelper: 	at com.google.android.apps.gsa.staticplugins.searchboxroot.features.n.a.c.<init>(PG:16)
+11-18 05:01:00.384  1768  2207 W CorpusConfigHelper: 	at com.google.android.apps.gsa.staticplugins.searchboxroot.b.a(PG:14)
+11-18 05:01:00.384  1768  2207 W CorpusConfigHelper: 	at com.google.android.apps.gsa.staticplugins.searchboxroot.x.<init>(PG:7)
+11-18 05:01:00.384  1768  2207 W CorpusConfigHelper: 	at com.google.android.apps.gsa.binaries.velvet.app.akd.b(PG:15)
+11-18 05:01:00.384  1768  2207 W CorpusConfigHelper: 	at dagger.a.e.b(PG:1)
+11-18 05:01:00.384  1768  2207 W CorpusConfigHelper: 	at com.google.android.apps.gsa.staticplugins.searchboxroot.a.a.a(PG:3)
+11-18 05:01:00.384  1768  2207 W CorpusConfigHelper: 	at com.google.android.apps.gsa.binaries.velvet.app.ok.f(Unknown Source:2541)
+11-18 05:01:00.384  1768  2207 W CorpusConfigHelper: 	at com.google.android.apps.gsa.binaries.velvet.app.ok.b(PG:1)
+11-18 05:01:00.384  1768  2207 W CorpusConfigHelper: 	at com.google.android.apps.gsa.search.core.service.g.a.c.a(PG:2)
+11-18 05:01:00.384  1768  2207 W CorpusConfigHelper: 	at com.google.android.libraries.gsa.k.a.f.a(PG:2)
+11-18 05:01:00.384  1768  2207 W CorpusConfigHelper: 	at com.google.common.util.concurrent.dx.a(PG:1)
+11-18 05:01:00.384  1768  2207 W CorpusConfigHelper: 	at com.google.common.util.concurrent.cv.run(PG:4)
+11-18 05:01:00.384  1768  2207 W CorpusConfigHelper: 	at com.google.common.util.concurrent.dz.run(PG:1)
+11-18 05:01:00.384  1768  2207 W CorpusConfigHelper: 	at com.google.android.libraries.i.ae.run(PG:1)
+11-18 05:01:00.384  1768  2207 W CorpusConfigHelper: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-18 05:01:00.384  1768  2207 W CorpusConfigHelper: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-18 05:01:00.384  1768  2207 W CorpusConfigHelper: 	at com.google.android.libraries.i.k.run(PG:2)
+11-18 05:01:00.384  1768  2207 W CorpusConfigHelper: 	at com.google.android.libraries.i.p.run(PG:4)
+11-18 05:01:00.384  1768  2207 W CorpusConfigHelper: 	at java.lang.Thread.run(Thread.java:1012)
+11-18 05:01:00.393   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:00.393   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:00.393   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:00.393   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:00.393   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:00.393   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:00.393   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:00.393   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:00.393   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:00.393   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:00.393   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:00.393   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:00.393   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:00.408   489   513 W InputManager-JNI: Input channel object '7429fa7 Splash Screen com.timcordova.quartznotes.test (client)' was disposed without first being removed with the input manager!
+11-18 05:01:00.410  1768  2283 W SearchServiceCore: Abort, client detached.
+11-18 05:01:00.411  1768  2283 I MicroDetectionState: Should stop hotword detection immediately - true
+11-18 05:01:00.412  1768  2283 I A       : Using proto config with mendel
+11-18 05:01:00.412  1768  2283 I A       : Using proto config with mendel
+11-18 05:01:00.412  1768  2283 I MicroDetectionState: Should stop hotword detection immediately - true
+11-18 05:01:00.412  1768  2283 I A       : Using proto config with mendel
+11-18 05:01:00.412  1768  2283 I A       : Using proto config with mendel
+11-18 05:01:00.430   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b59d0
+11-18 05:01:00.432   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9390
+11-18 05:01:00.432   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b7590
+11-18 05:01:00.432   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b59d0
+11-18 05:01:00.432   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b7590
+11-18 05:01:00.432   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:00.437   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:00.437   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:00.449  1054  4484 I s.nexuslauncher: oneway function results for code 2 on binder at 0x732b6c758e70 will be dropped but finished with status UNKNOWN_TRANSACTION
+11-18 05:01:00.450  1768  7293 I PBSessionCacheImpl: Deleted sessionId[7777541209396377] from persistence.
+11-18 05:01:00.453   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:00.463   489   509 W ziparchive: Unable to open '/data/app/~~q7gscu1n3ILq4DpSpq4VdQ==/com.timcordova.quartznotes-nbzIvoAk_EFWKv7by7QDAg==/base.dm': No such file or directory
+11-18 05:01:00.465   489   509 I ActivityTaskManager: Displayed com.timcordova.quartznotes/androidx.activity.ComponentActivity: +332ms
+11-18 05:01:00.465   489  2313 W InputManager-JNI: Input channel object '18fa25 com.timcordova.quartznotes.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity (client)' was disposed without first being removed with the input manager!
+11-18 05:01:00.482   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bc990
+11-18 05:01:00.482   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b6870
+11-18 05:01:00.482   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bbeb0
+11-18 05:01:00.482   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b6810
+11-18 05:01:00.489   489  1405 W InputManager-JNI: Input channel object '8a4c05f Splash Screen com.timcordova.quartznotes (client)' was disposed without first being removed with the input manager!
+11-18 05:01:00.498  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInputView():2241
+11-18 05:01:00.499  1549  1549 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-18 05:01:00.499  1549  1549 I InputBundle: InputBundle.consumeEvent():923 Skip consuming an event as keyboard status is 0
+11-18 05:01:00.499  1549  1549 I KeyboardWrapper: KeyboardWrapper.consumeEvent():275 Skip consuming an event as current keyboard is deactivated (state=0, keyboard existence=true)
+11-18 05:01:00.499  1549  1549 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.shutdown():77 shutdown()
+11-18 05:01:00.500  1549  1549 I AndroidIME: AbstractIme.onDeactivate():207 LatinIme.onDeactivate()
+11-18 05:01:00.500  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-18 05:01:00.501  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-18 05:01:00.501  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=null}, false)
+11-18 05:01:00.501  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 05:01:00.501  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:01:00.502  7023  7023 E ImeBackDispatcher: Ime callback not found. Ignoring unregisterReceivedCallback. callbackId: 104116003
+11-18 05:01:00.525   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b6cf0
+11-18 05:01:00.525   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bc7b0
+11-18 05:01:00.525   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b6810
+11-18 05:01:00.525   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bc210
+11-18 05:01:00.525   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bc210
+11-18 05:01:00.525   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bc210
+11-18 05:01:00.525   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b6810
+11-18 05:01:00.525   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:00.525   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:00.527  1549  1637 W ModuleManager: ModuleManager.loadModule():450 Module jjj is not available
+11-18 05:01:00.528  1549  1637 I NebulaeTrainingCacheMetricsProcessor: NebulaeTrainingCacheMetricsProcessor.processEndSession():447 No input action collection in this session, skip logging.
+11-18 05:01:00.588  7023  7023 D AutofillManager: Fill dialog is enabled:false, hints=[password, passwordAuto, creditCardNumber, creditCardSecurityCode, creditCardExpirationDate]
+11-18 05:01:00.613  1549  1718 D EGL_emulation: app_time_stats: avg=810.88ms min=130.25ms max=1491.51ms count=2
+11-18 05:01:00.680   789   845 D EGL_emulation: app_time_stats: avg=23623.45ms min=23623.45ms max=23623.45ms count=1
+11-18 05:01:00.768  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-18 05:01:00.769  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-18 05:01:00.769  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=null}, false)
+11-18 05:01:00.769  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 05:01:00.769  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:01:00.774   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b7fb0
+11-18 05:01:00.888   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b6810
+11-18 05:01:00.950  7023  7110 W Parcel  : Expecting binder but got null!
+11-18 05:01:00.963   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:01.114  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-18 05:01:01.120  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-18 05:01:01.120  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=null}, false)
+11-18 05:01:01.120  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 05:01:01.120  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:01:01.228   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:01.971   489  2313 D ConnectivityService: requestNetwork for uid/pid:10119/1768 activeRequest: null callbackRequest: 161 [NetworkRequest [ REQUEST id=161, [ Transports: CELLULAR Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN&NOT_VCN_MANAGED Uid: 10119 RequestorUid: 10119 RequestorPkg: com.google.android.googlequicksearchbox UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+11-18 05:01:01.973   285   347 I netd    : networkSetPermissionForNetwork(101, 0) <0.94ms>
+11-18 05:01:01.978   489   727 D ConnectivityService: NetReassign [161 : null → 101] [c 0] [a 4] [i 2]
+11-18 05:01:01.979   489   727 D ConnectivityService: reportNetworkConnectivity(100, false) by 10119
+11-18 05:01:01.979   944  2781 D NetworkMonitor/100: Forcing reevaluation for UID 10119. Dns signal count: 0
+11-18 05:01:01.980   944  7845 D TrafficStats: tagSocket(6) with statsTag=0xffffff81, statsUid=-1
+11-18 05:01:01.980   944  7844 D TrafficStats: tagSocket(69) with statsTag=0xffffff81, statsUid=-1
+11-18 05:01:01.981   944  7845 D TrafficStats: tagSocket(6) with statsTag=0xffffff81, statsUid=-1
+11-18 05:01:01.981   944  7844 D TrafficStats: tagSocket(69) with statsTag=0xffffff81, statsUid=-1
+11-18 05:01:01.982   285  7846 I resolv  : ResNSendHandler::run: 0 / {100 983140 100 983140 1073 1}
+11-18 05:01:01.982   285  7847 I resolv  : ResNSendHandler::run: 0 / {100 983140 100 983140 1073 1}
+11-18 05:01:01.983   285  7847 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x71459f2b3290
+11-18 05:01:01.984   285  7848 I resolv  : ResNSendHandler::run: 0 / {100 983140 100 983140 1073 1}
+11-18 05:01:01.984   285  7848 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x71456f2b6fd0
+11-18 05:01:01.984   285  7849 I resolv  : ResNSendHandler::run: 0 / {100 983140 100 983140 1073 1}
+11-18 05:01:01.989   285  7849 I resolv  : res_nsend: used send_dg 160 terrno: 0
+11-18 05:01:01.989   944   944 D TrafficStats: tagSocket(68) with statsTag=0xffffffff, statsUid=-1
+11-18 05:01:01.990   944   944 D TrafficStats: tagSocket(68) with statsTag=0xffffffff, statsUid=-1
+11-18 05:01:01.990   944   944 D TrafficStats: tagSocket(68) with statsTag=0xffffffff, statsUid=-1
+11-18 05:01:01.990   285  7846 I resolv  : res_nsend: used send_dg 75 terrno: 0
+11-18 05:01:01.990   944   944 D TrafficStats: tagSocket(68) with statsTag=0xffffffff, statsUid=-1
+11-18 05:01:01.990   944   944 D TrafficStats: tagSocket(68) with statsTag=0xffffffff, statsUid=-1
+11-18 05:01:01.991   944   944 D TrafficStats: tagSocket(68) with statsTag=0xffffffff, statsUid=-1
+11-18 05:01:01.991   944   944 D TrafficStats: tagSocket(68) with statsTag=0xffffffff, statsUid=-1
+11-18 05:01:01.991   944   944 D TrafficStats: tagSocket(68) with statsTag=0xffffffff, statsUid=-1
+11-18 05:01:01.991   944   944 D TrafficStats: tagSocket(68) with statsTag=0xffffffff, statsUid=-1
+11-18 05:01:01.992   944   944 D TrafficStats: tagSocket(68) with statsTag=0xffffffff, statsUid=-1
+11-18 05:01:01.992   944   944 D TrafficStats: tagSocket(68) with statsTag=0xffffffff, statsUid=-1
+11-18 05:01:01.992   944   944 D TrafficStats: tagSocket(68) with statsTag=0xffffffff, statsUid=-1
+11-18 05:01:01.992   944   944 D TrafficStats: tagSocket(68) with statsTag=0xffffffff, statsUid=-1
+11-18 05:01:01.992   944   944 D TrafficStats: tagSocket(68) with statsTag=0xffffffff, statsUid=-1
+11-18 05:01:01.993   944   944 D TrafficStats: tagSocket(68) with statsTag=0xffffffff, statsUid=-1
+11-18 05:01:01.993   944   944 D TrafficStats: tagSocket(68) with statsTag=0xffffffff, statsUid=-1
+11-18 05:01:01.993   944   944 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+11-18 05:01:01.993   944  7844 D NetworkMonitor/100: PROBE_DNS www.google.com 12ms OK 142.251.157.119,142.251.155.119,142.251.150.119,142.251.153.119,142.251.154.119,142.251.152.119,142.251.151.119,142.251.156.119,2001:4860:482b:7700::,2001:4860:4826:7700::,2001:4860:482d:7700::,2001:4860:482a:7700::,2001:4860:4828:7700::,2001:4860:4827:7700::,2001:4860:482c:7700::,2001:4860:4829:7700::
+11-18 05:01:01.994   944   944 D TrafficStats: tagSocket(6) with statsTag=0xffffffff, statsUid=-1
+11-18 05:01:01.994   944  7845 D NetworkMonitor/100: PROBE_DNS connectivitycheck.gstatic.com 14ms OK 142.251.150.120,2001:4860:4826:7800::
+11-18 05:01:01.995   285  7850 I resolv  : GetAddrInfoHandler::run: {100 983140 100 983140 1073 1}
+11-18 05:01:01.995   285  7852 I resolv  : res_nmkquery: (QUERY, IN, A)
+11-18 05:01:01.995   285  7853 I resolv  : GetAddrInfoHandler::run: {100 983140 100 983140 1073 1}
+11-18 05:01:01.995   285  7852 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x71457f2b25b0
+11-18 05:01:01.995   285  7852 I resolv  : doQuery: rcode=0, ancount=8, return value=160
+11-18 05:01:01.995   285  7851 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-18 05:01:01.995   285  7851 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x71459f2b3290
+11-18 05:01:01.996   285  7851 I resolv  : doQuery: rcode=0, ancount=8, return value=256
+11-18 05:01:01.996   285  7855 I resolv  : res_nmkquery: (QUERY, IN, A)
+11-18 05:01:01.996   285  7855 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x71456f2b6fd0
+11-18 05:01:01.996   285  7855 I resolv  : doQuery: rcode=0, ancount=1, return value=63
+11-18 05:01:01.996   944  7844 D TrafficStats: tagSocket(6) with statsTag=0xffffff81, statsUid=-1
+11-18 05:01:01.996   285  7854 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-18 05:01:01.996   285  7854 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x71456f2b62b0
+11-18 05:01:01.996   285  7854 I resolv  : doQuery: rcode=0, ancount=1, return value=75
+11-18 05:01:01.997   944  7845 D TrafficStats: tagSocket(68) with statsTag=0xffffff81, statsUid=-1
+11-18 05:01:02.044   944  7845 D NetworkMonitor/100: PROBE_HTTP http://connectivitycheck.gstatic.com/generate_204 time=50ms ret=204 request={Connection=[close], User-Agent=[Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.32 Safari/537.36]} headers={null=[HTTP/1.1 204 No Content], Connection=[close], Content-Length=[0], Cross-Origin-Resource-Policy=[cross-origin], Date=[Wed, 18 Nov 2026 05:01:02 GMT], X-Android-Received-Millis=[1794978062044], X-Android-Response-Source=[NETWORK 204], X-Android-Selected-Protocol=[http/1.1], X-Android-Sent-Millis=[1794978062003]}
+11-18 05:01:02.050   944  7844 D NetworkMonitor/100: PROBE_HTTPS https://www.google.com/generate_204 time=56ms ret=204 request={Connection=[close], User-Agent=[Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.32 Safari/537.36]} headers={null=[HTTP/1.1 204 No Content], Alt-Svc=[h3=":443"; ma=2592000,h3-29=":443"; ma=2592000], Connection=[close], Content-Length=[0], Cross-Origin-Resource-Policy=[cross-origin], Date=[Wed, 18 Nov 2026 05:01:02 GMT], X-Android-Received-Millis=[1794978062050], X-Android-Response-Source=[NETWORK 204], X-Android-Selected-Protocol=[http/1.1], X-Android-Sent-Millis=[1794978062046]}
+11-18 05:01:02.050   944  7843 D NetworkMonitor/100: isCaptivePortal: isSuccessful()=true isPortal()=false RedirectUrl=null isPartialConnectivity()=false Time=71ms
+11-18 05:01:02.051   489   727 D ConnectivityService: [100 WIFI] validation passed
+11-18 05:01:02.100  7023  7029 I ova.quartznotes: Compiler allocated 4178KB to compile void com.timcordova.quartznotes.ui.notebook.PageTimelineKt$PageTimelineSheet$5$invoke$lambda$23$lambda$22$lambda$21$$inlined$itemsIndexed$default$3.invoke(androidx.compose.foundation.lazy.LazyItemScope, int, androidx.compose.runtime.Composer, int)
+11-18 05:01:02.112  7023  7029 I ova.quartznotes: Compiler allocated 4675KB to compile void com.timcordova.quartznotes.ui.notebook.PageTimelineKt.PageThumbnail(com.timcordova.quartznotes.data.db.PageEntity, java.util.List, boolean, androidx.compose.runtime.Composer, int)
+11-18 05:01:02.173   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:02.173   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:02.173   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:02.173   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:02.173   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:03.034  1480  1480 I DialerCallerIdFeedbackDeletionWorker: com.android.dialer.calleridfeedback.impl.database.retention.CallerIdFeedbackDeletionWorker.startWork:60 startWork
+11-18 05:01:03.034  1480  1480 I DialerCallerIdFeedbackEnabledFn: com.android.dialer.calleridfeedback.impl.CallerIdFeedbackEnabledFn.isEnabled:41 Caller ID feedback enabled [CONTEXT ratelimit_period="1 MINUTES [skipped: 1]" ]
+11-18 05:01:03.035  1480  1520 I WM-WorkerWrapper: Worker result SUCCESS for Work [ id=18a70167-2090-4a55-81fc-f484f5302541, tags={ com.google.apps.tiktok.contrib.work.TikTokListenableWorker, TikTokWorker#com.android.dialer.calleridfeeback.impl.database.retention.CallerIdFeedbackDeletionWorker } ]
+11-18 05:01:03.041  1480  1528 I DialerCallerIdFeedbackDatabase: com.android.dialer.calleridfeedback.impl.database.CallerIdFeedbackDatabase.deleteAllMatching:409 feedbackCreationTimestamp list empty
+11-18 05:01:03.041  1480  1528 I DialerCallerIdFeedbackDatabase: com.android.dialer.calleridfeedback.impl.database.CallerIdFeedbackDatabase$1.onSuccess:351 Deleted old caller IDs.
+11-18 05:01:03.087  1480  1480 I DialerXatuMetricsWorker: com.android.dialer.xatu.impl.storage.postcall.XatuMetricsWorker.startWork:66 enter
+11-18 05:01:03.094  5729  7856 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+11-18 05:01:03.097  1480  1525 I WM-WorkerWrapper: Worker result SUCCESS for Work [ id=b050ffd6-e2c6-43ce-8b15-b8a98b3cd408, tags={ com.google.apps.tiktok.contrib.work.TikTokListenableWorker, TikTokWorker#com.android.dialer.xatu.impl.storage.postcall.XatuMetricsWorker } ]
+11-18 05:01:03.099  5729  7856 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+11-18 05:01:03.101  5729  7856 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-18 05:01:03.101  5729  7856 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+11-18 05:01:03.101  5729  7856 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+11-18 05:01:03.101  5729  7856 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-18 05:01:03.101  5729  7856 I NamespaceManager: Package 1 name not found! Using module version.
+11-18 05:01:03.102  5729  7856 I NamespaceManager: Package rkpd name not found! Using module version.
+11-18 05:01:03.102  5729  7856 I NamespaceManager: Package com.google.android.devicelockcontroller name not found! Using module version.
+11-18 05:01:03.102  5729  7856 I NamespaceManager: Package com.google.android.healthfitness name not found! Using module version.
+11-18 05:01:03.102  5729  7856 I NamespaceManager: Package android.companion name not found! Using module version.
+11-18 05:01:03.102  5729  7856 I NamespaceManager: Package com.google.android.healthfitness name not found! Using module version.
+11-18 05:01:03.102  5729  7856 I NamespaceManager: Package com.google.android.aicore name not found! Using module version.
+11-18 05:01:03.102  5729  7856 I NamespaceManager: Package com.google.android.audioproxy name not found! Using module version.
+11-18 05:01:03.102  5729  7856 I NamespaceManager: Package com.google.android.healthfitness name not found! Using module version.
+11-18 05:01:03.102  5729  7856 I NamespaceManager: Package com.google.android.apps.pixel.psi name not found! Using module version.
+11-18 05:01:03.102  5729  7856 I NamespaceManager: Package com.google.android.apps.safetycore name not found! Using module version.
+11-18 05:01:03.102  5729  7856 I NamespaceManager: Package com.google.android.crashrecovery name not found! Using module version.
+11-18 05:01:03.103  5729  7856 I NamespaceManager: Package com.google.android.profiling name not found! Using module version.
+11-18 05:01:03.103  5729  7856 I NamespaceManager: Package com.google.android.bt name not found! Using module version.
+11-18 05:01:03.103  5729  7856 I NamespaceManager: Package com.google.android.nfcservices name not found! Using module version.
+11-18 05:01:03.103  5729  7856 I NamespaceManager: Package com.google.android.webapp name not found! Using module version.
+11-18 05:01:03.103  5729  7856 I NamespaceManager: Package com.google.android.telephonycore name not found! Using module version.
+11-18 05:01:03.103  5729  7856 I NamespaceManager: Package com.google.android.uprobestats name not found! Using module version.
+11-18 05:01:03.107  5729  7757 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.auth.account.be.legacy.AuthCronService started execution. cause:4 exec_start_elapsed_seconds: 369 [CONTEXT service_id=218 ]
+11-18 05:01:03.108  5713  7859 I ChimeraConfigurator: Starting update, reason: 4 urgentFeatures: vision.ocr:-1
+11-18 05:01:03.129  1653  1956 I TranscodeHelper: Empty transcode compat stale
+11-18 05:01:03.133  1653  1956 I TranscodeHelper: Parsed 0 packages from resource
+11-18 05:01:03.134  1653  1956 I TranscodeHelper: Parsed 8 packages from device config
+11-18 05:01:03.144  5713  7859 I ChimeraConfigurator: Detected pending changes for urgent request: [vision.ocr]. Pending module sets: container:2318189190800+mlkit.ocr.common,tflite_dynamite:2640104055100800+tflite_dynamite,vision_ocr:2316024025100000+vision.ocr
+11-18 05:01:03.148  2701  2726 W libc    : Access denied finding property "persist.adb.tls_server.enable"
+11-18 05:01:03.148  2701  2726 W libc    : Access denied finding property "service.adb.tls.port"
+11-18 05:01:03.155  1653  1956 I MediaApplication: Changed PhotoPickerSettingsActivity component state to STATE_DISABLED ( 2 )
+11-18 05:01:03.144  2701  2701 W binder:2701_2: type=1400 audit(0.0:62): avc: denied { read } for name="u:object_r:system_adbd_prop:s0" dev="tmpfs" ino=269 scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:object_r:system_adbd_prop:s0 tclass=file permissive=0 app=com.google.android.gms
+11-18 05:01:03.144  2701  2701 W binder:2701_2: type=1400 audit(0.0:63): avc: denied { read } for name="u:object_r:adbd_prop:s0" dev="tmpfs" ino=61 scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:object_r:adbd_prop:s0 tclass=file permissive=0 app=com.google.android.gms
+11-18 05:01:03.164  1653  1956 I MediaProvider: Changed PhotoPickerGetContentActivity component state to STATE_DISABLED ( 2 )
+11-18 05:01:03.164  1653  1956 I MediaProvider: Changed PhotoPickerUserSelectActivity component state to STATE_DISABLED ( 2 )
+11-18 05:01:03.165  5713  7859 I GmsDebugLogger: [73] 1801
+11-18 05:01:03.168  5713  7859 W ZappDownloader: No successful module downloads for requested features [vision.ocr].
+11-18 05:01:03.168  5713  7859 I GmsDebugLogger: [30] [VisionOcrDynamite.integ:231602402100000],[TfliteDynamiteDynamite.integ:264010405100800],[MlkitOcrCommon.optional:231818100800]
+11-18 05:01:03.169  5729  7856 I bwir    : updateFromConfigurations using legacy put method [CONTEXT service_id=204 ]
+11-18 05:01:03.174  5713  7859 W ChimeraConfigService: Retry attempt was throttled. [CONTEXT service_id=264 ]
+11-18 05:01:03.175  5713  7859 I GmsDebugLogger: [83] 1 [vision.ocr]
+11-18 05:01:03.176  5729  7856 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+11-18 05:01:03.176  5729  7856 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+11-18 05:01:03.176  5729  7856 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-18 05:01:03.176  5729  7856 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+11-18 05:01:03.176  5729  7856 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+11-18 05:01:03.176  5729  7856 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-18 05:01:03.177  5729  7856 I NamespaceManager: Package 1 name not found! Using module version.
+11-18 05:01:03.177  5729  7856 I NamespaceManager: Package rkpd name not found! Using module version.
+11-18 05:01:03.177  5729  7856 I NamespaceManager: Package com.google.android.devicelockcontroller name not found! Using module version.
+11-18 05:01:03.177  5729  7856 I NamespaceManager: Package com.google.android.healthfitness name not found! Using module version.
+11-18 05:01:03.177  5729  7856 I NamespaceManager: Package android.companion name not found! Using module version.
+11-18 05:01:03.177  5729  7856 I NamespaceManager: Package com.google.android.healthfitness name not found! Using module version.
+11-18 05:01:03.177  5729  7856 I NamespaceManager: Package com.google.android.aicore name not found! Using module version.
+11-18 05:01:03.177  5729  7856 I NamespaceManager: Package com.google.android.audioproxy name not found! Using module version.
+11-18 05:01:03.178  5729  7856 I NamespaceManager: Package com.google.android.healthfitness name not found! Using module version.
+11-18 05:01:03.178  5729  7856 I NamespaceManager: Package com.google.android.apps.pixel.psi name not found! Using module version.
+11-18 05:01:03.178  5729  7856 I NamespaceManager: Package com.google.android.apps.safetycore name not found! Using module version.
+11-18 05:01:03.178  5729  7856 I NamespaceManager: Package com.google.android.crashrecovery name not found! Using module version.
+11-18 05:01:03.178  5729  7856 I NamespaceManager: Package com.google.android.profiling name not found! Using module version.
+11-18 05:01:03.178  5729  7856 I NamespaceManager: Package com.google.android.bt name not found! Using module version.
+11-18 05:01:03.178  5729  7856 I NamespaceManager: Package com.google.android.nfcservices name not found! Using module version.
+11-18 05:01:03.178  5729  7856 I NamespaceManager: Package com.google.android.webapp name not found! Using module version.
+11-18 05:01:03.179  5729  7856 I NamespaceManager: Package com.google.android.telephonycore name not found! Using module version.
+11-18 05:01:03.179  5729  7856 I NamespaceManager: Package com.google.android.uprobestats name not found! Using module version.
+11-18 05:01:03.180  5713  7858 W Vision  : Request for optional module download of ocr failed. Request again.
+11-18 05:01:03.180  5713  7858 W Vision  : Would have logged:
+11-18 05:01:03.180  5713  7858 W Vision  : # dsae@37884fe7
+11-18 05:01:03.180  5713  7858 I Vision  : Schedule retrying download ocr at 369166 with backoff 160 seconds
+11-18 05:01:03.185   285  7868 I resolv  : GetAddrInfoHandler::run: {100 786532 100 983140 10120 0}
+11-18 05:01:03.187  2701  2726 D TrafficStats: tagSocket(82) with statsTag=0x1809, statsUid=-1
+11-18 05:01:03.195  5729  5932 W GmsUrlRequestImpl: Content-Type header is overwritten.
+11-18 05:01:03.206   285  7869 I resolv  : GetAddrInfoHandler::run: {100 786532 100 983140 10120 0}
+11-18 05:01:03.206   285  7870 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-18 05:01:03.206   285  7870 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x71459f2b06d0
+11-18 05:01:03.206   285  7870 I resolv  : doQuery: rcode=0, ancount=8, return value=264
+11-18 05:01:03.206   285  7871 I resolv  : res_nmkquery: (QUERY, IN, A)
+11-18 05:01:03.207   285  7871 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x71458f2b0270
+11-18 05:01:03.207   285  7871 I resolv  : doQuery: rcode=0, ancount=8, return value=168
+11-18 05:01:03.208  5729  6002 D TrafficStats: tagSocket(117) with statsTag=0x401, statsUid=10120
+11-18 05:01:03.229   489  7872 E StatsCompanionService: Could not get installer for package: com.google.android.trichromelibrary
+11-18 05:01:03.229   489  7872 E StatsCompanionService: android.content.pm.PackageManager$NameNotFoundException: com.google.android.trichromelibrary
+11-18 05:01:03.229   489  7872 E StatsCompanionService: 	at android.app.ApplicationPackageManager.getInstallSourceInfo(ApplicationPackageManager.java:2541)
+11-18 05:01:03.229   489  7872 E StatsCompanionService: 	at com.android.server.stats.StatsCompanionService.getInstallerPackageName(Unknown Source:1)
+11-18 05:01:03.229   489  7872 E StatsCompanionService: 	at com.android.server.stats.StatsCompanionService.lambda$informAllUids$0(Unknown Source:107)
+11-18 05:01:03.229   489  7872 E StatsCompanionService: 	at com.android.server.stats.StatsCompanionService.$r8$lambda$VOiYvFUkZmZjyfB0dWDMf-akDT0(Unknown Source:0)
+11-18 05:01:03.229   489  7872 E StatsCompanionService: 	at com.android.server.stats.StatsCompanionService$$ExternalSyntheticLambda1.run(Unknown Source:6)
+11-18 05:01:03.229   489  7872 E StatsCompanionService: 	at android.os.Handler.handleCallback(Handler.java:942)
+11-18 05:01:03.229   489  7872 E StatsCompanionService: 	at android.os.Handler.dispatchMessage(Handler.java:99)
+11-18 05:01:03.229   489  7872 E StatsCompanionService: 	at android.os.Looper.loopOnce(Looper.java:201)
+11-18 05:01:03.229   489  7872 E StatsCompanionService: 	at android.os.Looper.loop(Looper.java:288)
+11-18 05:01:03.229   489  7872 E StatsCompanionService: 	at android.os.HandlerThread.run(HandlerThread.java:67)
+11-18 05:01:03.267  5729  5932 W GLSUser : [AppCertManager] Exception while requesting key:
+11-18 05:01:03.267  5729  5932 W GLSUser : java.util.concurrent.ExecutionException: avvw: Parse Proto Exception.
+11-18 05:01:03.267  5729  5932 W GLSUser : 	at dlnv.s(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+11-18 05:01:03.267  5729  5932 W GLSUser : 	at dlnv.get(:com.google.android.gms@231818047@23.18.18 (190800-535401451):7)
+11-18 05:01:03.267  5729  5932 W GLSUser : 	at oub.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):78)
+11-18 05:01:03.267  5729  5932 W GLSUser : 	at otz.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+11-18 05:01:03.267  5729  5932 W GLSUser : 	at otu.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-18 05:01:03.267  5729  5932 W GLSUser : 	at otx.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-18 05:01:03.267  5729  5932 W GLSUser : 	at lzq.call(:com.google.android.gms@231818047@23.18.18 (190800-535401451):14)
+11-18 05:01:03.267  5729  5932 W GLSUser : 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+11-18 05:01:03.267  5729  5932 W GLSUser : 	at aced.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-18 05:01:03.267  5729  5932 W GLSUser : 	at aced.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):7)
+11-18 05:01:03.267  5729  5932 W GLSUser : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-18 05:01:03.267  5729  5932 W GLSUser : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-18 05:01:03.267  5729  5932 W GLSUser : 	at acjn.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-18 05:01:03.267  5729  5932 W GLSUser : 	at java.lang.Thread.run(Thread.java:1012)
+11-18 05:01:03.267  5729  5932 W GLSUser : Caused by: avvw: Parse Proto Exception.
+11-18 05:01:03.267  5729  5932 W GLSUser : 	at avwn.f(:com.google.android.gms@231818047@23.18.18 (190800-535401451):5)
+11-18 05:01:03.267  5729  5932 W GLSUser : 	at avxk.onSucceeded(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-18 05:01:03.267  5729  5932 W GLSUser : 	at jf.onSucceeded(:com.google.android.gms.dynamite_cronetdynamite@231818047@23.18.18 (190800-0):0)
+11-18 05:01:03.267  5729  5932 W GLSUser : 	at ie.run(:com.google.android.gms.dynamite_cronetdynamite@231818047@23.18.18 (190800-0):4)
+11-18 05:01:03.267  5729  5932 W GLSUser : 	... 6 more
+11-18 05:01:03.267  5729  5932 W GLSUser : Caused by: dzfz: Protocol message contained an invalid tag (zero).
+11-18 05:01:03.267  5729  5932 W GLSUser : 	at dzdb.k(:com.google.android.gms@231818047@23.18.18 (190800-535401451):13)
+11-18 05:01:03.267  5729  5932 W GLSUser : 	at dzha.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):47)
+11-18 05:01:03.267  5729  5932 W GLSUser : 	at dzha.h(:com.google.android.gms@231818047@23.18.18 (190800-535401451):45)
+11-18 05:01:03.267  5729  5932 W GLSUser : 	at dzfd.A(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-18 05:01:03.267  5729  5932 W GLSUser : 	at dzex.f(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-18 05:01:03.267  5729  5932 W GLSUser : 	at dzcx.d(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-18 05:01:03.267  5729  5932 W GLSUser : 	at dzcx.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-18 05:01:03.267  5729  5932 W GLSUser : 	at dzcx.n(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-18 05:01:03.267  5729  5932 W GLSUser : 	at avwn.h(:com.google.android.gms@231818047@23.18.18 (190800-535401451):7)
+11-18 05:01:03.267  5729  5932 W GLSUser : 	at avwn.f(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+11-18 05:01:03.267  5729  5932 W GLSUser : 	... 9 more
+11-18 05:01:03.272  5729  7757 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.auth.account.be.legacy.AuthCronService finished executing. cause:4 result: 3 elapsed_millis: 177 uptime_millis: 177 exec_start_elapsed_seconds: 369 [CONTEXT service_id=218 ]
+11-18 05:01:03.383   125   125 I lowmemorykiller: lmkd data connection established
+11-18 05:01:03.402   125   125 I lowmemorykiller: Using psi monitors for memory pressure detection
+11-18 05:01:03.402   125   125 I lowmemorykiller: Properties reinitilized
+11-18 05:01:03.402  7876  7876 I lowmemorykiller: lmkd updated properties successfully
+11-18 05:01:03.402   125   125 I lowmemorykiller: lmkd data connection dropped
+11-18 05:01:03.402   125   125 I lowmemorykiller: closing lmkd data connection
+11-18 05:01:03.426   489   489 W ServiceConnector.Impl: mayInterruptIfRunning not supported - ignoring
+11-18 05:01:03.426  1640  2036 I AiAiAutofill: Disconnected AiAiAugmentedAutofillService.
+11-18 05:01:03.428  1640  1640 D AugmentedAutofillService: handleOnConnected(): debug=true, verbose=false
+11-18 05:01:03.435  1640  2036 I AiAiAutofill: Connected AiAiAugmentedAutofillService.
+11-18 05:01:03.462   125   125 I lowmemorykiller: Kill 'com.android.bluetooth' (1145), uid 1002, oom_score_adj 999 to free 34684kB rss, 29076kB swap; reason: device is not responding
+11-18 05:01:03.466   286   286 I Zygote  : Process 1145 exited due to signal 9 (Killed)
+11-18 05:01:03.467   125   131 W lowmemorykiller: Failed to open /proc/1145/task; errno=2: process pid(1145) might have died
+11-18 05:01:03.467   125   131 E lowmemorykiller: process_mrelease 1145 failed: No such process
+11-18 05:01:03.469   489   522 I libprocessgroup: Successfully killed process cgroup uid 1002 pid 1145 in 0ms
+11-18 05:01:03.490  7023  7257 D CompatibilityChangeReporter: Compat change id reported: 150939131; UID 10174; state: ENABLED
+11-18 05:01:03.502  1640  1640 I AiAi    : onTrimMemory() with level 5
+11-18 05:01:03.511  5484  5484 I A       : Trimming objects from memory, since app is in the background.
+11-18 05:01:03.530  1549  1549 I AppBase : AppBase.onTrimMemory():497 onTrimMemory(): 5
+11-18 05:01:03.530  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onTrimMemory():4406 onTrimMemory(): 5
+11-18 05:01:03.552  1768  2302 W A       : [Download] response code: 400
+11-18 05:01:03.568  3171  3340 W Bugle   : TextClassifierLibManagerImpl: Reclaiming memory at level: 40
+11-18 05:01:03.570  1549  1637 I ProtoXDBBufferWrapper: ProtoXDBBufferWrapper.flushToStorage():153 Flushed 24 data item(s) to storage.
+11-18 05:01:03.607  7023  7110 D EGL_emulation: app_time_stats: avg=861.56ms min=271.29ms max=1454.20ms count=3
+11-18 05:01:03.744  1054  1054 I ActivityThread: Schedule relaunch activity: com.google.android.apps.nexuslauncher.NexusLauncherActivity
+11-18 05:01:03.750  1054  1054 D b/254119092: clearActivity
+11-18 05:01:03.750  1054  1054 D b/254119092: mActivity and mContext agree taskbarIsPresent=false
+11-18 05:01:03.760   489  2296 W InputManager-JNI: Input channel object 'e844df0 com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity (client)' was disposed without first being removed with the input manager!
+11-18 05:01:03.764  1054  1054 W OnBackInvokedCallback: OnBackInvokedCallback is not enabled for the application.
+11-18 05:01:03.764  1054  1054 W OnBackInvokedCallback: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-18 05:01:03.781   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b0e10
+11-18 05:01:03.781   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b0e10
+11-18 05:01:03.786  7192  7205 D CompatibilityChangeReporter: Compat change id reported: 150939131; UID 10120; state: ENABLED
+11-18 05:01:03.830  1054  1054 D AutofillManager: Fill dialog is enabled:false, hints=[password, passwordAuto, creditCardNumber, creditCardSecurityCode, creditCardExpirationDate]
+11-18 05:01:03.832  1054  1054 D DeviceSearchAlg: search timeout = %d200
+11-18 05:01:03.834   789   789 D NavigationModeController: getCurrentUserContext: contextUser=0 currentUser=0
+11-18 05:01:03.835  1054  1081 I AiAiSuggestUi: Connecting to system intelligence module.
+11-18 05:01:03.837  5729  7856 I bwir    : updateFromConfigurations using legacy put method [CONTEXT service_id=204 ]
+11-18 05:01:03.840  1054  4484 I AiAiSuggestUi: Successfully connected to system intelligence:
+11-18 05:01:03.844  1054  1054 W PageIndicator: Total number of pages invalid: 0. Assuming 1 page.
+11-18 05:01:03.844  1054  1054 W BcSmartspaceView: Current card is not present in the Adapter; cannot log.
+11-18 05:01:03.848  1054  1054 I OverviewComponentObserver: updateOverviewTargets: mIsHomeDisabled=false, isDefaultHomeNull=false, mIsDefaultHome=true
+11-18 05:01:03.861  1640  1640 I AiAiEcho: SearchContextManagerImpl::setSearchContext resultTypes=[141151] extras=[Bundle[mParcelledData.dataSize=608]] sessionId=[com.google.android.apps.nexuslauncher:bb62bc66-10e7-4f9d-9e4f-9652d0f2c2d3,0]
+11-18 05:01:03.866  1054  1054 I ContentCaptureHelper: Setting logging level to DEBUG
+11-18 05:01:03.866  1054  1054 D ContentCaptureManager: setFlushViewTreeAppearingEventDisabled(): setting to false
+11-18 05:01:03.867  1054  1054 D ContentCaptureManager: updateWindowAttributes(): window flags=-2137980672
+11-18 05:01:03.868  1054  1827 W Parcel  : Expecting binder but got null!
+11-18 05:01:03.871  1054  1054 D MainContentCaptureSession: Flushing 0 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FINISHED
+11-18 05:01:03.871  1054  1054 D MainContentCaptureSession: Destroying session (ctx=com.google.android.apps.nexuslauncher.NexusLauncherActivity@b5dd85a, id=933692463) with 0 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false]
+11-18 05:01:03.872  1640  1640 W ContentCaptureService: handleSendEvents() received empty list of events
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: Unable to register Doze Always on content observer.
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: java.lang.SecurityException: No access to content://settings/secure/doze_always_on: Neither user 10155 nor current process has android.permission.INTERACT_ACROSS_USERS_FULL.
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at android.os.Parcel.createExceptionOrNull(Parcel.java:3011)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at android.os.Parcel.createException(Parcel.java:2995)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at android.os.Parcel.readException(Parcel.java:2978)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at android.os.Parcel.readException(Parcel.java:2920)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at android.content.IContentService$Stub$Proxy.registerContentObserver(IContentService.java:1032)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at android.content.ContentResolver.registerContentObserver(ContentResolver.java:2712)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at com.google.android.systemui.smartspace.BcSmartspaceView.onAttachedToWindow(Unknown Source:222)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at android.view.View.dispatchAttachedToWindow(View.java:21357)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at android.view.ViewGroup.dispatchAttachedToWindow(ViewGroup.java:3491)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at android.view.ViewGroup.dispatchAttachedToWindow(ViewGroup.java:3498)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at android.view.ViewGroup.dispatchAttachedToWindow(ViewGroup.java:3498)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at android.view.ViewGroup.dispatchAttachedToWindow(ViewGroup.java:3498)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at android.view.ViewGroup.dispatchAttachedToWindow(ViewGroup.java:3498)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at android.view.ViewGroup.dispatchAttachedToWindow(ViewGroup.java:3498)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at android.view.ViewGroup.dispatchAttachedToWindow(ViewGroup.java:3498)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at android.view.ViewGroup.dispatchAttachedToWindow(ViewGroup.java:3498)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at android.view.ViewGroup.dispatchAttachedToWindow(ViewGroup.java:3498)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at android.view.ViewGroup.dispatchAttachedToWindow(ViewGroup.java:3498)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at android.view.ViewRootImpl.performTraversals(ViewRootImpl.java:2900)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at android.view.ViewRootImpl.doTraversal(ViewRootImpl.java:2371)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at android.view.ViewRootImpl$TraversalRunnable.run(ViewRootImpl.java:9297)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1231)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1239)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at android.view.Choreographer.doCallbacks(Choreographer.java:899)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at android.view.Choreographer.doFrame(Choreographer.java:832)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at android.view.Choreographer$FrameDisplayEventReceiver.run(Choreographer.java:1214)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at android.os.Handler.handleCallback(Handler.java:942)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at android.os.Handler.dispatchMessage(Handler.java:99)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at android.os.Looper.loopOnce(Looper.java:201)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at android.os.Looper.loop(Looper.java:288)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at android.app.ActivityThread.main(ActivityThread.java:7924)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at java.lang.reflect.Method.invoke(Native Method)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:548)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:936)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: Caused by: android.os.RemoteException: Remote stack trace:
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at android.app.ContextImpl.enforce(ContextImpl.java:2240)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at android.app.ContextImpl.enforceCallingOrSelfPermission(ContextImpl.java:2268)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at com.android.server.content.ContentService.handleIncomingUser(ContentService.java:1397)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at com.android.server.content.ContentService.registerContentObserver(ContentService.java:369)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView: 	at android.content.IContentService$Stub.onTransact(IContentService.java:486)
+11-18 05:01:03.899  1054  1054 W BcSmartspaceView:
+11-18 05:01:03.913  1054  1054 D TISBindHelper: TIS service connected
+11-18 05:01:03.913  1054  1054 D b/254119092: Set mActivity=com.google.android.apps.nexuslauncher.NexusLauncherActivity@1176b28
+11-18 05:01:03.913  1054  1054 D b/254119092: mActivity and mContext agree taskbarIsPresent=false
+11-18 05:01:03.913  1054  1054 D MainContentCaptureSession: handleScheduleFlush(act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=1 (WAITING_FOR_SERVER), disabled=false], reason=FULL): not a timeout reason because mDirectServiceInterface is not ready yet
+11-18 05:01:03.915  1054  1054 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=CONNECTED
+11-18 05:01:03.915  1054  1054 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+11-18 05:01:03.959   489   489 D BluetoothDeviceConfigChangeTracker: shouldRestartWhenPropertiesUpdated: scan_timeout_millis='300000',location_denylist_name='',location_denylist_advertising_data='⊈0016AAFE40/00FFFFFFF0,⊆0016AAFE/00FFFFFF,⊆00FF4C0002/00FFFFFFFF',location_denylist_mac=''
+11-18 05:01:03.959   489   489 D BluetoothDeviceConfigListener: All properties unchanged, skipping restart
+11-18 05:01:03.969   489   489 E DeviceConfig: Parsing int failed for location_mode
+11-18 05:01:03.976  1768  2679 W Parcel  : Expecting binder but got null!
+11-18 05:01:03.978   489  1943 W InputManager-JNI: Input channel object '50454b5 com.google.android.googlequicksearchbox/android.app.ContextImpl (client)' was disposed without first being removed with the input manager!
+11-18 05:01:03.990   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b7b30
+11-18 05:01:03.990   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b7b30
+11-18 05:01:04.661  1768  2207 I BistoDBWrapper: Close DB
+11-18 05:01:06.086  7011  7019 W System  : A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+11-18 05:01:06.086  7011  7019 W System  : java.lang.Throwable: Explicit termination method 'HardwareBuffer.close' not called
+11-18 05:01:06.086  7011  7019 W System  : 	at dalvik.system.CloseGuard.openWithCallSite(CloseGuard.java:288)
+11-18 05:01:06.086  7011  7019 W System  : 	at dalvik.system.CloseGuard.open(CloseGuard.java:257)
+11-18 05:01:06.086  7011  7019 W System  : 	at android.hardware.HardwareBuffer.<init>(HardwareBuffer.java:272)
+11-18 05:01:06.086  7011  7019 W System  : A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+11-18 05:01:06.086  7011  7019 W System  : java.lang.Throwable: Explicit termination method 'HardwareBuffer.close' not called
+11-18 05:01:06.086  7011  7019 W System  : 	at dalvik.system.CloseGuard.openWithCallSite(CloseGuard.java:288)
+11-18 05:01:06.086  7011  7019 W System  : 	at dalvik.system.CloseGuard.open(CloseGuard.java:257)
+11-18 05:01:06.086  7011  7019 W System  : 	at android.hardware.HardwareBuffer.<init>(HardwareBuffer.java:272)
+11-18 05:01:06.149   489   502 W JavaBinder: BinderProxy is being destroyed but the application did not call unlinkToDeath to unlink all of its death recipients beforehand.  Releasing leaked death recipient: com.android.server.wm.ActivityRecord$$ExternalSyntheticLambda0
+11-18 05:01:06.150   489   502 I BpBinder: onLastStrongRef automatically unlinking death recipients: <uncached descriptor>
+11-18 05:01:06.150   489   502 W JavaBinder: BinderProxy is being destroyed but the application did not call unlinkToDeath to unlink all of its death recipients beforehand.  Releasing leaked death recipient: com.android.server.wm.ActivityRecord$$ExternalSyntheticLambda0
+11-18 05:01:06.150   489   502 I BpBinder: onLastStrongRef automatically unlinking death recipients: <uncached descriptor>
+11-18 05:01:06.238  7023  7110 D EGL_emulation: app_time_stats: avg=877.17ms min=37.43ms max=1779.68ms count=3
+11-18 05:01:06.265  7023  7110 D EGL_emulation: app_time_stats: avg=648.28ms min=48.38ms max=4887.70ms count=9
+11-18 05:01:06.274   489  1943 W InputManager-JNI: Input channel object '2139bbe com.timcordova.quartznotes/androidx.activity.ComponentActivity (client)' was disposed without first being removed with the input manager!
+11-18 05:01:06.295   789   845 D EGL_emulation: app_time_stats: avg=1503.03ms min=113.18ms max=5289.31ms count=4
+11-18 05:01:06.298   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b7cb0
+11-18 05:01:06.298   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bd7d0
+11-18 05:01:06.298   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9630
+11-18 05:01:06.310   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9390
+11-18 05:01:06.310   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b89d0
+11-18 05:01:06.317   789   845 D EGL_emulation: app_time_stats: avg=2818.54ms min=732.16ms max=4904.92ms count=2
+11-18 05:01:06.365  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-18 05:01:06.366  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-18 05:01:06.366  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=null}, false)
+11-18 05:01:06.366  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 05:01:06.367  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:01:06.376   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b7710
+11-18 05:01:06.376   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:06.376   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:07.243   789   833 D SplashScreenView: Build android.window.SplashScreenView{7ab9e79 V.E...... ......ID 0,0-0,0}
+11-18 05:01:07.243   789   833 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-18 05:01:07.243   789   833 D SplashScreenView: Branding: view: android.view.View{8f187be G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-18 05:01:07.244   789   845 W Parcel  : Expecting binder but got null!
+11-18 05:01:07.246  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@7db181f in: PAUSED
+11-18 05:01:07.246  7023  7023 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=androidx.activity.ComponentActivity@7db181f
+11-18 05:01:07.255  7130  7153 W Parcel  : Expecting binder but got null!
+11-18 05:01:07.308   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:07.338   489  2315 W InputManager-JNI: Input channel object '5572923 com.timcordova.quartznotes.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity (client)' was disposed without first being removed with the input manager!
+11-18 05:01:07.345   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 1
+11-18 05:01:07.346   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-18 05:01:07.348   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-18 05:01:07.361   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9c30
+11-18 05:01:07.361   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9ff0
+11-18 05:01:07.361   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:07.364   489  1056 W InputManager-JNI: Input channel object 'd48c825 Splash Screen com.timcordova.quartznotes.test (client)' was disposed without first being removed with the input manager!
+11-18 05:01:07.398  1054  1054 W BcSmartspaceCard: No title view to update
+11-18 05:01:07.398  1054  1054 I BcSmartspaceCard: setFormattedContentDescription: textView=SUBTITLE, text=null, iconDescription=null, contentDescription=null
+11-18 05:01:07.409   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b7710
+11-18 05:01:07.409   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b6870
+11-18 05:01:07.409   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b6870
+11-18 05:01:07.409   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b6870
+11-18 05:01:07.434  1054  1054 W TextView: onProvideContentCaptureStructure(): calling assumeLayout()
+11-18 05:01:07.437  1054  1054 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+11-18 05:01:07.453   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:07.458   489  1666 W AppSearchIcing: icing-search-engine.cc:217: Error: 5, Message: Document (com.google.android.googlequicksearchbox$OneSearchZeroStateGoogleSuggestions/default, zp) not found.
+11-18 05:01:07.459  1054  2068 D OneSearchSuggestProvider: Created the binder channel successfully for end point service =com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService , mChannel=Q0{delegate=L0{logId=109, target=directaddress:///AndroidComponentAddress%5BIntent%20%7B%20act=grpc.io.action.BIND%20cmp=com.google.android.googlequicksearchbox/com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService%20%7D%5D}} , mOneSearchConnection=y1.J@7cb60c
+11-18 05:01:07.479  1640  1951 I AiAiEcho: Predicting[0]:
+11-18 05:01:07.479  1640  1951 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:
+11-18 05:01:07.480  1640  1951 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0
+11-18 05:01:07.480  1640  1951 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0
+11-18 05:01:07.484  1054  1054 W TextView: onProvideContentCaptureStructure(): calling assumeLayout()
+11-18 05:01:07.484  1054  1054 D MainContentCaptureSession: Flushing 2 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARING
+11-18 05:01:07.488  1054  1054 D MainContentCaptureSession: Flushing 63 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARED
+11-18 05:01:07.505  1054  1054 D MainContentCaptureSession: Flushing 2 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARING
+11-18 05:01:07.513   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bd7d0
+11-18 05:01:07.513   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bb490
+11-18 05:01:07.513   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bc2d0
+11-18 05:01:07.515  1054  1054 D MainContentCaptureSession: Flushing 19 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARED
+11-18 05:01:07.535  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@7db181f in: STOPPED
+11-18 05:01:07.537  7023  7023 V ActivityScenario: Update currentActivityStage to STOPPED, currentActivity=androidx.activity.ComponentActivity@7db181f
+11-18 05:01:07.567   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:07.569  1768  1768 I A       : Constructor was called
+11-18 05:01:07.572   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:07.592  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-18 05:01:07.593  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-18 05:01:07.593  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.google.android.apps.nexuslauncher fieldId=-1 fieldName=null extras=null}, false)
+11-18 05:01:07.593  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 05:01:07.593  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:01:07.597  1768  1768 I A       : No savedInstanceState.
+11-18 05:01:07.597  1768  1768 I A       : makeRequest: subscribing to new source
+11-18 05:01:07.598  1054  1054 D MainContentCaptureSession: Flushing 0 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_ROOT
+11-18 05:01:07.601  1640  1640 W ContentCaptureService: handleSendEvents() received empty list of events
+11-18 05:01:07.608  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@7db181f in: DESTROYED
+11-18 05:01:07.608  7023  7023 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
+11-18 05:01:07.609  7023  7040 D IdlingRegistry: Unregistering idling resources: [androidx.compose.ui.test.EspressoLink@3d2454b]
+11-18 05:01:07.615   489  2315 W InputManager-JNI: Input channel object '4c40344 com.timcordova.quartznotes/androidx.activity.ComponentActivity (client)' was disposed without first being removed with the input manager!
+11-18 05:01:07.621  1768  1768 I A       : OnCreate Was Called
+11-18 05:01:07.621  1768  1768 I A       : getMinusOnePromotion
+11-18 05:01:07.660  1768  2206 I A       : #enqueuePeriodicJob: running = false
+11-18 05:01:07.661  1768  2206 I A       : #scheduledRefresh: enable_prod_refresh is true but we have no valid refresh schedule
+11-18 05:01:07.670  1768  2206 I A       : loading data on surface MinusOne.
+11-18 05:01:07.673  1768  1768 I A       : onApplyWindowInsets: systemWindowInsets=Insets{left=0, top=128, right=0, bottom=63}
+11-18 05:01:07.673  1768  1768 I A       : onApplyWindowInsets: Adjusting for display cutouts. Safe insets: left=0, top=128, right=0, bottom=0
+11-18 05:01:07.673  1768  1768 I A       : onApplyWindowInsets: systemWindowInsets=Insets{left=0, top=128, right=0, bottom=63}
+11-18 05:01:07.689  1054  1054 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARING
+11-18 05:01:07.689  1054  1054 D MainContentCaptureSession: Flushing 2 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARED
+11-18 05:01:07.695  1768  1768 I A       : Created gRPC endpoint to "search" for service class com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService
+11-18 05:01:07.715  7023  7040 I TestRunner: finished: mouseWheelInTimeline(com.timcordova.quartznotes.ui.notebook.PageInputTest)

@@ -1,0 +1,25 @@
+11-18 04:58:11.630  7023  7040 I TestRunner: started: templatesAndBackgroundPicturesSync(com.timcordova.quartznotes.data.sync.SyncEngineTest)
+11-18 04:58:11.632  7023  7040 D TrafficStats: tagSocket(93) with statsTag=0xffffffff, statsUid=-1
+11-18 04:58:12.146   285   347 I netd    : setProcSysNet(4, 2, wlan0, retrans_time_ms, 750) <2.23ms>
+11-18 04:58:12.147   285   347 I netd    : setProcSysNet(4, 2, wlan0, ucast_solicit, 10) <0.04ms>
+11-18 04:58:12.147   285   347 I netd    : setProcSysNet(6, 2, wlan0, retrans_time_ms, 750) <0.03ms>
+11-18 04:58:12.147   285   347 I netd    : setProcSysNet(6, 2, wlan0, ucast_solicit, 10) <0.02ms>
+11-18 04:58:12.304  5729  5862 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.tapandpay.gcmtask.TapAndPayGcmTaskService started execution. cause:4 exec_start_elapsed_seconds: 198 [CONTEXT service_id=218 ]
+11-18 04:58:12.309  5729  5789 W TapAndPay: NfcAdapter is null while obtaining CardEmulation instance. [CONTEXT service_id=79 ]
+11-18 04:58:12.309  5729  5789 W TapAndPay: java.lang.NullPointerException: NfcAdapter is null
+11-18 04:58:12.309  5729  5789 W TapAndPay: 	at android.nfc.cardemulation.CardEmulation.getInstance(CardEmulation.java:154)
+11-18 04:58:12.309  5729  5789 W TapAndPay: 	at cdoy.<init>(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-18 04:58:12.309  5729  5789 W TapAndPay: 	at com.google.android.gms.tapandpay.hce.task.TapAndPayAidRegistrationTaskOperation.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):5)
+11-18 04:58:12.309  5729  5789 W TapAndPay: 	at com.google.android.gms.tapandpay.gcmtask.TapAndPayGcmTaskChimeraService.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+11-18 04:58:12.309  5729  5789 W TapAndPay: 	at avzs.call(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+11-18 04:58:12.309  5729  5789 W TapAndPay: 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+11-18 04:58:12.309  5729  5789 W TapAndPay: 	at aced.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-18 04:58:12.309  5729  5789 W TapAndPay: 	at aced.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):7)
+11-18 04:58:12.309  5729  5789 W TapAndPay: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-18 04:58:12.309  5729  5789 W TapAndPay: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-18 04:58:12.309  5729  5789 W TapAndPay: 	at acjn.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-18 04:58:12.309  5729  5789 W TapAndPay: 	at java.lang.Thread.run(Thread.java:1012)
+11-18 04:58:12.312  5729  5789 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.tapandpay.gcmtask.TapAndPayGcmTaskService finished executing. cause:4 result: 3 elapsed_millis: 14 uptime_millis: 14 exec_start_elapsed_seconds: 198 [CONTEXT service_id=218 ]
+11-18 04:58:12.329  5729  5862 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.tapandpay.gcmtask.TapAndPayGcmTaskService started execution. cause:5 exec_start_elapsed_seconds: 198 [CONTEXT service_id=218 ]
+11-18 04:58:12.334  5729  5826 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.tapandpay.gcmtask.TapAndPayGcmTaskService finished executing. cause:5 result: 1 elapsed_millis: 9 uptime_millis: 9 exec_start_elapsed_seconds: 198 [CONTEXT service_id=218 ]
+11-18 04:58:12.372  7023  7040 I TestRunner: finished: templatesAndBackgroundPicturesSync(com.timcordova.quartznotes.data.sync.SyncEngineTest)

@@ -1,0 +1,124 @@
+11-18 04:58:26.135  7023  7040 I TestRunner: started: coversShowTheirMaterial(com.timcordova.quartznotes.ui.components.CoverTexturesTest)
+11-18 04:58:26.137  7130  7153 W Parcel  : Expecting binder but got null!
+11-18 04:58:26.141  7023  7040 D IdlingRegistry: Registering idling resources: [androidx.compose.ui.test.EspressoLink@1c72274]
+11-18 04:58:26.150  7023  7040 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+11-18 04:58:26.182   789   833 D SplashScreenView: Build android.window.SplashScreenView{e94d7cf V.E...... ......ID 0,0-0,0}
+11-18 04:58:26.182   789   833 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-18 04:58:26.182   789   833 D SplashScreenView: Branding: view: android.view.View{83b255c G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-18 04:58:26.184   789   845 W Parcel  : Expecting binder but got null!
+11-18 04:58:26.188   331   772 W ServiceManager: Permission failure: android.permission.ACCESS_SURFACE_FLINGER from uid=10175 pid=7130
+11-18 04:58:26.188   331   772 D PermissionCache: checking android.permission.ACCESS_SURFACE_FLINGER for uid=10175 => denied (100 us)
+11-18 04:58:26.188   331   772 W ServiceManager: Permission failure: android.permission.ROTATE_SURFACE_FLINGER from uid=10175 pid=7130
+11-18 04:58:26.188   331   772 D PermissionCache: checking android.permission.ROTATE_SURFACE_FLINGER for uid=10175 => denied (71 us)
+11-18 04:58:26.188   331   772 W ServiceManager: Permission failure: android.permission.INTERNAL_SYSTEM_WINDOW from uid=10175 pid=7130
+11-18 04:58:26.188   331   772 D PermissionCache: checking android.permission.INTERNAL_SYSTEM_WINDOW for uid=10175 => denied (47 us)
+11-18 04:58:26.194   331   397 W ServiceManager: Permission failure: android.permission.ACCESS_SURFACE_FLINGER from uid=10175 pid=0
+11-18 04:58:26.194   331   397 D PermissionCache: checking android.permission.ACCESS_SURFACE_FLINGER for uid=10175 => denied (6767 us)
+11-18 04:58:26.199  7130  7153 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_multi_configs ANDROID_EMU_hwc_color_transform GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0
+11-18 04:58:26.265  7130  7153 W OpenGLRenderer: Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-18 04:58:26.267  7130  7153 D EGL_emulation: eglCreateContext: 0x732bdc6eecd0: maj 3 min 0 rcv 3
+11-18 04:58:26.268  7130  7153 D EGL_emulation: eglMakeCurrent: 0x732bdc6eecd0: ver 3 0 (tinfo 0x732e0677e080) (first time)
+11-18 04:58:26.309   127   127 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+11-18 04:58:26.311  7130  7153 I Gralloc4: mapper 4.x is not supported
+11-18 04:58:26.332   127   127 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.allocator@4.0::IAllocator/default in either framework or device VINTF manifest.
+11-18 04:58:26.334   126   126 I servicemanager: Could not find android.hardware.graphics.allocator.IAllocator/default in the VINTF manifest.
+11-18 04:58:26.334  7130  7153 W Gralloc4: allocator 4.x is not supported
+11-18 04:58:26.349  7130  7153 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_multi_configs ANDROID_EMU_hwc_color_transform GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0
+11-18 04:58:26.490   489   513 W InputManager-JNI: Input channel object '67f16fb Splash Screen com.timcordova.quartznotes.test (client)' was disposed without first being removed with the input manager!
+11-18 04:58:26.494   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 1
+11-18 04:58:26.494   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-18 04:58:26.494   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-18 04:58:26.501  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@45c1cf8 in: PRE_ON_CREATE
+11-18 04:58:26.501  7023  7023 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+11-18 04:58:26.520  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@45c1cf8 in: CREATED
+11-18 04:58:26.520  7023  7023 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=androidx.activity.ComponentActivity@45c1cf8
+11-18 04:58:26.520  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@45c1cf8 in: STARTED
+11-18 04:58:26.520  7023  7023 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=androidx.activity.ComponentActivity@45c1cf8
+11-18 04:58:26.521  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@45c1cf8 in: RESUMED
+11-18 04:58:26.521  7023  7023 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=androidx.activity.ComponentActivity@45c1cf8
+11-18 04:58:26.531  7023  7110 W Parcel  : Expecting binder but got null!
+11-18 04:58:26.590   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9330
+11-18 04:58:26.591   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9630
+11-18 04:58:26.603   789   845 D EGL_emulation: app_time_stats: avg=849.96ms min=262.30ms max=1437.61ms count=2
+11-18 04:58:26.625   489   567 W InputManager-JNI: Input channel object '7be0087 com.timcordova.quartznotes.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity (client)' was disposed without first being removed with the input manager!
+11-18 04:58:26.632   489   509 W ziparchive: Unable to open '/data/app/~~q7gscu1n3ILq4DpSpq4VdQ==/com.timcordova.quartznotes-nbzIvoAk_EFWKv7by7QDAg==/base.dm': No such file or directory
+11-18 04:58:26.636   489   509 I ActivityTaskManager: Displayed com.timcordova.quartznotes/androidx.activity.ComponentActivity: +446ms
+11-18 04:58:26.642   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9bd0
+11-18 04:58:26.642   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b8250
+11-18 04:58:26.642   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9090
+11-18 04:58:26.642   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b7fb0
+11-18 04:58:26.642   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9390
+11-18 04:58:26.650  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-18 04:58:26.652  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-18 04:58:26.652  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=null}, false)
+11-18 04:58:26.653  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 04:58:26.653  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 04:58:26.661   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9990
+11-18 04:58:26.670   489   567 W InputManager-JNI: Input channel object 'de252aa Splash Screen com.timcordova.quartznotes (client)' was disposed without first being removed with the input manager!
+11-18 04:58:26.891   789   845 D EGL_emulation: app_time_stats: avg=1321.97ms min=1321.97ms max=1321.97ms count=1
+11-18 04:58:26.936   489   727 D ConnectivityService: releasing NetworkRequest [ REQUEST id=133, [ Transports: CELLULAR Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN&NOT_VCN_MANAGED Uid: 10119 RequestorUid: 10119 RequestorPkg: com.google.android.googlequicksearchbox UnderlyingNetworks: Null] ] (release request)
+11-18 04:58:26.939   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b8f10
+11-18 04:58:26.947   489   727 I ConnectivityService: Update capabilities for net 101 : -FOREGROUND
+11-18 04:58:26.955   285   347 I netd    : networkSetPermissionForNetwork(101, 1) <6.48ms>
+11-18 04:58:26.990  7023  7023 W ova.quartznotes: Accessing hidden method Landroid/os/SystemProperties;->addChangeCallback(Ljava/lang/Runnable;)V (unsupported, reflection, allowed)
+11-18 04:58:27.022  5729  5929 I FontLog : Fetch {Noto Color Emoji Compat, wdth 100.0, wght 400, ital 0.0, bestEffort false} end status Status{statusCode=SUCCESS, resolution=null} [CONTEXT service_id=132 ]
+11-18 04:58:27.028  5729  6129 I FontLog : Pulling font file for id = 1, cache size = 1 [CONTEXT service_id=132 ]
+11-18 04:58:27.033  5729  6129 I FontLog : Pulling font file for id = 1, cache size = 1 [CONTEXT service_id=132 ]
+11-18 04:58:27.062   285   347 I netd    : tetherGetStats() -> {[]} <0.24ms>
+11-18 04:58:27.064   285   347 I netd    : bandwidthSetGlobalAlert(2097152) <0.10ms>
+11-18 04:58:27.344  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@45c1cf8 in: PAUSED
+11-18 04:58:27.344  7023  7023 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=androidx.activity.ComponentActivity@45c1cf8
+11-18 04:58:27.353   789   833 D SplashScreenView: Build android.window.SplashScreenView{94152bf V.E...... ......ID 0,0-0,0}
+11-18 04:58:27.353   789   833 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-18 04:58:27.353   789   833 D SplashScreenView: Branding: view: android.view.View{6c09d8c G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-18 04:58:27.354   789   845 W Parcel  : Expecting binder but got null!
+11-18 04:58:27.387   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 1
+11-18 04:58:27.387   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-18 04:58:27.387   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-18 04:58:27.399  7130  7153 W Parcel  : Expecting binder but got null!
+11-18 04:58:27.572   489   567 W InputManager-JNI: Input channel object 'db84dd3 com.timcordova.quartznotes.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity (client)' was disposed without first being removed with the input manager!
+11-18 04:58:27.662   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 1
+11-18 04:58:27.662   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-18 04:58:27.662   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-18 04:58:27.665   489   937 W InputManager-JNI: Input channel object '75c6e5b Splash Screen com.timcordova.quartznotes.test (client)' was disposed without first being removed with the input manager!
+11-18 04:58:27.722   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9450
+11-18 04:58:27.722   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9270
+11-18 04:58:27.748  1054  1054 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+11-18 04:58:27.766  1054  1054 W TextView: onProvideContentCaptureStructure(): calling assumeLayout()
+11-18 04:58:27.780   489  1666 W AppSearchIcing: icing-search-engine.cc:217: Error: 5, Message: Document (com.google.android.googlequicksearchbox$OneSearchZeroStateGoogleSuggestions/default, zp) not found.
+11-18 04:58:27.848  1054  2068 D OneSearchSuggestProvider: Created the binder channel successfully for end point service =com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService , mChannel=Q0{delegate=L0{logId=9, target=directaddress:///AndroidComponentAddress%5BIntent%20%7B%20act=grpc.io.action.BIND%20cmp=com.google.android.googlequicksearchbox/com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService%20%7D%5D}} , mOneSearchConnection=y1.J@309d98
+11-18 04:58:27.870  1640  1951 I AiAiEcho: Predicting[0]:
+11-18 04:58:27.870  1640  1951 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:
+11-18 04:58:27.873  1640  1951 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0
+11-18 04:58:27.878  7023  7035 I OpenGLRenderer: Davey! duration=1166ms; Flags=0, FrameTimelineVsyncId=10009, IntendedVsync=212691067945, Vsync=213041067931, InputEventId=0, HandleInputStart=213051238245, AnimationStart=213051240318, PerformTraversalsStart=213051241149, DrawStart=213098283254, FrameDeadline=212707734611, FrameInterval=213051228159, FrameStartTime=16666666, SyncQueued=213102009670, SyncStart=213102048623, IssueDrawCommandsStart=213102076004, SwapBuffers=213746614119, FrameCompleted=213857867300, DequeueBufferDuration=2514, QueueBufferDuration=107341, GpuCompleted=213857867300, SwapBuffersCompleted=213843160957, DisplayPresentTime=0, CommandSubmissionCompleted=213746614119,
+11-18 04:58:27.878  1640  1951 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0
+11-18 04:58:27.896   489   512 W system_server: Long monitor contention with owner android.anim (513) at void com.android.server.wm.WindowSurfacePlacer$Traverser.run()(WindowSurfacePlacer.java:58) waiters=1 in void com.android.server.wm.WindowManagerService$H.handleMessage(android.os.Message) for 142ms
+11-18 04:58:27.915   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b8df0
+11-18 04:58:27.915   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b7fb0
+11-18 04:58:27.915   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9b10
+11-18 04:58:27.924  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-18 04:58:27.929  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-18 04:58:27.929  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.google.android.apps.nexuslauncher fieldId=-1 fieldName=null extras=null}, false)
+11-18 04:58:27.929  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 04:58:27.929  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 04:58:27.932  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@45c1cf8 in: STOPPED
+11-18 04:58:27.933  7023  7023 V ActivityScenario: Update currentActivityStage to STOPPED, currentActivity=androidx.activity.ComponentActivity@45c1cf8
+11-18 04:58:27.956  1768  1768 I A       : Constructor was called
+11-18 04:58:27.957  1768  1768 I A       : No savedInstanceState.
+11-18 04:58:27.957  1768  1768 I A       : makeRequest: subscribing to new source
+11-18 04:58:27.958  1768  1768 I A       : OnCreate Was Called
+11-18 04:58:27.958  1768  1768 I A       : getMinusOnePromotion
+11-18 04:58:27.993  1768  1768 I A       : Created gRPC endpoint to "search" for service class com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService
+11-18 04:58:28.034  1768  2206 I A       : #enqueuePeriodicJob: running = false
+11-18 04:58:28.036  1768  2206 I A       : loading data on surface MinusOne.
+11-18 04:58:28.037  1768  2206 I A       : #scheduledRefresh: enable_prod_refresh is true but we have no valid refresh schedule
+11-18 04:58:28.043  1768  1768 I A       : onApplyWindowInsets: systemWindowInsets=Insets{left=0, top=128, right=0, bottom=63}
+11-18 04:58:28.044  1768  1768 I A       : onApplyWindowInsets: Adjusting for display cutouts. Safe insets: left=0, top=128, right=0, bottom=0
+11-18 04:58:28.044  1768  1768 I A       : onApplyWindowInsets: systemWindowInsets=Insets{left=0, top=128, right=0, bottom=63}
+11-18 04:58:28.046  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@45c1cf8 in: DESTROYED
+11-18 04:58:28.046  7023  7023 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
+11-18 04:58:28.048  7023  7040 D IdlingRegistry: Unregistering idling resources: [androidx.compose.ui.test.EspressoLink@1c72274]
+11-18 04:58:28.053   489   568 W InputManager-JNI: Input channel object 'e4c2226 com.timcordova.quartznotes/androidx.activity.ComponentActivity (client)' was disposed without first being removed with the input manager!
+11-18 04:58:28.055  1768  2151 W A       : Didn't find the session (MAIN_FEED, true)
+11-18 04:58:28.056  1768  2151 W A       : Didn't find the session (MAIN_FEED, false)
+11-18 04:58:28.061  7023  7040 I TestRunner: finished: coversShowTheirMaterial(com.timcordova.quartznotes.ui.components.CoverTexturesTest)

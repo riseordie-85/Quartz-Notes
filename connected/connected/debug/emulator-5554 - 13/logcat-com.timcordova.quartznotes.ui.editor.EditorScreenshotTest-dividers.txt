@@ -1,0 +1,433 @@
+11-18 04:58:38.837  7023  7040 I TestRunner: started: dividers(com.timcordova.quartznotes.ui.editor.EditorScreenshotTest)
+11-18 04:58:38.898   489  1666 W AppSearchIcing: icing-search-engine.cc:217: Error: 5, Message: Document (com.google.android.googlequicksearchbox$OneSearchZeroStateGoogleSuggestions/default, zp) not found.
+11-18 04:58:38.899  1054  2068 D OneSearchSuggestProvider: Created the binder channel successfully for end point service =com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService , mChannel=Q0{delegate=L0{logId=25, target=directaddress:///AndroidComponentAddress%5BIntent%20%7B%20act=grpc.io.action.BIND%20cmp=com.google.android.googlequicksearchbox/com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService%20%7D%5D}} , mOneSearchConnection=y1.J@a3ed889
+11-18 04:58:38.901   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b6ab0
+11-18 04:58:38.901   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bb6d0
+11-18 04:58:38.901   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b77d0
+11-18 04:58:38.901   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b59d0
+11-18 04:58:38.919  7023  7040 D IdlingRegistry: Registering idling resources: [androidx.compose.ui.test.EspressoLink@512fcd4]
+11-18 04:58:38.949  7023  7040 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+11-18 04:58:38.953  1768  1768 I A       : Created gRPC endpoint to "search" for service class com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService
+11-18 04:58:38.956   789   833 D SplashScreenView: Build android.window.SplashScreenView{5846cc2 V.E...... ......ID 0,0-0,0}
+11-18 04:58:38.956   789   833 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-18 04:58:38.956   789   833 D SplashScreenView: Branding: view: android.view.View{2919ad3 G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-18 04:58:38.973  1768  2283 I A       : Using proto config with mendel
+11-18 04:58:38.975   789   845 W Parcel  : Expecting binder but got null!
+11-18 04:58:38.980  1640  1951 I AiAiEcho: Predicting[0]:
+11-18 04:58:38.980  1640  1951 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:
+11-18 04:58:38.981  1640  1951 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0
+11-18 04:58:38.981  1640  1951 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0
+11-18 04:58:38.984  1768  2283 I A       : Using proto config with mendel
+11-18 04:58:38.984  1768  2206 I A       : group apa_head_suggest not present without account in *
+11-18 04:58:39.009  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@ff2e958 in: PRE_ON_CREATE
+11-18 04:58:39.010  7023  7023 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+11-18 04:58:39.014  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@ff2e958 in: CREATED
+11-18 04:58:39.015  7023  7023 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=androidx.activity.ComponentActivity@ff2e958
+11-18 04:58:39.016  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@ff2e958 in: STARTED
+11-18 04:58:39.017  7023  7023 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=androidx.activity.ComponentActivity@ff2e958
+11-18 04:58:39.018  1054  1054 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+11-18 04:58:39.019   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 1
+11-18 04:58:39.019   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-18 04:58:39.019   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-18 04:58:39.026  1768  2206 I A       : incrementApaDataDownloadStoreStatus(latency = PT0.047S, appVersion = 13.17.16.23, status = NOT_FOUND, locale = *, fileGroupnames = apa_head_suggest, accountScoped = false, localGroupsAvailable = false, timeSinceSearchBoot = Optional[PT2M36.624S] (ONE_TO_FIVE_MINUTES), timeSinceDataDownloadInit = PT10.299S (TEN_SECONDS_TO_THIRTY_SECONDS))
+11-18 04:58:39.026  1768  2207 I A       : incrementApaDataDownloadStoreStatusNotFound(appVersion = 13.17.16.23, locale = *, groupName = apa_head_suggest, accountScoped = false, foundGroups = 0, status = 0, localGroupsAvailable = false)
+11-18 04:58:39.059   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9930
+11-18 04:58:39.060  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@ff2e958 in: RESUMED
+11-18 04:58:39.060  7023  7023 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=androidx.activity.ComponentActivity@ff2e958
+11-18 04:58:39.101   489   513 W InputManager-JNI: Input channel object 'b01947 Splash Screen com.timcordova.quartznotes.test (client)' was disposed without first being removed with the input manager!
+11-18 04:58:39.117   331   377 W TransactionTracing: Could not find layer handle 0x79ff032baa10
+11-18 04:58:39.117   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bad10
+11-18 04:58:39.117   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b7e90
+11-18 04:58:39.147  7023  7110 W Parcel  : Expecting binder but got null!
+11-18 04:58:39.236   789   845 D EGL_emulation: app_time_stats: avg=2078.82ms min=2078.82ms max=2078.82ms count=1
+11-18 04:58:39.253  1054  2068 D OneSearchSuggestProvider: Shut down the binder channel
+11-18 04:58:39.269   489  1175 W InputManager-JNI: Input channel object '663a30e com.timcordova.quartznotes.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity (client)' was disposed without first being removed with the input manager!
+11-18 04:58:39.271   489   509 W ziparchive: Unable to open '/data/app/~~q7gscu1n3ILq4DpSpq4VdQ==/com.timcordova.quartznotes-nbzIvoAk_EFWKv7by7QDAg==/base.dm': No such file or directory
+11-18 04:58:39.271   489   509 I ActivityTaskManager: Displayed com.timcordova.quartznotes/androidx.activity.ComponentActivity: +319ms
+11-18 04:58:39.277  1768  7293 I PBSessionCacheImpl: Deleted sessionId[7777541209396349] from persistence.
+11-18 04:58:39.278   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bbd90
+11-18 04:58:39.278   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9150
+11-18 04:58:39.279   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9f90
+11-18 04:58:39.279   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bbe50
+11-18 04:58:39.279   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bbbb0
+11-18 04:58:39.280  1054  7179 I s.nexuslauncher: oneway function results for code 2 on binder at 0x732b6c7619f0 will be dropped but finished with status UNKNOWN_TRANSACTION
+11-18 04:58:39.284  1768  2283 W SearchServiceCore: Abort, client detached.
+11-18 04:58:39.284  1768  2283 W SearchServiceCore: Abort, client detached.
+11-18 04:58:39.284  1768  2283 W SearchServiceCore: Abort, client detached.
+11-18 04:58:39.284  1768  2283 W SearchServiceCore: Abort, client detached.
+11-18 04:58:39.284  1768  2283 W SearchServiceCore: Abort, client detached.
+11-18 04:58:39.284  1768  2283 W SearchServiceCore: Abort, client detached.
+11-18 04:58:39.284  1768  2283 W SearchServiceCore: Abort, client detached.
+11-18 04:58:39.286  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInputView():2241
+11-18 04:58:39.287  1549  1549 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-18 04:58:39.287  1549  1549 I InputBundle: InputBundle.consumeEvent():923 Skip consuming an event as keyboard status is 0
+11-18 04:58:39.289  1549  1549 I KeyboardWrapper: KeyboardWrapper.consumeEvent():275 Skip consuming an event as current keyboard is deactivated (state=0, keyboard existence=true)
+11-18 04:58:39.289  1549  1549 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.shutdown():77 shutdown()
+11-18 04:58:39.289  1549  1549 I AndroidIME: AbstractIme.onDeactivate():207 LatinIme.onDeactivate()
+11-18 04:58:39.291  1549  1637 W ModuleManager: ModuleManager.loadModule():450 Module jjj is not available
+11-18 04:58:39.296   489  2312 W InputManager-JNI: Input channel object '26b8be9 Splash Screen com.timcordova.quartznotes (client)' was disposed without first being removed with the input manager!
+11-18 04:58:39.307  7023  7023 D AutofillManager: Fill dialog is enabled:false, hints=[password, passwordAuto, creditCardNumber, creditCardSecurityCode, creditCardExpirationDate]
+11-18 04:58:39.309   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bc690
+11-18 04:58:39.309   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9150
+11-18 04:58:39.309   331   377 W TransactionTracing: Could not find layer handle 0x79ff032ba230
+11-18 04:58:39.323  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-18 04:58:39.347  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-18 04:58:39.347  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=null}, false)
+11-18 04:58:39.347  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 04:58:39.348  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 04:58:39.358   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b80d0
+11-18 04:58:39.389  1549  1718 D EGL_emulation: app_time_stats: avg=337.23ms min=52.36ms max=1066.68ms count=5
+11-18 04:58:39.410   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bbbb0
+11-18 04:58:39.505   789   845 D EGL_emulation: app_time_stats: avg=1702.55ms min=1702.55ms max=1702.55ms count=1
+11-18 04:58:39.540  7023  7023 E ImeBackDispatcher: Ime callback not found. Ignoring unregisterReceivedCallback. callbackId: 104116003
+11-18 04:58:39.566   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bad70
+11-18 04:58:39.566   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b6330
+11-18 04:58:39.566   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bad70
+11-18 04:58:39.773  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-18 04:58:39.773  7023  7023 D InsetsController: show(ime(), fromIme=false)
+11-18 04:58:39.773  7023  7023 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{c99a007 VFED..... .F....ID 0,0-1080,2209 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT_BY_INSETS_API
+11-18 04:58:39.773  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-18 04:58:39.775  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x2c001(Normal) imeOptions=0x42000000 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=63 initialSelEnd=63 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=Bundle[mParcelledData.dataSize=404]}, false)
+11-18 04:58:39.775  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 04:58:39.777  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 04:58:39.778  7023  7023 I AssistStructure: Flattened final assist data: 560 bytes, containing 1 windows, 3 views
+11-18 04:58:39.781  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x2c001(Normal) imeOptions=0x42000000 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=63 initialSelEnd=63 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=Bundle[mParcelledData.dataSize=404]}, true)
+11-18 04:58:39.781  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 04:58:39.782  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 04:58:39.782  1549  1549 W SessionManager: SessionManager.beginSession():53 Try to begin an already begun session [INPUT_SESSION], end it first
+11-18 04:58:39.785  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInputView():1995 onStartInputView(EditorInfo{inputType=0x2c001(Normal) imeOptions=0x42000000 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=63 initialSelEnd=63 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false, android.support.text.emoji.emojiCompat_replaceAll=false}]}, false)
+11-18 04:58:39.786  1549  1637 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 04:58:39.786  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 04:58:39.786  1549  1549 W ModuleManager: ModuleManager.loadModule():450 Module erj is not available
+11-18 04:58:39.786  5729  5729 W AutofillChimeraService: Pending fill request while another request in the same session was triggered. [CONTEXT service_id=177 ]
+11-18 04:58:39.798  7023  7110 W Parcel  : Expecting binder but got null!
+11-18 04:58:39.806  7023  7023 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{c99a007 VFED..... .F....ID 0,0-1080,2209 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+11-18 04:58:39.807  1577  1577 V InlineSuggestionRenderService: handleDestroySuggestionViews called for 0:969443957
+11-18 04:58:39.845  7023  7023 D Autofill Status: Autofill popup isn't shown because autofill is not available.
+11-18 04:58:39.845  7023  7023 D Autofill Status:
+11-18 04:58:39.845  7023  7023 D Autofill Status: Did you set up autofill?
+11-18 04:58:39.845  7023  7023 D Autofill Status: 1. Go to Settings > System > Languages&input > Advanced > Autofill Service
+11-18 04:58:39.845  7023  7023 D Autofill Status: 2. Pick a service
+11-18 04:58:39.845  7023  7023 D Autofill Status:
+11-18 04:58:39.845  7023  7023 D Autofill Status: Did you add an account?
+11-18 04:58:39.845  7023  7023 D Autofill Status: 1. Go to Settings > System > Languages&input > Advanced
+11-18 04:58:39.845  7023  7023 D Autofill Status: 2. Click on the settings icon next to the Autofill Service
+11-18 04:58:39.845  7023  7023 D Autofill Status: 3. Add your account
+11-18 04:58:39.848  1549  1549 I KeyboardViewUtil: KeyboardViewUtil.getKeyboardHeightRatio():189 systemKeyboardHeightRatio:1.000000; userKeyboardHeightRatio:1.000000.
+11-18 04:58:39.848  1549  1549 I AndroidIME: AbstractIme.onActivate():86 LatinIme.onActivate() : EditorInfo = inputType=0x2c001(Normal) imeOptions=0x42000000 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=63 initialSelEnd=63 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false, android.support.text.emoji.emojiCompat_replaceAll=false}], IncognitoMode = false, DeviceLocked = false
+11-18 04:58:39.848  1549  1549 I Delight5Facilitator: Delight5Facilitator.initializeForIme():777 initializeForIme() : Locale = [en_US], layout = qwerty
+11-18 04:58:39.849  1549  1549 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.cancelShutdown():55 cancelShutdown()
+11-18 04:58:39.849  1549  1549 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.syncLanguagePacks():67 syncLanguagePacks()
+11-18 04:58:39.849  1549  1549 I LatinIme: LatinIme.updateEnableInlineSuggestionsOnDecoderSideFlags():1003 inline flag updated to:false
+11-18 04:58:39.850  1549  7190 I SpeechFactory: SpeechRecognitionFactory.maybeScheduleAutoPackDownloadForFallback():205 maybeScheduleAutoPackDownloadForFallback()
+11-18 04:58:39.850  1549  7190 I FallbackOnDeviceRecognitionProvider: FallbackOnDeviceRecognitionProvider.maybeScheduleAutoPackDownload():195 maybeScheduleAutoPackDownload() for language tag en-US
+11-18 04:58:39.851  1549  1549 I KeyboardWrapper: KeyboardWrapper.consumeEvent():275 Skip consuming an event as current keyboard is deactivated (state=0, keyboard existence=true)
+11-18 04:58:39.871  1549  1549 I KeyboardViewUtil: KeyboardViewUtil.calculateMaxKeyboardBodyHeight():40 leave 354 height for app when screen height:2274, header height:116 and isFullscreenMode:false, so the max keyboard body height is:1804
+11-18 04:58:39.872  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 04:58:39.872  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = HEADER, shownType = SHOW_OPTIONAL
+11-18 04:58:39.872  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-18 04:58:39.872  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = BODY, shownType = SHOW_MANDATORY
+11-18 04:58:39.872  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-18 04:58:39.872  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = FLOATING_CANDIDATES, shownType = HIDE
+11-18 04:58:39.872  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = false
+11-18 04:58:39.872  1549  1549 I KeyboardViewUtil: KeyboardViewUtil.calculateMaxKeyboardBodyHeight():40 leave 354 height for app when screen height:2274, header height:116 and isFullscreenMode:false, so the max keyboard body height is:1804
+11-18 04:58:39.875  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 04:58:39.875  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = HEADER, shownType = SHOW_MANDATORY_WITH_ANIMATION
+11-18 04:58:39.875  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-18 04:58:39.876  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 04:58:39.876  1549  1549 I KeyboardModeManager: KeyboardModeManager.setInputView():364 setInputView() : supportsOneHandedMode=true
+11-18 04:58:39.876  1549  1549 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-18 04:58:39.877  1549  1549 I AndroidIME: KeyboardViewManager.updateKeyboardBodyViewHolderPaddingBottom():604 Set finalPaddingBottom = 0 while keyboardBottomGapFromScreen = 0; navigationHeight = 126
+11-18 04:58:39.880  1549  1549 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-18 04:58:39.880  1549  1549 I AndroidIME: KeyboardViewManager.updateKeyboardBodyViewHolderPaddingBottom():604 Set finalPaddingBottom = 0 while keyboardBottomGapFromScreen = 0; navigationHeight = 126
+11-18 04:58:39.880  1549  1549 I KeyboardModeManager: KeyboardModeManager.setInputView():356 setInputView() : entry=hwn{languageTag=en-US, variant=qwerty, hasLocalizedResources=true, conditionCacheKey=_device=phone_device_size=default_enable_adaptive_text_editing=true_enable_inline_suggestions_on_client_side=false_enable_large_tablet_batch_1=false_enable_large_tablet_batch_2=false_enable_more_candidates_view_for_multilingual=false_enable_nav_redesign=false_enable_number_row=false_enable_preemptive_decode=true_enable_secondary_symbols=false_expressions=normal_four_or_more_letter_rows=false_keyboard_mode=normal_language=en-US_orientation=portrait_physical_keyboard=qwerty_show_secondary_digits=true_show_suggestions=true_split_with_duplicate_keys=true_variant=qwerty, imeDef.stringId=ime_english_united_states, imeDef.className=com.google.android.apps.inputmethod.libs.latin5.LatinIme, imeDef.languageTag=en-US}
+11-18 04:58:39.881  1549  1549 I VoiceImeExtension: VoiceImeExtension.shouldStartVoiceInputAutomatically():383 No private IME option set to start voice input.
+11-18 04:58:39.887  5713  5713 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 04:58:39.887  5713  5713 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 04:58:39.888  5713  5713 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 04:58:39.936  1549  1549 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-18 04:58:39.937  1549  2139 I Delight5Decoder: Delight5DecoderWrapper.setKeyboardLayout():457 setKeyboardLayout()
+11-18 04:58:39.943  7023  7023 D InsetsController: show(ime(), fromIme=true)
+11-18 04:58:39.972  5713  5713 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 04:58:39.973  5713  5713 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 04:58:39.979  5713  5713 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 04:58:39.982  7023  7030 I ova.quartznotes: Background young concurrent copying GC freed 219106(6628KB) AllocSpace objects, 0(0B) LOS objects, 41% free, 8275KB/13MB, paused 19.744ms,13us total 64.067ms
+11-18 04:58:39.996   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bb2b0
+11-18 04:58:40.036   489  2312 W InputManager-JNI: Input channel object '38e0892 Pop-Up Window (client)' was disposed without first being removed with the input manager!
+11-18 04:58:40.041   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b6330
+11-18 04:58:40.041   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b62d0
+11-18 04:58:40.101  1768  2207 W A       : Batch timed out; batchId=1 taskId=-1000006
+11-18 04:58:40.118  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x2c001(Normal) imeOptions=0x42000000 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=66 initialSelEnd=66 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=Bundle[mParcelledData.dataSize=404]}, true)
+11-18 04:58:40.118  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 04:58:40.118  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 04:58:40.118  1549  1549 W SessionManager: SessionManager.beginSession():53 Try to begin an already begun session [INPUT_SESSION], end it first
+11-18 04:58:40.118  1549  1549 W SessionManager: SessionManager.endSession():96 Child session [INPUT_VIEW_SESSION] is not ended while ending session [{INPUT_SESSION=1794977919782, IME_SESSION=1794977919848, INPUT_VIEW_SESSION=1794977919785, TRAINING_CACHE_SESSION=1794977919848}], ending it now.
+11-18 04:58:40.118  1549  1549 W SessionManager: SessionManager.endSession():96 Child session [IME_SESSION] is not ended while ending session [{INPUT_SESSION=1794977919782, IME_SESSION=1794977919848, INPUT_VIEW_SESSION=1794977919785, TRAINING_CACHE_SESSION=1794977919848}], ending it now.
+11-18 04:58:40.119  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInputView():1995 onStartInputView(EditorInfo{inputType=0x2c001(Normal) imeOptions=0x42000000 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=66 initialSelEnd=66 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false, android.support.text.emoji.emojiCompat_replaceAll=false}]}, true)
+11-18 04:58:40.119  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 04:58:40.121  1549  1637 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 04:58:40.121  1549  1549 W ModuleManager: ModuleManager.loadModule():450 Module erj is not available
+11-18 04:58:40.175  1549  1549 I KeyboardViewUtil: KeyboardViewUtil.getKeyboardHeightRatio():189 systemKeyboardHeightRatio:1.000000; userKeyboardHeightRatio:1.000000.
+11-18 04:58:40.177  1549  1549 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-18 04:58:40.177  1549  1549 I KeyboardWrapper: KeyboardWrapper.consumeEvent():275 Skip consuming an event as current keyboard is deactivated (state=0, keyboard existence=true)
+11-18 04:58:40.177  1549  1549 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.shutdown():77 shutdown()
+11-18 04:58:40.177  1549  1549 I AndroidIME: AbstractIme.onDeactivate():207 LatinIme.onDeactivate()
+11-18 04:58:40.177  1549  1549 W SessionManager: SessionManager.endSession():88 Try to end a not begun session [IME_SESSION].
+11-18 04:58:40.178  1549  1549 I AndroidIME: AbstractIme.onActivate():86 LatinIme.onActivate() : EditorInfo = inputType=0x2c001(Normal) imeOptions=0x42000000 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=66 initialSelEnd=66 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false, android.support.text.emoji.emojiCompat_replaceAll=false}], IncognitoMode = false, DeviceLocked = false
+11-18 04:58:40.178  1549  1549 I Delight5Facilitator: Delight5Facilitator.initializeForIme():777 initializeForIme() : Locale = [en_US], layout = qwerty
+11-18 04:58:40.178  1549  1549 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.cancelShutdown():55 cancelShutdown()
+11-18 04:58:40.178  1549  1549 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.syncLanguagePacks():67 syncLanguagePacks()
+11-18 04:58:40.178  1549  1549 I LatinIme: LatinIme.updateEnableInlineSuggestionsOnDecoderSideFlags():1003 inline flag updated to:false
+11-18 04:58:40.180  1549  1549 I KeyboardWrapper: KeyboardWrapper.consumeEvent():275 Skip consuming an event as current keyboard is deactivated (state=0, keyboard existence=true)
+11-18 04:58:40.192  1549  1549 I KeyboardViewUtil: KeyboardViewUtil.calculateMaxKeyboardBodyHeight():40 leave 354 height for app when screen height:2274, header height:116 and isFullscreenMode:false, so the max keyboard body height is:1804
+11-18 04:58:40.192  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 04:58:40.192  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = HEADER, shownType = SHOW_OPTIONAL
+11-18 04:58:40.192  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-18 04:58:40.192  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = BODY, shownType = SHOW_MANDATORY
+11-18 04:58:40.192  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-18 04:58:40.192  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = FLOATING_CANDIDATES, shownType = HIDE
+11-18 04:58:40.192  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = false
+11-18 04:58:40.193  1549  1549 I KeyboardViewUtil: KeyboardViewUtil.calculateMaxKeyboardBodyHeight():40 leave 354 height for app when screen height:2274, header height:116 and isFullscreenMode:false, so the max keyboard body height is:1804
+11-18 04:58:40.193  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 04:58:40.198  1549  1637 W ModuleManager: ModuleManager.loadModule():450 Module jjj is not available
+11-18 04:58:40.199  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 04:58:40.199  1549  1549 I KeyboardModeManager: KeyboardModeManager.setInputView():364 setInputView() : supportsOneHandedMode=true
+11-18 04:58:40.199  1549  1549 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-18 04:58:40.199  1549  1549 I AndroidIME: KeyboardViewManager.updateKeyboardBodyViewHolderPaddingBottom():604 Set finalPaddingBottom = 0 while keyboardBottomGapFromScreen = 0; navigationHeight = 126
+11-18 04:58:40.199  1549  1549 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-18 04:58:40.200  1549  1549 I AndroidIME: KeyboardViewManager.updateKeyboardBodyViewHolderPaddingBottom():604 Set finalPaddingBottom = 0 while keyboardBottomGapFromScreen = 0; navigationHeight = 126
+11-18 04:58:40.200  1549  1549 I KeyboardModeManager: KeyboardModeManager.setInputView():356 setInputView() : entry=hwn{languageTag=en-US, variant=qwerty, hasLocalizedResources=true, conditionCacheKey=_device=phone_device_size=default_enable_adaptive_text_editing=true_enable_inline_suggestions_on_client_side=false_enable_large_tablet_batch_1=false_enable_large_tablet_batch_2=false_enable_more_candidates_view_for_multilingual=false_enable_nav_redesign=false_enable_number_row=false_enable_preemptive_decode=true_enable_secondary_symbols=false_expressions=normal_four_or_more_letter_rows=false_keyboard_mode=normal_language=en-US_orientation=portrait_physical_keyboard=qwerty_show_secondary_digits=true_show_suggestions=true_split_with_duplicate_keys=true_variant=qwerty, imeDef.stringId=ime_english_united_states, imeDef.className=com.google.android.apps.inputmethod.libs.latin5.LatinIme, imeDef.languageTag=en-US}
+11-18 04:58:40.201  1549  1549 I VoiceImeExtension: VoiceImeExtension.shouldStartVoiceInputAutomatically():383 No private IME option set to start voice input.
+11-18 04:58:40.208  5713  5713 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 04:58:40.208  5713  5713 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 04:58:40.209  5713  5713 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 04:58:40.209  1549  7190 I SpeechFactory: SpeechRecognitionFactory.maybeScheduleAutoPackDownloadForFallback():205 maybeScheduleAutoPackDownloadForFallback()
+11-18 04:58:40.212  1549  7190 I FallbackOnDeviceRecognitionProvider: FallbackOnDeviceRecognitionProvider.maybeScheduleAutoPackDownload():195 maybeScheduleAutoPackDownload() for language tag en-US
+11-18 04:58:40.216  7023  7023 D InsetsController: show(ime(), fromIme=true)
+11-18 04:58:40.269  1549  1549 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-18 04:58:40.273  1549  2139 I Delight5Decoder: Delight5DecoderWrapper.setKeyboardLayout():457 setKeyboardLayout()
+11-18 04:58:40.291  5713  5713 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 04:58:40.291  5713  5713 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 04:58:40.292  5713  5713 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 04:58:40.315  1768  2475 D t       : Starting download: https://www.gstatic.com/assistant/appintegration/models/1/662c5aa4617258c027708e2bb9323ead.binarypb
+11-18 04:58:40.315  1768  2475 V t       : Is http uri, downloading (uri: https://www.gstatic.com/assistant/appintegration/models/1/662c5aa4617258c027708e2bb9323ead.binarypb)
+11-18 04:58:40.316  1768  2454 D t       : Starting download: https://www.gstatic.com/federated_assistant/policy_config_federated_hotword-v610555528.binarypb
+11-18 04:58:40.316  1768  2454 V t       : Is http uri, downloading (uri: https://www.gstatic.com/federated_assistant/policy_config_federated_hotword-v610555528.binarypb)
+11-18 04:58:40.318  1768  2207 I A       : NGA Sync: MDD Task: MDD.CHARGING.PERIODIC.TASK done.
+11-18 04:58:40.321  1768  2207 I A       : NGA Sync: isNgaSyncEnabled: false; enableFileGroupPopulator: false; requiresMddAssets: false
+11-18 04:58:40.327  1768  2151 I A       : Refresh account policy.
+11-18 04:58:40.330  1768  2283 W SearchServiceCore: Abort, client detached.
+11-18 04:58:40.330  1768  2283 W SearchServiceCore: Abort, client detached.
+11-18 04:58:40.330  1768  2475 E MDD     : DownloadProgressMonitor: Can't find file group for uri: android://com.google.android.googlequicksearchbox/files/datadownload/shared/public/datadownloadfile_1794977833206
+11-18 04:58:40.333  1768  2454 E MDD     : DownloadProgressMonitor: Can't find file group for uri: android://com.google.android.googlequicksearchbox/files/datadownload/shared/public/datadownloadfile_1794977833208
+11-18 04:58:40.350  1768  6287 D t       : Starting download: https://www.gstatic.com/assistant/appintegration/models/1/05a8f7c516a3ad6c26cc4161a3dd6ac6.binarypb
+11-18 04:58:40.350  1768  6287 V t       : Is http uri, downloading (uri: https://www.gstatic.com/assistant/appintegration/models/1/05a8f7c516a3ad6c26cc4161a3dd6ac6.binarypb)
+11-18 04:58:40.372  1768  6287 E MDD     : DownloadProgressMonitor: Can't find file group for uri: android://com.google.android.googlequicksearchbox/files/datadownload/shared/public/datadownloadfile_1794977833207
+11-18 04:58:40.376  1768  2457 D t       : Starting download: https://dl.google.com/assistant/nga/1/4bce3720332aff95260f75ee29bbe97bd379e868.mddz
+11-18 04:58:40.376  1768  2457 V t       : Is http uri, downloading (uri: https://dl.google.com/assistant/nga/1/4bce3720332aff95260f75ee29bbe97bd379e868.mddz)
+11-18 04:58:40.387  1768  2475 D t       : Starting download: https://dl.google.com/assistant/nga/1/17d453d07f334b7d810f8e6e05dbd6001dc45eea.mddz
+11-18 04:58:40.387  1768  2475 V t       : Is http uri, downloading (uri: https://dl.google.com/assistant/nga/1/17d453d07f334b7d810f8e6e05dbd6001dc45eea.mddz)
+11-18 04:58:40.453  1768  1793 W earchbox:search: Cleared Reference was only reachable from finalizer (only reported once)
+11-18 04:58:40.487  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = HEADER, shownType = SHOW_MANDATORY_WITH_ANIMATION
+11-18 04:58:40.487  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-18 04:58:40.496  1768  6285 E SingleDataFileGroupPop: Failed to add file group
+11-18 04:58:40.496  1768  6285 E PhFileGroupPop: Failed to add file group
+11-18 04:58:40.496  1768  6285 E PhFileGroupPop: Failed to add file group
+11-18 04:58:40.496  1768  6285 E PhFileGroupPop: Failed to add file group
+11-18 04:58:40.496  1768  6285 E PhFileGroupPop: Failed to add file group
+11-18 04:58:40.496  1768  6285 E PhFileGroupPop: Failed to add file group
+11-18 04:58:40.499  1768  6285 E d       : RuntimeException while executing runnable cb{com.google.apps.tiktok.tracing.ej@84db56e} with executor MoreExecutors.directExecutor()
+11-18 04:58:40.499  1768  6285 E d       : java.lang.NullPointerException: Attempt to read from field 'java.lang.String com.google.android.libraries.mdi.download.ae.b' on a null object reference in method 'void com.google.android.libraries.mdi.download.h.bq.gH(java.lang.Object)'
+11-18 04:58:40.499  1768  6285 E d       : 	at com.google.android.libraries.mdi.download.h.bq.gH(PG:2)
+11-18 04:58:40.499  1768  6285 E d       : 	at com.google.apps.tiktok.tracing.ej.gH(PG:2)
+11-18 04:58:40.499  1768  6285 E d       : 	at com.google.common.util.concurrent.cb.run(PG:7)
+11-18 04:58:40.499  1768  6285 E d       : 	at com.google.common.util.concurrent.bf.execute(PG:1)
+11-18 04:58:40.499  1768  6285 E d       : 	at com.google.common.util.concurrent.d.i(PG:1)
+11-18 04:58:40.499  1768  6285 E d       : 	at com.google.common.util.concurrent.d.iq(PG:5)
+11-18 04:58:40.499  1768  6285 E d       : 	at com.google.common.util.concurrent.ci.t(PG:1)
+11-18 04:58:40.499  1768  6285 E d       : 	at com.google.android.libraries.mdi.download.h.bu.b(PG:26)
+11-18 04:58:40.499  1768  6285 E d       : 	at com.google.android.libraries.mdi.download.gs.p(PG:3)
+11-18 04:58:40.499  1768  6285 E d       : 	at com.google.android.libraries.mdi.download.gf.apply(Unknown Source:4)
+11-18 04:58:40.499  1768  6285 E d       : 	at com.google.apps.tiktok.tracing.eo.apply(PG:2)
+11-18 04:58:40.499  1768  6285 E d       : 	at com.google.common.util.concurrent.h.e(PG:2)
+11-18 04:58:40.499  1768  6285 E d       : 	at com.google.common.util.concurrent.j.run(PG:9)
+11-18 04:58:40.499  1768  6285 E d       : 	at com.google.common.util.concurrent.do.run(PG:4)
+11-18 04:58:40.499  1768  6285 E d       : 	at com.google.android.libraries.i.ae.run(PG:1)
+11-18 04:58:40.499  1768  6285 E d       : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-18 04:58:40.499  1768  6285 E d       : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-18 04:58:40.499  1768  6285 E d       : 	at com.google.android.libraries.i.i.run(PG:2)
+11-18 04:58:40.499  1768  6285 E d       : 	at com.google.android.libraries.i.p.run(PG:4)
+11-18 04:58:40.499  1768  6285 E d       : 	at java.lang.Thread.run(Thread.java:1012)
+11-18 04:58:40.499  1768  6285 E PhFileGroupPop: Failed to add file group
+11-18 04:58:40.499  1768  6285 E PhFileGroupPop: Failed to add file group
+11-18 04:58:40.499  1768  6285 E PhFileGroupPop: Failed to add file group
+11-18 04:58:40.501  1768  6287 I A       : Starting new batch; batchId=2 corpus=1004
+11-18 04:58:40.501  1768  2454 I A       : Joining existing batch; batchId=2 corpus=1008
+11-18 04:58:40.501  1768  2444 I A       : Joining existing batch; batchId=2 corpus=1014
+11-18 04:58:40.501  1768  6286 I A       : Joining existing batch; batchId=2 corpus=1015
+11-18 04:58:40.509  1768  6285 I A       : Download file group for language pack: en-US
+11-18 04:58:40.509  1768  6285 W A       : Locale en-US is not compatible, please check manifest exists
+11-18 04:58:40.509  1768  6285 I A       : Using proto config with mendel
+11-18 04:58:40.509  1768  6285 I A       : Using proto config with mendel
+11-18 04:58:40.510  1768  6285 I A       : Using proto config with mendel
+11-18 04:58:40.510  1768  6285 I A       : Merging legacy hotword config map with new proto.
+11-18 04:58:40.516  1768  6285 I A       : Adding from config to map. Locale: cmn-Hant-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+11-18 04:58:40.516  1768  6285 I A       : Adding from config to map. Locale: id-ID modelPrefix: x_google Location:cfffcc1a4c1c084c003c8eb27f73d770 isSpeakerIdSupported: true
+11-18 04:58:40.516  1768  6285 I A       : Adding from config to map. Locale: ko-KR modelPrefix: x_google Location:0b132163a2eb2c1194b202067475724b isSpeakerIdSupported: true
+11-18 04:58:40.516  1768  6285 I A       : Skipping. Expected model: 2 Found: 1
+11-18 04:58:40.516  1768  6285 I A       : Adding from config to map. Locale: zh-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+11-18 04:58:40.516  1768  6285 I HotwordModelPopulator: #updateHotwordFileGroup group name: hotword_model_en-US_okhey, raw locale: en-US, locale: en-US
+11-18 04:58:40.534  1768  6285 I A       : Using proto config with mendel
+11-18 04:58:40.535  1768  6285 I A       : Using proto config with mendel
+11-18 04:58:40.535  1768  6285 I A       : Merging legacy hotword config map with new proto.
+11-18 04:58:40.535  1768  6285 I A       : Adding from config to map. Locale: cmn-Hant-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+11-18 04:58:40.535  1768  6285 I A       : Adding from config to map. Locale: id-ID modelPrefix: x_google Location:cfffcc1a4c1c084c003c8eb27f73d770 isSpeakerIdSupported: true
+11-18 04:58:40.535  1768  6285 I A       : Adding from config to map. Locale: ko-KR modelPrefix: x_google Location:0b132163a2eb2c1194b202067475724b isSpeakerIdSupported: true
+11-18 04:58:40.535  1768  6285 I A       : Skipping. Expected model: 2 Found: 1
+11-18 04:58:40.535  1768  6285 I A       : Adding from config to map. Locale: zh-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+11-18 04:58:40.535  1768  6285 I HotwordModelPopulator: #updateHotwordFileGroup group name: hotword_model_en-US_okhey, raw locale: en-US, locale: en-US
+11-18 04:58:40.539  1768  6285 I A       : Using proto config with mendel
+11-18 04:58:40.539  1768  6285 I A       : Merging legacy hotword config map with new proto.
+11-18 04:58:40.539  1768  6285 I A       : Adding from config to map. Locale: cmn-Hant-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+11-18 04:58:40.539  1768  6285 I A       : Adding from config to map. Locale: id-ID modelPrefix: x_google Location:cfffcc1a4c1c084c003c8eb27f73d770 isSpeakerIdSupported: true
+11-18 04:58:40.539  1768  6285 I A       : Adding from config to map. Locale: ko-KR modelPrefix: x_google Location:0b132163a2eb2c1194b202067475724b isSpeakerIdSupported: true
+11-18 04:58:40.539  1768  6285 I A       : Skipping. Expected model: 2 Found: 1
+11-18 04:58:40.539  1768  6285 I A       : Adding from config to map. Locale: zh-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+11-18 04:58:40.540  1768  6285 I HotwordModelPopulator: #updateHotwordFileGroup group name: hotword_model_en-US_okhey, raw locale: en-US, locale: en-US
+11-18 04:58:40.548  1768  6285 D PhFileGroupPop: Added file groups assistant_appintegration_appactions_config
+11-18 04:58:40.560  1768  2457 E MDD     : DownloadProgressMonitor: Can't find file group for uri: android://com.google.android.googlequicksearchbox/files/datadownload/shared/public/datadownloadfile_1794977833209_1d48ae4b292cd15bc945ae5ddedb9565d268f7e2
+11-18 04:58:40.563  1768  2475 E MDD     : DownloadProgressMonitor: Can't find file group for uri: android://com.google.android.googlequicksearchbox/files/datadownload/shared/public/datadownloadfile_1794977833210_a64a3f98d26fa7e7180cd6d29bf44fced216fc32
+11-18 04:58:40.564  1768  6285 D PhFileGroupPop: Added file groups fedass_policy_config_group
+11-18 04:58:40.565  1768  6285 D PhFileGroupPop: Added file groups tapas_cortex
+11-18 04:58:40.571  1549  1549 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-18 04:58:40.576  1768  6286 D t       : Starting download: https://dl.google.com/assistant/nga/1/c11ffd9ddd4f0c6433a5cb07a437812b735fa547.mddz
+11-18 04:58:40.576  1768  6286 V t       : Is http uri, downloading (uri: https://dl.google.com/assistant/nga/1/c11ffd9ddd4f0c6433a5cb07a437812b735fa547.mddz)
+11-18 04:58:40.595  7023  7110 D EGL_emulation: app_time_stats: avg=94.00ms min=23.54ms max=281.74ms count=14
+11-18 04:58:40.631  1768  2197 I MicroModelsUtil: #getHotwordModelFromMobstore [mobstoreUri: android://com.google.android.googlequicksearchbox/files/datadownload/shared/public/datadownloadfile_1794977833205]
+11-18 04:58:40.632  1768  2151 I MicroModelsUtil: #getHotwordModelFromMobstore [mobstoreUri: android://com.google.android.googlequicksearchbox/files/datadownload/shared/public/datadownloadfile_1794977833205]
+11-18 04:58:40.636  1768  2196 I MicroModelsUtil: #getHotwordModelFromMobstore [mobstoreUri: android://com.google.android.googlequicksearchbox/files/datadownload/shared/public/datadownloadfile_1794977833205]
+11-18 04:58:40.636  1768  2151 I HotwordModelPopulator: Updated file group for locale 'hotword_model_en-US_okhey' from location: https://www.gstatic.com/android-search/hotword/x_google/975058821313279e27b2c3f04de0beef/hotword.data. Download already finished.
+11-18 04:58:40.639  1768  2196 I HotwordModelPopulator: Updated file group for locale 'hotword_model_en-US_okhey' from location: https://www.gstatic.com/android-search/hotword/x_google/975058821313279e27b2c3f04de0beef/hotword.data. Download already finished.
+11-18 04:58:40.641  1768  2197 I HotwordModelPopulator: Updated file group for locale 'hotword_model_en-US_okhey' from location: https://www.gstatic.com/android-search/hotword/x_google/975058821313279e27b2c3f04de0beef/hotword.data. Download already finished.
+11-18 04:58:40.750  1768  6286 E MDD     : DownloadProgressMonitor: Can't find file group for uri: android://com.google.android.googlequicksearchbox/files/datadownload/shared/public/datadownloadfile_1794977833211_5e9da2701f510020f2592c1e5b468922569445d7
+11-18 04:58:40.763  1768  2475 D t       : Starting download: https://dl.google.com/assistant/nga/1/1658155c551c182a9c9cbdff0bc6cd4293920bc3.mddz
+11-18 04:58:40.763  1768  2475 V t       : Is http uri, downloading (uri: https://dl.google.com/assistant/nga/1/1658155c551c182a9c9cbdff0bc6cd4293920bc3.mddz)
+11-18 04:58:40.802  1768  2475 E MDD     : DownloadProgressMonitor: Can't find file group for uri: android://com.google.android.googlequicksearchbox/files/datadownload/shared/public/datadownloadfile_1794977833212_b56351a773b9354cf1ebcacf86f309b6489173ac
+11-18 04:58:40.853  1768  6285 E SingleDataFileGroupPop: Failed to add file group
+11-18 04:58:40.853  1768  6285 E PhFileGroupPop: Failed to add file group
+11-18 04:58:40.853  1768  6285 E PhFileGroupPop: Failed to add file group
+11-18 04:58:40.854  1768  6285 E PhFileGroupPop: Failed to add file group
+11-18 04:58:40.854  1768  6285 E PhFileGroupPop: Failed to add file group
+11-18 04:58:40.854  1768  6285 E PhFileGroupPop: Failed to add file group
+11-18 04:58:40.855  1768  6285 E d       : RuntimeException while executing runnable cb{com.google.apps.tiktok.tracing.ej@aba1da6} with executor MoreExecutors.directExecutor()
+11-18 04:58:40.855  1768  6285 E d       : java.lang.NullPointerException: Attempt to read from field 'java.lang.String com.google.android.libraries.mdi.download.ae.b' on a null object reference in method 'void com.google.android.libraries.mdi.download.h.bq.gH(java.lang.Object)'
+11-18 04:58:40.855  1768  6285 E d       : 	at com.google.android.libraries.mdi.download.h.bq.gH(PG:2)
+11-18 04:58:40.855  1768  6285 E d       : 	at com.google.apps.tiktok.tracing.ej.gH(PG:2)
+11-18 04:58:40.855  1768  6285 E d       : 	at com.google.common.util.concurrent.cb.run(PG:7)
+11-18 04:58:40.855  1768  6285 E d       : 	at com.google.common.util.concurrent.bf.execute(PG:1)
+11-18 04:58:40.855  1768  6285 E d       : 	at com.google.common.util.concurrent.d.i(PG:1)
+11-18 04:58:40.855  1768  6285 E d       : 	at com.google.common.util.concurrent.d.iq(PG:5)
+11-18 04:58:40.855  1768  6285 E d       : 	at com.google.common.util.concurrent.ci.t(PG:1)
+11-18 04:58:40.855  1768  6285 E d       : 	at com.google.android.libraries.mdi.download.h.bu.b(PG:26)
+11-18 04:58:40.855  1768  6285 E d       : 	at com.google.android.libraries.mdi.download.gs.p(PG:3)
+11-18 04:58:40.855  1768  6285 E d       : 	at com.google.android.libraries.mdi.download.gf.apply(Unknown Source:4)
+11-18 04:58:40.855  1768  6285 E d       : 	at com.google.apps.tiktok.tracing.eo.apply(PG:2)
+11-18 04:58:40.855  1768  6285 E d       : 	at com.google.common.util.concurrent.h.e(PG:2)
+11-18 04:58:40.855  1768  6285 E d       : 	at com.google.common.util.concurrent.j.run(PG:9)
+11-18 04:58:40.855  1768  6285 E d       : 	at com.google.common.util.concurrent.do.run(PG:4)
+11-18 04:58:40.855  1768  6285 E d       : 	at com.google.android.libraries.i.ae.run(PG:1)
+11-18 04:58:40.855  1768  6285 E d       : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-18 04:58:40.855  1768  6285 E d       : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-18 04:58:40.855  1768  6285 E d       : 	at com.google.android.libraries.i.i.run(PG:2)
+11-18 04:58:40.855  1768  6285 E d       : 	at com.google.android.libraries.i.p.run(PG:4)
+11-18 04:58:40.855  1768  6285 E d       : 	at java.lang.Thread.run(Thread.java:1012)
+11-18 04:58:40.855  1768  6285 E PhFileGroupPop: Failed to add file group
+11-18 04:58:40.855  1768  6285 E PhFileGroupPop: Failed to add file group
+11-18 04:58:40.855  1768  6285 E PhFileGroupPop: Failed to add file group
+11-18 04:58:40.856  1768  2457 I A       : Joining existing batch; batchId=2 corpus=1014
+11-18 04:58:40.856  1768  2444 I A       : Joining existing batch; batchId=2 corpus=1015
+11-18 04:58:40.856  1768  2475 I A       : Joining existing batch; batchId=2 corpus=1004
+11-18 04:58:40.857  1768  6286 I A       : Joining existing batch; batchId=2 corpus=1008
+11-18 04:58:40.857  1768  6285 I A       : Download file group for language pack: en-US
+11-18 04:58:40.857  1768  6285 W A       : Locale en-US is not compatible, please check manifest exists
+11-18 04:58:40.858  1768  6285 I A       : Using proto config with mendel
+11-18 04:58:40.858  1768  6285 I A       : Using proto config with mendel
+11-18 04:58:40.858  1768  6285 I A       : Using proto config with mendel
+11-18 04:58:40.858  1768  6285 I A       : Merging legacy hotword config map with new proto.
+11-18 04:58:40.858  1768  6285 I A       : Adding from config to map. Locale: cmn-Hant-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+11-18 04:58:40.858  1768  6285 I A       : Adding from config to map. Locale: id-ID modelPrefix: x_google Location:cfffcc1a4c1c084c003c8eb27f73d770 isSpeakerIdSupported: true
+11-18 04:58:40.858  1768  6285 I A       : Adding from config to map. Locale: ko-KR modelPrefix: x_google Location:0b132163a2eb2c1194b202067475724b isSpeakerIdSupported: true
+11-18 04:58:40.858  1768  6285 I A       : Skipping. Expected model: 2 Found: 1
+11-18 04:58:40.858  1768  6285 I A       : Adding from config to map. Locale: zh-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+11-18 04:58:40.858  1768  6285 I HotwordModelPopulator: #updateHotwordFileGroup group name: hotword_model_en-US_okhey, raw locale: en-US, locale: en-US
+11-18 04:58:40.858  1768  6285 I A       : Using proto config with mendel
+11-18 04:58:40.858  1768  6285 I A       : Using proto config with mendel
+11-18 04:58:40.858  1768  6285 I A       : Merging legacy hotword config map with new proto.
+11-18 04:58:40.858  1768  6285 I A       : Adding from config to map. Locale: cmn-Hant-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+11-18 04:58:40.858  1768  6285 I A       : Adding from config to map. Locale: id-ID modelPrefix: x_google Location:cfffcc1a4c1c084c003c8eb27f73d770 isSpeakerIdSupported: true
+11-18 04:58:40.858  1768  6285 I A       : Adding from config to map. Locale: ko-KR modelPrefix: x_google Location:0b132163a2eb2c1194b202067475724b isSpeakerIdSupported: true
+11-18 04:58:40.858  1768  6285 I A       : Skipping. Expected model: 2 Found: 1
+11-18 04:58:40.858  1768  6285 I A       : Adding from config to map. Locale: zh-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+11-18 04:58:40.858  1768  6285 I HotwordModelPopulator: #updateHotwordFileGroup group name: hotword_model_en-US_okhey, raw locale: en-US, locale: en-US
+11-18 04:58:40.859  1768  6285 I A       : Using proto config with mendel
+11-18 04:58:40.859  1768  6285 I A       : Merging legacy hotword config map with new proto.
+11-18 04:58:40.859  1768  6285 I A       : Adding from config to map. Locale: cmn-Hant-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+11-18 04:58:40.859  1768  6285 I A       : Adding from config to map. Locale: id-ID modelPrefix: x_google Location:cfffcc1a4c1c084c003c8eb27f73d770 isSpeakerIdSupported: true
+11-18 04:58:40.859  1768  6285 I A       : Adding from config to map. Locale: ko-KR modelPrefix: x_google Location:0b132163a2eb2c1194b202067475724b isSpeakerIdSupported: true
+11-18 04:58:40.859  1768  6285 I A       : Skipping. Expected model: 2 Found: 1
+11-18 04:58:40.859  1768  6285 I A       : Adding from config to map. Locale: zh-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+11-18 04:58:40.859  1768  6285 I HotwordModelPopulator: #updateHotwordFileGroup group name: hotword_model_en-US_okhey, raw locale: en-US, locale: en-US
+11-18 04:58:40.859  1768  6285 D PhFileGroupPop: Added file groups assistant_appintegration_appactions_config
+11-18 04:58:40.860  1768  6285 D PhFileGroupPop: Added file groups fedass_policy_config_group
+11-18 04:58:40.860  1768  6285 D PhFileGroupPop: Added file groups tapas_cortex
+11-18 04:58:40.862  1768  2197 I MicroModelsUtil: #getHotwordModelFromMobstore [mobstoreUri: android://com.google.android.googlequicksearchbox/files/datadownload/shared/public/datadownloadfile_1794977833205]
+11-18 04:58:40.862  1768  2151 I MicroModelsUtil: #getHotwordModelFromMobstore [mobstoreUri: android://com.google.android.googlequicksearchbox/files/datadownload/shared/public/datadownloadfile_1794977833205]
+11-18 04:58:40.862  1768  2200 I MicroModelsUtil: #getHotwordModelFromMobstore [mobstoreUri: android://com.google.android.googlequicksearchbox/files/datadownload/shared/public/datadownloadfile_1794977833205]
+11-18 04:58:40.863  1768  2197 I HotwordModelPopulator: Updated file group for locale 'hotword_model_en-US_okhey' from location: https://www.gstatic.com/android-search/hotword/x_google/975058821313279e27b2c3f04de0beef/hotword.data. Download already finished.
+11-18 04:58:40.864  1768  2151 I HotwordModelPopulator: Updated file group for locale 'hotword_model_en-US_okhey' from location: https://www.gstatic.com/android-search/hotword/x_google/975058821313279e27b2c3f04de0beef/hotword.data. Download already finished.
+11-18 04:58:40.864  1768  2200 I HotwordModelPopulator: Updated file group for locale 'hotword_model_en-US_okhey' from location: https://www.gstatic.com/android-search/hotword/x_google/975058821313279e27b2c3f04de0beef/hotword.data. Download already finished.
+11-18 04:58:40.968  1549  1718 D EGL_emulation: app_time_stats: avg=171.89ms min=18.12ms max=452.40ms count=6
+11-18 04:58:41.129  1549  1549 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-18 04:58:41.217   789   833 D SplashScreenView: Build android.window.SplashScreenView{146dec3 V.E...... ......ID 0,0-0,0}
+11-18 04:58:41.217   789   833 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-18 04:58:41.217   789   833 D SplashScreenView: Branding: view: android.view.View{de7340 G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-18 04:58:41.218   789   845 W Parcel  : Expecting binder but got null!
+11-18 04:58:41.223  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@ff2e958 in: PAUSED
+11-18 04:58:41.223  7023  7023 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=androidx.activity.ComponentActivity@ff2e958
+11-18 04:58:41.280  7130  7153 W Parcel  : Expecting binder but got null!
+11-18 04:58:41.453   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9f90
+11-18 04:58:41.454   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9810
+11-18 04:58:41.454   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bbf70
+11-18 04:58:41.454   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b59d0
+11-18 04:58:41.454   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bbf70
+11-18 04:58:41.454   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9f90
+11-18 04:58:41.454   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9f90
+11-18 04:58:41.454   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9810
+11-18 04:58:41.454   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bbf70
+11-18 04:58:41.454   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9810
+11-18 04:58:41.454   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bbf70
+11-18 04:58:41.525  1768  6285 I A       : Scheduled one-off task for batch; batchId=2 taskId=-1000008 corpora=[1004,1008,1014,1015]
+11-18 04:58:41.525  1768  6285 I A       : Pending callbacks: 1
+11-18 04:58:41.632   285   347 I netd    : tetherGetStats() -> {[]} <0.29ms>
+11-18 04:58:41.641  1054  1054 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+11-18 04:58:41.649   489  1666 W AppSearchIcing: icing-search-engine.cc:217: Error: 5, Message: Document (com.google.android.googlequicksearchbox$OneSearchZeroStateGoogleSuggestions/default, zp) not found.
+11-18 04:58:41.651  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@ff2e958 in: STOPPED
+11-18 04:58:41.651  1054  2068 D OneSearchSuggestProvider: Created the binder channel successfully for end point service =com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService , mChannel=Q0{delegate=L0{logId=29, target=directaddress:///AndroidComponentAddress%5BIntent%20%7B%20act=grpc.io.action.BIND%20cmp=com.google.android.googlequicksearchbox/com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService%20%7D%5D}} , mOneSearchConnection=y1.J@e11f5f9
+11-18 04:58:41.651   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 1
+11-18 04:58:41.651   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-18 04:58:41.651   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-18 04:58:41.652  7023  7023 V ActivityScenario: Update currentActivityStage to STOPPED, currentActivity=androidx.activity.ComponentActivity@ff2e958
+11-18 04:58:41.657   285   347 I netd    : bandwidthSetGlobalAlert(2097152) <0.12ms>
+11-18 04:58:41.671  7023  7023 D AutofillManager: onActivityFinishing(): calling cancelLocked()
+11-18 04:58:41.671  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@ff2e958 in: DESTROYED
+11-18 04:58:41.671  7023  7023 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
+11-18 04:58:41.672  7023  7040 D IdlingRegistry: Unregistering idling resources: [androidx.compose.ui.test.EspressoLink@512fcd4]
+11-18 04:58:41.673   489  1516 W InputManager-JNI: Input channel object '5584b8 com.timcordova.quartznotes/androidx.activity.ComponentActivity (client)' was disposed without first being removed with the input manager!
+11-18 04:58:41.719  1640  1951 I AiAiEcho: Predicting[0]:
+11-18 04:58:41.719  1640  1951 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:
+11-18 04:58:41.720  1640  1951 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0
+11-18 04:58:41.720  1640  1951 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0
+11-18 04:58:41.722   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bc4b0
+11-18 04:58:41.722   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9b10
+11-18 04:58:41.722   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9150
+11-18 04:58:41.725  7023  7040 I TestRunner: finished: dividers(com.timcordova.quartznotes.ui.editor.EditorScreenshotTest)

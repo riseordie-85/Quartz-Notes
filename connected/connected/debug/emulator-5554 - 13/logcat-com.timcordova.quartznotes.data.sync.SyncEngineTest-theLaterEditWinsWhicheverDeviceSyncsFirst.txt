@@ -1,0 +1,10 @@
+11-18 04:58:20.012  7023  7040 I TestRunner: started: theLaterEditWinsWhicheverDeviceSyncsFirst(com.timcordova.quartznotes.data.sync.SyncEngineTest)
+11-18 04:58:20.018  7023  7040 D TrafficStats: tagSocket(99) with statsTag=0xffffffff, statsUid=-1
+11-18 04:58:20.330  5729  5729 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.phenotype.service.START pkg=com.google.android.gms }
+11-18 04:58:20.392  7023  7029 I ova.quartznotes: JIT allocated 63KB for compiled code of java.lang.Object com.timcordova.quartznotes.data.sync.SyncEngine.apply(java.lang.String, kotlinx.serialization.json.JsonObject, boolean, com.timcordova.quartznotes.data.sync.SyncEngine$Counts, kotlin.coroutines.Continuation)
+11-18 04:58:20.597   285   347 I netd    : tetherGetStats() -> {[]} <0.39ms>
+11-18 04:58:20.605   285   347 I netd    : bandwidthSetGlobalAlert(2097152) <0.11ms>
+11-18 04:58:20.625   285   347 I netd    : bandwidthRemoveInterfaceQuota(eth0) <0.59ms>
+11-18 04:58:20.627   285   347 I netd    : bandwidthSetInterfaceQuota(eth0, 9223372036854775807) <0.53ms>
+11-18 04:58:20.671  5713  5713 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.mdd.service.START dat=chimera-action:/... cmp=com.google.android.gms/.chimera.GmsBoundBrokerService }
+11-18 04:58:20.834  7023  7040 I TestRunner: finished: theLaterEditWinsWhicheverDeviceSyncsFirst(com.timcordova.quartznotes.data.sync.SyncEngineTest)

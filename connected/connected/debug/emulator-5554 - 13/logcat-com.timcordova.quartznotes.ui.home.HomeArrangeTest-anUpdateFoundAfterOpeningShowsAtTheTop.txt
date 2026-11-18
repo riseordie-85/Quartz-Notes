@@ -1,0 +1,223 @@
+11-18 04:58:48.863  7023  7040 I TestRunner: started: anUpdateFoundAfterOpeningShowsAtTheTop(com.timcordova.quartznotes.ui.home.HomeArrangeTest)
+11-18 04:58:48.865  7023  7040 D IdlingRegistry: Registering idling resources: [androidx.compose.ui.test.EspressoLink@c6006e0]
+11-18 04:58:48.869  7023  7040 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+11-18 04:58:48.921  1054  1054 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+11-18 04:58:48.929  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@7f815a4 in: PRE_ON_CREATE
+11-18 04:58:48.932  7023  7023 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+11-18 04:58:48.934  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@7f815a4 in: CREATED
+11-18 04:58:48.934  7023  7023 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=androidx.activity.ComponentActivity@7f815a4
+11-18 04:58:48.936  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@7f815a4 in: STARTED
+11-18 04:58:48.936  7023  7023 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=androidx.activity.ComponentActivity@7f815a4
+11-18 04:58:48.937  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@7f815a4 in: RESUMED
+11-18 04:58:48.937  7023  7023 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=androidx.activity.ComponentActivity@7f815a4
+11-18 04:58:48.938  7023  7110 W Parcel  : Expecting binder but got null!
+11-18 04:58:48.939   789   833 D SplashScreenView: Build android.window.SplashScreenView{eed756 V.E...... ......ID 0,0-0,0}
+11-18 04:58:48.939   789   833 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-18 04:58:48.939   789   833 D SplashScreenView: Branding: view: android.view.View{dd213d7 G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-18 04:58:48.940   789   845 W Parcel  : Expecting binder but got null!
+11-18 04:58:49.219   789   845 D EGL_emulation: app_time_stats: avg=971.81ms min=180.82ms max=2221.77ms count=3
+11-18 04:58:49.337   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bc4b0
+11-18 04:58:49.337   331   377 W TransactionTracing: Could not find layer handle 0x79ff032ba230
+11-18 04:58:49.416   789   845 D EGL_emulation: app_time_stats: avg=1206.78ms min=174.20ms max=2239.36ms count=2
+11-18 04:58:49.420   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 1
+11-18 04:58:49.420   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-18 04:58:49.420   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-18 04:58:49.434   489   509 W ziparchive: Unable to open '/data/app/~~q7gscu1n3ILq4DpSpq4VdQ==/com.timcordova.quartznotes-nbzIvoAk_EFWKv7by7QDAg==/base.dm': No such file or directory
+11-18 04:58:49.437  7023  7023 D AutofillManager: Fill dialog is enabled:false, hints=[password, passwordAuto, creditCardNumber, creditCardSecurityCode, creditCardExpirationDate]
+11-18 04:58:49.441   489  2298 W InputManager-JNI: Input channel object '1182b7a Splash Screen com.timcordova.quartznotes (client)' was disposed without first being removed with the input manager!
+11-18 04:58:49.444   489   509 I ActivityTaskManager: Displayed com.timcordova.quartznotes/androidx.activity.ComponentActivity: +563ms
+11-18 04:58:49.470   331   377 W TransactionTracing: Could not find layer handle 0x79ff032ba8f0
+11-18 04:58:49.470   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bc210
+11-18 04:58:49.470   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b8310
+11-18 04:58:49.470   331   377 W TransactionTracing: Could not find layer handle 0x79ff032ba8f0
+11-18 04:58:49.470   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b8310
+11-18 04:58:49.470   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bc210
+11-18 04:58:49.470   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bc210
+11-18 04:58:49.470   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b8310
+11-18 04:58:49.470   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bc210
+11-18 04:58:49.470   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b8310
+11-18 04:58:49.470   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bc210
+11-18 04:58:49.470   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bc210
+11-18 04:58:49.470   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bc210
+11-18 04:58:49.470   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bc210
+11-18 04:58:49.527  1768  7293 W A       : [Download] response code: 400
+11-18 04:58:49.528  1768  7375 I PBSessionCacheImpl: Deleted sessionId[7777541209396354] from persistence.
+11-18 04:58:49.541  1768  2283 W SearchServiceCore: Abort, client detached.
+11-18 04:58:49.551  1054  2068 D OneSearchSuggestProvider: Shut down the binder channel
+11-18 04:58:49.552  1768  2283 W SearchServiceCore: Abort, client detached.
+11-18 04:58:49.552  1054  1714 I s.nexuslauncher: oneway function results for code 2 on binder at 0x732b6c75aa30 will be dropped but finished with status UNKNOWN_TRANSACTION
+11-18 04:58:49.553  1768  2283 W SearchServiceCore: Abort, client detached.
+11-18 04:58:49.553  1768  2283 W SearchServiceCore: Abort, client detached.
+11-18 04:58:49.553  1768  2283 W SearchServiceCore: Abort, client detached.
+11-18 04:58:49.589   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bae30
+11-18 04:58:49.589   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bba90
+11-18 04:58:49.604  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-18 04:58:49.604  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-18 04:58:49.605  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=null}, false)
+11-18 04:58:49.605  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 04:58:49.640   331   377 W TransactionTracing: Could not find layer handle 0x79ff032ba410
+11-18 04:58:49.642  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 04:58:49.738   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b94b0
+11-18 04:58:49.780  5729  7404 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.droidguard.DroidGuardGcmTaskService started execution. cause:7 exec_start_elapsed_seconds: 235 [CONTEXT service_id=218 ]
+11-18 04:58:49.787  5729  7105 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.droidguard.DroidGuardGcmTaskService finished executing. cause:7 result: 1 elapsed_millis: 8 uptime_millis: 8 exec_start_elapsed_seconds: 235 [CONTEXT service_id=218 ]
+11-18 04:58:49.804  5729  7404 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.auth.account.be.legacy.AuthCronService started execution. cause:5 exec_start_elapsed_seconds: 235 [CONTEXT service_id=218 ]
+11-18 04:58:49.806   285  7406 I resolv  : GetAddrInfoHandler::run: {100 786532 100 983140 10120 0}
+11-18 04:58:49.807   285  7407 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-18 04:58:49.807   285  7407 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x71459f2affd0
+11-18 04:58:49.807   285  7407 I resolv  : doQuery: rcode=0, ancount=8, return value=260
+11-18 04:58:49.809   285  7408 I resolv  : res_nmkquery: (QUERY, IN, A)
+11-18 04:58:49.809   285  7408 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x71458f2af1f0
+11-18 04:58:49.809   285  7408 I resolv  : doQuery: rcode=0, ancount=8, return value=164
+11-18 04:58:49.811  2701  3197 D TrafficStats: tagSocket(110) with statsTag=0x1803, statsUid=10120
+11-18 04:58:49.814  5729  7105 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.chimera.container.ConfigService started execution. cause:5 exec_start_elapsed_seconds: 235 [CONTEXT service_id=218 ]
+11-18 04:58:49.816  5713  5809 I ChimeraConfigurator: Starting update, reason: 1 urgentFeatures:
+11-18 04:58:49.840   285  7413 I resolv  : GetAddrInfoHandler::run: {100 786532 100 983140 10120 0}
+11-18 04:58:49.845  2701  3953 D TrafficStats: tagSocket(107) with statsTag=0x1809, statsUid=-1
+11-18 04:58:49.850  2701  3953 W libc    : Access denied finding property "persist.adb.tls_server.enable"
+11-18 04:58:49.850  2701  3953 W libc    : Access denied finding property "service.adb.tls.port"
+11-18 04:58:49.851  5713  5809 I GmsDebugLogger: [73] 1801
+11-18 04:58:49.852  5713  5809 W ZappDownloader: No successful module downloads for requested features [].
+11-18 04:58:49.852  5713  5809 I GmsDebugLogger: [30] [VisionOcrDynamite.integ:231602402100000],[VisionBarcode.optional:231818100800],[TfliteDynamiteDynamite.integ:264010405100800],[MlkitOcrCommon.optional:231818100800],[MapsCoreDynamite.integ:231112103100800],[MlkitBarcodeUi.optional:231818100000]
+11-18 04:58:49.844  2701  2701 W binder:2701_5: type=1400 audit(0.0:58): avc: denied { read } for name="u:object_r:system_adbd_prop:s0" dev="tmpfs" ino=269 scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:object_r:system_adbd_prop:s0 tclass=file permissive=0 app=com.google.android.gms
+11-18 04:58:49.860  5713  5809 I ChimeraConfigService: Scheduling checkin for one-off execution between [3300,43201] seconds from now (1794977929860) [CONTEXT service_id=264 ]
+11-18 04:58:49.862  5713  5809 I ChimeraConfigService: Scheduling checkin every 43201 seconds, with flex of 21600 seconds [CONTEXT service_id=264 ]
+11-18 04:58:49.870  5729  7105 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.chimera.container.ConfigService finished executing. cause:5 result: 2 elapsed_millis: 63 uptime_millis: 63 exec_start_elapsed_seconds: 235 [CONTEXT service_id=218 ]
+11-18 04:58:49.844  2701  2701 W binder:2701_5: type=1400 audit(0.0:59): avc: denied { read } for name="u:object_r:adbd_prop:s0" dev="tmpfs" ino=61 scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:object_r:adbd_prop:s0 tclass=file permissive=0 app=com.google.android.gms
+11-18 04:58:49.877  5729  5932 W GmsUrlRequestImpl: Content-Type header is overwritten.
+11-18 04:58:49.879   285  7415 I resolv  : GetAddrInfoHandler::run: {100 786532 100 983140 10120 0}
+11-18 04:58:49.880   285  7417 I resolv  : res_nmkquery: (QUERY, IN, A)
+11-18 04:58:49.880   285  7417 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x71458f2b0270
+11-18 04:58:49.880   285  7417 I resolv  : doQuery: rcode=0, ancount=8, return value=168
+11-18 04:58:49.881   285  7416 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-18 04:58:49.881   285  7416 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x71459f2b06d0
+11-18 04:58:49.881   285  7416 I resolv  : doQuery: rcode=0, ancount=8, return value=264
+11-18 04:58:49.886  5729  6002 D TrafficStats: tagSocket(80) with statsTag=0x401, statsUid=10120
+11-18 04:58:49.896  5729  7414 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.clearcut.uploader.QosUploaderService started execution. cause:5 exec_start_elapsed_seconds: 235 [CONTEXT service_id=218 ]
+11-18 04:58:49.905  5729  5938 I SQLiteConnection: /data/user/0/com.google.android.gms/databases/phenotype.db-wal 1322552 bytes: Bigger than 1048576; truncating
+11-18 04:58:49.928  5729  7409 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.clearcut.uploader.QosUploaderService finished executing. cause:5 result: 1 elapsed_millis: 40 uptime_millis: 40 exec_start_elapsed_seconds: 235 [CONTEXT service_id=218 ]
+11-18 04:58:49.931  3439  3462 I RemoteProvisioningService: Notify key generated ping for secLevel: 1
+11-18 04:58:49.932  3439  3462 I RemoteProvisioner: Pool status 6, 5, 0, 6
+11-18 04:58:49.932  3439  3462 I RemoteProvisioningService: Pool status.
+11-18 04:58:49.932  3439  3462 I RemoteProvisioningService: Total: 6
+11-18 04:58:49.932  3439  3462 I RemoteProvisioningService: Attested: 6
+11-18 04:58:49.932  3439  3462 I RemoteProvisioningService: Unassigned: 5
+11-18 04:58:49.932  3439  3462 I RemoteProvisioningService: Expiring: 0
+11-18 04:58:49.932  3439  3462 I RemoteProvisioningService.KeyPoolStats: Sufficient keys are available, no CSR needed.
+11-18 04:58:49.932  3439  3462 I RemoteProvisioningService: No provisioning needed.
+11-18 04:58:49.945  5729  5932 W GLSUser : [AppCertManager] Exception while requesting key:
+11-18 04:58:49.945  5729  5932 W GLSUser : java.util.concurrent.ExecutionException: avvw: Parse Proto Exception.
+11-18 04:58:49.945  5729  5932 W GLSUser : 	at dlnv.s(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+11-18 04:58:49.945  5729  5932 W GLSUser : 	at dlnv.get(:com.google.android.gms@231818047@23.18.18 (190800-535401451):7)
+11-18 04:58:49.945  5729  5932 W GLSUser : 	at oub.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):78)
+11-18 04:58:49.945  5729  5932 W GLSUser : 	at otz.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+11-18 04:58:49.945  5729  5932 W GLSUser : 	at otu.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-18 04:58:49.945  5729  5932 W GLSUser : 	at otx.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-18 04:58:49.945  5729  5932 W GLSUser : 	at lzq.call(:com.google.android.gms@231818047@23.18.18 (190800-535401451):14)
+11-18 04:58:49.945  5729  5932 W GLSUser : 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+11-18 04:58:49.945  5729  5932 W GLSUser : 	at aced.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-18 04:58:49.945  5729  5932 W GLSUser : 	at aced.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):7)
+11-18 04:58:49.945  5729  5932 W GLSUser : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-18 04:58:49.945  5729  5932 W GLSUser : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-18 04:58:49.945  5729  5932 W GLSUser : 	at acjn.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-18 04:58:49.945  5729  5932 W GLSUser : 	at java.lang.Thread.run(Thread.java:1012)
+11-18 04:58:49.945  5729  5932 W GLSUser : Caused by: avvw: Parse Proto Exception.
+11-18 04:58:49.945  5729  5932 W GLSUser : 	at avwn.f(:com.google.android.gms@231818047@23.18.18 (190800-535401451):5)
+11-18 04:58:49.945  5729  5932 W GLSUser : 	at avxk.onSucceeded(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-18 04:58:49.945  5729  5932 W GLSUser : 	at jf.onSucceeded(:com.google.android.gms.dynamite_cronetdynamite@231818047@23.18.18 (190800-0):0)
+11-18 04:58:49.945  5729  5932 W GLSUser : 	at ie.run(:com.google.android.gms.dynamite_cronetdynamite@231818047@23.18.18 (190800-0):4)
+11-18 04:58:49.945  5729  5932 W GLSUser : 	... 6 more
+11-18 04:58:49.945  5729  5932 W GLSUser : Caused by: dzfz: Protocol message contained an invalid tag (zero).
+11-18 04:58:49.945  5729  5932 W GLSUser : 	at dzdb.k(:com.google.android.gms@231818047@23.18.18 (190800-535401451):13)
+11-18 04:58:49.945  5729  5932 W GLSUser : 	at dzha.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):47)
+11-18 04:58:49.945  5729  5932 W GLSUser : 	at dzha.h(:com.google.android.gms@231818047@23.18.18 (190800-535401451):45)
+11-18 04:58:49.945  5729  5932 W GLSUser : 	at dzfd.A(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-18 04:58:49.945  5729  5932 W GLSUser : 	at dzex.f(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-18 04:58:49.945  5729  5932 W GLSUser : 	at dzcx.d(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-18 04:58:49.945  5729  5932 W GLSUser : 	at dzcx.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-18 04:58:49.945  5729  5932 W GLSUser : 	at dzcx.n(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-18 04:58:49.945  5729  5932 W GLSUser : 	at avwn.h(:com.google.android.gms@231818047@23.18.18 (190800-535401451):7)
+11-18 04:58:49.945  5729  5932 W GLSUser : 	at avwn.f(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+11-18 04:58:49.945  5729  5932 W GLSUser : 	... 9 more
+11-18 04:58:49.961  5729  5826 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.clearcut.uploader.QosUploaderService started execution. cause:5 exec_start_elapsed_seconds: 235 [CONTEXT service_id=218 ]
+11-18 04:58:49.963  5729  5826 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.auth.account.be.legacy.AuthCronService finished executing. cause:5 result: 3 elapsed_millis: 162 uptime_millis: 162 exec_start_elapsed_seconds: 235 [CONTEXT service_id=218 ]
+11-18 04:58:50.007  2701  7405 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_multi_configs ANDROID_EMU_hwc_color_transform GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0
+11-18 04:58:50.009  2701  7405 D EGL_emulation: eglCreateContext: 0x732bdc6f25d0: maj 3 min 0 rcv 3
+11-18 04:58:50.010  2701  7405 D EGL_emulation: eglMakeCurrent: 0x732bdc6f25d0: ver 3 0 (tinfo 0x732e064fd380) (first time)
+11-18 04:58:50.026   285  7426 I resolv  : GetAddrInfoHandler::run: {100 786532 100 983140 10120 0}
+11-18 04:58:50.031   285  7427 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-18 04:58:50.031   285  7428 I resolv  : res_nmkquery: (QUERY, IN, A)
+11-18 04:58:50.054   285  7428 I resolv  : res_nsend: used send_dg 165 terrno: 0
+11-18 04:58:50.055   285  7428 I resolv  : doQuery: rcode=0, ancount=8, return value=165
+11-18 04:58:50.066   285  7427 I resolv  : res_nsend: used send_dg 261 terrno: 0
+11-18 04:58:50.066   285  7427 I resolv  : doQuery: rcode=0, ancount=8, return value=261
+11-18 04:58:50.068  5729  6002 D TrafficStats: tagSocket(234) with statsTag=0x1065fff, statsUid=-1
+11-18 04:58:50.111  2701  7405 W libc    : Access denied finding property "persist.adb.tls_server.enable"
+11-18 04:58:50.112  2701  7405 W libc    : Access denied finding property "service.adb.tls.port"
+11-18 04:58:50.108  2701  2701 W IntentService[D: type=1400 audit(0.0:60): avc: denied { read } for name="u:object_r:system_adbd_prop:s0" dev="tmpfs" ino=269 scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:object_r:system_adbd_prop:s0 tclass=file permissive=0 app=com.google.android.gms
+11-18 04:58:50.108  2701  2701 W IntentService[D: type=1400 audit(0.0:61): avc: denied { read } for name="u:object_r:adbd_prop:s0" dev="tmpfs" ino=61 scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:object_r:adbd_prop:s0 tclass=file permissive=0 app=com.google.android.gms
+11-18 04:58:50.132  2701  7405 D TrafficStats: tagSocket(114) with statsTag=0x1809, statsUid=-1
+11-18 04:58:50.132  2701  7405 D TrafficStats: tagSocket(114) with statsTag=0x1809, statsUid=-1
+11-18 04:58:50.133  2701  7405 D TrafficStats: tagSocket(114) with statsTag=0x1809, statsUid=-1
+11-18 04:58:50.144  2701  7405 W SystemServiceRegistry: No service published for: persistent_data_block
+11-18 04:58:50.358  5729  6002 D TrafficStats: tagSocket(132) with statsTag=0x1065fff, statsUid=10119
+11-18 04:58:50.777  7023  7110 D EGL_emulation: app_time_stats: avg=454.31ms min=90.96ms max=1060.23ms count=3
+11-18 04:58:50.783  5713  5854 E WakeLock: DG:service ** IS FORCE-RELEASED ON TIMEOUT **
+11-18 04:58:51.034  5729  6002 D TrafficStats: tagSocket(89) with statsTag=0x1065fff, statsUid=10141
+11-18 04:58:51.117  5729  6002 D TrafficStats: tagSocket(139) with statsTag=0x1065fff, statsUid=10142
+11-18 04:58:51.187  5729  6002 D TrafficStats: tagSocket(117) with statsTag=0x1065fff, statsUid=10138
+11-18 04:58:51.268  5729  6002 D TrafficStats: tagSocket(118) with statsTag=0x1065fff, statsUid=10111
+11-18 04:58:51.740  7011  7019 W System  : A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+11-18 04:58:51.740  7011  7019 W System  : java.lang.Throwable: Explicit termination method 'HardwareBuffer.close' not called
+11-18 04:58:51.740  7011  7019 W System  : 	at dalvik.system.CloseGuard.openWithCallSite(CloseGuard.java:288)
+11-18 04:58:51.740  7011  7019 W System  : 	at dalvik.system.CloseGuard.open(CloseGuard.java:257)
+11-18 04:58:51.740  7011  7019 W System  : 	at android.hardware.HardwareBuffer.<init>(HardwareBuffer.java:272)
+11-18 04:58:51.842  5729  7414 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.clearcut.uploader.QosUploaderService finished executing. cause:5 result: 1 elapsed_millis: 1896 uptime_millis: 1896 exec_start_elapsed_seconds: 235 [CONTEXT service_id=218 ]
+11-18 04:58:51.852  5713  5892 I TelephonySpamChimeraSer: Running Telephony Spam Chimera Service [CONTEXT service_id=150 ]
+11-18 04:58:51.853  5713  5892 I TelephonySpamChimeraSer: Cleaning SIP Header local table of old entries [CONTEXT service_id=150 ]
+11-18 04:58:51.854  5729  7409 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.telephonyspam.sync.SpamListSyncTaskService started execution. cause:5 exec_start_elapsed_seconds: 237 [CONTEXT service_id=218 ]
+11-18 04:58:51.854  5713  5892 I SpamListSync: Call spam module disabled. Skipping cleaning cache sip header table. [CONTEXT service_id=150 ]
+11-18 04:58:51.855  5713  5892 I TelephonySpamChimeraSer: Syncing Call Spam List [CONTEXT service_id=150 ]
+11-18 04:58:51.855  5713  5892 I SpamListSync: SpamListSyncChimeraService.syncSpamList called with tag: telephonyspam.SpamListSyncOneOffTask, extras: Bundle[{SpamList Type=0, Action=1.0}] [CONTEXT service_id=150 ]
+11-18 04:58:51.856  5713  5892 I SpamListSync: Call spam module disabled. Skipping spam list syncing. [CONTEXT service_id=150 ]
+11-18 04:58:51.857  5729  7414 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.telephonyspam.sync.SpamListSyncTaskService finished executing. cause:5 result: 1 elapsed_millis: 8 uptime_millis: 8 exec_start_elapsed_seconds: 237 [CONTEXT service_id=218 ]
+11-18 04:58:51.861   789   833 D SplashScreenView: Build android.window.SplashScreenView{809c206 V.E...... ......ID 0,0-0,0}
+11-18 04:58:51.861   789   833 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-18 04:58:51.861   789   833 D SplashScreenView: Branding: view: android.view.View{be9a0c7 G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-18 04:58:51.862   789   845 W Parcel  : Expecting binder but got null!
+11-18 04:58:51.863  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@7f815a4 in: PAUSED
+11-18 04:58:51.864  7023  7023 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=androidx.activity.ComponentActivity@7f815a4
+11-18 04:58:51.871  7130  7153 W Parcel  : Expecting binder but got null!
+11-18 04:58:51.922  1054  1054 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+11-18 04:58:51.934   489  1666 W AppSearchIcing: icing-search-engine.cc:217: Error: 5, Message: Document (com.google.android.googlequicksearchbox$OneSearchZeroStateGoogleSuggestions/default, zp) not found.
+11-18 04:58:51.936  1054  2068 D OneSearchSuggestProvider: Created the binder channel successfully for end point service =com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService , mChannel=Q0{delegate=L0{logId=41, target=directaddress:///AndroidComponentAddress%5BIntent%20%7B%20act=grpc.io.action.BIND%20cmp=com.google.android.googlequicksearchbox/com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService%20%7D%5D}} , mOneSearchConnection=y1.J@8495cd2
+11-18 04:58:51.938   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 1
+11-18 04:58:51.938   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-18 04:58:51.938   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-18 04:58:51.943  1640  1951 I AiAiEcho: Predicting[0]:
+11-18 04:58:51.943  1640  1951 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:
+11-18 04:58:51.944  1640  1951 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0
+11-18 04:58:51.945  1640  1951 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0
+11-18 04:58:51.956   489  1162 W InputManager-JNI: Input channel object '3f69570 com.timcordova.quartznotes.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity (client)' was disposed without first being removed with the input manager!
+11-18 04:58:51.959   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b81f0
+11-18 04:58:51.959   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b6330
+11-18 04:58:51.986   489  1516 W InputManager-JNI: Input channel object '5c8303b Splash Screen com.timcordova.quartznotes.test (client)' was disposed without first being removed with the input manager!
+11-18 04:58:51.987  1768  1768 I A       : Created gRPC endpoint to "search" for service class com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService
+11-18 04:58:52.005  1768  2283 I A       : Using proto config with mendel
+11-18 04:58:52.006  1768  2283 I A       : Using proto config with mendel
+11-18 04:58:52.023  1768  2207 I A       : group apa_head_suggest not present without account in *
+11-18 04:58:52.024  1768  2207 I A       : incrementApaDataDownloadStoreStatus(latency = PT0.008S, appVersion = 13.17.16.23, status = NOT_FOUND, locale = *, fileGroupnames = apa_head_suggest, accountScoped = false, localGroupsAvailable = false, timeSinceSearchBoot = Optional[PT2M49.661S] (ONE_TO_FIVE_MINUTES), timeSinceDataDownloadInit = PT23.337S (TEN_SECONDS_TO_THIRTY_SECONDS))
+11-18 04:58:52.025  1768  2207 I A       : incrementApaDataDownloadStoreStatusNotFound(appVersion = 13.17.16.23, locale = *, groupName = apa_head_suggest, accountScoped = false, foundGroups = 0, status = 0, localGroupsAvailable = false)
+11-18 04:58:52.043   331   377 W TransactionTracing: Could not find layer handle 0x79ff032ba530
+11-18 04:58:52.109  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-18 04:58:52.113  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-18 04:58:52.113  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.google.android.apps.nexuslauncher fieldId=-1 fieldName=null extras=null}, false)
+11-18 04:58:52.113  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 04:58:52.113  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 04:58:52.202   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b69f0
+11-18 04:58:52.241  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@7f815a4 in: STOPPED
+11-18 04:58:52.241  7023  7023 V ActivityScenario: Update currentActivityStage to STOPPED, currentActivity=androidx.activity.ComponentActivity@7f815a4
+11-18 04:58:52.253  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@7f815a4 in: DESTROYED
+11-18 04:58:52.253  7023  7023 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
+11-18 04:58:52.254  7023  7040 D IdlingRegistry: Unregistering idling resources: [androidx.compose.ui.test.EspressoLink@c6006e0]
+11-18 04:58:52.256   489  1516 W InputManager-JNI: Input channel object '79a7d21 com.timcordova.quartznotes/androidx.activity.ComponentActivity (client)' was disposed without first being removed with the input manager!
+11-18 04:58:52.258  7023  7040 I TestRunner: finished: anUpdateFoundAfterOpeningShowsAtTheTop(com.timcordova.quartznotes.ui.home.HomeArrangeTest)

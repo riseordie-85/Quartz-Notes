@@ -1,0 +1,293 @@
+11-18 04:58:23.851  7023  7040 I TestRunner: started: eachMaterialIsQuickAndSeamless(com.timcordova.quartznotes.ui.components.CoverTexturesTest)
+11-18 04:58:23.873  7023  7040 W FileTestStorage: Output properties is not supported.
+11-18 04:58:23.873  7023  7040 I Tracing : Tracer added: class androidx.test.platform.tracing.AndroidXTracer
+11-18 04:58:23.879  7023  7023 D EventInjectionStrategy: Creating injection strategy with input manager.
+11-18 04:58:23.880  7023  7023 W ova.quartznotes: Accessing hidden method Landroid/hardware/input/InputManager;->getInstance()Landroid/hardware/input/InputManager; (unsupported, reflection, allowed)
+11-18 04:58:23.882  7023  7023 W ova.quartznotes: Accessing hidden method Landroid/hardware/input/InputManager;->injectInputEvent(Landroid/view/InputEvent;I)Z (unsupported, reflection, allowed)
+11-18 04:58:23.883  7023  7023 W ova.quartznotes: Accessing hidden field Landroid/hardware/input/InputManager;->INJECT_INPUT_EVENT_MODE_WAIT_FOR_FINISH:I (unsupported, reflection, allowed)
+11-18 04:58:23.887  7023  7023 W ova.quartznotes: Accessing hidden method Landroid/os/MessageQueue;->next()Landroid/os/Message; (unsupported, reflection, allowed)
+11-18 04:58:23.887  7023  7023 W ova.quartznotes: Accessing hidden field Landroid/os/MessageQueue;->mMessages:Landroid/os/Message; (unsupported, reflection, allowed)
+11-18 04:58:23.888  7023  7023 W ova.quartznotes: Accessing hidden method Landroid/os/Message;->recycleUnchecked()V (unsupported, reflection, allowed)
+11-18 04:58:23.889  7023  7040 D IdlingRegistry: Registering idling resources: [androidx.compose.ui.test.EspressoLink@aae909e]
+11-18 04:58:23.896  7023  7040 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+11-18 04:58:24.096  1054  1054 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+11-18 04:58:24.135   789   833 D SplashScreenView: Build android.window.SplashScreenView{46128e8 V.E...... ......ID 0,0-0,0}
+11-18 04:58:24.135   789   833 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-18 04:58:24.135   789   833 D SplashScreenView: Branding: view: android.view.View{3454b01 G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-18 04:58:24.145   789   845 W Parcel  : Expecting binder but got null!
+11-18 04:58:24.176  1054  1827 D EGL_emulation: app_time_stats: avg=14895.40ms min=14895.40ms max=14895.40ms count=1
+11-18 04:58:24.232  7023  7112 D libEGL  : loaded /vendor/lib64/egl/libEGL_emulation.so
+11-18 04:58:24.237  7023  7112 D libEGL  : loaded /vendor/lib64/egl/libGLESv1_CM_emulation.so
+11-18 04:58:24.241  7023  7112 D libEGL  : loaded /vendor/lib64/egl/libGLESv2_emulation.so
+11-18 04:58:24.337   489   501 I system_server: Background young concurrent copying GC freed 559087(22MB) AllocSpace objects, 26(2844KB) LOS objects, 51% free, 22MB/46MB, paused 573us,71us total 333.310ms
+11-18 04:58:24.363   489  2297 W Binder  : Caught a RuntimeException from the binder stub implementation.
+11-18 04:58:24.363   489  2297 W Binder  : java.lang.ArrayIndexOutOfBoundsException: Array index out of range: 0
+11-18 04:58:24.363   489  2297 W Binder  : 	at android.util.ArraySet.valueAt(ArraySet.java:422)
+11-18 04:58:24.363   489  2297 W Binder  : 	at com.android.server.contentcapture.ContentCapturePerUserService$ContentCaptureServiceRemoteCallback.updateContentCaptureOptions(ContentCapturePerUserService.java:733)
+11-18 04:58:24.363   489  2297 W Binder  : 	at com.android.server.contentcapture.ContentCapturePerUserService$ContentCaptureServiceRemoteCallback.setContentCaptureWhitelist(ContentCapturePerUserService.java:646)
+11-18 04:58:24.363   489  2297 W Binder  : 	at android.service.contentcapture.IContentCaptureServiceCallback$Stub.onTransact(IContentCaptureServiceCallback.java:115)
+11-18 04:58:24.363   489  2297 W Binder  : 	at android.os.Binder.execTransactInternal(Binder.java:1285)
+11-18 04:58:24.363   489  2297 W Binder  : 	at android.os.Binder.execTransact(Binder.java:1244)
+11-18 04:58:24.419  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@4f51650 in: PRE_ON_CREATE
+11-18 04:58:24.420  7023  7023 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+11-18 04:58:24.466  1054  1054 D MainContentCaptureSession: Flushing 2 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARING
+11-18 04:58:24.466  1054  1054 D MainContentCaptureSession: Flushing 2 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARED
+11-18 04:58:24.470   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b8910
+11-18 04:58:24.470   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b7b30
+11-18 04:58:24.470   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b7b30
+11-18 04:58:24.470   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b8910
+11-18 04:58:24.551  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@4f51650 in: CREATED
+11-18 04:58:24.552  7023  7023 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=androidx.activity.ComponentActivity@4f51650
+11-18 04:58:24.552  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@4f51650 in: STARTED
+11-18 04:58:24.553  7023  7023 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=androidx.activity.ComponentActivity@4f51650
+11-18 04:58:24.565   789   845 D EGL_emulation: app_time_stats: avg=122698.91ms min=122698.91ms max=122698.91ms count=1
+11-18 04:58:24.585  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@4f51650 in: RESUMED
+11-18 04:58:24.585  7023  7023 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=androidx.activity.ComponentActivity@4f51650
+11-18 04:58:24.589   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b8250
+11-18 04:58:24.597  7023  7023 D CompatibilityChangeReporter: Compat change id reported: 237531167; UID 10174; state: DISABLED
+11-18 04:58:24.608  7023  7110 W Parcel  : Expecting binder but got null!
+11-18 04:58:24.649   331   397 W ServiceManager: Permission failure: android.permission.ACCESS_SURFACE_FLINGER from uid=10174 pid=0
+11-18 04:58:24.649   331   397 D PermissionCache: checking android.permission.ACCESS_SURFACE_FLINGER for uid=10174 => denied (91 us)
+11-18 04:58:24.649   331   397 W ServiceManager: Permission failure: android.permission.ROTATE_SURFACE_FLINGER from uid=10174 pid=0
+11-18 04:58:24.649   331   397 D PermissionCache: checking android.permission.ROTATE_SURFACE_FLINGER for uid=10174 => denied (21 us)
+11-18 04:58:24.649   331   772 W ServiceManager: Permission failure: android.permission.INTERNAL_SYSTEM_WINDOW from uid=10174 pid=7023
+11-18 04:58:24.649   331   772 D PermissionCache: checking android.permission.INTERNAL_SYSTEM_WINDOW for uid=10174 => denied (35 us)
+11-18 04:58:24.650   331   397 W ServiceManager: Permission failure: android.permission.INTERNAL_SYSTEM_WINDOW from uid=10174 pid=0
+11-18 04:58:24.650   331   397 D PermissionCache: checking android.permission.INTERNAL_SYSTEM_WINDOW for uid=10174 => denied (959 us)
+11-18 04:58:24.664  7023  7110 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_multi_configs ANDROID_EMU_hwc_color_transform GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0
+11-18 04:58:24.670  7023  7110 W OpenGLRenderer: Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-18 04:58:24.671  7023  7110 D EGL_emulation: eglCreateContext: 0x732bdc6f40d0: maj 3 min 0 rcv 3
+11-18 04:58:24.677   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b7fb0
+11-18 04:58:24.680   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b6cf0
+11-18 04:58:24.682  7023  7110 D EGL_emulation: eglMakeCurrent: 0x732bdc6f40d0: ver 3 0 (tinfo 0x732e13046080) (first time)
+11-18 04:58:24.803   127   127 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+11-18 04:58:24.903   789   845 D EGL_emulation: app_time_stats: avg=24852.39ms min=24852.39ms max=24852.39ms count=1
+11-18 04:58:24.911  7023  7110 I Gralloc4: mapper 4.x is not supported
+11-18 04:58:24.925   127   127 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.allocator@4.0::IAllocator/default in either framework or device VINTF manifest.
+11-18 04:58:24.927   126   126 I servicemanager: Could not find android.hardware.graphics.allocator.IAllocator/default in the VINTF manifest.
+11-18 04:58:24.927  7023  7110 W Gralloc4: allocator 4.x is not supported
+11-18 04:58:24.932  7023  7110 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_multi_configs ANDROID_EMU_hwc_color_transform GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0
+11-18 04:58:25.038   489   509 W ziparchive: Unable to open '/data/app/~~q7gscu1n3ILq4DpSpq4VdQ==/com.timcordova.quartznotes-nbzIvoAk_EFWKv7by7QDAg==/base.dm': No such file or directory
+11-18 04:58:25.041  1054  1054 I ActivityThread: Schedule relaunch activity: com.google.android.apps.nexuslauncher.NexusLauncherActivity
+11-18 04:58:25.044  1054  2068 D OneSearchSuggestProvider: Shut down the binder channel
+11-18 04:58:25.045   489   509 I ActivityTaskManager: Displayed com.timcordova.quartznotes/androidx.activity.ComponentActivity: +1s122ms
+11-18 04:58:25.046  1054  4484 I s.nexuslauncher: oneway function results for code 2 on binder at 0x732b6c7510a0 will be dropped but finished with status UNKNOWN_TRANSACTION
+11-18 04:58:25.053  1768  2302 I PBSessionCacheImpl: Deleted sessionId[7777541209396118] from persistence.
+11-18 04:58:25.065   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 1
+11-18 04:58:25.065   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-18 04:58:25.065   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-18 04:58:25.065  1054  1054 D b/254119092: clearActivity
+11-18 04:58:25.065  1054  1054 D b/254119092: mActivity and mContext agree taskbarIsPresent=false
+11-18 04:58:25.078  1768  2283 I A       : Using proto config with mendel
+11-18 04:58:25.081  1768  2283 I A       : Using proto config with mendel
+11-18 04:58:25.081  1768  2283 W SearchServiceCore: Abort, client detached.
+11-18 04:58:25.081  1768  2283 W SearchServiceCore: Abort, client detached.
+11-18 04:58:25.081  1768  2283 W SearchServiceCore: Abort, client detached.
+11-18 04:58:25.081  1768  2283 W SearchServiceCore: Abort, client detached.
+11-18 04:58:25.081  1768  2283 W SearchServiceCore: Abort, client detached.
+11-18 04:58:25.081  1768  2283 W SearchServiceCore: Abort, client detached.
+11-18 04:58:25.081  1768  2283 W SearchServiceCore: Abort, client detached.
+11-18 04:58:25.081  1768  2283 I MicroDetectionState: Should stop hotword detection immediately - true
+11-18 04:58:25.081  1768  2283 I A       : Using proto config with mendel
+11-18 04:58:25.081  1768  2283 I A       : Using proto config with mendel
+11-18 04:58:25.096  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-18 04:58:25.107   489  2297 W InputManager-JNI: Input channel object 'bc405ab Splash Screen com.timcordova.quartznotes (client)' was disposed without first being removed with the input manager!
+11-18 04:58:25.112  1054  1054 W OnBackInvokedCallback: OnBackInvokedCallback is not enabled for the application.
+11-18 04:58:25.112  1054  1054 W OnBackInvokedCallback: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-18 04:58:25.115  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-18 04:58:25.115  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=null}, false)
+11-18 04:58:25.115  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 04:58:25.119  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 04:58:25.122   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b6930
+11-18 04:58:25.122   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b7c50
+11-18 04:58:25.122   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b6810
+11-18 04:58:25.122   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b6930
+11-18 04:58:25.122   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b6810
+11-18 04:58:25.122   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b7c50
+11-18 04:58:25.139   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 1
+11-18 04:58:25.140   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-18 04:58:25.140   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-18 04:58:25.143  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 04:58:25.143  1549  1549 I KeyboardModeManager: KeyboardModeManager.setInputView():364 setInputView() : supportsOneHandedMode=true
+11-18 04:58:25.143  1549  1549 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-18 04:58:25.143  1549  1549 I KeyboardModeManager: KeyboardModeManager.setInputView():356 setInputView() : entry=hwn{languageTag=en-US, variant=qwerty, hasLocalizedResources=true, conditionCacheKey=_device=phone_device_size=default_enable_adaptive_text_editing=true_enable_inline_suggestions_on_client_side=false_enable_large_tablet_batch_1=false_enable_large_tablet_batch_2=false_enable_more_candidates_view_for_multilingual=false_enable_nav_redesign=false_enable_number_row=false_enable_preemptive_decode=true_enable_secondary_symbols=false_expressions=normal_four_or_more_letter_rows=false_keyboard_mode=normal_language=en-US_orientation=portrait_physical_keyboard=qwerty_show_secondary_digits=true_show_suggestions=true_split_with_duplicate_keys=true_variant=qwerty, imeDef.stringId=ime_english_united_states, imeDef.className=com.google.android.apps.inputmethod.libs.latin5.LatinIme, imeDef.languageTag=en-US}
+11-18 04:58:25.155  1549  1549 I StyledKeyboardTheme: StyledKeyboardTheme.<init>():87 Pref: [], themeName: [silk:], darkMode: [false], cacheKey: [overlay_builtin_dynamic_color_light_base.binarypb:dynamic-light-fff0f0f3-ff76d1ff-ce191c6173d879ea127e4e40bfd70d3c]
+11-18 04:58:25.156  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 04:58:25.156  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 04:58:25.156  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 04:58:25.156  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 04:58:25.156  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 04:58:25.157  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.initializeKeyboardTheme():1343 Apply keyboard theme: theme_border_bottom4dp_stylesheet_noshadow_gsans_pillkey_silkpopup_refinedkp_materiallight_phone_400_overlay_builtin_dynamic_color_light_base.binarypb:dynamic-light-fff0f0f3-ff76d1ff-ce191c6173d879ea127e4e40bfd70d3c_port
+11-18 04:58:25.159  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onCreateInputView():1768 onCreateInputView()
+11-18 04:58:25.182  5729  5929 I FontLog : No directory on disk newer than version 0 [CONTEXT service_id=132 ]
+11-18 04:58:25.205  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 04:58:25.206  1549  1549 I KeyboardViewUtil: KeyboardViewUtil.getKeyboardHeightRatio():189 systemKeyboardHeightRatio:1.000000; userKeyboardHeightRatio:1.000000.
+11-18 04:58:25.209  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 04:58:25.209  5729  5929 I FontLog : Received query Noto Color Emoji Compat, URI content://com.google.android.gms.fonts [CONTEXT service_id=132 ]
+11-18 04:58:25.209  1549  1549 I KeyboardModeManager: KeyboardModeManager.setInputView():364 setInputView() : supportsOneHandedMode=true
+11-18 04:58:25.209  1549  1549 I AndroidIME: KeyboardViewManager.updateKeyboardBackgroundFrameVisibility():357 Set background frame visibility. old:8, new:8
+11-18 04:58:25.209  1549  1549 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-18 04:58:25.209  1549  1549 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-18 04:58:25.209  5729  5929 I FontLog : Query [emojicompat-emoji-font] resolved to {Noto Color Emoji Compat, wdth 100.0, wght 400, ital 0.0, bestEffort false} [CONTEXT service_id=132 ]
+11-18 04:58:25.211  1549  1549 I KeyboardModeManager: KeyboardModeManager.setInputView():356 setInputView() : entry=hwn{languageTag=en-US, variant=qwerty, hasLocalizedResources=true, conditionCacheKey=_device=phone_device_size=default_enable_adaptive_text_editing=true_enable_inline_suggestions_on_client_side=false_enable_large_tablet_batch_1=false_enable_large_tablet_batch_2=false_enable_more_candidates_view_for_multilingual=false_enable_nav_redesign=false_enable_number_row=false_enable_preemptive_decode=true_enable_secondary_symbols=false_expressions=normal_four_or_more_letter_rows=false_keyboard_mode=normal_language=en-US_orientation=portrait_physical_keyboard=qwerty_show_secondary_digits=true_show_suggestions=true_split_with_duplicate_keys=true_variant=qwerty, imeDef.stringId=ime_english_united_states, imeDef.className=com.google.android.apps.inputmethod.libs.latin5.LatinIme, imeDef.languageTag=en-US}
+11-18 04:58:25.242  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@4f51650 in: PAUSED
+11-18 04:58:25.242  7023  7023 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=androidx.activity.ComponentActivity@4f51650
+11-18 04:58:25.245   285  7123 I resolv  : GetAddrInfoHandler::run: {100 786532 100 983140 10120 0}
+11-18 04:58:25.246   285  7124 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-18 04:58:25.246   285  7124 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x71456f2b7970
+11-18 04:58:25.246   285  7124 I resolv  : doQuery: rcode=0, ancount=1, return value=63
+11-18 04:58:25.248   789   833 D SplashScreenView: Build android.window.SplashScreenView{9a49c18 V.E...... ......ID 0,0-0,0}
+11-18 04:58:25.248   789   833 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-18 04:58:25.248   789   833 D SplashScreenView: Branding: view: android.view.View{535f671 G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-18 04:58:25.252   285  7125 I resolv  : res_nmkquery: (QUERY, IN, A)
+11-18 04:58:25.253   285  7125 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x71455f2b4590
+11-18 04:58:25.253   285  7125 I resolv  : doQuery: rcode=0, ancount=1, return value=51
+11-18 04:58:25.258   789   845 W Parcel  : Expecting binder but got null!
+11-18 04:58:25.259  5729  5932 D TrafficStats: tagSocket(221) with statsTag=0x30006001, statsUid=10120
+11-18 04:58:25.272  1054  1054 D AutofillManager: Fill dialog is enabled:false, hints=[password, passwordAuto, creditCardNumber, creditCardSecurityCode, creditCardExpirationDate]
+11-18 04:58:25.312   286   286 D Zygote  : Forked child process 7130
+11-18 04:58:25.318  1054  1054 D DeviceSearchAlg: search timeout = %d200
+11-18 04:58:25.357  1054  1081 I AiAiSuggestUi: Connecting to system intelligence module.
+11-18 04:58:25.362  7130  7130 I uartznotes.test: Late-enabling -Xcheck:jni
+11-18 04:58:25.408  1054  1054 W PageIndicator: Total number of pages invalid: 0. Assuming 1 page.
+11-18 04:58:25.408  1054  1054 W BcSmartspaceView: Current card is not present in the Adapter; cannot log.
+11-18 04:58:25.411  5729  5932 W Conscrypt: Could not set socket write timeout: java.net.SocketException: Socket closed
+11-18 04:58:25.414  5729  5932 W Conscrypt: 	at com.google.android.gms.org.conscrypt.Platform.setSocketWriteTimeout(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-18 04:58:25.414  5729  5932 W Conscrypt: 	at com.google.android.gms.org.conscrypt.ConscryptFileDescriptorSocket.setSoWriteTimeout(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-18 04:58:25.434  1054  4484 I AiAiSuggestUi: Successfully connected to system intelligence:
+11-18 04:58:25.447   489  2297 W system_server: Long monitor contention with owner android.anim (513) at void com.android.server.wm.WindowSurfacePlacer$Traverser.run()(WindowSurfacePlacer.java:58) waiters=0 in android.app.ActivityTaskManager$RootTaskInfo com.android.server.wm.ActivityTaskManagerService.getFocusedRootTaskInfo() for 117ms
+11-18 04:58:25.458   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b7b30
+11-18 04:58:25.458   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b7fb0
+11-18 04:58:25.458   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b7b30
+11-18 04:58:25.458   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b7b30
+11-18 04:58:25.458   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b7fb0
+11-18 04:58:25.458   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b7fb0
+11-18 04:58:25.460  1054  1054 I OverviewComponentObserver: updateOverviewTargets: mIsHomeDisabled=false, isDefaultHomeNull=false, mIsDefaultHome=true
+11-18 04:58:25.481   489  1370 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_multi_configs ANDROID_EMU_hwc_color_transform GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0
+11-18 04:58:25.484  1640  1640 I AiAiEcho: SearchContextManagerImpl::setSearchContext resultTypes=[141151] extras=[Bundle[mParcelledData.dataSize=608]] sessionId=[com.google.android.apps.nexuslauncher:5cdaee60-d950-4799-8043-c32f98b6c5ef,0]
+11-18 04:58:25.487   489  1370 W OpenGLRenderer: Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-18 04:58:25.492  5729  5932 W Conscrypt: Could not set socket write timeout: java.net.SocketException: Socket closed
+11-18 04:58:25.492  5729  5932 W Conscrypt: 	at com.google.android.gms.org.conscrypt.Platform.setSocketWriteTimeout(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-18 04:58:25.492  5729  5932 W Conscrypt: 	at com.google.android.gms.org.conscrypt.ConscryptFileDescriptorSocket.setSoWriteTimeout(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-18 04:58:25.495   489  1370 D EGL_emulation: eglCreateContext: 0x732bdc705e90: maj 3 min 0 rcv 3
+11-18 04:58:25.503   489  1370 D EGL_emulation: eglMakeCurrent: 0x732bdc705e90: ver 3 0 (tinfo 0x732dee200080) (first time)
+11-18 04:58:25.526   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9390
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: Unable to register Doze Always on content observer.
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: java.lang.SecurityException: No access to content://settings/secure/doze_always_on: Neither user 10155 nor current process has android.permission.INTERACT_ACROSS_USERS_FULL.
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.os.Parcel.createExceptionOrNull(Parcel.java:3011)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.os.Parcel.createException(Parcel.java:2995)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.os.Parcel.readException(Parcel.java:2978)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.os.Parcel.readException(Parcel.java:2920)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.content.IContentService$Stub$Proxy.registerContentObserver(IContentService.java:1032)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.content.ContentResolver.registerContentObserver(ContentResolver.java:2712)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at com.google.android.systemui.smartspace.BcSmartspaceView.onAttachedToWindow(Unknown Source:222)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.view.View.dispatchAttachedToWindow(View.java:21357)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.view.ViewGroup.dispatchAttachedToWindow(ViewGroup.java:3491)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.view.ViewGroup.dispatchAttachedToWindow(ViewGroup.java:3498)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.view.ViewGroup.dispatchAttachedToWindow(ViewGroup.java:3498)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.view.ViewGroup.dispatchAttachedToWindow(ViewGroup.java:3498)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.view.ViewGroup.dispatchAttachedToWindow(ViewGroup.java:3498)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.view.ViewGroup.dispatchAttachedToWindow(ViewGroup.java:3498)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.view.ViewGroup.dispatchAttachedToWindow(ViewGroup.java:3498)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.view.ViewGroup.addViewInner(ViewGroup.java:5291)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.view.ViewGroup.addView(ViewGroup.java:5077)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.view.ViewGroup.addView(ViewGroup.java:5049)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at com.android.internal.policy.PhoneWindow.setContentView(PhoneWindow.java:507)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at com.android.internal.policy.PhoneWindow.setContentView(PhoneWindow.java:488)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.app.Activity.setContentView(Activity.java:3622)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at com.android.launcher3.Launcher.onCreate(Unknown Source:345)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at com.android.launcher3.uioverrides.QuickstepLauncher.onCreate(Unknown Source:0)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at com.google.android.apps.nexuslauncher.NexusLauncherActivity.onCreate(Unknown Source:0)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.app.Activity.performCreate(Activity.java:8342)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.app.Activity.performCreate(Activity.java:8321)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1417)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:3626)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:3782)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.app.ActivityThread.handleRelaunchActivityInner(ActivityThread.java:5783)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.app.ActivityThread.handleRelaunchActivity(ActivityThread.java:5674)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.app.servertransaction.ActivityRelaunchItem.execute(ActivityRelaunchItem.java:71)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.app.servertransaction.ActivityTransactionItem.execute(ActivityTransactionItem.java:45)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.app.servertransaction.TransactionExecutor.executeCallbacks(TransactionExecutor.java:138)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:95)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.app.ClientTransactionHandler.executeTransaction(ClientTransactionHandler.java:61)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.app.ActivityThread.handleRelaunchActivityLocally(ActivityThread.java:5742)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2317)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.os.Looper.loopOnce(Looper.java:201)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.os.Looper.loop(Looper.java:288)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.app.ActivityThread.main(ActivityThread.java:7924)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at java.lang.reflect.Method.invoke(Native Method)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:548)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:936)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: Caused by: android.os.RemoteException: Remote stack trace:
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.app.ContextImpl.enforce(ContextImpl.java:2240)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.app.ContextImpl.enforceCallingOrSelfPermission(ContextImpl.java:2268)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at com.android.server.content.ContentService.handleIncomingUser(ContentService.java:1397)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at com.android.server.content.ContentService.registerContentObserver(ContentService.java:369)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView: 	at android.content.IContentService$Stub.onTransact(IContentService.java:486)
+11-18 04:58:25.529  1054  1054 W BcSmartspaceView:
+11-18 04:58:25.564  5729  5788 I FontLog : Updating from directory version 0 to 25 from disk [CONTEXT service_id=132 ]
+11-18 04:58:25.569   789   845 D EGL_emulation: app_time_stats: avg=502.12ms min=398.11ms max=606.12ms count=2
+11-18 04:58:25.601  7130  7130 I uartznotes.test: Using CollectorTypeCC GC.
+11-18 04:58:25.606  1054  1054 I ContentCaptureHelper: Setting logging level to DEBUG
+11-18 04:58:25.606  1054  1054 D ContentCaptureManager: setFlushViewTreeAppearingEventDisabled(): setting to false
+11-18 04:58:25.606  1054  1054 D ContentCaptureManager: updateWindowAttributes(): window flags=-2137980672
+11-18 04:58:25.609  7130  7130 W uartznotes.test: Unexpected CPU variant for x86: x86_64.
+11-18 04:58:25.609  7130  7130 W uartznotes.test: Known variants: atom, sandybridge, silvermont, kabylake, default
+11-18 04:58:25.609  1054  1054 D ContentCaptureManager: updateWindowAttributes(): window flags=-2137980672
+11-18 04:58:25.616  1054  1054 D MainContentCaptureSession: Flushing 0 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FINISHED
+11-18 04:58:25.616  1054  1054 D MainContentCaptureSession: Destroying session (ctx=com.google.android.apps.nexuslauncher.NexusLauncherActivity@d14f524, id=-886752934) with 0 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false]
+11-18 04:58:25.616  1054  1054 I Choreographer: Skipped 32 frames!  The application may be doing too much work on its main thread.
+11-18 04:58:25.624  1640  1988 I AiAiStatsd: Successfully logged feature usage for VISUAL_CORTEX.
+11-18 04:58:25.675   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9f30
+11-18 04:58:25.682  1640  1640 W ContentCaptureService: handleSendEvents() received empty list of events
+11-18 04:58:25.690  5729  5938 I FontLog : Using directory in FlatBuffer format [CONTEXT service_id=132 ]
+11-18 04:58:25.697   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9b70
+11-18 04:58:25.815   398   406 I adbd    : jdwp connection from 7130
+11-18 04:58:25.817  1054  1054 W BcSmartspaceCard: No title view to update
+11-18 04:58:25.819  1054  1054 I BcSmartspaceCard: setFormattedContentDescription: textView=SUBTITLE, text=null, iconDescription=null, contentDescription=null
+11-18 04:58:25.823   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b4ef0
+11-18 04:58:25.833  7130  7130 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10175; state: ENABLED
+11-18 04:58:25.833  1768  2679 W Parcel  : Expecting binder but got null!
+11-18 04:58:25.858  1054  1054 D TISBindHelper: TIS service connected
+11-18 04:58:25.858  1054  1054 D b/254119092: Set mActivity=com.google.android.apps.nexuslauncher.NexusLauncherActivity@b5dd85a
+11-18 04:58:25.858  1054  1054 D b/254119092: mActivity and mContext agree taskbarIsPresent=false
+11-18 04:58:25.859  1054  1054 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+11-18 04:58:25.859  1054  1054 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+11-18 04:58:25.861  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@4f51650 in: STOPPED
+11-18 04:58:25.862   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 1
+11-18 04:58:25.863   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-18 04:58:25.864   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-18 04:58:25.865  7023  7023 V ActivityScenario: Update currentActivityStage to STOPPED, currentActivity=androidx.activity.ComponentActivity@4f51650
+11-18 04:58:25.868  1768  2679 W Parcel  : Expecting binder but got null!
+11-18 04:58:25.870   489   781 W InputManager-JNI: Input channel object '9c2fbd4 com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity (client)' was disposed without first being removed with the input manager!
+11-18 04:58:25.872   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b58b0
+11-18 04:58:25.908  7130  7130 D ApplicationLoaders: Returning zygote-cached class loader: /system/framework/android.test.base.jar
+11-18 04:58:25.932  7130  7130 D nativeloader: Configuring classloader-namespace for other apk /system/framework/android.test.mock.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/data/app/~~RL-N2gHIJ9ggYogoAQLtUQ==/com.timcordova.quartznotes.test-gf1uhURR3Qr-VZk_2pPVEg==/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.timcordova.quartznotes.test
+11-18 04:58:25.939   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9d50
+11-18 04:58:25.947   489   781 W InputManager-JNI: Input channel object '10591f9 com.google.android.googlequicksearchbox/android.app.ContextImpl (client)' was disposed without first being removed with the input manager!
+11-18 04:58:25.955   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b8310
+11-18 04:58:25.964  7130  7130 D ApplicationLoaders: Returning zygote-cached class loader: /system/framework/android.test.base.jar
+11-18 04:58:25.971  7130  7130 W uartznotes.test: ClassLoaderContext shared library size mismatch. Expected=0, found=2 (PCL[] | PCL[]{PCL[/system/framework/android.test.base.jar*2876549756]#PCL[/system/framework/android.test.mock.jar*4109917914]})
+11-18 04:58:25.972  7130  7130 D nativeloader: Configuring classloader-namespace for other apk /system/framework/android.test.runner.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/data/app/~~RL-N2gHIJ9ggYogoAQLtUQ==/com.timcordova.quartznotes.test-gf1uhURR3Qr-VZk_2pPVEg==/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.timcordova.quartznotes.test
+11-18 04:58:25.975  7130  7130 W ziparchive: Unable to open '/data/app/~~RL-N2gHIJ9ggYogoAQLtUQ==/com.timcordova.quartznotes.test-gf1uhURR3Qr-VZk_2pPVEg==/base.dm': No such file or directory
+11-18 04:58:25.976  7130  7130 W ziparchive: Unable to open '/data/app/~~RL-N2gHIJ9ggYogoAQLtUQ==/com.timcordova.quartznotes.test-gf1uhURR3Qr-VZk_2pPVEg==/base.dm': No such file or directory
+11-18 04:58:26.023  7130  7130 D nativeloader: Configuring classloader-namespace for other apk /data/app/~~RL-N2gHIJ9ggYogoAQLtUQ==/com.timcordova.quartznotes.test-gf1uhURR3Qr-VZk_2pPVEg==/base.apk. target_sdk_version=35, uses_libraries=, library_path=/data/app/~~RL-N2gHIJ9ggYogoAQLtUQ==/com.timcordova.quartznotes.test-gf1uhURR3Qr-VZk_2pPVEg==/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.timcordova.quartznotes.test
+11-18 04:58:26.054  7130  7130 V GraphicsEnvironment: ANGLE Developer option for 'com.timcordova.quartznotes.test' set to: 'default'
+11-18 04:58:26.057  7130  7130 V GraphicsEnvironment: ANGLE GameManagerService for com.timcordova.quartznotes.test: false
+11-18 04:58:26.057  7130  7130 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-18 04:58:26.064  7130  7130 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-18 04:58:26.064  7130  7130 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-18 04:58:26.070  7130  7155 D libEGL  : loaded /vendor/lib64/egl/libEGL_emulation.so
+11-18 04:58:26.077  7130  7155 D libEGL  : loaded /vendor/lib64/egl/libGLESv1_CM_emulation.so
+11-18 04:58:26.087  7130  7155 D libEGL  : loaded /vendor/lib64/egl/libGLESv2_emulation.so
+11-18 04:58:26.110  7130  7130 D CompatibilityChangeReporter: Compat change id reported: 237531167; UID 10175; state: DISABLED
+11-18 04:58:26.113  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@4f51650 in: DESTROYED
+11-18 04:58:26.114  7023  7023 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
+11-18 04:58:26.115   489   937 W InputManager-JNI: Input channel object 'b01f67 com.timcordova.quartznotes/androidx.activity.ComponentActivity (client)' was disposed without first being removed with the input manager!
+11-18 04:58:26.129   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b69f0
+11-18 04:58:26.129   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b7050
+11-18 04:58:26.129   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b8f10
+11-18 04:58:26.129   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b7bf0
+11-18 04:58:26.130  7023  7040 D IdlingRegistry: Unregistering idling resources: [androidx.compose.ui.test.EspressoLink@aae909e]
+11-18 04:58:26.134  7023  7040 I TestRunner: finished: eachMaterialIsQuickAndSeamless(com.timcordova.quartznotes.ui.components.CoverTexturesTest)

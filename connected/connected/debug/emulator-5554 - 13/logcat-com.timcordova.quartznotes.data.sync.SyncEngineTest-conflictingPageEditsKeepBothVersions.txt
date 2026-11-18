@@ -1,0 +1,11 @@
+11-18 04:58:21.816  7023  7040 I TestRunner: started: conflictingPageEditsKeepBothVersions(com.timcordova.quartznotes.data.sync.SyncEngineTest)
+11-18 04:58:21.819  7023  7040 D TrafficStats: tagSocket(102) with statsTag=0xffffffff, statsUid=-1
+11-18 04:58:22.258  2065  7092 D DownloadManager: [9] Finished with status SUCCESS
+11-18 04:58:22.270  1768  2454 W BlobLobber: Not processing download id 9, not a BlobLobber blob
+11-18 04:58:22.270  1768  2454 W BlobLobber: Notification for download id 9 which we didn't know or failed
+11-18 04:58:22.277  1768  1768 I BgTaskExecutorImpl: Starting NONEXCLUSIVE background task ZIP_DOWNLOAD_PROCESSOR.
+11-18 04:58:22.279  1768  2196 I ModelDnldProcssHelpr: #handleDownloadComplete, downloadId=9
+11-18 04:58:22.279  1768  2196 E ModelDnldProcssHelpr: pending download info for pending_hotword_model_download_info is null
+11-18 04:58:22.279  1768  2196 E ModelDnldProcssHelpr: pending download info for pending_xgoogle_hotword_model_download_info is null
+11-18 04:58:22.286  1768  2200 I ZipDownloadProcessorTsk: cacheDestination: /data/user/0/com.google.android.googlequicksearchbox/app_g3_models/en-US.zip
+11-18 04:58:22.333  7023  7040 I TestRunner: finished: conflictingPageEditsKeepBothVersions(com.timcordova.quartznotes.data.sync.SyncEngineTest)

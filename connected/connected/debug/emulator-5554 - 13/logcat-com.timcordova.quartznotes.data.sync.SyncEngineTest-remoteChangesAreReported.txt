@@ -1,0 +1,68 @@
+11-18 04:58:13.301  7023  7040 I TestRunner: started: remoteChangesAreReported(com.timcordova.quartznotes.data.sync.SyncEngineTest)
+11-18 04:58:13.305  7023  7040 D TrafficStats: tagSocket(96) with statsTag=0xffffffff, statsUid=-1
+11-18 04:58:13.317  1177  1192 D SlicesIndexer: Slices already indexed - returning.
+11-18 04:58:13.334  1177  1192 D SettingsSliceProvider: Allowlisting 16 uris to 3 pkgs.
+11-18 04:58:13.349  1177  1192 D SlicesIndexer: Slices already indexed - returning.
+11-18 04:58:13.349  1177  1192 D SettingsSliceProvider: Allowlisting 5 uris to 3 pkgs.
+11-18 04:58:13.413  1177  1192 D SliceBuilder: Creating slice for: com.android.settings.gestures.DoubleTapPowerPreferenceController
+11-18 04:58:13.423  1177  1419 D SlicesIndexer: Slices already indexed - returning.
+11-18 04:58:13.423  1177  3760 D SlicesIndexer: Slices already indexed - returning.
+11-18 04:58:13.424  1177  3760 W SliceData: Highlight menu key res is empty: com.android.settings.deviceinfo.hardwareinfo.DeviceModelPreferenceController
+11-18 04:58:13.475  1177  1419 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/gesture_double_tap_power) in: 52
+11-18 04:58:13.475  1177  1419 D SlicesIndexer: Slices already indexed - returning.
+11-18 04:58:13.476  1177  3760 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/hardware_info_device_model) in: 52
+11-18 04:58:13.476  1177  3760 D SlicesIndexer: Slices already indexed - returning.
+11-18 04:58:13.476  1177  3760 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/screen_magnification_gestures_preference_screen) in: 0
+11-18 04:58:13.476  1177  3760 D SlicesIndexer: Slices already indexed - returning.
+11-18 04:58:13.483  1177  1200 D SliceBroadcastRelay: Registering Uri for broadcast relay: content://com.android.settings.slices/action/mobile_data
+11-18 04:58:13.483  1177  1419 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/smart_battery) in: 8
+11-18 04:58:13.483  1177  1419 D SlicesIndexer: Slices already indexed - returning.
+11-18 04:58:13.483  1177  1419 W SliceData: Highlight menu key res is empty: com.android.settings.deviceinfo.firmwareversion.FirmwareVersionDetailPreferenceController
+11-18 04:58:13.484  1177  1419 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/os_firmware_version) in: 1
+11-18 04:58:13.484  1177  1419 D SlicesIndexer: Slices already indexed - returning.
+11-18 04:58:13.494  1872  1872 V ContactsProvider: Scheduled notifyChange started.
+11-18 04:58:13.498   988   988 D BluetoothPbapService:  onChange on contact uri
+11-18 04:58:13.523  1177  1419 D VolumeSliceHelper: Registering uri for broadcast relay: content://com.android.settings.slices/action/media_volume
+11-18 04:58:13.523  1177  1419 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/media_volume) in: 39
+11-18 04:58:13.523  1177  1419 D SlicesIndexer: Slices already indexed - returning.
+11-18 04:58:13.524  1177  1177 D SettingsSliceProvider: Starting background worker for: content://com.android.settings.slices/action/mobile_data
+11-18 04:58:13.526  1177  1419 D VolumeSliceHelper: Registering uri for broadcast relay: content://com.android.settings.slices/action/call_volume
+11-18 04:58:13.526  1177  1200 D SliceBroadcastRelay: Registering Uri for broadcast relay: content://com.android.settings.slices/action/zen_mode_toggle
+11-18 04:58:13.527  1177  1419 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/call_volume) in: 4
+11-18 04:58:13.527  1177  1419 D SlicesIndexer: Slices already indexed - returning.
+11-18 04:58:13.528  1177  1200 D SliceBroadcastRelay: Registering Uri for broadcast relay: content://android.settings.slices/action/bluetooth
+11-18 04:58:13.528  1177  1419 D VolumeSliceHelper: Registering uri for broadcast relay: content://com.android.settings.slices/action/ring_volume
+11-18 04:58:13.528  1177  1419 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/ring_volume) in: 1
+11-18 04:58:13.528  1177  1419 D SlicesIndexer: Slices already indexed - returning.
+11-18 04:58:13.529  1177  1419 D VolumeSliceHelper: Registering uri for broadcast relay: content://com.android.settings.slices/action/separate_ring_volume
+11-18 04:58:13.529  1177  1419 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/separate_ring_volume) in: 1
+11-18 04:58:13.529  1177  1419 D SlicesIndexer: Slices already indexed - returning.
+11-18 04:58:13.529  1177  1419 D VolumeSliceHelper: Registering uri for broadcast relay: content://com.android.settings.slices/action/notification_volume
+11-18 04:58:13.529  1177  1419 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/notification_volume) in: 0
+11-18 04:58:13.529  1177  1419 D SlicesIndexer: Slices already indexed - returning.
+11-18 04:58:13.529  1177  1419 D VolumeSliceHelper: Registering uri for broadcast relay: content://com.android.settings.slices/action/alarm_volume
+11-18 04:58:13.529  1177  1419 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/alarm_volume) in: 0
+11-18 04:58:13.529  1177  1419 D SlicesIndexer: Slices already indexed - returning.
+11-18 04:58:13.530  1177  1177 D SettingsSliceProvider: Starting background worker for: content://android.settings.slices/action/wifi
+11-18 04:58:13.530  1177  1177 D SliceBackgroundWorker: create instance: class com.android.settings.wifi.slice.WifiScanWorker
+11-18 04:58:13.530  1177  1419 D SettingsSliceProvider: Could not create slicedata for uri: content://com.android.settings.slices/intent/wifi_calling
+11-18 04:58:13.530  1177  1419 D SettingsSliceProvider: java.lang.IllegalStateException: Invalid Slices key from path: wifi_calling
+11-18 04:58:13.530  1177  1419 D SettingsSliceProvider: 	at com.android.settings.slices.SlicesDatabaseAccessor.getIndexedSliceData(SlicesDatabaseAccessor.java:132)
+11-18 04:58:13.530  1177  1419 D SettingsSliceProvider: 	at com.android.settings.slices.SlicesDatabaseAccessor.getSliceDataFromUri(SlicesDatabaseAccessor.java:75)
+11-18 04:58:13.530  1177  1419 D SettingsSliceProvider: 	at com.android.settings.slices.SettingsSliceProvider.loadSlice(SettingsSliceProvider.java:395)
+11-18 04:58:13.530  1177  1419 D SettingsSliceProvider: 	at com.android.settings.slices.SettingsSliceProvider.lambda$loadSliceInBackground$5(SettingsSliceProvider.java:426)
+11-18 04:58:13.530  1177  1419 D SettingsSliceProvider: 	at com.android.settings.slices.SettingsSliceProvider.$r8$lambda$IApJtz2y7JXGRdMRCkYjf83H4T4(Unknown Source:0)
+11-18 04:58:13.530  1177  1419 D SettingsSliceProvider: 	at com.android.settings.slices.SettingsSliceProvider$$ExternalSyntheticLambda0.run(Unknown Source:4)
+11-18 04:58:13.530  1177  1419 D SettingsSliceProvider: 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:463)
+11-18 04:58:13.530  1177  1419 D SettingsSliceProvider: 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+11-18 04:58:13.530  1177  1419 D SettingsSliceProvider: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-18 04:58:13.530  1177  1419 D SettingsSliceProvider: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-18 04:58:13.530  1177  1419 D SettingsSliceProvider: 	at java.lang.Thread.run(Thread.java:1012)
+11-18 04:58:13.530  1177  1419 D SlicesIndexer: Slices already indexed - returning.
+11-18 04:58:13.532  1177  1419 D SettingsSliceProvider: Built slice (content://android.settings.slices/action/airplane_mode) in: 2
+11-18 04:58:13.532  1177  1419 D SlicesIndexer: Slices already indexed - returning.
+11-18 04:58:13.532  1177  1419 D SettingsSliceProvider: Built slice (content://android.settings.slices/action/battery_saver) in: 0
+11-18 04:58:13.544  1177  3760 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/auto_rotate) in: 68
+11-18 04:58:13.546  7023  7087 D ProfileInstaller: Installing profile for com.timcordova.quartznotes
+11-18 04:58:13.550   988  7086 D BluetoothPbapUtils: primaryVersionCounter = 0, secondaryVersionCounter=0
+11-18 04:58:13.605  7023  7040 I TestRunner: finished: remoteChangesAreReported(com.timcordova.quartznotes.data.sync.SyncEngineTest)

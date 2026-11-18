@@ -1,0 +1,969 @@
+11-18 05:01:31.550  7023  7040 I TestRunner: started: sheetShowsTypesAndFormats(com.timcordova.quartznotes.ui.notebook.SheetEditorTest)
+11-18 05:01:31.563  1768  1768 I A       : Created gRPC endpoint to "search" for service class com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService
+11-18 05:01:31.573  7023  7040 D IdlingRegistry: Registering idling resources: [androidx.compose.ui.test.EspressoLink@6505596]
+11-18 05:01:31.575   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9bd0
+11-18 05:01:31.577   331   377 W TransactionTracing: Could not find layer handle 0x79ff032ba170
+11-18 05:01:31.579  7023  7040 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+11-18 05:01:31.599  1054  1054 D MainContentCaptureSession: Flushing 2 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARING
+11-18 05:01:31.601  1054  1054 D MainContentCaptureSession: Flushing 32 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARED
+11-18 05:01:31.605   789   833 D SplashScreenView: Build android.window.SplashScreenView{6f1fe0c V.E...... ......ID 0,0-0,0}
+11-18 05:01:31.605   789   833 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-18 05:01:31.605   789   833 D SplashScreenView: Branding: view: android.view.View{9b90355 G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-18 05:01:31.607   789   845 W Parcel  : Expecting binder but got null!
+11-18 05:01:31.640   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:31.640   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:31.647  1054  1054 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+11-18 05:01:31.650  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@bfb467a in: PRE_ON_CREATE
+11-18 05:01:31.668  1054  2068 D OneSearchSuggestProvider: Shut down the binder channel
+11-18 05:01:31.675  1768  2283 I A       : Using proto config with mendel
+11-18 05:01:31.676  1054  1054 D MainContentCaptureSession: Flushing 3 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARING
+11-18 05:01:31.678  1054  1054 D MainContentCaptureSession: Flushing 2 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARED
+11-18 05:01:31.680   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 1
+11-18 05:01:31.681  7023  7023 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+11-18 05:01:31.682   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-18 05:01:31.684  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@bfb467a in: CREATED
+11-18 05:01:31.688   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-18 05:01:31.693  1768  2283 I A       : Using proto config with mendel
+11-18 05:01:31.697  7023  7023 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=androidx.activity.ComponentActivity@bfb467a
+11-18 05:01:31.697  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@bfb467a in: STARTED
+11-18 05:01:31.697   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9330
+11-18 05:01:31.698   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9330
+11-18 05:01:31.698  7023  7023 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=androidx.activity.ComponentActivity@bfb467a
+11-18 05:01:31.699   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9ab0
+11-18 05:01:31.699   331   377 W TransactionTracing: Could not find layer handle 0x79ff032ba530
+11-18 05:01:31.699   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:31.699  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@bfb467a in: RESUMED
+11-18 05:01:31.699   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:31.703  7023  7023 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=androidx.activity.ComponentActivity@bfb467a
+11-18 05:01:31.721  7023  7110 W Parcel  : Expecting binder but got null!
+11-18 05:01:31.732  1054  7179 I s.nexuslauncher: oneway function results for code 2 on binder at 0x732b6c751310 will be dropped but finished with status UNKNOWN_TRANSACTION
+11-18 05:01:31.757   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:31.757   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:31.757   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:31.757   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:31.760  1768  2283 W SearchServiceCore: Abort, client detached.
+11-18 05:01:31.767  1768  3124 I PBSessionCacheImpl: Deleted sessionId[7777541209396384] from persistence.
+11-18 05:01:31.779   789   845 D EGL_emulation: app_time_stats: avg=2459.68ms min=2459.68ms max=2459.68ms count=1
+11-18 05:01:31.871   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:31.871   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:31.871   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:31.876   489   509 W ziparchive: Unable to open '/data/app/~~q7gscu1n3ILq4DpSpq4VdQ==/com.timcordova.quartznotes-nbzIvoAk_EFWKv7by7QDAg==/base.dm': No such file or directory
+11-18 05:01:31.876   489   509 I ActivityTaskManager: Displayed com.timcordova.quartznotes/androidx.activity.ComponentActivity: +277ms
+11-18 05:01:31.882   489  2313 W InputManager-JNI: Input channel object '77094d3 com.timcordova.quartznotes.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity (client)' was disposed without first being removed with the input manager!
+11-18 05:01:31.903   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9390
+11-18 05:01:31.921  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInputView():2241
+11-18 05:01:31.922  1549  1549 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-18 05:01:31.922  1549  1549 I InputBundle: InputBundle.consumeEvent():923 Skip consuming an event as keyboard status is 0
+11-18 05:01:31.923  1549  1549 I KeyboardWrapper: KeyboardWrapper.consumeEvent():275 Skip consuming an event as current keyboard is deactivated (state=0, keyboard existence=true)
+11-18 05:01:31.924  1549  1549 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.shutdown():77 shutdown()
+11-18 05:01:31.925  1549  1549 I AndroidIME: AbstractIme.onDeactivate():207 LatinIme.onDeactivate()
+11-18 05:01:31.931  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-18 05:01:31.933   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:31.933   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:31.933  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-18 05:01:31.933  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=null}, false)
+11-18 05:01:31.933  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 05:01:31.935   489   937 W InputManager-JNI: Input channel object 'dc7adfc Splash Screen com.timcordova.quartznotes (client)' was disposed without first being removed with the input manager!
+11-18 05:01:31.936  7023  7023 E ImeBackDispatcher: Ime callback not found. Ignoring unregisterReceivedCallback. callbackId: 104116003
+11-18 05:01:31.939  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:01:31.949   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b89d0
+11-18 05:01:31.980   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bb1f0
+11-18 05:01:31.980   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bb3d0
+11-18 05:01:31.980   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bbd90
+11-18 05:01:31.980   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bb1f0
+11-18 05:01:31.986  1549  1637 W ModuleManager: ModuleManager.loadModule():450 Module jjj is not available
+11-18 05:01:32.051   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:32.104  7023  7023 D AutofillManager: Fill dialog is enabled:false, hints=[password, passwordAuto, creditCardNumber, creditCardSecurityCode, creditCardExpirationDate]
+11-18 05:01:32.208   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b95d0
+11-18 05:01:32.272  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-18 05:01:32.273  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-18 05:01:32.273  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=null}, false)
+11-18 05:01:32.273  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 05:01:32.273  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:01:33.863  7023  7110 D EGL_emulation: app_time_stats: avg=663.95ms min=130.93ms max=1566.01ms count=3
+11-18 05:01:34.656  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x1(Normal) imeOptions=0x2000006 privateImeOptions=null actionName=DONE actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=Bundle[mParcelledData.dataSize=404]}, true)
+11-18 05:01:34.656  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 05:01:34.656  7023  7023 D InsetsController: show(ime(), fromIme=false)
+11-18 05:01:34.656  7023  7023 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{63cec82 VFED..... .F....ID 0,0-1080,2209 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT_BY_INSETS_API
+11-18 05:01:34.657  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:01:34.657  1549  1549 W SessionManager: SessionManager.beginSession():53 Try to begin an already begun session [INPUT_SESSION], end it first
+11-18 05:01:34.658  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInputView():1995 onStartInputView(EditorInfo{inputType=0x1(Normal) imeOptions=0x2000006 privateImeOptions=null actionName=DONE actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false, android.support.text.emoji.emojiCompat_replaceAll=false}]}, false)
+11-18 05:01:34.659  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:01:34.659  1549  1549 W ModuleManager: ModuleManager.loadModule():450 Module erj is not available
+11-18 05:01:34.660  1549  1637 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 05:01:34.663  7023  7023 I AssistStructure: Flattened final assist data: 652 bytes, containing 1 windows, 4 views
+11-18 05:01:34.666  5729  5729 W AutofillChimeraService: Pending fill request while another request in the same session was triggered. [CONTEXT service_id=177 ]
+11-18 05:01:34.668  1577  1577 V InlineSuggestionRenderService: handleDestroySuggestionViews called for 0:1742718521
+11-18 05:01:34.673  7023  7023 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{63cec82 VFED..... .F....ID 0,0-1080,2209 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+11-18 05:01:34.673  7023  7023 D Autofill Status: Autofill popup isn't shown because autofill is not available.
+11-18 05:01:34.673  7023  7023 D Autofill Status:
+11-18 05:01:34.673  7023  7023 D Autofill Status: Did you set up autofill?
+11-18 05:01:34.673  7023  7023 D Autofill Status: 1. Go to Settings > System > Languages&input > Advanced > Autofill Service
+11-18 05:01:34.673  7023  7023 D Autofill Status: 2. Pick a service
+11-18 05:01:34.673  7023  7023 D Autofill Status:
+11-18 05:01:34.673  7023  7023 D Autofill Status: Did you add an account?
+11-18 05:01:34.673  7023  7023 D Autofill Status: 1. Go to Settings > System > Languages&input > Advanced
+11-18 05:01:34.673  7023  7023 D Autofill Status: 2. Click on the settings icon next to the Autofill Service
+11-18 05:01:34.673  7023  7023 D Autofill Status: 3. Add your account
+11-18 05:01:34.675  1549  1549 I KeyboardViewUtil: KeyboardViewUtil.getKeyboardHeightRatio():189 systemKeyboardHeightRatio:1.000000; userKeyboardHeightRatio:1.000000.
+11-18 05:01:34.675  1549  1549 I AndroidIME: AbstractIme.onActivate():86 LatinIme.onActivate() : EditorInfo = inputType=0x1(Normal) imeOptions=0x2000006 privateImeOptions=null actionName=DONE actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false, android.support.text.emoji.emojiCompat_replaceAll=false}], IncognitoMode = false, DeviceLocked = false
+11-18 05:01:34.675  1549  1549 I Delight5Facilitator: Delight5Facilitator.initializeForIme():777 initializeForIme() : Locale = [en_US], layout = qwerty
+11-18 05:01:34.676  1549  1549 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.cancelShutdown():55 cancelShutdown()
+11-18 05:01:34.676  1549  1549 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.syncLanguagePacks():67 syncLanguagePacks()
+11-18 05:01:34.676  1549  1549 I LatinIme: LatinIme.updateEnableInlineSuggestionsOnDecoderSideFlags():1003 inline flag updated to:false
+11-18 05:01:34.678  1549  1549 I KeyboardWrapper: KeyboardWrapper.consumeEvent():275 Skip consuming an event as current keyboard is deactivated (state=0, keyboard existence=true)
+11-18 05:01:34.680  1549  7190 I SpeechFactory: SpeechRecognitionFactory.maybeScheduleAutoPackDownloadForFallback():205 maybeScheduleAutoPackDownloadForFallback()
+11-18 05:01:34.680  1549  1549 I KeyboardViewUtil: KeyboardViewUtil.calculateMaxKeyboardBodyHeight():40 leave 354 height for app when screen height:2274, header height:116 and isFullscreenMode:false, so the max keyboard body height is:1804
+11-18 05:01:34.680  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 05:01:34.680  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = HEADER, shownType = SHOW_OPTIONAL
+11-18 05:01:34.680  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-18 05:01:34.680  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = BODY, shownType = SHOW_MANDATORY
+11-18 05:01:34.680  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-18 05:01:34.681  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = FLOATING_CANDIDATES, shownType = HIDE
+11-18 05:01:34.681  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = false
+11-18 05:01:34.681  1549  1549 I KeyboardViewUtil: KeyboardViewUtil.calculateMaxKeyboardBodyHeight():40 leave 354 height for app when screen height:2274, header height:116 and isFullscreenMode:false, so the max keyboard body height is:1804
+11-18 05:01:34.681  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 05:01:34.682  1549  7190 I FallbackOnDeviceRecognitionProvider: FallbackOnDeviceRecognitionProvider.maybeScheduleAutoPackDownload():195 maybeScheduleAutoPackDownload() for language tag en-US
+11-18 05:01:34.686  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 05:01:34.686  1549  1549 I KeyboardModeManager: KeyboardModeManager.setInputView():364 setInputView() : supportsOneHandedMode=true
+11-18 05:01:34.686  1549  1549 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-18 05:01:34.687  1549  1549 I AndroidIME: KeyboardViewManager.updateKeyboardBodyViewHolderPaddingBottom():604 Set finalPaddingBottom = 0 while keyboardBottomGapFromScreen = 0; navigationHeight = 126
+11-18 05:01:34.687  1549  1549 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-18 05:01:34.687  1549  1549 I AndroidIME: KeyboardViewManager.updateKeyboardBodyViewHolderPaddingBottom():604 Set finalPaddingBottom = 0 while keyboardBottomGapFromScreen = 0; navigationHeight = 126
+11-18 05:01:34.687  1549  1549 I KeyboardModeManager: KeyboardModeManager.setInputView():356 setInputView() : entry=hwn{languageTag=en-US, variant=qwerty, hasLocalizedResources=true, conditionCacheKey=_device=phone_device_size=default_enable_adaptive_text_editing=true_enable_inline_suggestions_on_client_side=false_enable_large_tablet_batch_1=false_enable_large_tablet_batch_2=false_enable_more_candidates_view_for_multilingual=false_enable_nav_redesign=false_enable_number_row=false_enable_preemptive_decode=true_enable_secondary_symbols=false_expressions=normal_four_or_more_letter_rows=false_keyboard_mode=normal_language=en-US_orientation=portrait_physical_keyboard=qwerty_show_secondary_digits=true_show_suggestions=true_split_with_duplicate_keys=true_variant=qwerty, imeDef.stringId=ime_english_united_states, imeDef.className=com.google.android.apps.inputmethod.libs.latin5.LatinIme, imeDef.languageTag=en-US}
+11-18 05:01:34.688  1549  1549 I VoiceImeExtension: VoiceImeExtension.shouldStartVoiceInputAutomatically():383 No private IME option set to start voice input.
+11-18 05:01:34.705  5713  5713 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:34.705  5713  5713 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:34.745  5713  5713 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:34.779  7023  7023 D InsetsController: show(ime(), fromIme=true)
+11-18 05:01:34.780  1549  1549 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-18 05:01:34.782  1549  2139 I Delight5Decoder: Delight5DecoderWrapper.setKeyboardLayout():457 setKeyboardLayout()
+11-18 05:01:34.786  5713  5713 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:34.786  5713  5713 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:34.788  5713  5713 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:34.789  7023  7023 D InsetsController: show(ime(), fromIme=true)
+11-18 05:01:34.805   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9ab0
+11-18 05:01:34.873   789   845 D EGL_emulation: app_time_stats: avg=1031.16ms min=108.43ms max=2689.51ms count=3
+11-18 05:01:34.879  1549  1549 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-18 05:01:35.580  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = HEADER, shownType = SHOW_MANDATORY_WITH_ANIMATION
+11-18 05:01:35.580  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-18 05:01:35.678  7023  7110 D EGL_emulation: app_time_stats: avg=453.24ms min=42.76ms max=926.27ms count=4
+11-18 05:01:35.776  1549  1549 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-18 05:01:37.180  7011  7019 W System  : A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+11-18 05:01:37.180  7011  7019 W System  : java.lang.Throwable: Explicit termination method 'HardwareBuffer.close' not called
+11-18 05:01:37.180  7011  7019 W System  : 	at dalvik.system.CloseGuard.openWithCallSite(CloseGuard.java:288)
+11-18 05:01:37.180  7011  7019 W System  : 	at dalvik.system.CloseGuard.open(CloseGuard.java:257)
+11-18 05:01:37.180  7011  7019 W System  : 	at android.hardware.HardwareBuffer.<init>(HardwareBuffer.java:272)
+11-18 05:01:37.180  7011  7019 W System  : A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+11-18 05:01:37.180  7011  7019 W System  : java.lang.Throwable: Explicit termination method 'HardwareBuffer.close' not called
+11-18 05:01:37.180  7011  7019 W System  : 	at dalvik.system.CloseGuard.openWithCallSite(CloseGuard.java:288)
+11-18 05:01:37.180  7011  7019 W System  : 	at dalvik.system.CloseGuard.open(CloseGuard.java:257)
+11-18 05:01:37.180  7011  7019 W System  : 	at android.hardware.HardwareBuffer.<init>(HardwareBuffer.java:272)
+11-18 05:01:37.377  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x1(Normal) imeOptions=0x2000006 privateImeOptions=null actionName=DONE actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=Bundle[mParcelledData.dataSize=404]}, true)
+11-18 05:01:37.378  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 05:01:37.378  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:01:37.378  1549  1549 W SessionManager: SessionManager.beginSession():53 Try to begin an already begun session [INPUT_SESSION], end it first
+11-18 05:01:37.379  1549  1549 W SessionManager: SessionManager.endSession():96 Child session [INPUT_VIEW_SESSION] is not ended while ending session [{INPUT_SESSION=1794978094657, IME_SESSION=1794978094675, INPUT_VIEW_SESSION=1794978094659, TRAINING_CACHE_SESSION=1794978094675}], ending it now.
+11-18 05:01:37.379  1549  1549 W SessionManager: SessionManager.endSession():96 Child session [IME_SESSION] is not ended while ending session [{INPUT_SESSION=1794978094657, IME_SESSION=1794978094675, INPUT_VIEW_SESSION=1794978094659, TRAINING_CACHE_SESSION=1794978094675}], ending it now.
+11-18 05:01:37.381  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInputView():1995 onStartInputView(EditorInfo{inputType=0x1(Normal) imeOptions=0x2000006 privateImeOptions=null actionName=DONE actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false, android.support.text.emoji.emojiCompat_replaceAll=false}]}, true)
+11-18 05:01:37.381  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:01:37.381  1549  1549 W ModuleManager: ModuleManager.loadModule():450 Module erj is not available
+11-18 05:01:37.382  1549  1637 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 05:01:37.403  7023  7110 D EGL_emulation: app_time_stats: avg=569.31ms min=32.85ms max=1632.65ms count=3
+11-18 05:01:37.404  7023  7023 W RemoteInputConnectionImpl: getSurroundingText on inactive InputConnection
+11-18 05:01:37.405  1549  1549 I KeyboardViewUtil: KeyboardViewUtil.getKeyboardHeightRatio():189 systemKeyboardHeightRatio:1.000000; userKeyboardHeightRatio:1.000000.
+11-18 05:01:37.411  1549  1549 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-18 05:01:37.412  1549  1549 I KeyboardWrapper: KeyboardWrapper.consumeEvent():275 Skip consuming an event as current keyboard is deactivated (state=0, keyboard existence=true)
+11-18 05:01:37.412  1549  1549 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.shutdown():77 shutdown()
+11-18 05:01:37.412  1549  1549 I AndroidIME: AbstractIme.onDeactivate():207 LatinIme.onDeactivate()
+11-18 05:01:37.413  1549  1549 W SessionManager: SessionManager.endSession():88 Try to end a not begun session [IME_SESSION].
+11-18 05:01:37.413  1549  1549 I AndroidIME: AbstractIme.onActivate():86 LatinIme.onActivate() : EditorInfo = inputType=0x1(Normal) imeOptions=0x2000006 privateImeOptions=null actionName=DONE actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false, android.support.text.emoji.emojiCompat_replaceAll=false}], IncognitoMode = false, DeviceLocked = false
+11-18 05:01:37.416  1549  1549 I Delight5Facilitator: Delight5Facilitator.initializeForIme():777 initializeForIme() : Locale = [en_US], layout = qwerty
+11-18 05:01:37.416  1549  1549 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.cancelShutdown():55 cancelShutdown()
+11-18 05:01:37.416  1549  1549 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.syncLanguagePacks():67 syncLanguagePacks()
+11-18 05:01:37.416  1549  1549 I LatinIme: LatinIme.updateEnableInlineSuggestionsOnDecoderSideFlags():1003 inline flag updated to:false
+11-18 05:01:37.419  1549  7190 I SpeechFactory: SpeechRecognitionFactory.maybeScheduleAutoPackDownloadForFallback():205 maybeScheduleAutoPackDownloadForFallback()
+11-18 05:01:37.419  1549  7190 I FallbackOnDeviceRecognitionProvider: FallbackOnDeviceRecognitionProvider.maybeScheduleAutoPackDownload():195 maybeScheduleAutoPackDownload() for language tag en-US
+11-18 05:01:37.419  1549  1637 W ModuleManager: ModuleManager.loadModule():450 Module jjj is not available
+11-18 05:01:37.434  1549  1549 I KeyboardWrapper: KeyboardWrapper.consumeEvent():275 Skip consuming an event as current keyboard is deactivated (state=0, keyboard existence=true)
+11-18 05:01:37.439  1549  1549 I KeyboardViewUtil: KeyboardViewUtil.calculateMaxKeyboardBodyHeight():40 leave 354 height for app when screen height:2274, header height:116 and isFullscreenMode:false, so the max keyboard body height is:1804
+11-18 05:01:37.444  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 05:01:37.444  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = HEADER, shownType = SHOW_OPTIONAL
+11-18 05:01:37.444  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-18 05:01:37.444  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = BODY, shownType = SHOW_MANDATORY
+11-18 05:01:37.444  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-18 05:01:37.444  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = FLOATING_CANDIDATES, shownType = HIDE
+11-18 05:01:37.444  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = false
+11-18 05:01:37.448  1549  1549 I KeyboardViewUtil: KeyboardViewUtil.calculateMaxKeyboardBodyHeight():40 leave 354 height for app when screen height:2274, header height:116 and isFullscreenMode:false, so the max keyboard body height is:1804
+11-18 05:01:37.449  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 05:01:37.452  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 05:01:37.452  1549  1549 I KeyboardModeManager: KeyboardModeManager.setInputView():364 setInputView() : supportsOneHandedMode=true
+11-18 05:01:37.452  1549  1549 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-18 05:01:37.453  1549  1549 I AndroidIME: KeyboardViewManager.updateKeyboardBodyViewHolderPaddingBottom():604 Set finalPaddingBottom = 0 while keyboardBottomGapFromScreen = 0; navigationHeight = 126
+11-18 05:01:37.453  1549  1549 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-18 05:01:37.458  1549  1549 I AndroidIME: KeyboardViewManager.updateKeyboardBodyViewHolderPaddingBottom():604 Set finalPaddingBottom = 0 while keyboardBottomGapFromScreen = 0; navigationHeight = 126
+11-18 05:01:37.458  1549  1549 I KeyboardModeManager: KeyboardModeManager.setInputView():356 setInputView() : entry=hwn{languageTag=en-US, variant=qwerty, hasLocalizedResources=true, conditionCacheKey=_device=phone_device_size=default_enable_adaptive_text_editing=true_enable_inline_suggestions_on_client_side=false_enable_large_tablet_batch_1=false_enable_large_tablet_batch_2=false_enable_more_candidates_view_for_multilingual=false_enable_nav_redesign=false_enable_number_row=false_enable_preemptive_decode=true_enable_secondary_symbols=false_expressions=normal_four_or_more_letter_rows=false_keyboard_mode=normal_language=en-US_orientation=portrait_physical_keyboard=qwerty_show_secondary_digits=true_show_suggestions=true_split_with_duplicate_keys=true_variant=qwerty, imeDef.stringId=ime_english_united_states, imeDef.className=com.google.android.apps.inputmethod.libs.latin5.LatinIme, imeDef.languageTag=en-US}
+11-18 05:01:37.462  1549  1549 I VoiceImeExtension: VoiceImeExtension.shouldStartVoiceInputAutomatically():383 No private IME option set to start voice input.
+11-18 05:01:37.467  5713  5713 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:37.467  5713  5713 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:37.468  5713  5713 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:37.481  7023  7029 I ova.quartznotes: Compiler allocated 6021KB to compile kotlin.Unit com.timcordova.quartznotes.ui.sheet.SheetGridViewKt$SheetGridView$1.invoke$lambda$32$lambda$31(com.timcordova.quartznotes.ui.sheet.SheetGeometry, float, float, com.timcordova.quartznotes.ui.sheet.SheetState, float, float, com.timcordova.quartznotes.ui.sheet.SheetLook, float, long, long, androidx.compose.ui.unit.Density, long, androidx.compose.runtime.MutableFloatState, androidx.compose.runtime.MutableFloatState, com.timcordova.quartznotes.data.sheet.SheetData, com.timcordova.quartznotes.data.sheet.SheetCalc, androidx.compose.ui.text.TextMeasurer, boolean, androidx.compose.runtime.MutableState, float, androidx.compose.runtime.State, androidx.compose.runtime.State, androidx.compose.runtime.State, androidx.compose.runtime.State, androidx.compose.runtime.State, androidx.compose.runtime.State, androidx.compose.runtime.State, androidx.compose.ui.graphics.drawscope.DrawScope)
+11-18 05:01:37.488  7023  7023 D InsetsController: show(ime(), fromIme=true)
+11-18 05:01:37.493  1549  1718 D EGL_emulation: app_time_stats: avg=904.94ms min=27.80ms max=1863.84ms count=3
+11-18 05:01:37.512  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInputView():2241
+11-18 05:01:37.516  1549  1549 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-18 05:01:37.516  1549  1549 I InputBundle: InputBundle.consumeEvent():923 Skip consuming an event as keyboard status is 0
+11-18 05:01:37.517  1549  1549 I KeyboardWrapper: KeyboardWrapper.consumeEvent():275 Skip consuming an event as current keyboard is deactivated (state=0, keyboard existence=true)
+11-18 05:01:37.517  1549  1549 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.shutdown():77 shutdown()
+11-18 05:01:37.517  1549  1549 I AndroidIME: AbstractIme.onDeactivate():207 LatinIme.onDeactivate()
+11-18 05:01:37.517  1549  1637 W ModuleManager: ModuleManager.loadModule():450 Module jjj is not available
+11-18 05:01:37.518  1549  1637 I NebulaeTrainingCacheMetricsProcessor: NebulaeTrainingCacheMetricsProcessor.processEndSession():447 No input action collection in this session, skip logging.
+11-18 05:01:37.518  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=null}, true)
+11-18 05:01:37.518  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 05:01:37.518  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:01:37.518  1549  1549 W SessionManager: SessionManager.beginSession():53 Try to begin an already begun session [INPUT_SESSION], end it first
+11-18 05:01:37.519  1549  1549 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-18 05:01:37.519  1549  1549 I InputBundle: InputBundle.consumeEvent():919 Skip consuming an event as imeStatus is 0
+11-18 05:01:37.524  5713  5713 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:37.524  5713  5713 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:37.528   789   845 D EGL_emulation: app_time_stats: avg=2655.07ms min=2655.07ms max=2655.07ms count=1
+11-18 05:01:37.529   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:37.529   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:37.529   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:37.529   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:37.529   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:37.529   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:37.530   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:37.530   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:37.530   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:37.530   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:37.530   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:37.548  5713  5713 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:37.739   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bb1f0
+11-18 05:01:37.739   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:37.739   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:37.739   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:37.739   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:38.156  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x1(Normal) imeOptions=0x2000006 privateImeOptions=null actionName=DONE actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=Bundle[mParcelledData.dataSize=404]}, true)
+11-18 05:01:38.156  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 05:01:38.157  7023  7023 D InsetsController: show(ime(), fromIme=false)
+11-18 05:01:38.157  7023  7023 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{63cec82 VFED..... .F....ID 0,0-1080,2209 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT_BY_INSETS_API
+11-18 05:01:38.157  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:01:38.157  1549  1549 W SessionManager: SessionManager.beginSession():53 Try to begin an already begun session [INPUT_SESSION], end it first
+11-18 05:01:38.158  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInputView():1995 onStartInputView(EditorInfo{inputType=0x1(Normal) imeOptions=0x2000006 privateImeOptions=null actionName=DONE actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false, android.support.text.emoji.emojiCompat_replaceAll=false}]}, false)
+11-18 05:01:38.158  1549  1637 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 05:01:38.160  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:01:38.160  1549  1549 W ModuleManager: ModuleManager.loadModule():450 Module erj is not available
+11-18 05:01:38.169  7023  7023 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{63cec82 VFED..... .F....ID 0,0-1080,2209 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+11-18 05:01:38.170  7023  7023 W RemoteInputConnectionImpl: getSurroundingText on inactive InputConnection
+11-18 05:01:38.171  1549  1549 I KeyboardViewUtil: KeyboardViewUtil.getKeyboardHeightRatio():189 systemKeyboardHeightRatio:1.000000; userKeyboardHeightRatio:1.000000.
+11-18 05:01:38.171  1549  1549 I AndroidIME: AbstractIme.onActivate():86 LatinIme.onActivate() : EditorInfo = inputType=0x1(Normal) imeOptions=0x2000006 privateImeOptions=null actionName=DONE actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false, android.support.text.emoji.emojiCompat_replaceAll=false}], IncognitoMode = false, DeviceLocked = false
+11-18 05:01:38.171  1549  1549 I Delight5Facilitator: Delight5Facilitator.initializeForIme():777 initializeForIme() : Locale = [en_US], layout = qwerty
+11-18 05:01:38.172  1549  1549 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.cancelShutdown():55 cancelShutdown()
+11-18 05:01:38.172  1549  1549 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.syncLanguagePacks():67 syncLanguagePacks()
+11-18 05:01:38.172  1549  1549 I LatinIme: LatinIme.updateEnableInlineSuggestionsOnDecoderSideFlags():1003 inline flag updated to:false
+11-18 05:01:38.172  1549  7190 I SpeechFactory: SpeechRecognitionFactory.maybeScheduleAutoPackDownloadForFallback():205 maybeScheduleAutoPackDownloadForFallback()
+11-18 05:01:38.174  1549  1549 I KeyboardWrapper: KeyboardWrapper.consumeEvent():275 Skip consuming an event as current keyboard is deactivated (state=0, keyboard existence=true)
+11-18 05:01:38.175  1549  1549 I KeyboardViewUtil: KeyboardViewUtil.calculateMaxKeyboardBodyHeight():40 leave 354 height for app when screen height:2274, header height:116 and isFullscreenMode:false, so the max keyboard body height is:1804
+11-18 05:01:38.175  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 05:01:38.176  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = HEADER, shownType = SHOW_OPTIONAL
+11-18 05:01:38.176  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-18 05:01:38.176  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = BODY, shownType = SHOW_MANDATORY
+11-18 05:01:38.176  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-18 05:01:38.176  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = FLOATING_CANDIDATES, shownType = HIDE
+11-18 05:01:38.176  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = false
+11-18 05:01:38.176  1549  1549 I KeyboardViewUtil: KeyboardViewUtil.calculateMaxKeyboardBodyHeight():40 leave 354 height for app when screen height:2274, header height:116 and isFullscreenMode:false, so the max keyboard body height is:1804
+11-18 05:01:38.176  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 05:01:38.177  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 05:01:38.177  1549  1549 I KeyboardModeManager: KeyboardModeManager.setInputView():364 setInputView() : supportsOneHandedMode=true
+11-18 05:01:38.177  1549  1549 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-18 05:01:38.177  1549  1549 I AndroidIME: KeyboardViewManager.updateKeyboardBodyViewHolderPaddingBottom():604 Set finalPaddingBottom = 0 while keyboardBottomGapFromScreen = 0; navigationHeight = 126
+11-18 05:01:38.177  1549  1549 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-18 05:01:38.178  1549  1549 I AndroidIME: KeyboardViewManager.updateKeyboardBodyViewHolderPaddingBottom():604 Set finalPaddingBottom = 0 while keyboardBottomGapFromScreen = 0; navigationHeight = 126
+11-18 05:01:38.178  1549  1549 I KeyboardModeManager: KeyboardModeManager.setInputView():356 setInputView() : entry=hwn{languageTag=en-US, variant=qwerty, hasLocalizedResources=true, conditionCacheKey=_device=phone_device_size=default_enable_adaptive_text_editing=true_enable_inline_suggestions_on_client_side=false_enable_large_tablet_batch_1=false_enable_large_tablet_batch_2=false_enable_more_candidates_view_for_multilingual=false_enable_nav_redesign=false_enable_number_row=false_enable_preemptive_decode=true_enable_secondary_symbols=false_expressions=normal_four_or_more_letter_rows=false_keyboard_mode=normal_language=en-US_orientation=portrait_physical_keyboard=qwerty_show_secondary_digits=true_show_suggestions=true_split_with_duplicate_keys=true_variant=qwerty, imeDef.stringId=ime_english_united_states, imeDef.className=com.google.android.apps.inputmethod.libs.latin5.LatinIme, imeDef.languageTag=en-US}
+11-18 05:01:38.178  1549  1549 I VoiceImeExtension: VoiceImeExtension.shouldStartVoiceInputAutomatically():383 No private IME option set to start voice input.
+11-18 05:01:38.180  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x1(Normal) imeOptions=0x2000006 privateImeOptions=null actionName=DONE actionLabel=null actionId=0 initialSelStart=15 initialSelEnd=15 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=Bundle[mParcelledData.dataSize=404]}, true)
+11-18 05:01:38.180  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 05:01:38.182  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:01:38.182  1549  1549 W SessionManager: SessionManager.beginSession():53 Try to begin an already begun session [INPUT_SESSION], end it first
+11-18 05:01:38.182  1549  1549 W SessionManager: SessionManager.endSession():96 Child session [INPUT_VIEW_SESSION] is not ended while ending session [{INPUT_SESSION=1794978098157, IME_SESSION=1794978098171, INPUT_VIEW_SESSION=1794978098158, TRAINING_CACHE_SESSION=1794978098171}], ending it now.
+11-18 05:01:38.182  1549  1549 W SessionManager: SessionManager.endSession():96 Child session [IME_SESSION] is not ended while ending session [{INPUT_SESSION=1794978098157, IME_SESSION=1794978098171, INPUT_VIEW_SESSION=1794978098158, TRAINING_CACHE_SESSION=1794978098171}], ending it now.
+11-18 05:01:38.183  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInputView():1995 onStartInputView(EditorInfo{inputType=0x1(Normal) imeOptions=0x2000006 privateImeOptions=null actionName=DONE actionLabel=null actionId=0 initialSelStart=15 initialSelEnd=15 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false, android.support.text.emoji.emojiCompat_replaceAll=false}]}, true)
+11-18 05:01:38.183  1549  1637 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 05:01:38.185  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:01:38.185  1549  1549 W ModuleManager: ModuleManager.loadModule():450 Module erj is not available
+11-18 05:01:38.187  5713  5713 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:38.187  5713  5713 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:38.188  5713  5713 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:38.195  1549  7190 I FallbackOnDeviceRecognitionProvider: FallbackOnDeviceRecognitionProvider.maybeScheduleAutoPackDownload():195 maybeScheduleAutoPackDownload() for language tag en-US
+11-18 05:01:38.206  1549  1549 I KeyboardViewUtil: KeyboardViewUtil.getKeyboardHeightRatio():189 systemKeyboardHeightRatio:1.000000; userKeyboardHeightRatio:1.000000.
+11-18 05:01:38.207  1549  1549 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-18 05:01:38.207  1549  1549 I KeyboardWrapper: KeyboardWrapper.consumeEvent():275 Skip consuming an event as current keyboard is deactivated (state=0, keyboard existence=true)
+11-18 05:01:38.207  1549  1549 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.shutdown():77 shutdown()
+11-18 05:01:38.208  1549  1549 I AndroidIME: AbstractIme.onDeactivate():207 LatinIme.onDeactivate()
+11-18 05:01:38.208  1549  1549 W SessionManager: SessionManager.endSession():88 Try to end a not begun session [IME_SESSION].
+11-18 05:01:38.208  1549  1549 I AndroidIME: AbstractIme.onActivate():86 LatinIme.onActivate() : EditorInfo = inputType=0x1(Normal) imeOptions=0x2000006 privateImeOptions=null actionName=DONE actionLabel=null actionId=0 initialSelStart=15 initialSelEnd=15 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false, android.support.text.emoji.emojiCompat_replaceAll=false}], IncognitoMode = false, DeviceLocked = false
+11-18 05:01:38.209  1549  1549 I Delight5Facilitator: Delight5Facilitator.initializeForIme():777 initializeForIme() : Locale = [en_US], layout = qwerty
+11-18 05:01:38.209  1549  1549 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.cancelShutdown():55 cancelShutdown()
+11-18 05:01:38.209  1549  1549 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.syncLanguagePacks():67 syncLanguagePacks()
+11-18 05:01:38.209  1549  1549 I LatinIme: LatinIme.updateEnableInlineSuggestionsOnDecoderSideFlags():1003 inline flag updated to:false
+11-18 05:01:38.210  1549  1549 I KeyboardWrapper: KeyboardWrapper.consumeEvent():275 Skip consuming an event as current keyboard is deactivated (state=0, keyboard existence=true)
+11-18 05:01:38.217  1549  1549 I KeyboardViewUtil: KeyboardViewUtil.calculateMaxKeyboardBodyHeight():40 leave 354 height for app when screen height:2274, header height:116 and isFullscreenMode:false, so the max keyboard body height is:1804
+11-18 05:01:38.218  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 05:01:38.218  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = HEADER, shownType = SHOW_OPTIONAL
+11-18 05:01:38.218  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-18 05:01:38.218  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = BODY, shownType = SHOW_MANDATORY
+11-18 05:01:38.218  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-18 05:01:38.218  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = FLOATING_CANDIDATES, shownType = HIDE
+11-18 05:01:38.218  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = false
+11-18 05:01:38.219  1549  1549 I KeyboardViewUtil: KeyboardViewUtil.calculateMaxKeyboardBodyHeight():40 leave 354 height for app when screen height:2274, header height:116 and isFullscreenMode:false, so the max keyboard body height is:1804
+11-18 05:01:38.221  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 05:01:38.221  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 05:01:38.221  1549  1549 I KeyboardModeManager: KeyboardModeManager.setInputView():364 setInputView() : supportsOneHandedMode=true
+11-18 05:01:38.221  1549  1549 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-18 05:01:38.221  1549  1549 I AndroidIME: KeyboardViewManager.updateKeyboardBodyViewHolderPaddingBottom():604 Set finalPaddingBottom = 0 while keyboardBottomGapFromScreen = 0; navigationHeight = 126
+11-18 05:01:38.222  1549  1549 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-18 05:01:38.222  1549  1549 I AndroidIME: KeyboardViewManager.updateKeyboardBodyViewHolderPaddingBottom():604 Set finalPaddingBottom = 0 while keyboardBottomGapFromScreen = 0; navigationHeight = 126
+11-18 05:01:38.222  1549  1549 I KeyboardModeManager: KeyboardModeManager.setInputView():356 setInputView() : entry=hwn{languageTag=en-US, variant=qwerty, hasLocalizedResources=true, conditionCacheKey=_device=phone_device_size=default_enable_adaptive_text_editing=true_enable_inline_suggestions_on_client_side=false_enable_large_tablet_batch_1=false_enable_large_tablet_batch_2=false_enable_more_candidates_view_for_multilingual=false_enable_nav_redesign=false_enable_number_row=false_enable_preemptive_decode=true_enable_secondary_symbols=false_expressions=normal_four_or_more_letter_rows=false_keyboard_mode=normal_language=en-US_orientation=portrait_physical_keyboard=qwerty_show_secondary_digits=true_show_suggestions=true_split_with_duplicate_keys=true_variant=qwerty, imeDef.stringId=ime_english_united_states, imeDef.className=com.google.android.apps.inputmethod.libs.latin5.LatinIme, imeDef.languageTag=en-US}
+11-18 05:01:38.223  1549  1549 I VoiceImeExtension: VoiceImeExtension.shouldStartVoiceInputAutomatically():383 No private IME option set to start voice input.
+11-18 05:01:38.232  1549  7190 I SpeechFactory: SpeechRecognitionFactory.maybeScheduleAutoPackDownloadForFallback():205 maybeScheduleAutoPackDownloadForFallback()
+11-18 05:01:38.237  5713  5713 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:38.240  1549  7190 I FallbackOnDeviceRecognitionProvider: FallbackOnDeviceRecognitionProvider.maybeScheduleAutoPackDownload():195 maybeScheduleAutoPackDownload() for language tag en-US
+11-18 05:01:38.242  5713  5713 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:38.247  1549  1637 W ModuleManager: ModuleManager.loadModule():450 Module jjj is not available
+11-18 05:01:38.247  1549  1637 I NebulaeTrainingCacheMetricsProcessor: NebulaeTrainingCacheMetricsProcessor.processEndSession():447 No input action collection in this session, skip logging.
+11-18 05:01:38.267  5713  5713 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:38.307  1549  1549 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-18 05:01:38.308  1549  1549 W InputContextProxyV4: InputContextProxyV4.applyClientDiffInternal():897 Ignore [FetchSuggestions] diff due to stale request: 202<204, inputStateId=140, lastInputStateId=141
+11-18 05:01:38.308  1549  2139 I Delight5Decoder: Delight5DecoderWrapper.setKeyboardLayout():457 setKeyboardLayout()
+11-18 05:01:38.309  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = HEADER, shownType = SHOW_MANDATORY_WITH_ANIMATION
+11-18 05:01:38.309  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-18 05:01:38.314  7023  7023 D InsetsController: show(ime(), fromIme=true)
+11-18 05:01:38.315  5713  5713 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:38.315  5713  5713 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:38.319  5713  5713 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:38.321  1549  2139 I Delight5Decoder: Delight5DecoderWrapper.setKeyboardLayout():457 setKeyboardLayout()
+11-18 05:01:38.325  5713  5713 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:38.327  5713  5713 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:38.329  5713  5713 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:38.412  1549  1549 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-18 05:01:39.008  7023  7110 D EGL_emulation: app_time_stats: avg=401.25ms min=54.31ms max=762.95ms count=4
+11-18 05:01:39.872  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInputView():2241
+11-18 05:01:39.873  1549  1549 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-18 05:01:39.873  1549  1549 I InputBundle: InputBundle.consumeEvent():923 Skip consuming an event as keyboard status is 0
+11-18 05:01:39.874  1549  1549 I KeyboardWrapper: KeyboardWrapper.consumeEvent():275 Skip consuming an event as current keyboard is deactivated (state=0, keyboard existence=true)
+11-18 05:01:39.874  1549  1549 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.shutdown():77 shutdown()
+11-18 05:01:39.874  1549  1549 I AndroidIME: AbstractIme.onDeactivate():207 LatinIme.onDeactivate()
+11-18 05:01:39.874  1549  1637 W ModuleManager: ModuleManager.loadModule():450 Module jjj is not available
+11-18 05:01:39.879  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=null}, true)
+11-18 05:01:39.879  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 05:01:39.880  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:01:39.880  1549  1549 W SessionManager: SessionManager.beginSession():53 Try to begin an already begun session [INPUT_SESSION], end it first
+11-18 05:01:39.966  1549  1718 D EGL_emulation: app_time_stats: avg=552.29ms min=11.02ms max=1598.10ms count=3
+11-18 05:01:40.051   789   845 D EGL_emulation: app_time_stats: avg=1261.22ms min=928.57ms max=1593.87ms count=2
+11-18 05:01:40.106   331   377 W TransactionTracing: Could not find layer handle 0x79ff032babf0
+11-18 05:01:41.402  7011  7019 W System  : A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+11-18 05:01:41.402  7011  7019 W System  : java.lang.Throwable: Explicit termination method 'HardwareBuffer.close' not called
+11-18 05:01:41.402  7011  7019 W System  : 	at dalvik.system.CloseGuard.openWithCallSite(CloseGuard.java:288)
+11-18 05:01:41.402  7011  7019 W System  : 	at dalvik.system.CloseGuard.open(CloseGuard.java:257)
+11-18 05:01:41.402  7011  7019 W System  : 	at android.hardware.HardwareBuffer.<init>(HardwareBuffer.java:272)
+11-18 05:01:41.402  7011  7019 W System  : A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+11-18 05:01:41.402  7011  7019 W System  : java.lang.Throwable: Explicit termination method 'HardwareBuffer.close' not called
+11-18 05:01:41.402  7011  7019 W System  : 	at dalvik.system.CloseGuard.openWithCallSite(CloseGuard.java:288)
+11-18 05:01:41.402  7011  7019 W System  : 	at dalvik.system.CloseGuard.open(CloseGuard.java:257)
+11-18 05:01:41.402  7011  7019 W System  : 	at android.hardware.HardwareBuffer.<init>(HardwareBuffer.java:272)
+11-18 05:01:41.554  7023  7110 D EGL_emulation: app_time_stats: avg=636.33ms min=50.07ms max=1549.02ms count=4
+11-18 05:01:41.972   489   727 D ConnectivityService: releasing NetworkRequest [ REQUEST id=161, [ Transports: CELLULAR Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN&NOT_VCN_MANAGED Uid: 10119 RequestorUid: 10119 RequestorPkg: com.google.android.googlequicksearchbox UnderlyingNetworks: Null] ] (release request)
+11-18 05:01:41.972   489   727 I ConnectivityService: Update capabilities for net 101 : -FOREGROUND
+11-18 05:01:41.974   285   347 I netd    : networkSetPermissionForNetwork(101, 1) <1.08ms>
+11-18 05:01:42.204   285  8021 I resolv  : GetAddrInfoHandler::run: {100 786532 100 983140 10120 0}
+11-18 05:01:42.205   285  8022 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-18 05:01:42.205   285  8023 I resolv  : res_nmkquery: (QUERY, IN, A)
+11-18 05:01:42.205   285  8023 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x71458f2b2370
+11-18 05:01:42.205   285  8023 I resolv  : doQuery: rcode=0, ancount=8, return value=173
+11-18 05:01:42.205   285  8022 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x71459f2b1f50
+11-18 05:01:42.205   285  8022 I resolv  : doQuery: rcode=0, ancount=8, return value=269
+11-18 05:01:42.258   789   845 D EGL_emulation: app_time_stats: avg=2749.08ms min=126.52ms max=10221.56ms count=4
+11-18 05:01:43.123  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x1(Normal) imeOptions=0x2000006 privateImeOptions=null actionName=DONE actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=Bundle[mParcelledData.dataSize=404]}, true)
+11-18 05:01:43.123  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 05:01:43.123  7023  7023 D InsetsController: show(ime(), fromIme=false)
+11-18 05:01:43.123  7023  7023 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{63cec82 VFED..... .F....ID 0,0-1080,2209 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT_BY_INSETS_API
+11-18 05:01:43.123  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:01:43.123  1549  1549 W SessionManager: SessionManager.beginSession():53 Try to begin an already begun session [INPUT_SESSION], end it first
+11-18 05:01:43.125  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInputView():1995 onStartInputView(EditorInfo{inputType=0x1(Normal) imeOptions=0x2000006 privateImeOptions=null actionName=DONE actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false, android.support.text.emoji.emojiCompat_replaceAll=false}]}, false)
+11-18 05:01:43.125  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:01:43.126  1549  1549 W ModuleManager: ModuleManager.loadModule():450 Module erj is not available
+11-18 05:01:43.127  1549  1637 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 05:01:43.133  7023  7023 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{63cec82 VFED..... .F....ID 0,0-1080,2209 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+11-18 05:01:43.133  7023  7023 W RemoteInputConnectionImpl: getSurroundingText on inactive InputConnection
+11-18 05:01:43.134  1549  1549 I KeyboardViewUtil: KeyboardViewUtil.getKeyboardHeightRatio():189 systemKeyboardHeightRatio:1.000000; userKeyboardHeightRatio:1.000000.
+11-18 05:01:43.134  1549  1549 I AndroidIME: AbstractIme.onActivate():86 LatinIme.onActivate() : EditorInfo = inputType=0x1(Normal) imeOptions=0x2000006 privateImeOptions=null actionName=DONE actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false, android.support.text.emoji.emojiCompat_replaceAll=false}], IncognitoMode = false, DeviceLocked = false
+11-18 05:01:43.134  1549  1549 I Delight5Facilitator: Delight5Facilitator.initializeForIme():777 initializeForIme() : Locale = [en_US], layout = qwerty
+11-18 05:01:43.135  1549  1549 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.cancelShutdown():55 cancelShutdown()
+11-18 05:01:43.135  1549  1549 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.syncLanguagePacks():67 syncLanguagePacks()
+11-18 05:01:43.135  1549  1549 I LatinIme: LatinIme.updateEnableInlineSuggestionsOnDecoderSideFlags():1003 inline flag updated to:false
+11-18 05:01:43.135  1549  7190 I SpeechFactory: SpeechRecognitionFactory.maybeScheduleAutoPackDownloadForFallback():205 maybeScheduleAutoPackDownloadForFallback()
+11-18 05:01:43.135  1549  7190 I FallbackOnDeviceRecognitionProvider: FallbackOnDeviceRecognitionProvider.maybeScheduleAutoPackDownload():195 maybeScheduleAutoPackDownload() for language tag en-US
+11-18 05:01:43.137  1549  1549 I KeyboardWrapper: KeyboardWrapper.consumeEvent():275 Skip consuming an event as current keyboard is deactivated (state=0, keyboard existence=true)
+11-18 05:01:43.139  1549  1549 I KeyboardViewUtil: KeyboardViewUtil.calculateMaxKeyboardBodyHeight():40 leave 354 height for app when screen height:2274, header height:116 and isFullscreenMode:false, so the max keyboard body height is:1804
+11-18 05:01:43.139  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 05:01:43.139  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = HEADER, shownType = SHOW_OPTIONAL
+11-18 05:01:43.139  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-18 05:01:43.140  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = BODY, shownType = SHOW_MANDATORY
+11-18 05:01:43.140  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-18 05:01:43.140  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = FLOATING_CANDIDATES, shownType = HIDE
+11-18 05:01:43.140  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = false
+11-18 05:01:43.140  1549  1549 I KeyboardViewUtil: KeyboardViewUtil.calculateMaxKeyboardBodyHeight():40 leave 354 height for app when screen height:2274, header height:116 and isFullscreenMode:false, so the max keyboard body height is:1804
+11-18 05:01:43.141  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 05:01:43.141  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 05:01:43.141  1549  1549 I KeyboardModeManager: KeyboardModeManager.setInputView():364 setInputView() : supportsOneHandedMode=true
+11-18 05:01:43.142  1549  1549 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-18 05:01:43.142  1549  1549 I AndroidIME: KeyboardViewManager.updateKeyboardBodyViewHolderPaddingBottom():604 Set finalPaddingBottom = 0 while keyboardBottomGapFromScreen = 0; navigationHeight = 126
+11-18 05:01:43.142  1549  1549 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-18 05:01:43.142  1549  1549 I AndroidIME: KeyboardViewManager.updateKeyboardBodyViewHolderPaddingBottom():604 Set finalPaddingBottom = 0 while keyboardBottomGapFromScreen = 0; navigationHeight = 126
+11-18 05:01:43.143  1549  1549 I KeyboardModeManager: KeyboardModeManager.setInputView():356 setInputView() : entry=hwn{languageTag=en-US, variant=qwerty, hasLocalizedResources=true, conditionCacheKey=_device=phone_device_size=default_enable_adaptive_text_editing=true_enable_inline_suggestions_on_client_side=false_enable_large_tablet_batch_1=false_enable_large_tablet_batch_2=false_enable_more_candidates_view_for_multilingual=false_enable_nav_redesign=false_enable_number_row=false_enable_preemptive_decode=true_enable_secondary_symbols=false_expressions=normal_four_or_more_letter_rows=false_keyboard_mode=normal_language=en-US_orientation=portrait_physical_keyboard=qwerty_show_secondary_digits=true_show_suggestions=true_split_with_duplicate_keys=true_variant=qwerty, imeDef.stringId=ime_english_united_states, imeDef.className=com.google.android.apps.inputmethod.libs.latin5.LatinIme, imeDef.languageTag=en-US}
+11-18 05:01:43.143  1549  1549 I VoiceImeExtension: VoiceImeExtension.shouldStartVoiceInputAutomatically():383 No private IME option set to start voice input.
+11-18 05:01:43.146  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x1(Normal) imeOptions=0x2000006 privateImeOptions=null actionName=DONE actionLabel=null actionId=0 initialSelStart=1 initialSelEnd=1 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=Bundle[mParcelledData.dataSize=404]}, true)
+11-18 05:01:43.146  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 05:01:43.146  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:01:43.146  1549  1549 W SessionManager: SessionManager.beginSession():53 Try to begin an already begun session [INPUT_SESSION], end it first
+11-18 05:01:43.147  1549  1549 W SessionManager: SessionManager.endSession():96 Child session [INPUT_VIEW_SESSION] is not ended while ending session [{INPUT_SESSION=1794978103124, IME_SESSION=1794978103134, INPUT_VIEW_SESSION=1794978103125, TRAINING_CACHE_SESSION=1794978103134}], ending it now.
+11-18 05:01:43.147  1549  1549 W SessionManager: SessionManager.endSession():96 Child session [IME_SESSION] is not ended while ending session [{INPUT_SESSION=1794978103124, IME_SESSION=1794978103134, INPUT_VIEW_SESSION=1794978103125, TRAINING_CACHE_SESSION=1794978103134}], ending it now.
+11-18 05:01:43.147  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInputView():1995 onStartInputView(EditorInfo{inputType=0x1(Normal) imeOptions=0x2000006 privateImeOptions=null actionName=DONE actionLabel=null actionId=0 initialSelStart=1 initialSelEnd=1 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false, android.support.text.emoji.emojiCompat_replaceAll=false}]}, true)
+11-18 05:01:43.147  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:01:43.147  1549  1549 W ModuleManager: ModuleManager.loadModule():450 Module erj is not available
+11-18 05:01:43.148  5713  5713 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:43.148  5713  5713 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:43.150  5713  5713 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:43.151  1549  1637 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 05:01:43.156  7023  7110 D EGL_emulation: app_time_stats: avg=398.48ms min=48.71ms max=750.94ms count=4
+11-18 05:01:43.161  1549  1549 I KeyboardViewUtil: KeyboardViewUtil.getKeyboardHeightRatio():189 systemKeyboardHeightRatio:1.000000; userKeyboardHeightRatio:1.000000.
+11-18 05:01:43.162  1549  1549 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-18 05:01:43.162  1549  1549 I KeyboardWrapper: KeyboardWrapper.consumeEvent():275 Skip consuming an event as current keyboard is deactivated (state=0, keyboard existence=true)
+11-18 05:01:43.162  1549  1549 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.shutdown():77 shutdown()
+11-18 05:01:43.163  1549  1549 I AndroidIME: AbstractIme.onDeactivate():207 LatinIme.onDeactivate()
+11-18 05:01:43.163  1549  1549 W SessionManager: SessionManager.endSession():88 Try to end a not begun session [IME_SESSION].
+11-18 05:01:43.163  1549  1549 I AndroidIME: AbstractIme.onActivate():86 LatinIme.onActivate() : EditorInfo = inputType=0x1(Normal) imeOptions=0x2000006 privateImeOptions=null actionName=DONE actionLabel=null actionId=0 initialSelStart=1 initialSelEnd=1 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false, android.support.text.emoji.emojiCompat_replaceAll=false}], IncognitoMode = false, DeviceLocked = false
+11-18 05:01:43.163  1549  1549 I Delight5Facilitator: Delight5Facilitator.initializeForIme():777 initializeForIme() : Locale = [en_US], layout = qwerty
+11-18 05:01:43.164  1549  1549 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.cancelShutdown():55 cancelShutdown()
+11-18 05:01:43.164  1549  1549 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.syncLanguagePacks():67 syncLanguagePacks()
+11-18 05:01:43.164  1549  1549 I LatinIme: LatinIme.updateEnableInlineSuggestionsOnDecoderSideFlags():1003 inline flag updated to:false
+11-18 05:01:43.165  1549  7190 I SpeechFactory: SpeechRecognitionFactory.maybeScheduleAutoPackDownloadForFallback():205 maybeScheduleAutoPackDownloadForFallback()
+11-18 05:01:43.166  1549  7190 I FallbackOnDeviceRecognitionProvider: FallbackOnDeviceRecognitionProvider.maybeScheduleAutoPackDownload():195 maybeScheduleAutoPackDownload() for language tag en-US
+11-18 05:01:43.166  1549  1549 I KeyboardWrapper: KeyboardWrapper.consumeEvent():275 Skip consuming an event as current keyboard is deactivated (state=0, keyboard existence=true)
+11-18 05:01:43.167  1549  1549 I KeyboardViewUtil: KeyboardViewUtil.calculateMaxKeyboardBodyHeight():40 leave 354 height for app when screen height:2274, header height:116 and isFullscreenMode:false, so the max keyboard body height is:1804
+11-18 05:01:43.168  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 05:01:43.168  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = HEADER, shownType = SHOW_OPTIONAL
+11-18 05:01:43.168  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-18 05:01:43.168  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = BODY, shownType = SHOW_MANDATORY
+11-18 05:01:43.168  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-18 05:01:43.168  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = FLOATING_CANDIDATES, shownType = HIDE
+11-18 05:01:43.168  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = false
+11-18 05:01:43.168  1549  1549 I KeyboardViewUtil: KeyboardViewUtil.calculateMaxKeyboardBodyHeight():40 leave 354 height for app when screen height:2274, header height:116 and isFullscreenMode:false, so the max keyboard body height is:1804
+11-18 05:01:43.168  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 05:01:43.169  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 05:01:43.169  1549  1549 I KeyboardModeManager: KeyboardModeManager.setInputView():364 setInputView() : supportsOneHandedMode=true
+11-18 05:01:43.169  1549  1549 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-18 05:01:43.170  1549  1549 I AndroidIME: KeyboardViewManager.updateKeyboardBodyViewHolderPaddingBottom():604 Set finalPaddingBottom = 0 while keyboardBottomGapFromScreen = 0; navigationHeight = 126
+11-18 05:01:43.170  1549  1549 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-18 05:01:43.171  1549  1549 I AndroidIME: KeyboardViewManager.updateKeyboardBodyViewHolderPaddingBottom():604 Set finalPaddingBottom = 0 while keyboardBottomGapFromScreen = 0; navigationHeight = 126
+11-18 05:01:43.171  1549  1549 I KeyboardModeManager: KeyboardModeManager.setInputView():356 setInputView() : entry=hwn{languageTag=en-US, variant=qwerty, hasLocalizedResources=true, conditionCacheKey=_device=phone_device_size=default_enable_adaptive_text_editing=true_enable_inline_suggestions_on_client_side=false_enable_large_tablet_batch_1=false_enable_large_tablet_batch_2=false_enable_more_candidates_view_for_multilingual=false_enable_nav_redesign=false_enable_number_row=false_enable_preemptive_decode=true_enable_secondary_symbols=false_expressions=normal_four_or_more_letter_rows=false_keyboard_mode=normal_language=en-US_orientation=portrait_physical_keyboard=qwerty_show_secondary_digits=true_show_suggestions=true_split_with_duplicate_keys=true_variant=qwerty, imeDef.stringId=ime_english_united_states, imeDef.className=com.google.android.apps.inputmethod.libs.latin5.LatinIme, imeDef.languageTag=en-US}
+11-18 05:01:43.172  1549  1549 I VoiceImeExtension: VoiceImeExtension.shouldStartVoiceInputAutomatically():383 No private IME option set to start voice input.
+11-18 05:01:43.196  1549  1637 W ModuleManager: ModuleManager.loadModule():450 Module jjj is not available
+11-18 05:01:43.196  1549  1637 I NebulaeTrainingCacheMetricsProcessor: NebulaeTrainingCacheMetricsProcessor.processEndSession():447 No input action collection in this session, skip logging.
+11-18 05:01:43.215  5713  5713 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:43.215  5713  5713 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:43.220  5713  5713 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:43.254  1549  1549 W InputContextProxyV4: InputContextProxyV4.applyClientDiffInternal():897 Ignore [FetchSuggestions] diff due to stale request: 206<208, inputStateId=145, lastInputStateId=146
+11-18 05:01:43.255  1549  1549 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-18 05:01:43.266  1549  2139 I Delight5Decoder: Delight5DecoderWrapper.setKeyboardLayout():457 setKeyboardLayout()
+11-18 05:01:43.268  1549  2139 I Delight5Decoder: Delight5DecoderWrapper.setKeyboardLayout():457 setKeyboardLayout()
+11-18 05:01:43.269  7023  7023 D InsetsController: show(ime(), fromIme=true)
+11-18 05:01:43.274  5713  5713 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:43.274  5713  5713 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:43.280   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b8310
+11-18 05:01:43.283  5713  5713 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:43.285  5713  5713 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:43.286  5713  5713 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:43.287  5713  5713 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:43.326   789   845 D EGL_emulation: app_time_stats: avg=3275.45ms min=3275.45ms max=3275.45ms count=1
+11-18 05:01:43.369  1549  1549 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-18 05:01:44.023  1640  1640 I AiAiTextClassifier: onDestroyTextClassificationSession = TextClassificationSessionId {9a81ec16-a2b2-460b-97fe-5c35d9660b39}
+11-18 05:01:44.023  1640  1640 I AiAiTextClassifier: onDestroyTextClassificationSession = TextClassificationSessionId {8949d34d-c7f5-4df5-8e4d-b51bd5f35471}
+11-18 05:01:44.163  1549  1549 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-18 05:01:44.811  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x1(Normal) imeOptions=0x2000006 privateImeOptions=null actionName=DONE actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=Bundle[mParcelledData.dataSize=404]}, true)
+11-18 05:01:44.811  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 05:01:44.812  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:01:44.812  1549  1549 W SessionManager: SessionManager.beginSession():53 Try to begin an already begun session [INPUT_SESSION], end it first
+11-18 05:01:44.812  1549  1549 W SessionManager: SessionManager.endSession():96 Child session [INPUT_VIEW_SESSION] is not ended while ending session [{INPUT_SESSION=1794978103147, IME_SESSION=1794978103163, INPUT_VIEW_SESSION=1794978103147, TRAINING_CACHE_SESSION=1794978103163}], ending it now.
+11-18 05:01:44.812  1549  1549 W SessionManager: SessionManager.endSession():96 Child session [IME_SESSION] is not ended while ending session [{INPUT_SESSION=1794978103147, IME_SESSION=1794978103163, INPUT_VIEW_SESSION=1794978103147, TRAINING_CACHE_SESSION=1794978103163}], ending it now.
+11-18 05:01:44.813  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInputView():1995 onStartInputView(EditorInfo{inputType=0x1(Normal) imeOptions=0x2000006 privateImeOptions=null actionName=DONE actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false, android.support.text.emoji.emojiCompat_replaceAll=false}]}, true)
+11-18 05:01:44.813  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:01:44.814  1549  1549 W ModuleManager: ModuleManager.loadModule():450 Module erj is not available
+11-18 05:01:44.826  1549  1637 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 05:01:44.829  7023  7110 D EGL_emulation: app_time_stats: avg=412.56ms min=28.67ms max=830.67ms count=4
+11-18 05:01:44.849  7023  7023 W RemoteInputConnectionImpl: getSurroundingText on inactive InputConnection
+11-18 05:01:44.851  1549  1549 I KeyboardViewUtil: KeyboardViewUtil.getKeyboardHeightRatio():189 systemKeyboardHeightRatio:1.000000; userKeyboardHeightRatio:1.000000.
+11-18 05:01:44.851  1549  1549 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-18 05:01:44.852  1549  1549 I KeyboardWrapper: KeyboardWrapper.consumeEvent():275 Skip consuming an event as current keyboard is deactivated (state=0, keyboard existence=true)
+11-18 05:01:44.852  1549  1549 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.shutdown():77 shutdown()
+11-18 05:01:44.852  1549  1549 I AndroidIME: AbstractIme.onDeactivate():207 LatinIme.onDeactivate()
+11-18 05:01:44.852  1549  1637 W ModuleManager: ModuleManager.loadModule():450 Module jjj is not available
+11-18 05:01:44.855  1549  1549 W SessionManager: SessionManager.endSession():88 Try to end a not begun session [IME_SESSION].
+11-18 05:01:44.855  1549  1549 I AndroidIME: AbstractIme.onActivate():86 LatinIme.onActivate() : EditorInfo = inputType=0x1(Normal) imeOptions=0x2000006 privateImeOptions=null actionName=DONE actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false, android.support.text.emoji.emojiCompat_replaceAll=false}], IncognitoMode = false, DeviceLocked = false
+11-18 05:01:44.857  1549  1549 I Delight5Facilitator: Delight5Facilitator.initializeForIme():777 initializeForIme() : Locale = [en_US], layout = qwerty
+11-18 05:01:44.858  1549  1549 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.cancelShutdown():55 cancelShutdown()
+11-18 05:01:44.858  1549  1549 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.syncLanguagePacks():67 syncLanguagePacks()
+11-18 05:01:44.858  1549  1549 I LatinIme: LatinIme.updateEnableInlineSuggestionsOnDecoderSideFlags():1003 inline flag updated to:false
+11-18 05:01:44.863  1549  1549 I KeyboardWrapper: KeyboardWrapper.consumeEvent():275 Skip consuming an event as current keyboard is deactivated (state=0, keyboard existence=true)
+11-18 05:01:44.867  1549  1549 I KeyboardViewUtil: KeyboardViewUtil.calculateMaxKeyboardBodyHeight():40 leave 354 height for app when screen height:2274, header height:116 and isFullscreenMode:false, so the max keyboard body height is:1804
+11-18 05:01:44.867  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 05:01:44.867  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = HEADER, shownType = SHOW_OPTIONAL
+11-18 05:01:44.867  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-18 05:01:44.867  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = BODY, shownType = SHOW_MANDATORY
+11-18 05:01:44.867  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-18 05:01:44.867  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = FLOATING_CANDIDATES, shownType = HIDE
+11-18 05:01:44.867  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = false
+11-18 05:01:44.867  1549  1549 I KeyboardViewUtil: KeyboardViewUtil.calculateMaxKeyboardBodyHeight():40 leave 354 height for app when screen height:2274, header height:116 and isFullscreenMode:false, so the max keyboard body height is:1804
+11-18 05:01:44.867  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 05:01:44.868  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 05:01:44.868  1549  1549 I KeyboardModeManager: KeyboardModeManager.setInputView():364 setInputView() : supportsOneHandedMode=true
+11-18 05:01:44.868  1549  1549 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-18 05:01:44.868  1549  1549 I AndroidIME: KeyboardViewManager.updateKeyboardBodyViewHolderPaddingBottom():604 Set finalPaddingBottom = 0 while keyboardBottomGapFromScreen = 0; navigationHeight = 126
+11-18 05:01:44.868  1549  1549 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-18 05:01:44.871  1549  7190 I SpeechFactory: SpeechRecognitionFactory.maybeScheduleAutoPackDownloadForFallback():205 maybeScheduleAutoPackDownloadForFallback()
+11-18 05:01:44.871  1549  7190 I FallbackOnDeviceRecognitionProvider: FallbackOnDeviceRecognitionProvider.maybeScheduleAutoPackDownload():195 maybeScheduleAutoPackDownload() for language tag en-US
+11-18 05:01:44.873  1549  1549 I AndroidIME: KeyboardViewManager.updateKeyboardBodyViewHolderPaddingBottom():604 Set finalPaddingBottom = 0 while keyboardBottomGapFromScreen = 0; navigationHeight = 126
+11-18 05:01:44.873  1549  1549 I KeyboardModeManager: KeyboardModeManager.setInputView():356 setInputView() : entry=hwn{languageTag=en-US, variant=qwerty, hasLocalizedResources=true, conditionCacheKey=_device=phone_device_size=default_enable_adaptive_text_editing=true_enable_inline_suggestions_on_client_side=false_enable_large_tablet_batch_1=false_enable_large_tablet_batch_2=false_enable_more_candidates_view_for_multilingual=false_enable_nav_redesign=false_enable_number_row=false_enable_preemptive_decode=true_enable_secondary_symbols=false_expressions=normal_four_or_more_letter_rows=false_keyboard_mode=normal_language=en-US_orientation=portrait_physical_keyboard=qwerty_show_secondary_digits=true_show_suggestions=true_split_with_duplicate_keys=true_variant=qwerty, imeDef.stringId=ime_english_united_states, imeDef.className=com.google.android.apps.inputmethod.libs.latin5.LatinIme, imeDef.languageTag=en-US}
+11-18 05:01:44.873  1549  1549 I VoiceImeExtension: VoiceImeExtension.shouldStartVoiceInputAutomatically():383 No private IME option set to start voice input.
+11-18 05:01:44.875  7023  7023 D InsetsController: show(ime(), fromIme=true)
+11-18 05:01:44.895  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInputView():2241
+11-18 05:01:44.896  1549  1549 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-18 05:01:44.897  1549  1549 I InputBundle: InputBundle.consumeEvent():923 Skip consuming an event as keyboard status is 0
+11-18 05:01:44.897  1549  1549 I KeyboardWrapper: KeyboardWrapper.consumeEvent():275 Skip consuming an event as current keyboard is deactivated (state=0, keyboard existence=true)
+11-18 05:01:44.897  1549  1549 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.shutdown():77 shutdown()
+11-18 05:01:44.898  1549  1549 I AndroidIME: AbstractIme.onDeactivate():207 LatinIme.onDeactivate()
+11-18 05:01:44.898   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b95d0
+11-18 05:01:44.901  5713  5713 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:44.901  5713  5713 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:44.906   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:44.908  5713  5713 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:44.912  1549  1637 W ModuleManager: ModuleManager.loadModule():450 Module jjj is not available
+11-18 05:01:44.912  1549  1637 I NebulaeTrainingCacheMetricsProcessor: NebulaeTrainingCacheMetricsProcessor.processEndSession():447 No input action collection in this session, skip logging.
+11-18 05:01:44.916  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=null}, true)
+11-18 05:01:44.916  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 05:01:44.916  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:01:44.916  1549  1549 W SessionManager: SessionManager.beginSession():53 Try to begin an already begun session [INPUT_SESSION], end it first
+11-18 05:01:44.917  1549  1549 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-18 05:01:44.917  1549  1549 I InputBundle: InputBundle.consumeEvent():919 Skip consuming an event as imeStatus is 0
+11-18 05:01:44.938  5713  5713 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:44.938  5713  5713 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:44.943  5713  5713 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:01:44.969   789   845 D EGL_emulation: app_time_stats: avg=1643.23ms min=1643.23ms max=1643.23ms count=1
+11-18 05:01:45.139   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bd650
+11-18 05:01:45.695  7023  7110 W Parcel  : Expecting binder but got null!
+11-18 05:01:45.756   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:45.756   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:45.756   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:45.756   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:45.756   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:45.756   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:45.756   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:45.756   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:45.756   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:45.822  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-18 05:01:45.871  7023  7110 D EGL_emulation: app_time_stats: avg=260.35ms min=50.83ms max=802.08ms count=4
+11-18 05:01:45.872  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-18 05:01:45.872  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=16908290 fieldName=null extras=null}, false)
+11-18 05:01:45.872  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 05:01:45.872  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:01:45.886   331   377 W TransactionTracing: Could not find layer handle 0x79ff032ba050
+11-18 05:01:46.648   489   781 W InputManager-JNI: Input channel object 'a0ad247 Pop-Up Window (client)' was disposed without first being removed with the input manager!
+11-18 05:01:46.663   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b8970
+11-18 05:01:46.663   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b71d0
+11-18 05:01:46.663   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b8970
+11-18 05:01:46.711  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-18 05:01:46.712  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-18 05:01:46.713  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=null}, false)
+11-18 05:01:46.713  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 05:01:46.713  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:01:46.727   331   377 W TransactionTracing: Could not find layer handle 0x79ff032baa10
+11-18 05:01:47.494  7023  7110 D EGL_emulation: app_time_stats: avg=541.04ms min=71.58ms max=820.02ms count=3
+11-18 05:01:48.373   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:49.111  7023  7110 W Parcel  : Expecting binder but got null!
+11-18 05:01:49.173   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:49.198  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-18 05:01:49.200  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-18 05:01:49.200  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=null}, false)
+11-18 05:01:49.200  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 05:01:49.201  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:01:49.206   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9450
+11-18 05:01:49.206   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:49.206   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:49.297  7023  7110 D EGL_emulation: app_time_stats: avg=600.49ms min=30.84ms max=922.31ms count=3
+11-18 05:01:50.755  7011  7019 W System  : A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+11-18 05:01:50.755  7011  7019 W System  : java.lang.Throwable: Explicit termination method 'HardwareBuffer.close' not called
+11-18 05:01:50.755  7011  7019 W System  : 	at dalvik.system.CloseGuard.openWithCallSite(CloseGuard.java:288)
+11-18 05:01:50.755  7011  7019 W System  : 	at dalvik.system.CloseGuard.open(CloseGuard.java:257)
+11-18 05:01:50.755  7011  7019 W System  : 	at android.hardware.HardwareBuffer.<init>(HardwareBuffer.java:272)
+11-18 05:01:50.755  7011  7019 W System  : A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+11-18 05:01:50.755  7011  7019 W System  : java.lang.Throwable: Explicit termination method 'HardwareBuffer.close' not called
+11-18 05:01:50.755  7011  7019 W System  : 	at dalvik.system.CloseGuard.openWithCallSite(CloseGuard.java:288)
+11-18 05:01:50.755  7011  7019 W System  : 	at dalvik.system.CloseGuard.open(CloseGuard.java:257)
+11-18 05:01:50.755  7011  7019 W System  : 	at android.hardware.HardwareBuffer.<init>(HardwareBuffer.java:272)
+11-18 05:01:51.000   489  1134 W InputManager-JNI: Input channel object '5800e com.timcordova.quartznotes/androidx.activity.ComponentActivity (client)' was disposed without first being removed with the input manager!
+11-18 05:01:51.012   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b8910
+11-18 05:01:51.012   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bc570
+11-18 05:01:51.024   331   377 W TransactionTracing: Could not find layer handle 0x79ff032ba050
+11-18 05:01:51.024   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9b10
+11-18 05:01:51.024   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b8070
+11-18 05:01:51.024   331   377 W TransactionTracing: Could not find layer handle 0x79ff032ba2f0
+11-18 05:01:51.024   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9f30
+11-18 05:01:51.024   331   377 W TransactionTracing: Could not find layer handle 0x79ff032baad0
+11-18 05:01:51.024   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b8070
+11-18 05:01:51.024   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:51.024   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:51.024   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:51.034  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-18 05:01:51.036  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-18 05:01:51.036  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=null}, false)
+11-18 05:01:51.036  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 05:01:51.036  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:01:51.065  7023  7110 D EGL_emulation: app_time_stats: avg=1767.29ms min=1767.29ms max=1767.29ms count=1
+11-18 05:01:52.661  7023  7110 W Parcel  : Expecting binder but got null!
+11-18 05:01:52.672   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:52.672   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:52.729   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:52.729   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:52.729   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:52.729   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:52.729   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:52.744   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:52.744   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:52.783   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bb9d0
+11-18 05:01:52.783   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b4ef0
+11-18 05:01:52.783   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b4ef0
+11-18 05:01:52.783   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bb9d0
+11-18 05:01:52.798  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-18 05:01:52.842   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b8a90
+11-18 05:01:52.843  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-18 05:01:52.843  7023  7110 D EGL_emulation: app_time_stats: avg=592.54ms min=58.62ms max=968.65ms count=3
+11-18 05:01:52.843  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=null}, false)
+11-18 05:01:52.843  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 05:01:52.847  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:01:53.598   489  1134 W InputManager-JNI: Input channel object 'd7f9e07 com.timcordova.quartznotes/androidx.activity.ComponentActivity (client)' was disposed without first being removed with the input manager!
+11-18 05:01:53.613   331   377 W TransactionTracing: Could not find layer handle 0x79ff032ba050
+11-18 05:01:53.613   331   377 W TransactionTracing: Could not find layer handle 0x79ff032ba110
+11-18 05:01:53.648   331   377 W TransactionTracing: Could not find layer handle 0x79ff032ba3b0
+11-18 05:01:53.648   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bb9d0
+11-18 05:01:53.648   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bb490
+11-18 05:01:53.648   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bbd90
+11-18 05:01:53.648   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b7cb0
+11-18 05:01:53.648   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bb490
+11-18 05:01:53.654  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-18 05:01:53.654  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-18 05:01:53.654  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=null}, false)
+11-18 05:01:53.654  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 05:01:53.655  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:01:53.662   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:53.662   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:53.662   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:53.662   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:53.662   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:53.662   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:53.672   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b8a90
+11-18 05:01:54.460  7023  7110 D EGL_emulation: app_time_stats: avg=539.10ms min=54.59ms max=808.38ms count=3
+11-18 05:01:54.916  1549  1637 I ProtoXDBBufferWrapper: ProtoXDBBufferWrapper.flushToStorage():153 Flushed 36 data item(s) to storage.
+11-18 05:01:55.224  7023  7110 W Parcel  : Expecting binder but got null!
+11-18 05:01:55.345  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-18 05:01:55.346  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-18 05:01:55.346  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=16908290 fieldName=null extras=null}, false)
+11-18 05:01:55.346  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 05:01:55.349  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:01:55.358   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b4ef0
+11-18 05:01:55.358   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:55.358   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:55.358   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:56.146   489  2297 W InputManager-JNI: Input channel object '8378500 Pop-Up Window (client)' was disposed without first being removed with the input manager!
+11-18 05:01:56.159   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bc450
+11-18 05:01:56.159   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bb730
+11-18 05:01:56.159   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bb9d0
+11-18 05:01:56.159   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9f90
+11-18 05:01:56.159   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bb9d0
+11-18 05:01:56.174  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-18 05:01:56.182  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-18 05:01:56.182  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=null}, false)
+11-18 05:01:56.182  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 05:01:56.182  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:01:56.218  7023  7110 D EGL_emulation: app_time_stats: avg=437.16ms min=29.59ms max=799.22ms count=4
+11-18 05:01:57.738  7011  7019 W System  : A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+11-18 05:01:57.739  7011  7019 W System  : java.lang.Throwable: Explicit termination method 'HardwareBuffer.close' not called
+11-18 05:01:57.739  7011  7019 W System  : 	at dalvik.system.CloseGuard.openWithCallSite(CloseGuard.java:288)
+11-18 05:01:57.739  7011  7019 W System  : 	at dalvik.system.CloseGuard.open(CloseGuard.java:257)
+11-18 05:01:57.739  7011  7019 W System  : 	at android.hardware.HardwareBuffer.<init>(HardwareBuffer.java:272)
+11-18 05:01:57.739  7011  7019 W System  : A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+11-18 05:01:57.739  7011  7019 W System  : java.lang.Throwable: Explicit termination method 'HardwareBuffer.close' not called
+11-18 05:01:57.739  7011  7019 W System  : 	at dalvik.system.CloseGuard.openWithCallSite(CloseGuard.java:288)
+11-18 05:01:57.739  7011  7019 W System  : 	at dalvik.system.CloseGuard.open(CloseGuard.java:257)
+11-18 05:01:57.739  7011  7019 W System  : 	at android.hardware.HardwareBuffer.<init>(HardwareBuffer.java:272)
+11-18 05:01:57.865  7023  7110 D EGL_emulation: app_time_stats: avg=544.53ms min=57.20ms max=838.53ms count=3
+11-18 05:01:57.922   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:57.922   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:01:58.609  7023  7110 W Parcel  : Expecting binder but got null!
+11-18 05:01:58.684  1480  5636 I DialerOmtpVvmCarrierConfigHelper: com.android.voicemail.impl.OmtpVvmCarrierConfigHelper.handleEvent:527 OmtpEvent:CONFIG_STATUS_SMS_TIME_OUT PhoneAccountHandle: [ComponentName: com.android.phone/com.android.services.telephony.TelephonyConnectionService subId: 1] [CONTEXT enable_persistent_logger=true ]
+11-18 05:01:58.685  1480  1480 I DialerRetryPolicy: com.android.voicemail.impl.scheduling.RetryPolicy.onCompleted:106 Retry limit for com.android.voicemail.impl.ActivationTask@b7d0f25 reached [CONTEXT enable_persistent_logger=true ]
+11-18 05:01:58.685  1480  1480 I DialerRetryPolicy: com.android.voicemail.impl.scheduling.RetryPolicy.onCompleted:108 committing deferred status [CONTEXT enable_persistent_logger=true ]
+11-18 05:01:58.685  1480  1480 I DialerTaskExecutor: com.android.voicemail.impl.scheduling.TaskExecutor.prepareStop:371 no more tasks, stopping service if no task are added in 5000 millis [CONTEXT enable_persistent_logger=true ]
+11-18 05:01:58.685  1480  8033 I DialerVoicemailStatus: com.android.voicemail.impl.VoicemailStatus$Editor.apply:112 enter
+11-18 05:01:58.686  1480  8033 I DialerVoicemailStatusDataServiceImpl: com.android.dialer.voicemailstatus.dataservice.impl.VoicemailStatusDataServiceImpl.insertOrUpdateVoicemailStatus:196 enter
+11-18 05:01:58.697  1480  8034 I DialerRestVoicemailEnabledFn: com.android.dialer.voicemail.service.impl.vvmclients.rest.RestVoicemailEnabledFn.isEnabled:51 disabled by flag [CONTEXT ratelimit_period="1 MINUTES [skipped: 23]" ]
+11-18 05:01:58.703  1480  8034 I DialerCvvmEnabledFn: com.android.dialer.voicemail.service.impl.vvmclients.omtp.protocol.cvvm.CvvmEnabledFn.isEnabled:37 disabled by flag [CONTEXT ratelimit_period="1 MINUTES [skipped: 11]" ]
+11-18 05:01:58.718  1480  8034 I DialerOmtpVvmCarrierConfigHelper: com.android.voicemail.impl.OmtpVvmCarrierConfigHelper.isCarrierAppInstalled:637 carrier app not installed in this device [CONTEXT ratelimit_period="1 MINUTES [skipped: 4]" ]
+11-18 05:01:58.726  1480  8034 W Settings: Setting airplane_mode_on has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+11-18 05:01:58.726  1480  8034 I DialerVoicemailStatusDataServiceImpl: com.android.dialer.voicemailstatus.dataservice.impl.VoicemailStatusDataServiceImpl.lambda$insertOrUpdateVoicemailStatus$5:213 merged status: # kee@5cbbd7c4
+11-18 05:01:58.766  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-18 05:01:58.770  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-18 05:01:58.770  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=16908290 fieldName=null extras=null}, false)
+11-18 05:01:58.770  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 05:01:58.771  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:02:00.001  1640  1951 I AiAiEcho: Predicting[0]:
+11-18 05:02:00.001  1640  1951 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:
+11-18 05:02:00.002  1640  1951 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0
+11-18 05:02:00.002  1640  1951 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0
+11-18 05:02:00.011   789   845 D EGL_emulation: app_time_stats: avg=17753.45ms min=17753.45ms max=17753.45ms count=1
+11-18 05:02:00.011  1640  1951 I AiAiEcho: Predicting[0]:
+11-18 05:02:00.012  1640  1951 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:
+11-18 05:02:00.012  1640  1951 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0
+11-18 05:02:00.012  1640  1951 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0
+11-18 05:02:00.382  7023  7110 D EGL_emulation: app_time_stats: avg=824.15ms min=29.31ms max=1618.99ms count=2
+11-18 05:02:00.384   489  2297 W InputManager-JNI: Input channel object '325d9eb Pop-Up Window (client)' was disposed without first being removed with the input manager!
+11-18 05:02:00.394   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b6ab0
+11-18 05:02:00.394   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b94b0
+11-18 05:02:00.394   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b7a70
+11-18 05:02:00.394   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b86d0
+11-18 05:02:00.394   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b7a70
+11-18 05:02:00.409  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-18 05:02:00.410  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-18 05:02:00.410  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=null}, false)
+11-18 05:02:00.410  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 05:02:00.411  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:02:00.433   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b7bf0
+11-18 05:02:00.443  7023  7110 D EGL_emulation: app_time_stats: avg=644.38ms min=47.27ms max=1628.34ms count=4
+11-18 05:02:01.518   312   312 E android.hardware.power.stats@1.0-service-mock: Failed to getEnergyData
+11-18 05:02:02.112  7023  7110 D EGL_emulation: app_time_stats: avg=332.17ms min=42.25ms max=779.04ms count=5
+11-18 05:02:03.690  1480  1480 I DialerTaskExecutor: com.android.voicemail.impl.scheduling.TaskExecutor.lambda$new$0:152 Stopping service [CONTEXT enable_persistent_logger=true ]
+11-18 05:02:03.691  1480  1480 I DialerTaskExecutor: com.android.voicemail.impl.scheduling.TaskExecutor.finishJobAsync:461 finishing Job [CONTEXT enable_persistent_logger=true ]
+11-18 05:02:03.691  1480  1480 I DialerTaskSchedulerJobService: com.android.voicemail.impl.scheduling.TaskSchedulerJobService.finishAsync:195 finishing job [CONTEXT enable_persistent_logger=true ]
+11-18 05:02:03.695  1480  1480 I DialerTaskExecutor: com.android.voicemail.impl.scheduling.TaskExecutor$JobFinishedPoller.run:189 JobFinishedPoller.run Job finished [CONTEXT enable_persistent_logger=true ]
+11-18 05:02:03.695  1480  1480 I DialerTaskExecutor: com.android.voicemail.impl.scheduling.TaskExecutor.terminate:287 terminated [CONTEXT enable_persistent_logger=true ]
+11-18 05:02:04.328  7011  7019 W System  : A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+11-18 05:02:04.328  7011  7019 W System  : java.lang.Throwable: Explicit termination method 'HardwareBuffer.close' not called
+11-18 05:02:04.328  7011  7019 W System  : 	at dalvik.system.CloseGuard.openWithCallSite(CloseGuard.java:288)
+11-18 05:02:04.328  7011  7019 W System  : 	at dalvik.system.CloseGuard.open(CloseGuard.java:257)
+11-18 05:02:04.328  7011  7019 W System  : 	at android.hardware.HardwareBuffer.<init>(HardwareBuffer.java:272)
+11-18 05:02:04.328  7011  7019 W System  : A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+11-18 05:02:04.328  7011  7019 W System  : java.lang.Throwable: Explicit termination method 'HardwareBuffer.close' not called
+11-18 05:02:04.328  7011  7019 W System  : 	at dalvik.system.CloseGuard.openWithCallSite(CloseGuard.java:288)
+11-18 05:02:04.328  7011  7019 W System  : 	at dalvik.system.CloseGuard.open(CloseGuard.java:257)
+11-18 05:02:04.328  7011  7019 W System  : 	at android.hardware.HardwareBuffer.<init>(HardwareBuffer.java:272)
+11-18 05:02:04.463  7023  7110 D EGL_emulation: app_time_stats: avg=1175.43ms min=769.31ms max=1581.55ms count=2
+11-18 05:02:04.898  1549  1637 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.shutdownVoiceInternal():95 shutdownVoiceInternal()
+11-18 05:02:05.256  7023  7023 D InsetsController: show(ime(), fromIme=false)
+11-18 05:02:05.257  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x1(Normal) imeOptions=0x2000006 privateImeOptions=null actionName=DONE actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=Bundle[mParcelledData.dataSize=404]}, true)
+11-18 05:02:05.257  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 05:02:05.257  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:02:05.257  1549  1549 W SessionManager: SessionManager.beginSession():53 Try to begin an already begun session [INPUT_SESSION], end it first
+11-18 05:02:05.257  7023  7023 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{63cec82 VFED..... .F....ID 0,0-1080,2209 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT_BY_INSETS_API
+11-18 05:02:05.259  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInputView():1995 onStartInputView(EditorInfo{inputType=0x1(Normal) imeOptions=0x2000006 privateImeOptions=null actionName=DONE actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false, android.support.text.emoji.emojiCompat_replaceAll=false}]}, false)
+11-18 05:02:05.260  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:02:05.260  1549  1549 W ModuleManager: ModuleManager.loadModule():450 Module erj is not available
+11-18 05:02:05.260  1549  1637 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 05:02:05.270  7023  7023 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{63cec82 VFED..... .F....ID 0,0-1080,2209 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+11-18 05:02:05.272  1549  1549 I KeyboardViewUtil: KeyboardViewUtil.getKeyboardHeightRatio():189 systemKeyboardHeightRatio:1.000000; userKeyboardHeightRatio:1.000000.
+11-18 05:02:05.272  1549  1549 I AndroidIME: AbstractIme.onActivate():86 LatinIme.onActivate() : EditorInfo = inputType=0x1(Normal) imeOptions=0x2000006 privateImeOptions=null actionName=DONE actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false, android.support.text.emoji.emojiCompat_replaceAll=false}], IncognitoMode = false, DeviceLocked = false
+11-18 05:02:05.273  1549  1549 I Delight5Facilitator: Delight5Facilitator.initializeForIme():777 initializeForIme() : Locale = [en_US], layout = qwerty
+11-18 05:02:05.273  1549  1549 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.cancelShutdown():55 cancelShutdown()
+11-18 05:02:05.273  1549  1549 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.syncLanguagePacks():67 syncLanguagePacks()
+11-18 05:02:05.273  1549  1549 I LatinIme: LatinIme.updateEnableInlineSuggestionsOnDecoderSideFlags():1003 inline flag updated to:false
+11-18 05:02:05.276  1549  7190 I SpeechFactory: SpeechRecognitionFactory.maybeScheduleAutoPackDownloadForFallback():205 maybeScheduleAutoPackDownloadForFallback()
+11-18 05:02:05.276  1549  7190 I FallbackOnDeviceRecognitionProvider: FallbackOnDeviceRecognitionProvider.maybeScheduleAutoPackDownload():195 maybeScheduleAutoPackDownload() for language tag en-US
+11-18 05:02:05.276  1549  1549 I KeyboardWrapper: KeyboardWrapper.consumeEvent():275 Skip consuming an event as current keyboard is deactivated (state=0, keyboard existence=true)
+11-18 05:02:05.279  1549  1549 I KeyboardViewUtil: KeyboardViewUtil.calculateMaxKeyboardBodyHeight():40 leave 354 height for app when screen height:2274, header height:116 and isFullscreenMode:false, so the max keyboard body height is:1804
+11-18 05:02:05.279  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 05:02:05.279  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = HEADER, shownType = SHOW_OPTIONAL
+11-18 05:02:05.279  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-18 05:02:05.279  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = BODY, shownType = SHOW_MANDATORY
+11-18 05:02:05.279  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-18 05:02:05.279  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = FLOATING_CANDIDATES, shownType = HIDE
+11-18 05:02:05.279  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = false
+11-18 05:02:05.279  1549  1549 I KeyboardViewUtil: KeyboardViewUtil.calculateMaxKeyboardBodyHeight():40 leave 354 height for app when screen height:2274, header height:116 and isFullscreenMode:false, so the max keyboard body height is:1804
+11-18 05:02:05.280  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 05:02:05.281  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 05:02:05.281  1549  1549 I KeyboardModeManager: KeyboardModeManager.setInputView():364 setInputView() : supportsOneHandedMode=true
+11-18 05:02:05.281  1549  1549 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-18 05:02:05.282  1549  1549 I AndroidIME: KeyboardViewManager.updateKeyboardBodyViewHolderPaddingBottom():604 Set finalPaddingBottom = 0 while keyboardBottomGapFromScreen = 0; navigationHeight = 126
+11-18 05:02:05.282  1549  1549 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-18 05:02:05.283  1549  1549 I AndroidIME: KeyboardViewManager.updateKeyboardBodyViewHolderPaddingBottom():604 Set finalPaddingBottom = 0 while keyboardBottomGapFromScreen = 0; navigationHeight = 126
+11-18 05:02:05.283  1549  1549 I KeyboardModeManager: KeyboardModeManager.setInputView():356 setInputView() : entry=hwn{languageTag=en-US, variant=qwerty, hasLocalizedResources=true, conditionCacheKey=_device=phone_device_size=default_enable_adaptive_text_editing=true_enable_inline_suggestions_on_client_side=false_enable_large_tablet_batch_1=false_enable_large_tablet_batch_2=false_enable_more_candidates_view_for_multilingual=false_enable_nav_redesign=false_enable_number_row=false_enable_preemptive_decode=true_enable_secondary_symbols=false_expressions=normal_four_or_more_letter_rows=false_keyboard_mode=normal_language=en-US_orientation=portrait_physical_keyboard=qwerty_show_secondary_digits=true_show_suggestions=true_split_with_duplicate_keys=true_variant=qwerty, imeDef.stringId=ime_english_united_states, imeDef.className=com.google.android.apps.inputmethod.libs.latin5.LatinIme, imeDef.languageTag=en-US}
+11-18 05:02:05.284  1549  1549 I VoiceImeExtension: VoiceImeExtension.shouldStartVoiceInputAutomatically():383 No private IME option set to start voice input.
+11-18 05:02:05.331   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:02:05.331   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:02:05.331   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:02:05.331   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:02:05.331   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:02:05.331   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:02:05.331   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:02:05.367  1549  1549 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-18 05:02:05.367  7023  7023 D InsetsController: show(ime(), fromIme=true)
+11-18 05:02:05.371  1549  2139 I Delight5Decoder: Delight5DecoderWrapper.setKeyboardLayout():457 setKeyboardLayout()
+11-18 05:02:05.383   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b7710
+11-18 05:02:05.403  5713  5713 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:02:05.403  5713  5713 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:02:05.407  5713  5713 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:02:05.410  5713  5713 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:02:05.410  5713  5713 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:02:05.415  5713  5713 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:02:05.440   789   845 D EGL_emulation: app_time_stats: avg=20470.96ms min=20470.96ms max=20470.96ms count=1
+11-18 05:02:05.477  1549  1549 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-18 05:02:06.182  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = HEADER, shownType = SHOW_MANDATORY_WITH_ANIMATION
+11-18 05:02:06.182  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-18 05:02:06.235  7023  7110 D EGL_emulation: app_time_stats: avg=438.31ms min=33.64ms max=902.41ms count=4
+11-18 05:02:06.346   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:02:06.346   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:02:06.346   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:02:06.374  1549  1549 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-18 05:02:06.480  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x1(Normal) imeOptions=0x2000006 privateImeOptions=null actionName=DONE actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=Bundle[mParcelledData.dataSize=404]}, true)
+11-18 05:02:06.480  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 05:02:06.480  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:02:06.481  1549  1549 W SessionManager: SessionManager.beginSession():53 Try to begin an already begun session [INPUT_SESSION], end it first
+11-18 05:02:06.481  1549  1549 W SessionManager: SessionManager.endSession():96 Child session [INPUT_VIEW_SESSION] is not ended while ending session [{INPUT_SESSION=1794978125257, IME_SESSION=1794978125272, INPUT_VIEW_SESSION=1794978125259, TRAINING_CACHE_SESSION=1794978125273}], ending it now.
+11-18 05:02:06.481  1549  1549 W SessionManager: SessionManager.endSession():96 Child session [IME_SESSION] is not ended while ending session [{INPUT_SESSION=1794978125257, IME_SESSION=1794978125272, INPUT_VIEW_SESSION=1794978125259, TRAINING_CACHE_SESSION=1794978125273}], ending it now.
+11-18 05:02:06.485  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInputView():1995 onStartInputView(EditorInfo{inputType=0x1(Normal) imeOptions=0x2000006 privateImeOptions=null actionName=DONE actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false, android.support.text.emoji.emojiCompat_replaceAll=false}]}, true)
+11-18 05:02:06.486  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:02:06.486  1549  1549 W ModuleManager: ModuleManager.loadModule():450 Module erj is not available
+11-18 05:02:06.487  1549  1637 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 05:02:06.495  7023  7023 W RemoteInputConnectionImpl: getSurroundingText on inactive InputConnection
+11-18 05:02:06.497  1549  1549 I KeyboardViewUtil: KeyboardViewUtil.getKeyboardHeightRatio():189 systemKeyboardHeightRatio:1.000000; userKeyboardHeightRatio:1.000000.
+11-18 05:02:06.497  1549  1549 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-18 05:02:06.498  1549  1549 I KeyboardWrapper: KeyboardWrapper.consumeEvent():275 Skip consuming an event as current keyboard is deactivated (state=0, keyboard existence=true)
+11-18 05:02:06.498  1549  1549 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.shutdown():77 shutdown()
+11-18 05:02:06.498  1549  1549 I AndroidIME: AbstractIme.onDeactivate():207 LatinIme.onDeactivate()
+11-18 05:02:06.498  1549  1549 W SessionManager: SessionManager.endSession():88 Try to end a not begun session [IME_SESSION].
+11-18 05:02:06.498  1549  1549 I AndroidIME: AbstractIme.onActivate():86 LatinIme.onActivate() : EditorInfo = inputType=0x1(Normal) imeOptions=0x2000006 privateImeOptions=null actionName=DONE actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false, android.support.text.emoji.emojiCompat_replaceAll=false}], IncognitoMode = false, DeviceLocked = false
+11-18 05:02:06.499  1549  1549 I Delight5Facilitator: Delight5Facilitator.initializeForIme():777 initializeForIme() : Locale = [en_US], layout = qwerty
+11-18 05:02:06.499  1549  1549 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.cancelShutdown():55 cancelShutdown()
+11-18 05:02:06.499  1549  1549 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.syncLanguagePacks():67 syncLanguagePacks()
+11-18 05:02:06.499  1549  1549 I LatinIme: LatinIme.updateEnableInlineSuggestionsOnDecoderSideFlags():1003 inline flag updated to:false
+11-18 05:02:06.500  1549  7190 I SpeechFactory: SpeechRecognitionFactory.maybeScheduleAutoPackDownloadForFallback():205 maybeScheduleAutoPackDownloadForFallback()
+11-18 05:02:06.500  1549  7190 I FallbackOnDeviceRecognitionProvider: FallbackOnDeviceRecognitionProvider.maybeScheduleAutoPackDownload():195 maybeScheduleAutoPackDownload() for language tag en-US
+11-18 05:02:06.500  1549  1549 I KeyboardWrapper: KeyboardWrapper.consumeEvent():275 Skip consuming an event as current keyboard is deactivated (state=0, keyboard existence=true)
+11-18 05:02:06.502  1549  1549 I KeyboardViewUtil: KeyboardViewUtil.calculateMaxKeyboardBodyHeight():40 leave 354 height for app when screen height:2274, header height:116 and isFullscreenMode:false, so the max keyboard body height is:1804
+11-18 05:02:06.502  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 05:02:06.502  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = HEADER, shownType = SHOW_OPTIONAL
+11-18 05:02:06.502  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-18 05:02:06.502  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = BODY, shownType = SHOW_MANDATORY
+11-18 05:02:06.502  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = true
+11-18 05:02:06.502  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3483 setKeyboardViewShown() : type = FLOATING_CANDIDATES, shownType = HIDE
+11-18 05:02:06.502  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.setKeyboardViewShown():3530 setKeyboardViewShown() : shouldShow = false
+11-18 05:02:06.503  1549  1549 I KeyboardViewUtil: KeyboardViewUtil.calculateMaxKeyboardBodyHeight():40 leave 354 height for app when screen height:2274, header height:116 and isFullscreenMode:false, so the max keyboard body height is:1804
+11-18 05:02:06.503  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 05:02:06.503  1549  1549 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():122 Get device mode phone by ui mode:1 and smallestScreenWidthDp:411
+11-18 05:02:06.503  1549  1549 I KeyboardModeManager: KeyboardModeManager.setInputView():364 setInputView() : supportsOneHandedMode=true
+11-18 05:02:06.503  1549  1549 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-18 05:02:06.504  1549  1549 I AndroidIME: KeyboardViewManager.updateKeyboardBodyViewHolderPaddingBottom():604 Set finalPaddingBottom = 0 while keyboardBottomGapFromScreen = 0; navigationHeight = 126
+11-18 05:02:06.504  1549  1549 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-18 05:02:06.519  1549  1637 W ModuleManager: ModuleManager.loadModule():450 Module jjj is not available
+11-18 05:02:06.520  1549  1549 I AndroidIME: KeyboardViewManager.updateKeyboardBodyViewHolderPaddingBottom():604 Set finalPaddingBottom = 0 while keyboardBottomGapFromScreen = 0; navigationHeight = 126
+11-18 05:02:06.521  1549  1549 I KeyboardModeManager: KeyboardModeManager.setInputView():356 setInputView() : entry=hwn{languageTag=en-US, variant=qwerty, hasLocalizedResources=true, conditionCacheKey=_device=phone_device_size=default_enable_adaptive_text_editing=true_enable_inline_suggestions_on_client_side=false_enable_large_tablet_batch_1=false_enable_large_tablet_batch_2=false_enable_more_candidates_view_for_multilingual=false_enable_nav_redesign=false_enable_number_row=false_enable_preemptive_decode=true_enable_secondary_symbols=false_expressions=normal_four_or_more_letter_rows=false_keyboard_mode=normal_language=en-US_orientation=portrait_physical_keyboard=qwerty_show_secondary_digits=true_show_suggestions=true_split_with_duplicate_keys=true_variant=qwerty, imeDef.stringId=ime_english_united_states, imeDef.className=com.google.android.apps.inputmethod.libs.latin5.LatinIme, imeDef.languageTag=en-US}
+11-18 05:02:06.522  1549  1549 I VoiceImeExtension: VoiceImeExtension.shouldStartVoiceInputAutomatically():383 No private IME option set to start voice input.
+11-18 05:02:06.522  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInputView():2241
+11-18 05:02:06.522  1549  1549 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():159 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+11-18 05:02:06.522  1549  1549 I InputBundle: InputBundle.consumeEvent():923 Skip consuming an event as keyboard status is 0
+11-18 05:02:06.523  1549  1549 I KeyboardWrapper: KeyboardWrapper.consumeEvent():275 Skip consuming an event as current keyboard is deactivated (state=0, keyboard existence=true)
+11-18 05:02:06.523  1549  1549 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.shutdown():77 shutdown()
+11-18 05:02:06.523  1549  1549 I AndroidIME: AbstractIme.onDeactivate():207 LatinIme.onDeactivate()
+11-18 05:02:06.524  1549  1637 W ModuleManager: ModuleManager.loadModule():450 Module jjj is not available
+11-18 05:02:06.524  1549  1637 I NebulaeTrainingCacheMetricsProcessor: NebulaeTrainingCacheMetricsProcessor.processEndSession():447 No input action collection in this session, skip logging.
+11-18 05:02:06.537  5713  5713 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:02:06.537  5713  5713 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:02:06.555  7023  7023 D InsetsController: show(ime(), fromIme=true)
+11-18 05:02:06.558  5713  5713 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:02:06.559  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=null}, true)
+11-18 05:02:06.559  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 05:02:06.561  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:02:06.561  1549  1549 W SessionManager: SessionManager.beginSession():53 Try to begin an already begun session [INPUT_SESSION], end it first
+11-18 05:02:06.563  1549  1549 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():116 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+11-18 05:02:06.563  1549  1549 I InputBundle: InputBundle.consumeEvent():919 Skip consuming an event as imeStatus is 0
+11-18 05:02:06.564   789   845 D EGL_emulation: app_time_stats: avg=1123.69ms min=1123.69ms max=1123.69ms count=1
+11-18 05:02:06.567  5713  5713 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:02:06.567  5713  5713 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:02:06.569  5713  5713 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-18 05:02:06.572   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:02:06.572   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:02:06.572   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:02:06.756   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bb4f0
+11-18 05:02:06.756   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:02:06.756   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:02:06.756   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:02:06.756   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:02:06.756   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:02:06.756   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:02:06.756   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:02:06.756   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:02:07.375   789   833 D SplashScreenView: Build android.window.SplashScreenView{c6a961b V.E...... ......ID 0,0-0,0}
+11-18 05:02:07.375   789   833 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-18 05:02:07.375   789   833 D SplashScreenView: Branding: view: android.view.View{70053b8 G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-18 05:02:07.375   789   845 W Parcel  : Expecting binder but got null!
+11-18 05:02:07.377  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@bfb467a in: PAUSED
+11-18 05:02:07.377  7023  7023 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=androidx.activity.ComponentActivity@bfb467a
+11-18 05:02:07.379  7023  7110 D EGL_emulation: app_time_stats: avg=228.62ms min=31.31ms max=852.26ms count=5
+11-18 05:02:07.403  7130  7153 W Parcel  : Expecting binder but got null!
+11-18 05:02:07.459   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 1
+11-18 05:02:07.459   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-18 05:02:07.459   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-18 05:02:07.465  1054  1054 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+11-18 05:02:07.467   489  1134 W InputManager-JNI: Input channel object '4a19020 com.timcordova.quartznotes.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity (client)' was disposed without first being removed with the input manager!
+11-18 05:02:07.470   489  1666 W AppSearchIcing: icing-search-engine.cc:217: Error: 5, Message: Document (com.google.android.googlequicksearchbox$OneSearchZeroStateGoogleSuggestions/default, zp) not found.
+11-18 05:02:07.475   489  2318 W InputManager-JNI: Input channel object 'c12cffa Splash Screen com.timcordova.quartznotes.test (client)' was disposed without first being removed with the input manager!
+11-18 05:02:07.477  1054  2068 D OneSearchSuggestProvider: Created the binder channel successfully for end point service =com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService , mChannel=Q0{delegate=L0{logId=129, target=directaddress:///AndroidComponentAddress%5BIntent%20%7B%20act=grpc.io.action.BIND%20cmp=com.google.android.googlequicksearchbox/com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService%20%7D%5D}} , mOneSearchConnection=y1.J@6a5fda4
+11-18 05:02:07.493  1640  1951 I AiAiEcho: Predicting[0]:
+11-18 05:02:07.494  1640  1951 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:
+11-18 05:02:07.498  1640  1951 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0
+11-18 05:02:07.498  1640  1951 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0
+11-18 05:02:07.501   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b8970
+11-18 05:02:07.501   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b64b0
+11-18 05:02:07.501   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bb070
+11-18 05:02:07.501   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b69f0
+11-18 05:02:07.501   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b69f0
+11-18 05:02:07.501   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bb070
+11-18 05:02:07.501   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:02:07.548  1768  1768 I A       : Created gRPC endpoint to "search" for service class com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService
+11-18 05:02:07.551  1054  1054 D MainContentCaptureSession: Flushing 2 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARING
+11-18 05:02:07.552  1054  1054 D MainContentCaptureSession: Flushing 32 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARED
+11-18 05:02:07.574  1768  2283 I A       : Using proto config with mendel
+11-18 05:02:07.575  1768  2283 W A       : Queue length for executor EventBus is now 11. Perhaps some tasks are too long, or the pool is too small.
+11-18 05:02:07.576  1768  2283 I A       : Using proto config with mendel
+11-18 05:02:07.593   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bbcd0
+11-18 05:02:07.640   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:02:07.640   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:02:07.642  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@bfb467a in: STOPPED
+11-18 05:02:07.643  7023  7023 V ActivityScenario: Update currentActivityStage to STOPPED, currentActivity=androidx.activity.ComponentActivity@bfb467a
+11-18 05:02:07.650   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:02:07.650   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:02:07.650   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:02:07.650   331   377 W TransactionTracing: Could not find layer id -1
+11-18 05:02:07.654  1054  1054 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARING
+11-18 05:02:07.654  1054  1054 D MainContentCaptureSession: Flushing 2 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARED
+11-18 05:02:07.659  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-18 05:02:07.660  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-18 05:02:07.660  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.google.android.apps.nexuslauncher fieldId=-1 fieldName=null extras=null}, false)
+11-18 05:02:07.660  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 05:02:07.669  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 05:02:07.671  1054  1054 D MainContentCaptureSession: Flushing 0 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_ROOT
+11-18 05:02:07.683  1640  1640 W ContentCaptureService: handleSendEvents() received empty list of events
+11-18 05:02:07.687  7023  7023 D AutofillManager: onActivityFinishing(): calling cancelLocked()
+11-18 05:02:07.687  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@bfb467a in: DESTROYED
+11-18 05:02:07.687  7023  7023 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
+11-18 05:02:07.692  7023  7040 D IdlingRegistry: Unregistering idling resources: [androidx.compose.ui.test.EspressoLink@6505596]
+11-18 05:02:07.696   489  2318 W InputManager-JNI: Input channel object 'fa81073 com.timcordova.quartznotes/androidx.activity.ComponentActivity (client)' was disposed without first being removed with the input manager!
+11-18 05:02:07.698  7023  7040 I TestRunner: finished: sheetShowsTypesAndFormats(com.timcordova.quartznotes.ui.notebook.SheetEditorTest)

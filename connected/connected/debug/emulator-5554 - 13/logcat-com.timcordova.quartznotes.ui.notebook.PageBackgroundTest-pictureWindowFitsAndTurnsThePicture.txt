@@ -1,0 +1,212 @@
+11-18 04:59:45.921  7023  7040 I TestRunner: started: pictureWindowFitsAndTurnsThePicture(com.timcordova.quartznotes.ui.notebook.PageBackgroundTest)
+11-18 04:59:45.956  7023  7040 D IdlingRegistry: Registering idling resources: [androidx.compose.ui.test.EspressoLink@5c15aae]
+11-18 04:59:45.960   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bb310
+11-18 04:59:45.961   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9330
+11-18 04:59:45.961   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bb430
+11-18 04:59:45.961   331   377 W TransactionTracing: Could not find layer handle 0x79ff032ba290
+11-18 04:59:45.961   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9150
+11-18 04:59:45.961   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9d50
+11-18 04:59:46.006  7023  7040 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+11-18 04:59:46.017   789   833 D SplashScreenView: Build android.window.SplashScreenView{5f6d23a V.E...... ......ID 0,0-0,0}
+11-18 04:59:46.017   789   833 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-18 04:59:46.017   789   833 D SplashScreenView: Branding: view: android.view.View{1015eeb G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-18 04:59:46.023   789   845 W Parcel  : Expecting binder but got null!
+11-18 04:59:46.035  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@559c012 in: PRE_ON_CREATE
+11-18 04:59:46.035  7023  7023 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+11-18 04:59:46.038  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@559c012 in: CREATED
+11-18 04:59:46.038  7023  7023 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=androidx.activity.ComponentActivity@559c012
+11-18 04:59:46.038  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@559c012 in: STARTED
+11-18 04:59:46.038  7023  7023 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=androidx.activity.ComponentActivity@559c012
+11-18 04:59:46.043  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@559c012 in: RESUMED
+11-18 04:59:46.043  7023  7023 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=androidx.activity.ComponentActivity@559c012
+11-18 04:59:46.053  7023  7110 W Parcel  : Expecting binder but got null!
+11-18 04:59:46.062   489   513 W InputManager-JNI: Input channel object '67cc257 Splash Screen com.timcordova.quartznotes.test (client)' was disposed without first being removed with the input manager!
+11-18 04:59:46.084   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b7dd0
+11-18 04:59:46.084   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b96f0
+11-18 04:59:46.084   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bc5d0
+11-18 04:59:46.084   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b7dd0
+11-18 04:59:46.084   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b96f0
+11-18 04:59:46.182   489   509 W ziparchive: Unable to open '/data/app/~~q7gscu1n3ILq4DpSpq4VdQ==/com.timcordova.quartznotes-nbzIvoAk_EFWKv7by7QDAg==/base.dm': No such file or directory
+11-18 04:59:46.188   489  2295 W InputManager-JNI: Input channel object '958f999 com.timcordova.quartznotes.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity (client)' was disposed without first being removed with the input manager!
+11-18 04:59:46.204   489   509 I ActivityTaskManager: Displayed com.timcordova.quartznotes/androidx.activity.ComponentActivity: +167ms
+11-18 04:59:46.207   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b7050
+11-18 04:59:46.207   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b7170
+11-18 04:59:46.210   489   567 W InputManager-JNI: Input channel object 'ef39d27 Splash Screen com.timcordova.quartznotes (client)' was disposed without first being removed with the input manager!
+11-18 04:59:46.222  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-18 04:59:46.226   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9a50
+11-18 04:59:46.227  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-18 04:59:46.227  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=null}, false)
+11-18 04:59:46.227  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 04:59:46.234  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 04:59:46.235   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b8bb0
+11-18 04:59:46.235   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b6330
+11-18 04:59:46.251   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bb1f0
+11-18 04:59:46.291   489   501 I system_server: NativeAlloc concurrent copying GC freed 101854(3787KB) AllocSpace objects, 1(20KB) LOS objects, 50% free, 21MB/42MB, paused 46us,77us total 318.642ms
+11-18 04:59:46.294   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9630
+11-18 04:59:46.294   789   845 D EGL_emulation: app_time_stats: avg=470.71ms min=265.53ms max=686.93ms count=3
+11-18 04:59:46.312  7023  7023 D AutofillManager: Fill dialog is enabled:false, hints=[password, passwordAuto, creditCardNumber, creditCardSecurityCode, creditCardExpirationDate]
+11-18 04:59:46.435   789   845 D EGL_emulation: app_time_stats: avg=480.98ms min=236.87ms max=754.51ms count=3
+11-18 04:59:46.471  7023  7557 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_multi_configs ANDROID_EMU_hwc_color_transform GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0
+11-18 04:59:46.480  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-18 04:59:46.487  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-18 04:59:46.487  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=null}, false)
+11-18 04:59:46.487  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 04:59:46.488  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 04:59:46.515  7023  7557 W OpenGLRenderer: Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-18 04:59:46.516  7023  7557 D EGL_emulation: eglCreateContext: 0x732bdc709850: maj 3 min 0 rcv 3
+11-18 04:59:46.517  7023  7557 D EGL_emulation: eglMakeCurrent: 0x732bdc709850: ver 3 0 (tinfo 0x732e13046100) (first time)
+11-18 04:59:46.521  7023  7054 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_multi_configs ANDROID_EMU_hwc_color_transform GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0
+11-18 04:59:46.539   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b7050
+11-18 04:59:48.128  7011  7019 W System  : A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+11-18 04:59:48.128  7011  7019 W System  : java.lang.Throwable: Explicit termination method 'HardwareBuffer.close' not called
+11-18 04:59:48.128  7011  7019 W System  : 	at dalvik.system.CloseGuard.openWithCallSite(CloseGuard.java:288)
+11-18 04:59:48.128  7011  7019 W System  : 	at dalvik.system.CloseGuard.open(CloseGuard.java:257)
+11-18 04:59:48.128  7011  7019 W System  : 	at android.hardware.HardwareBuffer.<init>(HardwareBuffer.java:272)
+11-18 04:59:48.128  7011  7019 W System  : A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+11-18 04:59:48.128  7011  7019 W System  : java.lang.Throwable: Explicit termination method 'HardwareBuffer.close' not called
+11-18 04:59:48.128  7011  7019 W System  : 	at dalvik.system.CloseGuard.openWithCallSite(CloseGuard.java:288)
+11-18 04:59:48.128  7011  7019 W System  : 	at dalvik.system.CloseGuard.open(CloseGuard.java:257)
+11-18 04:59:48.128  7011  7019 W System  : 	at android.hardware.HardwareBuffer.<init>(HardwareBuffer.java:272)
+11-18 04:59:48.248  7023  7110 W Parcel  : Expecting binder but got null!
+11-18 04:59:48.335   789   845 D EGL_emulation: app_time_stats: avg=2040.72ms min=2040.72ms max=2040.72ms count=1
+11-18 04:59:48.494  1480  5636 I DialerOmtpVvmCarrierConfigHelper: com.android.voicemail.impl.OmtpVvmCarrierConfigHelper.handleEvent:527 OmtpEvent:CONFIG_STATUS_SMS_TIME_OUT PhoneAccountHandle: [ComponentName: com.android.phone/com.android.services.telephony.TelephonyConnectionService subId: 1] [CONTEXT enable_persistent_logger=true ]
+11-18 04:59:48.494  1480  1480 I DialerRetryPolicy: com.android.voicemail.impl.scheduling.RetryPolicy.onCompleted:118 discarding deferred status [CONTEXT enable_persistent_logger=true ]
+11-18 04:59:48.496  1480  1480 I DialerTaskExecutor: com.android.voicemail.impl.scheduling.TaskExecutor.prepareStop:371 no more tasks, stopping service if no task are added in 5000 millis [CONTEXT enable_persistent_logger=true ]
+11-18 04:59:48.496  1480  1480 I DialerLogcatLoggingBindings: com.android.dialer.logging.logcat.LogcatLoggingBindings.logImpression:41 Impression: VVM_AUTO_RETRY_ACTIVATION
+11-18 04:59:48.496  1480  1480 I DialerTaskReceiver: com.android.voicemail.impl.scheduling.TaskReceiver.onReceive:68 task received [CONTEXT enable_persistent_logger=true ]
+11-18 04:59:48.497  1480  1480 I DialerTaskReceiver: com.android.voicemail.impl.scheduling.TaskReceiver.onReceive:73 TaskExecutor already running [CONTEXT enable_persistent_logger=true ]
+11-18 04:59:48.497  1480  1480 I DialerTasks: com.android.voicemail.impl.scheduling.Tasks.createTask:59 Task.createTask create task:com.android.voicemail.impl.ActivationTask [CONTEXT enable_persistent_logger=true ]
+11-18 04:59:48.499  1480  1480 I DialerRetryPolicy: com.android.voicemail.impl.scheduling.RetryPolicy.onCreate:81 retry #3 for com.android.voicemail.impl.ActivationTask@36b723a queued, executing in 5000 [CONTEXT enable_persistent_logger=true ]
+11-18 04:59:48.501  1480  1480 I DialerTaskExecutor: com.android.voicemail.impl.scheduling.TaskExecutor.addTask:299 com.android.voicemail.impl.ActivationTask@36b723a added [CONTEXT enable_persistent_logger=true ]
+11-18 04:59:48.502  1480  1480 I DialerTaskExecutor: com.android.voicemail.impl.scheduling.TaskExecutor.runNextTask:345 minimal wait time:4998 [CONTEXT enable_persistent_logger=true ]
+11-18 04:59:48.502  1480  1480 I DialerTaskExecutor: com.android.voicemail.impl.scheduling.TaskExecutor.sleep:355 sleep for 4998 millis [CONTEXT enable_persistent_logger=true ]
+11-18 04:59:48.532  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-18 04:59:48.532  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-18 04:59:48.532  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=null}, false)
+11-18 04:59:48.532  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 04:59:48.532  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 04:59:48.534  7023  7110 D EGL_emulation: app_time_stats: avg=471.15ms min=41.45ms max=1826.02ms count=5
+11-18 04:59:48.573   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9ff0
+11-18 04:59:48.611   789   845 D EGL_emulation: app_time_stats: avg=2175.84ms min=2175.84ms max=2175.84ms count=1
+11-18 04:59:49.297  7023  7110 W Parcel  : Expecting binder but got null!
+11-18 04:59:49.572  7023  7110 D EGL_emulation: app_time_stats: avg=612.29ms min=152.38ms max=1072.19ms count=2
+11-18 04:59:49.577  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-18 04:59:49.582  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-18 04:59:49.582  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=null}, false)
+11-18 04:59:49.582  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 04:59:49.584  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 04:59:49.594   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9d50
+11-18 04:59:49.594   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b6810
+11-18 04:59:49.594   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bb490
+11-18 04:59:49.594   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bb490
+11-18 04:59:49.594   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b6810
+11-18 04:59:49.610   789   845 D EGL_emulation: app_time_stats: avg=1274.21ms min=1274.21ms max=1274.21ms count=1
+11-18 04:59:49.614   789   845 D EGL_emulation: app_time_stats: avg=1002.71ms min=1002.71ms max=1002.71ms count=1
+11-18 04:59:52.537  7023  7110 D EGL_emulation: app_time_stats: avg=296.52ms min=21.88ms max=1572.96ms count=10
+11-18 04:59:52.608   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b6930
+11-18 04:59:52.608   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b6930
+11-18 04:59:53.504  1480  5636 I DialerTaskExecutor: com.android.voicemail.impl.scheduling.TaskExecutor$WorkerThreadHandler.handleMessage:221 executing task com.android.voicemail.impl.ActivationTask@36b723a [CONTEXT enable_persistent_logger=true ]
+11-18 04:59:53.505  1480  1480 I DialerLogcatLoggingBindings: com.android.dialer.logging.logcat.LogcatLoggingBindings.logImpression:41 Impression: VVM_ACTIVATION_STARTED
+11-18 04:59:53.506  1480  5636 I DialerPreOMigrationHandler: com.android.voicemail.impl.PreOMigrationHandler.migrate:76 ComponentInfo{com.android.phone/com.android.services.telephony.TelephonyConnectionService}, 1, UserHandle{0} already migrated [CONTEXT enable_persistent_logger=true ]
+11-18 04:59:53.508  1480  5636 I DialerOmtpVvmCarrierConfigHelper: com.android.voicemail.impl.OmtpVvmCarrierConfigHelper.isCarrierAppInstalled:637 carrier app not installed in this device [CONTEXT ratelimit_period="1 MINUTES [skipped: 4]" ]
+11-18 04:59:53.508  1480  5636 I DialerVoicemailStatus: com.android.voicemail.impl.VoicemailStatus$Editor.apply:112 enter
+11-18 04:59:53.509  1480  5636 I DialerVoicemailStatusDataServiceImpl: com.android.dialer.voicemailstatus.dataservice.impl.VoicemailStatusDataServiceImpl.insertOrUpdateVoicemailStatus:196 enter
+11-18 04:59:53.511  1480  7661 I DialerRestVoicemailEnabledFn: com.android.dialer.voicemail.service.impl.vvmclients.rest.RestVoicemailEnabledFn.isEnabled:51 disabled by flag [CONTEXT ratelimit_period="1 MINUTES [skipped: 23]" ]
+11-18 04:59:53.511  1480  7661 I DialerCvvmEnabledFn: com.android.dialer.voicemail.service.impl.vvmclients.omtp.protocol.cvvm.CvvmEnabledFn.isEnabled:37 disabled by flag [CONTEXT ratelimit_period="1 MINUTES [skipped: 11]" ]
+11-18 04:59:53.514  1480  7661 W Settings: Setting airplane_mode_on has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+11-18 04:59:53.515  1480  7661 I DialerVoicemailStatusDataServiceImpl: com.android.dialer.voicemailstatus.dataservice.impl.VoicemailStatusDataServiceImpl.lambda$insertOrUpdateVoicemailStatus$5:213 merged status: # kee@6600c263
+11-18 04:59:53.515  1480  5636 I DialerActivationTask: com.android.voicemail.impl.ActivationTask.onExecuteInBackgroundThread:292 VVM content provider configured - vvm_type_cvvm PhoneAccountHandle: [ComponentName: com.android.phone/com.android.services.telephony.TelephonyConnectionService subId: 1] [CONTEXT enable_persistent_logger=true ]
+11-18 04:59:53.515  1480  5636 I DialerActivationTask: com.android.voicemail.impl.ActivationTask.updateVoicemailsWithIccId:477 conversion disabled [CONTEXT enable_persistent_logger=true ]
+11-18 04:59:53.515  1480  5636 I DialerOmtpVvmCarrierConfigHelper: com.android.voicemail.impl.OmtpVvmCarrierConfigHelper.handleEvent:527 OmtpEvent:CONFIG_ACTIVATING PhoneAccountHandle: [ComponentName: com.android.phone/com.android.services.telephony.TelephonyConnectionService subId: 1] [CONTEXT enable_persistent_logger=true ]
+11-18 04:59:53.516  1480  5636 I DialerVoicemailStatus: com.android.voicemail.impl.VoicemailStatus$Editor.apply:112 enter
+11-18 04:59:53.516  1480  5636 I DialerVoicemailStatusDataServiceImpl: com.android.dialer.voicemailstatus.dataservice.impl.VoicemailStatusDataServiceImpl.insertOrUpdateVoicemailStatus:196 enter
+11-18 04:59:53.520  1480  7661 W Settings: Setting airplane_mode_on has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+11-18 04:59:53.520  1480  7661 I DialerVoicemailStatusDataServiceImpl: com.android.dialer.voicemailstatus.dataservice.impl.VoicemailStatusDataServiceImpl.lambda$insertOrUpdateVoicemailStatus$5:213 merged status: # kee@6600c263
+11-18 04:59:53.521  1480  5636 I DialerActivationTask: com.android.voicemail.impl.ActivationTask.onExecuteInBackgroundThread:339 sending an activation request [CONTEXT enable_persistent_logger=true ]
+11-18 04:59:53.522  1019  1536 D SmsNumberUtils: enter filterDestAddr. destAddr="[BajqU4K5_YhSYbs-7QUn0dOwcmI]"
+11-18 04:59:53.522  1019  1536 D SmsNumberUtils: destAddr is not formatted.
+11-18 04:59:53.522  1019  1536 D SmsNumberUtils: leave filterDestAddr, new destAddr="[BajqU4K5_YhSYbs-7QUn0dOwcmI]"
+11-18 04:59:53.526  1480  5636 I DialerLogcatLoggingBindings: com.android.dialer.logging.logcat.LogcatLoggingBindings.logImpression:46 Impression: CVVM_SEND_VVM_SMS
+11-18 04:59:53.528  1480  1480 I DialerStatusSmsFetcher: com.android.voicemail.impl.sms.StatusSmsFetcher.onReceive:106 Request SMS successfully sent [CONTEXT enable_persistent_logger=true ]
+11-18 04:59:54.382  7011  7019 W System  : A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+11-18 04:59:54.382  7011  7019 W System  : java.lang.Throwable: Explicit termination method 'HardwareBuffer.close' not called
+11-18 04:59:54.382  7011  7019 W System  : 	at dalvik.system.CloseGuard.openWithCallSite(CloseGuard.java:288)
+11-18 04:59:54.382  7011  7019 W System  : 	at dalvik.system.CloseGuard.open(CloseGuard.java:257)
+11-18 04:59:54.382  7011  7019 W System  : 	at android.hardware.HardwareBuffer.<init>(HardwareBuffer.java:272)
+11-18 04:59:54.382  7011  7019 W System  : A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+11-18 04:59:54.382  7011  7019 W System  : java.lang.Throwable: Explicit termination method 'HardwareBuffer.close' not called
+11-18 04:59:54.382  7011  7019 W System  : 	at dalvik.system.CloseGuard.openWithCallSite(CloseGuard.java:288)
+11-18 04:59:54.382  7011  7019 W System  : 	at dalvik.system.CloseGuard.open(CloseGuard.java:257)
+11-18 04:59:54.382  7011  7019 W System  : 	at android.hardware.HardwareBuffer.<init>(HardwareBuffer.java:272)
+11-18 04:59:54.505  7023  7110 D EGL_emulation: app_time_stats: avg=315.47ms min=40.89ms max=1489.60ms count=6
+11-18 04:59:54.586   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bc150
+11-18 04:59:54.586   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bc150
+11-18 04:59:54.974   489  1504 W InputManager-JNI: Input channel object '1c99a8a com.timcordova.quartznotes/androidx.activity.ComponentActivity (client)' was disposed without first being removed with the input manager!
+11-18 04:59:55.043   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bafb0
+11-18 04:59:55.043   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9d50
+11-18 04:59:55.043   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9b10
+11-18 04:59:55.043   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b77d0
+11-18 04:59:55.043   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bbe50
+11-18 04:59:55.043   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bb910
+11-18 04:59:55.043   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bbe50
+11-18 04:59:55.043   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bbe50
+11-18 04:59:55.043   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9d50
+11-18 04:59:55.043   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b77d0
+11-18 04:59:55.043   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b77d0
+11-18 04:59:55.043   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9b10
+11-18 04:59:55.043   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b77d0
+11-18 04:59:55.043   331   377 W TransactionTracing: Could not find layer handle 0x79ff032ba590
+11-18 04:59:55.043   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9d50
+11-18 04:59:55.043   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bbd90
+11-18 04:59:55.043   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bafb0
+11-18 04:59:55.043   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9d50
+11-18 04:59:55.081  7023  7110 D EGL_emulation: app_time_stats: avg=5508.39ms min=5508.39ms max=5508.39ms count=1
+11-18 04:59:55.098   789   845 D EGL_emulation: app_time_stats: avg=5487.80ms min=5487.80ms max=5487.80ms count=1
+11-18 04:59:55.099  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-18 04:59:55.099  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-18 04:59:55.099  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=null}, false)
+11-18 04:59:55.099  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 04:59:55.119  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 04:59:55.136   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b94b0
+11-18 04:59:55.232  7023  7110 D EGL_emulation: app_time_stats: avg=6697.37ms min=6697.37ms max=6697.37ms count=1
+11-18 04:59:55.255   789   845 D EGL_emulation: app_time_stats: avg=5641.71ms min=5641.71ms max=5641.71ms count=1
+11-18 04:59:55.982   489  1504 W InputManager-JNI: Input channel object '481c6da com.timcordova.quartznotes/androidx.activity.ComponentActivity (client)' was disposed without first being removed with the input manager!
+11-18 04:59:55.989   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bbb50
+11-18 04:59:55.989   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b7170
+11-18 04:59:55.989   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bafb0
+11-18 04:59:55.989   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b7170
+11-18 04:59:56.006   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bb2b0
+11-18 04:59:56.007   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bb4f0
+11-18 04:59:56.009  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-18 04:59:56.009  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-18 04:59:56.010  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=null}, false)
+11-18 04:59:56.010  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 04:59:56.011  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 04:59:56.023   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9330
+11-18 04:59:56.746  7023  7110 D EGL_emulation: app_time_stats: avg=1513.99ms min=1513.99ms max=1513.99ms count=1
+11-18 04:59:57.547   789   833 D SplashScreenView: Build android.window.SplashScreenView{caa8853 V.E...... ......ID 0,0-0,0}
+11-18 04:59:57.547   789   833 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-18 04:59:57.547   789   833 D SplashScreenView: Branding: view: android.view.View{d578590 G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-18 04:59:57.548  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@559c012 in: PAUSED
+11-18 04:59:57.549  7023  7023 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=androidx.activity.ComponentActivity@559c012
+11-18 04:59:57.552   789   845 W Parcel  : Expecting binder but got null!
+11-18 04:59:57.585  7130  7153 W Parcel  : Expecting binder but got null!
+11-18 04:59:57.735   489  2298 W system_server: Long monitor contention with owner android.anim (513) at void com.android.server.wm.WindowSurfacePlacer$Traverser.run()(WindowSurfacePlacer.java:58) waiters=1 in boolean com.android.server.wm.ActivityClientController.finishActivity(android.os.IBinder, int, android.content.Intent, int) for 108ms
+11-18 04:59:57.736  1054  1067 W System  : A resource failed to call release.
+11-18 04:59:57.736  1054  1067 W System  : A resource failed to call release.
+11-18 04:59:57.736  1054  1067 W System  : A resource failed to call release.
+11-18 04:59:57.754   789   845 D EGL_emulation: app_time_stats: avg=1328.08ms min=901.50ms max=1754.67ms count=2
+11-18 04:59:57.837  1054  1054 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+11-18 04:59:57.839   331   377 W TransactionTracing: Could not find layer handle 0x79ff032ba170
+11-18 04:59:57.845  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@559c012 in: STOPPED
+11-18 04:59:57.846  7023  7023 V ActivityScenario: Update currentActivityStage to STOPPED, currentActivity=androidx.activity.ComponentActivity@559c012
+11-18 04:59:57.864   489  1666 W AppSearchIcing: icing-search-engine.cc:217: Error: 5, Message: Document (com.google.android.googlequicksearchbox$OneSearchZeroStateGoogleSuggestions/default, zp) not found.
+11-18 04:59:57.868   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 1
+11-18 04:59:57.868   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-18 04:59:57.869   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-18 04:59:57.871  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@559c012 in: DESTROYED
+11-18 04:59:57.871  7023  7023 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
+11-18 04:59:57.873  7023  7040 D IdlingRegistry: Unregistering idling resources: [androidx.compose.ui.test.EspressoLink@5c15aae]
+11-18 04:59:57.874  1054  2068 D OneSearchSuggestProvider: Created the binder channel successfully for end point service =com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService , mChannel=Q0{delegate=L0{logId=89, target=directaddress:///AndroidComponentAddress%5BIntent%20%7B%20act=grpc.io.action.BIND%20cmp=com.google.android.googlequicksearchbox/com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService%20%7D%5D}} , mOneSearchConnection=y1.J@4024444
+11-18 04:59:57.875   489  1502 W InputManager-JNI: Input channel object 'f55222 com.timcordova.quartznotes/androidx.activity.ComponentActivity (client)' was disposed without first being removed with the input manager!
+11-18 04:59:57.885  7023  7040 I TestRunner: finished: pictureWindowFitsAndTurnsThePicture(com.timcordova.quartznotes.ui.notebook.PageBackgroundTest)

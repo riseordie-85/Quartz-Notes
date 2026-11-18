@@ -1,0 +1,46 @@
+11-18 04:58:08.253  7023  7040 I TestRunner: started: oversizedSheetIsCompressedAndItsNotebookOpens(com.timcordova.quartznotes.data.BigSheetMigrationTest)
+11-18 04:58:08.918  7023  7040 I ova.quartznotes: Starting a blocking GC Alloc
+11-18 04:58:08.918  7023  7040 I ova.quartznotes: Starting a blocking GC Alloc
+11-18 04:58:09.096   988   988 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-18 04:58:09.097   988   988 D MediaPlayerList: Name of package changed: com.timcordova.quartznotes
+11-18 04:58:09.097   988   988 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-18 04:58:09.098   988   988 D MediaPlayerList: Name of package changed: com.timcordova.quartznotes
+11-18 04:58:09.099  4782  4797 I PermissionControllerServiceImpl: Updating user sensitive for uid 10174
+11-18 04:58:09.100   489   595 I InputReader: Reconfiguring input devices, changes=KEYBOARD_LAYOUTS |
+11-18 04:58:09.101   789   789 D ControlsListingControllerImpl: ServiceConfig reloaded, count: 0
+11-18 04:58:09.103  1019  1019 D CarrierSvcBindHelper: onPackageModified: com.timcordova.quartznotes
+11-18 04:58:09.104   489   586 I RoleService: Granting default roles...
+11-18 04:58:09.104  1019  1019 D CarrierSvcBindHelper: No carrier app for: 0
+11-18 04:58:09.105  1019  1019 D ImsResolver: maybeAddedImsService, packageName: com.timcordova.quartznotes
+11-18 04:58:09.114  4782  4843 W Role    : Default holder doesn't have required signing certificate: com.google.android.apps.work.clouddpc:23962F4B43B9857638EA66F4D419518EAE282491ACDA4B94707BD59003C45E58
+11-18 04:58:09.129  3762  7067 I ProvidersCache: Provider returned no roots. Possibly naughty: com.google.android.apps.docs.storage
+11-18 04:58:09.134  5729  6242 I Fitness : OnPackageChangedOperation got intent: Intent { act=android.intent.action.PACKAGE_CHANGED dat=package: flg=0x45000010 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.PersistentIntentOperationService (has extras) } [CONTEXT service_id=17 ]
+11-18 04:58:09.147  5729  6235 I Fitness : FitCleanupIntentOperation received Intent android.intent.action.PACKAGE_CHANGED [CONTEXT service_id=17 ]
+11-18 04:58:09.152  7023  7040 I ova.quartznotes: Alloc concurrent copying GC freed 2527130(79MB) AllocSpace objects, 53(49MB) LOS objects, 27% free, 63MB/87MB, paused 76us,10us total 233.799ms
+11-18 04:58:09.152  7023  7030 I ova.quartznotes: WaitForGcToComplete blocked Background on Alloc for 231.410ms
+11-18 04:58:09.154  5729  5788 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+11-18 04:58:09.160  5729  5788 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+11-18 04:58:09.182  5713  5892 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+11-18 04:58:09.192  5713  5892 I Icing   : Indexing done com.google.android.gms-apps
+11-18 04:58:09.192  5713  5892 I Icing   : Indexing com.google.android.gms-internal.3p:MobileApplication from com.google.android.gms
+11-18 04:58:09.209  3171  6883 W BugleConnectivity: Unregister ConnectivityStateListener for subId -1 fail.
+11-18 04:58:09.234  5713  5892 I Icing   : Indexing done com.google.android.gms-internal.3p:MobileApplication
+11-18 04:58:09.253  3171  6883 I BugleRcsEngine: [209] bgfx.g: No RCS Configuration was found in Bugle for simID: redacted-pii:sim_id[chars:20,last3:897]
+11-18 04:58:09.255  3171  6883 W BugleConnectivity: getNetworkState: NetworkStateMonitor not found for subId 1.
+11-18 04:58:09.271  3171  6883 I BugleDataModel: PendingMessagesProcessor: process from ProcessPendingMessagesAction due to scheduled processing with delay 0 with queues:
+11-18 04:58:09.280  1054  1827 D EGL_emulation: app_time_stats: avg=1307.73ms min=464.20ms max=2151.25ms count=2
+11-18 04:58:09.281  3171  6883 W BugleConnectivity: Unregister ConnectivityStateListener for subId -1 fail.
+11-18 04:58:09.303  3171  6883 W BugleConnectivity: getNetworkState: NetworkStateMonitor not found for subId 1.
+11-18 04:58:09.308  3171  6883 I BugleDataModel: PendingMessagesProcessor: process from ProcessPendingMessagesAction due to scheduled processing with delay 0 with queues:
+11-18 04:58:09.313  3171  6883 W BugleConnectivity: Unregister ConnectivityStateListener for subId -1 fail.
+11-18 04:58:09.315  3171  6883 W BugleConnectivity: getNetworkState: NetworkStateMonitor not found for subId 1.
+11-18 04:58:09.316  3171  6883 I BugleDataModel: PendingMessagesProcessor: process from ProcessPendingMessagesAction due to scheduled processing with delay 0 with queues:
+11-18 04:58:09.317  3171  6883 W BugleConnectivity: Unregister ConnectivityStateListener for subId -1 fail.
+11-18 04:58:09.318  3171  6883 W BugleConnectivity: getNetworkState: NetworkStateMonitor not found for subId 1.
+11-18 04:58:09.319  3171  6883 I BugleDataModel: PendingMessagesProcessor: process from ProcessPendingMessagesAction due to scheduled processing with delay 0 with queues:
+11-18 04:58:09.356  3171  6883 W BugleConnectivity: Unregister ConnectivityStateListener for subId -1 fail.
+11-18 04:58:09.358  3171  6883 W BugleConnectivity: getNetworkState: NetworkStateMonitor not found for subId 1.
+11-18 04:58:09.359  3171  6883 I BugleDataModel: PendingMessagesProcessor: process from ProcessPendingMessagesAction due to scheduled processing with delay 0 with queues:
+11-18 04:58:09.497  3171  3327 W Bugle   : TextClassifierLibManagerImpl: Reclaiming memory at level: 40
+11-18 04:58:09.598  7023  7030 I ova.quartznotes: Background concurrent copying GC freed 839559(19MB) AllocSpace objects, 0(0B) LOS objects, 21% free, 88MB/112MB, paused 51us,10us total 157.740ms
+11-18 04:58:09.628  7023  7040 I TestRunner: finished: oversizedSheetIsCompressedAndItsNotebookOpens(com.timcordova.quartznotes.data.BigSheetMigrationTest)

@@ -1,0 +1,19 @@
+11-18 04:58:21.302  7023  7040 I TestRunner: started: liveNotesStayHiddenWhileDeletedOnesArriveLater(com.timcordova.quartznotes.data.sync.SyncEngineTest)
+11-18 04:58:21.307  7023  7040 D TrafficStats: tagSocket(101) with statsTag=0xffffffff, statsUid=-1
+11-18 04:58:21.598  5713  7097 I ChimeraConfigurator: Starting update, reason: 4 urgentFeatures: vision.ocr:-1
+11-18 04:58:21.600  5729  5862 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.checkin.CheckinService started execution. cause:4 exec_start_elapsed_seconds: 207 [CONTEXT service_id=218 ]
+11-18 04:58:21.647  5713  7097 I ChimeraConfigurator: Detected pending changes for urgent request: [vision.ocr]. Pending module sets: container:2318189190800+mlkit.ocr.common,tflite_dynamite:2640104055100800+tflite_dynamite,vision_ocr:2316024025100000+vision.ocr
+11-18 04:58:21.662  5713  7097 I GmsDebugLogger: [73] 1801
+11-18 04:58:21.669  5713  7097 W ZappDownloader: No successful module downloads for requested features [vision.ocr].
+11-18 04:58:21.670  5713  7097 I GmsDebugLogger: [30] [VisionOcrDynamite.integ:231602402100000],[TfliteDynamiteDynamite.integ:264010405100800],[MlkitOcrCommon.optional:231818100800]
+11-18 04:58:21.675  5713  7097 W ChimeraConfigService: Retry attempt was throttled. [CONTEXT service_id=264 ]
+11-18 04:58:21.677  5713  7097 I GmsDebugLogger: [83] 1 [vision.ocr]
+11-18 04:58:21.679  5713  7096 W Vision  : Request for optional module download of ocr failed. Request again.
+11-18 04:58:21.687  5713  7096 W Vision  : Would have logged:
+11-18 04:58:21.687  5713  7096 W Vision  : # dsae@37884fe7
+11-18 04:58:21.692  5713  7096 I Vision  : Schedule retrying download ocr at 207673 with backoff 40 seconds
+11-18 04:58:21.702  5729  5789 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.checkin.CheckinService finished executing. cause:4 result: 1 elapsed_millis: 77 uptime_millis: 77 exec_start_elapsed_seconds: 207 [CONTEXT service_id=218 ]
+11-18 04:58:21.716   285   347 I netd    : tetherGetStats() -> {[]} <0.42ms>
+11-18 04:58:21.720   285   347 I netd    : bandwidthSetGlobalAlert(2097152) <0.07ms>
+11-18 04:58:21.726  5729  5729 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.nearby.exposurenotification.START dat=chimera-action:/... cmp=com.google.android.gms/.chimera.PersistentApiServiceNoInstantApps }
+11-18 04:58:21.815  7023  7040 I TestRunner: finished: liveNotesStayHiddenWhileDeletedOnesArriveLater(com.timcordova.quartznotes.data.sync.SyncEngineTest)

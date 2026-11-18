@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<testsuite name="com.timcordova.quartznotes.data.BigSheetMigrationTest" tests="86" failures="0" errors="0" skipped="0" time="266.588" timestamp="2026-11-18T05:02:35" hostname="localhost">
+  <properties>
+    <property name="device" value="emulator-5554 - 13" />
+    <property name="flavor" value="" />
+    <property name="project" value=":app" />
+  </properties>
+  <testcase name="oversizedSheetIsCompressedAndItsNotebookOpens" classname="com.timcordova.quartznotes.data.BigSheetMigrationTest" time="1.358" />
+  <testcase name="wordTextAndSheets" classname="com.timcordova.quartznotes.data.ExportBuilderTest" time="0.047" />
+  <testcase name="combinedPdfAndPerPageZip" classname="com.timcordova.quartznotes.data.ExportBuilderTest" time="0.277" />
+  <testcase name="deletingSomethingSyncedLeavesAHiddenMarker" classname="com.timcordova.quartznotes.data.SyncGroundworkTest" time="0.031" />
+  <testcase name="newDatabaseStartsWithATrackedShelf" classname="com.timcordova.quartznotes.data.SyncGroundworkTest" time="0.001" />
+  <testcase name="copiesGetTheirOwnIds" classname="com.timcordova.quartznotes.data.SyncGroundworkTest" time="0.0" />
+  <testcase name="wholeRowSavesAreTracked" classname="com.timcordova.quartznotes.data.SyncGroundworkTest" time="0.024" />
+  <testcase name="anOldCopyCantBringBackADeletedRow" classname="com.timcordova.quartznotes.data.SyncGroundworkTest" time="0.002" />
+  <testcase name="editsMarkRowsForUploadButSyncWritesDoNot" classname="com.timcordova.quartznotes.data.SyncGroundworkTest" time="0.001" />
+  <testcase name="migration4To5GivesEveryRowAnIdAndMarksItForUpload" classname="com.timcordova.quartznotes.data.SyncGroundworkTest" time="0.054" />
+  <testcase name="deletingANotebookDeletesItsPagesAndItems" classname="com.timcordova.quartznotes.data.SyncGroundworkTest" time="0.029" />
+  <testcase name="restoringABackupKeepsIdsAndAddingAlongsideMakesNewOnes" classname="com.timcordova.quartznotes.data.SyncGroundworkTest" time="0.0" />
+  <testcase name="deletingSomethingNeverSyncedErasesIt" classname="com.timcordova.quartznotes.data.SyncGroundworkTest" time="0.027" />
+  <testcase name="startersLoadAndMakePagesAndNotes" classname="com.timcordova.quartznotes.data.TemplatesTest" time="0.0" />
+  <testcase name="pagesAddedInTheTemplatesNotebookAreTemplates" classname="com.timcordova.quartznotes.data.TemplatesTest" time="0.026" />
+  <testcase name="aPageSavedAsATemplateMakesNewPagesWithEverythingOnIt" classname="com.timcordova.quartznotes.data.TemplatesTest" time="0.004" />
+  <testcase name="migration5To6AddsTemplateAndBackgroundFields" classname="com.timcordova.quartznotes.data.TemplatesTest" time="0.054" />
+  <testcase name="aNoteSavedAsATemplateStaysOutOfTheListAndMakesNewNotes" classname="com.timcordova.quartznotes.data.TemplatesTest" time="0.001" />
+  <testcase name="notebooksWithPagesItemsAndAttachments" classname="com.timcordova.quartznotes.data.sync.SyncEngineTest" time="0.806" />
+  <testcase name="accentAndBackgroundAreShared" classname="com.timcordova.quartznotes.data.sync.SyncEngineTest" time="0.326" />
+  <testcase name="deletingReachesTheOtherDevice" classname="com.timcordova.quartznotes.data.sync.SyncEngineTest" time="0.278" />
+  <testcase name="templatesAndBackgroundPicturesSync" classname="com.timcordova.quartznotes.data.sync.SyncEngineTest" time="0.728" />
+  <testcase name="picturesRecordingsAndFontsTravel" classname="com.timcordova.quartznotes.data.sync.SyncEngineTest" time="0.457" />
+  <testcase name="conflictingNoteEditsKeepBothVersions" classname="com.timcordova.quartznotes.data.sync.SyncEngineTest" time="0.479" />
+  <testcase name="remoteChangesAreReported" classname="com.timcordova.quartznotes.data.sync.SyncEngineTest" time="0.301" />
+  <testcase name="aNoteTravelsBothWays" classname="com.timcordova.quartznotes.data.sync.SyncEngineTest" time="6.096" />
+  <testcase name="offlineIsReportedAndNothingIsLost" classname="com.timcordova.quartznotes.data.sync.SyncEngineTest" time="0.279" />
+  <testcase name="theLaterEditWinsWhicheverDeviceSyncsFirst" classname="com.timcordova.quartznotes.data.sync.SyncEngineTest" time="0.834" />
+  <testcase name="firstSyncMergesWhatBothDevicesHad" classname="com.timcordova.quartznotes.data.sync.SyncEngineTest" time="0.449" />
+  <testcase name="liveNotesStayHiddenWhileDeletedOnesArriveLater" classname="com.timcordova.quartznotes.data.sync.SyncEngineTest" time="0.502" />
+  <testcase name="conflictingPageEditsKeepBothVersions" classname="com.timcordova.quartznotes.data.sync.SyncEngineTest" time="0.504" />
+  <testcase name="liveChangesArriveWithinSeconds" classname="com.timcordova.quartznotes.data.sync.SyncEngineTest" time="0.758" />
+  <testcase name="signingOutMarksEverythingForTheNextServer" classname="com.timcordova.quartznotes.data.sync.SyncEngineTest" time="0.531" />
+  <testcase name="openNoteShowsChangesOrKeepsThemAsACopy" classname="com.timcordova.quartznotes.ui.LiveEditTest" time="0.173" />
+  <testcase name="openPageShowsChanges" classname="com.timcordova.quartznotes.ui.LiveEditTest" time="0.051" />
+  <testcase name="eachMaterialIsQuickAndSeamless" classname="com.timcordova.quartznotes.ui.components.CoverTexturesTest" time="2.31" />
+  <testcase name="coversShowTheirMaterial" classname="com.timcordova.quartznotes.ui.components.CoverTexturesTest" time="1.924" />
+  <testcase name="typingEnterAndLists" classname="com.timcordova.quartznotes.ui.editor.EditorScreenshotTest" time="3.614" />
+  <testcase name="selectAcrossParagraphs" classname="com.timcordova.quartznotes.ui.editor.EditorScreenshotTest" time="3.642" />
+  <testcase name="layout" classname="com.timcordova.quartznotes.ui.editor.EditorScreenshotTest" time="1.241" />
+  <testcase name="picturesInLine" classname="com.timcordova.quartznotes.ui.editor.EditorScreenshotTest" time="2.187" />
+  <testcase name="dividers" classname="com.timcordova.quartznotes.ui.editor.EditorScreenshotTest" time="2.856" />
+  <testcase name="holdAndDragANotebookToMoveIt" classname="com.timcordova.quartznotes.ui.home.HomeArrangeTest" time="4.742" />
+  <testcase name="splitViewCanBeTurnedOffOnWideScreens" classname="com.timcordova.quartznotes.ui.home.HomeArrangeTest" time="2.326" />
+  <testcase name="anUpdateFoundAfterOpeningShowsAtTheTop" classname="com.timcordova.quartznotes.ui.home.HomeArrangeTest" time="3.382" />
+  <testcase name="noSplitViewButtonOnAPhone" classname="com.timcordova.quartznotes.ui.home.HomeArrangeTest" time="1.744" />
+  <testcase name="swipingTheShelfDoesNotOpenSettings" classname="com.timcordova.quartznotes.ui.home.HomeArrangeTest" time="2.995" />
+  <testcase name="brushesSizesAndTwoFingerUndo" classname="com.timcordova.quartznotes.ui.notebook.BrushTest" time="12.025" />
+  <testcase name="aNewNotebookIsSetUpStepByStep" classname="com.timcordova.quartznotes.ui.notebook.FreeformTest" time="10.846" />
+  <testcase name="picturesOnATextPageGoInLine" classname="com.timcordova.quartznotes.ui.notebook.FreeformTest" time="0.748" />
+  <testcase name="aSmallPageIsCenteredAndPinchingAPictureResizesIt" classname="com.timcordova.quartznotes.ui.notebook.FreeformTest" time="5.157" />
+  <testcase name="freeformNotebooksMakePagesOfTheirSize" classname="com.timcordova.quartznotes.ui.notebook.FreeformTest" time="0.849" />
+  <testcase name="aFreeformPageZoomsAndFitsAgain" classname="com.timcordova.quartznotes.ui.notebook.FreeformTest" time="4.635" />
+  <testcase name="drawingToolsOnATextPageOfferAFreeformPage" classname="com.timcordova.quartznotes.ui.notebook.FreeformTest" time="5.22" />
+  <testcase name="groupsMoveCopyAndPaste" classname="com.timcordova.quartznotes.ui.notebook.FreeformToolsTest" time="1.061" />
+  <testcase name="lassoPicksItemsAndUndoBringsThemBack" classname="com.timcordova.quartznotes.ui.notebook.FreeformToolsTest" time="7.261" />
+  <testcase name="undoAndRedoItemChanges" classname="com.timcordova.quartznotes.ui.notebook.FreeformToolsTest" time="0.915" />
+  <testcase name="pictureWindowFitsAndTurnsThePicture" classname="com.timcordova.quartznotes.ui.notebook.PageBackgroundTest" time="11.973" />
+  <testcase name="pageButtonsAndTimeline" classname="com.timcordova.quartznotes.ui.notebook.PageInputTest" time="7.472" />
+  <testcase name="clickAnywhereOnALine" classname="com.timcordova.quartznotes.ui.notebook.PageInputTest" time="3.441" />
+  <testcase name="composeMouseOnBareEditor" classname="com.timcordova.quartznotes.ui.notebook.PageInputTest" time="2.84" />
+  <testcase name="selectingTextOnBareEditor" classname="com.timcordova.quartznotes.ui.notebook.PageInputTest" time="23.409" />
+  <testcase name="selectingTextOnPage" classname="com.timcordova.quartznotes.ui.notebook.PageInputTest" time="24.83" />
+  <testcase name="mouseWheelInTimeline" classname="com.timcordova.quartznotes.ui.notebook.PageInputTest" time="7.621" />
+  <testcase name="composeMouseOnPage" classname="com.timcordova.quartznotes.ui.notebook.PageInputTest" time="2.884" />
+  <testcase name="handlesOnPage" classname="com.timcordova.quartznotes.ui.notebook.PageInputTest" time="4.471" />
+  <testcase name="handlesOnBareEditor" classname="com.timcordova.quartznotes.ui.notebook.PageInputTest" time="3.639" />
+  <testcase name="toolbarOnTop" classname="com.timcordova.quartznotes.ui.notebook.PageInputTest" time="1.939" />
+  <testcase name="rightClickThumbnailToDelete" classname="com.timcordova.quartznotes.ui.notebook.PageInputTest" time="6.104" />
+  <testcase name="penHandlesOnPage" classname="com.timcordova.quartznotes.ui.notebook.PageInputTest" time="4.66" />
+  <testcase name="sheetShowsTypesAndFormats" classname="com.timcordova.quartznotes.ui.notebook.SheetEditorTest" time="36.159" />
+  <testcase name="dragAPageAlongTheTimeline" classname="com.timcordova.quartznotes.ui.notebook.TimelineDragTest" time="3.722" />
+  <testcase name="aNewVersionPopsUpOnceWithUpdateAndLater" classname="com.timcordova.quartznotes.ui.settings.UpdateUiTest" time="1.171" />
+  <testcase name="anOlderServerWithoutAppBuildsIsFine" classname="com.timcordova.quartznotes.ui.settings.UpdateUiTest" time="0.945" />
+  <testcase name="offersANewerBuildAndAsksToAllowInstalling" classname="com.timcordova.quartznotes.ui.settings.UpdateUiTest" time="1.119" />
+  <testcase name="saysUpToDateWhenTheServerHasThisVersion" classname="com.timcordova.quartznotes.ui.settings.UpdateUiTest" time="1.067" />
+  <testcase name="aVeryShortGridStillDraws" classname="com.timcordova.quartznotes.ui.sheet.SheetGridShortTest" time="1.53" />
+  <testcase name="templatesAndBackgroundPictures" classname="com.timcordova.quartznotes.ui.templates.TemplatesUiTest" time="9.731" />
+  <testcase name="settingsListsTemplates" classname="com.timcordova.quartznotes.ui.templates.TemplatesUiTest" time="3.35" />
+  <testcase name="launchLinksRoundTrip" classname="com.timcordova.quartznotes.widget.WidgetsTest" time="0.002" />
+  <testcase name="shelfCanBeHeldToAFewBooksAcross" classname="com.timcordova.quartznotes.widget.WidgetsTest" time="0.346" />
+  <testcase name="shelfFillsItsSizeWithTheFirstNotebooksInOrder" classname="com.timcordova.quartznotes.widget.WidgetsTest" time="1.104" />
+  <testcase name="notebookIsAnIconSmallAndShowsMoreBigger" classname="com.timcordova.quartznotes.widget.WidgetsTest" time="0.878" />
+  <testcase name="quickNotesAsAListAndAGrid" classname="com.timcordova.quartznotes.widget.WidgetsTest" time="0.703" />
+  <testcase name="shelfPlanAddsRowsAndColumnsAsItGrows" classname="com.timcordova.quartznotes.widget.WidgetsTest" time="0.0" />
+  <testcase name="toolbarLabelsItsButtonsWhenThereIsRoom" classname="com.timcordova.quartznotes.widget.WidgetsTest" time="0.856" />
+</testsuite>

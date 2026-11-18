@@ -1,0 +1,59 @@
+Fetching distribution.
+Downloading https://services.gradle.org/distributions/gradle-8.9-bin.zip
+............10%.............20%.............30%.............40%.............50%.............60%.............70%.............80%.............90%.............100%
+
+Welcome to Gradle 8.9!
+
+Here are the highlights of this release:
+ - Enhanced Error and Warning Messages
+ - IDE Integration Improvements
+ - Daemon JVM Information
+
+For more details see https://docs.gradle.org/8.9/release-notes.html
+
+Starting a Gradle Daemon (subsequent builds will be faster)
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:generateDebugResValues
+> Task :app:checkDebugAarMetadata
+> Task :app:mapDebugSourceSetPaths
+> Task :app:generateDebugResources
+> Task :app:packageDebugResources
+> Task :app:mergeDebugResources
+> Task :app:createDebugCompatibleScreenManifests
+> Task :app:extractDeepLinksDebug
+> Task :app:parseDebugLocalResources
+> Task :app:processDebugMainManifest
+> Task :app:processDebugManifest
+> Task :app:processDebugManifestForPackage
+> Task :app:javaPreCompileDebug
+> Task :app:preDebugUnitTestBuild UP-TO-DATE
+> Task :app:javaPreCompileDebugUnitTest
+> Task :app:processDebugResources
+> Task :app:kspDebugKotlin
+> Task :app:compileDebugKotlin
+w: file:///home/runner/work/Quartz-Notes/Quartz-Notes/app/src/main/java/com/timcordova/quartznotes/ui/editor/RichTextEditor.kt:200:25 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///home/runner/work/Quartz-Notes/Quartz-Notes/app/src/main/java/com/timcordova/quartznotes/ui/editor/RichTextEditor.kt:841:20 'interface ClipboardManager : Any' is deprecated. Use Clipboard instead, which supports suspend functions.
+w: file:///home/runner/work/Quartz-Notes/Quartz-Notes/app/src/main/java/com/timcordova/quartznotes/ui/note/NoteSharing.kt:110:52 'field scaledDensity: Float' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Quartz-Notes/Quartz-Notes/app/src/main/java/com/timcordova/quartznotes/ui/notebook/NotebookScreen.kt:256:50 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///home/runner/work/Quartz-Notes/Quartz-Notes/app/src/main/java/com/timcordova/quartznotes/ui/notebook/PageElements.kt:1103:90 'val Icons.Rounded.ViewQuilt: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Rounded.ViewQuilt.
+w: file:///home/runner/work/Quartz-Notes/Quartz-Notes/app/src/main/java/com/timcordova/quartznotes/ui/sheet/SheetGridView.kt:83:21 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///home/runner/work/Quartz-Notes/Quartz-Notes/app/src/main/java/com/timcordova/quartznotes/ui/sheet/SheetPageView.kt:59:8 'interface ClipboardManager : Any' is deprecated. Use Clipboard instead, which supports suspend functions.
+w: file:///home/runner/work/Quartz-Notes/Quartz-Notes/app/src/main/java/com/timcordova/quartznotes/ui/sheet/SheetPageView.kt:272:74 'interface ClipboardManager : Any' is deprecated. Use Clipboard instead, which supports suspend functions.
+w: file:///home/runner/work/Quartz-Notes/Quartz-Notes/app/src/main/java/com/timcordova/quartznotes/ui/sheet/SheetToolbar.kt:107:21 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///home/runner/work/Quartz-Notes/Quartz-Notes/app/src/main/java/com/timcordova/quartznotes/ui/templates/TemplateSheets.kt:116:42 'val Icons.Rounded.NoteAdd: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Rounded.NoteAdd.
+
+> Task :app:compileDebugJavaWithJavac
+> Task :app:processDebugJavaRes
+> Task :app:bundleDebugClassesToCompileJar
+> Task :app:bundleDebugClassesToRuntimeJar
+> Task :app:kspDebugUnitTestKotlin
+> Task :app:compileDebugUnitTestKotlin
+> Task :app:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :app:processDebugUnitTestJavaRes
+> Task :app:testDebugUnitTest
+gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run_2-1794977479562.json
+
+BUILD SUCCESSFUL in 2m 16s
+25 actionable tasks: 25 executed

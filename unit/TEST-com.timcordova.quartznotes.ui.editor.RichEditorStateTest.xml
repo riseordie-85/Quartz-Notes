@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.timcordova.quartznotes.ui.editor.RichEditorStateTest" tests="32" skipped="0" failures="0" errors="0" timestamp="2026-11-18T04:53:27" hostname="runnervmccnms" time="0.015">
+  <properties/>
+  <testcase name="enterAfterHeadingGivesPlainText" classname="com.timcordova.quartznotes.ui.editor.RichEditorStateTest" time="0.002"/>
+  <testcase name="selectedTextAndInsertText" classname="com.timcordova.quartznotes.ui.editor.RichEditorStateTest" time="0.0"/>
+  <testcase name="backspaceAtStartWhenNoteStartsWithEmptyLineDoesNothing" classname="com.timcordova.quartznotes.ui.editor.RichEditorStateTest" time="0.001"/>
+  <testcase name="indentAndOutdent" classname="com.timcordova.quartznotes.ui.editor.RichEditorStateTest" time="0.0"/>
+  <testcase name="typingAndEnterMakeParagraphs" classname="com.timcordova.quartznotes.ui.editor.RichEditorStateTest" time="0.001"/>
+  <testcase name="listToggleAppliesToEverySelectedParagraph" classname="com.timcordova.quartznotes.ui.editor.RichEditorStateTest" time="0.0"/>
+  <testcase name="backspaceAfterPictureDoesNotMergeText" classname="com.timcordova.quartznotes.ui.editor.RichEditorStateTest" time="0.001"/>
+  <testcase name="deletingThePictureCharacterRemovesThePicture" classname="com.timcordova.quartznotes.ui.editor.RichEditorStateTest" time="0.0"/>
+  <testcase name="dividerAtTheEndAddsALineAndSurvivesSaving" classname="com.timcordova.quartznotes.ui.editor.RichEditorStateTest" time="0.001"/>
+  <testcase name="selectAllAndBoldCoversEveryParagraph" classname="com.timcordova.quartznotes.ui.editor.RichEditorStateTest" time="0.001"/>
+  <testcase name="deletingUpToAPictureKeepsThePicture" classname="com.timcordova.quartznotes.ui.editor.RichEditorStateTest" time="0.0"/>
+  <testcase name="deletingTheDividerAndUndo" classname="com.timcordova.quartznotes.ui.editor.RichEditorStateTest" time="0.0"/>
+  <testcase name="typingInFrontOfAPictureMakesOneLineAboveIt" classname="com.timcordova.quartznotes.ui.editor.RichEditorStateTest" time="0.001"/>
+  <testcase name="picturesStayOnTheirOwnLine" classname="com.timcordova.quartznotes.ui.editor.RichEditorStateTest" time="0.001"/>
+  <testcase name="enterInFrontOfAPictureAddsAPlainLineAndKeepsThePicture" classname="com.timcordova.quartznotes.ui.editor.RichEditorStateTest" time="0.0"/>
+  <testcase name="selectingAcrossParagraphsAndDeletingMerges" classname="com.timcordova.quartznotes.ui.editor.RichEditorStateTest" time="0.0"/>
+  <testcase name="enterInListContinuesItAndEnterOnEmptyItemEndsIt" classname="com.timcordova.quartznotes.ui.editor.RichEditorStateTest" time="0.001"/>
+  <testcase name="backspaceAtVeryStartOfNoteRemovesListFormatting" classname="com.timcordova.quartznotes.ui.editor.RichEditorStateTest" time="0.0"/>
+  <testcase name="enterAtStartOfHeadingKeepsHeadingBelow" classname="com.timcordova.quartznotes.ui.editor.RichEditorStateTest" time="0.001"/>
+  <testcase name="undoAndRedoTypingAndFormatting" classname="com.timcordova.quartznotes.ui.editor.RichEditorStateTest" time="0.0"/>
+  <testcase name="blocksAlwaysMatchLines" classname="com.timcordova.quartznotes.ui.editor.RichEditorStateTest" time="0.001"/>
+  <testcase name="deletingTextBetweenTwoPicturesKeepsBoth" classname="com.timcordova.quartznotes.ui.editor.RichEditorStateTest" time="0.0"/>
+  <testcase name="removeBlockAndFocusEnd" classname="com.timcordova.quartznotes.ui.editor.RichEditorStateTest" time="0.0"/>
+  <testcase name="loadAndSaveKeepsEverything" classname="com.timcordova.quartznotes.ui.editor.RichEditorStateTest" time="0.001"/>
+  <testcase name="deletingAnEmptyLineKeepsTheNextLinesLook" classname="com.timcordova.quartznotes.ui.editor.RichEditorStateTest" time="0.0"/>
+  <testcase name="pendingBoldAppliesToTypedText" classname="com.timcordova.quartznotes.ui.editor.RichEditorStateTest" time="0.0"/>
+  <testcase name="enterAfterACenteredPictureStartsALeftAlignedLine" classname="com.timcordova.quartznotes.ui.editor.RichEditorStateTest" time="0.0"/>
+  <testcase name="checkingSelectedTasks" classname="com.timcordova.quartznotes.ui.editor.RichEditorStateTest" time="0.001"/>
+  <testcase name="dividerGoesBelowTheLineWithALineAfterIt" classname="com.timcordova.quartznotes.ui.editor.RichEditorStateTest" time="0.0"/>
+  <testcase name="dividerOnAnEmptyLineReplacesIt" classname="com.timcordova.quartznotes.ui.editor.RichEditorStateTest" time="0.001"/>
+  <testcase name="backspaceAtStartOfListItemRemovesTheBulletFirst" classname="com.timcordova.quartznotes.ui.editor.RichEditorStateTest" time="0.0"/>
+  <testcase name="pastingSeveralLinesMakesParagraphs" classname="com.timcordova.quartznotes.ui.editor.RichEditorStateTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

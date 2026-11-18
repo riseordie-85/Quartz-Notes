@@ -1,0 +1,12 @@
+11-18 04:58:22.334  7023  7040 I TestRunner: started: liveChangesArriveWithinSeconds(com.timcordova.quartznotes.data.sync.SyncEngineTest)
+11-18 04:58:22.335  7023  7040 D TrafficStats: tagSocket(103) with statsTag=0xffffffff, statsUid=-1
+11-18 04:58:22.556  7023  7106 D TrafficStats: tagSocket(104) with statsTag=0xffffffff, statsUid=-1
+11-18 04:58:22.860   285   347 I netd    : tetherGetStats() -> {[]} <0.22ms>
+11-18 04:58:22.863   285   347 I netd    : bandwidthSetGlobalAlert(2097152) <0.08ms>
+11-18 04:58:22.864   285   347 I netd    : bandwidthRemoveInterfaceQuota(eth0) <0.34ms>
+11-18 04:58:22.864   285   347 I netd    : bandwidthSetInterfaceQuota(eth0, 9223372036854775807) <0.23ms>
+11-18 04:58:22.882  1768  2196 I A       : #handleLocale  en-US
+11-18 04:58:22.883  1768  2196 I A       : available language pack of en-US is version 1001
+11-18 04:58:22.885  2065  2133 V DownloadManager: Deleting /storage/emulated/0/Android/data/com.google.android.googlequicksearchbox/files/download_cache/soda-en-US-v1001.zip via provider delete
+11-18 04:58:22.892  1653  5200 I MediaProvider: Scanned external_primary due to REASON_DEMAND, found 0 items in 1ms, 0 inserts 0 updates 0 deletes
+11-18 04:58:23.083  7023  7040 I TestRunner: finished: liveChangesArriveWithinSeconds(com.timcordova.quartznotes.data.sync.SyncEngineTest)

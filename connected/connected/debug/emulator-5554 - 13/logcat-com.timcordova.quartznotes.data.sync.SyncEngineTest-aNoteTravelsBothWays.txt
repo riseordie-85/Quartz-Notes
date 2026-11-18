@@ -1,0 +1,172 @@
+11-18 04:58:13.607  7023  7040 I TestRunner: started: aNoteTravelsBothWays(com.timcordova.quartznotes.data.sync.SyncEngineTest)
+11-18 04:58:13.608  1177  1192 D SliceBuilder: Creating slice for: com.android.settings.deviceinfo.hardwareinfo.DeviceModelPreferenceController
+11-18 04:58:13.610  1177  1200 D SliceBuilder: Creating slice for: com.android.settings.fuelgauge.SmartBatteryPreferenceController
+11-18 04:58:13.610  7023  7040 D TrafficStats: tagSocket(97) with statsTag=0xffffffff, statsUid=-1
+11-18 04:58:13.612  1177  1200 D SliceBuilder: Creating slice for: com.android.settings.accessibility.MagnificationGesturesPreferenceController
+11-18 04:58:13.614  1177  1200 D SliceBuilder: Creating slice for: com.android.settings.display.SmartAutoRotatePreferenceController
+11-18 04:58:13.624  1177  1200 D SliceBuilder: Creating slice for: com.android.settings.deviceinfo.firmwareversion.FirmwareVersionDetailPreferenceController
+11-18 04:58:13.626  1177  1200 D SliceBuilder: Creating slice for: com.android.settings.notification.MediaVolumePreferenceController
+11-18 04:58:13.628  1177  1200 D MediaVolumePreCtrl: The slice doesn't support end item
+11-18 04:58:13.629  1177  1200 D SliceBuilder: Creating slice for: com.android.settings.notification.CallVolumePreferenceController
+11-18 04:58:13.629  1177  1192 D VolumeSliceHelper: Unregistering uri broadcast relay: content://com.android.settings.slices/action/media_volume
+11-18 04:58:13.635  5729  5826 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.icing.proxy.IcingInternalCorporaUpdateService started execution. cause:9 exec_start_elapsed_seconds: 199 [CONTEXT service_id=218 ]
+11-18 04:58:13.642  5729  5738 W .gms.persistent: Cleared Reference was only reachable from finalizer (only reported once)
+11-18 04:58:13.665  1177  1177 D WsuServiceClient: Binding to com.google.android.apps.carrier.carrierwifi
+11-18 04:58:13.666  1177  1177 D WsuServiceClient: the specified wsu service is not installed.
+11-18 04:58:13.666  1177  1177 D SettingsSliceProvider: Stopping background worker for: content://com.android.settings.slices/action/media_volume
+11-18 04:58:13.669   489   727 D ConnectivityService: NetReassign [no changes] [c 0] [a 0] [i 1]
+11-18 04:58:13.676  1177  1200 D VolumeSliceHelper: Unregistering uri broadcast relay: content://com.android.settings.slices/action/call_volume
+11-18 04:58:13.677  1177  1200 D SliceBuilder: Creating slice for: com.android.settings.notification.RingVolumePreferenceController
+11-18 04:58:13.680   489  2311 D ConnectivityService: requestNetwork for uid/pid:1000/1177 activeRequest: null callbackRequest: 154 [NetworkRequest [ TRACK_SYSTEM_DEFAULT id=154, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN&NOT_VCN_MANAGED RequestorUid: 1000 RequestorPkg: com.android.settings UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+11-18 04:58:13.683   489   727 D ConnectivityService: NetReassign [154 : null → 100] [c 0] [a 1] [i 0]
+11-18 04:58:13.683  1177  1194 D VolumeSliceHelper: Unregistering uri broadcast relay: content://com.android.settings.slices/action/ring_volume
+11-18 04:58:13.683  1177  1192 D SliceBuilder: Creating slice for: com.android.settings.notification.SeparateRingVolumePreferenceController
+11-18 04:58:13.684  1177  1194 D SliceBuilder: Creating slice for: com.android.settings.notification.NotificationVolumePreferenceController
+11-18 04:58:13.685  1177  1192 D VolumeSliceHelper: Unregistering uri broadcast relay: content://com.android.settings.slices/action/separate_ring_volume
+11-18 04:58:13.686  1177  5508 D SliceBuilder: Creating slice for: com.android.settings.notification.AlarmVolumePreferenceController
+11-18 04:58:13.686  1177  1192 D VolumeSliceHelper: Unregistering uri broadcast relay: content://com.android.settings.slices/action/notification_volume
+11-18 04:58:13.691  1177  1200 D VolumeSliceHelper: Unregistering uri broadcast relay: content://com.android.settings.slices/action/alarm_volume
+11-18 04:58:13.691  1177  1200 D SliceBroadcastRelay: Unregistering uri broadcast relay: content://com.android.settings.slices/action/volume_slices
+11-18 04:58:13.728   489  2297 W ScanResultUtil: Empty or null ScanResult list
+11-18 04:58:13.728   489  2297 W WifiService: Attempt to retrieve WifiConfiguration with invalid scanResult List
+11-18 04:58:13.734   489  2297 W ScanResultUtil: Empty or null ScanResult list
+11-18 04:58:13.734   489  2297 W WifiService: Attempt to retrieve WifiConfiguration with invalid scanResult List
+11-18 04:58:13.735   489  2297 W ScanResultUtil: Empty or null ScanResult list
+11-18 04:58:13.735   489  2297 E WifiService: Attempt to retrieve passpoint with invalid scanResult List
+11-18 04:58:13.735   489  2297 W ScanResultUtil: Empty or null ScanResult list
+11-18 04:58:13.735   489  2297 W WifiService: Attempt to retrieve OsuProviders with invalid scanResult List
+11-18 04:58:13.752  1177  7089 D CompatibilityChangeReporter: Compat change id reported: 186082280; UID 1000; state: ENABLED
+11-18 04:58:13.755   489  2297 I WifiService: startScan uid=1000
+11-18 04:58:13.759  1768  1768 I BgTaskExecutorImpl: Starting PERIODIC background task RESTORE_SPEAKER_MODEL.
+11-18 04:58:13.762   489  2297 W ScanResultUtil: Empty or null ScanResult list
+11-18 04:58:13.762   489  2297 W WifiService: Attempt to retrieve WifiConfiguration with invalid scanResult List
+11-18 04:58:13.762   489  2297 W ScanResultUtil: Empty or null ScanResult list
+11-18 04:58:13.762   489  2297 E WifiService: Attempt to retrieve passpoint with invalid scanResult List
+11-18 04:58:13.762   489  2297 W ScanResultUtil: Empty or null ScanResult list
+11-18 04:58:13.762   489  2297 W WifiService: Attempt to retrieve OsuProviders with invalid scanResult List
+11-18 04:58:13.766  1768  2207 I sb.r.PDSWriter: Updating TNG suggest bootstrap data
+11-18 04:58:13.772   285   347 I netd    : tetherGetStats() -> {[]} <4.41ms>
+11-18 04:58:13.776  1177  1200 D SliceBroadcastRelay: Unregistering uri broadcast relay: content://com.android.settings.slices/action/mobile_data
+11-18 04:58:13.778  1768  2283 I A       : Using proto config with mendel
+11-18 04:58:13.779  1768  2283 I A       : Using proto config with mendel
+11-18 04:58:13.780  1177  1177 D SettingsSliceProvider: Stopping background worker for: content://com.android.settings.slices/action/mobile_data
+11-18 04:58:13.785  1768  6285 I A       : Canceling restore - user account is null
+11-18 04:58:13.787  1768  1768 I SearchWidgetFlow: GsaWidgetProvider:onReceive(Intent { act=update-widget-intent flg=0x10 cmp=com.google.android.googlequicksearchbox/.SearchWidgetProvider }) started
+11-18 04:58:13.793  1768  2283 I SearchWidgetFlow: GsaWidgetSessionController:handleGenericClientEvent
+11-18 04:58:13.797  1768  1768 I BgTaskExecutorImpl: Starting PERIODIC background task SYNC_TAPAS_ZERO_PREFIX_CACHE.
+11-18 04:58:13.798  1768  2196 I sb.r.PDSWriter: Updated TNG suggest bootstrap data
+11-18 04:58:13.800   285   347 I netd    : bandwidthSetGlobalAlert(2097152) <0.33ms>
+11-18 04:58:13.803  1768  1768 I BgTaskExecutorImpl: Starting PERIODIC background task TNG_DISCOVER_CLEANUP.
+11-18 04:58:13.808  1768  2283 I TngDiscoverClean: Trying to cleanup TNG:Discover flag change
+11-18 04:58:13.808  1768  2283 I TngDiscoverClean: Starting FeedSync in TNG:Discover
+11-18 04:58:13.818  1768  1768 I BgTaskExecutorImpl: Starting PERIODIC background task TNG_MINUS_ONE_SYNC.
+11-18 04:58:13.819  1768  2283 I TngMinusOneSync: Syncing TNG:-1
+11-18 04:58:13.820  1768  2283 W TngMinusOneSync: TNG state changed: FIRST_ENROLLED
+11-18 04:58:13.821  1768  1768 I BgTaskExecutorImpl: Starting PERIODIC background task TNG_VOICE_SEARCH_SYNC.
+11-18 04:58:13.827  1768  2283 I TngVoiceSearchSync: Syncing TNG:VoiceSearch
+11-18 04:58:13.829  1768  1768 I BgTaskExecutorImpl: Starting PERIODIC background task UPDATE_GSERVICES_CONFIG.
+11-18 04:58:13.830  1768  2475 I A       : Updating Gservices keys
+11-18 04:58:13.842  1177  5508 D WifiCallingSliceHelper: Wifi calling is either not provisioned or not enabled by Platform
+11-18 04:58:13.849  1768  1768 I BgTaskExecutorImpl: Starting PERIODIC background task UPDATE_LANGUAGE_PACKS.
+11-18 04:58:13.851  1768  2454 I A       : Skip LanguagePack auto-update because controller is uninitialized.
+11-18 04:58:13.851  1177  1200 D SliceBroadcastRelay: Unregistering uri broadcast relay: content://com.android.settings.slices/action/zen_mode_toggle
+11-18 04:58:13.853  1177  5508 D SliceBuilder: Creating slice for: com.android.settings.network.AirplaneModePreferenceController
+11-18 04:58:13.859  1768  2200 I LanguagePackUpdateContr: Queuing language pack download for: en-US
+11-18 04:58:13.860  1768  1768 I LanguagePackUpdateContr: #finishInitRunnable run
+11-18 04:58:13.860  1768  2302 I LanguagePackUpdateContr: Proceeding with download, not active: soda-en-US-v1001
+11-18 04:58:13.864  1768  1768 I BgTaskExecutorImpl: Starting EXCLUSIVE background task FETCH_CONFIGS_FROM_PHENOTYPE.
+11-18 04:58:13.870  1768  2283 I SearchWidgetFlow: SearchWidgetWorker:handleIntent(Intent { act=update-widget-intent flg=0x10 cmp=com.google.android.googlequicksearchbox/.SearchWidgetProvider }) started
+11-18 04:58:13.871  1768  1768 I SearchWidgetFlow: SearchWidget:handleIntent(Intent { act=update-widget-intent flg=0x10 cmp=com.google.android.googlequicksearchbox/.SearchWidgetProvider })
+11-18 04:58:13.878  1768  2207 I SearchWidgetFlow: SearchWidgetWorker:handleIntent(Intent { act=update-widget-intent flg=0x10 cmp=com.google.android.googlequicksearchbox/.SearchWidgetProvider }) done
+11-18 04:58:13.878  1768  2207 I SearchWidgetFlow: GsaWidgetProvider:onReceive(Intent { act=update-widget-intent flg=0x10 cmp=com.google.android.googlequicksearchbox/.SearchWidgetProvider }) done
+11-18 04:58:13.897  1177  5508 D SliceBuilder: Creating slice for: com.android.settings.fuelgauge.batterysaver.BatterySaverButtonPreferenceController
+11-18 04:58:13.905  1177  5508 D SliceBroadcastRelay: Unregistering uri broadcast relay: content://android.settings.slices/action/bluetooth
+11-18 04:58:13.907  1177  1200 D WifiSlice: calling uid name : com.google.android.settings.intelligence
+11-18 04:58:13.934  1177  1177 D SettingsSliceProvider: Stopping background worker for: content://android.settings.slices/action/wifi
+11-18 04:58:13.965  5729  5788 W BpBinder: Large outgoing transaction of 323724 bytes, interface descriptor <uncached descriptor>, code 4
+11-18 04:58:13.969  1768  2196 W A       : Can't format flag AndroidGsaVelourJars__velour_birthdaydoodle_jar__name to integer.
+11-18 04:58:13.969  1768  2196 W A       : Can't format flag AndroidGsaVelourJars__velour_call_jar__name to integer.
+11-18 04:58:13.969  1768  2196 W A       : Can't format flag AndroidGsaVelourJars__velour_canvas_jar__name to integer.
+11-18 04:58:13.969  1768  2196 W A       : Can't format flag AndroidGsaVelourJars__velour_chkpkg_jar__name to integer.
+11-18 04:58:13.969  1768  2196 W A       : Can't format flag AndroidGsaVelourJars__velour_crashtest_jar__name to integer.
+11-18 04:58:13.969  1768  2196 W A       : Can't format flag AndroidGsaVelourJars__velour_dining_jar__name to integer.
+11-18 04:58:13.969  1768  2196 W A       : Can't format flag AndroidGsaVelourJars__velour_doodle_notifications_jar__name to integer.
+11-18 04:58:13.969  1768  2196 W A       : Can't format flag AndroidGsaVelourJars__velour_imageviewer_jar__name to integer.
+11-18 04:58:13.969  1768  2196 W A       : Can't format flag AndroidGsaVelourJars__velour_ipa_jar__name to integer.
+11-18 04:58:13.969  1768  2196 W A       : Can't format flag AndroidGsaVelourJars__velour_jslocation_jar__name to integer.
+11-18 04:58:13.969  1768  2196 W A       : Can't format flag AndroidGsaVelourJars__velour_localintent_jar__name to integer.
+11-18 04:58:13.969  1768  2196 W A       : Can't format flag AndroidGsaVelourJars__velour_messaging_jar__name to integer.
+11-18 04:58:13.969  1768  2196 W A       : Can't format flag AndroidGsaVelourJars__velour_nativesrp_activity_jar__name to integer.
+11-18 04:58:13.969  1768  2196 W A       : Can't format flag AndroidGsaVelourJars__velour_nativesrp_presenter_jar__name to integer.
+11-18 04:58:13.969  1768  2196 W A       : Can't format flag AndroidGsaVelourJars__velour_nowcontent_jar__name to integer.
+11-18 04:58:13.969  1768  2196 W A       : Can't format flag AndroidGsaVelourJars__velour_recents_activity_jar__name to integer.
+11-18 04:58:13.969  1768  2196 W A       : Can't format flag AndroidGsaVelourJars__velour_save_jar__name to integer.
+11-18 04:58:13.969  1768  2196 W A       : Can't format flag AndroidGsaVelourJars__velour_searchresults_activity_jar__name to integer.
+11-18 04:58:13.969  1768  2196 W A       : Can't format flag AndroidGsaVelourJars__velour_test_jar__name to integer.
+11-18 04:58:13.969  1768  2196 W A       : Can't format flag AndroidGsaVelourJars__velour_weather_jar__name to integer.
+11-18 04:58:13.969  1768  2196 W A       : Can't format flag bindle_flags__bloblobber_blob to integer.
+11-18 04:58:13.969  1768  2196 W A       : Can't format flag bindle_flags__velour_jar to integer.
+11-18 04:58:13.981  1768  2200 I FedAssExpListener: Fed-ass not supported for signed out users.
+11-18 04:58:13.981  1768  2200 I FedAssExpListener: Successfully processed experiments changed.
+11-18 04:58:13.981  1768  2200 I A       : NGA disabled due to not being eligible.
+11-18 04:58:13.986  1768  2197 I OpaEligibilityChecker: send OpaEligibilityChange broadcast to CommonBroadcastReceiver
+11-18 04:58:14.006  1768  2197 W CorpusConfigHelper: Invalid input from icing corpus JSON flag.
+11-18 04:58:14.006  1768  2197 W CorpusConfigHelper: android.util.MalformedJsonException: Use JsonReader.setLenient(true) to accept malformed JSON at line 123 column 2
+11-18 04:58:14.006  1768  2197 W CorpusConfigHelper: 	at android.util.JsonReader.syntaxError(JsonReader.java:1162)
+11-18 04:58:14.006  1768  2197 W CorpusConfigHelper: 	at android.util.JsonReader.checkLenient(JsonReader.java:840)
+11-18 04:58:14.006  1768  2197 W CorpusConfigHelper: 	at android.util.JsonReader.nextInArray(JsonReader.java:615)
+11-18 04:58:14.006  1768  2197 W CorpusConfigHelper: 	at android.util.JsonReader.peek(JsonReader.java:345)
+11-18 04:58:14.006  1768  2197 W CorpusConfigHelper: 	at android.util.JsonReader.hasNext(JsonReader.java:321)
+11-18 04:58:14.006  1768  2197 W CorpusConfigHelper: 	at com.google.android.apps.gsa.searchbox.c.b.b.k.c(PG:7)
+11-18 04:58:14.006  1768  2197 W CorpusConfigHelper: 	at com.google.android.apps.gsa.searchbox.c.b.b.j.a(Unknown Source:2)
+11-18 04:58:14.006  1768  2197 W CorpusConfigHelper: 	at com.google.android.apps.gsa.search.core.i.r.run(PG:5)
+11-18 04:58:14.006  1768  2197 W CorpusConfigHelper: 	at com.google.android.libraries.gsa.k.a.h.run(PG:2)
+11-18 04:58:14.006  1768  2197 W CorpusConfigHelper: 	at com.google.android.apps.gsa.shared.util.c.a.cf.b(PG:1)
+11-18 04:58:14.006  1768  2197 W CorpusConfigHelper: 	at com.google.android.apps.gsa.shared.util.c.a.ci.run(PG:1)
+11-18 04:58:14.006  1768  2197 W CorpusConfigHelper: 	at com.google.android.libraries.i.ae.run(PG:1)
+11-18 04:58:14.006  1768  2197 W CorpusConfigHelper: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-18 04:58:14.006  1768  2197 W CorpusConfigHelper: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-18 04:58:14.006  1768  2197 W CorpusConfigHelper: 	at com.google.android.libraries.i.k.run(PG:2)
+11-18 04:58:14.006  1768  2197 W CorpusConfigHelper: 	at com.google.android.libraries.i.p.run(PG:4)
+11-18 04:58:14.006  1768  2197 W CorpusConfigHelper: 	at java.lang.Thread.run(Thread.java:1012)
+11-18 04:58:14.088  1768  1793 I earchbox:search: Background concurrent copying GC freed 270084(10MB) AllocSpace objects, 27(2968KB) LOS objects, 50% free, 17MB/35MB, paused 34us,15us total 121.899ms
+11-18 04:58:14.175  5713  6949 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.googlequicksearchbox componentName=agsa_icing_connection serviceId=32
+11-18 04:58:14.176  5713  5854 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.googlequicksearchbox componentName=agsa_icing_connection serviceId=33
+11-18 04:58:14.187  5729  5789 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.icing.proxy.IcingInternalCorporaUpdateService finished executing. cause:9 result: 1 elapsed_millis: 634 uptime_millis: 634 exec_start_elapsed_seconds: 199 [CONTEXT service_id=218 ]
+11-18 04:58:14.189  5729  5738 I .gms.persistent: Background young concurrent copying GC freed 227281(10MB) AllocSpace objects, 11(240KB) LOS objects, 34% free, 17MB/27MB, paused 834us,12us total 635.312ms
+11-18 04:58:14.218  1768  1768 V ClearcutMetricXmitter: Transmission is done.
+11-18 04:58:14.218  1768  1768 V ClearcutMetricXmitter: Transmission is done.
+11-18 04:58:14.249  2065  7092 D DownloadManager: [9] Starting
+11-18 04:58:14.253  2065  7092 D NetworkSecurityConfig: Using Network Security Config from resource network_security_config debugBuild: false
+11-18 04:58:14.254  2065  7092 D NetworkSecurityConfig: Using Network Security Config from resource network_security_config debugBuild: false
+11-18 04:58:14.254   285  7093 I resolv  : GetAddrInfoHandler::run: {100 983140 100 983140 10077 0}
+11-18 04:58:14.255   285  7094 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-18 04:58:14.255   285  7095 I resolv  : res_nmkquery: (QUERY, IN, A)
+11-18 04:58:14.255   285  7095 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x71456f2b7190
+11-18 04:58:14.255   285  7095 I resolv  : doQuery: rcode=0, ancount=4, return value=95
+11-18 04:58:14.335  5713  5854 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.gms componentName=null serviceId=30
+11-18 04:58:14.353  5713  5809 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+11-18 04:58:14.355  5713  5809 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+11-18 04:58:14.357  5713  5809 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+11-18 04:58:15.348  5713  5713 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.chimera.container.moduleinstall.ModuleInstallService.START dat=chimera-action:/... cmp=com.google.android.gms/.chimera.GmsApiService }
+11-18 04:58:15.349  5713  5713 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.mobstore.service.START dat=chimera-action:/... cmp=com.google.android.gms/.chimera.GmsBoundBrokerService }
+11-18 04:58:17.398  5729  5862 I GMS_MM_Logger: Memory Metric Logging not allowed. Stopping.
+11-18 04:58:17.552   489   937 D WifiNl80211Manager: Scan result ready event
+11-18 04:58:17.553   489   937 D WifiNative: Scan result ready event
+11-18 04:58:18.141  6731  7098 W AssistantConfig: appIntegrationDataInBase64 is null
+11-18 04:58:18.143  6731  7098 E AssistantConnector: Couldn't read whether gRPC is supported from public value
+11-18 04:58:18.143  6731  7098 E AssistantConnector: java.lang.IllegalStateException: Failed to query AGSA value. This is most likely caused by a Google signature check failure. Please make sure both of the AGSA app and the client app are either release or dev builds.
+11-18 04:58:18.143  6731  7098 E AssistantConnector: 	at bhtw.call(PG:17)
+11-18 04:58:18.143  6731  7098 E AssistantConnector: 	at byyi.call(PG:3)
+11-18 04:58:18.143  6731  7098 E AssistantConnector: 	at ceby.a(PG:1)
+11-18 04:58:18.143  6731  7098 E AssistantConnector: 	at ceav.run(PG:4)
+11-18 04:58:18.143  6731  7098 E AssistantConnector: 	at cebz.run(PG:1)
+11-18 04:58:18.143  6731  7098 E AssistantConnector: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+11-18 04:58:18.143  6731  7098 E AssistantConnector: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+11-18 04:58:18.143  6731  7098 E AssistantConnector: 	at java.lang.Thread.run(Thread.java:1012)
+11-18 04:58:19.261   285  7094 I resolv  : res_nsend: used send_dg 0 terrno: 110
+11-18 04:58:19.262   285  7094 I resolv  : res_nsend: used send_dg 255 terrno: 0
+11-18 04:58:19.262   285  7094 I resolv  : doQuery: rcode=0, ancount=8, return value=255
+11-18 04:58:19.263  2065  7092 D TrafficStats: tagSocket(76) with statsTag=0xffffff01, statsUid=10119
+11-18 04:58:19.562  5713  6055 D TrafficStats: tagSocket(134) with statsTag=0x30001803, statsUid=-1
+11-18 04:58:19.711  7023  7040 I TestRunner: finished: aNoteTravelsBothWays(com.timcordova.quartznotes.data.sync.SyncEngineTest)

@@ -1,0 +1,94 @@
+11-18 04:58:52.259  7023  7040 I TestRunner: started: noSplitViewButtonOnAPhone(com.timcordova.quartznotes.ui.home.HomeArrangeTest)
+11-18 04:58:52.263  7023  7040 D IdlingRegistry: Registering idling resources: [androidx.compose.ui.test.EspressoLink@769642c]
+11-18 04:58:52.265  7023  7040 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+11-18 04:58:52.272   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bb430
+11-18 04:58:52.272   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b9270
+11-18 04:58:52.272   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bc2d0
+11-18 04:58:52.272   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b62d0
+11-18 04:58:52.273   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b62d0
+11-18 04:58:52.278  1549  1637 I ProtoXDBBufferWrapper: ProtoXDBBufferWrapper.flushToStorage():153 Flushed 43 data item(s) to storage.
+11-18 04:58:52.281   789   833 D SplashScreenView: Build android.window.SplashScreenView{8ae93d5 V.E...... ......ID 0,0-0,0}
+11-18 04:58:52.281   789   833 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-18 04:58:52.281   789   833 D SplashScreenView: Branding: view: android.view.View{f1e07ea G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-18 04:58:52.282  1054  1054 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+11-18 04:58:52.284   789   845 W Parcel  : Expecting binder but got null!
+11-18 04:58:52.296   789   796 I ndroid.systemui: NativeAlloc concurrent copying GC freed 69863(2933KB) AllocSpace objects, 1(20KB) LOS objects, 50% free, 16MB/32MB, paused 35us,19us total 247.387ms
+11-18 04:58:52.384  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@c653130 in: PRE_ON_CREATE
+11-18 04:58:52.384  7023  7023 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+11-18 04:58:52.395  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@c653130 in: CREATED
+11-18 04:58:52.405  7023  7023 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=androidx.activity.ComponentActivity@c653130
+11-18 04:58:52.405  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@c653130 in: STARTED
+11-18 04:58:52.405  7023  7023 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=androidx.activity.ComponentActivity@c653130
+11-18 04:58:52.406  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@c653130 in: RESUMED
+11-18 04:58:52.406  7023  7023 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=androidx.activity.ComponentActivity@c653130
+11-18 04:58:52.408  7023  7110 W Parcel  : Expecting binder but got null!
+11-18 04:58:52.588   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bc270
+11-18 04:58:52.588   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bb2b0
+11-18 04:58:52.630   489   501 I system_server: NativeAlloc concurrent copying GC freed 225307(8442KB) AllocSpace objects, 5(100KB) LOS objects, 49% free, 21MB/42MB, paused 39us,38us total 534.412ms
+11-18 04:58:52.681   789   845 D EGL_emulation: app_time_stats: avg=1730.97ms min=331.25ms max=3130.69ms count=2
+11-18 04:58:52.722   489   509 W ziparchive: Unable to open '/data/app/~~q7gscu1n3ILq4DpSpq4VdQ==/com.timcordova.quartznotes-nbzIvoAk_EFWKv7by7QDAg==/base.dm': No such file or directory
+11-18 04:58:52.722   489   509 I ActivityTaskManager: Displayed com.timcordova.quartznotes/androidx.activity.ComponentActivity: +451ms
+11-18 04:58:52.726   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode 1
+11-18 04:58:52.726   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-18 04:58:52.726   988  1294 D BtGatt.ScanManager: uid 10120 isForeground true scanMode -1
+11-18 04:58:52.731   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bc150
+11-18 04:58:52.741  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-18 04:58:52.742  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-18 04:58:52.742  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes fieldId=-1 fieldName=null extras=null}, false)
+11-18 04:58:52.742  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 04:58:52.742  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 04:58:52.765   789   845 D EGL_emulation: app_time_stats: avg=1674.80ms min=187.21ms max=3162.39ms count=2
+11-18 04:58:52.769  1054  2068 D OneSearchSuggestProvider: Shut down the binder channel
+11-18 04:58:52.772  1768  7375 I PBSessionCacheImpl: Deleted sessionId[7777541209396355] from persistence.
+11-18 04:58:52.791   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bc5d0
+11-18 04:58:52.791  1054  1174 I s.nexuslauncher: oneway function results for code 2 on binder at 0x732b6c75f2c0 will be dropped but finished with status UNKNOWN_TRANSACTION
+11-18 04:58:52.796  1768  2283 W SearchServiceCore: Abort, client detached.
+11-18 04:58:52.796  1768  2283 W SearchServiceCore: Abort, client detached.
+11-18 04:58:52.796  1768  2283 W SearchServiceCore: Abort, client detached.
+11-18 04:58:52.796  1768  2283 W SearchServiceCore: Abort, client detached.
+11-18 04:58:52.796  1768  2283 W SearchServiceCore: Abort, client detached.
+11-18 04:58:52.805   489  1162 W InputManager-JNI: Input channel object 'f85477e Splash Screen com.timcordova.quartznotes (client)' was disposed without first being removed with the input manager!
+11-18 04:58:52.873  7023  7023 D AutofillManager: Fill dialog is enabled:false, hints=[password, passwordAuto, creditCardNumber, creditCardSecurityCode, creditCardExpirationDate]
+11-18 04:58:52.939   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b80d0
+11-18 04:58:53.626  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@c653130 in: PAUSED
+11-18 04:58:53.626  7023  7023 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=androidx.activity.ComponentActivity@c653130
+11-18 04:58:53.628   789   833 D SplashScreenView: Build android.window.SplashScreenView{1127769 V.E...... ......ID 0,0-0,0}
+11-18 04:58:53.628   789   833 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-18 04:58:53.628   789   833 D SplashScreenView: Branding: view: android.view.View{97505ee G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-18 04:58:53.629   789   845 W Parcel  : Expecting binder but got null!
+11-18 04:58:53.636  7130  7153 W Parcel  : Expecting binder but got null!
+11-18 04:58:53.678   331   377 W TransactionTracing: Could not find layer handle 0x79ff032ba1d0
+11-18 04:58:53.681   331   377 W TransactionTracing: Could not find layer handle 0x79ff032bb010
+11-18 04:58:53.783  1054  1067 W System  : A resource failed to call release.
+11-18 04:58:53.783  1054  1067 W System  : A resource failed to call release.
+11-18 04:58:53.787  1054  1067 W System  : A resource failed to call release.
+11-18 04:58:53.787  1054  1067 W System  : A resource failed to call release.
+11-18 04:58:53.787  1054  1067 W System  : A resource failed to call release.
+11-18 04:58:53.787  1054  1067 W System  : A resource failed to call release.
+11-18 04:58:53.859   789   845 D EGL_emulation: app_time_stats: avg=588.75ms min=182.67ms max=994.83ms count=2
+11-18 04:58:53.859   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b85b0
+11-18 04:58:53.859   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b85b0
+11-18 04:58:53.861   489   509 W ziparchive: Unable to open '/data/app/~~RL-N2gHIJ9ggYogoAQLtUQ==/com.timcordova.quartznotes.test-gf1uhURR3Qr-VZk_2pPVEg==/base.dm': No such file or directory
+11-18 04:58:53.865   489   509 I ActivityTaskManager: Displayed com.timcordova.quartznotes.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity: +237ms
+11-18 04:58:53.904   789   845 D EGL_emulation: app_time_stats: avg=568.90ms min=180.86ms max=956.94ms count=2
+11-18 04:58:53.920  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-18 04:58:53.921  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-18 04:58:53.921  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.timcordova.quartznotes.test fieldId=-1 fieldName=null extras=null}, false)
+11-18 04:58:53.921  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-18 04:58:53.940   489  1405 W InputManager-JNI: Input channel object '228e854 Splash Screen com.timcordova.quartznotes.test (client)' was disposed without first being removed with the input manager!
+11-18 04:58:53.950   331   377 W TransactionTracing: Could not find layer handle 0x79ff032ba410
+11-18 04:58:53.950   331   377 W TransactionTracing: Could not find layer handle 0x79ff032ba950
+11-18 04:58:53.950   331   377 W TransactionTracing: Could not find layer handle 0x79ff032ba410
+11-18 04:58:53.950   331   377 W TransactionTracing: Could not find layer handle 0x79ff032b4ef0
+11-18 04:58:53.950   331   377 W TransactionTracing: Could not find layer handle 0x79ff032ba950
+11-18 04:58:53.950   331   377 W TransactionTracing: Could not find layer handle 0x79ff032ba410
+11-18 04:58:53.950   331   377 W TransactionTracing: Could not find layer handle 0x79ff032ba950
+11-18 04:58:53.951  1549  1549 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-18 04:58:53.978  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@c653130 in: STOPPED
+11-18 04:58:53.978  7023  7023 V ActivityScenario: Update currentActivityStage to STOPPED, currentActivity=androidx.activity.ComponentActivity@c653130
+11-18 04:58:53.991  7023  7023 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@c653130 in: DESTROYED
+11-18 04:58:53.991  7023  7023 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
+11-18 04:58:53.992  7023  7040 D IdlingRegistry: Unregistering idling resources: [androidx.compose.ui.test.EspressoLink@769642c]
+11-18 04:58:53.993   489  1162 W InputManager-JNI: Input channel object '557818 com.timcordova.quartznotes/androidx.activity.ComponentActivity (client)' was disposed without first being removed with the input manager!
+11-18 04:58:53.995  1054  1054 D MainContentCaptureSession: Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+11-18 04:58:54.004  7023  7040 I TestRunner: finished: noSplitViewButtonOnAPhone(com.timcordova.quartznotes.ui.home.HomeArrangeTest)
