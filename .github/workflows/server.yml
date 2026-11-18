@@ -18,7 +18,8 @@ env:
 
 jobs:
   check:
-    runs-on: ubuntu-latest
+    # Playwright can't install its browser's system libraries on ubuntu-latest (26.04) yet.
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v4
